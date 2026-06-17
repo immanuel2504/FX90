@@ -1,6 +1,287 @@
 {
-  "x-command": "get_bleConfig",
-  "x-category": "Ble",
-  "x-status": "Missing in Response Schema",
-  "description": "Get BLE configuration"
+  "title": "Get BLE Configuration Response",
+  "type": "object",
+  "description": "Returns the current BLE scanner configuration.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "get_bleConfig",
+      "description": "The value for the key command must be get_bleConfig",
+      "enum": [
+        "get_bleConfig"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "ble-get-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "get_bleConfig_response",
+          "type": "object",
+          "description": "Current BLE scanner configuration.",
+          "properties": {
+            "ble": {
+              "type": "object",
+              "properties": {
+                "enable": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "scanIntervalSec": {
+                  "type": "integer",
+                  "example": 5
+                },
+                "additionalFilters": {
+                  "type": "object",
+                  "properties": {
+                    "rssi": {
+                      "type": "integer",
+                      "example": -80
+                    },
+                    "serviceUuids16": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "serviceUuids128": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "protocols": {
+                  "type": "object",
+                  "properties": {
+                    "iBeacon": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "filters": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "uuid": {
+                                "type": "string"
+                              },
+                              "major": {
+                                "type": "integer"
+                              },
+                              "minor": {
+                                "type": "integer"
+                              },
+                              "txPower": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "altBeacon": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "filters": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "mfgId": {
+                                "type": "string"
+                              },
+                              "beaconId": {
+                                "type": "string"
+                              },
+                              "major": {
+                                "type": "integer"
+                              },
+                              "minor": {
+                                "type": "integer"
+                              },
+                              "refRssi": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "eddystone": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "filters": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "frameType": {
+                                "type": "string",
+                                "enum": [
+                                  "URL",
+                                  "UID",
+                                  "EID",
+                                  "TLM"
+                                ]
+                              },
+                              "txPower": {
+                                "type": "integer"
+                              },
+                              "url": {
+                                "type": "string"
+                              },
+                              "namespace": {
+                                "type": "string"
+                              },
+                              "instance": {
+                                "type": "string"
+                              },
+                              "ephemeralId": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "generic": {
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean"
+                        },
+                        "filters": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "address": {
+                                "type": "string"
+                              },
+                              "addressType": {
+                                "type": "string",
+                                "enum": [
+                                  "public",
+                                  "random"
+                                ]
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "alias": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "ble"
+          ]
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload",
+    "response"
+  ],
+  "examples": [
+    {
+      "command": "get_bleConfig",
+      "command_id": "ble-get-001",
+      "response": "success",
+      "payload": {
+        "ble": {
+          "enable": true,
+          "scanIntervalSec": 5,
+          "protocols": {
+            "iBeacon": {
+              "enabled": true,
+              "filters": [
+                {
+                  "uuid": "FDA50693-A4E2-4FB1-AFCF-C6EB07647825",
+                  "major": 10001,
+                  "minor": 20002,
+                  "txPower": -59
+                }
+              ]
+            }
+          },
+          "additionalFilters": {
+            "rssi": -80,
+            "serviceUuids16": [
+              "FEAA",
+              "FE9B"
+            ],
+            "serviceUuids128": [
+              "FDA50693-A4E2-4FB1-AFCF-C6EB07647825"
+            ]
+          }
+        }
+      }
+    }
+  ]
 }

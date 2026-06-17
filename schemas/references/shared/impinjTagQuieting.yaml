@@ -1,0 +1,13 @@
+type: object
+description: Impinj TagQuieting configuration. Exactly one of basic or advanced must be provided.
+oneOf:
+- required:
+  - basic
+- required:
+  - advanced
+properties:
+  basic:
+    $ref: impinjTagQuietingBasic.yaml
+  advanced:
+    $ref: impinjTagQuietingAdvanced.yaml
+additionalProperties: false

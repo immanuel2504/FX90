@@ -29,19 +29,75 @@
           "properties": {
             "fastID": {
               "type": "object",
-              "additionalProperties": true
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "tidSelector": {
+                  "type": "string",
+                  "enum": [
+                    "TID[0]",
+                    "TID[1]",
+                    "TID[2]",
+                    "TID[3]"
+                  ],
+                  "example": "TID[0]"
+                }
+              },
+              "required": [
+                "enabled"
+              ]
             },
             "tagProtect": {
               "type": "object",
-              "additionalProperties": true
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "enableTagProtection",
+                    "disableTagProtection",
+                    "enableTagVisibility",
+                    "disableTagVisibility"
+                  ],
+                  "example": "enableTagProtection"
+                },
+                "password": {
+                  "type": "string",
+                  "minLength": 8,
+                  "maxLength": 8,
+                  "pattern": "^[0-9A-Fa-f]{8}$",
+                  "example": "77777777"
+                },
+                "tagID": {
+                  "type": "string",
+                  "pattern": "^[0-9A-Fa-f]+$",
+                  "example": "e2801191a5030069073b426d"
+                },
+                "enableShortRange": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "required": [
+                "action",
+                "password"
+              ]
             },
             "tagFocus": {
               "type": "object",
-              "additionalProperties": true
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "required": [
+                "enabled"
+              ]
             },
             "tagQuieting": {
-              "type": "object",
-              "additionalProperties": true
+              "$ref": "../../references/shared/impinjTagQuieting.yaml"
             }
           },
           "additionalProperties": false

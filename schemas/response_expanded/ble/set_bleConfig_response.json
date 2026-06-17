@@ -1,6 +1,85 @@
 {
-  "x-command": "set_bleConfig",
-  "x-category": "Ble",
-  "x-status": "Missing in Response Schema",
-  "description": "Set BLE configuration"
+  "title": "Set BLE Configuration Response",
+  "type": "object",
+  "description": "Acknowledges BLE scanner configuration updates.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "example": "set_bleConfig",
+      "description": "The value for the key command must be set_bleConfig",
+      "enum": [
+        "set_bleConfig"
+      ]
+    },
+    "command_id": {
+      "type": "string",
+      "example": "ble-set-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "title": "set_bleConfig_response",
+          "type": "object",
+          "description": "Successful BLE configuration update acknowledgement.",
+          "additionalProperties": false
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload",
+    "response"
+  ],
+  "examples": [
+    {
+      "command": "set_bleConfig",
+      "command_id": "ble-set-001",
+      "response": "success",
+      "payload": {}
+    }
+  ]
 }

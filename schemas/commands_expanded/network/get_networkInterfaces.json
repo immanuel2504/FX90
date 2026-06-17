@@ -20,7 +20,9 @@
       "description": "A Unique Id echoed by the reader in the response to Get Network Interfaces"
     },
     "payload": {
-      "$ref": "../../references/request_payload/get_networkInterfaces_command.yaml"
+      "type": "object",
+      "description": "An empty object as no additional parameters are required.",
+      "additionalProperties": false
     }
   },
   "required": [

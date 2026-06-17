@@ -1,6 +1,520 @@
 {
-  "x-command": "set_impinjGen2X",
-  "x-category": "ImpinjGen2X",
-  "x-status": "Missing in Command Schema",
-  "description": "Set Impinj Gen2X configuration"
+  "title": "Set Impinj Gen2X Configuration",
+  "type": "object",
+  "description": "Configures Impinj Gen2X proprietary features such as FastID, TagProtect, TagFocus, and TagQuieting.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_impinjGen2X"
+      ],
+      "example": "set_impinjGen2X",
+      "description": "The value for the key command must be set_impinjGen2X"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "gen2x-set-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "description": "At least one feature object must be provided.",
+      "minProperties": 1,
+      "properties": {
+        "fastID": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "example": true
+            },
+            "tidSelector": {
+              "type": "string",
+              "enum": [
+                "TID[0]",
+                "TID[1]",
+                "TID[2]",
+                "TID[3]"
+              ],
+              "example": "TID[0]"
+            }
+          },
+          "required": [
+            "enabled"
+          ]
+        },
+        "tagProtect": {
+          "description": "Password-based tag protection or visibility settings.",
+          "oneOf": [
+            {
+              "type": "object",
+              "title": "Protect or Unprotect Tag",
+              "description": "Protect or unprotect a specific tag identified by its EPC.",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "enableTagProtection",
+                    "disableTagProtection"
+                  ],
+                  "example": "enableTagProtection"
+                },
+                "password": {
+                  "type": "string",
+                  "minLength": 8,
+                  "maxLength": 8,
+                  "pattern": "^[0-9A-Fa-f]{8}$",
+                  "example": "77777777"
+                },
+                "tagID": {
+                  "type": "string",
+                  "pattern": "^[0-9A-Fa-f]+$",
+                  "example": "e2801191a5030069073b426d"
+                },
+                "enableShortRange": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "required": [
+                "action",
+                "password",
+                "tagID"
+              ]
+            },
+            {
+              "type": "object",
+              "title": "Enable or Disable Protected Tag Reading",
+              "description": "Enable or disable the reader's ability to read protected tags.",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "enableTagVisibility",
+                    "disableTagVisibility"
+                  ],
+                  "example": "enableTagVisibility"
+                },
+                "password": {
+                  "type": "string",
+                  "minLength": 8,
+                  "maxLength": 8,
+                  "pattern": "^[0-9A-Fa-f]{8}$",
+                  "example": "77777777"
+                },
+                "enableShortRange": {
+                  "type": "boolean",
+                  "example": false
+                }
+              },
+              "required": [
+                "action",
+                "password"
+              ]
+            }
+          ]
+        },
+        "tagFocus": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "example": true
+            }
+          },
+          "required": [
+            "enabled"
+          ]
+        },
+        "tagQuieting": {
+          "type": "object",
+          "description": "Impinj TagQuieting configuration. Exactly one of basic or advanced must be provided.",
+          "oneOf": [
+            {
+              "required": [
+                "basic"
+              ]
+            },
+            {
+              "required": [
+                "advanced"
+              ]
+            }
+          ],
+          "properties": {
+            "basic": {
+              "type": "object",
+              "description": "Basic TagQuieting configuration for quieting or unquieting specific tags identified by EPC.",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "quiet",
+                    "unquiet"
+                  ],
+                  "example": "quiet"
+                },
+                "tagIDs": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[0-9A-Fa-f]+$",
+                    "example": "e2801191a5030069073b426d"
+                  }
+                }
+              },
+              "required": [
+                "action",
+                "tagIDs"
+              ]
+            },
+            "advanced": {
+              "type": "object",
+              "description": "Advanced TagQuieting configuration using Impinj Gen2X proprietary features.",
+              "properties": {
+                "preSelect": {
+                  "type": "array",
+                  "maxItems": 31,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "target": {
+                        "type": "string",
+                        "enum": [
+                          "S0",
+                          "S1",
+                          "S2",
+                          "S3",
+                          "SL"
+                        ],
+                        "example": "S2"
+                      },
+                      "action": {
+                        "type": "string",
+                        "enum": [
+                          "ASSERTSL_NOTHING",
+                          "DEASSERTSL_NOTHING",
+                          "ASSERTSL_ASSERTSL",
+                          "ASSERTSL_DEASSERTSL",
+                          "DEASSERTSL_ASSERTSL",
+                          "DEASSERTSL_DEASSERTSL",
+                          "NEGSL_NOTHING",
+                          "NOTHING_ASSERTSL",
+                          "NOTHING_DEASSERTSL",
+                          "NOTHING_NEGSL",
+                          "INVA_NOTHING",
+                          "INVB_NOTHING",
+                          "INVA_INVB",
+                          "INVB_INVA",
+                          "INVA_INVA",
+                          "INVB_INVB",
+                          "NOTHING_INVA",
+                          "NOTHING_INVB"
+                        ],
+                        "example": "INVB_INVA"
+                      },
+                      "mask": {
+                        "type": "object",
+                        "properties": {
+                          "bank": {
+                            "type": "string",
+                            "enum": [
+                              "EPC",
+                              "TID",
+                              "USER",
+                              "RESERVED"
+                            ],
+                            "example": "EPC"
+                          },
+                          "pointer": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 65535,
+                            "example": 32
+                          },
+                          "length": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 255,
+                            "example": 96
+                          },
+                          "value": {
+                            "type": "string",
+                            "pattern": "^[0-9A-Fa-f]+$",
+                            "example": "A55E551ABE1C0DE869C7A459"
+                          }
+                        },
+                        "required": [
+                          "bank",
+                          "pointer",
+                          "length",
+                          "value"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "target",
+                      "action",
+                      "mask"
+                    ]
+                  }
+                },
+                "tagQuietMasks": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 3,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "S0A",
+                      "S0B",
+                      "S2A",
+                      "S2B",
+                      "S3A",
+                      "S3B",
+                      "SL_ASSERT",
+                      "SL_DEASSERT"
+                    ],
+                    "example": "S0A"
+                  }
+                },
+                "target": {
+                  "type": "string",
+                  "enum": [
+                    "SL",
+                    "S0",
+                    "S1",
+                    "S2",
+                    "S3"
+                  ],
+                  "example": "SL"
+                },
+                "stateAwareAction": {
+                  "type": "string",
+                  "enum": [
+                    "ASSERTSL",
+                    "DEASSERTSL",
+                    "ASSERTSL_DEASSERTSL",
+                    "DEASSERTSL_ASSERTSL",
+                    "NEGSL",
+                    "NOT_DEASSERTSL",
+                    "NOT_ASSERTSL",
+                    "NOT_NEGSL",
+                    "INV_A",
+                    "INV_B",
+                    "INV_A_NOT_INV_B",
+                    "INV_B_NOT_INV_A",
+                    "INV_A2BB2A",
+                    "NOT_INV_B",
+                    "NOT_INV_A",
+                    "NOT_INV_A2BB2A"
+                  ],
+                  "example": "ASSERTSL"
+                }
+              },
+              "required": [
+                "tagQuietMasks",
+                "target",
+                "stateAwareAction"
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-fastid-enable-001",
+      "payload": {
+        "fastID": {
+          "enabled": true
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-fastid-disable-001",
+      "payload": {
+        "fastID": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-protect-tag-001",
+      "payload": {
+        "tagProtect": {
+          "action": "enableTagProtection",
+          "password": "77777777",
+          "tagID": "e2801191a5030069073b426d",
+          "enableShortRange": true
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-unprotect-tag-001",
+      "payload": {
+        "tagProtect": {
+          "action": "disableTagProtection",
+          "password": "77777777",
+          "tagID": "e2801191a5030069073b426d"
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-enable-protect-read-001",
+      "payload": {
+        "tagProtect": {
+          "action": "enableTagVisibility",
+          "password": "77777777"
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-disable-protect-read-001",
+      "payload": {
+        "tagProtect": {
+          "action": "disableTagVisibility",
+          "password": "77777777"
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-tagfocus-enable-001",
+      "payload": {
+        "tagFocus": {
+          "enabled": true
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-tagfocus-disable-001",
+      "payload": {
+        "tagFocus": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-quiet-tags-001",
+      "payload": {
+        "tagQuieting": {
+          "basic": {
+            "action": "quiet",
+            "tagIDs": [
+              "e2801191a5030069073b426d",
+              "e2801191a5030069073b426e"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-unquiet-tags-001",
+      "payload": {
+        "tagQuieting": {
+          "basic": {
+            "action": "unquiet",
+            "tagIDs": [
+              "e2801191a5030069073b426d"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-advanced-quiet-001",
+      "payload": {
+        "tagQuieting": {
+          "advanced": {
+            "preSelect": [
+              {
+                "target": "SL",
+                "action": "ASSERTSL_NOTHING",
+                "mask": {
+                  "bank": "EPC",
+                  "pointer": 32,
+                  "length": 96,
+                  "value": "E280123456789012345678AB"
+                }
+              },
+              {
+                "target": "S2",
+                "action": "INVB_INVA",
+                "mask": {
+                  "bank": "EPC",
+                  "pointer": 32,
+                  "length": 96,
+                  "value": "E280AABBCCDDEEFF11223344"
+                }
+              }
+            ],
+            "tagQuietMasks": [
+              "SL_ASSERT",
+              "S2B"
+            ],
+            "target": "SL",
+            "stateAwareAction": "ASSERTSL_DEASSERTSL"
+          }
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-advanced-unquiet-001",
+      "payload": {
+        "tagQuieting": {
+          "advanced": {
+            "preSelect": [
+              {
+                "target": "SL",
+                "action": "DEASSERTSL_NOTHING",
+                "mask": {
+                  "bank": "EPC",
+                  "pointer": 32,
+                  "length": 96,
+                  "value": "E280123456789012345678AB"
+                }
+              },
+              {
+                "target": "S2",
+                "action": "INVA_INVB",
+                "mask": {
+                  "bank": "EPC",
+                  "pointer": 32,
+                  "length": 96,
+                  "value": "E280AABBCCDDEEFF11223344"
+                }
+              }
+            ],
+            "tagQuietMasks": [
+              "SL_DEASSERT",
+              "S2A"
+            ],
+            "target": "SL",
+            "stateAwareAction": "DEASSERTSL_ASSERTSL"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -1,6 +1,90 @@
 {
-  "x-command": "get_readPoints",
-  "x-category": "Network",
-  "x-status": "Missing in Response Schema",
-  "description": "Gets the read points on the reader"
+  "title": "Get Read Points Response",
+  "type": "object",
+  "description": "Returns the list of read points on the reader.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_readPoints"
+      ],
+      "example": "get_readPoints"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "readpoints-get-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_readPoints",
+      "command_id": "readpoints-get-001",
+      "response": "success",
+      "payload": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    }
+  ]
 }

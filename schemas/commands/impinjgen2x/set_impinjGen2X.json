@@ -44,36 +44,75 @@
           ]
         },
         "tagProtect": {
-          "type": "object",
           "description": "Password-based tag protection or visibility settings.",
-          "properties": {
-            "action": {
-              "type": "string",
-              "enum": [
-                "enableTagProtection",
-                "disableTagProtection",
-                "enableTagVisibility",
-                "disableTagVisibility"
-              ],
-              "example": "enableTagProtection"
+          "oneOf": [
+            {
+              "type": "object",
+              "title": "Protect or Unprotect Tag",
+              "description": "Protect or unprotect a specific tag identified by its EPC.",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "enableTagProtection",
+                    "disableTagProtection"
+                  ],
+                  "example": "enableTagProtection"
+                },
+                "password": {
+                  "type": "string",
+                  "minLength": 8,
+                  "maxLength": 8,
+                  "pattern": "^[0-9A-Fa-f]{8}$",
+                  "example": "77777777"
+                },
+                "tagID": {
+                  "type": "string",
+                  "pattern": "^[0-9A-Fa-f]+$",
+                  "example": "e2801191a5030069073b426d"
+                },
+                "enableShortRange": {
+                  "type": "boolean",
+                  "example": true
+                }
+              },
+              "required": [
+                "action",
+                "password",
+                "tagID"
+              ]
             },
-            "password": {
-              "type": "string",
-              "minLength": 8,
-              "maxLength": 8,
-              "pattern": "^[0-9A-Fa-f]{8}$",
-              "example": "77777777"
-            },
-            "tagID": {
-              "type": "string",
-              "pattern": "^[0-9A-Fa-f]+$",
-              "example": "e2801191a5030069073b426d"
-            },
-            "enableShortRange": {
-              "type": "boolean",
-              "example": true
+            {
+              "type": "object",
+              "title": "Enable or Disable Protected Tag Reading",
+              "description": "Enable or disable the reader's ability to read protected tags.",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "enum": [
+                    "enableTagVisibility",
+                    "disableTagVisibility"
+                  ],
+                  "example": "enableTagVisibility"
+                },
+                "password": {
+                  "type": "string",
+                  "minLength": 8,
+                  "maxLength": 8,
+                  "pattern": "^[0-9A-Fa-f]{8}$",
+                  "example": "77777777"
+                },
+                "enableShortRange": {
+                  "type": "boolean",
+                  "example": false
+                }
+              },
+              "required": [
+                "action",
+                "password"
+              ]
             }
-          }
+          ]
         },
         "tagFocus": {
           "type": "object",
@@ -88,9 +127,7 @@
           ]
         },
         "tagQuieting": {
-          "type": "object",
-          "description": "Advanced TagQuieting configuration. Complex mask fields are passed through as documented by the REST API examples.",
-          "additionalProperties": true
+          "$ref": "../../references/shared/impinjTagQuieting.yaml"
         }
       }
     }

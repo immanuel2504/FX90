@@ -1,6 +1,91 @@
 {
-  "x-command": "get_preSelection",
-  "x-category": "Control",
-  "x-status": "Missing in Response Schema",
-  "description": "Returns rxSawFilter status"
+  "title": "Get PreSelection Response",
+  "type": "object",
+  "description": "Returns whether rxSawFilter preSelection is enabled or disabled.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_preSelection"
+      ],
+      "example": "get_preSelection"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "preselect-get-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "preSelection": {
+              "type": "string",
+              "example": "disabled"
+            }
+          },
+          "required": [
+            "preSelection"
+          ]
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_preSelection",
+      "command_id": "preselect-get-001",
+      "response": "success",
+      "payload": {
+        "preSelection": "disabled"
+      }
+    }
+  ]
 }

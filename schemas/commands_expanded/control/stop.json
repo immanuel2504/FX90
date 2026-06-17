@@ -1,33 +1,95 @@
 {
-  "title": "Stop Tag Reads",
-  "x-stoplight": {
-    "id": "71sdusl91pbe9"
-  },
+  "title": "Stop RFID Inventory or BLE scan",
   "type": "object",
-  "description": "Stop the tag reads on reader",
+  "description": "Stop RFID inventory, BLE scanning, or both.",
   "properties": {
     "command": {
       "type": "string",
       "enum": [
         "stop"
       ],
-      "example": "stop",
-      "description": "The value for the key command must be stop"
+      "description": "Command name. Must be 'stop'."
     },
     "command_id": {
       "type": "string",
-      "example": "abcd1324",
       "description": "A unique ID that will be echoed back in the command response by the reader."
     },
     "payload": {
-      "title": "stop",
+      "title": "Stop RFID Inventory or BLE scan",
       "type": "object",
-      "description": "Stop tag reads"
+      "description": "Stop RFID inventory, BLE scanning, or both.\n\nThe optional `scanType` array controls what is stopped.\n\nOmitting the payload (or `scanType`) stops RFID only \u2014 the original default behaviour.\n\nUse [\"ble\"] to stop only BLE (RFID continues),\n[\"rfid\"] to stop only RFID (BLE continues),\nor [\"ble\",\"rfid\"] to stop both.\n",
+      "properties": {
+        "scanType": {
+          "type": "array",
+          "description": "The optional `scanType` array controls what is stopped.\n\nPossible values:\n- \"rfid\"\n- \"ble\"\n\nBehaviour:\n- Omitted \u2192 stops RFID only (default)\n- [\"ble\"] \u2192 stops BLE only\n- [\"rfid\"] \u2192 stops RFID only\n- [\"ble\",\"rfid\"] \u2192 stops both BLE and RFID\n",
+          "items": {
+            "type": "string",
+            "enum": [
+              "rfid",
+              "ble"
+            ]
+          }
+        }
+      },
+      "examples": [
+        {},
+        {
+          "scanType": [
+            "rfid"
+          ]
+        },
+        {
+          "scanType": [
+            "ble"
+          ]
+        },
+        {
+          "scanType": [
+            "ble",
+            "rfid"
+          ]
+        }
+      ]
     }
   },
   "required": [
     "command",
     "command_id",
     "payload"
+  ],
+  "examples": [
+    {
+      "command": "stop",
+      "command_id": "req-001",
+      "payload": {}
+    },
+    {
+      "command": "stop",
+      "command_id": "req-002",
+      "payload": {
+        "scanType": [
+          "rfid"
+        ]
+      }
+    },
+    {
+      "command": "stop",
+      "command_id": "req-003",
+      "payload": {
+        "scanType": [
+          "ble"
+        ]
+      }
+    },
+    {
+      "command": "stop",
+      "command_id": "req-004",
+      "payload": {
+        "scanType": [
+          "ble",
+          "rfid"
+        ]
+      }
+    }
   ]
 }
