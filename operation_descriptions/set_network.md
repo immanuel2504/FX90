@@ -16,7 +16,6 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_network](get_network.md), [set_hostname](set_hostname.md), [get_hostname](get_hostname.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Configure network addressing |
 | Supported API Versions | V1.0 |
 
@@ -30,17 +29,3 @@ Gather these details before sending the command. A wrong static IP or gateway ca
 | MAC address | Reader MAC address (as reported by `get_network`). |
 | DHCP vs static | `dhcp: true` for automatic addressing, or `false` with full static details. |
 | Static IP details | If DHCP disabled: `ipAddress`, `gatewayAddress`, `subnetMask`, `dnsAddress`. |
-
-## 4. Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.hostName` | string | Yes | Reader hostname. |
-| `payload.dhcp` | boolean | Yes | `true` — use DHCP. `false` — use static IP fields below. |
-| `payload.macAddress` | string | Yes | Reader MAC address. |
-| `payload.ipAddress` | string | If `dhcp` is false | Static IPv4 address. |
-| `payload.gatewayAddress` | string | If `dhcp` is false | Default gateway IP. |
-| `payload.subnetMask` | string | If `dhcp` is false | Subnet mask. |
-| `payload.dnsAddress` | string | If `dhcp` is false | DNS server IP. |
-
-> **Note:** Use `get_network` before `set_network` to capture current addressing. Ensure you retain a path to reach the reader after changing IP settings.

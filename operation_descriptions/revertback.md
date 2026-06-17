@@ -16,7 +16,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [set_os](set_os.md), [get_version](get_version.md), [reboot](reboot.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported API Versions | V1.0 |
 
 MQTT command key: `set_revertbackOS`.

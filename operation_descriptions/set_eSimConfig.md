@@ -16,17 +16,9 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_eSimConfig](get_eSimConfig.md), [get_network](get_network.md), [set_network](set_network.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set eSIM configuration |
 | Supported API Versions | V1.0 |
 
 ## Before You Begin
 
 Run `get_eSimConfig` first if you need the exact profile nickname. The nickname in the request must match a profile known to the reader.
-
-## Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.operation` | string | No | eSIM operation to perform, such as enabling a profile. |
-| `payload.profileNickName` | string | No | Nickname of the eSIM profile to update. |

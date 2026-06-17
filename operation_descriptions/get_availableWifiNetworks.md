@@ -18,7 +18,6 @@ No additional payload fields are required in the request to initiate the scan.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | get_networkInterfaces, get_network, set_network |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve visible Wi-Fi networks and local configurations |
 | Supported API Versions | V1.0 |
 
@@ -29,5 +28,3 @@ Use `get_availableWifiNetworks` to:
 - Troubleshoot wireless connectivity issues by verifying if the target network is broadcasting and has adequate signal strength.
 - Identify the security protocols mandated by the local access points (e.g., WPA3-Enterprise, OWE) before pushing a new network configuration.
 - Audit the reader's saved profiles to see which networks are configured to `autoConnect`.
-
-> **Note:** The response may contain multiple entries with the same `essid` if there are multiple access points broadcasting the same network name with different security capabilities or on different frequencies (e.g., 2.4GHz vs 5GHz).

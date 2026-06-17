@@ -17,7 +17,6 @@ No additional payload fields are required to retrieve the radio-control log arch
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | get_rg_error_logs, get_rg_warn_logs, get_logs |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the radio-control information log archive |
 | Supported API Versions | V1.0 |
 
@@ -28,5 +27,3 @@ Use `get_rc_log` to:
 - Investigate radio-control behavior and RF issues
 - Collect radio-control logs for support escalation
 - Correlate radio events with inventory anomalies
-
-> **Note:** Use alongside `get_radio_pkt_logs` when diagnosing low-level RF problems.

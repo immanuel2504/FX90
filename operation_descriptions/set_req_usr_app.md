@@ -16,7 +16,6 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_user_apps](get_user_apps.md), [start_user_app](start_user_app.md), [stop_user_app](stop_user_app.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Send request to a user application |
 | Supported API Versions | V1.0 |
 
@@ -28,12 +27,3 @@ Gather these details before sending the command. The target user app must be ins
 |---|---|
 | User app name | Exact `appname` from `get_user_apps`. |
 | Command/data | String or JSON object to pass to the user app (`payload.command`). |
-
-## 4. Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.userapp` | string | Yes | Target user application name. |
-| `payload.command` | string or object | Yes | Custom command or data sent to the user app. |
-
-> **Note:** MQTT command key in the request envelope is `set_reqToUserapp`. Ensure the app is running (`get_user_apps` → `runningStatus`) before sending.

@@ -16,7 +16,6 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_ntpServer](get_ntpServer.md), [set_timeZone](set_timeZone.md), [get_status](get_status.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set the NTP server address |
 | Supported API Versions | V1.0 |
 
@@ -27,11 +26,3 @@ Gather these details before sending the command. An unreachable NTP server will 
 | What You Need | Details |
 |---|---|
 | NTP server | Hostname or IP address of a reachable NTP server on the reader's network. |
-
-## 4. Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.server` | string | Yes | NTP server hostname or IP address. |
-
-> **Note:** Use `get_ntpServer` before `set_ntpServer` to confirm the current server.

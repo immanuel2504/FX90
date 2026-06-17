@@ -15,7 +15,6 @@ No additional payload fields are required to retrieve the full version set. The 
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | get_status, get_readerCapabilites, set_os, revertback |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve firmware, model, serial number, and upgrade details |
 | Supported API Versions | V1.0 |
 
@@ -26,5 +25,3 @@ Use `get_version` to:
 - Verify the exact reader model (e.g., FXR90) when applying model-specific configuration
 - Capture the serial number for asset tracking, remote fleet management, or support cases
 - Audit available OS upgrade paths or rollback capabilities across a fleet
-
-> **Note:** Run `get_version` before `set_os` to confirm the current version and the available upgrade paths so you don't reapply an existing build or attempt an incompatible update.

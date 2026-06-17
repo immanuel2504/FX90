@@ -16,7 +16,6 @@ No additional payload fields are required to retrieve the hostname.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | set_hostname, get_network, get_nameAndDescription |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the reader hostname |
 | Supported API Versions | V1.0 |
 
@@ -27,5 +26,3 @@ Use `get_hostname` to:
 - Confirm the reader's network hostname
 - Verify the result of a prior `set_hostname` call
 - Audit hostname consistency across a fleet
-
-> **Note:** The payload key is `hostname` (lowercase). Use `get_hostname` before `set_hostname` to confirm the current value.

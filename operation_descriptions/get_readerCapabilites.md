@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the capability set.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | get_version, get_status, get_config |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve static reader capabilities |
 | Supported API Versions | V1.0 |
 
@@ -30,5 +29,3 @@ Use `get_readerCapabilites` to:
 - Confirm whether LLRP is supported on this model
 - Determine which endpoint types can be configured for data/management
 - Verify the API versions the reader accepts
-
-> **Note:** Capabilities are static per model; cache the result rather than polling it repeatedly.

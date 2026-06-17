@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the supported standard lis
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | get_region, set_region, get_SupportedRegionList |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve supported regulatory standards and channels |
 | Supported API Versions | V1.0 |
 
@@ -29,5 +28,3 @@ Use `get_SupportedStandardlist` to:
 - Discover which regulatory standards apply for a region
 - Determine whether LBT or channel hopping is configurable
 - Inspect channel availability before tuning RF settings
-
-> **Note:** Standard availability is tied to the configured region; review `get_region` alongside this list.

@@ -44,5 +44,3 @@ The reader publishes `tagDataEvents` automatically to configured data endpoints 
 | `type` | string | Operating mode (selects `data` payload). |
 | `timestamp` | string (date-time) | Tag read timestamp (ISO 8601). |
 | `data` | object (oneOf) | Tag read payload matching `type`. |
-
-> **Note:** Configure data endpoints in `set_config` / `set_importCloudConfig` before tag data will flow to your backend.

@@ -30,5 +30,3 @@ The reader publishes `userapp_event` when an installed user application emits an
 | Field | Type | Description |
 |---|---|---|
 | `event` | string | Raw event string defined by the user application. |
-
-> **Note:** The `event` payload is opaque to the reader — its structure is defined entirely by the user application that emits it.

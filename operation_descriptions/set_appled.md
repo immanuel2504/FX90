@@ -16,7 +16,6 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_appled](get_appled.md), [set_stackled](set_stackled.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set application LED state |
 | Supported API Versions | V1.0 |
 
@@ -29,11 +28,3 @@ Gather these details before sending the command. An out-of-range color or durati
 | LED color | One of `red`, `amber`, `green`, `off` (lowercase). |
 | Duration | Seconds the LED stays in this state (default `60`). |
 | Flash | Whether the LED should flash while active. |
-
-## 4. Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.color` | string | Yes | LED color. Allowed: `red`, `amber`, `green`, `off`. |
-| `payload.seconds` | integer | Yes | Duration the LED state remains active (default `60`). |
-| `payload.flash` | boolean | Yes | `true` — LED flashes. `false` — LED stays solid. |

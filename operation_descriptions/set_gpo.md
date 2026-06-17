@@ -16,7 +16,6 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_gpostatus](get_gpostatus.md), [get_gpi_status](get_gpi_status.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set a single GPO pin state |
 | Supported API Versions | V1.0 |
 
@@ -28,10 +27,3 @@ Gather these details before sending the command. Targeting a port beyond the mod
 |---|---|
 | Port number | GPO port ID (1–4; max depends on model — see `get_readerCapabilites`). |
 | State | Desired output state (`true` = HIGH, `false` = LOW). |
-
-## 4. Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.port` | integer | Yes | GPO port ID (1–4; device-dependent maximum). |
-| `payload.state` | boolean | Yes | `true` — drive port HIGH. `false` — drive port LOW (default `false`). |

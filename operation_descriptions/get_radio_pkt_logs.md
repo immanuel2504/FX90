@@ -17,7 +17,6 @@ No additional payload fields are required to retrieve the radio packet log archi
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | del_radio_pkt_logs, get_logs, get_logs_syslog |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the radio packet log archive |
 | Supported API Versions | V1.0 |
 
@@ -28,5 +27,3 @@ Use `get_radio_pkt_logs` to:
 - Collect low-level radio packet traces for RF diagnostics
 - Capture evidence when investigating read-performance issues
 - Archive packet logs before purging with `del_radio_pkt_logs`
-
-> **Note:** Radio packet logging must be enabled (see `get_logs`/`set_logs`) for this archive to contain data.

@@ -40,5 +40,3 @@ The reader publishes `error` automatically when an error condition occurs. No co
 | Field | Type | Description |
 |---|---|---|
 | `message` | string | Error message text describing the condition. |
-
-> **Note:** Error events carry a free-text `message`; parse known substrings (e.g. "Antenna Disconnected on Port") to classify and route alerts.

@@ -16,7 +16,6 @@ No additional payload fields are required to retrieve the LED state.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | set_appled, get_stackled |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current application LED state |
 | Supported API Versions | V1.0 |
 
@@ -27,5 +26,3 @@ Use `get_appled` to:
 - Confirm whether the app LED is in its default state
 - Verify the effect of a prior `set_appled` call
 - Audit LED state as part of a device health check
-
-> **Note:** Use `get_appled` before `set_appled` to confirm the current state before changing LED behavior.

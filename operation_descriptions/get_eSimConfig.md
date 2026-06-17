@@ -16,7 +16,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [set_eSimConfig](set_eSimConfig.md), [get_network](get_network.md), [set_network](set_network.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Retrieve eSIM configuration |
 | Supported API Versions | V1.0 |
 

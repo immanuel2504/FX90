@@ -16,11 +16,9 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_certs](get_certs.md), [del_certs](del_certs.md), [refresh-cert](refresh-cert.md), [set_installCACertificate](set_installCACertificate.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Install or update a certificate |
 | Supported API Versions | V1.0 |
 
-> **Security Note:** Never hardcode FTPS passwords, PFX passwords, or certificate content in your payload. Supply credentials at runtime from a secrets manager or environment variable.
 
 ## 3. Before You Begin
 
@@ -42,21 +40,3 @@ The `authenticationType` field controls FTPS server authentication.
 |---|---|---|
 | `NONE` | No FTPS authentication | None |
 | `BASIC` | Username/password FTPS auth | `options.username`, `options.password` |
-
-## 5. Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.name` | string | Yes | Certificate name on the reader. |
-| `payload.type` | string | Yes | Certificate role: `server`, `client`, or `app`. |
-| `payload.url` | string | Yes | FTPS URL hosting the certificate or PFX file. |
-| `payload.authenticationType` | string | No | FTPS auth: `NONE` or `BASIC`. |
-| `payload.options.username` | string | If BASIC | FTPS username. |
-| `payload.options.password` | string | If BASIC | FTPS password. |
-| `payload.pfxPassword` | string | No | Password for the PFX file. |
-| `payload.pfxFileName` | string | No | Inline PFX filename (alternative to URL). |
-| `payload.pfxContent` | string | No | Inline Base64 PFX content (alternative to URL). |
-| `payload.verifyHost` | boolean | No | Verify server hostname (TLS). |
-| `payload.verifyPeer` | boolean | No | Verify server certificate (TLS). |
-
-> **Note:** Use `get_certs` to confirm the certificate list before installing. MQTT command key in the payload is `set_updateCertificate`.

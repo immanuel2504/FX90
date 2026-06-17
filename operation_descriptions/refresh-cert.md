@@ -16,7 +16,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_certs](get_certs.md), [set_update_cert](set_update_cert.md), [del_certs](del_certs.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Certificate Types | `client`, `server`, `app` |
 | Supported API Versions | V1.0 |
 
@@ -30,10 +29,3 @@ The certificate must already be installed. Use `get_certs` to confirm the `name`
 |---|---|
 | Certificate name | Exact name of the installed certificate. |
 | Certificate type | `client`, `server`, or `app`. |
-
-## Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.name` | string | Yes | Certificate name to refresh. |
-| `payload.type` | string | Yes | Certificate type: `client`, `server`, or `app`. |

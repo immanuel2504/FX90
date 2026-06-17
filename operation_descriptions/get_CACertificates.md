@@ -16,7 +16,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [set_installCACertificate](set_installCACertificate.md), [del_CACertificate](del_CACertificate.md) |
-| Required Request Fields | `command`, `command_id` |
 | Supported Operations | List installed CA certificates |
 | Supported API Versions | V1.0 |
 

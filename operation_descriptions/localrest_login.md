@@ -15,7 +15,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [set_password](set_password.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported API Versions | V1.0 |
 
 ## Before You Begin

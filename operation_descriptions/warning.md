@@ -39,5 +39,3 @@ The reader publishes `warning` automatically when a warning condition occurs. No
 | Field | Type | Description |
 |---|---|---|
 | `message` | string | Warning message text describing the condition. |
-
-> **Note:** Warnings often precede `error` events for the same subsystem (e.g. "Temperature High" before "Temperature Critical") — use them as early indicators.

@@ -16,7 +16,6 @@ No additional payload fields are required to retrieve all pin states.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | set_gpo, get_gpi_status, get_readerCapabilites |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current GPO pin states |
 | Supported API Versions | V1.0 |
 
@@ -27,5 +26,3 @@ Use `get_gpostatus` to:
 - Confirm GPO pin states before or after a `set_gpo` call
 - Verify external signaling (lights, horns, gates) is in the expected state
 - Audit output state during troubleshooting
-
-> **Note:** The number of usable GPO pins depends on the model; check `numGPOs` from `get_readerCapabilites`.

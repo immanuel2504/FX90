@@ -17,7 +17,6 @@ No additional payload fields are required to retrieve the error log archive.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | get_rg_warn_logs, get_rc_log, get_logs |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the reader-gateway error log archive |
 | Supported API Versions | V1.0 |
 
@@ -28,5 +27,3 @@ Use `get_rg_error_logs` to:
 - Investigate reader-gateway errors affecting data delivery
 - Collect error logs for support escalation
 - Correlate errors with `error` management events
-
-> **Note:** Pair with `get_rg_warn_logs` for a fuller picture of reader-gateway health.

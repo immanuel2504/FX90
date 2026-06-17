@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the full configuration.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | set_config, set_importCloudConfig, get_status, get_readerCapabilites |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active reader configuration details |
 | Supported API Versions | V1.0 |
 
@@ -30,5 +29,3 @@ Use `get_config` to:
 - Audit GPIO/LED default states across readers
 - Inspect tag-data retention and batching settings
 - Confirm configured data/management endpoints
-
-> **Note:** Use `get_config` before `set_config` to review existing settings and avoid overwriting active configuration unexpectedly.

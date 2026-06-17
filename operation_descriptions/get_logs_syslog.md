@@ -17,7 +17,6 @@ No additional payload fields are required to retrieve the syslog archive.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | del_syslogs, get_logs, get_radio_pkt_logs |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the system log archive |
 | Supported API Versions | V1.0 |
 
@@ -28,5 +27,3 @@ Use `get_logs_syslog` to:
 - Collect system logs for support or diagnostics
 - Capture a log snapshot before rebooting or updating
 - Archive logs before purging with `del_syslogs`
-
-> **Note:** The `binary` field can be large; ensure your MQTT client and broker allow a sufficient payload size.

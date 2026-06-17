@@ -17,7 +17,6 @@ No additional payload fields are required; values are returned keyed by read poi
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | set_cableLossCompensation, get_config |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve per-read-point cable loss values |
 | Supported API Versions | V1.0 |
 
@@ -29,5 +28,3 @@ Use `get_cableLossCompensation` to:
 - Verify cabling assumptions per antenna/read point
 - Audit RF link budgets across read points
 - Confirm settings after replacing antenna cabling
-
-> **Note:** Run `get_cableLossCompensation` before `set_cableLossCompensation` to confirm existing per-read-point values.

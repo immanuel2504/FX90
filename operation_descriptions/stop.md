@@ -19,7 +19,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [start](start.md), [set_bleConfig](set_bleConfig.md), [get_bleConfig](get_bleConfig.md), [get_mode](get_mode.md), [get_status](get_status.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Stop RFID inventory, BLE scan, or both |
 | Supported API Versions | V1.0 |
 
@@ -40,9 +39,3 @@ Stopping a scan type that is already idle may still succeed or may return failur
 |---|---|
 | Current activity | Optional. Check `get_status` if you need to confirm RFID or BLE activity before stopping. |
 | Target scan type | Choose `rfid`, `ble`, or both in `scanType`. Omit `scanType` only when you want the default RFID stop behavior. |
-
-## Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.scanType` | array of strings | No | Controls which scan types are stopped. Allowed values are `rfid` and `ble`. If omitted, RFID stops by default. |

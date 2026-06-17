@@ -16,7 +16,6 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_mode](get_mode.md), [start](start.md), [stop](stop.md), [get_config](get_config.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Configure operating mode and RF parameters |
 | Supported API Versions | V1.0 |
 
@@ -43,23 +42,3 @@ The `type` field in the payload defines the operating mode.
 | `CONVEYOR` | Conveyor-style read | Mode-specific conveyor settings |
 | `CUSTOM` | Custom mode configuration | Custom settings object |
 | `DIRECTIONALITY` | Zone-based direction detection | `basicConfig`, `beamConfig`, zone plan |
-
-## 5. Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.type` | string | Yes | Operating mode. Allowed: `SIMPLE`, `INVENTORY`, `PORTAL`, `CONVEYOR`, `CUSTOM`, `DIRECTIONALITY`. |
-| `payload.modeSpecificSettings` | object | If mode requires | Settings object whose shape depends on `type`. |
-| `payload.antennas` | array of integer | No | Antenna ports or ATR beam numbers to use. |
-| `payload.transmitPower` | number or array | No | TX power in dBm (single value or per-antenna array). |
-| `payload.environment` | string | No | RF environment profile. |
-| `payload.filter` | object | No | Tag ID filter (`value`, `match`, `operation`). |
-| `payload.antennaStopCondition` | object/array | No | Per-antenna stop condition (`type`, `value`). |
-| `payload.query` | object/array | No | Gen2 query parameters (`sel`, `session`, `target`, `tagPopulation`). |
-| `payload.tagMetaData` | array | No | Metadata fields to include in tag reports. |
-| `payload.modeSpecificSettings.interval.unit` | string | If INVENTORY | Interval unit: `seconds`, `minutes`, `hours`, `days`. |
-| `payload.modeSpecificSettings.interval.value` | integer | If INVENTORY | Interval value. |
-| `payload.modeSpecificSettings.startTrigger.port` | integer | If PORTAL | GPI port (1–4) for start trigger. |
-| `payload.modeSpecificSettings.startTrigger.signal` | string | If PORTAL | Trigger signal: `HIGH` or `LOW`. |
-
-> **Note:** Use `get_mode` before `set_mode` to review the active configuration. The schema defines 20+ additional optional RF fields — see the **Schema** tab for the full list.

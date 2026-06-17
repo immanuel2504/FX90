@@ -16,11 +16,9 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_version](get_version.md), [revertback](revertback.md), [get_status](get_status.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Update OS firmware from URL |
 | Supported API Versions | V1.0 |
 
-> **Security Note:** Never hardcode HTTP credentials, JWT tokens, or CA certificate content in your payload. Supply them at runtime from a secrets manager.
 
 ## 3. Before You Begin
 
@@ -42,21 +40,3 @@ The `authenticationType` field controls HTTP(S) server authentication.
 | `BASIC` | Username/password auth | `options.username`, `options.password` |
 
 JWT bearer tokens may be supplied via `payload.headers.Authorization` regardless of `authenticationType`.
-
-## 5. Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.url` | string | Yes | HTTP(S) URL of firmware folder. |
-| `payload.authenticationType` | string | Yes | Server auth: `NONE` or `BASIC`. |
-| `payload.options.username` | string | If BASIC | HTTP username. |
-| `payload.options.password` | string | If BASIC | HTTP password. |
-| `payload.verifyPeer` | boolean | No | Verify server certificate (default `true`). |
-| `payload.verifyHost` | boolean | No | Verify server hostname (default `true`). |
-| `payload.CACertificateFileContent` | string | No | Inline CA cert for server validation. |
-| `payload.CACertificateFileLocation` | string | No | CA cert file path on reader. |
-| `payload.headers.Authorization` | string | No | Bearer JWT for API authentication. |
-| `payload.retry` | object | No | Retry policy (`policy.retries`, `type`). |
-| `payload.timeouts` | object | No | Connection and read timeouts (seconds). |
-
-> **Note:** Check `get_version` → `availableOSUpgrades` before upgrading. Use `revertback` to roll back if needed.

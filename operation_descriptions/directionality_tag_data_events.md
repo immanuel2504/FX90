@@ -48,5 +48,3 @@ The reader publishes this payload inside the `tagDataEvents` envelope (`type: DI
 | `direction` | string | Travel direction (TIMED_OUT only): `IN`, `OUT`, `NONE`, `UNKNOWN`, `ERROR`. |
 | `zoneHistory` | array | Zones traversed (TIMED_OUT + `report_zone_history` enabled). |
 | `locationHistory` | array | Location estimates (TIMED_OUT + `report_location_history` enabled). |
-
-> **Note:** `direction` and history arrays are only present in the `TIMED_OUT` state. Enable `report_zone_history` / `report_location_history` in directionality mode settings.

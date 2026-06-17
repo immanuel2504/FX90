@@ -16,7 +16,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [set_impinjGen2X](set_impinjGen2X.md), [start](start.md), [get_mode](get_mode.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Retrieve saved Impinj Gen2X configuration |
 | Supported API Versions | V1.0 |
 

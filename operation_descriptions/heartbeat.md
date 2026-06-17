@@ -38,5 +38,3 @@ The reader publishes `heartbeat` on a periodic interval configured in `managemen
 | `system.temperature.ambient` | number | Reader ambient temperature. |
 | `system.uptime` | string | Reader uptime (hours:min:seconds). |
 | `userapps[].status` | string | User app status: `running`, `stopped`. |
-
-> **Note:** Use the heartbeat interval as a liveness timeout — if a heartbeat is missed for longer than the configured interval, treat the reader as unreachable.

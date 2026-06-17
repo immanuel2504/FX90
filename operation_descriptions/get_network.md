@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the full network configura
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | set_network, get_hostname, get_networkInterfaces |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active network configuration |
 | Supported API Versions | V1.0 |
 
@@ -30,5 +29,3 @@ Use `get_network` to:
 - Verify which interface (Ethernet/Wi-Fi) is connected
 - Audit network identity (hostname) across devices
 - Review interface status during connectivity troubleshooting
-
-> **Note:** Use `get_network` before `set_network` to review existing addressing and avoid losing connectivity to the reader.

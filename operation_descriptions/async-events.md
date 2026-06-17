@@ -48,5 +48,3 @@ The reader publishes management events automatically to the endpoints set in `ma
 | `component` | string | Event source: `RG`, `RC`, or `<appname>`. |
 | `eventNum` | number | Event sequence number. |
 | `data` | object (oneOf) | Event payload matching `type`. |
-
-> **Note:** Subscribe once to the management endpoint and branch on `type` rather than configuring a separate channel per event.

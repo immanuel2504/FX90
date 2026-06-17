@@ -16,7 +16,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_cableLossCompensation](get_cableLossCompensation.md), [set_cableLossCompensation](set_cableLossCompensation.md), [set_mode](set_mode.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Retrieve reader read points |
 | Supported API Versions | V1.0 |
 

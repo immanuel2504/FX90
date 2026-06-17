@@ -39,5 +39,3 @@ The reader publishes this payload inside the `tagDataEvents` envelope when a tag
 | `channel` | number | RF channel in MHz. |
 | `phase` | number | Tag phase in degrees. |
 | `CRC` / `PC` / `TID` / `USER` / `XPC` | varies | Optional memory-bank fields when configured. |
-
-> **Note:** Which optional fields appear depends on `tagMetaData` configuration in `set_mode`. See the **Schema** tab for the full field list.

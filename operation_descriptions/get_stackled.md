@@ -16,7 +16,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [set_stackled](set_stackled.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Retrieve stack LED state |
 | Supported API Versions | V1.0 |
 

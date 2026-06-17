@@ -16,13 +16,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [stop_user_app](stop_user_app.md), [get_user_apps](get_user_apps.md), [install_user_app](install_user_app.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported API Versions | V1.0 |
 
 MQTT command key: `set_startUserapp`.
-
-## Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.appname` | string | Yes | User application name to start. |

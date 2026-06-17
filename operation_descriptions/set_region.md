@@ -16,17 +16,9 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_region](get_region.md), [get_SupportedRegionList](get_SupportedRegionList.md), [get_SupportedStandardlist](get_SupportedStandardlist.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Update RF region configuration |
 | Supported API Versions | V1.0 |
 
 ## Before You Begin
 
 Use `get_SupportedRegionList` and `get_SupportedStandardlist` to choose a valid country and regulatory standard before updating region settings.
-
-## Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.country` | string | Yes | Target country/region name. |
-| `payload.standardname` | string | Yes | Regulatory standard name to apply for the selected country. |

@@ -32,5 +32,3 @@ The reader publishes `gpo` automatically when a GPO pin transitions. No command 
 |---|---|---|
 | `pin` | number | GPO pin number (`1`, `2`, `3`, `4`). |
 | `state` | string | New pin state: `HIGH` or `LOW`. |
-
-> **Note:** Use `get_gpostatus` to query current GPO states on demand; use this event to be notified of changes as they happen.

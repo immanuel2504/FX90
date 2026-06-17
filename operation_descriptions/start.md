@@ -19,7 +19,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [stop](stop.md), [set_bleConfig](set_bleConfig.md), [get_bleConfig](get_bleConfig.md), [set_mode](set_mode.md), [get_mode](get_mode.md), [set_impinjGen2X](set_impinjGen2X.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Start RFID inventory, BLE scan, or both |
 | Supported API Versions | V1.0 |
 
@@ -51,11 +50,3 @@ Configure the scan type you plan to start.
 - BLE scanning requires BLE configuration from `set_bleConfig`.
 - `scanType` containing `ble` cannot be combined with `applyImpinjGen2X`.
 - `applyImpinjGen2X` is for RFID Gen2X operations, not BLE scanning.
-
-## Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.scanType` | array of strings | No | Controls which scan types are started. Allowed values are `rfid` and `ble`. If omitted, RFID starts by default. |
-| `payload.doNotPersistState` | boolean | No | Set to `false` to allow the reader to persist state. If omitted, default reader behavior applies. |
-| `payload.applyImpinjGen2X` | boolean | No | Applies the saved Impinj Gen2X configuration when starting RFID inventory. Do not use with BLE scan types. |

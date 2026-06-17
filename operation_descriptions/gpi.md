@@ -32,5 +32,3 @@ The reader publishes `gpi` automatically when a GPI pin transitions, provided GP
 |---|---|---|
 | `pin` | number | GPI pin number (`1`, `2`, `3`, `4`). |
 | `state` | string | New pin state: `HIGH` or `LOW`. |
-
-> **Note:** GPI events must be enabled in reader configuration before they are published. The number of available pins depends on the model (see `get_readerCapabilites`).

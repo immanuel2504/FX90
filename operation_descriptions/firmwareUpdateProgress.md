@@ -46,5 +46,3 @@ The reader publishes `firmwareUpdateProgress` automatically after `set_os` begin
 | `imageDownloadProgress` | number | Current partition progress (0–100). |
 | `overallUpdateProgress` | number | Overall update progress (0–100). |
 | `updateProgressDetails` | string or object | Failure reason, or per-partition progress (`os`, `radioFirmware`, `platform`). |
-
-> **Note:** A `failed` status includes a reason in `updateProgressDetails`; a `rebooting` status means the reader will briefly disconnect.

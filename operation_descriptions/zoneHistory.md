@@ -31,5 +31,3 @@ Use this event to:
 |---|---|---|
 | `timestamp` | number | UNIX millisecond timestamp of the zone visit. |
 | `Zone` | integer | Zone number (1–6). |
-
-> **Note:** Each array entry represents one zone the tag passed through, in chronological order.

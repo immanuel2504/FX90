@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the active region settings
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | set_region, get_SupportedRegionList, get_SupportedStandardlist |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active RF region and regulatory settings |
 | Supported API Versions | V1.0 |
 
@@ -30,5 +29,3 @@ Use `get_region` to:
 - Verify LBT and channel configuration before inventory
 - Audit minimum transmit power for the region
 - Validate region settings after deployment to a new country
-
-> **Note:** Use `get_region` before `set_region`, and cross-check `get_SupportedRegionList` to ensure the target region is permitted on this reader.

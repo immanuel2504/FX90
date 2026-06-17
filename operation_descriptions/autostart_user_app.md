@@ -16,14 +16,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_user_apps](get_user_apps.md), [start_user_app](start_user_app.md), [install_user_app](install_user_app.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported API Versions | V1.0 |
 
 MQTT command key: `set_autostartUserapp`.
-
-## Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.appname` | string | Yes | User application name. |
-| `payload.autostart` | boolean | Yes | `true` — start on boot. `false` — manual start only. |

@@ -16,7 +16,6 @@ No additional payload fields are required to retrieve all pin states.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | get_gpostatus, set_gpo, get_readerCapabilites |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current GPI pin states |
 | Supported API Versions | V1.0 |
 
@@ -27,5 +26,3 @@ Use `get_gpi_status` to:
 - Read the current state of external sensors wired to GPI pins
 - Confirm a trigger source (e.g. motion sensor, beam break) before enabling start/stop triggers
 - Audit input state during troubleshooting
-
-> **Note:** The number of usable GPI pins depends on the model; check `numGPIs` from `get_readerCapabilites`.

@@ -17,7 +17,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [set_bleConfig](set_bleConfig.md), [start](start.md), [stop](stop.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Retrieve BLE scanner configuration |
 | Supported API Versions | V1.0 |
 

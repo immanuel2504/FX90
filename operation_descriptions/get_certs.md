@@ -16,7 +16,6 @@ No additional payload fields are required to retrieve all installed certificates
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | set_update_cert, del_certs, refresh-cert, get_CACertificates |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the list of installed certificates |
 | Supported API Versions | V1.0 |
 
@@ -28,5 +27,3 @@ Use `get_certs` to:
 - Check certificate validity windows before expiry
 - Confirm a certificate was installed or removed
 - Retrieve the full list of certificates on the device
-
-> **Note:** Use `get_certs` before `set_update_cert` or `del_certs` to reference the exact certificate `name`.

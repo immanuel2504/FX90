@@ -16,7 +16,6 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_radio_pkt_logs](get_radio_pkt_logs.md), [set_logs](set_logs.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported API Versions | V1.0 |
 
 ## Before You Begin

@@ -16,11 +16,9 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_config](get_config.md), [set_config](set_config.md), [get_certs](get_certs.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Import cloud endpoint configuration |
 | Supported API Versions | V1.0 |
 
-> **Security Note:** Endpoint connections include TLS certificates, usernames, and passwords. Never hardcode sensitive values in your payload. Supply them at runtime from a secrets manager or environment variable.
 
 ## 3. Before You Begin
 
@@ -46,23 +44,3 @@ The `type` field in each `connections[]` entry defines the transport.
 | `mqtt-AZURE` | Azure IoT Hub MQTT | Azure-specific options |
 | `mqtt-AWS` | AWS IoT Core MQTT | AWS-specific options |
 | `keyboard-emulation` | Keyboard emulation output | N/A |
-
-## 5. Request Fields
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `payload.endpointConfig` | object | No | Root object for all endpoint channels. |
-| `payload.endpointConfig.data.event` | object | No | Tag data event channel with `connections[]`. |
-| `payload.endpointConfig.control.commandResponse` | object | No | Control command-response channel. |
-| `payload.endpointConfig.management.event` | object | No | Management event channel. |
-| `payload.endpointConfig.management.commandResponse` | object | No | Management command-response channel. |
-| `payload.endpointConfig.*.connections[].type` | string | No | Transport type (see table above). |
-| `payload.endpointConfig.*.connections[].name` | string | No | Endpoint display name. |
-| `payload.endpointConfig.*.connections[].options` | object | No | Type-specific options (host, port, security, topics). |
-| `payload.endpointConfig.*.connections[].options.endpoint.hostName` | string | If mqtt | Broker hostname or IP. |
-| `payload.endpointConfig.*.connections[].options.endpoint.port` | integer | If mqtt | Broker port. |
-| `payload.endpointConfig.*.connections[].options.publishTopic` | string[] | If mqtt | Topics to publish tag data / responses. |
-| `payload.endpointConfig.*.connections[].additionalOptions.batching` | object | No | `reportingInterval`, `maxPayloadSizePerReport`. |
-| `payload.endpointConfig.*.connections[].additionalOptions.retention` | object | No | `throttle`, `maxNumEvents`, `maxEventRetentionTimeInMin`. |
-
-> **Note:** Review `get_config` first to see existing endpoint settings before importing a new cloud configuration.

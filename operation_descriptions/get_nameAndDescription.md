@@ -17,7 +17,6 @@ No additional payload fields are required to retrieve the name and description.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | set_nameAndDescription, get_hostname, get_network |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the reader name and description |
 | Supported API Versions | V1.0 |
 
@@ -28,5 +27,3 @@ Use `get_nameAndDescription` to:
 - Confirm the friendly name shown in management tools
 - Verify the result of a prior `set_nameAndDescription` call
 - Audit naming conventions across a fleet
-
-> **Note:** Use `get_nameAndDescription` before `set_nameAndDescription` to preserve existing values you don't intend to change.

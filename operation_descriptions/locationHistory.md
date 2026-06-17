@@ -32,5 +32,3 @@ Use this event to:
 | `timestamp` | string | Timestamp in ISO 8601 format. |
 | `x` | number | X coordinate of location estimate (feet). |
 | `y` | number | Y coordinate of location estimate (feet). |
-
-> **Note:** Location estimates require directionality mode with `report_location_history` enabled. Coordinates are in feet relative to the reader's configured zone plan.

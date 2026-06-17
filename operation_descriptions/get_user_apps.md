@@ -16,7 +16,6 @@ No additional payload fields are required to retrieve all installed user apps.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | install_user_app, uninstall-user-app, start_user_app, stop_user_app, autostart_user_app |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the list of installed user applications |
 | Supported API Versions | V1.0 |
 
@@ -28,5 +27,3 @@ Use `get_user_apps` to:
 - Check whether an app is currently running
 - Verify autostart configuration per app
 - Audit deployed applications across a fleet
-
-> **Note:** Use `get_user_apps` to obtain the exact `appname` before calling `start_user_app`, `stop_user_app`, or `uninstall-user-app`.

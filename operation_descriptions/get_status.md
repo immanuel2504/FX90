@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the full status snapshot.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | get_version, get_readerCapabilites, get_config |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve live operational statistics and health |
 | Supported API Versions | V1.0 |
 
@@ -30,5 +29,3 @@ Use `get_status` to:
 - Verify the radio is connected before starting inventory
 - Monitor reader temperature for thermal issues
 - Synchronize against the reader's current system time
-
-> **Note:** The status payload uses the field name `radioActivitiy` (spelling as returned by the reader) for radio activity state.

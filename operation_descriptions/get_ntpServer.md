@@ -16,7 +16,6 @@ No additional payload fields are required to retrieve the NTP server setting.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | set_ntpServer, get_timeZone, get_status |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the configured NTP server |
 | Supported API Versions | V1.0 |
 
@@ -27,5 +26,3 @@ Use `get_ntpServer` to:
 - Confirm the reader points to the correct time source
 - Verify the result of a prior `set_ntpServer` call
 - Troubleshoot clock drift affecting event timestamps
-
-> **Note:** Use `get_ntpServer` before `set_ntpServer` to confirm the active server and avoid disrupting time sync.
