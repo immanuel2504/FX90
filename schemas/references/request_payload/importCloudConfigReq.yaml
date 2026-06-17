@@ -2,369 +2,133 @@ title: Import Cloud Config Request
 x-stoplight:
   id: ykvtb3ll3v3cw
 type: object
-x-examples:
-  example-1: {}
 examples:
 - endpointConfig:
-    data:
-      event:
-        connections:
-        - type: mqtt
-          options:
-            endpoint:
-              hostName: 10.17.231.77
-              port: 8883
-              protocol: tcp
-            enableSecurity: true
-            security:
-              keyFormat: PEM
-              keyAlgorithm: RSA256
-              CACertificateFileLocation: string
-              publicKeyFileLocation: string
-              privateKeyFileLocation: string
-              verifyHostName: true
-              verifyPeer: true
-              installedCertificateName: string
-              installedCertificateType: server
-            basicAuthentication:
-              username: string
-              password: string
-            additional:
-              keepAlive: 0
-              cleanSession: true
-              debug: true
-              reconnectDelay: 0
-              reconnectDelayMax: 0
-              clientId: string
-              qos: 0
-              retain: false
-            publishTopic:
-            - string
-          name: string
-          description: string
-          additionalOptions:
-            batching:
-              reportingInterval: 1000
-              maxPayloadSizePerReport: 256000
-            retention:
-              throttle: 200
-              maxNumEvents: 150000
-              maxEventRetentionTimeInMin: 10
     control:
       commandResponse:
         connections:
-        - type: mqtt
+        - description: MQTT_TEST
+          name: MQTT_TEST
           options:
-            endpoint:
-              hostName: 10.17.231.77
-              port: 8883
-              protocol: tcp
-            enableSecurity: true
-            security:
-              keyFormat: PEM
-              keyAlgorithm: RSA256
-              CACertificateFileLocation: string
-              publicKeyFileLocation: string
-              privateKeyFileLocation: string
-              verifyHostName: true
-              verifyPeer: true
-              installedCertificateName: string
-              installedCertificateType: server
-            basicAuthentication:
-              username: string
-              password: string
             additional:
-              keepAlive: 0
               cleanSession: true
-              debug: true
-              reconnectDelay: 0
-              reconnectDelayMax: 0
-              clientId: string
+              clientId: FX9600FCC017
+              debug: false
+              keepAlive: 60
               qos: 0
-              retain: false
+              reconnectDelay: 1
+              reconnectDelayMax: 5
+            enableSecurity: false
+            endpoint:
+              hostName: broker.emqx.io
+              port: 1883
+              protocol: tcp
             publishTopic:
-            - string
+            - FX9600FCC017/rsp
+            security:
+              CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+              installedCertificateName: Server
+              installedCertificateType: server
+              keyAlgorithm: RS256
+              keyFormat: PEM
+              verifyHostName: false
+              verifyPeer: false
             subscribeTopic:
-            - string
-          name: string
-          description: string
-          additionalOptions:
-            batching:
-              reportingInterval: 1000
-              maxPayloadSizePerReport: 256000
-            retention:
-              throttle: 200
-              maxNumEvents: 150000
-              maxEventRetentionTimeInMin: 10
-    management:
-      event:
-        connections:
-        - type: mqtt
-          options:
-            endpoint:
-              hostName: 10.17.231.77
-              port: 8883
-              protocol: tcp
-            enableSecurity: true
-            security:
-              keyFormat: PEM
-              keyAlgorithm: RSA256
-              CACertificateFileLocation: string
-              publicKeyFileLocation: string
-              privateKeyFileLocation: string
-              verifyHostName: true
-              verifyPeer: true
-              installedCertificateName: string
-              installedCertificateType: server
-            basicAuthentication:
-              username: string
-              password: string
-            additional:
-              keepAlive: 0
-              cleanSession: true
-              debug: true
-              reconnectDelay: 0
-              reconnectDelayMax: 0
-              clientId: string
-              qos: 0
-              retain: false
-            publishTopic:
-            - string
-          name: string
-          description: string
-          additionalOptions:
-            batching:
-              reportingInterval: 1000
-              maxPayloadSizePerReport: 256000
-            retention:
-              throttle: 200
-              maxNumEvents: 150000
-              maxEventRetentionTimeInMin: 10
-      commandResponse:
-        connections:
-        - type: mqtt
-          options:
-            endpoint:
-              hostName: 10.17.231.77
-              port: 8883
-              protocol: tcp
-            enableSecurity: true
-            security:
-              keyFormat: PEM
-              keyAlgorithm: RSA256
-              CACertificateFileLocation: string
-              publicKeyFileLocation: string
-              privateKeyFileLocation: string
-              verifyHostName: true
-              verifyPeer: true
-              installedCertificateName: string
-              installedCertificateType: server
-            basicAuthentication:
-              username: string
-              password: string
-            additional:
-              keepAlive: 0
-              cleanSession: true
-              debug: true
-              reconnectDelay: 0
-              reconnectDelayMax: 0
-              clientId: string
-              qos: 0
-              retain: false
-            publishTopic:
-            - string
-            subscribeTopic:
-            - string
-          name: string
-          description: string
-          additionalOptions:
-            batching:
-              reportingInterval: 1000
-              maxPayloadSizePerReport: 256000
-            retention:
-              throttle: 200
-              maxNumEvents: 150000
-              maxEventRetentionTimeInMin: 10
-- endpointConfig:
+            - FX9600FCC017/cmd
+          type: mqtt
+        enableLocalRest: true
     data:
       event:
         connections:
-        - type: mqtt
-          options:
-            endpoint:
-              hostName: 10.17.231.77
-              port: 8883
-              protocol: tcp
-            enableSecurity: true
-            security:
-              keyFormat: PEM
-              keyAlgorithm: RSA256
-              CACertificateFileLocation: string
-              publicKeyFileLocation: string
-              privateKeyFileLocation: string
-              verifyHostName: true
-              verifyPeer: true
-              installedCertificateName: string
-              installedCertificateType: server
-            basicAuthentication:
-              username: string
-              password: string
-            additional:
-              keepAlive: 0
-              cleanSession: true
-              debug: true
-              reconnectDelay: 0
-              reconnectDelayMax: 0
-              clientId: string
-              qos: 0
-              retain: false
-            publishTopic:
-            - string
-          name: string
-          description: string
-          additionalOptions:
-            batching:
-              reportingInterval: 1000
-              maxPayloadSizePerReport: 256000
+        - additionalOptions:
+            batching: null
             retention:
-              throttle: 200
+              maxEventRetentionTimeInMin: 500
               maxNumEvents: 150000
-              maxEventRetentionTimeInMin: 10
-    control:
+              throttle: 500
+          description: MQTT_TEST
+          name: MQTT_TEST
+          options:
+            additional:
+              cleanSession: true
+              clientId: FX9600FCC017
+              debug: false
+              keepAlive: 60
+              qos: 0
+              reconnectDelay: 1
+              reconnectDelayMax: 5
+            enableSecurity: false
+            endpoint:
+              hostName: broker.emqx.io
+              port: 1883
+              protocol: tcp
+            publishTopic:
+            - FX9600FCC017/tevents
+            security:
+              CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+              installedCertificateName: Server
+              installedCertificateType: server
+              keyAlgorithm: RS256
+              keyFormat: PEM
+              verifyHostName: false
+              verifyPeer: false
+            subscribeTopic: []
+          type: mqtt
+    management:
       commandResponse:
         connections:
-        - type: mqtt
+        - description: MQTT_TEST
+          name: MQTT_TEST
           options:
-            endpoint:
-              hostName: 10.17.231.77
-              port: 8883
-              protocol: tcp
-            enableSecurity: true
-            security:
-              keyFormat: PEM
-              keyAlgorithm: RSA256
-              CACertificateFileLocation: string
-              publicKeyFileLocation: string
-              privateKeyFileLocation: string
-              verifyHostName: true
-              verifyPeer: true
-              installedCertificateName: string
-              installedCertificateType: server
-            basicAuthentication:
-              username: string
-              password: string
             additional:
-              keepAlive: 0
               cleanSession: true
-              debug: true
-              reconnectDelay: 0
-              reconnectDelayMax: 0
-              clientId: string
+              clientId: FX9600FCC017
+              debug: false
+              keepAlive: 60
               qos: 0
-              retain: false
+              reconnectDelay: 1
+              reconnectDelayMax: 5
+            enableSecurity: false
+            endpoint:
+              hostName: broker.emqx.io
+              port: 1883
+              protocol: tcp
             publishTopic:
-            - string
+            - FX9600FCC017/rsp
+            security:
+              CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+              installedCertificateName: Server
+              installedCertificateType: server
+              keyAlgorithm: RS256
+              keyFormat: PEM
+              verifyHostName: false
+              verifyPeer: false
             subscribeTopic:
-            - string
-          name: string
-          description: string
-          additionalOptions:
-            batching:
-              reportingInterval: 1000
-              maxPayloadSizePerReport: 256000
-            retention:
-              throttle: 200
-              maxNumEvents: 150000
-              maxEventRetentionTimeInMin: 10
-    management:
+            - FX9600FCC017/cmd
+          type: mqtt
+        enableLocalRest: true
       event:
         connections:
-        - type: mqtt
+        - description: MQTT_TEST
+          name: MQTT_TEST
           options:
-            endpoint:
-              hostName: 10.17.231.77
-              port: 8883
-              protocol: tcp
-            enableSecurity: true
-            security:
-              keyFormat: PEM
-              keyAlgorithm: RSA256
-              CACertificateFileLocation: string
-              publicKeyFileLocation: string
-              privateKeyFileLocation: string
-              verifyHostName: true
-              verifyPeer: true
-              installedCertificateName: string
-              installedCertificateType: server
-            basicAuthentication:
-              username: string
-              password: string
             additional:
-              keepAlive: 0
               cleanSession: true
-              debug: true
-              reconnectDelay: 0
-              reconnectDelayMax: 0
-              clientId: string
+              clientId: FX9600FCC017
+              debug: false
+              keepAlive: 60
               qos: 0
-              retain: false
-            publishTopic:
-            - string
-          name: string
-          description: string
-          additionalOptions:
-            batching:
-              reportingInterval: 1000
-              maxPayloadSizePerReport: 256000
-            retention:
-              throttle: 200
-              maxNumEvents: 150000
-              maxEventRetentionTimeInMin: 10
-      commandResponse:
-        connections:
-        - type: mqtt
-          options:
+              reconnectDelay: 1
+              reconnectDelayMax: 5
+            enableSecurity: false
             endpoint:
-              hostName: 10.17.231.77
-              port: 8883
+              hostName: broker.emqx.io
+              port: 1883
               protocol: tcp
-            enableSecurity: true
-            security:
-              keyFormat: PEM
-              keyAlgorithm: RSA256
-              CACertificateFileLocation: string
-              publicKeyFileLocation: string
-              privateKeyFileLocation: string
-              verifyHostName: true
-              verifyPeer: true
-              installedCertificateName: string
-              installedCertificateType: server
-            basicAuthentication:
-              username: string
-              password: string
-            additional:
-              keepAlive: 0
-              cleanSession: true
-              debug: true
-              reconnectDelay: 0
-              reconnectDelayMax: 0
-              clientId: string
-              qos: 0
-              retain: false
             publishTopic:
-            - string
-            subscribeTopic:
-            - string
-          name: string
-          description: string
-          additionalOptions:
-            batching:
-              reportingInterval: 1000
-              maxPayloadSizePerReport: 256000
-            retention:
-              throttle: 200
-              maxNumEvents: 150000
-              maxEventRetentionTimeInMin: 10
+            - FX9600FCC017/mevents
+            subscribeTopic: []
+          type: mqtt
 description: Imports Cloud Configuration
 properties:
   endpointConfig:
@@ -403,3 +167,5 @@ properties:
             $ref: ../shared/mgmt_cmdresp.yaml
             x-stoplight:
               id: p5o8vwwnyv7ui
+required:
+- endpointConfig

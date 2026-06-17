@@ -57,6 +57,12 @@
     "set_config_management_events": "Updates management event, warning, error, and heartbeat settings.",
     "set_config_gpio_led": "Updates GPIO and LED event-action configuration."
   },
+  "Set-ImportCloudConfigCommand": {
+    "set_importCloudConfig": "Imports control, data, and management cloud endpoint configuration using the REST cloudConfig example."
+  },
+  "Set-ImportCloudConfig-Response": {
+    "Cloud config import success": "Returns an empty payload when the cloud endpoint configuration import succeeds."
+  },
   "Set Cable Loss Compensation": {
     "Set ports 1 and 2 cable loss": "Sets cable length and cable loss per hundred feet for antenna ports 1 and 2.",
     "Set ports 3 and 4 cable loss": "Sets cable length and cable loss per hundred feet for antenna ports 3 and 4."

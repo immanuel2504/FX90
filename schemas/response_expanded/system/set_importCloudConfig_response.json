@@ -10,7 +10,7 @@
       "command": "set_importCloudConfig",
       "command_id": "abdc453254",
       "response": "success",
-      "payload": {}
+      "payload": ""
     }
   ],
   "properties": {
@@ -47,17 +47,15 @@
       "oneOf": [
         {
           "title": "Import Cloud Config Response",
+          "type": "string",
+          "description": "Empty response payload returned after a successful cloud endpoint configuration import.",
+          "example": "",
+          "examples": [
+            ""
+          ],
           "x-stoplight": {
             "id": "b8aznc38e0bm3"
-          },
-          "type": "object",
-          "x-examples": {
-            "example-1": {}
-          },
-          "examples": [
-            {}
-          ],
-          "description": "Imports Cloud Configuration"
+          }
         },
         {
           "title": "failure",
@@ -103,14 +101,8 @@
   },
   "required": [
     "command",
-    "command_id"
-  ],
-  "x-examples": {
-    "Example 1": {
-      "command": "set_importCloudConfig",
-      "command_id": "abdc453254",
-      "response": "success",
-      "payload": {}
-    }
-  }
+    "command_id",
+    "response",
+    "payload"
+  ]
 }

@@ -10,7 +10,7 @@
       "command": "set_importCloudConfig",
       "command_id": "abdc453254",
       "response": "success",
-      "payload": {}
+      "payload": ""
     }
   ],
   "properties": {
@@ -65,14 +65,8 @@
   },
   "required": [
     "command",
-    "command_id"
-  ],
-  "x-examples": {
-    "Example 1": {
-      "command": "set_importCloudConfig",
-      "command_id": "abdc453254",
-      "response": "success",
-      "payload": {}
-    }
-  }
+    "command_id",
+    "response",
+    "payload"
+  ]
 }

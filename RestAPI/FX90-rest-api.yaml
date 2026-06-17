@@ -571,7 +571,60 @@ paths:
       tags:
       - Control
       summary: Start RFID Inventory or BLE scan
-      description: "MQTT API :- start\n\nStart RFID inventory, BLE scanning, or both simultaneously.\nThe optional `scanType` array controls which scan types are activated.\nOmitting the payload (or `scanType`) defaults to RFID-only.\nBLE scanning requires prior BLE configuration via `set_bleConfig`.\n  `scanType` with `\"ble\"` cannot be combined with `applyImpinjGen2X`."
+      description: 'The `PUT /cloud/start` REST endpoint and the `start` MQTT command start RFID inventory, BLE scanning, or both.
+
+
+        By default, an empty request starts RFID inventory only. Use `scanType` to explicitly start BLE, RFID, or both.
+
+
+        ## 1. Operation Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | Pattern Name | Scan Control - Start |
+
+        | Supported Protocols | REST (HTTP/HTTPS), MQTT |
+
+        | Applies To | FXR90 |
+
+        | Related Operations | `stopInventory`, `setBleConfig`, `setImpinjGen2X`, `setMode` |
+
+        | REST Endpoint | `PUT /cloud/start` |
+
+        | MQTT Command | `start` |
+
+
+        ## 2. Start Behavior
+
+
+        | Payload | Result |
+
+        |---|---|
+
+        | `{}` | Starts RFID inventory only. |
+
+        | `{ "scanType": ["rfid"] }` | Starts RFID inventory explicitly. |
+
+        | `{ "scanType": ["ble"] }` | Starts BLE scanning only. |
+
+        | `{ "scanType": ["ble", "rfid"] }` | Starts BLE scanning and RFID inventory together. |
+
+        | `{ "applyImpinjGen2X": true }` | Starts RFID inventory and applies the saved Impinj Gen2X configuration. |
+
+
+        ## 3. Before You Begin
+
+
+        Configure the scan mode before starting:
+
+        - RFID inventory should be configured with mode settings.
+
+        - BLE scanning requires BLE configuration from `PUT /cloud/ble-config`.
+
+        - Gen2X settings must be saved before using `applyImpinjGen2X`.'
       operationId: startInventory
       requestBody:
         content:
@@ -610,18 +663,52 @@ paths:
       tags:
       - Control
       summary: Stop RFID Inventory or BLE scan
-      description: 'MQTT API :- stop
+      description: 'The `PUT /cloud/stop` REST endpoint and the `stop` MQTT command stop RFID inventory, BLE scanning, or both.
 
 
-        Stop RFID inventory, BLE scanning, or both.
+        By default, an empty request stops RFID inventory only. Use `scanType` to explicitly stop BLE, RFID, or both.
 
-        The optional `scanType` array controls what is stopped.
 
-        Omitting the payload (or `scanType`) stops RFID only — the original default behaviour.
+        ## 1. Operation Details
 
-        Use `["ble"]` to stop only BLE (RFID continues), `["rfid"]` to stop only RFID
 
-        (BLE continues), or `["ble","rfid"]` to stop both.'
+        | Property | Value |
+
+        |---|---|
+
+        | Pattern Name | Scan Control - Stop |
+
+        | Supported Protocols | REST (HTTP/HTTPS), MQTT |
+
+        | Applies To | FXR90 |
+
+        | Related Operations | `startInventory`, `getStatus` |
+
+        | REST Endpoint | `PUT /cloud/stop` |
+
+        | MQTT Command | `stop` |
+
+
+        ## 2. Stop Behavior
+
+
+        | Payload | Result |
+
+        |---|---|
+
+        | `{}` | Stops RFID inventory only. |
+
+        | `{ "scanType": ["rfid"] }` | Stops RFID inventory explicitly. |
+
+        | `{ "scanType": ["ble"] }` | Stops BLE scanning only. RFID inventory continues. |
+
+        | `{ "scanType": ["ble", "rfid"] }` | Stops BLE scanning and RFID inventory together. |
+
+
+        ## 3. When to Use This Endpoint
+
+
+        Use this endpoint when changing operating modes, applying configuration updates, or stopping scans before maintenance. Use `GET /cloud/status` to confirm the resulting radio and BLE activity state.'
       operationId: stopInventory
       requestBody:
         content:
@@ -1340,7 +1427,81 @@ paths:
       tags:
       - System
       summary: Import cloud endpoint configuration
-      description: MQTT API :- set_importCloudConfig <br> Imports the cloud endpoint configuration (control/data/management/management event endpoints) into the reader
+      description: 'The `PUT /cloud/cloudConfig` REST endpoint and the `set_importCloudConfig` MQTT command import cloud endpoint configuration onto the reader. Use this operation to define how tag data, command responses, and management events are delivered.
+
+
+        This operation configures:
+
+        - Data event endpoints under `endpointConfig.data.event`
+
+        - Control command-response endpoints under `endpointConfig.control.commandResponse`
+
+        - Management event endpoints under `endpointConfig.management.event`
+
+        - Management command-response endpoints under `endpointConfig.management.commandResponse`
+
+
+        ## 1. Operation Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | Pattern Name | Cloud Endpoint Configuration Import |
+
+        | Supported Protocols | REST (HTTP/HTTPS), MQTT |
+
+        | Communication Type | Synchronous (REST), Bidirectional (MQTT) |
+
+        | Applies To | FXR90 |
+
+        | Related Operations | config, certificates |
+
+        | REST Endpoint | `PUT /cloud/cloudConfig` |
+
+        | MQTT Command | `set_importCloudConfig` |
+
+
+        ## 2. Before You Begin
+
+
+        Gather the endpoint details before sending the request. An incorrect hostname, port, topic, or certificate reference will prevent the reader from connecting to the cloud backend.
+
+
+        | What You Need | Details |
+
+        |---|---|
+
+        | Endpoint channels | `data.event`, `control.commandResponse`, `management.event`, `management.commandResponse`. |
+
+        | Connection type | `mqtt`, `httpPost`, `tcpip-server`, `WEBSOCKET`, `mqtt-AZURE`, `mqtt-AWS`, or another supported endpoint type. |
+
+        | Host, port, and topics | MQTT endpoints require `hostName`, `port`, `protocol`, `publishTopic`, and command-response `subscribeTopic`. |
+
+        | Certificates and auth | TLS certificate references or inline PEM paths, plus optional `basicAuthentication` credentials. |
+
+
+        ## 3. Connection Types
+
+
+        | Type | Description |
+
+        |---|---|
+
+        | `mqtt` | Standard MQTT broker connection. |
+
+        | `httpPost` | HTTP POST delivery for data events. |
+
+        | `tcpip-server` | TCP/IP server socket endpoint. |
+
+        | `WEBSOCKET` | WebSocket endpoint connection. |
+
+        | `mqtt-AZURE` | Azure IoT Hub MQTT connection. |
+
+        | `mqtt-AWS` | AWS IoT Core MQTT connection. |
+
+        | `keyboard-emulation` | Keyboard emulation output. |'
       operationId: setImportcloudconfig
       requestBody:
         required: true
@@ -2968,7 +3129,57 @@ paths:
       tags:
       - ImpinjGen2X
       summary: Get Impinj Gen2X configuration
-      description: MQTT API :- get_impinjGen2X <br> Retrieves the current Impinj Gen2X feature configuration as last saved via set_impinjGen2X. Returns an empty object if no Gen2X configuration has been set yet. Only feature objects that were previously configured are included in the response.
+      description: 'The `GET /cloud/impinjGen2X` REST endpoint and the `get_impinjGen2X` MQTT command retrieve the Impinj Gen2X feature configuration saved on the reader.
+
+
+        This operation can return configuration for:
+
+        - FastID
+
+        - TagProtect
+
+        - TagFocus
+
+        - TagQuieting
+
+
+        ## 1. Operation Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | Pattern Name | Impinj Gen2X Configuration Query |
+
+        | Supported Protocols | REST (HTTP/HTTPS), MQTT |
+
+        | Applies To | FXR90 |
+
+        | Related Operations | `setImpinjGen2X`, `startInventory` |
+
+        | REST Endpoint | `GET /cloud/impinjGen2X` |
+
+        | MQTT Command | `get_impinjGen2X` |
+
+
+        ## 2. When to Use This Endpoint
+
+
+        Use this endpoint to verify saved Gen2X settings before starting RFID inventory. If no Gen2X configuration has been saved, the response can be an empty object.
+
+
+        | Field | What to Check |
+
+        |---|---|
+
+        | `fastID.enabled` | Whether FastID is enabled. |
+
+        | `tagProtect` | Tag protection or visibility action settings. |
+
+        | `tagFocus.enabled` | Whether TagFocus is enabled. |
+
+        | `tagQuieting` | Basic or advanced quieting settings. |'
       operationId: getImpinjGen2X
       responses:
         '200':
@@ -3024,7 +3235,57 @@ paths:
       tags:
       - ImpinjGen2X
       summary: Set Impinj Gen2X configuration
-      description: MQTT API :- set_impinjGen2X <br> Configures Impinj Gen2X proprietary features (FastID, TagProtect, TagFocus, TagQuieting). At least one feature object must be provided.
+      description: 'The `PUT /cloud/impinjGen2X` REST endpoint and the `set_impinjGen2X` MQTT command configure Impinj Gen2X RFID features on the reader.
+
+
+        Use this operation to:
+
+        - Enable or disable FastID
+
+        - Configure TagProtect protection or visibility actions
+
+        - Enable or disable TagFocus
+
+        - Quiet or unquiet tags using basic or advanced TagQuieting
+
+
+        ## 1. Operation Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | Pattern Name | Impinj Gen2X Configuration Update |
+
+        | Supported Protocols | REST (HTTP/HTTPS), MQTT |
+
+        | Applies To | FXR90 |
+
+        | Related Operations | `getImpinjGen2X`, `startInventory` |
+
+        | REST Endpoint | `PUT /cloud/impinjGen2X` |
+
+        | MQTT Command | `set_impinjGen2X` |
+
+
+        ## 2. Before You Begin
+
+
+        Configure Gen2X before starting RFID inventory. To apply the saved configuration during inventory, call `PUT /cloud/start` with `applyImpinjGen2X: true`.
+
+
+        | Feature | Notes |
+
+        |---|---|
+
+        | `fastID` | Enables or disables FastID. |
+
+        | `tagProtect` | Requires action and password; tag-specific actions require `tagID`. |
+
+        | `tagFocus` | Enables or disables TagFocus mode. |
+
+        | `tagQuieting` | Supports basic tag ID lists and advanced pre-select masks. |'
       operationId: setImpinjGen2X
       requestBody:
         required: true
@@ -3161,16 +3422,57 @@ paths:
       tags:
       - Ble
       summary: Set BLE configuration
-      description: 'MQTT API :- set_bleConfig
+      description: 'The `PUT /cloud/ble-config` REST endpoint and the `set_bleConfig` MQTT command configure BLE scanning on the reader.
 
 
-        Configure the BLE scanner. The `ble.enable` field is required.
+        Use this operation to:
 
-        Optional fields control scan interval, RSSI filter, service UUID filters,
+        - Enable or disable BLE scanning
 
-        and protocol-specific settings.
+        - Set the scan interval
 
-        BLE configuration must be applied before starting a BLE scan via `start`.'
+        - Filter beacons by RSSI, service UUID, address, or beacon protocol fields
+
+        - Configure iBeacon, AltBeacon, Eddystone, and generic BLE filters
+
+
+        ## 1. Operation Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | Pattern Name | BLE Configuration Update |
+
+        | Supported Protocols | REST (HTTP/HTTPS), MQTT |
+
+        | Applies To | FXR90 |
+
+        | Related Operations | `getBleConfig`, `startInventory`, `stopInventory` |
+
+        | REST Endpoint | `PUT /cloud/ble-config` |
+
+        | MQTT Command | `set_bleConfig` |
+
+
+        ## 2. Before You Begin
+
+
+        BLE configuration must be applied before starting a BLE scan. After saving configuration, use `PUT /cloud/start` with `scanType: ["ble"]` or `scanType: ["ble", "rfid"]`.
+
+
+        | Field | Notes |
+
+        |---|---|
+
+        | `ble.enable` | Required. Set to `true` to enable BLE scanning or `false` to disable it. |
+
+        | `ble.scanIntervalSec` | Optional scan interval in seconds. |
+
+        | `ble.additionalFilters.rssi` | Optional minimum RSSI filter. |
+
+        | `ble.protocols` | Optional protocol-specific filters for iBeacon, AltBeacon, Eddystone, or generic BLE advertisements. |'
       operationId: setBleConfig
       requestBody:
         required: true
@@ -3256,7 +3558,57 @@ paths:
       tags:
       - Ble
       summary: Get BLE configuration
-      description: MQTT API :- get_bleConfig
+      description: 'The `GET /cloud/ble-config` REST endpoint and the `get_bleConfig` MQTT command retrieve the current BLE scanner configuration from the reader.
+
+
+        This operation returns:
+
+        - Whether BLE scanning is enabled
+
+        - Scan interval settings
+
+        - Protocol-specific filters for iBeacon, AltBeacon, Eddystone, and generic BLE advertisements
+
+        - Additional RSSI and service UUID filters
+
+
+        ## 1. Operation Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | Pattern Name | BLE Configuration Query |
+
+        | Supported Protocols | REST (HTTP/HTTPS), MQTT |
+
+        | Applies To | FXR90 |
+
+        | Related Operations | `setBleConfig`, `startInventory`, `stopInventory` |
+
+        | REST Endpoint | `GET /cloud/ble-config` |
+
+        | MQTT Command | `get_bleConfig` |
+
+
+        ## 2. When to Use This Endpoint
+
+
+        Use this endpoint before starting BLE scans to verify that the reader is configured with the expected scan interval and filters.
+
+
+        | Field | What to Check |
+
+        |---|---|
+
+        | `ble.enable` | Confirms whether BLE scanning is enabled. |
+
+        | `ble.scanIntervalSec` | Confirms how often BLE scan results are collected. |
+
+        | `ble.protocols` | Confirms which beacon protocols and filters are active. |
+
+        | `additionalFilters` | Confirms RSSI and service UUID filters. |'
       operationId: getBleConfig
       responses:
         '200':

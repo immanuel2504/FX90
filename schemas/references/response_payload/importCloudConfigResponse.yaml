@@ -1,9 +1,6 @@
 title: Import Cloud Config Response
-x-stoplight:
-  id: e2y8b5sm9ttpt
-type: object
-x-examples:
-  example-1: {}
+type: string
+description: Empty response payload returned after a successful cloud endpoint configuration import.
+example: ''
 examples:
-- {}
-description: Imports Cloud Configuration
+- ''

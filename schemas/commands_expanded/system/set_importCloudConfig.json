@@ -11,238 +11,169 @@
       "command_id": "abcd1324",
       "payload": {
         "endpointConfig": {
-          "data": {
-            "event": {
-              "connections": [
-                {
-                  "type": "mqtt",
-                  "options": {
-                    "endpoint": {
-                      "hostName": "10.17.231.77",
-                      "port": 8883,
-                      "protocol": "tcp"
-                    },
-                    "enableSecurity": true,
-                    "security": {
-                      "keyFormat": "PEM",
-                      "keyAlgorithm": "RSA256",
-                      "CACertificateFileLocation": "string",
-                      "publicKeyFileLocation": "string",
-                      "privateKeyFileLocation": "string",
-                      "verifyHostName": true,
-                      "verifyPeer": true,
-                      "installedCertificateName": "string",
-                      "installedCertificateType": "server"
-                    },
-                    "basicAuthentication": {
-                      "username": "string",
-                      "password": "string"
-                    },
-                    "additional": {
-                      "keepAlive": 0,
-                      "cleanSession": true,
-                      "debug": true,
-                      "reconnectDelay": 0,
-                      "reconnectDelayMax": 0,
-                      "clientId": "string",
-                      "qos": 0,
-                      "retain": false
-                    },
-                    "publishTopic": [
-                      "string"
-                    ]
-                  },
-                  "name": "string",
-                  "description": "string",
-                  "additionalOptions": {
-                    "batching": {
-                      "reportingInterval": 1000,
-                      "maxPayloadSizePerReport": 256000
-                    },
-                    "retention": {
-                      "throttle": 200,
-                      "maxNumEvents": 150000,
-                      "maxEventRetentionTimeInMin": 10
-                    }
-                  }
-                }
-              ]
-            }
-          },
           "control": {
             "commandResponse": {
               "connections": [
                 {
-                  "type": "mqtt",
+                  "description": "MQTT_TEST",
+                  "name": "MQTT_TEST",
                   "options": {
+                    "additional": {
+                      "cleanSession": true,
+                      "clientId": "FX9600FCC017",
+                      "debug": false,
+                      "keepAlive": 60,
+                      "qos": 0,
+                      "reconnectDelay": 1,
+                      "reconnectDelayMax": 5
+                    },
+                    "enableSecurity": false,
                     "endpoint": {
-                      "hostName": "10.17.231.77",
-                      "port": 8883,
+                      "hostName": "broker.emqx.io",
+                      "port": 1883,
                       "protocol": "tcp"
                     },
-                    "enableSecurity": true,
-                    "security": {
-                      "keyFormat": "PEM",
-                      "keyAlgorithm": "RSA256",
-                      "CACertificateFileLocation": "string",
-                      "publicKeyFileLocation": "string",
-                      "privateKeyFileLocation": "string",
-                      "verifyHostName": true,
-                      "verifyPeer": true,
-                      "installedCertificateName": "string",
-                      "installedCertificateType": "server"
-                    },
-                    "basicAuthentication": {
-                      "username": "string",
-                      "password": "string"
-                    },
-                    "additional": {
-                      "keepAlive": 0,
-                      "cleanSession": true,
-                      "debug": true,
-                      "reconnectDelay": 0,
-                      "reconnectDelayMax": 0,
-                      "clientId": "string",
-                      "qos": 0,
-                      "retain": false
-                    },
                     "publishTopic": [
-                      "string"
+                      "FX9600FCC017/rsp"
                     ],
+                    "security": {
+                      "CACertificateFileLocation": "/home/root/broker.emqx.io-ca.crt",
+                      "installedCertificateName": "Server",
+                      "installedCertificateType": "server",
+                      "keyAlgorithm": "RS256",
+                      "keyFormat": "PEM",
+                      "verifyHostName": false,
+                      "verifyPeer": false
+                    },
                     "subscribeTopic": [
-                      "string"
+                      "FX9600FCC017/cmd"
                     ]
                   },
-                  "name": "string",
-                  "description": "string",
+                  "type": "mqtt"
+                }
+              ],
+              "enableLocalRest": true
+            }
+          },
+          "data": {
+            "event": {
+              "connections": [
+                {
                   "additionalOptions": {
-                    "batching": {
-                      "reportingInterval": 1000,
-                      "maxPayloadSizePerReport": 256000
-                    },
+                    "batching": null,
                     "retention": {
-                      "throttle": 200,
+                      "maxEventRetentionTimeInMin": 500,
                       "maxNumEvents": 150000,
-                      "maxEventRetentionTimeInMin": 10
+                      "throttle": 500
                     }
-                  }
+                  },
+                  "description": "MQTT_TEST",
+                  "name": "MQTT_TEST",
+                  "options": {
+                    "additional": {
+                      "cleanSession": true,
+                      "clientId": "FX9600FCC017",
+                      "debug": false,
+                      "keepAlive": 60,
+                      "qos": 0,
+                      "reconnectDelay": 1,
+                      "reconnectDelayMax": 5
+                    },
+                    "enableSecurity": false,
+                    "endpoint": {
+                      "hostName": "broker.emqx.io",
+                      "port": 1883,
+                      "protocol": "tcp"
+                    },
+                    "publishTopic": [
+                      "FX9600FCC017/tevents"
+                    ],
+                    "security": {
+                      "CACertificateFileLocation": "/home/root/broker.emqx.io-ca.crt",
+                      "installedCertificateName": "Server",
+                      "installedCertificateType": "server",
+                      "keyAlgorithm": "RS256",
+                      "keyFormat": "PEM",
+                      "verifyHostName": false,
+                      "verifyPeer": false
+                    },
+                    "subscribeTopic": []
+                  },
+                  "type": "mqtt"
                 }
               ]
             }
           },
           "management": {
-            "event": {
-              "connections": [
-                {
-                  "type": "mqtt",
-                  "options": {
-                    "endpoint": {
-                      "hostName": "10.17.231.77",
-                      "port": 8883,
-                      "protocol": "tcp"
-                    },
-                    "enableSecurity": true,
-                    "security": {
-                      "keyFormat": "PEM",
-                      "keyAlgorithm": "RSA256",
-                      "CACertificateFileLocation": "string",
-                      "publicKeyFileLocation": "string",
-                      "privateKeyFileLocation": "string",
-                      "verifyHostName": true,
-                      "verifyPeer": true,
-                      "installedCertificateName": "string",
-                      "installedCertificateType": "server"
-                    },
-                    "basicAuthentication": {
-                      "username": "string",
-                      "password": "string"
-                    },
-                    "additional": {
-                      "keepAlive": 0,
-                      "cleanSession": true,
-                      "debug": true,
-                      "reconnectDelay": 0,
-                      "reconnectDelayMax": 0,
-                      "clientId": "string",
-                      "qos": 0,
-                      "retain": false
-                    },
-                    "publishTopic": [
-                      "string"
-                    ]
-                  },
-                  "name": "string",
-                  "description": "string",
-                  "additionalOptions": {
-                    "batching": {
-                      "reportingInterval": 1000,
-                      "maxPayloadSizePerReport": 256000
-                    },
-                    "retention": {
-                      "throttle": 200,
-                      "maxNumEvents": 150000,
-                      "maxEventRetentionTimeInMin": 10
-                    }
-                  }
-                }
-              ]
-            },
             "commandResponse": {
               "connections": [
                 {
-                  "type": "mqtt",
+                  "description": "MQTT_TEST",
+                  "name": "MQTT_TEST",
                   "options": {
+                    "additional": {
+                      "cleanSession": true,
+                      "clientId": "FX9600FCC017",
+                      "debug": false,
+                      "keepAlive": 60,
+                      "qos": 0,
+                      "reconnectDelay": 1,
+                      "reconnectDelayMax": 5
+                    },
+                    "enableSecurity": false,
                     "endpoint": {
-                      "hostName": "10.17.231.77",
-                      "port": 8883,
+                      "hostName": "broker.emqx.io",
+                      "port": 1883,
                       "protocol": "tcp"
                     },
-                    "enableSecurity": true,
-                    "security": {
-                      "keyFormat": "PEM",
-                      "keyAlgorithm": "RSA256",
-                      "CACertificateFileLocation": "string",
-                      "publicKeyFileLocation": "string",
-                      "privateKeyFileLocation": "string",
-                      "verifyHostName": true,
-                      "verifyPeer": true,
-                      "installedCertificateName": "string",
-                      "installedCertificateType": "server"
-                    },
-                    "basicAuthentication": {
-                      "username": "string",
-                      "password": "string"
-                    },
-                    "additional": {
-                      "keepAlive": 0,
-                      "cleanSession": true,
-                      "debug": true,
-                      "reconnectDelay": 0,
-                      "reconnectDelayMax": 0,
-                      "clientId": "string",
-                      "qos": 0,
-                      "retain": false
-                    },
                     "publishTopic": [
-                      "string"
+                      "FX9600FCC017/rsp"
                     ],
+                    "security": {
+                      "CACertificateFileLocation": "/home/root/broker.emqx.io-ca.crt",
+                      "installedCertificateName": "Server",
+                      "installedCertificateType": "server",
+                      "keyAlgorithm": "RS256",
+                      "keyFormat": "PEM",
+                      "verifyHostName": false,
+                      "verifyPeer": false
+                    },
                     "subscribeTopic": [
-                      "string"
+                      "FX9600FCC017/cmd"
                     ]
                   },
-                  "name": "string",
-                  "description": "string",
-                  "additionalOptions": {
-                    "batching": {
-                      "reportingInterval": 1000,
-                      "maxPayloadSizePerReport": 256000
+                  "type": "mqtt"
+                }
+              ],
+              "enableLocalRest": true
+            },
+            "event": {
+              "connections": [
+                {
+                  "description": "MQTT_TEST",
+                  "name": "MQTT_TEST",
+                  "options": {
+                    "additional": {
+                      "cleanSession": true,
+                      "clientId": "FX9600FCC017",
+                      "debug": false,
+                      "keepAlive": 60,
+                      "qos": 0,
+                      "reconnectDelay": 1,
+                      "reconnectDelayMax": 5
                     },
-                    "retention": {
-                      "throttle": 200,
-                      "maxNumEvents": 150000,
-                      "maxEventRetentionTimeInMin": 10
-                    }
-                  }
+                    "enableSecurity": false,
+                    "endpoint": {
+                      "hostName": "broker.emqx.io",
+                      "port": 1883,
+                      "protocol": "tcp"
+                    },
+                    "publishTopic": [
+                      "FX9600FCC017/mevents"
+                    ],
+                    "subscribeTopic": []
+                  },
+                  "type": "mqtt"
                 }
               ]
             }
@@ -276,484 +207,172 @@
         "id": "2uswebodr7z20"
       },
       "type": "object",
-      "x-examples": {
-        "example-1": {}
-      },
       "examples": [
         {
           "endpointConfig": {
-            "data": {
-              "event": {
-                "connections": [
-                  {
-                    "type": "mqtt",
-                    "options": {
-                      "endpoint": {
-                        "hostName": "10.17.231.77",
-                        "port": 8883,
-                        "protocol": "tcp"
-                      },
-                      "enableSecurity": true,
-                      "security": {
-                        "keyFormat": "PEM",
-                        "keyAlgorithm": "RSA256",
-                        "CACertificateFileLocation": "string",
-                        "publicKeyFileLocation": "string",
-                        "privateKeyFileLocation": "string",
-                        "verifyHostName": true,
-                        "verifyPeer": true,
-                        "installedCertificateName": "string",
-                        "installedCertificateType": "server"
-                      },
-                      "basicAuthentication": {
-                        "username": "string",
-                        "password": "string"
-                      },
-                      "additional": {
-                        "keepAlive": 0,
-                        "cleanSession": true,
-                        "debug": true,
-                        "reconnectDelay": 0,
-                        "reconnectDelayMax": 0,
-                        "clientId": "string",
-                        "qos": 0,
-                        "retain": false
-                      },
-                      "publishTopic": [
-                        "string"
-                      ]
-                    },
-                    "name": "string",
-                    "description": "string",
-                    "additionalOptions": {
-                      "batching": {
-                        "reportingInterval": 1000,
-                        "maxPayloadSizePerReport": 256000
-                      },
-                      "retention": {
-                        "throttle": 200,
-                        "maxNumEvents": 150000,
-                        "maxEventRetentionTimeInMin": 10
-                      }
-                    }
-                  }
-                ]
-              }
-            },
             "control": {
               "commandResponse": {
                 "connections": [
                   {
-                    "type": "mqtt",
+                    "description": "MQTT_TEST",
+                    "name": "MQTT_TEST",
                     "options": {
+                      "additional": {
+                        "cleanSession": true,
+                        "clientId": "FX9600FCC017",
+                        "debug": false,
+                        "keepAlive": 60,
+                        "qos": 0,
+                        "reconnectDelay": 1,
+                        "reconnectDelayMax": 5
+                      },
+                      "enableSecurity": false,
                       "endpoint": {
-                        "hostName": "10.17.231.77",
-                        "port": 8883,
+                        "hostName": "broker.emqx.io",
+                        "port": 1883,
                         "protocol": "tcp"
                       },
-                      "enableSecurity": true,
-                      "security": {
-                        "keyFormat": "PEM",
-                        "keyAlgorithm": "RSA256",
-                        "CACertificateFileLocation": "string",
-                        "publicKeyFileLocation": "string",
-                        "privateKeyFileLocation": "string",
-                        "verifyHostName": true,
-                        "verifyPeer": true,
-                        "installedCertificateName": "string",
-                        "installedCertificateType": "server"
-                      },
-                      "basicAuthentication": {
-                        "username": "string",
-                        "password": "string"
-                      },
-                      "additional": {
-                        "keepAlive": 0,
-                        "cleanSession": true,
-                        "debug": true,
-                        "reconnectDelay": 0,
-                        "reconnectDelayMax": 0,
-                        "clientId": "string",
-                        "qos": 0,
-                        "retain": false
-                      },
                       "publishTopic": [
-                        "string"
+                        "FX9600FCC017/rsp"
                       ],
+                      "security": {
+                        "CACertificateFileLocation": "/home/root/broker.emqx.io-ca.crt",
+                        "installedCertificateName": "Server",
+                        "installedCertificateType": "server",
+                        "keyAlgorithm": "RS256",
+                        "keyFormat": "PEM",
+                        "verifyHostName": false,
+                        "verifyPeer": false
+                      },
                       "subscribeTopic": [
-                        "string"
+                        "FX9600FCC017/cmd"
                       ]
                     },
-                    "name": "string",
-                    "description": "string",
+                    "type": "mqtt"
+                  }
+                ],
+                "enableLocalRest": true
+              }
+            },
+            "data": {
+              "event": {
+                "connections": [
+                  {
                     "additionalOptions": {
-                      "batching": {
-                        "reportingInterval": 1000,
-                        "maxPayloadSizePerReport": 256000
-                      },
+                      "batching": null,
                       "retention": {
-                        "throttle": 200,
+                        "maxEventRetentionTimeInMin": 500,
                         "maxNumEvents": 150000,
-                        "maxEventRetentionTimeInMin": 10
+                        "throttle": 500
                       }
-                    }
+                    },
+                    "description": "MQTT_TEST",
+                    "name": "MQTT_TEST",
+                    "options": {
+                      "additional": {
+                        "cleanSession": true,
+                        "clientId": "FX9600FCC017",
+                        "debug": false,
+                        "keepAlive": 60,
+                        "qos": 0,
+                        "reconnectDelay": 1,
+                        "reconnectDelayMax": 5
+                      },
+                      "enableSecurity": false,
+                      "endpoint": {
+                        "hostName": "broker.emqx.io",
+                        "port": 1883,
+                        "protocol": "tcp"
+                      },
+                      "publishTopic": [
+                        "FX9600FCC017/tevents"
+                      ],
+                      "security": {
+                        "CACertificateFileLocation": "/home/root/broker.emqx.io-ca.crt",
+                        "installedCertificateName": "Server",
+                        "installedCertificateType": "server",
+                        "keyAlgorithm": "RS256",
+                        "keyFormat": "PEM",
+                        "verifyHostName": false,
+                        "verifyPeer": false
+                      },
+                      "subscribeTopic": []
+                    },
+                    "type": "mqtt"
                   }
                 ]
               }
             },
             "management": {
-              "event": {
+              "commandResponse": {
                 "connections": [
                   {
-                    "type": "mqtt",
+                    "description": "MQTT_TEST",
+                    "name": "MQTT_TEST",
                     "options": {
+                      "additional": {
+                        "cleanSession": true,
+                        "clientId": "FX9600FCC017",
+                        "debug": false,
+                        "keepAlive": 60,
+                        "qos": 0,
+                        "reconnectDelay": 1,
+                        "reconnectDelayMax": 5
+                      },
+                      "enableSecurity": false,
                       "endpoint": {
-                        "hostName": "10.17.231.77",
-                        "port": 8883,
+                        "hostName": "broker.emqx.io",
+                        "port": 1883,
                         "protocol": "tcp"
                       },
-                      "enableSecurity": true,
-                      "security": {
-                        "keyFormat": "PEM",
-                        "keyAlgorithm": "RSA256",
-                        "CACertificateFileLocation": "string",
-                        "publicKeyFileLocation": "string",
-                        "privateKeyFileLocation": "string",
-                        "verifyHostName": true,
-                        "verifyPeer": true,
-                        "installedCertificateName": "string",
-                        "installedCertificateType": "server"
-                      },
-                      "basicAuthentication": {
-                        "username": "string",
-                        "password": "string"
-                      },
-                      "additional": {
-                        "keepAlive": 0,
-                        "cleanSession": true,
-                        "debug": true,
-                        "reconnectDelay": 0,
-                        "reconnectDelayMax": 0,
-                        "clientId": "string",
-                        "qos": 0,
-                        "retain": false
-                      },
                       "publishTopic": [
-                        "string"
+                        "FX9600FCC017/rsp"
+                      ],
+                      "security": {
+                        "CACertificateFileLocation": "/home/root/broker.emqx.io-ca.crt",
+                        "installedCertificateName": "Server",
+                        "installedCertificateType": "server",
+                        "keyAlgorithm": "RS256",
+                        "keyFormat": "PEM",
+                        "verifyHostName": false,
+                        "verifyPeer": false
+                      },
+                      "subscribeTopic": [
+                        "FX9600FCC017/cmd"
                       ]
                     },
-                    "name": "string",
-                    "description": "string",
-                    "additionalOptions": {
-                      "batching": {
-                        "reportingInterval": 1000,
-                        "maxPayloadSizePerReport": 256000
-                      },
-                      "retention": {
-                        "throttle": 200,
-                        "maxNumEvents": 150000,
-                        "maxEventRetentionTimeInMin": 10
-                      }
-                    }
+                    "type": "mqtt"
                   }
-                ]
+                ],
+                "enableLocalRest": true
               },
-              "commandResponse": {
-                "connections": [
-                  {
-                    "type": "mqtt",
-                    "options": {
-                      "endpoint": {
-                        "hostName": "10.17.231.77",
-                        "port": 8883,
-                        "protocol": "tcp"
-                      },
-                      "enableSecurity": true,
-                      "security": {
-                        "keyFormat": "PEM",
-                        "keyAlgorithm": "RSA256",
-                        "CACertificateFileLocation": "string",
-                        "publicKeyFileLocation": "string",
-                        "privateKeyFileLocation": "string",
-                        "verifyHostName": true,
-                        "verifyPeer": true,
-                        "installedCertificateName": "string",
-                        "installedCertificateType": "server"
-                      },
-                      "basicAuthentication": {
-                        "username": "string",
-                        "password": "string"
-                      },
-                      "additional": {
-                        "keepAlive": 0,
-                        "cleanSession": true,
-                        "debug": true,
-                        "reconnectDelay": 0,
-                        "reconnectDelayMax": 0,
-                        "clientId": "string",
-                        "qos": 0,
-                        "retain": false
-                      },
-                      "publishTopic": [
-                        "string"
-                      ],
-                      "subscribeTopic": [
-                        "string"
-                      ]
-                    },
-                    "name": "string",
-                    "description": "string",
-                    "additionalOptions": {
-                      "batching": {
-                        "reportingInterval": 1000,
-                        "maxPayloadSizePerReport": 256000
-                      },
-                      "retention": {
-                        "throttle": 200,
-                        "maxNumEvents": 150000,
-                        "maxEventRetentionTimeInMin": 10
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        },
-        {
-          "endpointConfig": {
-            "data": {
               "event": {
                 "connections": [
                   {
-                    "type": "mqtt",
+                    "description": "MQTT_TEST",
+                    "name": "MQTT_TEST",
                     "options": {
+                      "additional": {
+                        "cleanSession": true,
+                        "clientId": "FX9600FCC017",
+                        "debug": false,
+                        "keepAlive": 60,
+                        "qos": 0,
+                        "reconnectDelay": 1,
+                        "reconnectDelayMax": 5
+                      },
+                      "enableSecurity": false,
                       "endpoint": {
-                        "hostName": "10.17.231.77",
-                        "port": 8883,
+                        "hostName": "broker.emqx.io",
+                        "port": 1883,
                         "protocol": "tcp"
                       },
-                      "enableSecurity": true,
-                      "security": {
-                        "keyFormat": "PEM",
-                        "keyAlgorithm": "RSA256",
-                        "CACertificateFileLocation": "string",
-                        "publicKeyFileLocation": "string",
-                        "privateKeyFileLocation": "string",
-                        "verifyHostName": true,
-                        "verifyPeer": true,
-                        "installedCertificateName": "string",
-                        "installedCertificateType": "server"
-                      },
-                      "basicAuthentication": {
-                        "username": "string",
-                        "password": "string"
-                      },
-                      "additional": {
-                        "keepAlive": 0,
-                        "cleanSession": true,
-                        "debug": true,
-                        "reconnectDelay": 0,
-                        "reconnectDelayMax": 0,
-                        "clientId": "string",
-                        "qos": 0,
-                        "retain": false
-                      },
                       "publishTopic": [
-                        "string"
-                      ]
-                    },
-                    "name": "string",
-                    "description": "string",
-                    "additionalOptions": {
-                      "batching": {
-                        "reportingInterval": 1000,
-                        "maxPayloadSizePerReport": 256000
-                      },
-                      "retention": {
-                        "throttle": 200,
-                        "maxNumEvents": 150000,
-                        "maxEventRetentionTimeInMin": 10
-                      }
-                    }
-                  }
-                ]
-              }
-            },
-            "control": {
-              "commandResponse": {
-                "connections": [
-                  {
-                    "type": "mqtt",
-                    "options": {
-                      "endpoint": {
-                        "hostName": "10.17.231.77",
-                        "port": 8883,
-                        "protocol": "tcp"
-                      },
-                      "enableSecurity": true,
-                      "security": {
-                        "keyFormat": "PEM",
-                        "keyAlgorithm": "RSA256",
-                        "CACertificateFileLocation": "string",
-                        "publicKeyFileLocation": "string",
-                        "privateKeyFileLocation": "string",
-                        "verifyHostName": true,
-                        "verifyPeer": true,
-                        "installedCertificateName": "string",
-                        "installedCertificateType": "server"
-                      },
-                      "basicAuthentication": {
-                        "username": "string",
-                        "password": "string"
-                      },
-                      "additional": {
-                        "keepAlive": 0,
-                        "cleanSession": true,
-                        "debug": true,
-                        "reconnectDelay": 0,
-                        "reconnectDelayMax": 0,
-                        "clientId": "string",
-                        "qos": 0,
-                        "retain": false
-                      },
-                      "publishTopic": [
-                        "string"
+                        "FX9600FCC017/mevents"
                       ],
-                      "subscribeTopic": [
-                        "string"
-                      ]
+                      "subscribeTopic": []
                     },
-                    "name": "string",
-                    "description": "string",
-                    "additionalOptions": {
-                      "batching": {
-                        "reportingInterval": 1000,
-                        "maxPayloadSizePerReport": 256000
-                      },
-                      "retention": {
-                        "throttle": 200,
-                        "maxNumEvents": 150000,
-                        "maxEventRetentionTimeInMin": 10
-                      }
-                    }
-                  }
-                ]
-              }
-            },
-            "management": {
-              "event": {
-                "connections": [
-                  {
-                    "type": "mqtt",
-                    "options": {
-                      "endpoint": {
-                        "hostName": "10.17.231.77",
-                        "port": 8883,
-                        "protocol": "tcp"
-                      },
-                      "enableSecurity": true,
-                      "security": {
-                        "keyFormat": "PEM",
-                        "keyAlgorithm": "RSA256",
-                        "CACertificateFileLocation": "string",
-                        "publicKeyFileLocation": "string",
-                        "privateKeyFileLocation": "string",
-                        "verifyHostName": true,
-                        "verifyPeer": true,
-                        "installedCertificateName": "string",
-                        "installedCertificateType": "server"
-                      },
-                      "basicAuthentication": {
-                        "username": "string",
-                        "password": "string"
-                      },
-                      "additional": {
-                        "keepAlive": 0,
-                        "cleanSession": true,
-                        "debug": true,
-                        "reconnectDelay": 0,
-                        "reconnectDelayMax": 0,
-                        "clientId": "string",
-                        "qos": 0,
-                        "retain": false
-                      },
-                      "publishTopic": [
-                        "string"
-                      ]
-                    },
-                    "name": "string",
-                    "description": "string",
-                    "additionalOptions": {
-                      "batching": {
-                        "reportingInterval": 1000,
-                        "maxPayloadSizePerReport": 256000
-                      },
-                      "retention": {
-                        "throttle": 200,
-                        "maxNumEvents": 150000,
-                        "maxEventRetentionTimeInMin": 10
-                      }
-                    }
-                  }
-                ]
-              },
-              "commandResponse": {
-                "connections": [
-                  {
-                    "type": "mqtt",
-                    "options": {
-                      "endpoint": {
-                        "hostName": "10.17.231.77",
-                        "port": 8883,
-                        "protocol": "tcp"
-                      },
-                      "enableSecurity": true,
-                      "security": {
-                        "keyFormat": "PEM",
-                        "keyAlgorithm": "RSA256",
-                        "CACertificateFileLocation": "string",
-                        "publicKeyFileLocation": "string",
-                        "privateKeyFileLocation": "string",
-                        "verifyHostName": true,
-                        "verifyPeer": true,
-                        "installedCertificateName": "string",
-                        "installedCertificateType": "server"
-                      },
-                      "basicAuthentication": {
-                        "username": "string",
-                        "password": "string"
-                      },
-                      "additional": {
-                        "keepAlive": 0,
-                        "cleanSession": true,
-                        "debug": true,
-                        "reconnectDelay": 0,
-                        "reconnectDelayMax": 0,
-                        "clientId": "string",
-                        "qos": 0,
-                        "retain": false
-                      },
-                      "publishTopic": [
-                        "string"
-                      ],
-                      "subscribeTopic": [
-                        "string"
-                      ]
-                    },
-                    "name": "string",
-                    "description": "string",
-                    "additionalOptions": {
-                      "batching": {
-                        "reportingInterval": 1000,
-                        "maxPayloadSizePerReport": 256000
-                      },
-                      "retention": {
-                        "throttle": 200,
-                        "maxNumEvents": 150000,
-                        "maxEventRetentionTimeInMin": 10
-                      }
-                    }
+                    "type": "mqtt"
                   }
                 ]
               }
@@ -924,7 +543,7 @@
                                           "client",
                                           "app"
                                         ],
-                                        "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                        "description": "Type of certificate installed on the reader"
                                       }
                                     },
                                     "required": [
@@ -1106,7 +725,7 @@
                                                 "x-stoplight": {
                                                   "id": "cr44y6hu8w4kr"
                                                 },
-                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                "description": "Type of certificate installed on the reader",
                                                 "enum": [
                                                   "server",
                                                   "client",
@@ -1175,7 +794,7 @@
                                       },
                                       "installedCertificateType": {
                                         "type": "string",
-                                        "description": "Type of certificate installed on the reader\nNote : select \"server\" as the type to use reader self signed certificate",
+                                        "description": "Type of certificate installed on the reader",
                                         "enum": [
                                           "server",
                                           "client",
@@ -1299,7 +918,7 @@
                                       "retention": {
                                         "title": "Tag Data Events Retention Configuration",
                                         "type": "object",
-                                        "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting \u201cmaxNumEvents\u201d to 0 will disable retention. When retention is enabled, \u201cmaxNumEvents\u201d must be a non-zero positive integer.",
+                                        "description": "Tag Data Events Retention Configuration on connection lost",
                                         "properties": {
                                           "throttle": {
                                             "type": "integer",
@@ -1493,7 +1112,7 @@
                                         "x-stoplight": {
                                           "id": "rty6ldmt4op48"
                                         },
-                                        "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                        "description": "Type of certificate installed on the reader",
                                         "enum": [
                                           "server",
                                           "app",
@@ -1677,7 +1296,7 @@
                                         "x-stoplight": {
                                           "id": "temyive12pced"
                                         },
-                                        "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                        "description": "Type of certificate installed on the reader",
                                         "enum": [
                                           "server",
                                           "app",
@@ -1738,7 +1357,7 @@
                               "retention": {
                                 "title": "Tag Data Events Retention Configuration",
                                 "type": "object",
-                                "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting \u201cmaxNumEvents\u201d to 0 will disable retention. When retention is enabled, \u201cmaxNumEvents\u201d must be a non-zero positive integer.",
+                                "description": "Tag Data Events Retention Configuration on connection lost",
                                 "properties": {
                                   "throttle": {
                                     "type": "integer",
@@ -1951,7 +1570,7 @@
                                           "client",
                                           "app"
                                         ],
-                                        "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                        "description": "Type of certificate installed on the reader"
                                       }
                                     },
                                     "required": [
@@ -2660,7 +2279,7 @@
                               "retention": {
                                 "title": "Tag Data Events Retention Configuration",
                                 "type": "object",
-                                "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting \u201cmaxNumEvents\u201d to 0 will disable retention. When retention is enabled, \u201cmaxNumEvents\u201d must be a non-zero positive integer.",
+                                "description": "Tag Data Events Retention Configuration on connection lost",
                                 "properties": {
                                   "throttle": {
                                     "type": "integer",
@@ -2926,7 +2545,7 @@
                                           "client",
                                           "app"
                                         ],
-                                        "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                        "description": "Type of certificate installed on the reader"
                                       }
                                     },
                                     "required": [
@@ -3111,7 +2730,7 @@
                                                 "x-stoplight": {
                                                   "id": "cr44y6hu8w4kr"
                                                 },
-                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                "description": "Type of certificate installed on the reader",
                                                 "enum": [
                                                   "server",
                                                   "client",
@@ -3342,7 +2961,7 @@
                                         "x-stoplight": {
                                           "id": "rty6ldmt4op48"
                                         },
-                                        "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                        "description": "Type of certificate installed on the reader",
                                         "enum": [
                                           "server",
                                           "app",
@@ -3526,7 +3145,7 @@
                                         "x-stoplight": {
                                           "id": "temyive12pced"
                                         },
-                                        "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                        "description": "Type of certificate installed on the reader",
                                         "enum": [
                                           "server",
                                           "app",
@@ -3599,7 +3218,7 @@
                               "retention": {
                                 "title": "Tag Data Events Retention Configuration",
                                 "type": "object",
-                                "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting \u201cmaxNumEvents\u201d to 0 will disable retention. When retention is enabled, \u201cmaxNumEvents\u201d must be a non-zero positive integer.",
+                                "description": "Tag Data Events Retention Configuration on connection lost",
                                 "properties": {
                                   "throttle": {
                                     "type": "integer",
@@ -3804,7 +3423,7 @@
                                           "client",
                                           "app"
                                         ],
-                                        "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                        "description": "Type of certificate installed on the reader"
                                       }
                                     },
                                     "required": [
@@ -4513,7 +4132,7 @@
                               "retention": {
                                 "title": "Tag Data Events Retention Configuration",
                                 "type": "object",
-                                "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting \u201cmaxNumEvents\u201d to 0 will disable retention. When retention is enabled, \u201cmaxNumEvents\u201d must be a non-zero positive integer.",
+                                "description": "Tag Data Events Retention Configuration on connection lost",
                                 "properties": {
                                   "throttle": {
                                     "type": "integer",
@@ -4616,218 +4235,15 @@
             }
           }
         }
-      }
+      },
+      "required": [
+        "endpointConfig"
+      ]
     }
   },
   "required": [
     "command",
     "command_id",
     "payload"
-  ],
-  "x-examples": {
-    "Example 1": {
-      "command": "set_importCloudConfig",
-      "command_id": "abcd1324",
-      "payload": {
-        "endpointConfig": {
-          "data": {
-            "event": {
-              "connections": [
-                {
-                  "type": "mqtt",
-                  "options": {
-                    "endpoint": {
-                      "hostName": "10.17.231.77",
-                      "port": 8883,
-                      "protocol": "tcp"
-                    },
-                    "enableSecurity": true,
-                    "security": {
-                      "keyFormat": "PEM",
-                      "keyAlgorithm": "RSA256",
-                      "CACertificateFileLocation": "string",
-                      "publicKeyFileLocation": "string",
-                      "privateKeyFileLocation": "string",
-                      "verifyHostName": true
-                    },
-                    "basicAuthentication": {
-                      "username": "string",
-                      "password": "string"
-                    },
-                    "additional": {
-                      "keepAlive": 0,
-                      "cleanSession": true,
-                      "debug": true,
-                      "reconnectDelay": 0,
-                      "reconnectDelayMax": 0,
-                      "clientId": "string",
-                      "qos": 0,
-                      "retain": false
-                    },
-                    "publishTopic": [
-                      "string"
-                    ]
-                  },
-                  "name": "string",
-                  "description": "string",
-                  "additionalOptions": {
-                    "batching": {
-                      "reportingInterval": 1000,
-                      "maxPayloadSizePerReport": 256000
-                    },
-                    "retention": {
-                      "throttle": 200,
-                      "maxNumEvents": 150000,
-                      "maxEventRetentionTimeInMin": 10
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "control": {
-            "commandResponse": {
-              "connections": [
-                {
-                  "type": "mqtt",
-                  "options": {
-                    "endpoint": {
-                      "hostName": "10.17.231.77",
-                      "port": 8883,
-                      "protocol": "tcp"
-                    },
-                    "enableSecurity": true,
-                    "security": {
-                      "keyFormat": "PEM",
-                      "keyAlgorithm": "RSA256",
-                      "CACertificateFileLocation": "string",
-                      "publicKeyFileLocation": "string",
-                      "privateKeyFileLocation": "string",
-                      "verifyHostName": true
-                    },
-                    "basicAuthentication": {
-                      "username": "string",
-                      "password": "string"
-                    },
-                    "additional": {
-                      "keepAlive": 0,
-                      "cleanSession": true,
-                      "debug": true,
-                      "reconnectDelay": 0,
-                      "reconnectDelayMax": 0,
-                      "clientId": "string",
-                      "qos": 0,
-                      "retain": false
-                    },
-                    "publishTopic": [
-                      "string"
-                    ]
-                  },
-                  "name": "string",
-                  "description": "string"
-                }
-              ]
-            }
-          },
-          "management": {
-            "event": {
-              "connections": [
-                {
-                  "type": "mqtt",
-                  "options": {
-                    "endpoint": {
-                      "hostName": "10.17.231.77",
-                      "port": 8883,
-                      "protocol": "tcp"
-                    },
-                    "enableSecurity": true,
-                    "security": {
-                      "keyFormat": "PEM",
-                      "keyAlgorithm": "RSA256",
-                      "CACertificateFileLocation": "string",
-                      "publicKeyFileLocation": "string",
-                      "privateKeyFileLocation": "string",
-                      "verifyHostName": true
-                    },
-                    "basicAuthentication": {
-                      "username": "string",
-                      "password": "string"
-                    },
-                    "additional": {
-                      "keepAlive": 0,
-                      "cleanSession": true,
-                      "debug": true,
-                      "reconnectDelay": 0,
-                      "reconnectDelayMax": 0,
-                      "clientId": "string",
-                      "qos": 0,
-                      "retain": false
-                    },
-                    "publishTopic": [
-                      "string"
-                    ]
-                  },
-                  "name": "string",
-                  "description": "string",
-                  "additionalOptions": {
-                    "batching": {
-                      "reportingInterval": 1000,
-                      "maxPayloadSizePerReport": 256000
-                    },
-                    "retention": {
-                      "throttle": 200,
-                      "maxNumEvents": 150000,
-                      "maxEventRetentionTimeInMin": 10
-                    }
-                  }
-                }
-              ]
-            },
-            "commandResponse": {
-              "connections": [
-                {
-                  "type": "mqtt",
-                  "options": {
-                    "endpoint": {
-                      "hostName": "10.17.231.77",
-                      "port": 8883,
-                      "protocol": "tcp"
-                    },
-                    "enableSecurity": true,
-                    "security": {
-                      "keyFormat": "PEM",
-                      "keyAlgorithm": "RSA256",
-                      "CACertificateFileLocation": "string",
-                      "publicKeyFileLocation": "string",
-                      "privateKeyFileLocation": "string",
-                      "verifyHostName": true
-                    },
-                    "basicAuthentication": {
-                      "username": "string",
-                      "password": "string"
-                    },
-                    "additional": {
-                      "keepAlive": 0,
-                      "cleanSession": true,
-                      "debug": true,
-                      "reconnectDelay": 0,
-                      "reconnectDelayMax": 0,
-                      "clientId": "string",
-                      "qos": 0,
-                      "retain": false
-                    },
-                    "publishTopic": [
-                      "string"
-                    ]
-                  },
-                  "name": "string",
-                  "description": "string"
-                }
-              ]
-            }
-          }
-        }
-      }
-    }
-  }
+  ]
 }
