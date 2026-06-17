@@ -19,7 +19,6 @@ No additional payload fields are required to retrieve the log configuration.
 | Related Commands | set_logs, get_logs_syslog, get_radio_pkt_logs |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current logging configuration |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -29,13 +28,5 @@ Use `get_logs` to:
 - Review active log levels before changing them with `set_logs`
 - Confirm whether radio packet logging is enabled
 - Audit per-component verbosity during troubleshooting
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `radioPacketLog` | Whether radio packet logging is on | High-volume logging that affects storage |
-| `components[].componentName` | Subcomponent (radio_control / reader_gateway) | Identifies which module the level applies to |
-| `components[].level` | Log level (DEBUG / INFO / WARNING / ERROR) | Controls log verbosity and volume |
 
 > **Note:** Use `get_logs` before `set_logs` to review existing levels and avoid unintentionally raising verbosity in production.

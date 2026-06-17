@@ -23,9 +23,3 @@ Use this command to:
 ## Before You Begin
 
 No command payload fields are required. Use this command before changing the pre-selection state or before starting inventory in deployments where receiver filtering matters.
-
-## Response Payload Summary
-
-| Field | Type | Description |
-|---|---|---|
-| `payload.preSelection` | string | Current rxSawFilter state, such as `enabled` or `disabled`. |

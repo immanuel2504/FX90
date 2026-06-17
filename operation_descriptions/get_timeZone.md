@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the time zone.
 | Related Commands | set_timeZone, get_ntpServer, get_status |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the configured time zone |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -28,11 +27,5 @@ Use `get_timeZone` to:
 - Confirm the reader's time zone before relying on event timestamps
 - Verify the result of a prior `set_timeZone` call
 - Audit time zone consistency across a fleet
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `timeZone` | Configured time zone value | Affects local time interpretation of timestamps |
 
 > **Note:** Use `get_timeZone` before `set_timeZone` to confirm the current setting; pair with `get_ntpServer` for full time configuration.

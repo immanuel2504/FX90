@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the supported region list.
 | Related Commands | get_region, set_region, get_SupportedStandardlist |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve permitted RF regions for this reader |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -28,11 +27,5 @@ Use `get_SupportedRegionList` to:
 - Determine valid values before calling `set_region`
 - Confirm a target deployment region is supported by the hardware
 - Build a region picker in a provisioning UI
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `SupportedRegions` | Array of supported region names | Only these values are accepted by `set_region` |
 
 > **Note:** Setting a region not in this list will be rejected; validate against `SupportedRegions` first.

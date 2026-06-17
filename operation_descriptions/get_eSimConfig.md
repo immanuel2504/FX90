@@ -23,15 +23,3 @@ Use this command to:
 ## Before You Begin
 
 No command payload fields are required. Use this command before `set_eSimConfig` when you need to confirm available profile nicknames.
-
-## Response Payload Summary
-
-| Field | Type | Description |
-|---|---|---|
-| `payload.eid` | string | Embedded SIM identifier. |
-| `payload.imei` | string | Cellular modem IMEI. |
-| `payload.profiles` | array of objects | Installed eSIM profiles. |
-| `payload.profiles[].enabled` | string | Whether the profile is enabled. |
-| `payload.profiles[].iccid` | string | ICCID of the eSIM profile. |
-| `payload.profiles[].profileNickName` | string | Profile nickname used by `set_eSimConfig`. |
-| `payload.profiles[].provider` | string | Profile provider/carrier label. |

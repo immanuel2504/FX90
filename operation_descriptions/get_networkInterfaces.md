@@ -23,9 +23,3 @@ Use this command to:
 ## Before You Begin
 
 No network configuration payload is required. Send an empty `payload` object and use the response to decide which interface names can be used in later network commands.
-
-## Response Payload Summary
-
-| Field | Type | Description |
-|---|---|---|
-| `payload.availableNetworkInterfaces` | array of strings | List of available interface names, such as Ethernet, Wi-Fi, Bluetooth network, or cellular interfaces. |

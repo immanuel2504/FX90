@@ -18,11 +18,8 @@ Use this command to:
 | Related Commands | [set_installCACertificate](set_installCACertificate.md), [del_CACertificate](del_CACertificate.md) |
 | Required Request Fields | `command`, `command_id` |
 | Supported Operations | List installed CA certificates |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
 
 Use `get_CACertificates` before installing or deleting CA certificates.
-
-> **Note:** Response schema is missing in `Response Schemas.json`. Request schema exists; response field details pending.

@@ -23,9 +23,3 @@ Use this command to:
 ## Before You Begin
 
 No command payload fields are required. Use the returned read-point list when configuring features that refer to antenna or read-point identifiers.
-
-## Response Payload Summary
-
-| Field | Type | Description |
-|---|---|---|
-| `payload` | array of strings | List of read-point identifiers available on the reader. |

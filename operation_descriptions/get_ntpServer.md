@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the NTP server setting.
 | Related Commands | set_ntpServer, get_timeZone, get_status |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the configured NTP server |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -28,11 +27,5 @@ Use `get_ntpServer` to:
 - Confirm the reader points to the correct time source
 - Verify the result of a prior `set_ntpServer` call
 - Troubleshoot clock drift affecting event timestamps
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `server` | NTP server hostname or IP address | Determines the reader's time synchronization source |
 
 > **Note:** Use `get_ntpServer` before `set_ntpServer` to confirm the active server and avoid disrupting time sync.

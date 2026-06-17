@@ -23,12 +23,3 @@ Use this command to:
 ## Before You Begin
 
 No command payload fields are required. The returned values represent the latest location data known to the reader.
-
-## Response Payload Summary
-
-| Field | Type | Description |
-|---|---|---|
-| `payload.lastReportedTime` | string | Timestamp of the last reported GPS fix. |
-| `payload.latitude` | string | Latitude value reported by the reader. |
-| `payload.longitude` | string | Longitude value reported by the reader. |
-| `payload.satellitesUsed` | integer | Number of satellites used for the GPS fix. |

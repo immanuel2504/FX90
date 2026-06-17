@@ -19,7 +19,6 @@ No additional payload fields are required to retrieve the error log archive.
 | Related Commands | get_rg_warn_logs, get_rc_log, get_logs |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the reader-gateway error log archive |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -29,12 +28,5 @@ Use `get_rg_error_logs` to:
 - Investigate reader-gateway errors affecting data delivery
 - Collect error logs for support escalation
 - Correlate errors with `error` management events
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `filename` | Archive filename (e.g. `rgErrorLog.tar.gz`) | Identifies the downloaded file |
-| `binary` | Base64-encoded `.tar.gz` content | Decode and extract to read error entries |
 
 > **Note:** Pair with `get_rg_warn_logs` for a fuller picture of reader-gateway health.

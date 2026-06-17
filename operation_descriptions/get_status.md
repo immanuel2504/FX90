@@ -20,7 +20,6 @@ No additional payload fields are required to retrieve the full status snapshot.
 | Related Commands | get_version, get_readerCapabilites, get_config |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve live operational statistics and health |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -31,14 +30,5 @@ Use `get_status` to:
 - Verify the radio is connected before starting inventory
 - Monitor reader temperature for thermal issues
 - Synchronize against the reader's current system time
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `uptime` | How long the reader has been running | Detects unexpected reboots |
-| `systemTime` | ISO 8601 reader clock value | Confirms time sync for event timestamps |
-| `radioConnection` | Radio connection status | Radio must be connected for RF operations |
-| `temperature` | Current reader temperature (°C) | High temperature can throttle or stop the radio |
 
 > **Note:** The status payload uses the field name `radioActivitiy` (spelling as returned by the reader) for radio activity state.

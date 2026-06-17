@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve all pin states.
 | Related Commands | set_gpo, get_gpi_status, get_readerCapabilites |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current GPO pin states |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -28,11 +27,5 @@ Use `get_gpostatus` to:
 - Confirm GPO pin states before or after a `set_gpo` call
 - Verify external signaling (lights, horns, gates) is in the expected state
 - Audit output state during troubleshooting
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `1`–`4` | HIGH/LOW state of each GPO pin | Reflects the actual electrical state driving external devices |
 
 > **Note:** The number of usable GPO pins depends on the model; check `numGPOs` from `get_readerCapabilites`.

@@ -20,7 +20,6 @@ No additional payload fields are required to retrieve the full network configura
 | Related Commands | set_network, get_hostname, get_networkInterfaces |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active network configuration |
-| Supported Response Sections | hostName, networkInterface |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -31,14 +30,5 @@ Use `get_network` to:
 - Verify which interface (Ethernet/Wi-Fi) is connected
 - Audit network identity (hostname) across devices
 - Review interface status during connectivity troubleshooting
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `hostName` | Device hostname | Identifies the reader on the network |
-| `networkInterface.eth0.IPV4.ipAddress` | Static IPv4 address | Confirms addressing for Ethernet |
-| `networkInterface.eth0.Status` | Interface connectivity status | Shows whether the link is up |
-| `networkInterface.mlan0` | Wi-Fi interface configuration | Confirms wireless settings when used |
 
 > **Note:** Use `get_network` before `set_network` to review existing addressing and avoid losing connectivity to the reader.

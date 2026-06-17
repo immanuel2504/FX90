@@ -23,12 +23,3 @@ Use this command to:
 ## Before You Begin
 
 No command payload fields are required. If no Gen2X configuration has been saved, the response payload can be an empty object.
-
-## Response Payload Summary
-
-| Field | Type | Description |
-|---|---|---|
-| `payload.fastID` | object | FastID configuration, present when configured. |
-| `payload.tagProtect` | object | TagProtect protection or visibility configuration, present when configured. |
-| `payload.tagFocus` | object | TagFocus configuration, present when configured. |
-| `payload.tagQuieting` | object | Basic or advanced TagQuieting configuration, present when configured. |

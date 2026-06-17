@@ -23,14 +23,3 @@ Use this command to:
 ## Before You Begin
 
 No command payload fields are required. Use this command after `set_stackled` to confirm the current visible LED state.
-
-## Response Payload Summary
-
-| Field | Type | Description |
-|---|---|---|
-| `payload.status` | string | Indicates whether the LED is in a default or non-default state. |
-| `payload.color` | string | Current stack LED color. |
-| `payload.brightness` | string | Current LED brightness. |
-| `payload.flash` | boolean | Whether the LED is flashing. |
-| `payload.seconds` | integer | Configured duration for the LED state. |
-| `payload.seconds_remaining` | integer | Remaining time for a timed LED state. |

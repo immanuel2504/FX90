@@ -20,7 +20,6 @@ No additional payload fields are required to retrieve the full configuration.
 | Related Commands | set_config, set_importCloudConfig, get_status, get_readerCapabilites |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active reader configuration details |
-| Supported Response Sections | xml, GPIO-LED, READER-GATEWAY |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -31,14 +30,5 @@ Use `get_config` to:
 - Audit GPIO/LED default states across readers
 - Inspect tag-data retention and batching settings
 - Confirm configured data/management endpoints
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `xml` | Current reader XML configuration | Source of truth for RF/reader settings |
-| `GPIO-LED` | GPO and LED default states | Confirms startup pin/LED behavior |
-| `READER-GATEWAY.retention` | Tag-data retention on disconnect | Controls data buffering behavior |
-| `READER-GATEWAY.batching` | Tag-data batching configuration | Affects throughput and message size |
 
 > **Note:** Use `get_config` before `set_config` to review existing settings and avoid overwriting active configuration unexpectedly.

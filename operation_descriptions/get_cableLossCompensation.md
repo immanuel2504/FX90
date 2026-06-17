@@ -19,7 +19,6 @@ No additional payload fields are required; values are returned keyed by read poi
 | Related Commands | set_cableLossCompensation, get_config |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve per-read-point cable loss values |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -30,12 +29,5 @@ Use `get_cableLossCompensation` to:
 - Verify cabling assumptions per antenna/read point
 - Audit RF link budgets across read points
 - Confirm settings after replacing antenna cabling
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `cableLength` | Configured cable length per read point | Used to estimate signal loss |
-| `cableLossPerHundredFt` | Loss per hundred feet of cable | Directly affects effective radiated power |
 
 > **Note:** Run `get_cableLossCompensation` before `set_cableLossCompensation` to confirm existing per-read-point values.

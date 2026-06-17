@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve all installed user apps.
 | Related Commands | install_user_app, uninstall-user-app, start_user_app, stop_user_app, autostart_user_app |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the list of installed user applications |
-| Supported Response Sections | payload (array) |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -29,14 +28,5 @@ Use `get_user_apps` to:
 - Check whether an app is currently running
 - Verify autostart configuration per app
 - Audit deployed applications across a fleet
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `appname` | User app name | Identifies the app for start/stop/uninstall |
-| `autostart` | Autostart setting | Determines whether the app launches on boot |
-| `runningStatus` | Whether the app is running | Confirms current execution state |
-| `metadata` | User app metadata string | Provides version/context details |
 
 > **Note:** Use `get_user_apps` to obtain the exact `appname` before calling `start_user_app`, `stop_user_app`, or `uninstall-user-app`.

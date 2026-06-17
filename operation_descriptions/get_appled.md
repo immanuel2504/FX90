@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the LED state.
 | Related Commands | set_appled, get_stackled |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current application LED state |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
@@ -28,11 +27,5 @@ Use `get_appled` to:
 - Confirm whether the app LED is in its default state
 - Verify the effect of a prior `set_appled` call
 - Audit LED state as part of a device health check
-
-Key fields to check in the response:
-
-| Field | What to Check | Why It Matters |
-|---|---|---|
-| `status` | App LED status (DEFAULT / NOT_DEFAULT) | Indicates whether an application has overridden the LED |
 
 > **Note:** Use `get_appled` before `set_appled` to confirm the current state before changing LED behavior.

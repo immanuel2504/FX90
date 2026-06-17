@@ -30,9 +30,3 @@ Use this command only when you know the target component and payload string expe
 |---|---|---|---|
 | `payload.component` | string | No | Reader component that should receive the pass-through payload. |
 | `payload.payload` | string | No | Component-specific command or data string. |
-
-## Response Payload Summary
-
-| Field | Type | Description |
-|---|---|---|
-| `payload.response` | string | Component response text returned by the reader. |
