@@ -19,5 +19,54 @@
     "Stop RFID explicitly": "Stops RFID inventory using scanType = ['rfid'].",
     "Stop BLE only": "Stops BLE scanning only. RFID inventory continues.",
     "Stop BLE and RFID": "Stops both BLE scanning and RFID inventory."
+  },
+  "Get rxSawFilter status": {
+    "Get current status": "Retrieves whether the rxSawFilter is currently enabled or disabled."
+  },
+  "Enable or disable rxSawFilter": {
+    "Disable rxSawFilter": "Disables the rxSawFilter by setting preSelection to false.",
+    "Enable rxSawFilter": "Enables the rxSawFilter by setting preSelection to true."
+  },
+  "Pass-through command": {
+    "Send mode command to component": "Sends a pass-through command to the specified component to control or query its operating mode.",
+    "Send status command to component": "Sends a pass-through command to the specified component to request its current status."
+  },
+  "Get Cable Loss Compensation": {
+    "Get cable loss settings": "Retrieves the current cable loss compensation values for all antenna ports."
+  },
+  "Set Cable Loss Compensation": {
+    "Set ports 1 and 2 cable loss": "Sets cable length and cable loss per hundred feet for antenna ports 1 and 2.",
+    "Set ports 3 and 4 cable loss": "Sets cable length and cable loss per hundred feet for antenna ports 3 and 4."
+  },
+  "Get Reader Capabilities Response": {
+    "Retrieve reader capabilities": "Returns the list of supported capabilities on the current reader, including antennas, supported endpoints, network interfaces, and feature flags."
+  },
+  "Change Reader Password": {
+    "Change password for user": "Changes the password for the specified user using the current and new password values."
+  },
+  "Set Impinj Gen2X Configuration": {
+    "Enable FastID": "Enables the FastID feature on the reader.",
+    "Disable FastID": "Disables the FastID feature on the reader.",
+    "Protect tag": "Enables tag protection for the specified tag using the provided password.",
+    "Unprotect tag": "Disables tag protection for the specified tag.",
+    "Enable protect read": "Enables tag visibility protection mode using the provided password.",
+    "Disable protect read": "Disables tag visibility protection mode.",
+    "Enable TagFocus": "Enables TagFocus mode to improve tag read performance.",
+    "Disable TagFocus": "Disables TagFocus mode.",
+    "Quiet tags": "Applies basic quieting to the specified tags to suppress their responses.",
+    "Unquiet tags": "Restores the specified tags from quiet state.",
+    "Advanced quiet tags": "Applies advanced quieting using preSelect and tagQuietMasks conditions.",
+    "Advanced unquiet tags": "Removes advanced quieting and restores tag communication based on defined conditions."
+  },
+  "Get Impinj Gen2X Response": {
+    "Empty configuration": "Returns an empty object when no Impinj Gen2X configuration has been set on the reader.",
+    "FastID configured": "Returns the FastID configuration when the FastID feature is enabled.",
+    "TagFocus configured": "Returns the TagFocus configuration when the feature is enabled."
+  },
+  "Get App LED Response": {
+    "Retrieve LED status": "Returns the current status of the application LED on the reader."
+  },
+  "Get Logs": {
+    "Retrieve logging configuration": "Returns the logging configuration of the reader, including component log levels and radio packet logging status."
   }
 }

@@ -33903,7 +33903,8 @@
                                 ]
                             },
                             "examples": {
-                                "example1": {
+                                "Enable FastID": {
+                                    "description": "Enables the FastID feature on the reader.",
                                     "value": {
                                         "command": "set_impinjGen2X",
                                         "command_id": "gen2x-set-001",
