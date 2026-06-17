@@ -6,18 +6,7 @@ description: 'GPI Event
 properties:
   pin:
     type: number
-    description: 'GPI pin number
-
-
-      Note:
-
-      Maximum number of ports available per device type
-
-      1. FX7500 = 2 GPI pins
-
-      2. FX9600 = 4 GPI pins
-
-      3. ATR7000 = 2 GPI pins'
+    description: GPI pin number
     minimum: 1
     maximum: 4
     example: 2

@@ -1,11 +1,6 @@
 title: Tag Data Events Retention Configuration
 type: object
-description: 'Tag Data Events Retention Configuration on connecti
-
-  on lost
-
-
-  Note : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.'
+description: Tag Data Events Retention Configuration on connection lost
 properties:
   throttle:
     type: integer

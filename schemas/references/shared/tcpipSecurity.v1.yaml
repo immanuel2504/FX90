@@ -15,9 +15,7 @@ properties:
     description: Name of certificate installed on the reader
   installedCertificateType:
     type: string
-    description: 'Type of certificate installed on the reader
-
-      Note : select "server" as the type to use reader self signed certificate'
+    description: 'Type of certificate installed on the reader'
     enum:
     - server
     - client

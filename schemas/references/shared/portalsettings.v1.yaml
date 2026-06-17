@@ -1,9 +1,6 @@
 title: portalSettings
 type: object
-description: 'Reader settings for portal mode.
-
-
-  Note : port 3 and 4 supported in FX9600 device only'
+description: 'Reader settings for portal mode.'
 examples:
 - startTrigger:
     port: 0

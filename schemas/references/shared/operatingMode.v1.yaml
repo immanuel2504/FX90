@@ -156,10 +156,7 @@ properties:
     $ref: rssiFilter.v1.yaml
   beams:
     type: array
-    description: 'Array of beams to use
-
-
-      Note : beams is only supported for ATR7000 reader'
+    description: 'Array of beams to use'
     items:
       type: object
       properties:

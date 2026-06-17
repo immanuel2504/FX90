@@ -3,10 +3,7 @@ type: object
 description: 'Tag with RSSI below threshold will not be inventoried by the radio
 
 
-  If absent, rssi filter is not used.
-
-
-  Note: Currently ONLY supported by the FX9600.'
+  If absent, rssi filter is not used.'
 x-examples: {}
 properties:
   threshold:

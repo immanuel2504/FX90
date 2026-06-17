@@ -117,10 +117,7 @@ properties:
         type: string
         x-stoplight:
           id: rty6ldmt4op48
-        description: 'Type of certificate installed on the reader
-
-
-          Note : select "server" as the type to use reader self signed certificate'
+        description: 'Type of certificate installed on the reader'
         enum:
         - server
         - app

@@ -42,10 +42,7 @@ properties:
     - server
     - client
     - app
-    description: 'Type of certificate installed on the reader
-
-
-      Note : select "server" as the type to use reader self signed certificate'
+    description: 'Type of certificate installed on the reader'
 required:
 - keyFormat
 - keyAlgorithm

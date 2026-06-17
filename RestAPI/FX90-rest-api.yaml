@@ -722,10 +722,7 @@ paths:
 
         | `serialNumber` | Unique reader serial number | Identifies the device securely for support and asset records. |
 
-        | `availableOsUpgrades` | Whether the object is empty `{}` or populated | Indicates if an OS upgrade path has been downloaded and is ready to be installed. |
-
-
-        > **Note:** Run this version query before triggering an OS update (`set_os`) to confirm the current version and available upgrade paths, ensuring you do not reapply an existing build or attempt an incompatible update. The `model` field will strictly return one of the predefined supported hardware identifiers.'
+        | `availableOsUpgrades` | Whether the object is empty `{}` or populated | Indicates if an OS upgrade path has been downloaded and is ready to be installed. |'
       operationId: getVersion
       responses:
         '200':
@@ -1343,7 +1340,7 @@ paths:
       tags:
       - System
       summary: Import cloud endpoint configuration
-      description: MQTT API :- set_importCloudConfig <br> Imports the cloud endpoint configuration (control/data/management/management event endpoints) into the reader <br> **Note:** Only `endpointConfig` can be configured via this API. `managementEventConfig` is not supported here — use `PUT /cloud/config` for that.
+      description: MQTT API :- set_importCloudConfig <br> Imports the cloud endpoint configuration (control/data/management/management event endpoints) into the reader
       operationId: setImportcloudconfig
       requestBody:
         required: true
@@ -2570,20 +2567,7 @@ paths:
 
         |---|---|---|
 
-        | `availableNetworkInterfaces` | The array of interface strings returned | Dictates the network paths the reader can currently utilize to connect to the cloud or local network. |
-
-
-        > **Note:** The interface strings returned by the reader map to standard Linux network interface naming conventions:
-
-        > * **`eth0`**: Primary wired Ethernet
-
-        > * **`mlan0`**: Wireless LAN (Wi-Fi)
-
-        > * **`bnep0`**: Bluetooth Network Encapsulation Protocol (Bluetooth PAN)
-
-        > * **`uap0`**: Micro Access Point (Reader acting as a Wi-Fi hotspot)
-
-        > * **`wan0`**: Wide Area Network (Cellular/LTE)'
+        | `availableNetworkInterfaces` | The array of interface strings returned | Dictates the network paths the reader can currently utilize to connect to the cloud or local network. |'
       operationId: getNetworkinterfaces
       responses:
         '200':
@@ -3040,7 +3024,7 @@ paths:
       tags:
       - ImpinjGen2X
       summary: Set Impinj Gen2X configuration
-      description: MQTT API :- set_impinjGen2X <br> Configures Impinj Gen2X proprietary features (FastID, TagProtect, TagFocus, TagQuieting). At least one feature object must be provided. Note - start command with applyImpinjGen2X flag should be used to start the Gen2X operations.
+      description: MQTT API :- set_impinjGen2X <br> Configures Impinj Gen2X proprietary features (FastID, TagProtect, TagFocus, TagQuieting). At least one feature object must be provided.
       operationId: setImpinjGen2X
       requestBody:
         required: true
@@ -4938,10 +4922,7 @@ components:
       description: 'Tag with RSSI below threshold will not be inventoried by the radio
 
 
-        If absent, rssi filter is not used.
-
-
-        Note: Currently ONLY supported by the FX9600.'
+        If absent, rssi filter is not used.'
       x-examples: {}
       properties:
         threshold:

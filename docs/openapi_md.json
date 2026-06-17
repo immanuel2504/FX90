@@ -1959,7 +1959,7 @@
                                                         "GPIO-LED": {
                                                             "title": "GPIO-LED configuration",
                                                             "type": "object",
-                                                            "description": "GPIO-LED module configuration\n\nNote : By default, it will be initialized as an empty object.\n\nConfigure GPO and LED behaviour based on Events generated\n\nSupported Events:\n1. GPI_1_L: event raised when GPI 1 changed from HIGH to LOW\n2. GPI_1_H: event raised when GPI 1 changed from LOW to HIGH\n3. GPI_2_L: event raised when GPI 2 changed from HIGH to LOW\n4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH\n5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud\n6. CLOUD_CONNECT: event raised when reader is connected to cloud\n7. TAG_READ: event raised when a tag is read\n8. RADIO_START: event raised when inventory operation started using START API\n9. RADIO_STOP: event raised when inventory operation stopped using STOP API",
+                                                            "description": "GPIO-LED module configuration\n\nConfigure GPO and LED behaviour based on Events generated\n\nSupported Events:\n1. GPI_1_L: event raised when GPI 1 changed from HIGH to LOW\n2. GPI_1_H: event raised when GPI 1 changed from LOW to HIGH\n3. GPI_2_L: event raised when GPI 2 changed from HIGH to LOW\n4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH\n5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud\n6. CLOUD_CONNECT: event raised when reader is connected to cloud\n7. TAG_READ: event raised when a tag is read\n8. RADIO_START: event raised when inventory operation started using START API\n9. RADIO_STOP: event raised when inventory operation stopped using STOP API",
                                                             "x-stoplight": {
                                                                 "id": "7qr7zp8ys5ukd"
                                                             },
@@ -5380,7 +5380,7 @@
                                                                 "retention": {
                                                                     "title": "Tag Data Events Retention Configuration",
                                                                     "type": "object",
-                                                                    "description": "Tag Data Events Retention Configuration on connection lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                    "description": "Tag Data Events Retention Configuration on connection lost",
                                                                     "x-stoplight": {
                                                                         "id": "i9xfn7z61bs2x"
                                                                     },
@@ -6054,7 +6054,7 @@
                                                                                         },
                                                                                         "userDefined": {
                                                                                             "type": "object",
-                                                                                            "description": "Custom user defined field\n\nNote : By default, it will be initialized as an empty object.",
+                                                                                            "description": "Custom user defined field",
                                                                                             "x-stoplight": {
                                                                                                 "id": "uf709yf6o4428"
                                                                                             }
@@ -6262,7 +6262,7 @@
                                                                                                                                     "client",
                                                                                                                                     "app"
                                                                                                                                 ],
-                                                                                                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                                                                                                                "description": "Type of certificate installed on the reader"
                                                                                                                             }
                                                                                                                         },
                                                                                                                         "required": [
@@ -6444,7 +6444,7 @@
                                                                                                                                                 "x-stoplight": {
                                                                                                                                                     "id": "cr44y6hu8w4kr"
                                                                                                                                                 },
-                                                                                                                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                                                "description": "Type of certificate installed on the reader",
                                                                                                                                                 "enum": [
                                                                                                                                                     "server",
                                                                                                                                                     "client",
@@ -6513,7 +6513,7 @@
                                                                                                                             },
                                                                                                                             "installedCertificateType": {
                                                                                                                                 "type": "string",
-                                                                                                                                "description": "Type of certificate installed on the reader\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                                "description": "Type of certificate installed on the reader",
                                                                                                                                 "enum": [
                                                                                                                                     "server",
                                                                                                                                     "client",
@@ -6637,7 +6637,7 @@
                                                                                                                             "retention": {
                                                                                                                                 "title": "Tag Data Events Retention Configuration",
                                                                                                                                 "type": "object",
-                                                                                                                                "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                                                                "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                                                                 "properties": {
                                                                                                                                     "throttle": {
                                                                                                                                         "type": "integer",
@@ -6793,7 +6793,7 @@
                                                                                                                                 "x-stoplight": {
                                                                                                                                     "id": "rty6ldmt4op48"
                                                                                                                                 },
-                                                                                                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                                "description": "Type of certificate installed on the reader",
                                                                                                                                 "enum": [
                                                                                                                                     "server",
                                                                                                                                     "app",
@@ -6939,7 +6939,7 @@
                                                                                                                                 "x-stoplight": {
                                                                                                                                     "id": "temyive12pced"
                                                                                                                                 },
-                                                                                                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                                "description": "Type of certificate installed on the reader",
                                                                                                                                 "enum": [
                                                                                                                                     "server",
                                                                                                                                     "app",
@@ -7000,7 +7000,7 @@
                                                                                                             "retention": {
                                                                                                                 "title": "Tag Data Events Retention Configuration",
                                                                                                                 "type": "object",
-                                                                                                                "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                                                "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                                                 "properties": {
                                                                                                                     "throttle": {
                                                                                                                         "type": "integer",
@@ -7212,7 +7212,7 @@
                                                                                                                                     "client",
                                                                                                                                     "app"
                                                                                                                                 ],
-                                                                                                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                                                                                                                "description": "Type of certificate installed on the reader"
                                                                                                                             }
                                                                                                                         },
                                                                                                                         "required": [
@@ -7845,7 +7845,7 @@
                                                                                                             "retention": {
                                                                                                                 "title": "Tag Data Events Retention Configuration",
                                                                                                                 "type": "object",
-                                                                                                                "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                                                "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                                                 "properties": {
                                                                                                                     "throttle": {
                                                                                                                         "type": "integer",
@@ -8050,7 +8050,7 @@
                                                                                                                                     "client",
                                                                                                                                     "app"
                                                                                                                                 ],
-                                                                                                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                                                                                                                "description": "Type of certificate installed on the reader"
                                                                                                                             }
                                                                                                                         },
                                                                                                                         "required": [
@@ -8235,7 +8235,7 @@
                                                                                                                                                 "x-stoplight": {
                                                                                                                                                     "id": "cr44y6hu8w4kr"
                                                                                                                                                 },
-                                                                                                                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                                                "description": "Type of certificate installed on the reader",
                                                                                                                                                 "enum": [
                                                                                                                                                     "server",
                                                                                                                                                     "client",
@@ -8428,7 +8428,7 @@
                                                                                                                                 "x-stoplight": {
                                                                                                                                     "id": "rty6ldmt4op48"
                                                                                                                                 },
-                                                                                                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                                "description": "Type of certificate installed on the reader",
                                                                                                                                 "enum": [
                                                                                                                                     "server",
                                                                                                                                     "app",
@@ -8574,7 +8574,7 @@
                                                                                                                                 "x-stoplight": {
                                                                                                                                     "id": "temyive12pced"
                                                                                                                                 },
-                                                                                                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                                "description": "Type of certificate installed on the reader",
                                                                                                                                 "enum": [
                                                                                                                                     "server",
                                                                                                                                     "app",
@@ -8647,7 +8647,7 @@
                                                                                                             "retention": {
                                                                                                                 "title": "Tag Data Events Retention Configuration",
                                                                                                                 "type": "object",
-                                                                                                                "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                                                "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                                                 "properties": {
                                                                                                                     "throttle": {
                                                                                                                         "type": "integer",
@@ -8851,7 +8851,7 @@
                                                                                                                                     "client",
                                                                                                                                     "app"
                                                                                                                                 ],
-                                                                                                                                "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                                                                                                                "description": "Type of certificate installed on the reader"
                                                                                                                             }
                                                                                                                         },
                                                                                                                         "required": [
@@ -9484,7 +9484,7 @@
                                                                                                             "retention": {
                                                                                                                 "title": "Tag Data Events Retention Configuration",
                                                                                                                 "type": "object",
-                                                                                                                "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                                                "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                                                 "properties": {
                                                                                                                     "throttle": {
                                                                                                                         "type": "integer",
@@ -9906,7 +9906,7 @@
                                             "GPIO-LED": {
                                                 "title": "GPIO-LED configuration",
                                                 "type": "object",
-                                                "description": "GPIO-LED module configuration\n\nNote : By default, it will be initialized as an empty object.\n\nConfigure GPO and LED behaviour based on Events generated\n\nSupported Events:\n1. GPI_1_L: event raised when GPI 1 changed from HIGH to LOW\n2. GPI_1_H: event raised when GPI 1 changed from LOW to HIGH\n3. GPI_2_L: event raised when GPI 2 changed from HIGH to LOW\n4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH\n5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud\n6. CLOUD_CONNECT: event raised when reader is connected to cloud\n7. TAG_READ: event raised when a tag is read\n8. RADIO_START: event raised when inventory operation started using START API\n9. RADIO_STOP: event raised when inventory operation stopped using STOP API",
+                                                "description": "GPIO-LED module configuration\n\nConfigure GPO and LED behaviour based on Events generated\n\nSupported Events:\n1. GPI_1_L: event raised when GPI 1 changed from HIGH to LOW\n2. GPI_1_H: event raised when GPI 1 changed from LOW to HIGH\n3. GPI_2_L: event raised when GPI 2 changed from HIGH to LOW\n4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH\n5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud\n6. CLOUD_CONNECT: event raised when reader is connected to cloud\n7. TAG_READ: event raised when a tag is read\n8. RADIO_START: event raised when inventory operation started using START API\n9. RADIO_STOP: event raised when inventory operation stopped using STOP API",
                                                 "properties": {
                                                     "GPIDebounce": {
                                                         "type": "object",
@@ -12367,7 +12367,7 @@
                                                     "retention": {
                                                         "title": "Tag Data Events Retention Configuration",
                                                         "type": "object",
-                                                        "description": "Tag Data Events Retention Configuration on connection lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                        "description": "Tag Data Events Retention Configuration on connection lost",
                                                         "properties": {
                                                             "throttle": {
                                                                 "type": "integer",
@@ -12875,7 +12875,7 @@
                                                                             },
                                                                             "userDefined": {
                                                                                 "type": "object",
-                                                                                "description": "Custom user defined field\n\nNote : By default, it will be initialized as an empty object."
+                                                                                "description": "Custom user defined field"
                                                                             }
                                                                         }
                                                                     },
@@ -13062,7 +13062,7 @@
                                                                                                                         "client",
                                                                                                                         "app"
                                                                                                                     ],
-                                                                                                                    "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                                                                                                    "description": "Type of certificate installed on the reader"
                                                                                                                 }
                                                                                                             },
                                                                                                             "required": [
@@ -13244,7 +13244,7 @@
                                                                                                                                     "x-stoplight": {
                                                                                                                                         "id": "cr44y6hu8w4kr"
                                                                                                                                     },
-                                                                                                                                    "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                                    "description": "Type of certificate installed on the reader",
                                                                                                                                     "enum": [
                                                                                                                                         "server",
                                                                                                                                         "client",
@@ -13313,7 +13313,7 @@
                                                                                                                 },
                                                                                                                 "installedCertificateType": {
                                                                                                                     "type": "string",
-                                                                                                                    "description": "Type of certificate installed on the reader\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                    "description": "Type of certificate installed on the reader",
                                                                                                                     "enum": [
                                                                                                                         "server",
                                                                                                                         "client",
@@ -13437,7 +13437,7 @@
                                                                                                                 "retention": {
                                                                                                                     "title": "Tag Data Events Retention Configuration",
                                                                                                                     "type": "object",
-                                                                                                                    "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                                                    "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                                                     "properties": {
                                                                                                                         "throttle": {
                                                                                                                             "type": "integer",
@@ -13593,7 +13593,7 @@
                                                                                                                     "x-stoplight": {
                                                                                                                         "id": "rty6ldmt4op48"
                                                                                                                     },
-                                                                                                                    "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                    "description": "Type of certificate installed on the reader",
                                                                                                                     "enum": [
                                                                                                                         "server",
                                                                                                                         "app",
@@ -13739,7 +13739,7 @@
                                                                                                                     "x-stoplight": {
                                                                                                                         "id": "temyive12pced"
                                                                                                                     },
-                                                                                                                    "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                    "description": "Type of certificate installed on the reader",
                                                                                                                     "enum": [
                                                                                                                         "server",
                                                                                                                         "app",
@@ -13800,7 +13800,7 @@
                                                                                                 "retention": {
                                                                                                     "title": "Tag Data Events Retention Configuration",
                                                                                                     "type": "object",
-                                                                                                    "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                                    "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                                     "properties": {
                                                                                                         "throttle": {
                                                                                                             "type": "integer",
@@ -14134,7 +14134,7 @@
                                                                                                                 "client",
                                                                                                                 "app"
                                                                                                             ],
-                                                                                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                                                                                            "description": "Type of certificate installed on the reader"
                                                                                                         }
                                                                                                     },
                                                                                                     "required": [
@@ -14316,7 +14316,7 @@
                                                                                                                             "x-stoplight": {
                                                                                                                                 "id": "cr44y6hu8w4kr"
                                                                                                                             },
-                                                                                                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                            "description": "Type of certificate installed on the reader",
                                                                                                                             "enum": [
                                                                                                                                 "server",
                                                                                                                                 "client",
@@ -14385,7 +14385,7 @@
                                                                                                         },
                                                                                                         "installedCertificateType": {
                                                                                                             "type": "string",
-                                                                                                            "description": "Type of certificate installed on the reader\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                            "description": "Type of certificate installed on the reader",
                                                                                                             "enum": [
                                                                                                                 "server",
                                                                                                                 "client",
@@ -14509,7 +14509,7 @@
                                                                                                         "retention": {
                                                                                                             "title": "Tag Data Events Retention Configuration",
                                                                                                             "type": "object",
-                                                                                                            "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                                            "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                                             "properties": {
                                                                                                                 "throttle": {
                                                                                                                     "type": "integer",
@@ -14665,7 +14665,7 @@
                                                                                                             "x-stoplight": {
                                                                                                                 "id": "rty6ldmt4op48"
                                                                                                             },
-                                                                                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                            "description": "Type of certificate installed on the reader",
                                                                                                             "enum": [
                                                                                                                 "server",
                                                                                                                 "app",
@@ -14811,7 +14811,7 @@
                                                                                                             "x-stoplight": {
                                                                                                                 "id": "temyive12pced"
                                                                                                             },
-                                                                                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                            "description": "Type of certificate installed on the reader",
                                                                                                             "enum": [
                                                                                                                 "server",
                                                                                                                 "app",
@@ -14872,7 +14872,7 @@
                                                                                         "retention": {
                                                                                             "title": "Tag Data Events Retention Configuration",
                                                                                             "type": "object",
-                                                                                            "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                            "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                             "properties": {
                                                                                                 "throttle": {
                                                                                                     "type": "integer",
@@ -15084,7 +15084,7 @@
                                                                                                                 "client",
                                                                                                                 "app"
                                                                                                             ],
-                                                                                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                                                                                            "description": "Type of certificate installed on the reader"
                                                                                                         }
                                                                                                     },
                                                                                                     "required": [
@@ -15717,7 +15717,7 @@
                                                                                         "retention": {
                                                                                             "title": "Tag Data Events Retention Configuration",
                                                                                             "type": "object",
-                                                                                            "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                            "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                             "properties": {
                                                                                                 "throttle": {
                                                                                                     "type": "integer",
@@ -15922,7 +15922,7 @@
                                                                                                                 "client",
                                                                                                                 "app"
                                                                                                             ],
-                                                                                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                                                                                            "description": "Type of certificate installed on the reader"
                                                                                                         }
                                                                                                     },
                                                                                                     "required": [
@@ -16107,7 +16107,7 @@
                                                                                                                             "x-stoplight": {
                                                                                                                                 "id": "cr44y6hu8w4kr"
                                                                                                                             },
-                                                                                                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                                            "description": "Type of certificate installed on the reader",
                                                                                                                             "enum": [
                                                                                                                                 "server",
                                                                                                                                 "client",
@@ -16300,7 +16300,7 @@
                                                                                                             "x-stoplight": {
                                                                                                                 "id": "rty6ldmt4op48"
                                                                                                             },
-                                                                                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                            "description": "Type of certificate installed on the reader",
                                                                                                             "enum": [
                                                                                                                 "server",
                                                                                                                 "app",
@@ -16446,7 +16446,7 @@
                                                                                                             "x-stoplight": {
                                                                                                                 "id": "temyive12pced"
                                                                                                             },
-                                                                                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                                                                            "description": "Type of certificate installed on the reader",
                                                                                                             "enum": [
                                                                                                                 "server",
                                                                                                                 "app",
@@ -16519,7 +16519,7 @@
                                                                                         "retention": {
                                                                                             "title": "Tag Data Events Retention Configuration",
                                                                                             "type": "object",
-                                                                                            "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                            "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                             "properties": {
                                                                                                 "throttle": {
                                                                                                     "type": "integer",
@@ -16723,7 +16723,7 @@
                                                                                                                 "client",
                                                                                                                 "app"
                                                                                                             ],
-                                                                                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                                                                                            "description": "Type of certificate installed on the reader"
                                                                                                         }
                                                                                                     },
                                                                                                     "required": [
@@ -17356,7 +17356,7 @@
                                                                                         "retention": {
                                                                                             "title": "Tag Data Events Retention Configuration",
                                                                                             "type": "object",
-                                                                                            "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.",
+                                                                                            "description": "Tag Data Events Retention Configuration on connection lost",
                                                                                             "properties": {
                                                                                                 "throttle": {
                                                                                                     "type": "integer",
@@ -22843,7 +22843,7 @@
                                     "payload": {
                                         "title": "set_appled",
                                         "type": "object",
-                                        "description": "Sets the reader APP LED to the specified color\n\nNote: whenever the seconds is set to 0 it is necessary to turn off the LED by setting it to off ",
+                                        "description": "Sets the reader APP LED to the specified color",
                                         "properties": {
                                             "color": {
                                                 "type": "string",
@@ -23156,7 +23156,7 @@
                                                             "x-stoplight": {
                                                                 "id": "r6tsamn5i9kd7"
                                                             },
-                                                            "description": "Name of subcomponent\n  Note : \n    For radio_control, only the INFO log level is supported. For reader_gateway, the supported log levels are INFO, DEBUG, WARNING, and ERROR",
+                                                            "description": "Name of subcomponent",
                                                             "type": "string",
                                                             "enum": [
                                                                 "radio_control",
@@ -29310,7 +29310,7 @@
                                                                 {
                                                                     "title": "portalSettings",
                                                                     "type": "object",
-                                                                    "description": "Reader settings for portal mode.\n\nNote : port 3 and 4 supported in FX9600 device only",
+                                                                    "description": "Reader settings for portal mode.",
                                                                     "properties": {
                                                                         "startTrigger": {
                                                                             "type": "object",
@@ -30950,7 +30950,7 @@
                                                         "rssiFilter": {
                                                             "title": "rssiFilter",
                                                             "type": "object",
-                                                            "description": "Tag with RSSI below threshold will not be inventoried by the radio\n\nIf absent, rssi filter is not used.\n\nNote: Currently ONLY supported by the FX9600.",
+                                                            "description": "Tag with RSSI below threshold will not be inventoried by the radio\n\nIf absent, rssi filter is not used.",
                                                             "x-examples": {},
                                                             "properties": {
                                                                 "threshold": {
@@ -30964,7 +30964,7 @@
                                                         },
                                                         "beams": {
                                                             "type": "array",
-                                                            "description": "Array of beams to use\n\nNote : beams is only supported for ATR7000 reader",
+                                                            "description": "Array of beams to use",
                                                             "items": {
                                                                 "type": "object",
                                                                 "properties": {
@@ -31161,7 +31161,7 @@
                                                     {
                                                         "title": "portalSettings",
                                                         "type": "object",
-                                                        "description": "Reader settings for portal mode.\n\nNote : port 3 and 4 supported in FX9600 device only",
+                                                        "description": "Reader settings for portal mode.",
                                                         "properties": {
                                                             "startTrigger": {
                                                                 "type": "object",
@@ -32801,7 +32801,7 @@
                                             "rssiFilter": {
                                                 "title": "rssiFilter",
                                                 "type": "object",
-                                                "description": "Tag with RSSI below threshold will not be inventoried by the radio\n\nIf absent, rssi filter is not used.\n\nNote: Currently ONLY supported by the FX9600.",
+                                                "description": "Tag with RSSI below threshold will not be inventoried by the radio\n\nIf absent, rssi filter is not used.",
                                                 "x-examples": {},
                                                 "properties": {
                                                     "threshold": {
@@ -32815,7 +32815,7 @@
                                             },
                                             "beams": {
                                                 "type": "array",
-                                                "description": "Array of beams to use\n\nNote : beams is only supported for ATR7000 reader",
+                                                "description": "Array of beams to use",
                                                 "items": {
                                                     "type": "object",
                                                     "properties": {
@@ -34801,7 +34801,7 @@
                                                                 },
                                                                 "antennas": {
                                                                     "type": "object",
-                                                                    "description": "antenna connection status. Note: Antenna status is \"unknown\" when reader is configured to LLRP mode. i.e. When there are no endpoints mapped to the data interfaces.",
+                                                                    "description": "antenna connection status.",
                                                                     "required": [
                                                                         "1",
                                                                         "2"
@@ -35920,7 +35920,7 @@
                                                 },
                                                 "antennas": {
                                                     "type": "object",
-                                                    "description": "antenna connection status. Note: Antenna status is \"unknown\" when reader is configured to LLRP mode. i.e. When there are no endpoints mapped to the data interfaces.",
+                                                    "description": "antenna connection status.",
                                                     "required": [
                                                         "1",
                                                         "2"

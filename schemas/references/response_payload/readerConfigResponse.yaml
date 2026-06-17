@@ -17,9 +17,6 @@ properties:
     description: 'GPIO-LED module configuration
 
 
-      Note : By default, it will be initialized as an empty object.
-
-
       Configure GPO and LED behaviour based on Events generated
 
 
@@ -3147,10 +3144,7 @@ properties:
       retention:
         title: Tag Data Events Retention Configuration
         type: object
-        description: 'Tag Data Events Retention Configuration on connection lost
-
-
-          Note : Setting “maxNumEvents” to 0 will disable retention. When retention is enabled, “maxNumEvents” must be a non-zero positive integer.'
+        description: 'Tag Data Events Retention Configuration on connection lost'
         x-stoplight:
           id: i9xfn7z61bs2x
         properties:
@@ -3680,10 +3674,7 @@ properties:
                         id: hgqtvv4c9du5y
                   userDefined:
                     type: object
-                    description: 'Custom user defined field
-
-
-                      Note : By default, it will be initialized as an empty object.'
+                    description: 'Custom user defined field'
                     x-stoplight:
                       id: uf709yf6o4428
               interval:

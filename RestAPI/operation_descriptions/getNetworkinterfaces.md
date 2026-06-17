@@ -16,10 +16,3 @@ Use `GET /cloud/networkInterfaces` to:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `availableNetworkInterfaces` | The array of interface strings returned | Dictates the network paths the reader can currently utilize to connect to the cloud or local network. |
-
-> **Note:** The interface strings returned by the reader map to standard Linux network interface naming conventions:
-> * **`eth0`**: Primary wired Ethernet
-> * **`mlan0`**: Wireless LAN (Wi-Fi)
-> * **`bnep0`**: Bluetooth Network Encapsulation Protocol (Bluetooth PAN)
-> * **`uap0`**: Micro Access Point (Reader acting as a Wi-Fi hotspot)
-> * **`wan0`**: Wide Area Network (Cellular/LTE)

@@ -131,7 +131,7 @@ properties:
         type: string
         description: 'Current Inventory State.
 
-          Note: radioActivity is "unknown" when reader is configured to LLRP mode. i.e. When there are no endpoints mapped to the data interfaces.'
+          '
         enum:
         - active
         - inactive
@@ -144,7 +144,7 @@ properties:
         - disconnected
       antennas:
         type: object
-        description: 'antenna connection status. Note: Antenna status is "unknown" when reader is configured to LLRP mode. i.e. When there are no endpoints mapped to the data interfaces.'
+        description: 'antenna connection status.'
         required:
         - '1'
         - '2'

@@ -39,7 +39,7 @@
                 "x-stoplight": {
                   "id": "r6tsamn5i9kd7"
                 },
-                "description": "Name of subcomponent\n  Note : \n    For radio_control, only the INFO log level is supported. For reader_gateway, the supported log levels are INFO, DEBUG, WARNING, and ERROR",
+                "description": "Name of subcomponent",
                 "type": "string",
                 "enum": [
                   "radio_control",

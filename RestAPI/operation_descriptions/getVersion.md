@@ -37,5 +37,3 @@ Use `GET /cloud/version` or `get_version` to:
 | `model` | Reader model (FXR90 / FX7500 / FX9600 / ATR7000) | Drives physical capabilities, antenna limits, and model-specific configurations. |
 | `serialNumber` | Unique reader serial number | Identifies the device securely for support and asset records. |
 | `availableOsUpgrades` | Whether the object is empty `{}` or populated | Indicates if an OS upgrade path has been downloaded and is ready to be installed. |
-
-> **Note:** Run this version query before triggering an OS update (`set_os`) to confirm the current version and available upgrade paths, ensuring you do not reapply an existing build or attempt an incompatible update. The `model` field will strictly return one of the predefined supported hardware identifiers.
