@@ -150,9 +150,11 @@ def sanitize_operation_description(description):
     return "\n".join(cleaned_lines)
 
 
-def discover_operations(operation_tags=None):
+def discover_operations(operation_tags=None, excluded_operations=None):
     if operation_tags is None:
         operation_tags = {}
+    if excluded_operations is None:
+        excluded_operations = set()
     operations = []
     if os.path.isdir(COMMANDS_DIR):
         for subfolder in sorted(os.listdir(COMMANDS_DIR)):
@@ -164,6 +166,8 @@ def discover_operations(operation_tags=None):
                     continue
                 filepath = os.path.join(subfolder_path, filename)
                 op_name = op_name_of(filename)
+                if op_name in excluded_operations:
+                    continue
                 tag = operation_tags.get(op_name)
                 if not tag:
                     continue
@@ -174,6 +178,8 @@ def discover_operations(operation_tags=None):
                 continue
             filepath = os.path.join(EVENTS_DIR, filename)
             op_name = op_name_of(filename)
+            if op_name in excluded_operations:
+                continue
             tag = operation_tags.get(op_name)
             if not tag:
                 print(
@@ -188,6 +194,8 @@ def discover_operations(operation_tags=None):
                 continue
             filepath = os.path.join(TAG_EVENTS_DIR, filename)
             op_name = op_name_of(filename)
+            if op_name in excluded_operations:
+                continue
             tag = operation_tags.get(op_name)
             if not tag:
                 print(
@@ -530,12 +538,14 @@ def rel(path):
         return path
 
 
-def validate_project(operation_tags):
+def validate_project(operation_tags, excluded_operations=None):
     """Run static checks over the schema tree and config.
 
     Returns a dict with keys: missing_tag_mappings, missing_command_files,
     missing_response_files, broken_refs, invalid_files.
     """
+    if excluded_operations is None:
+        excluded_operations = set()
     errors = {
         "missing_tag_mappings": [],
         "missing_command_files": [],
@@ -548,6 +558,8 @@ def validate_project(operation_tags):
     event_ops = set()
     for kind, op_name, source, path in iter_schema_files():
         _collect_broken_refs(path, errors)
+        if op_name in excluded_operations:
+            continue
         if kind == "command":
             command_ops[op_name] = (source, path)
             if op_name not in operation_tags:
@@ -559,6 +571,8 @@ def validate_project(operation_tags):
 
     # operation_tags entries that have no command/event file on disk.
     for op_name in operation_tags:
+        if op_name in excluded_operations:
+            continue
         if op_name not in command_ops and op_name not in event_ops:
             errors["missing_command_files"].append(
                 f"operation_tags maps '{op_name}' but no schema file exists"
@@ -623,7 +637,8 @@ def build_openapi():
     tag_groups = tag_config.get("tag_groups", {})
     tag_descriptions = load_tag_descriptions_from_md()
     operation_tags = tag_config.get("operation_tags", {})
-    operations = discover_operations(operation_tags)
+    excluded_operations = set(tag_config.get("excluded_operations", []))
+    operations = discover_operations(operation_tags, excluded_operations)
     operations = sort_operations(operations, tag_config)
     print(f"  Discovered {len(operations)} operations")
     used_tags = OrderedDict()
@@ -824,11 +839,12 @@ def main():
 
     tag_config = load_tag_config()
     operation_tags = tag_config.get("operation_tags", {})
+    excluded_operations = set(tag_config.get("excluded_operations", []))
 
     issue_total = 0
     if not args.no_validate:
         print("Validating schema tree ...")
-        errors = validate_project(operation_tags)
+        errors = validate_project(operation_tags, excluded_operations)
         issue_total = print_validation_report(errors)
         if args.validate_only:
             return 1 if (args.strict and issue_total) else 0

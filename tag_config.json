@@ -1,19 +1,16 @@
 {
   "tag_groups": {
     "Management Commands": [
-      "login",
       "system",
       "network",
       "region",
       "gpio",
       "app-led",
-      "stack-led",
       "logs",
       "date-time",
       "certificate",
       "firmware",
       "userapp",
-      "impinjgen2x",
       "ble"
     ],
     "Control Commands": [
@@ -27,11 +24,8 @@
     ]
   },
   "operation_tags": {
-    "localrest_login": "login",
     "get_appled": "app-led",
     "set_appled": "app-led",
-    "get_stackled": "stack-led",
-    "set_stackled": "stack-led",
     "get_gpostatus": "gpio",
     "set_gpo": "gpio",
     "get_gpi_status": "gpio",
@@ -98,8 +92,8 @@
     "autostart_user_app": "userapp",
     "set_req_usr_app": "userapp",
     "set_dataToRG": "userapp",
-    "get_impinjGen2X": "impinjgen2x",
-    "set_impinjGen2X": "impinjgen2x",
+    "get_impinjGen2X": "control",
+    "set_impinjGen2X": "control",
     "set_bleConfig": "ble",
     "get_bleConfig": "ble",
     "async-events": "management-events",
@@ -117,9 +111,6 @@
     "locationHistory": "tag-data-events"
   },
   "operation_order": {
-    "login": [
-      "localrest_login"
-    ],
     "system": [
       "get_version",
       "get_status",
@@ -153,7 +144,9 @@
       "start",
       "stop",
       "get_preSelection",
-      "set_preSelection"
+      "set_preSelection",
+      "get_impinjGen2X",
+      "set_impinjGen2X"
     ],
     "region": [
       "get_region",
@@ -169,10 +162,6 @@
     "app-led": [
       "get_appled",
       "set_appled"
-    ],
-    "stack-led": [
-      "get_stackled",
-      "set_stackled"
     ],
     "logs": [
       "get_logs",
@@ -214,10 +203,6 @@
       "set_req_usr_app",
       "set_dataToRG"
     ],
-    "impinjgen2x": [
-      "get_impinjGen2X",
-      "set_impinjGen2X"
-    ],
     "ble": [
       "set_bleConfig",
       "get_bleConfig"
@@ -240,5 +225,10 @@
       "locationHistory"
     ]
   },
+  "excluded_operations": [
+    "localrest_login",
+    "get_stackled",
+    "set_stackled"
+  ],
   "tag_descriptions": {}
 }
