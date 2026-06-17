@@ -30,7 +30,6 @@ Gather these details before sending the command. Use either the **All** variant 
 | Cable length | Length of antenna cable (integer; float values accepted). |
 | Cable loss | Loss per hundred feet of cable (integer; float values accepted). |
 
-
 ## 4. Payload Variants
 
 The payload shape is determined by whether you set all read points at once or individually.

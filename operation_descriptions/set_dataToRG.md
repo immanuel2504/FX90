@@ -1,14 +1,14 @@
-## 1. Description
+## Description
 
-The `set_dataToRG` command sends data to the reader gateway (RG) for processing or forwarding.
+The `set_dataToRG` command sends data to the reader gateway layer.
 
-Use it to:
+Use this command to:
 
-- Push application data into the reader gateway layer
-- Integrate custom data flows with tag reporting pipelines
-- Forward structured payloads for gateway-side handling
+- Trigger gateway-side data handling
+- Pass integration data toward reader gateway processing
+- Support user-application or backend workflows that depend on RG data injection
 
-## 2. Command Details
+## Command Details
 
 | Property | Value |
 |---|---|
@@ -20,6 +20,12 @@ Use it to:
 | Supported Operations | Send data to reader gateway |
 | Supported API Versions | V1.0 |
 
-## 3. Before You Begin
+## Before You Begin
 
-Prepare the data payload structure required by your integration before sending.
+The current payload schema is an empty object. Use this command only for workflows where the reader gateway expects this trigger.
+
+## Request Fields
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `payload` | object | Yes | Empty object for the current command schema. |

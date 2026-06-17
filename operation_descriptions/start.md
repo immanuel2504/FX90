@@ -1,62 +1,61 @@
 ## Description
 
-The `start` command begins RFID tag reads (or BLE scan) on the reader using the currently configured operating mode.
+The `start` command starts RFID inventory, BLE scanning, or both at the same time.
 
-This command allows you to:
-
-- Start an inventory or read cycle on demand
-- Optionally control whether the reader persists tag-read state across restarts
+By default, if `payload` is empty or `scanType` is not provided, the reader starts RFID inventory only. Use `scanType` when you need to explicitly start BLE, RFID, or both.
 
 Use this command to:
 
-- Begin RFID inventory after configuring mode with `set_mode`
-- Trigger reads without changing RF parameters
-- Resume operations after a prior `stop`
+- Start RFID inventory after configuring the reader mode with `set_mode`
+- Start BLE scanning after configuring BLE with `set_bleConfig`
+- Start RFID and BLE together for mixed tag/beacon workflows
+- Apply a previously saved Impinj Gen2X configuration when starting RFID
 
 ## Command Details
 
 | Property | Value |
 |---|---|
-| Pattern Name | RFID Read Control — Start |
+| Pattern Name | RFID/BLE Scan Control - Start |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [stop](stop.md), [get_mode](get_mode.md), [set_mode](set_mode.md), [get_status](get_status.md) |
+| Related Commands | [stop](stop.md), [set_bleConfig](set_bleConfig.md), [get_bleConfig](get_bleConfig.md), [set_mode](set_mode.md), [get_mode](get_mode.md), [set_impinjGen2X](set_impinjGen2X.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
-| Supported Operations | Start tag reads |
+| Supported Operations | Start RFID inventory, BLE scan, or both |
 | Supported API Versions | V1.0 |
 
 ## Before You Begin
 
-Confirm the operating mode is configured before starting reads. `start` triggers the active mode — it does not set RF parameters.
+Configure the scan type you plan to start.
 
 | What You Need | Details |
 |---|---|
-| Operating mode | Configure with `set_mode` (or verify with `get_mode`) before sending `start`. |
-| State persistence | Optional `doNotPersistState` — whether to persist current tag-read state. |
-| Radio status | Use `get_status` to confirm the radio is connected. |
+| RFID inventory | Configure inventory behavior with `set_mode` before starting RFID. |
+| BLE scanning | Configure BLE first with `set_bleConfig`. |
+| Impinj Gen2X | Configure Gen2X first with `set_impinjGen2X`, then start with `applyImpinjGen2X: true`. |
+| Reader status | Use `get_status` to confirm the radio is connected and ready. |
 
-## Sending the Command
+## Start Behavior
 
-### Example: Start tag reads
+| Payload | Result |
+|---|---|
+| `{}` | Starts RFID inventory only. This is the default behavior. |
+| `{ "scanType": ["rfid"] }` | Starts RFID inventory explicitly. |
+| `{ "scanType": ["ble"] }` | Starts BLE scanning only. |
+| `{ "scanType": ["ble", "rfid"] }` | Starts BLE scanning and RFID inventory together. |
+| `{ "applyImpinjGen2X": true }` | Starts RFID inventory and applies the saved Impinj Gen2X configuration. |
 
-```json
-{
-  "command": "start",
-  "command_id": "abcd1432",
-  "payload": {
-    "doNotPersistState": true
-  }
-}
-```
+## Important Rules
+
+- `scanType` may contain `rfid`, `ble`, or both.
+- If `scanType` is omitted, the reader defaults to RFID-only.
+- BLE scanning requires BLE configuration from `set_bleConfig`.
+- `scanType` containing `ble` cannot be combined with `applyImpinjGen2X`.
+- `applyImpinjGen2X` is for RFID Gen2X operations, not BLE scanning.
 
 ## Request Fields
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `payload.doNotPersistState` | boolean | No | `true` — do not persist tag-read state. `false` — persist state. |
-
-## Reading the Response
-
-The reader responds with `response: "success"` or `"failure"`. Match `command_id` in the response to your request.
-
-> **Note:** Sending `start` while reads are already active may fail — check `get_status` / heartbeat `radioActivity` first.
+| `payload.scanType` | array of strings | No | Controls which scan types are started. Allowed values are `rfid` and `ble`. If omitted, RFID starts by default. |
+| `payload.doNotPersistState` | boolean | No | Set to `false` to allow the reader to persist state. If omitted, default reader behavior applies. |
+| `payload.applyImpinjGen2X` | boolean | No | Applies the saved Impinj Gen2X configuration when starting RFID inventory. Do not use with BLE scan types. |

@@ -27,26 +27,8 @@ Deleting a CA certificate used for TLS verification on active endpoints will cau
 |---|---|
 | CA name | Exact `name` of the CA certificate to delete. |
 
-## Sending the Command
-
-### Example: Delete CA certificate
-
-```json
-{
-  "command": "del_CACertificate",
-  "command_id": "abcd1324",
-  "payload": {
-    "name": "cacert"
-  }
-}
-```
-
 ## Request Fields
 
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `payload.name` | string | Yes | Name of the CA certificate to delete. |
-
-## Reading the Response
-
-The reader responds with `response: "success"` or `"failure"`. Match `command_id` in the response.

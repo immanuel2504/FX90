@@ -21,18 +21,6 @@ Use this command to:
 
 MQTT command key: `set_stopUserapp`.
 
-## Sending the Command
-
-```json
-{
-  "command": "set_stopUserapp",
-  "command_id": "abcd1324",
-  "payload": {
-    "appname": "sample"
-  }
-}
-```
-
 ## Request Fields
 
 | Field | Type | Required | Description |

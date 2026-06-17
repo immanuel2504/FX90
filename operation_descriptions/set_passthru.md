@@ -1,14 +1,14 @@
-## 1. Description
+## Description
 
-The `set_passthru` command sends a pass-through command to the reader for low-level or vendor-specific operations.
+The `set_passthru` command sends a pass-through payload to a reader component.
 
-Use it to:
+Use this command to:
 
-- Forward custom commands not covered by the standard API
-- Invoke reader-specific extensions during diagnostics
-- Integrate legacy or proprietary control sequences
+- Forward component-specific commands not covered by standard APIs
+- Query or control low-level reader component behavior
+- Support diagnostics or vendor-specific workflows
 
-## 2. Command Details
+## Command Details
 
 | Property | Value |
 |---|---|
@@ -17,9 +17,22 @@ Use it to:
 | Applies To | FXR90 |
 | Related Commands | [get_status](get_status.md), [set_config](set_config.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
-| Supported Operations | Send pass-through command |
+| Supported Operations | Send a component pass-through command |
 | Supported API Versions | V1.0 |
 
-## 3. Before You Begin
+## Before You Begin
 
-Understand the pass-through payload format required by your use case before sending.
+Use this command only when you know the target component and payload string expected by that component. Invalid pass-through commands may return component-specific errors.
+
+## Request Fields
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `payload.component` | string | No | Reader component that should receive the pass-through payload. |
+| `payload.payload` | string | No | Component-specific command or data string. |
+
+## Response Payload Summary
+
+| Field | Type | Description |
+|---|---|---|
+| `payload.response` | string | Component response text returned by the reader. |

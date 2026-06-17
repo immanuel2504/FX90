@@ -42,24 +42,6 @@ Gather download server details before sending. The reader must reach the URL fro
 | `NONE` | No HTTP authentication | None |
 | `BASIC` | Username/password auth | `options.username`, `options.password` |
 
-## Sending the Command
-
-### Example: Install user app
-
-```json
-{
-  "command": "set_installUserapp",
-  "command_id": "abcd123",
-  "payload": {
-    "url": "https://example.com/apps/",
-    "filename": "sample_1.0.0.deb",
-    "authenticationType": "NONE",
-    "verifyPeer": true,
-    "verifyHost": true
-  }
-}
-```
-
 ## Request Fields
 
 | Field | Type | Required | Description |
@@ -75,7 +57,3 @@ Gather download server details before sending. The reader must reach the URL fro
 | `payload.retry` | object | No | Retry policy (`type`, `policy.retries`, `wait.min/max`). |
 | `payload.timeouts.connection` | integer | No | Connection timeout in seconds. |
 | `payload.timeouts.read` | integer | No | Read timeout in seconds. |
-
-## Reading the Response
-
-The reader responds with `response: "success"` or `"failure"`. Confirm installation with `get_user_apps`.

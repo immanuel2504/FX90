@@ -29,20 +29,6 @@ Stop the app with `stop_user_app` before uninstalling if it is currently running
 |---|---|
 | App name | Exact `appname` from `get_user_apps`. |
 
-## Sending the Command
-
-### Example: Uninstall user app
-
-```json
-{
-  "command": "set_uninstallUserapp",
-  "command_id": "abcd134",
-  "payload": {
-    "appname": "sample"
-  }
-}
-```
-
 ## Request Fields
 
 | Field | Type | Required | Description |

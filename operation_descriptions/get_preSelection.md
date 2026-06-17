@@ -1,25 +1,31 @@
-## 1. Description
+## Description
 
-The `get_preSelection` command returns the rxSawFilter status on the reader.
+The `get_preSelection` command retrieves the current rxSawFilter pre-selection state.
 
 Use this command to:
 
-- Verify whether the rxSaw filter is enabled
-- Audit RF pre-selection before starting inventory
+- Check whether rxSawFilter is enabled or disabled
+- Verify RF pre-selection before starting inventory
+- Confirm the effect of a previous `set_preSelection` command
 
-## 2. Command Details
+## Command Details
 
 | Property | Value |
 |---|---|
 | Pattern Name | rxSawFilter Status Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [set_preSelection](set_preSelection.md), [get_mode](get_mode.md) |
-| Required Request Fields | `command`, `command_id` |
-| Supported Operations | Retrieve rxSawFilter status |
-| Supported Response Sections | payload |
+| Related Commands | [set_preSelection](set_preSelection.md), [start](start.md), [get_status](get_status.md) |
+| Required Request Fields | `command`, `command_id`, `payload` |
+| Supported Operations | Retrieve rxSawFilter state |
 | Supported API Versions | V1.0 |
 
-## 3. When to Use This Command
+## Before You Begin
 
-Use `get_preSelection` before `set_preSelection` to confirm the current filter state.
+No command payload fields are required. Use this command before changing the pre-selection state or before starting inventory in deployments where receiver filtering matters.
+
+## Response Payload Summary
+
+| Field | Type | Description |
+|---|---|---|
+| `payload.preSelection` | string | Current rxSawFilter state, such as `enabled` or `disabled`. |

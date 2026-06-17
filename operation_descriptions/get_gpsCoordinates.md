@@ -1,21 +1,34 @@
-## 1. Description
+## Description
 
-The `get_gpsCoordinates` command retrieves the reader's current GPS coordinates.
+The `get_gpsCoordinates` command retrieves the reader's last reported GPS coordinates.
 
 Use this command to:
 
 - Record reader location for asset tracking
-- Verify GPS module functionality on mobile deployments
+- Confirm GPS/location availability on a deployed reader
+- Feed location data into fleet, site, or inventory systems
 
-## 2. Command Details
+## Command Details
 
 | Property | Value |
 |---|---|
 | Pattern Name | GPS Coordinates Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [get_network](get_network.md) |
-| Required Request Fields | `command`, `command_id` |
+| Related Commands | [get_network](get_network.md), [get_status](get_status.md) |
+| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Retrieve GPS coordinates |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
+
+## Before You Begin
+
+No command payload fields are required. The returned values represent the latest location data known to the reader.
+
+## Response Payload Summary
+
+| Field | Type | Description |
+|---|---|---|
+| `payload.lastReportedTime` | string | Timestamp of the last reported GPS fix. |
+| `payload.latitude` | string | Latitude value reported by the reader. |
+| `payload.longitude` | string | Longitude value reported by the reader. |
+| `payload.satellitesUsed` | integer | Number of satellites used for the GPS fix. |

@@ -24,19 +24,3 @@ Use this command to:
 Download logs with `get_radio_pkt_logs` before purging if you need them for RF analysis.
 
 MQTT command key: `del_logs_radioPacketLog`.
-
-## Sending the Command
-
-### Example: Purge radio packet logs
-
-```json
-{
-  "command": "del_logs_radioPacketLog",
-  "command_id": "abcd1234",
-  "payload": {}
-}
-```
-
-## Reading the Response
-
-The reader responds with `response: "success"` or `"failure"`. Purged logs cannot be recovered.

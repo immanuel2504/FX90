@@ -1,25 +1,32 @@
-## 1. Description
+## Description
 
-The `set_eSimConfig` command sets the eSIM configuration on the reader.
+The `set_eSimConfig` command updates the eSIM profile state on the reader.
 
-Use it to:
+Use this command to:
 
-- Provision cellular connectivity via eSIM profile
-- Update eSIM settings for mobile deployments
-- Switch eSIM profiles across carriers or regions
+- Enable a specific eSIM profile
+- Change cellular provisioning behavior
+- Apply a profile nickname returned by `get_eSimConfig`
 
-## 2. Command Details
+## Command Details
 
 | Property | Value |
 |---|---|
 | Pattern Name | eSIM Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [get_eSimConfig](get_eSimConfig.md), [set_network](set_network.md) |
+| Related Commands | [get_eSimConfig](get_eSimConfig.md), [get_network](get_network.md), [set_network](set_network.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set eSIM configuration |
 | Supported API Versions | V1.0 |
 
-## 3. Before You Begin
+## Before You Begin
 
-Gather eSIM profile and carrier details before sending.
+Run `get_eSimConfig` first if you need the exact profile nickname. The nickname in the request must match a profile known to the reader.
+
+## Request Fields
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `payload.operation` | string | No | eSIM operation to perform, such as enabling a profile. |
+| `payload.profileNickName` | string | No | Nickname of the eSIM profile to update. |

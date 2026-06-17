@@ -21,19 +21,6 @@ Use this command to:
 
 MQTT command key: `set_autostartUserapp`.
 
-## Sending the Command
-
-```json
-{
-  "command": "set_autostartUserapp",
-  "command_id": "abcd1324",
-  "payload": {
-    "appname": "sample",
-    "autostart": true
-  }
-}
-```
-
 ## Request Fields
 
 | Field | Type | Required | Description |

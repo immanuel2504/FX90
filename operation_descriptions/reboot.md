@@ -28,21 +28,3 @@ Plan for downtime — the reader will disconnect until it finishes booting. In-f
 |---|---|
 | Downtime window | Allow 1–3 minutes for reboot and MQTT reconnect. |
 | Active operations | Stop inventory with `stop` if a clean shutdown is preferred. |
-
-## Sending the Command
-
-### Example: Reboot reader
-
-```json
-{
-  "command": "reboot",
-  "command_id": "abcd1431243",
-  "payload": {}
-}
-```
-
-## Reading the Response
-
-If the reader acknowledges before rebooting, the response contains `response: "success"`. The MQTT connection will drop shortly after.
-
-> **Note:** After reboot, wait for heartbeat events or poll `get_status` to confirm the reader is back online.

@@ -31,30 +31,9 @@ Confirm the certificate is no longer in use. Cross-reference the certificate `na
 | Certificate name | Exact `name` from `get_certs`. |
 | Certificate type | `client`, `server`, or `app`. |
 
-## Sending the Command
-
-MQTT command key: `del_certificate`.
-
-### Example: Delete a certificate
-
-```json
-{
-  "command": "del_certificate",
-  "command_id": "abcd1234",
-  "payload": {
-    "name": "my_client_cert",
-    "type": "client"
-  }
-}
-```
-
 ## Request Fields
 
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `payload.name` | string | Yes | Certificate name to delete. |
 | `payload.type` | string | Yes | Certificate type: `client`, `server`, or `app`. |
-
-## Reading the Response
-
-The reader responds with `response: "success"` or `"failure"`. Match `command_id` in the response. Verify removal with `get_certs`.

@@ -1,14 +1,14 @@
-## 1. Description
+## Description
 
-The `set_region` command updates the reader's RF region and regulatory settings.
+The `set_region` command updates the reader's RF region and regulatory standard.
 
-Use it to:
+Use this command to:
 
-- Set the deployment region to match the country of operation
-- Change regulatory standard and channel configuration
-- Re-provision a reader moved to a new geographic location
+- Set the reader region for the deployment country
+- Apply the correct regulatory standard
+- Reconfigure a reader that has moved to a different region
 
-## 2. Command Details
+## Command Details
 
 | Property | Value |
 |---|---|
@@ -20,11 +20,13 @@ Use it to:
 | Supported Operations | Update RF region configuration |
 | Supported API Versions | V1.0 |
 
-## 3. Before You Begin
+## Before You Begin
 
-Gather these details before sending the command. The target region must appear in `get_SupportedRegionList`.
+Use `get_SupportedRegionList` and `get_SupportedStandardlist` to choose a valid country and regulatory standard before updating region settings.
 
-| What You Need | Details |
-|---|---|
-| Target region | Region name from the supported region list. |
-| Regulatory standard | Standard and channel settings for the region (see `get_SupportedStandardlist`). |
+## Request Fields
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `payload.country` | string | Yes | Target country/region name. |
+| `payload.standardname` | string | Yes | Regulatory standard name to apply for the selected country. |

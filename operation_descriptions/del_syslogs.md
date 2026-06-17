@@ -24,19 +24,3 @@ Use this command to:
 Archive logs with `get_logs_syslog` before purging if you need to retain them for support.
 
 MQTT command key: `del_logs_syslog`.
-
-## Sending the Command
-
-### Example: Purge syslogs
-
-```json
-{
-  "command": "del_logs_syslog",
-  "command_id": "abcd1234",
-  "payload": {}
-}
-```
-
-## Reading the Response
-
-The reader responds with `response: "success"` or `"failure"`. Purged logs cannot be recovered.

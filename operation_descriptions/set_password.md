@@ -1,14 +1,14 @@
-## 1. Description
+## Description
 
-The `set_password` command changes the password on the reader.
+The `set_password` command changes a reader user's password.
 
-Use it to:
+Use this command to:
 
-- Rotate the reader login password as part of security policy
-- Set an initial password on a newly deployed reader
-- Recover from a compromised credential
+- Rotate reader credentials
+- Set a new password during provisioning
+- Recover from or respond to credential exposure
 
-## 2. Command Details
+## Command Details
 
 | Property | Value |
 |---|---|
@@ -17,11 +17,17 @@ Use it to:
 | Applies To | FXR90 |
 | Related Commands | [localrest_login](localrest_login.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
-| Supported Operations | Change reader password |
+| Supported Operations | Change reader user password |
 | Supported API Versions | V1.0 |
 
-> **Security Note:** Never hardcode passwords in your payload or source code. Supply credentials at runtime from a secrets manager.
+## Before You Begin
 
-## 3. Before You Begin
+Confirm the current password and target user before sending the command. Store passwords securely and avoid hardcoding credentials in source code or documentation.
 
-Gather the current and new password values before sending. A failed change may lock you out if the old password is incorrect.
+## Request Fields
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `payload.currentPassword` | string | No | Current password for the target user. |
+| `payload.newPassword` | string | No | New password to assign. |
+| `payload.userName` | string | No | User account whose password should be changed. |

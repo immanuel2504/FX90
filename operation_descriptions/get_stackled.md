@@ -1,27 +1,36 @@
-## 1. Description
+## Description
 
-The `get_stackled` command retrieves the current state of the stack LED on the reader.
-
-This command returns stack LED status information.
+The `get_stackled` command retrieves the current stack LED state.
 
 Use this command to:
 
-- Confirm stack LED state before calling `set_stackled`
-- Audit LED indicators during health checks
+- Check the active stack LED color and brightness
+- Determine whether the LED is flashing
+- See how much time remains for a timed LED state
 
-## 2. Command Details
+## Command Details
 
 | Property | Value |
 |---|---|
-| Pattern Name | Stack LED Query |
+| Pattern Name | Stack LED Status Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [set_stackled](set_stackled.md), [get_appled](get_appled.md) |
-| Required Request Fields | `command`, `command_id` |
+| Related Commands | [set_stackled](set_stackled.md) |
+| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Retrieve stack LED state |
-| Supported Response Sections | payload |
 | Supported API Versions | V1.0 |
 
-## 3. When to Use This Command
+## Before You Begin
 
-Use `get_stackled` to read the current stack LED configuration and state.
+No command payload fields are required. Use this command after `set_stackled` to confirm the current visible LED state.
+
+## Response Payload Summary
+
+| Field | Type | Description |
+|---|---|---|
+| `payload.status` | string | Indicates whether the LED is in a default or non-default state. |
+| `payload.color` | string | Current stack LED color. |
+| `payload.brightness` | string | Current LED brightness. |
+| `payload.flash` | boolean | Whether the LED is flashing. |
+| `payload.seconds` | integer | Configured duration for the LED state. |
+| `payload.seconds_remaining` | integer | Remaining time for a timed LED state. |

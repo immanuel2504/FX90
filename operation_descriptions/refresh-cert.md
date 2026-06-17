@@ -31,28 +31,9 @@ The certificate must already be installed. Use `get_certs` to confirm the `name`
 | Certificate name | Exact name of the installed certificate. |
 | Certificate type | `client`, `server`, or `app`. |
 
-## Sending the Command
-
-### Example: Refresh certificate
-
-```json
-{
-  "command": "set_refreshCertificate",
-  "command_id": "abcd1324",
-  "payload": {
-    "name": "my_client_cert",
-    "type": "client"
-  }
-}
-```
-
 ## Request Fields
 
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `payload.name` | string | Yes | Certificate name to refresh. |
 | `payload.type` | string | Yes | Certificate type: `client`, `server`, or `app`. |
-
-## Reading the Response
-
-The reader responds with `response: "success"` or `"failure"`. Verify the updated certificate with `get_certs`.

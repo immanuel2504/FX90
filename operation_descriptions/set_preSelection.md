@@ -1,25 +1,31 @@
-## 1. Description
+## Description
 
-The `set_preSelection` command enables or disables the rxSawFilter on the reader.
+The `set_preSelection` command enables or disables the rxSawFilter pre-selection feature.
 
-Use it to:
+Use this command to:
 
-- Turn the rxSaw filter on or off for RF pre-selection
-- Tune receiver sensitivity for the deployment environment
-- Adjust filter settings before starting inventory
+- Enable rxSawFilter before RFID inventory
+- Disable rxSawFilter for troubleshooting or alternate RF behavior
+- Tune receiver filtering for the deployment environment
 
-## 2. Command Details
+## Command Details
 
 | Property | Value |
 |---|---|
 | Pattern Name | rxSawFilter Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [get_preSelection](get_preSelection.md), [set_mode](set_mode.md) |
+| Related Commands | [get_preSelection](get_preSelection.md), [start](start.md), [get_status](get_status.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Enable or disable rxSawFilter |
 | Supported API Versions | V1.0 |
 
-## 3. Before You Begin
+## Before You Begin
 
-Confirm the desired rxSawFilter state before sending.
+Use `get_preSelection` if you need to confirm the current state before changing it.
+
+## Request Fields
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `payload.preSelection` | boolean | Yes | Set to `true` to enable rxSawFilter or `false` to disable it. |
