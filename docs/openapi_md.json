@@ -3,7 +3,7 @@
     "info": {
         "title": "Zebra Fixed Reader MQTT API",
         "version": "1.0.0",
-        "description": "# FX90 API Documentation\n\nMQTT-based API for controlling Zebra fixed RFID readers (**FX90**)."
+        "description": "# FX90 MQTT API reference Documentation\n\nMQTT API reference for Zebra FX90 fixed RFID readers, covering command payloads, responses, events, and configuration workflows used to monitor and control reader operation."
     },
     "tags": [
         {

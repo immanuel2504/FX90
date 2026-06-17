@@ -1695,24 +1695,6 @@ blockquote p { margin-bottom: 0; }
 }
 
 /* ── API stats, loading, back to top ───────────────────────────── */
-.api-stats-bar {
- display: flex;
- flex-wrap: wrap;
- gap: var(--sp-4);
- margin: var(--sp-3) 0 var(--sp-5);
- padding: var(--sp-3) var(--sp-4);
- background: linear-gradient(135deg, #f0f7ff 0%, #f8fbff 100%);
- border: 1px solid #d8e4f1;
- border-radius: var(--radius-md);
-}
-.api-stat {
- font-size: var(--text-sm);
- color: var(--color-text-muted);
-}
-.api-stat strong {
- color: var(--color-primary);
- font-weight: 800;
-}
 #content.is-loading {
  display: flex;
  flex-direction: column;

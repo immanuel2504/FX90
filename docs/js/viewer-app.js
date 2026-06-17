@@ -34,21 +34,6 @@ function formatExampleLabel(key) {
   return key.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
 }
 
-function buildStatsBar(spec) {
-  var opCount = 0;
-  var paths = spec.paths || {};
-  Object.keys(paths).forEach(function (p) {
-    opCount += Object.keys(paths[p]).length;
-  });
-  var tagCount = (spec.tags || []).length;
-  var version = (spec.info && spec.info.version) ? spec.info.version : '';
-  return '<div class="api-stats-bar" role="status">' +
-    '<span class="api-stat"><strong>' + opCount + '</strong> commands</span>' +
-    '<span class="api-stat"><strong>' + tagCount + '</strong> categories</span>' +
-    (version ? '<span class="api-stat">Version <strong>' + escHtml(version) + '</strong></span>' : '') +
-    '</div>';
-}
-
 function md(text, options) {
    if (!text) return '';
    options = options || {};
@@ -1633,17 +1618,6 @@ function render(spec) {
    /* No h1 page title — topbar handles it */
    if (spec.info && spec.info.description) {
      html += '<div class="info-description md-content">' + md(spec.info.description, { idPrefix: 'info' }) + '</div>';
-     html += buildStatsBar(spec);
-     var infoSections = [];
-     spec.info.description.replace(/^## (.+)$/gm, function(_, t) { infoSections.push(t); });
-     if (infoSections.length) {
-       infoSections.forEach(function(t) {
-         if (t === 'Details') return;
-         var id = 'info-' + t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
-         navHtml += '<a class="nav-tag" href="#' + id + '">' + escHtml(t) + '</a>';
-       });
-       navHtml += '<hr class="nav-divider">';
-     }
    }
  
    var tagMap = {};
