@@ -1,0 +1,43 @@
+get:
+  tags:
+  - Date&Time
+  summary: Retrieve the NTP server
+  description: MQTT API :-  get_ntpServer <br> Retrieves the configured NTP server on the reader
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/get_ntpServerResponse
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Date&Time
+  summary: Set NTP server
+  description: MQTT API :-  set_ntpServer <br> Configures the NTP server on the reader
+  operationId: updateNtpServer
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/updateNtpServerRequest
+        examples:
+          set_ntpServer:
+            value:
+              server: time1.google.com
+              server2: time2.google.com
+          set_ntpServer_legacy:
+            value:
+              server1: time1.google.com
+              server2: time2.google.com
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/updateNtpServerResponse
+  security:
+  - bearerAuth: []

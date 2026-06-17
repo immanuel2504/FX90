@@ -1,0 +1,56 @@
+{
+  "title": "Start RFID Inventory or BLE scan Response",
+  "x-stoplight": {
+    "id": "2ck6qflak1zlw"
+  },
+  "type": "object",
+  "description": "Acknowledges the start of an RFID inventory, BLE scanning, or dual scan operation.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "start"
+      ],
+      "example": "start",
+      "description": "The value for the key command must be start."
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1432",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success",
+      "description": "Status of the execution request."
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/start.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "start",
+      "command_id": "abcd1432",
+      "response": "success",
+      "payload": {}
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+get:
+  tags:
+  - System
+  summary: Retrieves the cableLossCompensation
+  description: MQTT API :-  get_cableLossCompensation <br> Gets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet
+  operationId: getCablelosscompensation
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getCablelosscompensationResponse
+          example:
+            '1':
+              cableLength: 10
+              cableLossPerHundredFt: 10
+            '2':
+              cableLength: 10
+              cableLossPerHundredFt: 10
+            '3':
+              cableLength: 10
+              cableLossPerHundredFt: 10
+            '4':
+              cableLength: 10
+              cableLossPerHundredFt: 10
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - System
+  summary: Sets the cableLossCompensation
+  description: MQTT API :-  set_cableLossCompensation <br> Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet
+  operationId: setCablelosscompensation
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setCablelosscompensationRequest
+        examples:
+          set_cableLossCompensation:
+            value:
+              '1':
+                cableLength: 90
+                cableLossPerHundredFt: 18
+              '2':
+                cableLength: 18
+                cableLossPerHundredFt: 19
+              '3':
+                cableLength: 10
+                cableLossPerHundredFt: 11
+              '4':
+                cableLength: 10
+                cableLossPerHundredFt: 70
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setCablelosscompensationResponse
+    '400':
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setCablelosscompensationResponseschema_400
+    '500':
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setCablelosscompensationResponseschema_500
+  security:
+  - bearerAuth: []

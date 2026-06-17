@@ -1,0 +1,31 @@
+{
+  "title": "Get Network Interfaces",
+  "x-stoplight": {
+    "id": "g8n9w1aqba0k7"
+  },
+  "type": "object",
+  "description": "This command retrieves the available network interfaces of the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_networkInterfaces"
+      ],
+      "example": "get_networkInterfaces",
+      "description": "The value for command must be get_networkInterfaces"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "a12cb345654",
+      "description": "A Unique Id echoed by the reader in the response to Get Network Interfaces"
+    },
+    "payload": {
+      "$ref": "../../references/request_payload/get_networkInterfaces_command.yaml"
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ]
+}

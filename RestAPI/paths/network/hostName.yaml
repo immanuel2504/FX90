@@ -1,0 +1,39 @@
+get:
+  tags:
+  - Network
+  summary: Retrieves reader hostname
+  description: MQTT API :-  get_hostName <br> Retrieves the hostname of the reader
+  operationId: getHostName
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getHostNameResponse
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Network
+  summary: Sets reader hostname
+  description: MQTT API :-  set_hostName <br> Sets the hostname of the reader
+  operationId: setHostName
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setHostNameRequest
+        examples:
+          set_hostName:
+            value:
+              hostname: FXR90C60C001
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setHostNameResponse
+  security:
+  - bearerAuth: []

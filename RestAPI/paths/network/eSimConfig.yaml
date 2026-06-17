@@ -1,0 +1,35 @@
+get:
+  tags:
+  - Network
+  summary: Gets the eSIM configuration
+  description: MQTT API :- get_eSimConfig <br> Gets the eSIM configuration
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/get_eSimConfigResponse
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Network
+  summary: Sets the eSIM configuration
+  description: MQTT API :-  set_eSimConfig <br> Sets the eSIM configuration
+  operationId: setEsimConfig
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setEsimConfigRequest
+        examples:
+          set_eSimConfig:
+            value:
+              operation: enable
+              profileNickName: gnd1
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

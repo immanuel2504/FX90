@@ -1,0 +1,14 @@
+get:
+  tags:
+  - Logs
+  summary: Retrieve RcInfoLog
+  description: MQTT API :-  get_logs_rcLog <br> Retrieves the rc log (radio-control.log) from the reader.
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/get_logs_RcLogResponse
+  security:
+  - bearerAuth: []

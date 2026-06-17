@@ -1,0 +1,31 @@
+put:
+  tags:
+  - userapp
+  summary: Autostart user application
+  description: MQTT API :-  set_autostartUserapp <br> Configures autostart for a user application. For local REST, the app name is specified via the `{appname}` path parameter. For MQTT, `appname` must be provided in the request payload.
+  operationId: setAutostartuserapp
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setAutostartuserappRequest
+        examples:
+          set_autostartUserapp:
+            value:
+              appname: mylogger
+              autostart: true
+          set_autostartUserapp-false:
+            value:
+              appname: mylogger
+              autostart: false
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []
+parameters:
+- name: appname
+  in: path
+  required: true
+  schema:
+    type: string

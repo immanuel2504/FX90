@@ -1,0 +1,150 @@
+put:
+  tags:
+  - System
+  summary: Import cloud endpoint configuration
+  description: MQTT API :- set_importCloudConfig <br> Imports the cloud endpoint configuration (control/data/management/management event endpoints) into the reader <br> **Note:** Only `endpointConfig` can be configured via this API. `managementEventConfig` is not supported here — use `PUT /cloud/config` for that.
+  operationId: setImportcloudconfig
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setImportcloudconfigRequest
+        examples:
+          set_importCloudConfig:
+            value:
+              endpointConfig:
+                control:
+                  commandResponse:
+                    connections:
+                    - description: MQTT_TEST
+                      name: MQTT_TEST
+                      options:
+                        additional:
+                          cleanSession: true
+                          clientId: FX9600FCC017
+                          debug: false
+                          keepAlive: 60
+                          qos: 0
+                          reconnectDelay: 1
+                          reconnectDelayMax: 5
+                        enableSecurity: false
+                        endpoint:
+                          hostName: broker.emqx.io
+                          port: 1883
+                          protocol: tcp
+                        publishTopic:
+                        - FX9600FCC017/rsp
+                        security:
+                          CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+                          installedCertificateName: Server
+                          installedCertificateType: server
+                          keyAlgorithm: RS256
+                          keyFormat: PEM
+                          verifyHostName: false
+                          verifyPeer: false
+                        subscribeTopic:
+                        - FX9600FCC017/cmd
+                      type: mqtt
+                    enableLocalRest: true
+                data:
+                  event:
+                    connections:
+                    - additionalOptions:
+                        batching: null
+                        retention:
+                          maxEventRetentionTimeInMin: 500
+                          maxNumEvents: 150000
+                          throttle: 500
+                      description: MQTT_TEST
+                      name: MQTT_TEST
+                      options:
+                        additional:
+                          cleanSession: true
+                          clientId: FX9600FCC017
+                          debug: false
+                          keepAlive: 60
+                          qos: 0
+                          reconnectDelay: 1
+                          reconnectDelayMax: 5
+                        enableSecurity: false
+                        endpoint:
+                          hostName: broker.emqx.io
+                          port: 1883
+                          protocol: tcp
+                        publishTopic:
+                        - FX9600FCC017/tevents
+                        security:
+                          CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+                          installedCertificateName: Server
+                          installedCertificateType: server
+                          keyAlgorithm: RS256
+                          keyFormat: PEM
+                          verifyHostName: false
+                          verifyPeer: false
+                        subscribeTopic: []
+                      type: mqtt
+                management:
+                  commandResponse:
+                    connections:
+                    - description: MQTT_TEST
+                      name: MQTT_TEST
+                      options:
+                        additional:
+                          cleanSession: true
+                          clientId: FX9600FCC017
+                          debug: false
+                          keepAlive: 60
+                          qos: 0
+                          reconnectDelay: 1
+                          reconnectDelayMax: 5
+                        enableSecurity: false
+                        endpoint:
+                          hostName: broker.emqx.io
+                          port: 1883
+                          protocol: tcp
+                        publishTopic:
+                        - FX9600FCC017/rsp
+                        security:
+                          CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+                          installedCertificateName: Server
+                          installedCertificateType: server
+                          keyAlgorithm: RS256
+                          keyFormat: PEM
+                          verifyHostName: false
+                          verifyPeer: false
+                        subscribeTopic:
+                        - FX9600FCC017/cmd
+                      type: mqtt
+                    enableLocalRest: true
+                  event:
+                    connections:
+                    - description: MQTT_TEST
+                      name: MQTT_TEST
+                      options:
+                        additional:
+                          cleanSession: true
+                          clientId: FX9600FCC017
+                          debug: false
+                          keepAlive: 60
+                          qos: 0
+                          reconnectDelay: 1
+                          reconnectDelayMax: 5
+                        enableSecurity: false
+                        endpoint:
+                          hostName: broker.emqx.io
+                          port: 1883
+                          protocol: tcp
+                        publishTopic:
+                        - FX9600FCC017/mevents
+                        subscribeTopic: []
+                      type: mqtt
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setImportcloudconfigResponse
+  security:
+  - bearerAuth: []

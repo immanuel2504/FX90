@@ -1,0 +1,15 @@
+get:
+  tags:
+  - Login
+  summary: Reader Login
+  description: MQTT API :- localrest_login <br> Logs in to the reader
+  operationId: localrestlogin
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/localrestloginResponse
+  security:
+  - basicAuth: []

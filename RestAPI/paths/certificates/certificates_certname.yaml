@@ -1,0 +1,48 @@
+parameters:
+- name: certname
+  in: path
+  required: true
+  schema:
+    type: string
+put:
+  tags:
+  - Certificate
+  summary: Refresh certificate
+  description: MQTT API :-  set_refreshCertificate <br> Refreshes the specified certificate on the device
+  operationId: setRefreshcertificate
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setRefreshcertificateRequest
+        examples:
+          set_refreshCertificate_server:
+            value:
+              name: Server
+              type: server
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []
+delete:
+  tags:
+  - Certificate
+  summary: Delete certificate
+  description: MQTT API :-  del_certificate <br> Delete the specified certificate from the device
+  operationId: delCertificate
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/delCertificateRequest
+        examples:
+          del_certificate:
+            value:
+              name: reader
+              type: client
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

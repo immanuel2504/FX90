@@ -1,0 +1,24 @@
+get:
+  tags:
+  - userapp
+  summary: List user applications
+  description: MQTT API :-  get_userapps <br> Lists all installed user applications
+  operationId: getUserapps
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getUserappsResponse
+          example:
+          - appname: mylogger
+            runningStatus: true
+            autostart: false
+            metadata: 'APP_TYPE: DA'
+          - appname: sample
+            runningStatus: false
+            autostart: true
+            metadata: 'APP_TYPE: NORMAL'
+  security:
+  - bearerAuth: []

@@ -1,0 +1,59 @@
+get:
+  tags:
+  - Gpio
+  summary: Retrieves the GPO status
+  description: 'MQTT API :-  get_gpoStatus <br> Retrieves the GPO status on the specified port of the reader.
+
+    Maximum number of ports available per device type:
+
+    1. FX7500 = 3 GPO pins
+
+    2. FX9600 = 4 GPO pins
+
+    3. ATR7000 = 3 GPO pins
+
+    4. FXR90 = 4 GPO pins'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/get_gpoResponse
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Gpio
+  summary: Updates GPO port state
+  description: 'MQTT API :-  set_gpo <br> Updates the GPO state on the specified port of the reader.
+
+    Maximum number of ports available per device type:
+
+    1. FX7500 = 3 GPO pins
+
+    2. FX9600 = 4 GPO pins
+
+    3. ATR7000 = 3 GPO pins
+
+    4. FXR90 = 4 GPO pins'
+  operationId: setGpo
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setGpoRequest
+        examples:
+          set_gpo:
+            value:
+              port: 3
+              state: true
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setGpoResponse
+  security:
+  - bearerAuth: []

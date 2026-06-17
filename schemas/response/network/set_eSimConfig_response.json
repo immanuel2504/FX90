@@ -1,0 +1,51 @@
+{
+  "title": "Set eSIM Configuration Response",
+  "type": "object",
+  "description": "Acknowledges eSIM configuration updates.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "set_eSimConfig"
+      ],
+      "example": "set_eSimConfig"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "esim-set-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_eSimConfig",
+      "command_id": "esim-set-001",
+      "response": "success",
+      "payload": {}
+    }
+  ]
+}

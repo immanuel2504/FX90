@@ -1,0 +1,6 @@
+title: StartResponsePayload
+type: object
+description: >
+  An empty object indicating that the RFID inventory, BLE scanning, 
+  or dual scan operation has successfully started.
+properties: {}

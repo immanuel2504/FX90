@@ -1,0 +1,74 @@
+{
+  "title": "Get Version",
+  "x-stoplight": {
+    "id": "hmi9t8ucghoqm"
+  },
+  "type": "object",
+  "description": "Retrieves reader component version information including Boot Loader, OS, Reader Application, and Radio Firmware versions.",
+  "examples": [
+    {
+      "command": "get_version",
+      "command_id": "a12cb5677",
+      "response": "success",
+      "payload": {
+        "availableOsUpgrades": {},
+        "cloudAgentApplication": "0.6.2.64",
+        "model": "FXR90",
+        "radioControlApplication": "0.2.58.7",
+        "radioFirmware": "2.1.69.0",
+        "readerApplication": "4.0.9-13",
+        "revertBackFirmware": {},
+        "serialNumber": "25289523070378"
+      }
+    }
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_version"
+      ],
+      "description": "The value for the key command must be get_version."
+    },
+    "command_id": {
+      "type": "string",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "description": "The execution status of the requested command.",
+      "example": "success"
+    },
+    "payload": {
+      "$ref": "../../references/response_payload/get_version_response-2.yaml",
+      "description": "The object containing the component version information."
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "x-examples": {
+    "Example 1": {
+      "command": "get_version",
+      "command_id": "a12cb5677",
+      "response": "success",
+      "payload": {
+        "availableOsUpgrades": {},
+        "cloudAgentApplication": "0.6.2.64",
+        "model": "FXR90",
+        "radioControlApplication": "0.2.58.7",
+        "radioFirmware": "2.1.69.0",
+        "readerApplication": "4.0.9-13",
+        "revertBackFirmware": {},
+        "serialNumber": "25289523070378"
+      }
+    }
+  }
+}

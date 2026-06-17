@@ -1,0 +1,26 @@
+put:
+  tags:
+  - userapp
+  summary: Stop user application
+  description: MQTT API :-  set_stopUserapp <br> Stops a user application. For local REST, the app name is specified via the `{appname}` path parameter. For MQTT, `appname` must be provided in the request payload.
+  operationId: setStopuserapp
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setStopuserappRequest
+        examples:
+          set_stopUserapp:
+            value:
+              appname: mylogger
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []
+parameters:
+- name: appname
+  in: path
+  required: true
+  schema:
+    type: string

@@ -1,0 +1,192 @@
+get:
+  tags:
+  - ImpinjGen2X
+  summary: Get Impinj Gen2X configuration
+  description: MQTT API :- get_impinjGen2X <br> Retrieves the current Impinj Gen2X feature configuration as last saved via set_impinjGen2X. Returns an empty object if no Gen2X configuration has been set yet. Only feature objects that were previously configured are included in the response.
+  operationId: getImpinjGen2X
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getImpinjGen2XResponse
+          examples:
+            empty:
+              value: {}
+            fastID_configured:
+              value:
+                fastID:
+                  enabled: true
+                  tidSelector: TID[0]
+            tagFocus_configured:
+              value:
+                tagFocus:
+                  enabled: true
+            tagProtect_configured:
+              value:
+                tagProtect:
+                  action: enableTagProtection
+                  password: '77777777'
+                  tagID: e2801191a5030069073b426d
+                  enableShortRange: true
+            tagQuieting_basic_configured:
+              value:
+                tagQuieting:
+                  basic:
+                    action: quiet
+                    tagIDs:
+                    - e2801191a5030069073b426d
+            tagQuieting_advanced_configured:
+              value:
+                tagQuieting:
+                  advanced:
+                    tagQuietMasks:
+                    - S0A
+                    - S2A
+                    target: SL
+                    stateAwareAction: ASSERTSL
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getImpinjGen2XResponseschema_500
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - ImpinjGen2X
+  summary: Set Impinj Gen2X configuration
+  description: MQTT API :- set_impinjGen2X <br> Configures Impinj Gen2X proprietary features (FastID, TagProtect, TagFocus, TagQuieting). At least one feature object must be provided. Note - start command with applyImpinjGen2X flag should be used to start the Gen2X operations.
+  operationId: setImpinjGen2X
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setImpinjGen2XRequest
+        examples:
+          enable_fastID:
+            value:
+              fastID:
+                enabled: true
+          disable_fastID:
+            value:
+              fastID:
+                enabled: false
+          protect_tag:
+            value:
+              tagProtect:
+                action: enableTagProtection
+                password: '77777777'
+                tagID: e2801191a5030069073b426d
+                enableShortRange: true
+          unprotect_tag:
+            value:
+              tagProtect:
+                action: disableTagProtection
+                password: '77777777'
+                tagID: e2801191a5030069073b426d
+          enable_protect_read:
+            value:
+              tagProtect:
+                action: enableTagVisibility
+                password: '77777777'
+          disable_protect_read:
+            value:
+              tagProtect:
+                action: disableTagVisibility
+                password: '77777777'
+          enable_tagFocus:
+            value:
+              tagFocus:
+                enabled: true
+          disable_tagFocus:
+            value:
+              tagFocus:
+                enabled: false
+          quiet_tags:
+            value:
+              tagQuieting:
+                basic:
+                  action: quiet
+                  tagIDs:
+                  - e2801191a5030069073b426d
+                  - e2801191a5030069073b426e
+          unquiet_tags:
+            value:
+              tagQuieting:
+                basic:
+                  action: unquiet
+                  tagIDs:
+                  - e2801191a5030069073b426d
+          advanced_quiet_tags:
+            value:
+              tagQuieting:
+                advanced:
+                  preSelect:
+                  - target: SL
+                    action: ASSERTSL_NOTHING
+                    mask:
+                      bank: EPC
+                      pointer: 32
+                      length: 96
+                      value: E280123456789012345678AB
+                  - target: S2
+                    action: INVB_INVA
+                    mask:
+                      bank: EPC
+                      pointer: 32
+                      length: 96
+                      value: E280AABBCCDDEEFF11223344
+                  tagQuietMasks:
+                  - SL_ASSERT
+                  - S2B
+                  target: SL
+                  stateAwareAction: ASSERTSL_DEASSERTSL
+          advanced_unquiet_tags:
+            value:
+              tagQuieting:
+                advanced:
+                  preSelect:
+                  - target: SL
+                    action: DEASSERTSL_NOTHING
+                    mask:
+                      bank: EPC
+                      pointer: 32
+                      length: 96
+                      value: E280123456789012345678AB
+                  - target: S2
+                    action: INVA_INVB
+                    mask:
+                      bank: EPC
+                      pointer: 32
+                      length: 96
+                      value: E280AABBCCDDEEFF11223344
+                  tagQuietMasks:
+                  - SL_DEASSERT
+                  - S2A
+                  target: SL
+                  stateAwareAction: DEASSERTSL_ASSERTSL
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setImpinjGen2XResponse
+    '422':
+      description: Unprocessable Entity
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setImpinjGen2XResponseschema_422
+    '500':
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setImpinjGen2XResponseschema_500
+  security:
+  - bearerAuth: []

@@ -1,0 +1,15 @@
+get:
+  tags:
+  - Network
+  summary: Gets the GPS coordinates (lat/long)
+  description: MQTT API :-  get_gpsCoordinates <br> Gets the GPS coordinates (lat/long)
+  operationId: getGpsCoordinates
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getGpsCoordinatesResponse
+  security:
+  - bearerAuth: []

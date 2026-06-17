@@ -1,0 +1,268 @@
+get:
+  tags:
+  - Network
+  summary: Retrieves reader network configuration
+  description: MQTT API :-  get_network <br> Retrieves reader network information including IP address, subnet mask, gateway and DNS
+  operationId: getNetwork
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getNetworkResponse
+          example:
+            hostName: FXR90C5F1AB
+            networkInterface:
+              eth0:
+                IPV4:
+                  dhcp: true
+                  dnsAddress: 10.233.1.200
+                  domainName: zlab.com
+                  gatewayAddress: 10.233.45.2
+                  ipAddress: 10.233.45.235
+                  subnetMask: 255.255.255.0
+                IPV6:
+                  dhcp: true
+                  dnsAddress: fd6c:10:233:1::201
+                  domainName: zlab.com
+                  gatewayAddress: fe80::f6ee:31ff:fe0c:5a1f
+                  ipAddress: fd6c:10:233:45:eab:f51f:957e:f729
+                Status: connected
+                isEnabled: true
+                macAddress: C8:1C:FE:C5:F1:AB
+              mlan0:
+                IPV4:
+                  dhcp: true
+                  dnsAddress: 1.1.1.1
+                  domainName: FXR90C5F1AB
+                  gatewayAddress: 192.168.0.1
+                  ipAddress: 192.168.0.201
+                  subnetMask: 255.255.255.0
+                IPV6:
+                  dhcp: true
+                  dnsAddress: fd6c:10:233:1::201
+                  domainName: FXR90C5F1AB
+                  gatewayAddress: fe80::c206:c3ff:febe:ee3c
+                  ipAddress: fe80::3626:9125:eda5:36d7
+                Status: connected
+                accesspoint:
+                  autoConn: false
+                  essid: GLaDOS
+                  status: connected
+                  security:
+                    securityType: WPA2Personal
+                isEnabled: true
+                macAddress: 48:A4:93:BF:A9:50
+              bnep0:
+                Status: active
+                deviceDiscoverableName: FXR90C5F1AB
+                dhcpEndAddress: 192.168.0.10
+                dhcpStartAddress: 192.168.0.2
+                ipAddress: 192.168.241.171
+                isDiscoverable: true
+                isEnabled: true
+                isPairable: true
+                macAddress: 48:A4:93:BF:A9:52
+                passKey: '1234'
+                subnetMask: 255.255.0.0
+                usePassKey: true
+              wan0:
+                Status: online
+                activeSim: psim
+                isEnabled: true
+                psim:
+                  currentDataClass: LTE
+                  currentServiceProvider: Vi India
+                  enableIPv6: false
+                  enablePin: false
+                  enableRoaming: false
+                  highestAvailableDataClass: LTE
+                  internetAccess: true
+                  packetServiceState: Attached
+                  preferredNetworkType: AUTO
+                  registerState: Home
+                  rsrp: -103.7dBm
+                  rsrq: -5.5dB
+                  rssi: -82.7dBm
+                  signalBar: 1
+                  simState: Initialized
+                  snr: 0.0dB
+              uap0:
+                ssid: FXR90Hotspot
+                ssidPassword: MyP@ssword
+                isHidden: false
+                securityType: WPA3Personal
+                Status: active
+                isEnabled: true
+                macAddress: 48:A4:93:BF:A9:53
+                Clients:
+                - hostName: my-laptop
+                  IP: 192.168.43.2
+                  MAC: AA:BB:CC:DD:EE:FF
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Network
+  summary: Updates reader network configuration
+  description: 'MQTT API :-  set_network <br> Updates the reader network configuration settings. Only one interface key (`eth0`, `mlan0`, `bnep0`, `wan0`, or `uap0`) may be present per request.
+
+    '
+  operationId: updateNetwork
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/updateNetworkRequest
+        examples:
+          set_Network_ethernet_dhcp:
+            summary: Ethernet — DHCP
+            value:
+              eth0:
+                IPV4:
+                  dhcp: true
+                enable: true
+          set_Network_ethernet_static:
+            summary: Ethernet — static IP
+            value:
+              eth0:
+                IPV4:
+                  dhcp: false
+                  dnsAddress: 10.233.1.200
+                  domainName: zlab.com
+                  gatewayAddress: 10.233.46.2
+                  ipAddress: 10.233.46.47
+                  subnetMask: 255.255.255.0
+                enable: true
+          set_Network_ethernet_8021x:
+            summary: Ethernet — 802.1X (TLS)
+            value:
+              eth0:
+                security:
+                  enable: true
+                  802_1xEAP:
+                    authentication: TLS
+                    certificate: my-client-cert
+                enable: true
+          set_Network_ethernet_8021x_ttls_mschapv2:
+            summary: Ethernet — 802.1X (TTLS/MSCHAPv2)
+            value:
+              eth0:
+                security:
+                  enable: true
+                  802_1xEAP:
+                    authentication: TTLS
+                    innerAuthentication: MSCHAPv2
+                    username: john.doe
+                    password: secret
+                enable: true
+          set_Network_wifi_dhcp:
+            summary: WiFi — DHCP
+            value:
+              mlan0:
+                IPV4:
+                  dhcp: true
+                enable: true
+          set_Network_wifi_static:
+            summary: WiFi — static IP
+            value:
+              mlan0:
+                IPV4:
+                  dhcp: false
+                  dnsAddress: 10.233.1.200
+                  domainName: zlab.com
+                  gatewayAddress: 10.233.46.2
+                  ipAddress: 10.233.46.47
+                  subnetMask: 255.255.255.0
+                enable: true
+          set_Network_wifi_security_wpa2personal:
+            summary: WiFi — WPA2 Personal
+            value:
+              mlan0:
+                accesspoint:
+                  autoConn: true
+                  connect: true
+                  essid: Redmi Note 12 5G
+                  security:
+                    enable: true
+                    WPA2Personal:
+                      password: '12345678'
+                enable: true
+          set_Network_wifi_open:
+            summary: WiFi — Open (No Security)
+            value:
+              mlan0:
+                accesspoint:
+                  essid: OpenNetwork
+                  connect: true
+                  autoConn: true
+                  security:
+                    enable: false
+                enable: true
+          set_Network_wifi_enterprise:
+            summary: WiFi — WPA2 Enterprise (TLS)
+            value:
+              mlan0:
+                accesspoint:
+                  essid: CorpNetwork
+                  connect: true
+                  autoConn: true
+                  security:
+                    enable: true
+                    WPA2Enterprise:
+                      authentication: TLS
+                      certificate: my-client-cert
+                enable: true
+          set_Network_wifi_enterprise_ttls:
+            summary: WiFi — WPA2 Enterprise (TTLS/MSCHAPv2)
+            value:
+              mlan0:
+                accesspoint:
+                  essid: CorpNetwork
+                  connect: true
+                  autoConn: true
+                  security:
+                    enable: true
+                    WPA2Enterprise:
+                      authentication: TTLS
+                      innerAuthentication: MSCHAPv2
+                      username: john.doe
+                      password: secret
+                enable: true
+          set_Network_bluetooth:
+            summary: Bluetooth PAN
+            value:
+              bnep0:
+                dhcpEndAddress: 192.168.0.10
+                dhcpStartAddress: 192.168.0.2
+                discoverable: true
+                pairable: true
+                passKey: '1233'
+                usePassKey: false
+                enable: true
+          set_Network_wan:
+            summary: WAN — cellular (psim)
+            value:
+              wan0:
+                enable: true
+                activeSim: psim
+                psim:
+                  apn: internet
+                  preferredNetworkType: AUTO
+                  enableIPv6: true
+          set_Network_hotspot:
+            summary: WiFi Hotspot (uap0)
+            value:
+              uap0:
+                ssid: FXR90Hotspot
+                ssidPassword: MyP@ssword
+                countryCode: US
+                securityType: WPA3Personal
+                isHidden: false
+                enable: true
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

@@ -1,0 +1,157 @@
+put:
+  tags:
+  - Ble
+  summary: Set BLE configuration
+  description: 'MQTT API :- set_bleConfig
+
+
+    Configure the BLE scanner. The `ble.enable` field is required.
+
+    Optional fields control scan interval, RSSI filter, service UUID filters,
+
+    and protocol-specific settings.
+
+    BLE configuration must be applied before starting a BLE scan via `start`.'
+  operationId: setBleConfig
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setBleConfigRequest
+        examples:
+          enable_ble:
+            value:
+              ble:
+                enable: true
+          enable_with_interval:
+            value:
+              ble:
+                enable: true
+                scanIntervalSec: 5
+          enable_with_rssi_filter:
+            value:
+              ble:
+                enable: true
+                scanIntervalSec: 10
+                additionalFilters:
+                  rssi: -70
+          enable_with_protocols:
+            value:
+              ble:
+                enable: true
+                scanIntervalSec: 5
+                protocols:
+                  iBeacon:
+                    enabled: true
+                    filters:
+                    - uuid: FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+                      major: 10001
+                      minor: 20002
+                      txPower: -59
+                  altBeacon:
+                    enabled: true
+                    filters:
+                    - mfgId: 0118
+                      beaconId: 2F234454-CF6D-4A0F-ADF2-F4911BA9FFA7
+                      major: 4
+                      minor: 4
+                      refRssi: -100
+                  eddystone:
+                    enabled: true
+                    filters:
+                    - frameType: URL
+                      txPower: -59
+                      url: https://www.zebra.com
+                    - frameType: UID
+                      txPower: -18
+                      namespace: 0102030405060708090A
+                      instance: '000000000001'
+                    - frameType: EID
+                      txPower: -18
+                      ephemeralId: 0102030405060708
+                  generic:
+                    enabled: true
+                    filters:
+                    - address: 7E:41:25:1E:D5:16
+                      addressType: random
+                      name: BLEPeripheralApp
+                      alias: BLEPeripheralApp
+                additionalFilters:
+                  rssi: -80
+                  serviceUuids16:
+                  - FEAA
+                  - FE9B
+                  serviceUuids128:
+                  - FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+          disable_ble:
+            value:
+              ble:
+                enable: false
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []
+get:
+  tags:
+  - Ble
+  summary: Get BLE configuration
+  description: MQTT API :- get_bleConfig
+  operationId: getBleConfig
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getBleConfigResponse
+          example:
+            ble:
+              enable: true
+              scanIntervalSec: 5
+              protocols:
+                iBeacon:
+                  enabled: true
+                  filters:
+                  - uuid: FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+                    major: 10001
+                    minor: 20002
+                    txPower: -59
+                altBeacon:
+                  enabled: true
+                  filters:
+                  - mfgId: 0118
+                    beaconId: 2F234454-CF6D-4A0F-ADF2-F4911BA9FFA7
+                    major: 4
+                    minor: 4
+                    refRssi: -100
+                eddystone:
+                  enabled: true
+                  filters:
+                  - frameType: URL
+                    txPower: -59
+                    url: https://www.zebra.com
+                  - frameType: UID
+                    txPower: -18
+                    namespace: 0102030405060708090A
+                    instance: '000000000001'
+                  - frameType: EID
+                    txPower: -18
+                    ephemeralId: 0102030405060708
+                generic:
+                  enabled: true
+                  filters:
+                  - address: 7E:41:25:1E:D5:16
+                    addressType: random
+                    name: BLEPeripheralApp
+                    alias: BLEPeripheralApp
+              additionalFilters:
+                rssi: -80
+                serviceUuids16:
+                - FEAA
+                - FE9B
+                serviceUuids128:
+                - FDA50693-A4E2-4FB1-AFCF-C6EB07647825
+  security:
+  - bearerAuth: []

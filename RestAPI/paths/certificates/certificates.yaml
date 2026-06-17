@@ -1,0 +1,42 @@
+get:
+  tags:
+  - Certificate
+  summary: Retrieve installed certificate details
+  description: MQTT API :-  get_certificates <br> Retrieve installed certificate details
+  operationId: getCertificates
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getCertificatesResponse
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Certificate
+  summary: Install certificate
+  description: MQTT API :-  set_updateCertificate <br> Installs a certificate on the device
+  operationId: setUpdatecertificate
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setUpdatecertificateRequest
+        examples:
+          set_updateCertificate:
+            value:
+              authenticationOptions:
+                password: zebra
+                username: zebra
+              authenticationType: BASIC
+              name: reader
+              pfxPassword: abcd12345
+              type: client
+              url: https://10.117.229.15/reader.pfx
+  responses:
+    '200':
+      description: OK
+  security:
+  - bearerAuth: []

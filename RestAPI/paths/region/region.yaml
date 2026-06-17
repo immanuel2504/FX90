@@ -1,0 +1,55 @@
+get:
+  tags:
+  - Region
+  summary: Retrieves reader region information
+  description: MQTT API :-  get_region <br> Retrieves reader region (country) information
+  operationId: getRegion
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getRegionResponse
+          examples:
+            multiple_values:
+              value:
+                FrequencyHopping: true
+                channelData:
+                - 915250
+                - 915750
+                - 903250
+                - 926750
+                country: Canada
+                lbtEnabled: false
+                maxTxPowerSupported: 300
+                minTxPowerSupported: 100
+                region: US
+                regulatoryStandard: FCC
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Region
+  summary: Update region information
+  description: MQTT API :-  set_region <br> Updates the reader region information
+  operationId: setRegion
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setRegionRequest
+        examples:
+          set_region:
+            value:
+              country: Canada
+              standardname: CANADA_FCC_15
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setRegionResponse
+  security:
+  - bearerAuth: []

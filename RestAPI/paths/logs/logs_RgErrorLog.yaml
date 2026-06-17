@@ -1,0 +1,14 @@
+get:
+  tags:
+  - Logs
+  summary: Retrieve RgErrorLog
+  description: MQTT API :-  get_logs_rgErrorLog <br> Retrieves the RgErrorLog from the reader.
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/get_logs_RgErrorLogResponse
+  security:
+  - bearerAuth: []

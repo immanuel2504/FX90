@@ -1,0 +1,51 @@
+get:
+  tags:
+  - Stack-led
+  summary: Retrieves stack LED state
+  description: MQTT API :-  get_stackled <br> Retrieves the current status, color, brightness, and remaining time of the stack LED
+  operationId: getStackled
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getStackledResponse
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Stack-led
+  summary: Updates stack LED state
+  description: 'MQTT API :-  set_stackled <br> Updates the stack LED state on the reader to the state specified. <br><br> Supported Colors: red, amber, green, blue, off <br> Supported Brightness: low, med, high (Defaults to low)'
+  operationId: setStackled
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setStackledRequest
+        examples:
+          red_high_alert:
+            summary: Color:Red, Brightness:High, Flashing
+            description: The LED will blink bright red for 30 seconds.
+            value:
+              color: red
+              brightness: high
+              flash: true
+              seconds: 30
+          green_solid:
+            summary: Color:Green, Brightness:Low(Default), Solid
+            description: The LED will stay solid green indefinitely.
+            value:
+              color: green
+              flash: false
+              seconds: 0
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setStackledResponse
+  security:
+  - bearerAuth: []

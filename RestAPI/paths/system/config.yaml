@@ -1,0 +1,486 @@
+get:
+  tags:
+  - System
+  summary: Retrieves reader configuration
+  description: MQTT API :-  get_config <br> Retrieves reader configuration
+  operationId: getConfig
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getConfigResponse
+          example:
+            GPIO-LED: NOT_CONFIGURED
+            READER-GATEWAY:
+              batching:
+              - maxPayloadSizePerReport: 0
+                reportingInterval: 0
+              endpointConfig:
+                control:
+                  commandResponse:
+                    enableLocalRest: true
+                data:
+                  batching:
+                    maxPayloadSizePerReport: 0
+                    reportingInterval: 0
+                  event:
+                    connections:
+                    - additionalOptions:
+                        batching:
+                          maxPayloadSizePerReport: 0
+                          reportingInterval: 0
+                        retention:
+                          maxEventRetentionTimeInMin: 0
+                          maxNumEvents: 0
+                          throttle: 1
+                      description: WEBSOCKET_TEST
+                      name: WEBSOCKET_TEST
+                      options:
+                        security:
+                          verifyPeer: false
+                      type: WEBSOCKET
+                  retention:
+                    maxEventRetentionTimeInMin: 0
+                    maxNumEvents: 0
+                    throttle: 1
+                management:
+                  commandResponse:
+                    enableLocalRest: true
+                  event:
+                    connections:
+                    - additionalOptions:
+                        retention:
+                          maxEventRetentionTimeInMin: 500
+                          maxNumEvents: 150000
+                          throttle: 100
+                      description: WEBSOCKET_TEST
+                      name: WEBSOCKET_TEST
+                      options:
+                        security:
+                          verifyPeer: false
+                      type: WEBSOCKET
+              managementEventConfig:
+                errors:
+                  antenna: false
+                  cpu:
+                    reportIntervalInSec: 1800
+                    threshold: 90
+                  database: true
+                  flash:
+                    reportIntervalInSec: 1800
+                    threshold: 90
+                  ntp: true
+                  radio: true
+                  radio_control: false
+                  ram:
+                    reportIntervalInSec: 1800
+                    threshold: 90
+                  reader_gateway: true
+                  userApp:
+                    reportIntervalInSec: 1800
+                    threshold: 120
+                gpiEvents: true
+                gpoEvents: true
+                heartbeat:
+                  fields:
+                    radio_control:
+                    - ANTENNAS
+                    - RADIO_ACTIVITY
+                    - RADIO_CONNECTION
+                    - CPU
+                    - RAM
+                    - UPTIME
+                    - NUM_ERRORS
+                    - NUM_WARNINGS
+                    - NUM_TAG_READS
+                    - NUM_TAG_READS_PER_ANTENNA
+                    - NUM_DATA_MESSAGES_TXED
+                    - NUM_RADIO_PACKETS_RXED
+                    reader_gateway:
+                    - NUM_DATA_MESSAGES_RXED
+                    - NUM_MANAGEMENT_EVENTS_TXED
+                    - NUM_DATA_MESSAGES_TXED
+                    - NUM_DATA_MESSAGES_RETAINED
+                    - NUM_DATA_MESSAGES_DROPPED
+                    - CPU
+                    - RAM
+                    - UPTIME
+                    - NUM_ERRORS
+                    - NUM_WARNINGS
+                    - INTERFACE_CONNECTION_STATUS
+                    - NOLOCKQ_DEPTH
+                    system:
+                    - CPU
+                    - FLASH
+                    - NTP
+                    - RAM
+                    - SYSTEMTIME
+                    - TEMPERATURE
+                    - UPTIME
+                    - GPO
+                    - GPI
+                    - POWER_NEGOTIATION
+                    - POWER_SOURCE
+                    - MAC_ADDRESS
+                    - HOSTNAME
+                    userDefined: null
+                    userapps:
+                    - STATUS
+                    - CPU
+                    - RAM
+                    - UPTIME
+                    - NUM_DATA_MESSAGES_RXED
+                    - NUM_DATA_MESSAGES_TXED
+                    - INCOMING_DATA_BUFFER_PERCENTAGE_REMAINING
+                    - OUTGOING_DATA_BUFFER_PERCENTAGE_REMAINING
+                  interval: 10
+                userappEvents: true
+                warnings:
+                  cpu:
+                    reportIntervalInSec: 1800
+                    threshold: 80
+                  database: true
+                  flash:
+                    reportIntervalInSec: 1800
+                    threshold: 80
+                  ntp: true
+                  radio_api: true
+                  radio_control: true
+                  ram:
+                    reportIntervalInSec: 1800
+                    threshold: 80
+                  reader_gateway: true
+                  temperature:
+                    ambient: 75
+                    pa: 105
+                  userApp:
+                    reportIntervalInSec: 1800
+                    threshold: 60
+              retention:
+              - maxEventRetentionTimeInMin: -1
+                maxNumEvents: 0
+                throttle: 500
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - System
+  summary: Updates reader configuration
+  description: 'MQTT API :- set_config <br> Updates reader configuration. Accepts one or more of the following top-level keys: **xml** (string) - raw XML reader config; **GPIO-LED** (object) - GPIO and LED event-action configuration; **READER-GATEWAY** (object) - cloud gateway configuration accepting at least one of: endpointConfig (data endpoint configuration only - control/management endpoints are not configurable here; use /cloud/cloudConfig for that), batching (global batching settings for data events), retention (global retention settings for data events), managementEventConfig (asynchronous management events, heartbeat, warnings, errors configuration).'
+  operationId: setConfigMqtt
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setConfigMqttRequest
+        examples:
+          set_config_data_mqtt_async:
+            value:
+              READER-GATEWAY:
+                endpointConfig:
+                  data:
+                    event:
+                      connections:
+                      - additionalOptions:
+                          batching: null
+                          retention:
+                            maxEventRetentionTimeInMin: 500
+                            maxNumEvents: 150000
+                            throttle: 500
+                        description: MQTT_TEST
+                        name: MQTT_TEST
+                        options:
+                          additional:
+                            cleanSession: true
+                            clientId: EV1
+                            debug: false
+                            keepAlive: 60
+                            qos: 0
+                            reconnectDelay: 1
+                            reconnectDelayMax: 5
+                          enableSecurity: false
+                          endpoint:
+                            hostName: 10.117.229.9
+                            port: 1883
+                            protocol: tcp
+                          publishTopic:
+                          - tagevents_r2c_longrun
+                          security:
+                            CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+                            installedCertificateName: Server
+                            installedCertificateType: server
+                            keyAlgorithm: RS256
+                            keyFormat: PEM
+                            verifyHostName: false
+                            verifyPeer: false
+                          subscribeTopic: []
+                        type: mqtt
+          set_config_data_aws:
+            value:
+              READER-GATEWAY:
+                endpointConfig:
+                  data:
+                    event:
+                      connections:
+                      - description: AWS
+                        name: AWS_8883
+                        options:
+                          additional:
+                            cleanSession: true
+                            clientId: FXR90F009C9aws
+                            debug: false
+                            keepAlive: 20
+                            qos: 0
+                            reconnectDelay: 1
+                            reconnectDelayMax: 5
+                          enableSecurity: true
+                          endpoint:
+                            hostName: test-ats.iot.us-east-1.amazonaws.com
+                            port: 8883
+                            protocol: ssl
+                          publishTopic:
+                          - datacollection_aws/FXR90F009C9
+                          security:
+                            CACertificateFileLocation: /data/AmazonRootCA1.pem
+                            keyAlgorithm: RS256
+                            keyFormat: PEM
+                            privateKeyFileLocation: /data/aws-pvt.key
+                            publicKeyFileLocation: /data/aws-pub.crt
+                            verifyHostName: true
+                            verifyPeer: true
+                          subscribeTopic: []
+                        type: mqtt-AWS
+          set_config_data_azure_mqtt:
+            value:
+              READER-GATEWAY:
+                endpointConfig:
+                  data:
+                    event:
+                      connections:
+                      - additionalOptions:
+                          batching: null
+                          retention:
+                            maxEventRetentionTimeInMin: 500
+                            maxNumEvents: 150000
+                            throttle: 500
+                        description: MQTT_TEST
+                        name: MQTT_TEST
+                        options:
+                          additional:
+                            cleanSession: true
+                            clientId: EV1
+                            debug: false
+                            keepAlive: 60
+                            qos: 0
+                            reconnectDelay: 1
+                            reconnectDelayMax: 5
+                          enableSecurity: false
+                          endpoint:
+                            hostName: 10.117.229.9
+                            port: 1883
+                            protocol: tcp
+                          publishTopic:
+                          - tagevents_r2c_longrun
+                          security:
+                            CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+                            installedCertificateName: Server
+                            installedCertificateType: server
+                            keyAlgorithm: RS256
+                            keyFormat: PEM
+                            verifyHostName: false
+                            verifyPeer: false
+                          subscribeTopic: []
+                        type: mqtt
+          set_config_data_clear:
+            value:
+              READER-GATEWAY:
+                endpointConfig:
+                  data:
+                    event:
+                      connections: []
+          set_config_data_httpPost:
+            value:
+              READER-GATEWAY:
+                endpointConfig:
+                  data:
+                    event:
+                      connections:
+                      - options:
+                          URL: https://webhook.site/be9d3ddc-c25d-4b87-b4c4-9162f9c75768
+                          security:
+                            authenticationType: NONE
+                            verifyHost: false
+                            verifyPeer: false
+                        type: httpPost
+          set_config_data_mqtt:
+            value:
+              READER-GATEWAY:
+                endpointConfig:
+                  data:
+                    event:
+                      connections:
+                      - additionalOptions:
+                          batching: null
+                          retention:
+                            maxEventRetentionTimeInMin: 500
+                            maxNumEvents: 150000
+                            throttle: 100
+                        description: mqtt_data_public_emqx
+                        name: mqtt_emqx_data
+                        options:
+                          additional:
+                            cleanSession: true
+                            clientId: fxr90-reader
+                            debug: false
+                            keepAlive: 60
+                            qos: 0
+                            reconnectDelay: 1
+                            reconnectDelayMax: 5
+                          enableSecurity: false
+                          endpoint:
+                            hostName: broker.emqx.io
+                            port: 8083
+                            protocol: ws
+                          publishTopic:
+                          - /devices/fxr90-reader/events/data
+                          subscribeTopic: []
+                        type: mqtt
+          set_config_data_tcp_ip:
+            value:
+              READER-GATEWAY:
+                endpointConfig:
+                  data:
+                    event:
+                      connections:
+                      - additionalOptions:
+                          retention:
+                            maxEventRetentionTimeInMin: 500
+                            maxNumEvents: 150000
+                            throttle: 100
+                        description: tag_data_tcp_ip_conn
+                        name: tag_data_tcp_ip
+                        options:
+                          enableSecurity: false
+                          tcpipport: '8081'
+                        type: tcpip-server
+          set_config_data_websocket:
+            value:
+              READER-GATEWAY:
+                endpointConfig:
+                  data:
+                    event:
+                      connections:
+                      - additionalOptions:
+                          retention:
+                            maxEventRetentionTimeInMin: 500
+                            maxNumEvents: 150000
+                            throttle: 100
+                        description: WEBSOCKET_TEST
+                        name: WEBSOCKET_TEST
+                        options:
+                          security:
+                            verifyHost: true
+                            verifyPeer: true
+                        type: WEBSOCKET
+          set_config_global_batching:
+            value:
+              READER-GATEWAY:
+                batching:
+                  maxPayloadSizePerReport: 65536
+                  reportingInterval: 1000
+          set_config_global_retention:
+            value:
+              READER-GATEWAY:
+                retention:
+                  maxEventRetentionTimeInMin: 1440
+                  maxNumEvents: 150000
+                  throttle: 500
+          set_config_management_events:
+            value:
+              READER-GATEWAY:
+                managementEventConfig:
+                  errors:
+                    antenna: true
+                    cpu:
+                      threshold: 90
+                      reportIntervalInSec: 1800
+                    flash:
+                      threshold: 90
+                      reportIntervalInSec: 1800
+                    ram:
+                      threshold: 90
+                      reportIntervalInSec: 1800
+                    radio: true
+                    radio_control: true
+                    reader_gateway: true
+                    database: true
+                  warnings:
+                    cpu:
+                      threshold: 80
+                      reportIntervalInSec: 1800
+                    flash:
+                      threshold: 80
+                      reportIntervalInSec: 1800
+                    ram:
+                      threshold: 80
+                      reportIntervalInSec: 1800
+                    ntp: true
+                    radio_api: true
+                    radio_control: true
+                    reader_gateway: true
+                    temperature:
+                      ambient: 75
+                      pa: 105
+                  gpiEvents: true
+                  userappEvents: true
+                  heartbeat:
+                    interval: 60
+                    fields:
+                      radio_control:
+                      - ANTENNAS
+                      - RADIO_ACTIVITY
+                      - CPU
+                      - RAM
+                      reader_gateway:
+                      - NUM_DATA_MESSAGES_RXED
+                      - NUM_DATA_MESSAGES_TXED
+                      - CPU
+                      - RAM
+                      system:
+                      - CPU
+                      - FLASH
+                      - RAM
+                      - SYSTEMTIME
+                      - TEMPERATURE
+                      - UPTIME
+                      userapps:
+                      - STATUS
+                      - CPU
+                      - RAM
+          set_config_gpio_led:
+            value:
+              GPIO-LED:
+                GPODefaults:
+                  '1': LOW
+                  '2': LOW
+                LEDDefaults:
+                  '1': GREEN
+                RADIO_START:
+                - type: LED
+                  led: 1
+                  color: AMBER
+                RADIO_STOP:
+                - type: LED
+                  led: 1
+                  color: GREEN
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setConfigMqttResponse
+  security:
+  - bearerAuth: []

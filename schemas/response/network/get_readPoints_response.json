@@ -1,0 +1,60 @@
+{
+  "title": "Get Read Points Response",
+  "type": "object",
+  "description": "Returns the list of read points on the reader.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_readPoints"
+      ],
+      "example": "get_readPoints"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "readpoints-get-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "get_readPoints",
+      "command_id": "readpoints-get-001",
+      "response": "success",
+      "payload": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    }
+  ]
+}

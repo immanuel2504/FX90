@@ -1,0 +1,41 @@
+get:
+  tags:
+  - App-led
+  summary: Retrieves application LED state
+  description: MQTT API :-  get_appled <br> Retrieves a value indicating the current state of the application LED
+  operationId: getAppled
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/getAppledResponse
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - App-led
+  summary: Updates application LED state
+  description: MQTT API :-  set_appled <br> Updates the application LED state on the reader to the state specified
+  operationId: setAppled
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../openapi.yaml#/components/schemas/setAppledRequest
+        examples:
+          set_appled:
+            value:
+              color: amber
+              flash: true
+              seconds: 60
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setAppledResponse
+  security:
+  - bearerAuth: []

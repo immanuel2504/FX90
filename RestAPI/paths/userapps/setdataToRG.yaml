@@ -1,0 +1,15 @@
+put:
+  tags:
+  - userapp
+  summary: Set Data to RG
+  description: MQTT API :-  set_dataToRG <br> Sets data to RG.
+  operationId: setDataToRG
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../../openapi.yaml#/components/schemas/setDataToRGResponse
+  security:
+  - bearerAuth: []

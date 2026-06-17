@@ -1,0 +1,31 @@
+type: object
+properties:
+  availableOsUpgrades:
+    type: object
+    description: "A key-value map of available OS upgrade paths for the reader."
+  cloudAgentApplication:
+    type: string
+    description: "The version of the cloud agent application."
+  model:
+    type: string
+    description: "The hardware model identifier of the reader."
+    enum:
+      - FXR90
+      - FX7500
+      - FX9600
+      - ATR7000
+  radioControlApplication:
+    type: string
+    description: "The version of the radio control application."
+  radioFirmware:
+    type: string
+    description: "The version of the firmware running on the radio module."
+  readerApplication:
+    type: string
+    description: "The version of the main reader application software."
+  revertBackFirmware:
+    type: object
+    description: "Details about the firmware version stored for rollback."
+  serialNumber:
+    type: string
+    description: "The unique serial number of the reader device."
