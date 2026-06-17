@@ -12,13 +12,13 @@
       "response": "success",
       "payload": {
         "availableOsUpgrades": {},
-        "cloudAgentApplication": "0.6.2.64",
+        "cloudAgentApplication": "0.6.2.25",
         "model": "FXR90",
-        "radioControlApplication": "0.2.58.7",
-        "radioFirmware": "2.1.69.0",
-        "readerApplication": "4.0.9-13",
+        "radioControlApplication": "0.2.58.6",
+        "radioFirmware": "2.1.57.0",
+        "readerApplication": "2.0.7-5",
         "revertBackFirmware": {},
-        "serialNumber": "25289523070378"
+        "serialNumber": "233575230D0028"
       }
     }
   ],
@@ -55,19 +55,19 @@
     "payload"
   ],
   "x-examples": {
-    "Example 1": {
+    "REST-aligned example": {
       "command": "get_version",
       "command_id": "a12cb5677",
       "response": "success",
       "payload": {
         "availableOsUpgrades": {},
-        "cloudAgentApplication": "0.6.2.64",
+        "cloudAgentApplication": "0.6.2.25",
         "model": "FXR90",
-        "radioControlApplication": "0.2.58.7",
-        "radioFirmware": "2.1.69.0",
-        "readerApplication": "4.0.9-13",
+        "radioControlApplication": "0.2.58.6",
+        "radioFirmware": "2.1.57.0",
+        "readerApplication": "2.0.7-5",
         "revertBackFirmware": {},
-        "serialNumber": "25289523070378"
+        "serialNumber": "233575230D0028"
       }
     }
   }

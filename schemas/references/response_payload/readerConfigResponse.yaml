@@ -13,7 +13,9 @@ properties:
       id: wq6yui50ai2s3
   GPIO-LED:
     title: GPIO-LED configuration
-    type: object
+    oneOf:
+    - type: string
+    - type: object
     description: 'GPIO-LED module configuration
 
 
@@ -3143,7 +3145,11 @@ properties:
     properties:
       retention:
         title: Tag Data Events Retention Configuration
-        type: object
+        oneOf:
+        - type: object
+        - type: array
+          items:
+            type: object
         description: 'Tag Data Events Retention Configuration on connection lost'
         x-stoplight:
           id: i9xfn7z61bs2x
@@ -3185,7 +3191,11 @@ properties:
               id: ld7jqwp8x53ux
       batching:
         title: Tag Data Events batching configuration
-        type: object
+        oneOf:
+        - type: object
+        - type: array
+          items:
+            type: object
         description: Tag Data Events batching configuration
         x-stoplight:
           id: d8cw5u0c9fl8n

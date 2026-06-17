@@ -329,8 +329,15 @@
         },
         "GPIO-LED": {
           "title": "GPIO-LED configuration",
-          "type": "object",
-          "description": "GPIO-LED module configuration\n\nNote : By default, it will be initialized as an empty object.\n\nConfigure GPO and LED behaviour based on Events generated\n\nSupported Events:\n1. GPI_1_L: event raised when GPI 1 changed from HIGH to LOW\n2. GPI_1_H: event raised when GPI 1 changed from LOW to HIGH\n3. GPI_2_L: event raised when GPI 2 changed from HIGH to LOW\n4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH\n5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud\n6. CLOUD_CONNECT: event raised when reader is connected to cloud\n7. TAG_READ: event raised when a tag is read\n8. RADIO_START: event raised when inventory operation started using START API\n9. RADIO_STOP: event raised when inventory operation stopped using STOP API",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "description": "GPIO-LED module configuration\n\nConfigure GPO and LED behaviour based on Events generated\n\nSupported Events:\n1. GPI_1_L: event raised when GPI 1 changed from HIGH to LOW\n2. GPI_1_H: event raised when GPI 1 changed from LOW to HIGH\n3. GPI_2_L: event raised when GPI 2 changed from HIGH to LOW\n4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH\n5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud\n6. CLOUD_CONNECT: event raised when reader is connected to cloud\n7. TAG_READ: event raised when a tag is read\n8. RADIO_START: event raised when inventory operation started using START API\n9. RADIO_STOP: event raised when inventory operation stopped using STOP API",
           "properties": {
             "GPIDebounce": {
               "type": "object",
@@ -2790,8 +2797,18 @@
           "properties": {
             "retention": {
               "title": "Tag Data Events Retention Configuration",
-              "type": "object",
-              "description": "Tag Data Events Retention Configuration on connection lost\n\nNote : Setting \u201cmaxNumEvents\u201d to 0 will disable retention. When retention is enabled, \u201cmaxNumEvents\u201d must be a non-zero positive integer.",
+              "oneOf": [
+                {
+                  "type": "object"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              ],
+              "description": "Tag Data Events Retention Configuration on connection lost",
               "properties": {
                 "throttle": {
                   "type": "integer",
@@ -2821,7 +2838,17 @@
             },
             "batching": {
               "title": "Tag Data Events batching configuration",
-              "type": "object",
+              "oneOf": [
+                {
+                  "type": "object"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              ],
               "description": "Tag Data Events batching configuration\n\nNOTE : Batching can be disabled by configuring maxPayloadSizePerReport and reportingInterval to 0.",
               "properties": {
                 "reportingInterval": {
@@ -3299,7 +3326,7 @@
                         },
                         "userDefined": {
                           "type": "object",
-                          "description": "Custom user defined field\n\nNote : By default, it will be initialized as an empty object."
+                          "description": "Custom user defined field"
                         }
                       }
                     },
@@ -3486,7 +3513,7 @@
                                               "client",
                                               "app"
                                             ],
-                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate"
+                                            "description": "Type of certificate installed on the reader"
                                           }
                                         },
                                         "required": [
@@ -3668,7 +3695,7 @@
                                                     "x-stoplight": {
                                                       "id": "cr44y6hu8w4kr"
                                                     },
-                                                    "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                                    "description": "Type of certificate installed on the reader",
                                                     "enum": [
                                                       "server",
                                                       "client",
@@ -3737,7 +3764,7 @@
                                           },
                                           "installedCertificateType": {
                                             "type": "string",
-                                            "description": "Type of certificate installed on the reader\nNote : select \"server\" as the type to use reader self signed certificate",
+                                            "description": "Type of certificate installed on the reader",
                                             "enum": [
                                               "server",
                                               "client",
@@ -3861,7 +3888,7 @@
                                           "retention": {
                                             "title": "Tag Data Events Retention Configuration",
                                             "type": "object",
-                                            "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting \u201cmaxNumEvents\u201d to 0 will disable retention. When retention is enabled, \u201cmaxNumEvents\u201d must be a non-zero positive integer.",
+                                            "description": "Tag Data Events Retention Configuration on connection lost",
                                             "properties": {
                                               "throttle": {
                                                 "type": "integer",
@@ -4055,7 +4082,7 @@
                                             "x-stoplight": {
                                               "id": "rty6ldmt4op48"
                                             },
-                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                            "description": "Type of certificate installed on the reader",
                                             "enum": [
                                               "server",
                                               "app",
@@ -4239,7 +4266,7 @@
                                             "x-stoplight": {
                                               "id": "temyive12pced"
                                             },
-                                            "description": "Type of certificate installed on the reader\n\nNote : select \"server\" as the type to use reader self signed certificate",
+                                            "description": "Type of certificate installed on the reader",
                                             "enum": [
                                               "server",
                                               "app",
@@ -4300,7 +4327,7 @@
                                   "retention": {
                                     "title": "Tag Data Events Retention Configuration",
                                     "type": "object",
-                                    "description": "Tag Data Events Retention Configuration on connecti\non lost\n\nNote : Setting \u201cmaxNumEvents\u201d to 0 will disable retention. When retention is enabled, \u201cmaxNumEvents\u201d must be a non-zero positive integer.",
+                                    "description": "Tag Data Events Retention Configuration on connection lost",
                                     "properties": {
                                       "throttle": {
                                         "type": "integer",
@@ -4348,5 +4375,471 @@
     "command",
     "command_id",
     "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "endpointConfig": {
+            "data": {
+              "event": {
+                "connections": [
+                  {
+                    "additionalOptions": {
+                      "batching": null,
+                      "retention": {
+                        "maxEventRetentionTimeInMin": 500,
+                        "maxNumEvents": 150000,
+                        "throttle": 500
+                      }
+                    },
+                    "description": "MQTT_TEST",
+                    "name": "MQTT_TEST",
+                    "options": {
+                      "additional": {
+                        "cleanSession": true,
+                        "clientId": "EV1",
+                        "debug": false,
+                        "keepAlive": 60,
+                        "qos": 0,
+                        "reconnectDelay": 1,
+                        "reconnectDelayMax": 5
+                      },
+                      "enableSecurity": false,
+                      "endpoint": {
+                        "hostName": "10.117.229.9",
+                        "port": 1883,
+                        "protocol": "tcp"
+                      },
+                      "publishTopic": [
+                        "tagevents_r2c_longrun"
+                      ],
+                      "security": {
+                        "CACertificateFileLocation": "/home/root/broker.emqx.io-ca.crt",
+                        "installedCertificateName": "Server",
+                        "installedCertificateType": "server",
+                        "keyAlgorithm": "RS256",
+                        "keyFormat": "PEM",
+                        "verifyHostName": false,
+                        "verifyPeer": false
+                      },
+                      "subscribeTopic": []
+                    },
+                    "type": "mqtt"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "endpointConfig": {
+            "data": {
+              "event": {
+                "connections": [
+                  {
+                    "description": "AWS",
+                    "name": "AWS_8883",
+                    "options": {
+                      "additional": {
+                        "cleanSession": true,
+                        "clientId": "FXR90F009C9aws",
+                        "debug": false,
+                        "keepAlive": 20,
+                        "qos": 0,
+                        "reconnectDelay": 1,
+                        "reconnectDelayMax": 5
+                      },
+                      "enableSecurity": true,
+                      "endpoint": {
+                        "hostName": "test-ats.iot.us-east-1.amazonaws.com",
+                        "port": 8883,
+                        "protocol": "ssl"
+                      },
+                      "publishTopic": [
+                        "datacollection_aws/FXR90F009C9"
+                      ],
+                      "security": {
+                        "CACertificateFileLocation": "/data/AmazonRootCA1.pem",
+                        "keyAlgorithm": "RS256",
+                        "keyFormat": "PEM",
+                        "privateKeyFileLocation": "/data/aws-pvt.key",
+                        "publicKeyFileLocation": "/data/aws-pub.crt",
+                        "verifyHostName": true,
+                        "verifyPeer": true
+                      },
+                      "subscribeTopic": []
+                    },
+                    "type": "mqtt-AWS"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "endpointConfig": {
+            "data": {
+              "event": {
+                "connections": [
+                  {
+                    "additionalOptions": {
+                      "batching": null,
+                      "retention": {
+                        "maxEventRetentionTimeInMin": 500,
+                        "maxNumEvents": 150000,
+                        "throttle": 500
+                      }
+                    },
+                    "description": "MQTT_TEST",
+                    "name": "MQTT_TEST",
+                    "options": {
+                      "additional": {
+                        "cleanSession": true,
+                        "clientId": "EV1",
+                        "debug": false,
+                        "keepAlive": 60,
+                        "qos": 0,
+                        "reconnectDelay": 1,
+                        "reconnectDelayMax": 5
+                      },
+                      "enableSecurity": false,
+                      "endpoint": {
+                        "hostName": "10.117.229.9",
+                        "port": 1883,
+                        "protocol": "tcp"
+                      },
+                      "publishTopic": [
+                        "tagevents_r2c_longrun"
+                      ],
+                      "security": {
+                        "CACertificateFileLocation": "/home/root/broker.emqx.io-ca.crt",
+                        "installedCertificateName": "Server",
+                        "installedCertificateType": "server",
+                        "keyAlgorithm": "RS256",
+                        "keyFormat": "PEM",
+                        "verifyHostName": false,
+                        "verifyPeer": false
+                      },
+                      "subscribeTopic": []
+                    },
+                    "type": "mqtt"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "endpointConfig": {
+            "data": {
+              "event": {
+                "connections": []
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "endpointConfig": {
+            "data": {
+              "event": {
+                "connections": [
+                  {
+                    "options": {
+                      "URL": "https://webhook.site/be9d3ddc-c25d-4b87-b4c4-9162f9c75768",
+                      "security": {
+                        "authenticationType": "NONE",
+                        "verifyHost": false,
+                        "verifyPeer": false
+                      }
+                    },
+                    "type": "httpPost"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "endpointConfig": {
+            "data": {
+              "event": {
+                "connections": [
+                  {
+                    "additionalOptions": {
+                      "batching": null,
+                      "retention": {
+                        "maxEventRetentionTimeInMin": 500,
+                        "maxNumEvents": 150000,
+                        "throttle": 100
+                      }
+                    },
+                    "description": "mqtt_data_public_emqx",
+                    "name": "mqtt_emqx_data",
+                    "options": {
+                      "additional": {
+                        "cleanSession": true,
+                        "clientId": "fxr90-reader",
+                        "debug": false,
+                        "keepAlive": 60,
+                        "qos": 0,
+                        "reconnectDelay": 1,
+                        "reconnectDelayMax": 5
+                      },
+                      "enableSecurity": false,
+                      "endpoint": {
+                        "hostName": "broker.emqx.io",
+                        "port": 8083,
+                        "protocol": "ws"
+                      },
+                      "publishTopic": [
+                        "/devices/fxr90-reader/events/data"
+                      ],
+                      "subscribeTopic": []
+                    },
+                    "type": "mqtt"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "endpointConfig": {
+            "data": {
+              "event": {
+                "connections": [
+                  {
+                    "additionalOptions": {
+                      "retention": {
+                        "maxEventRetentionTimeInMin": 500,
+                        "maxNumEvents": 150000,
+                        "throttle": 100
+                      }
+                    },
+                    "description": "tag_data_tcp_ip_conn",
+                    "name": "tag_data_tcp_ip",
+                    "options": {
+                      "enableSecurity": false,
+                      "tcpipport": "8081"
+                    },
+                    "type": "tcpip-server"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "endpointConfig": {
+            "data": {
+              "event": {
+                "connections": [
+                  {
+                    "additionalOptions": {
+                      "retention": {
+                        "maxEventRetentionTimeInMin": 500,
+                        "maxNumEvents": 150000,
+                        "throttle": 100
+                      }
+                    },
+                    "description": "WEBSOCKET_TEST",
+                    "name": "WEBSOCKET_TEST",
+                    "options": {
+                      "security": {
+                        "verifyHost": true,
+                        "verifyPeer": true
+                      }
+                    },
+                    "type": "WEBSOCKET"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "batching": {
+            "maxPayloadSizePerReport": 65536,
+            "reportingInterval": 1000
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "retention": {
+            "maxEventRetentionTimeInMin": 1440,
+            "maxNumEvents": 150000,
+            "throttle": 500
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "READER-GATEWAY": {
+          "managementEventConfig": {
+            "errors": {
+              "antenna": true,
+              "cpu": {
+                "threshold": 90,
+                "reportIntervalInSec": 1800
+              },
+              "flash": {
+                "threshold": 90,
+                "reportIntervalInSec": 1800
+              },
+              "ram": {
+                "threshold": 90,
+                "reportIntervalInSec": 1800
+              },
+              "radio": true,
+              "radio_control": true,
+              "reader_gateway": true,
+              "database": true
+            },
+            "warnings": {
+              "cpu": {
+                "threshold": 80,
+                "reportIntervalInSec": 1800
+              },
+              "flash": {
+                "threshold": 80,
+                "reportIntervalInSec": 1800
+              },
+              "ram": {
+                "threshold": 80,
+                "reportIntervalInSec": 1800
+              },
+              "ntp": true,
+              "radio_api": true,
+              "radio_control": true,
+              "reader_gateway": true,
+              "temperature": {
+                "ambient": 75,
+                "pa": 105
+              }
+            },
+            "gpiEvents": true,
+            "userappEvents": true,
+            "heartbeat": {
+              "interval": 60,
+              "fields": {
+                "radio_control": [
+                  "ANTENNAS",
+                  "RADIO_ACTIVITY",
+                  "CPU",
+                  "RAM"
+                ],
+                "reader_gateway": [
+                  "NUM_DATA_MESSAGES_RXED",
+                  "NUM_DATA_MESSAGES_TXED",
+                  "CPU",
+                  "RAM"
+                ],
+                "system": [
+                  "CPU",
+                  "FLASH",
+                  "RAM",
+                  "SYSTEMTIME",
+                  "TEMPERATURE",
+                  "UPTIME"
+                ],
+                "userapps": [
+                  "STATUS",
+                  "CPU",
+                  "RAM"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "command": "set_config",
+      "command_id": "abdc2134",
+      "payload": {
+        "GPIO-LED": {
+          "GPODefaults": {
+            "1": "LOW",
+            "2": "LOW"
+          },
+          "LEDDefaults": {
+            "1": "GREEN"
+          },
+          "RADIO_START": [
+            {
+              "type": "LED",
+              "led": 1,
+              "color": "AMBER"
+            }
+          ],
+          "RADIO_STOP": [
+            {
+              "type": "LED",
+              "led": 1,
+              "color": "GREEN"
+            }
+          ]
+        }
+      }
+    }
   ]
 }

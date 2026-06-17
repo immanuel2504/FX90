@@ -218,7 +218,9 @@ properties:
     description: Current reader XML configuration
   GPIO-LED:
     title: GPIO-LED configuration
-    type: object
+    oneOf:
+    - type: string
+    - type: object
     description: 'GPIO-LED module configuration
 
 
@@ -2708,7 +2710,11 @@ properties:
     properties:
       retention:
         title: Tag Data Events Retention Configuration
-        type: object
+        oneOf:
+        - type: object
+        - type: array
+          items:
+            type: object
         description: 'Tag Data Events Retention Configuration on connection lost'
         properties:
           throttle:
@@ -2742,7 +2748,11 @@ properties:
             maximum: 10080
       batching:
         title: Tag Data Events batching configuration
-        type: object
+        oneOf:
+        - type: object
+        - type: array
+          items:
+            type: object
         description: 'Tag Data Events batching configuration
 
 

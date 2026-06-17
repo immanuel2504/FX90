@@ -30,9 +30,10 @@
     "payload": {
       "oneOf": [
         {
-          "title": "success",
-          "type": "object",
-          "description": "Updates the reader configuration"
+          "title": "Set Config Response Payload",
+          "type": "string",
+          "description": "Empty response payload returned after a successful reader configuration update.",
+          "example": ""
         },
         {
           "title": "failure",
