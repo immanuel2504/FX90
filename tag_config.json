@@ -14,7 +14,8 @@
       "ble"
     ],
     "Control Commands": [
-      "control"
+      "control",
+      "impinjgen2x"
     ],
     "Management Events": [
       "management-events"
@@ -92,8 +93,8 @@
     "autostart_user_app": "userapp",
     "set_req_usr_app": "userapp",
     "set_dataToRG": "userapp",
-    "get_impinjGen2X": "control",
-    "set_impinjGen2X": "control",
+    "get_impinjGen2X": "impinjgen2x",
+    "set_impinjGen2X": "impinjgen2x",
     "set_bleConfig": "ble",
     "get_bleConfig": "ble",
     "async-events": "management-events",
@@ -144,9 +145,7 @@
       "start",
       "stop",
       "get_preSelection",
-      "set_preSelection",
-      "get_impinjGen2X",
-      "set_impinjGen2X"
+      "set_preSelection"
     ],
     "region": [
       "get_region",
@@ -203,6 +202,10 @@
       "set_req_usr_app",
       "set_dataToRG"
     ],
+    "impinjgen2x": [
+      "get_impinjGen2X",
+      "set_impinjGen2X"
+    ],
     "ble": [
       "set_bleConfig",
       "get_bleConfig"
@@ -246,13 +249,6 @@
         "operations": [
           "get_preSelection",
           "set_preSelection"
-        ]
-      },
-      {
-        "name": "Impinj Gen2X",
-        "operations": [
-          "get_impinjGen2X",
-          "set_impinjGen2X"
         ]
       }
     ]
