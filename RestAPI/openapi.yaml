@@ -60,7 +60,7 @@ paths:
   /cloud/pass-through:
     $ref: ./paths/system/pass-through.yaml
   /cloud/cloudConfig:
-    $ref: ./paths/network/cloudConfig.yaml
+    $ref: ./paths/system/cloudConfig.yaml
   /cloud/readerCapabilities:
     $ref: ./paths/system/readerCapabilities.yaml
   /cloud/cableLossCompensation:
