@@ -292,7 +292,8 @@
                                 }
                             },
                             "examples": {
-                                "example1": {
+                                "REST-aligned version response": {
+                                    "description": "Returns reader component version information using the REST version response shape inside the MQTT response payload.",
                                     "value": {
                                         "command": "get_version",
                                         "command_id": "a12cb5677",
@@ -401,7 +402,8 @@
                                     }
                                 },
                                 "examples": {
-                                    "example1": {
+                                    "REST-aligned version response": {
+                                        "description": "Returns reader component version information using the REST version response shape inside the MQTT response payload.",
                                         "value": {
                                             "command": "get_version",
                                             "command_id": "a12cb5677",
@@ -816,7 +818,8 @@
                                     ]
                                 },
                                 "examples": {
-                                    "example1": {
+                                    "REST-aligned status response": {
+                                        "description": "Returns reader operational statistics using the REST status response shape inside the MQTT response payload.",
                                         "value": {
                                             "command": "get_status",
                                             "command_id": "abcd1234",
@@ -1790,7 +1793,8 @@
                                 ]
                             },
                             "examples": {
-                                "example1": {
+                                "REST-aligned configuration": {
+                                    "description": "Returns reader configuration using the REST configuration response shape inside the MQTT response payload.",
                                     "value": {
                                         "command": "get_config",
                                         "command_id": "1a234",
@@ -9490,7 +9494,8 @@
                                     ]
                                 },
                                 "examples": {
-                                    "example1": {
+                                    "REST-aligned configuration": {
+                                        "description": "Returns reader configuration using the REST configuration response shape inside the MQTT response payload.",
                                         "value": {
                                             "command": "get_config",
                                             "command_id": "1a234",
@@ -13719,7 +13724,8 @@
                                 ]
                             },
                             "examples": {
-                                "example1": {
+                                "set_config_data_mqtt_async": {
+                                    "description": "Configures an MQTT data endpoint with async retention and batching options.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -13780,7 +13786,8 @@
                                         }
                                     }
                                 },
-                                "example2": {
+                                "set_config_data_aws": {
+                                    "description": "Configures an AWS IoT MQTT data endpoint with certificate-based security.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -13833,7 +13840,8 @@
                                         }
                                     }
                                 },
-                                "example3": {
+                                "set_config_data_azure_mqtt": {
+                                    "description": "Configures an MQTT data endpoint using the Azure-style MQTT example from the REST reference.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -13894,7 +13902,8 @@
                                         }
                                     }
                                 },
-                                "example4": {
+                                "set_config_data_clear": {
+                                    "description": "Clears all configured data event endpoint connections.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -13911,7 +13920,8 @@
                                         }
                                     }
                                 },
-                                "example5": {
+                                "set_config_data_httpPost": {
+                                    "description": "Configures an HTTP POST data event endpoint.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -13940,7 +13950,8 @@
                                         }
                                     }
                                 },
-                                "example6": {
+                                "set_config_data_mqtt": {
+                                    "description": "Configures a public MQTT data endpoint for tag data publishing.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -13992,7 +14003,8 @@
                                         }
                                     }
                                 },
-                                "example7": {
+                                "set_config_data_tcp_ip": {
+                                    "description": "Configures a TCP/IP server data endpoint.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -14026,7 +14038,8 @@
                                         }
                                     }
                                 },
-                                "example8": {
+                                "set_config_data_websocket": {
+                                    "description": "Configures a WebSocket data event endpoint.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -14062,7 +14075,8 @@
                                         }
                                     }
                                 },
-                                "example9": {
+                                "set_config_global_batching": {
+                                    "description": "Updates global batching settings for data events.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -14076,7 +14090,8 @@
                                         }
                                     }
                                 },
-                                "example10": {
+                                "set_config_global_retention": {
+                                    "description": "Updates global retention settings for retained data events.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -14091,7 +14106,8 @@
                                         }
                                     }
                                 },
-                                "example11": {
+                                "set_config_management_events": {
+                                    "description": "Updates management event, warning, error, and heartbeat settings.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",
@@ -14176,7 +14192,8 @@
                                         }
                                     }
                                 },
-                                "example12": {
+                                "set_config_gpio_led": {
+                                    "description": "Updates GPIO and LED event-action configuration.",
                                     "value": {
                                         "command": "set_config",
                                         "command_id": "abdc2134",

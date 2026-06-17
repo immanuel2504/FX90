@@ -34,6 +34,29 @@
   "Get Cable Loss Compensation": {
     "Get cable loss settings": "Retrieves the current cable loss compensation values for all antenna ports."
   },
+  "Get Status": {
+    "REST-aligned status response": "Returns reader operational statistics using the REST status response shape inside the MQTT response payload."
+  },
+  "Get_Config": {
+    "REST-aligned configuration": "Returns reader configuration using the REST configuration response shape inside the MQTT response payload."
+  },
+  "Get Version": {
+    "REST-aligned version response": "Returns reader component version information using the REST version response shape inside the MQTT response payload."
+  },
+  "Set the Reader Configuration": {
+    "set_config_data_mqtt_async": "Configures an MQTT data endpoint with async retention and batching options.",
+    "set_config_data_aws": "Configures an AWS IoT MQTT data endpoint with certificate-based security.",
+    "set_config_data_azure_mqtt": "Configures an MQTT data endpoint using the Azure-style MQTT example from the REST reference.",
+    "set_config_data_clear": "Clears all configured data event endpoint connections.",
+    "set_config_data_httpPost": "Configures an HTTP POST data event endpoint.",
+    "set_config_data_mqtt": "Configures a public MQTT data endpoint for tag data publishing.",
+    "set_config_data_tcp_ip": "Configures a TCP/IP server data endpoint.",
+    "set_config_data_websocket": "Configures a WebSocket data event endpoint.",
+    "set_config_global_batching": "Updates global batching settings for data events.",
+    "set_config_global_retention": "Updates global retention settings for retained data events.",
+    "set_config_management_events": "Updates management event, warning, error, and heartbeat settings.",
+    "set_config_gpio_led": "Updates GPIO and LED event-action configuration."
+  },
   "Set Cable Loss Compensation": {
     "Set ports 1 and 2 cable loss": "Sets cable length and cable loss per hundred feet for antenna ports 1 and 2.",
     "Set ports 3 and 4 cable loss": "Sets cable length and cable loss per hundred feet for antenna ports 3 and 4."
