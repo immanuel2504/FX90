@@ -33907,10 +33907,218 @@
                                     "description": "Enables the FastID feature on the reader.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-set-001",
+                                        "command_id": "gen2x-fastid-enable-001",
                                         "payload": {
                                             "fastID": {
                                                 "enabled": true
+                                            }
+                                        }
+                                    }
+                                },
+                                "Disable FastID": {
+                                    "description": "Disables the FastID feature on the reader.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-fastid-disable-001",
+                                        "payload": {
+                                            "fastID": {
+                                                "enabled": false
+                                            }
+                                        }
+                                    }
+                                },
+                                "Protect tag": {
+                                    "description": "Enables tag protection for the specified tag using the provided password.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-protect-tag-001",
+                                        "payload": {
+                                            "tagProtect": {
+                                                "action": "enableTagProtection",
+                                                "password": "77777777",
+                                                "tagID": "e2801191a5030069073b426d",
+                                                "enableShortRange": true
+                                            }
+                                        }
+                                    }
+                                },
+                                "Unprotect tag": {
+                                    "description": "Disables tag protection for the specified tag.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-unprotect-tag-001",
+                                        "payload": {
+                                            "tagProtect": {
+                                                "action": "disableTagProtection",
+                                                "password": "77777777",
+                                                "tagID": "e2801191a5030069073b426d"
+                                            }
+                                        }
+                                    }
+                                },
+                                "Enable protect read": {
+                                    "description": "Enables tag visibility protection mode using the provided password.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-enable-protect-read-001",
+                                        "payload": {
+                                            "tagProtect": {
+                                                "action": "enableTagVisibility",
+                                                "password": "77777777"
+                                            }
+                                        }
+                                    }
+                                },
+                                "Disable protect read": {
+                                    "description": "Disables tag visibility protection mode.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-disable-protect-read-001",
+                                        "payload": {
+                                            "tagProtect": {
+                                                "action": "disableTagVisibility",
+                                                "password": "77777777"
+                                            }
+                                        }
+                                    }
+                                },
+                                "Enable TagFocus": {
+                                    "description": "Enables TagFocus mode to improve tag read performance.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-tagfocus-enable-001",
+                                        "payload": {
+                                            "tagFocus": {
+                                                "enabled": true
+                                            }
+                                        }
+                                    }
+                                },
+                                "Disable TagFocus": {
+                                    "description": "Disables TagFocus mode.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-tagfocus-disable-001",
+                                        "payload": {
+                                            "tagFocus": {
+                                                "enabled": false
+                                            }
+                                        }
+                                    }
+                                },
+                                "Quiet tags": {
+                                    "description": "Applies basic quieting to the specified tags to suppress their responses.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-quiet-tags-001",
+                                        "payload": {
+                                            "tagQuieting": {
+                                                "basic": {
+                                                    "action": "quiet",
+                                                    "tagIDs": [
+                                                        "e2801191a5030069073b426d",
+                                                        "e2801191a5030069073b426e"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "Unquiet tags": {
+                                    "description": "Restores the specified tags from quiet state.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-unquiet-tags-001",
+                                        "payload": {
+                                            "tagQuieting": {
+                                                "basic": {
+                                                    "action": "unquiet",
+                                                    "tagIDs": [
+                                                        "e2801191a5030069073b426d"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "Advanced quiet tags": {
+                                    "description": "Applies advanced quieting using preSelect and tagQuietMasks conditions.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-advanced-quiet-001",
+                                        "payload": {
+                                            "tagQuieting": {
+                                                "advanced": {
+                                                    "preSelect": [
+                                                        {
+                                                            "target": "SL",
+                                                            "action": "ASSERTSL_NOTHING",
+                                                            "mask": {
+                                                                "bank": "EPC",
+                                                                "pointer": 32,
+                                                                "length": 96,
+                                                                "value": "E280123456789012345678AB"
+                                                            }
+                                                        },
+                                                        {
+                                                            "target": "S2",
+                                                            "action": "INVB_INVA",
+                                                            "mask": {
+                                                                "bank": "EPC",
+                                                                "pointer": 32,
+                                                                "length": 96,
+                                                                "value": "E280AABBCCDDEEFF11223344"
+                                                            }
+                                                        }
+                                                    ],
+                                                    "tagQuietMasks": [
+                                                        "SL_ASSERT",
+                                                        "S2B"
+                                                    ],
+                                                    "target": "SL",
+                                                    "stateAwareAction": "ASSERTSL_DEASSERTSL"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "Advanced unquiet tags": {
+                                    "description": "Removes advanced quieting and restores tag communication based on defined conditions.",
+                                    "value": {
+                                        "command": "set_impinjGen2X",
+                                        "command_id": "gen2x-advanced-unquiet-001",
+                                        "payload": {
+                                            "tagQuieting": {
+                                                "advanced": {
+                                                    "preSelect": [
+                                                        {
+                                                            "target": "SL",
+                                                            "action": "DEASSERTSL_NOTHING",
+                                                            "mask": {
+                                                                "bank": "EPC",
+                                                                "pointer": 32,
+                                                                "length": 96,
+                                                                "value": "E280123456789012345678AB"
+                                                            }
+                                                        },
+                                                        {
+                                                            "target": "S2",
+                                                            "action": "INVA_INVB",
+                                                            "mask": {
+                                                                "bank": "EPC",
+                                                                "pointer": 32,
+                                                                "length": 96,
+                                                                "value": "E280AABBCCDDEEFF11223344"
+                                                            }
+                                                        }
+                                                    ],
+                                                    "tagQuietMasks": [
+                                                        "SL_DEASSERT",
+                                                        "S2A"
+                                                    ],
+                                                    "target": "SL",
+                                                    "stateAwareAction": "DEASSERTSL_ASSERTSL"
+                                                }
                                             }
                                         }
                                     }

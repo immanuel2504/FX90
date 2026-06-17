@@ -103,10 +103,185 @@
   "examples": [
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-set-001",
+      "command_id": "gen2x-fastid-enable-001",
       "payload": {
         "fastID": {
           "enabled": true
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-fastid-disable-001",
+      "payload": {
+        "fastID": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-protect-tag-001",
+      "payload": {
+        "tagProtect": {
+          "action": "enableTagProtection",
+          "password": "77777777",
+          "tagID": "e2801191a5030069073b426d",
+          "enableShortRange": true
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-unprotect-tag-001",
+      "payload": {
+        "tagProtect": {
+          "action": "disableTagProtection",
+          "password": "77777777",
+          "tagID": "e2801191a5030069073b426d"
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-enable-protect-read-001",
+      "payload": {
+        "tagProtect": {
+          "action": "enableTagVisibility",
+          "password": "77777777"
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-disable-protect-read-001",
+      "payload": {
+        "tagProtect": {
+          "action": "disableTagVisibility",
+          "password": "77777777"
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-tagfocus-enable-001",
+      "payload": {
+        "tagFocus": {
+          "enabled": true
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-tagfocus-disable-001",
+      "payload": {
+        "tagFocus": {
+          "enabled": false
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-quiet-tags-001",
+      "payload": {
+        "tagQuieting": {
+          "basic": {
+            "action": "quiet",
+            "tagIDs": [
+              "e2801191a5030069073b426d",
+              "e2801191a5030069073b426e"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-unquiet-tags-001",
+      "payload": {
+        "tagQuieting": {
+          "basic": {
+            "action": "unquiet",
+            "tagIDs": [
+              "e2801191a5030069073b426d"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-advanced-quiet-001",
+      "payload": {
+        "tagQuieting": {
+          "advanced": {
+            "preSelect": [
+              {
+                "target": "SL",
+                "action": "ASSERTSL_NOTHING",
+                "mask": {
+                  "bank": "EPC",
+                  "pointer": 32,
+                  "length": 96,
+                  "value": "E280123456789012345678AB"
+                }
+              },
+              {
+                "target": "S2",
+                "action": "INVB_INVA",
+                "mask": {
+                  "bank": "EPC",
+                  "pointer": 32,
+                  "length": 96,
+                  "value": "E280AABBCCDDEEFF11223344"
+                }
+              }
+            ],
+            "tagQuietMasks": [
+              "SL_ASSERT",
+              "S2B"
+            ],
+            "target": "SL",
+            "stateAwareAction": "ASSERTSL_DEASSERTSL"
+          }
+        }
+      }
+    },
+    {
+      "command": "set_impinjGen2X",
+      "command_id": "gen2x-advanced-unquiet-001",
+      "payload": {
+        "tagQuieting": {
+          "advanced": {
+            "preSelect": [
+              {
+                "target": "SL",
+                "action": "DEASSERTSL_NOTHING",
+                "mask": {
+                  "bank": "EPC",
+                  "pointer": 32,
+                  "length": 96,
+                  "value": "E280123456789012345678AB"
+                }
+              },
+              {
+                "target": "S2",
+                "action": "INVA_INVB",
+                "mask": {
+                  "bank": "EPC",
+                  "pointer": 32,
+                  "length": 96,
+                  "value": "E280AABBCCDDEEFF11223344"
+                }
+              }
+            ],
+            "tagQuietMasks": [
+              "SL_DEASSERT",
+              "S2A"
+            ],
+            "target": "SL",
+            "stateAwareAction": "DEASSERTSL_ASSERTSL"
+          }
         }
       }
     }
