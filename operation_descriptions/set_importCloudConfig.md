@@ -1,5 +1,3 @@
-# set_importCloudConfig
-
 ## 1. Description
 
 The `set_importCloudConfig` command imports a cloud endpoint configuration onto the reader, defining how tag data, control responses, and management events are delivered.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Cloud Endpoint Configuration Import |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_config](get_config.md), [set_config](set_config.md), [get_certs](get_certs.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Import cloud endpoint configuration |

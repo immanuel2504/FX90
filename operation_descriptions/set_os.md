@@ -1,5 +1,3 @@
-# set_os
-
 ## 1. Description
 
 The `set_os` command updates the reader's operating system firmware from an HTTP(S) URL.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | OS Firmware Update |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_version](get_version.md), [revertback](revertback.md), [get_status](get_status.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Update OS firmware from URL |

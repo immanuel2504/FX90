@@ -1,5 +1,3 @@
-# get_mode
-
 ## 1. Description
 
 The `get_mode` command retrieves the reader's current operating mode and the RF settings associated with that mode.
@@ -18,7 +16,7 @@ No additional payload fields are required to retrieve the active mode.
 |---|---|
 | Pattern Name | Operating Mode Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | set_mode, start, stop, get_config |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active operating mode and RF settings |

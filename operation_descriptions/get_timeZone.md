@@ -1,5 +1,3 @@
-# get_timeZone
-
 ## 1. Description
 
 The `get_timeZone` command retrieves the time zone currently configured on the reader.
@@ -16,7 +14,7 @@ No additional payload fields are required to retrieve the time zone.
 |---|---|
 | Pattern Name | Time Zone Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | set_timeZone, get_ntpServer, get_status |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the configured time zone |

@@ -1,6 +1,93 @@
 {
-  "x-command": "localrest_login",
-  "x-category": "Login",
-  "x-status": "Missing in Response Schema",
-  "description": "Reader Login"
+  "title": "Local REST Login Response",
+  "type": "object",
+  "description": "Returns the login result from the reader.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "localrest_login"
+      ],
+      "example": "localrest_login"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "login-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "number",
+              "example": 0
+            },
+            "message": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        {
+          "title": "failure",
+          "type": "object",
+          "description": "description of the error",
+          "examples": [
+            {
+              "code": 1,
+              "message": "invalid payload for version api. expected empty payload"
+            }
+          ],
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "The error code",
+              "example": 1,
+              "enum": [
+                1,
+                2,
+                3,
+                6,
+                7
+              ]
+            },
+            "message": {
+              "type": "string",
+              "description": "A brief description of the error"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "localrest_login",
+      "command_id": "login-001",
+      "response": "success",
+      "payload": {
+        "code": 0,
+        "message": "string"
+      }
+    }
+  ]
 }

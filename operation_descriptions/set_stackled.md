@@ -1,5 +1,3 @@
-# set_stackled
-
 ## 1. Description
 
 The `set_stackled` command updates the stack LED state on the reader.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Stack LED Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_stackled](get_stackled.md), [set_appled](set_appled.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set stack LED state |
@@ -25,5 +23,3 @@ Use it to:
 ## 3. Before You Begin
 
 Gather stack LED parameters before sending. Exact field names are pending schema publication.
-
-> **Note:** Request and response schemas for this command are not yet available in `Command Schemas.json` / `Response Schemas.json`. Field details will be added when Zebra publishes them.

@@ -1,5 +1,3 @@
-# set_cableLossCompensation
-
 ## 1. Description
 
 The `set_cableLossCompensation` command sets cable loss compensation values on the reader, either globally for all read points or individually per read point.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Cable Loss Compensation Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_cableLossCompensation](get_cableLossCompensation.md), [get_config](get_config.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set cable loss compensation (all or per read point) |
@@ -32,7 +30,6 @@ Gather these details before sending the command. Use either the **All** variant 
 | Cable length | Length of antenna cable (integer; float values accepted). |
 | Cable loss | Loss per hundred feet of cable (integer; float values accepted). |
 
-> **Note:** Cable loss compensation is not applicable to ATR7000 readers.
 
 ## 4. Payload Variants
 

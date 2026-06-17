@@ -1,5 +1,3 @@
-# async-events
-
 ## 1. Description
 
 The `async-events` envelope is the common wrapper for all asynchronous management events the reader publishes to configured management endpoints (`managementEventConfig` in reader configuration).
@@ -22,7 +20,7 @@ Use this event to:
 |---|---|
 | Event Type | Management Event Envelope |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Wraps every asynchronous management event published by the reader |
 | Related Events | heartbeat, firmwareUpdateProgress, gpi, gpo, error, warning, userapp_event |
 | Supported API Versions | V1.0 |

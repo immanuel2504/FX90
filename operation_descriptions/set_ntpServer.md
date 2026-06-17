@@ -1,5 +1,3 @@
-# set_ntpServer
-
 ## 1. Description
 
 The `set_ntpServer` command sets the NTP server used by the reader for time synchronization.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | NTP Server Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_ntpServer](get_ntpServer.md), [set_timeZone](set_timeZone.md), [get_status](get_status.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set the NTP server address |

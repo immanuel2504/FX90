@@ -1,5 +1,3 @@
-# get_rc_log
-
 ## 1. Description
 
 The `get_rc_log` command retrieves the radio-control information log as a downloadable archive.
@@ -17,7 +15,7 @@ No additional payload fields are required to retrieve the radio-control log arch
 |---|---|
 | Pattern Name | Radio-Control Log Retrieval |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | get_rg_error_logs, get_rg_warn_logs, get_logs |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the radio-control information log archive |

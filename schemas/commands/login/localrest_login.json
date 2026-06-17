@@ -1,6 +1,37 @@
 {
-  "x-command": "localrest_login",
-  "x-category": "Login",
-  "x-status": "Missing in Command Schema",
-  "description": "Reader Login"
+  "title": "Local REST Login",
+  "type": "object",
+  "description": "Logs in to the reader. REST uses Basic Auth; the MQTT command has no additional payload fields.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "localrest_login"
+      ],
+      "example": "localrest_login",
+      "description": "The value for the key command must be localrest_login"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "login-001",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "payload": {
+      "type": "object",
+      "description": "An empty object as no additional parameters are required in the command payload.",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "localrest_login",
+      "command_id": "login-001",
+      "payload": {}
+    }
+  ]
 }

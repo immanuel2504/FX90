@@ -1,5 +1,3 @@
-# get_preSelection
-
 ## 1. Description
 
 The `get_preSelection` command returns the rxSawFilter status on the reader.
@@ -15,7 +13,7 @@ Use this command to:
 |---|---|
 | Pattern Name | rxSawFilter Status Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [set_preSelection](set_preSelection.md), [get_mode](get_mode.md) |
 | Required Request Fields | `command`, `command_id` |
 | Supported Operations | Retrieve rxSawFilter status |
@@ -25,5 +23,3 @@ Use this command to:
 ## 3. When to Use This Command
 
 Use `get_preSelection` before `set_preSelection` to confirm the current filter state.
-
-> **Note:** Schemas not yet available in Zebra source files. Field details pending.

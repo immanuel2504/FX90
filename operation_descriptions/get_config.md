@@ -1,5 +1,3 @@
-# get_config
-
 ## 1. Description
 
 The `get_config` command retrieves the reader's full configuration, including RF/XML configuration, GPIO and LED defaults, and reader-gateway endpoint settings.
@@ -18,7 +16,7 @@ No additional payload fields are required to retrieve the full configuration.
 |---|---|
 | Pattern Name | Reader Configuration Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | set_config, set_importCloudConfig, get_status, get_readerCapabilites |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active reader configuration details |

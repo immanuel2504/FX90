@@ -1,5 +1,3 @@
-# get_nameAndDescription
-
 ## 1. Description
 
 The `get_nameAndDescription` command retrieves the human-friendly name and description assigned to the reader.
@@ -17,7 +15,7 @@ No additional payload fields are required to retrieve the name and description.
 |---|---|
 | Pattern Name | Name & Description Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | set_nameAndDescription, get_hostname, get_network |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the reader name and description |

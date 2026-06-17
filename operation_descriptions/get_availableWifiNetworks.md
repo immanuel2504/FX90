@@ -1,5 +1,3 @@
-# get_availableWifiNetworks
-
 ## 1. Description
 
 The `get_availableWifiNetworks` command triggers a Wi-Fi scan and retrieves a list of all visible Wi-Fi networks in the reader's vicinity. 
@@ -18,7 +16,7 @@ No additional payload fields are required in the request to initiate the scan.
 |---|---|
 | Pattern Name | Wi-Fi Site Survey |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | get_networkInterfaces, get_network, set_network |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve visible Wi-Fi networks and local configurations |

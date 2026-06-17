@@ -1,5 +1,3 @@
-# heartbeat
-
 ## 1. Description
 
 The `heartbeat` event provides a periodic health and activity snapshot of the reader for operational monitoring.
@@ -22,7 +20,7 @@ Use this event to:
 |---|---|
 | Event Type | Heartbeat |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Published periodically per `managementEventConfig.heartbeat` configuration |
 | Related Events | async-events, error, warning |
 | Supported API Versions | V1.0 |

@@ -1,5 +1,3 @@
-# set_preSelection
-
 ## 1. Description
 
 The `set_preSelection` command enables or disables the rxSawFilter on the reader.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | rxSawFilter Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_preSelection](get_preSelection.md), [set_mode](set_mode.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Enable or disable rxSawFilter |
@@ -25,5 +23,3 @@ Use it to:
 ## 3. Before You Begin
 
 Confirm the desired rxSawFilter state before sending.
-
-> **Note:** Request and response schemas for this command are not yet available in `Command Schemas.json` / `Response Schemas.json`. Field details will be added when Zebra publishes them.

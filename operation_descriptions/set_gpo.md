@@ -1,5 +1,3 @@
-# set_gpo
-
 ## 1. Description
 
 The `set_gpo` command sets the output state of a general-purpose output (GPO) pin on the reader.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | GPO Control |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_gpostatus](get_gpostatus.md), [get_gpi_status](get_gpi_status.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set a single GPO pin state |

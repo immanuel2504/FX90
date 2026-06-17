@@ -13,7 +13,7 @@ No additional payload fields are required to retrieve the full version set. The 
 |---|---|
 | Pattern Name | Version Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FXR90, FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | get_status, get_readerCapabilites, set_os, revertback |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve firmware, model, serial number, and upgrade details |
@@ -34,7 +34,7 @@ Key fields to check in the response payload:
 |---|---|---|
 | `readerApplication` | Current reader software version | Determines feature and REST/MQTT API availability |
 | `radioFirmware` | Firmware running on the radio module | Affects RF behavior, read performance, and compatibility |
-| `model` | Reader model (FXR90 / FX7500 / FX9600 / ATR7000) | Drives physical capabilities and model-specific configurations |
+| `model` | Reader model (FXR90) | Drives physical capabilities and model-specific configurations |
 | `serialNumber` | Unique reader serial number | Identifies the device for support and asset records |
 | `availableOsUpgrades` | Whether the object is empty `{}` or populated | Indicates if an OS upgrade path is ready to be installed |
 

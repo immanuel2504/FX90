@@ -1,5 +1,3 @@
-# set_req_usr_app
-
 ## 1. Description
 
 The `set_req_usr_app` command sends a custom request or data payload to a user application running on the reader.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | User Application Request |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_user_apps](get_user_apps.md), [start_user_app](start_user_app.md), [stop_user_app](stop_user_app.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Send request to a user application |

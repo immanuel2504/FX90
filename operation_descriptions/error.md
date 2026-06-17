@@ -1,5 +1,3 @@
-# error
-
 ## 1. Description
 
 The `error` event reports an error-level diagnostic message from the reader's Reader Gateway (RG) or Radio Control (RC) subsystems.
@@ -20,7 +18,7 @@ Use this event to:
 |---|---|
 | Event Type | Error |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Published when a monitored error condition occurs (per `managementEventConfig.errors`) |
 | Related Events | async-events, warning, heartbeat |
 | Supported API Versions | V1.0 |

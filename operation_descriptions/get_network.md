@@ -1,5 +1,3 @@
-# get_network
-
 ## 1. Description
 
 The `get_network` command retrieves the reader's network configuration across its interfaces.
@@ -18,7 +16,7 @@ No additional payload fields are required to retrieve the full network configura
 |---|---|
 | Pattern Name | Network Configuration Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | set_network, get_hostname, get_networkInterfaces |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active network configuration |

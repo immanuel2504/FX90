@@ -1,5 +1,3 @@
-# zoneHistory
-
 ## 1. Description
 
 The `zoneHistory` payload records the sequence of zones a tag traversed before timing out in directionality mode.
@@ -20,7 +18,7 @@ Use this event to:
 |---|---|
 | Event Type | Zone History (embedded) |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Included in `directionality_tag_data_events` on `TIMED_OUT` when `report_zone_history` is enabled |
 | Related Events | directionality_tag_data_events, locationHistory |
 | Supported API Versions | V1.0 |

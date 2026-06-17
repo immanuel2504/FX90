@@ -1,5 +1,3 @@
-# set_mode
-
 ## 1. Description
 
 The `set_mode` command configures the reader's operating mode and the RF settings associated with that mode.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Operating Mode Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_mode](get_mode.md), [start](start.md), [stop](stop.md), [get_config](get_config.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Configure operating mode and RF parameters |

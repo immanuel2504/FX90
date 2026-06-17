@@ -1,5 +1,3 @@
-# set_installCACertificate
-
 ## 1. Description
 
 The `set_installCACertificate` command installs a CA (Certificate Authority) root certificate on the reader.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | CA Certificate Installation |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_CACertificates](get_CACertificates.md), [del_CACertificate](del_CACertificate.md), [set_update_cert](set_update_cert.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Install a CA root certificate |

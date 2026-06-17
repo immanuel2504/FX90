@@ -1550,7 +1550,6 @@ function renderOperation(path, method, op) {
      '<div class="op-title-bar">' +
        '<div class="op-title-wrap">' +
          '<h3 class="op-title">' + escHtml(summary) + '</h3>' +
-         '<code class="op-mqtt-path" title="MQTT command key">' + escHtml(path) + '</code>' +
        '</div>' +
        '<button class="pdf-btn" data-op-id="' + id + '">⬇ Download PDF</button>' +
      '</div>' +

@@ -1,6 +1,63 @@
 {
-  "x-command": "localrest_login",
-  "x-category": "Login",
-  "x-status": "Missing in Response Schema",
-  "description": "Reader Login"
+  "title": "Local REST Login Response",
+  "type": "object",
+  "description": "Returns the login result from the reader.",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "localrest_login"
+      ],
+      "example": "localrest_login"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "login-001"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "number",
+              "example": 0
+            },
+            "message": {
+              "type": "string",
+              "example": "string"
+            }
+          }
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id",
+    "response",
+    "payload"
+  ],
+  "examples": [
+    {
+      "command": "localrest_login",
+      "command_id": "login-001",
+      "response": "success",
+      "payload": {
+        "code": 0,
+        "message": "string"
+      }
+    }
+  ]
 }

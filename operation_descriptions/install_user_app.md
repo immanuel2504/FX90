@@ -1,5 +1,3 @@
-# install_user_app
-
 ## Description
 
 The `install_user_app` command installs a user application (`.deb` package) on the reader from an HTTP(S) file server.
@@ -16,7 +14,7 @@ Use this command to:
 |---|---|
 | Pattern Name | User Application Installation |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_user_apps](get_user_apps.md), [uninstall-user-app](uninstall-user-app.md), [start_user_app](start_user_app.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Authentication Types | `NONE`, `BASIC` |

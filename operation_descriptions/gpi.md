@@ -1,5 +1,3 @@
-# gpi
-
 ## 1. Description
 
 The `gpi` event reports a change in the state of a general-purpose input (GPI) pin.
@@ -21,7 +19,7 @@ Use this event to:
 |---|---|
 | Event Type | GPI |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Published when a GPI pin changes state (enable via `managementEventConfig.gpiEvents`) |
 | Related Events | async-events, gpo |
 | Supported API Versions | V1.0 |

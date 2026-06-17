@@ -1,5 +1,3 @@
-# refresh-cert
-
 ## Description
 
 The `refresh-cert` command refreshes an already-installed certificate on the reader by re-fetching or re-applying it from its configured source.
@@ -16,7 +14,7 @@ Use this command to:
 |---|---|
 | Pattern Name | Certificate Refresh |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_certs](get_certs.md), [set_update_cert](set_update_cert.md), [del_certs](del_certs.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Certificate Types | `client`, `server`, `app` |

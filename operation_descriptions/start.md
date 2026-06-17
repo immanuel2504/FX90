@@ -1,5 +1,3 @@
-# start
-
 ## Description
 
 The `start` command begins RFID tag reads (or BLE scan) on the reader using the currently configured operating mode.
@@ -21,7 +19,7 @@ Use this command to:
 |---|---|
 | Pattern Name | RFID Read Control — Start |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [stop](stop.md), [get_mode](get_mode.md), [set_mode](set_mode.md), [get_status](get_status.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Start tag reads |

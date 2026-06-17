@@ -1,5 +1,3 @@
-# set_network
-
 ## 1. Description
 
 The `set_network` command configures the reader's network identity and IP settings (DHCP or static).
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Network Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_network](get_network.md), [set_hostname](set_hostname.md), [get_hostname](get_hostname.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Configure network addressing |

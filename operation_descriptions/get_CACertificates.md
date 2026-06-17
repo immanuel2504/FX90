@@ -1,5 +1,3 @@
-# get_CACertificates
-
 ## 1. Description
 
 The `get_CACertificates` command lists CA certificates installed on the reader.
@@ -16,7 +14,7 @@ Use this command to:
 |---|---|
 | Pattern Name | CA Certificate Inventory Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [set_installCACertificate](set_installCACertificate.md), [del_CACertificate](del_CACertificate.md) |
 | Required Request Fields | `command`, `command_id` |
 | Supported Operations | List installed CA certificates |

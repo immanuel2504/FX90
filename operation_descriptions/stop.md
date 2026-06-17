@@ -1,5 +1,3 @@
-# stop
-
 ## Description
 
 The `stop` command halts active RFID tag reads (or BLE scan) on the reader.
@@ -16,7 +14,7 @@ Use this command to:
 |---|---|
 | Pattern Name | RFID Read Control — Stop |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [start](start.md), [get_mode](get_mode.md), [get_status](get_status.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Stop tag reads |

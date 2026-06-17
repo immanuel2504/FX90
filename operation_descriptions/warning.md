@@ -1,5 +1,3 @@
-# warning
-
 ## 1. Description
 
 The `warning` event reports a warning-level diagnostic message from the reader's Reader Gateway (RG) or Radio subsystems.
@@ -20,7 +18,7 @@ Use this event to:
 |---|---|
 | Event Type | Warning |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Published when a monitored warning condition occurs (per `managementEventConfig.warnings`) |
 | Related Events | async-events, error, heartbeat |
 | Supported API Versions | V1.0 |

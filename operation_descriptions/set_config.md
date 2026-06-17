@@ -1,5 +1,3 @@
-# set_config
-
 ## 1. Description
 
 The `set_config` command updates the reader's full configuration, including RF/XML settings, GPIO and LED defaults, and reader-gateway endpoint configuration.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Reader Configuration Update |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_config](get_config.md), [set_importCloudConfig](set_importCloudConfig.md), [get_status](get_status.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Update reader configuration |

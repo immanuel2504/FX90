@@ -1,5 +1,3 @@
-# tagDataEvents
-
 ## 1. Description
 
 The `tagDataEvents` envelope is the common wrapper for all RFID tag read payloads the reader publishes to configured data endpoints.
@@ -21,7 +19,7 @@ Use this event to:
 |---|---|
 | Event Type | Tag Data Event Envelope |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Published when the reader reports tag reads during an active operating mode |
 | Related Events | mode_tag_data_events, directionality_tag_data_events |
 | Supported API Versions | V1.0 |

@@ -1,5 +1,3 @@
-# set_appled
-
 ## 1. Description
 
 The `set_appled` command sets the color, duration, and flash behavior of the application LED on the reader.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Application LED Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_appled](get_appled.md), [set_stackled](set_stackled.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set application LED state |

@@ -1,5 +1,3 @@
-# set_update_cert
-
 ## 1. Description
 
 The `set_update_cert` command installs or updates a certificate on the reader, fetched from an FTPS URL or supplied inline as PFX content.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Certificate Installation |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_certs](get_certs.md), [del_certs](del_certs.md), [refresh-cert](refresh-cert.md), [set_installCACertificate](set_installCACertificate.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Install or update a certificate |

@@ -1,5 +1,3 @@
-# set_hostname
-
 ## 1. Description
 
 The `set_hostname` command sets the network hostname of the reader.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Hostname Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_hostname](get_hostname.md), [set_network](set_network.md), [get_network](get_network.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set the reader hostname |

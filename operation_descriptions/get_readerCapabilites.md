@@ -1,5 +1,3 @@
-# get_readerCapabilites
-
 ## 1. Description
 
 The `get_readerCapabilites` command retrieves the static hardware and software capabilities of the reader.
@@ -18,7 +16,7 @@ No additional payload fields are required to retrieve the capability set.
 |---|---|
 | Pattern Name | Reader Capability Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | get_version, get_status, get_config |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve static reader capabilities |

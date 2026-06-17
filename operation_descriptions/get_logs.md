@@ -1,5 +1,3 @@
-# get_logs
-
 ## 1. Description
 
 The `get_logs` command retrieves the reader's current log configuration, including per-component log levels.
@@ -17,7 +15,7 @@ No additional payload fields are required to retrieve the log configuration.
 |---|---|
 | Pattern Name | Log Configuration Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | set_logs, get_logs_syslog, get_radio_pkt_logs |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current logging configuration |

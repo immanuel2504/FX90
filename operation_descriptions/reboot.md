@@ -1,5 +1,3 @@
-# reboot
-
 ## Description
 
 The `reboot` command restarts the reader. All in-progress operations stop and the reader briefly disconnects from MQTT.
@@ -16,7 +14,7 @@ Use this command to:
 |---|---|
 | Pattern Name | Reader Restart |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_status](get_status.md), [get_version](get_version.md), [set_os](set_os.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Restart the reader |

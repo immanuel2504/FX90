@@ -1,5 +1,3 @@
-# userapp_event
-
 ## 1. Description
 
 The `userapp_event` event delivers asynchronous custom events emitted by a user application running on the reader.
@@ -20,7 +18,7 @@ Use this event to:
 |---|---|
 | Event Type | Userapp Event |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Published when a user application emits a custom event (enable via `userappEvents`) |
 | Related Events | async-events, heartbeat |
 | Supported API Versions | V1.0 |

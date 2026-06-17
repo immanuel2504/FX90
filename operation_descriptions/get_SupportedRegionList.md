@@ -1,5 +1,3 @@
-# get_SupportedRegionList
-
 ## 1. Description
 
 The `get_SupportedRegionList` command retrieves the list of RF regions this reader is permitted to operate in.
@@ -16,7 +14,7 @@ No additional payload fields are required to retrieve the supported region list.
 |---|---|
 | Pattern Name | Supported Region Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | get_region, set_region, get_SupportedStandardlist |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve permitted RF regions for this reader |

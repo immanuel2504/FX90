@@ -1,5 +1,3 @@
-# get_user_apps
-
 ## 1. Description
 
 The `get_user_apps` command retrieves the list of user applications installed on the reader.
@@ -16,7 +14,7 @@ No additional payload fields are required to retrieve all installed user apps.
 |---|---|
 | Pattern Name | User Application Inventory Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | install_user_app, uninstall-user-app, start_user_app, stop_user_app, autostart_user_app |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the list of installed user applications |

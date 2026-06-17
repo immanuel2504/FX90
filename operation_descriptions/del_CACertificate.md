@@ -1,5 +1,3 @@
-# del_CACertificate
-
 ## Description
 
 The `del_CACertificate` command removes an installed CA (Certificate Authority) root certificate from the reader.
@@ -16,7 +14,7 @@ Use this command to:
 |---|---|
 | Pattern Name | CA Certificate Deletion |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_CACertificates](get_CACertificates.md), [set_installCACertificate](set_installCACertificate.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported API Versions | V1.0 |

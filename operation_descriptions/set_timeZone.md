@@ -1,5 +1,3 @@
-# set_timeZone
-
 ## 1. Description
 
 The `set_timeZone` command sets the time zone on the reader.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Time Zone Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_timeZone](get_timeZone.md), [set_ntpServer](set_ntpServer.md), [get_status](get_status.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set the reader time zone |

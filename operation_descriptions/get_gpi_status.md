@@ -1,5 +1,3 @@
-# get_gpi_status
-
 ## 1. Description
 
 The `get_gpi_status` command retrieves the current state of each general-purpose input (GPI) pin on the reader.
@@ -16,7 +14,7 @@ No additional payload fields are required to retrieve all pin states.
 |---|---|
 | Pattern Name | GPI Status Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | get_gpostatus, set_gpo, get_readerCapabilites |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current GPI pin states |

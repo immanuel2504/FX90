@@ -1,5 +1,3 @@
-# set_password
-
 ## 1. Description
 
 The `set_password` command changes the password on the reader.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Password Change |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [localrest_login](localrest_login.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Change reader password |
@@ -27,5 +25,3 @@ Use it to:
 ## 3. Before You Begin
 
 Gather the current and new password values before sending. A failed change may lock you out if the old password is incorrect.
-
-> **Note:** Request and response schemas for this command are not yet available in `Command Schemas.json` / `Response Schemas.json`. Field details will be added when Zebra publishes them.

@@ -1,5 +1,3 @@
-# firmwareUpdateProgress
-
 ## 1. Description
 
 The `firmwareUpdateProgress` event reports the status and progress of an in-flight firmware update.
@@ -22,7 +20,7 @@ Use this event to:
 |---|---|
 | Event Type | Firmware Update Progress |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Published while a firmware update is in progress, on status/progress changes |
 | Related Events | async-events, error |
 | Supported API Versions | V1.0 |

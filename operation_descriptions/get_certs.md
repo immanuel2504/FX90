@@ -1,5 +1,3 @@
-# get_certs
-
 ## 1. Description
 
 The `get_certs` command retrieves the list of certificates installed on the reader.
@@ -16,7 +14,7 @@ No additional payload fields are required to retrieve all installed certificates
 |---|---|
 | Pattern Name | Certificate Inventory Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | set_update_cert, del_certs, refresh-cert, get_CACertificates |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the list of installed certificates |

@@ -1,5 +1,3 @@
-# mode_tag_data_events
-
 ## 1. Description
 
 The `mode_tag_data_events` payload carries RFID tag read data during SIMPLE, INVENTORY, PORTAL, CONVEYOR, or CUSTOM operating modes.
@@ -21,7 +19,7 @@ Use this event to:
 |---|---|
 | Event Type | Mode Tag Data |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Published when a tag is inventoried/reported in a non-directionality mode |
 | Related Events | tagDataEvents, directionality_tag_data_events |
 | Supported API Versions | V1.0 |

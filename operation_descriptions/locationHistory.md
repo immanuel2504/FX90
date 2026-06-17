@@ -1,5 +1,3 @@
-# locationHistory
-
 ## 1. Description
 
 The `locationHistory` payload records estimated x/y location points for a tag before it timed out in directionality mode.
@@ -20,7 +18,7 @@ Use this event to:
 |---|---|
 | Event Type | Location History (embedded) |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Included in `directionality_tag_data_events` on `TIMED_OUT` when `report_location_history` is enabled |
 | Related Events | directionality_tag_data_events, zoneHistory |
 | Supported API Versions | V1.0 |

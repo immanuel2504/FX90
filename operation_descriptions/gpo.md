@@ -1,5 +1,3 @@
-# gpo
-
 ## 1. Description
 
 The `gpo` event reports a change in the state of a general-purpose output (GPO) pin.
@@ -21,7 +19,7 @@ Use this event to:
 |---|---|
 | Event Type | GPO |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Published when a GPO pin changes state |
 | Related Events | async-events, gpi |
 | Supported API Versions | V1.0 |

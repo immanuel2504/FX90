@@ -1,5 +1,3 @@
-# get_appled
-
 ## 1. Description
 
 The `get_appled` command retrieves the current state of the application LED on the reader.
@@ -16,7 +14,7 @@ No additional payload fields are required to retrieve the LED state.
 |---|---|
 | Pattern Name | Application LED Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | set_appled, get_stackled |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current application LED state |

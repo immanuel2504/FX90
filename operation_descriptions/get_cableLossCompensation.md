@@ -1,5 +1,3 @@
-# get_cableLossCompensation
-
 ## 1. Description
 
 The `get_cableLossCompensation` command retrieves the per-read-point cable loss compensation values configured on the reader.
@@ -17,7 +15,7 @@ No additional payload fields are required; values are returned keyed by read poi
 |---|---|
 | Pattern Name | Cable Loss Compensation Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | set_cableLossCompensation, get_config |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve per-read-point cable loss values |

@@ -1,5 +1,3 @@
-# get_radio_pkt_logs
-
 ## 1. Description
 
 The `get_radio_pkt_logs` command retrieves the radio packet log as a downloadable archive.
@@ -17,7 +15,7 @@ No additional payload fields are required to retrieve the radio packet log archi
 |---|---|
 | Pattern Name | Radio Packet Log Retrieval |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | del_radio_pkt_logs, get_logs, get_logs_syslog |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the radio packet log archive |

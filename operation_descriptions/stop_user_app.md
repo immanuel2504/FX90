@@ -1,5 +1,3 @@
-# stop_user_app
-
 ## Description
 
 The `stop_user_app` command stops a running user application on the reader.
@@ -16,7 +14,7 @@ Use this command to:
 |---|---|
 | Pattern Name | User Application Control — Stop |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [start_user_app](start_user_app.md), [get_user_apps](get_user_apps.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported API Versions | V1.0 |

@@ -1,5 +1,3 @@
-# directionality_tag_data_events
-
 ## 1. Description
 
 The `directionality_tag_data_events` payload carries zone-based tag state and direction information during DIRECTIONALITY operating mode.
@@ -21,7 +19,7 @@ Use this event to:
 |---|---|
 | Event Type | Directionality Tag Data |
 | Communication Type | Device to Cloud |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Trigger Condition | Published on tag zone state changes in DIRECTIONALITY mode |
 | Related Events | tagDataEvents, zoneHistory, locationHistory |
 | Supported API Versions | V1.0 |

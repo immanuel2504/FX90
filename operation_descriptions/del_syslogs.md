@@ -1,5 +1,3 @@
-# del_syslogs
-
 ## Description
 
 The `del_syslogs` command purges system logs stored on the reader, allowing a fresh log collection cycle.
@@ -16,7 +14,7 @@ Use this command to:
 |---|---|
 | Pattern Name | Syslog Purge |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_logs_syslog](get_logs_syslog.md), [get_logs](get_logs.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported API Versions | V1.0 |

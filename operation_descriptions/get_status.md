@@ -1,5 +1,3 @@
-# get_status
-
 ## 1. Description
 
 The `get_status` command retrieves operational statistics and health information from the reader at the moment of the request.
@@ -18,7 +16,7 @@ No additional payload fields are required to retrieve the full status snapshot.
 |---|---|
 | Pattern Name | Reader Status Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | get_version, get_readerCapabilites, get_config |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve live operational statistics and health |

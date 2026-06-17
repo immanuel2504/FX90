@@ -1,5 +1,3 @@
-# get_SupportedStandardlist
-
 ## 1. Description
 
 The `get_SupportedStandardlist` command retrieves the list of RF regulatory standards supported by the reader and the channel details for each.
@@ -18,7 +16,7 @@ No additional payload fields are required to retrieve the supported standard lis
 |---|---|
 | Pattern Name | Supported Standard Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | get_region, set_region, get_SupportedRegionList |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve supported regulatory standards and channels |

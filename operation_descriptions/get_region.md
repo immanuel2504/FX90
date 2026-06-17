@@ -1,5 +1,3 @@
-# get_region
-
 ## 1. Description
 
 The `get_region` command retrieves the reader's currently configured RF region and the regulatory parameters in effect.
@@ -18,7 +16,7 @@ No additional payload fields are required to retrieve the active region settings
 |---|---|
 | Pattern Name | Region Configuration Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | set_region, get_SupportedRegionList, get_SupportedStandardlist |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active RF region and regulatory settings |

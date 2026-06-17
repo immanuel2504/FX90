@@ -1,5 +1,3 @@
-# set_nameAndDescription
-
 ## 1. Description
 
 The `set_nameAndDescription` command sets the human-friendly name and description of the reader.
@@ -16,7 +14,7 @@ Use it to:
 |---|---|
 | Pattern Name | Name & Description Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | [get_nameAndDescription](get_nameAndDescription.md), [set_hostname](set_hostname.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | Set reader name and description |

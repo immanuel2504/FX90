@@ -1,5 +1,3 @@
-# get_rg_warn_logs
-
 ## 1. Description
 
 The `get_rg_warn_logs` command retrieves the reader-gateway warning log as a downloadable archive.
@@ -17,7 +15,7 @@ No additional payload fields are required to retrieve the warning log archive.
 |---|---|
 | Pattern Name | Reader-Gateway Warning Log Retrieval |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FX7500, FX9600, ATR7000 |
+| Applies To | FXR90 |
 | Related Commands | get_rg_error_logs, get_rc_log, get_logs |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the reader-gateway warning log archive |
