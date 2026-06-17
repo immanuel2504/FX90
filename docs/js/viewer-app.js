@@ -423,6 +423,15 @@ function errorTable(codes) {
 /* ── Auto-generate example from schema properties ── */
 function generateExampleFromSchema(schema) {
    if (!schema) return {};
+   if (schema.oneOf || schema.anyOf || schema.allOf) {
+     var variants = schema.oneOf || schema.anyOf || schema.allOf || [];
+     var selected = variants.find(function (item) {
+       return item && item.type === 'object' && item.properties;
+     }) || variants.find(function (item) {
+       return item && item.type === 'object';
+     }) || variants[0];
+     return generateExampleFromSchema(selected);
+   }
    var result = {};
    if (schema.properties) {
      Object.keys(schema.properties).forEach(function (key) {
@@ -435,6 +444,8 @@ function generateExampleFromSchema(schema) {
          result[key] = prop.const;
        } else if (prop.default !== undefined) {
          result[key] = prop.default;
+       } else if (prop.oneOf || prop.anyOf || prop.allOf) {
+         result[key] = generateExampleFromSchema(prop);
        } else {
          switch (prop.type) {
            case 'string':  result[key] = prop.format === 'date-time' ? '2026-01-01T00:00:00Z' : 'string'; break;
