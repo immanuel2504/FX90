@@ -699,6 +699,7 @@ def build_openapi():
         print(f"  NEW GROUP 'Other' created for tags: {uncategorized}")
     openapi["x-tagGroups"] = x_tag_groups
     openapi["x-operationOrder"] = tag_config.get("operation_order", {})
+    openapi["x-operationSubgroups"] = tag_config.get("operation_subgroups", {})
     paths = OrderedDict()
     skipped = []
     for op_name, tag_name, source, req_path in operations:

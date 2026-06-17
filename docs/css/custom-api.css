@@ -390,6 +390,18 @@ a:hover { text-decoration: underline; }
 }
 .nav-tag:hover { background: #e8f0f8; color: #003d6b; text-decoration: none; }
 .nav-tag.active { color: #003d6b; background: #ddeeff; border-left-color: #003d6b; }
+/* Operation subgroup — level 3 heading */
+.nav-subgroup {
+ display: block;
+ padding: 7px var(--sp-3) 3px 28px;
+ font-size: 0.625rem;
+ font-weight: 800;
+ line-height: 1.4;
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+ color: #003d6b;
+ opacity: 0.78;
+}
 /* Operation — level 3 */
 .nav-op {
  display: block;

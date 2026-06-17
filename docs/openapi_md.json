@@ -214,6 +214,38 @@
             "locationHistory"
         ]
     },
+    "x-operationSubgroups": {
+        "control": [
+            {
+                "name": "Mode",
+                "operations": [
+                    "get_mode",
+                    "set_mode"
+                ]
+            },
+            {
+                "name": "Inventory",
+                "operations": [
+                    "start",
+                    "stop"
+                ]
+            },
+            {
+                "name": "Preselection",
+                "operations": [
+                    "get_preSelection",
+                    "set_preSelection"
+                ]
+            },
+            {
+                "name": "Impinj Gen2X",
+                "operations": [
+                    "get_impinjGen2X",
+                    "set_impinjGen2X"
+                ]
+            }
+        ]
+    },
     "paths": {
         "/get_version": {
             "post": {

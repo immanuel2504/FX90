@@ -1583,6 +1583,34 @@ function finalizeTagOperations(tagMap, spec) {
      tagMap[tagName].operations = ops;
    });
 }
+
+function groupedTagOperations(tagName, operations, spec) {
+   var subgroupConfig = (spec['x-operationSubgroups'] || {})[tagName];
+   if (!subgroupConfig || !subgroupConfig.length) {
+      return [{ name: '', operations: operations }];
+   }
+   var byName = {};
+   operations.forEach(function (entry) {
+      byName[opIdFromPath(entry.path)] = entry;
+   });
+   var used = {};
+   var groups = [];
+   subgroupConfig.forEach(function (group) {
+      var entries = [];
+      (group.operations || []).forEach(function (opName) {
+         var entry = byName[opName];
+         if (!entry) return;
+         entries.push(entry);
+         used[opName] = true;
+      });
+      if (entries.length) groups.push({ name: group.name || '', operations: entries });
+   });
+   var remaining = operations.filter(function (entry) {
+      return !used[opIdFromPath(entry.path)];
+   });
+   if (remaining.length) groups.push({ name: 'Other', operations: remaining });
+   return groups;
+}
  
 /* ── Main render ── */
 function render(spec) {
@@ -1637,13 +1665,18 @@ function render(spec) {
      group.tags.forEach(function (tagName) {
        var tag = tagMap[tagName];
        if (!tag) return;
-       var tagId = slugify(tagName);
-       var tagLabel = formatCategoryLabel(tagName);
-       navHtml += '<a class="nav-tag" href="#tag-' + tagId + '">' + escHtml(tagLabel) + '</a>';
-       tag.operations.forEach(function (entry) {
-         var opId = opIdFromPath(entry.path);
-         navHtml += '<a class="nav-op" href="#op-' + opId + '">' + escHtml(entry.op.summary) + '</a>';
-       });
+      var tagId = slugify(tagName);
+      var tagLabel = formatCategoryLabel(tagName);
+      navHtml += '<a class="nav-tag" href="#tag-' + tagId + '">' + escHtml(tagLabel) + '</a>';
+      groupedTagOperations(tagName, tag.operations, spec).forEach(function (subgroup) {
+        if (subgroup.name) {
+          navHtml += '<div class="nav-subgroup">' + escHtml(subgroup.name) + '</div>';
+        }
+        subgroup.operations.forEach(function (entry) {
+          var opId = opIdFromPath(entry.path);
+          navHtml += '<a class="nav-op" href="#op-' + opId + '">' + escHtml(entry.op.summary) + '</a>';
+        });
+      });
        html += '<div class="tag-section" id="tag-' + tagId + '">';
        html += '<h2 class="tag-heading">' + escHtml(tagLabel) + '</h2>';
        if (tag.description) {
@@ -1708,13 +1741,15 @@ function render(spec) {
    if (searchInput && !searchInput.getAttribute('data-wired')) {
      searchInput.setAttribute('data-wired', '1');
      searchInput.addEventListener('input', function () {
-       var q = (searchInput.value || '').toLowerCase().trim();
-       var tagLinks = Array.prototype.slice.call(nav.querySelectorAll('.nav-tag'));
-       var opLinks = Array.prototype.slice.call(nav.querySelectorAll('.nav-op'));
-       if (!q) {
-         tagLinks.forEach(function (tag) { tag.style.display = ''; });
-         opLinks.forEach(function (op) { op.style.display = ''; });
-         /* Restore sessionStorage states when filter cleared */
+      var q = (searchInput.value || '').toLowerCase().trim();
+      var tagLinks = Array.prototype.slice.call(nav.querySelectorAll('.nav-tag'));
+      var opLinks = Array.prototype.slice.call(nav.querySelectorAll('.nav-op'));
+      var subgroupLabels = Array.prototype.slice.call(nav.querySelectorAll('.nav-subgroup'));
+      if (!q) {
+        tagLinks.forEach(function (tag) { tag.style.display = ''; });
+        opLinks.forEach(function (op) { op.style.display = ''; });
+        subgroupLabels.forEach(function (label) { label.style.display = ''; });
+        /* Restore sessionStorage states when filter cleared */
          document.querySelectorAll('.nav-group').forEach(function(group) {
            var groupName = group.getAttribute('data-group');
            var children = document.querySelector('.nav-group-children[data-group-children="' + groupName + '"]');
@@ -1742,13 +1777,25 @@ function render(spec) {
            if (prev) opMatchByTag[prev.getAttribute('href')] = true;
          }
        });
-       tagLinks.forEach(function (tag) {
-         var tagText = (tag.textContent || '').toLowerCase();
-         var tagMatch = tagText.indexOf(q) !== -1;
-         var hasMatchingOp = !!opMatchByTag[tag.getAttribute('href')];
-         tag.style.display = (tagMatch || hasMatchingOp) ? '' : 'none';
-       });
-       /* Auto-expand groups that have matching results */
+      tagLinks.forEach(function (tag) {
+        var tagText = (tag.textContent || '').toLowerCase();
+        var tagMatch = tagText.indexOf(q) !== -1;
+        var hasMatchingOp = !!opMatchByTag[tag.getAttribute('href')];
+        tag.style.display = (tagMatch || hasMatchingOp) ? '' : 'none';
+      });
+      subgroupLabels.forEach(function (label) {
+        var next = label.nextElementSibling;
+        var hasVisibleOp = false;
+        while (next && !next.classList.contains('nav-subgroup') && !next.classList.contains('nav-tag') && !next.classList.contains('nav-group')) {
+          if (next.classList.contains('nav-op') && next.style.display !== 'none') {
+            hasVisibleOp = true;
+            break;
+          }
+          next = next.nextElementSibling;
+        }
+        label.style.display = hasVisibleOp ? '' : 'none';
+      });
+      /* Auto-expand groups that have matching results */
        document.querySelectorAll('.nav-group-children').forEach(function(children) {
          var hasVisible = Array.prototype.slice.call(children.querySelectorAll('.nav-op, .nav-tag'))
            .some(function(el) { return el.style.display !== 'none'; });
