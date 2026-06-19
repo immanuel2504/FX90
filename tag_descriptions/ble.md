@@ -2,5 +2,5 @@
 
 | Command | Description |
 |---|---|
-| [set_bleConfig](#op-set-bleconfig) | Configure BLE scanning settings |
 | [get_bleConfig](#op-get-bleconfig) | Retrieve BLE scanning configuration |
+| [set_bleConfig](#op-set-bleconfig) | Configure BLE scanning settings |
