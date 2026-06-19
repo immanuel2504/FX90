@@ -1666,8 +1666,13 @@ function render(spec) {
        if (tag.description) {
          html += '<div class="tag-description md-content">' + md(tag.description) + '</div>';
        }
-       tag.operations.forEach(function (entry) {
-         html += renderOperation(entry.path, entry.method, entry.op);
+       groupedTagOperations(tagName, tag.operations, spec).forEach(function (subgroup) {
+         if (subgroup.name) {
+           html += '<h3 class="tag-subgroup-heading">' + escHtml(subgroup.name) + '</h3>';
+         }
+         subgroup.operations.forEach(function (entry) {
+           html += renderOperation(entry.path, entry.method, entry.op);
+         });
        });
        html += '</div><hr class="tag-divider">';
      });
