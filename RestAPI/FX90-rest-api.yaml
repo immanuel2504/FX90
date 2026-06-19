@@ -5033,31 +5033,6 @@ components:
             - SL_ASSERT
             - SL_DEASSERT
             example: S0A
-          allOf:
-          - not:
-              allOf:
-              - contains:
-                  const: S0A
-              - contains:
-                  const: S0B
-          - not:
-              allOf:
-              - contains:
-                  const: S2A
-              - contains:
-                  const: S2B
-          - not:
-              allOf:
-              - contains:
-                  const: S3A
-              - contains:
-                  const: S3B
-          - not:
-              allOf:
-              - contains:
-                  const: SL_ASSERT
-              - contains:
-                  const: SL_DEASSERT
         target:
           type: string
           description: Which flag to manipulate based on state check.

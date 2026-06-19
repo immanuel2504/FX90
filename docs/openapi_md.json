@@ -5045,73 +5045,7 @@
                                                                                     "SL_DEASSERT"
                                                                                 ],
                                                                                 "example": "S0A"
-                                                                            },
-                                                                            "allOf": [
-                                                                                {
-                                                                                    "not": {
-                                                                                        "allOf": [
-                                                                                            {
-                                                                                                "contains": {
-                                                                                                    "const": "S0A"
-                                                                                                }
-                                                                                            },
-                                                                                            {
-                                                                                                "contains": {
-                                                                                                    "const": "S0B"
-                                                                                                }
-                                                                                            }
-                                                                                        ]
-                                                                                    }
-                                                                                },
-                                                                                {
-                                                                                    "not": {
-                                                                                        "allOf": [
-                                                                                            {
-                                                                                                "contains": {
-                                                                                                    "const": "S2A"
-                                                                                                }
-                                                                                            },
-                                                                                            {
-                                                                                                "contains": {
-                                                                                                    "const": "S2B"
-                                                                                                }
-                                                                                            }
-                                                                                        ]
-                                                                                    }
-                                                                                },
-                                                                                {
-                                                                                    "not": {
-                                                                                        "allOf": [
-                                                                                            {
-                                                                                                "contains": {
-                                                                                                    "const": "S3A"
-                                                                                                }
-                                                                                            },
-                                                                                            {
-                                                                                                "contains": {
-                                                                                                    "const": "S3B"
-                                                                                                }
-                                                                                            }
-                                                                                        ]
-                                                                                    }
-                                                                                },
-                                                                                {
-                                                                                    "not": {
-                                                                                        "allOf": [
-                                                                                            {
-                                                                                                "contains": {
-                                                                                                    "const": "SL_ASSERT"
-                                                                                                }
-                                                                                            },
-                                                                                            {
-                                                                                                "contains": {
-                                                                                                    "const": "SL_DEASSERT"
-                                                                                                }
-                                                                                            }
-                                                                                        ]
-                                                                                    }
-                                                                                }
-                                                                            ]
+                                                                            }
                                                                         },
                                                                         "target": {
                                                                             "type": "string",
@@ -5531,73 +5465,7 @@
                                                                         "SL_DEASSERT"
                                                                     ],
                                                                     "example": "S0A"
-                                                                },
-                                                                "allOf": [
-                                                                    {
-                                                                        "not": {
-                                                                            "allOf": [
-                                                                                {
-                                                                                    "contains": {
-                                                                                        "const": "S0A"
-                                                                                    }
-                                                                                },
-                                                                                {
-                                                                                    "contains": {
-                                                                                        "const": "S0B"
-                                                                                    }
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    },
-                                                                    {
-                                                                        "not": {
-                                                                            "allOf": [
-                                                                                {
-                                                                                    "contains": {
-                                                                                        "const": "S2A"
-                                                                                    }
-                                                                                },
-                                                                                {
-                                                                                    "contains": {
-                                                                                        "const": "S2B"
-                                                                                    }
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    },
-                                                                    {
-                                                                        "not": {
-                                                                            "allOf": [
-                                                                                {
-                                                                                    "contains": {
-                                                                                        "const": "S3A"
-                                                                                    }
-                                                                                },
-                                                                                {
-                                                                                    "contains": {
-                                                                                        "const": "S3B"
-                                                                                    }
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    },
-                                                                    {
-                                                                        "not": {
-                                                                            "allOf": [
-                                                                                {
-                                                                                    "contains": {
-                                                                                        "const": "SL_ASSERT"
-                                                                                    }
-                                                                                },
-                                                                                {
-                                                                                    "contains": {
-                                                                                        "const": "SL_DEASSERT"
-                                                                                    }
-                                                                                }
-                                                                            ]
-                                                                        }
-                                                                    }
-                                                                ]
+                                                                }
                                                             },
                                                             "target": {
                                                                 "type": "string",
@@ -18833,7 +18701,7 @@
                     "certificate"
                 ],
                 "summary": "Get Certs",
-                "description": "## 1. Description\n\nThe `get_certs` command retrieves the list of certificates installed on the reader.\n\nThis command returns:\n\n- An array of installed certificates, each with name, type, serial, and validity dates\n\nNo additional payload fields are required to retrieve all installed certificates.\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Certificate Inventory Query |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| Related Commands | set_update_cert, del_certs, refresh-cert, get_CACertificates |\n| Supported Operations | Retrieve the list of installed certificates |\n\n## 3. When to Use This Command\n\nUse `get_certs` to:\n\n- Audit which certificates are installed and their types\n- Check certificate validity windows before expiry\n- Confirm a certificate was installed or removed\n- Retrieve the full list of certificates on the device",
+                "description": "## 1. Description\n\nThe `get_certs` command retrieves the list of certificates installed on the reader.\n\nThis command returns:\n\n- An array of installed certificates, each with name, type, serial, and validity dates\n\nNo additional payload fields are required to retrieve all installed certificates.\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Certificate Inventory Query |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| Related Commands | set_update_cert, del_certs, refresh-cert |\n| Supported Operations | Retrieve the list of installed certificates |\n\n## 3. When to Use This Command\n\nUse `get_certs` to:\n\n- Audit which certificates are installed and their types\n- Check certificate validity windows before expiry\n- Confirm a certificate was installed or removed\n- Retrieve the full list of certificates on the device",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -19183,7 +19051,7 @@
                     "certificate"
                 ],
                 "summary": "Set Update Cert",
-                "description": "## 1. Description\n\nThe `set_update_cert` command installs or updates a certificate on the reader, fetched from an FTPS URL or supplied inline as PFX content.\n\nUse it to:\n\n- Install a new TLS certificate for MQTT or HTTP endpoints\n- Update an existing certificate before expiry\n- Provision client, server, or application certificates\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Certificate Installation |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| Related Commands | [get_certs](get_certs.md), [del_certs](del_certs.md), [refresh-cert](refresh-cert.md), [set_installCACertificate](set_installCACertificate.md) |\n| Supported Operations | Install or update a certificate |\n\n\n## 3. Before You Begin\n\nGather these details before sending the command. An invalid URL, wrong certificate type, or bad PFX password will cause installation to fail.\n\n| What You Need | Details |\n|---|---|\n| Certificate name | Unique name for the certificate on the reader. |\n| Certificate type | `server`, `client`, or `app`. |\n| Source | FTPS `url` hosting the certificate/PFX, **or** inline `pfxFileName` + `pfxContent`. |\n| FTPS authentication | `NONE` or `BASIC` (with `options.username` / `options.password`). |\n| PFX password | Password for the PFX file, if applicable. |\n\n## 4. Authentication Types\n\nThe `authenticationType` field controls FTPS server authentication.\n\n| authenticationType | Description | Credentials Required |\n|---|---|---|\n| `NONE` | No FTPS authentication | None |\n| `BASIC` | Username/password FTPS auth | `options.username`, `options.password` |",
+                "description": "## 1. Description\n\nThe `set_update_cert` command installs or updates a certificate on the reader, fetched from an FTPS URL or supplied inline as PFX content.\n\nUse it to:\n\n- Install a new TLS certificate for MQTT or HTTP endpoints\n- Update an existing certificate before expiry\n- Provision client, server, or application certificates\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Certificate Installation |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| Related Commands | [get_certs](get_certs.md), [del_certs](del_certs.md), [refresh-cert](refresh-cert.md) |\n| Supported Operations | Install or update a certificate |\n\n\n## 3. Before You Begin\n\nGather these details before sending the command. An invalid URL, wrong certificate type, or bad PFX password will cause installation to fail.\n\n| What You Need | Details |\n|---|---|\n| Certificate name | Unique name for the certificate on the reader. |\n| Certificate type | `server`, `client`, or `app`. |\n| Source | FTPS `url` hosting the certificate/PFX, **or** inline `pfxFileName` + `pfxContent`. |\n| FTPS authentication | `NONE` or `BASIC` (with `options.username` / `options.password`). |\n| PFX password | Password for the PFX file, if applicable. |\n\n## 4. Authentication Types\n\nThe `authenticationType` field controls FTPS server authentication.\n\n| authenticationType | Description | Credentials Required |\n|---|---|---|\n| `NONE` | No FTPS authentication | None |\n| `BASIC` | Username/password FTPS auth | `options.username`, `options.password` |",
                 "requestBody": {
                     "required": true,
                     "content": {

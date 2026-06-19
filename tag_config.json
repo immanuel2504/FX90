@@ -251,7 +251,10 @@
     ]
   },
   "excluded_operations": [
-    "localrest_login"
+    "localrest_login",
+    "set_installCACertificate",
+    "get_CACertificates",
+    "del_CACertificate"
   ],
   "tag_descriptions": {}
 }

@@ -15,7 +15,7 @@ Use it to:
 | Pattern Name | Certificate Installation |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [get_certs](get_certs.md), [del_certs](del_certs.md), [refresh-cert](refresh-cert.md), [set_installCACertificate](set_installCACertificate.md) |
+| Related Commands | [get_certs](get_certs.md), [del_certs](del_certs.md), [refresh-cert](refresh-cert.md) |
 | Supported Operations | Install or update a certificate |
 | Supported API Versions | V1.0 |
 
