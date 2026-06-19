@@ -8,7 +8,7 @@
   "examples": [
     {
       "command": "get_version",
-      "command_id": "a12cb5677",
+      "command_id": "abcd1324",
       "response": "success",
       "payload": {
         "availableOsUpgrades": {},
@@ -48,15 +48,15 @@
       "properties": {
         "availableOsUpgrades": {
           "type": "object",
-          "description": "A key-value map of available OS upgrade paths for the reader."
+          "description": "Key-value map of OS upgrade packages currently available to the reader."
         },
         "cloudAgentApplication": {
           "type": "string",
-          "description": "The version of the cloud agent application."
+          "description": "Version of the cloud agent application running on the reader."
         },
         "model": {
           "type": "string",
-          "description": "The hardware model identifier of the reader.",
+          "description": "Hardware model identifier of the reader.",
           "enum": [
             "FXR90",
             "FX7500",
@@ -66,25 +66,26 @@
         },
         "radioControlApplication": {
           "type": "string",
-          "description": "The version of the radio control application."
+          "description": "Version of the radio control application running on the reader."
         },
         "radioFirmware": {
           "type": "string",
-          "description": "The version of the firmware running on the radio module."
+          "description": "Firmware version running on the RFID radio module."
         },
         "readerApplication": {
           "type": "string",
-          "description": "The version of the main reader application software."
+          "description": "Version of the main reader application software."
         },
         "revertBackFirmware": {
           "type": "object",
-          "description": "Details about the firmware version stored for rollback."
+          "description": "Firmware rollback information available on the reader."
         },
         "serialNumber": {
           "type": "string",
-          "description": "The unique serial number of the reader device."
+          "description": "Unique serial number assigned to the reader."
         }
       },
+      "title": "Get Version Response Payload",
       "description": "The object containing the component version information."
     }
   },

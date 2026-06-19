@@ -2658,25 +2658,254 @@ components:
           default: true
           description: Asynchronous events from user applications
     readerConfig:
-      title: Reader Configuration
       type: object
+      description: At least one of xml, GPIO-LED, or READER-GATEWAY must be provided.
       properties:
         xml:
           type: string
-          description: Current reader XML configuration
+          description: Raw XML reader configuration string.
         GPIO-LED:
           $ref: '#/components/schemas/GPIOLEDConfig.v1'
         READER-GATEWAY:
           type: object
-          description: Gateway specific configuration
+          description: 'Cloud gateway configuration. Must contain at least one of: endpointConfig, batching, retention, or managementEventConfig.'
           properties:
-            retention:
-              $ref: '#/components/schemas/retention'
+            endpointConfig:
+              type: object
+              description: Endpoint connections configuration. Only the data endpoint is configurable via this API.
+              properties:
+                data:
+                  type: object
+                  properties:
+                    event:
+                      type: object
+                      properties:
+                        connections:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              additionalOptions:
+                                type: object
+                                properties:
+                                  batching:
+                                    type:
+                                    - object
+                                    - 'null'
+                                    example: null
+                                  retention:
+                                    type: object
+                                    properties:
+                                      maxEventRetentionTimeInMin:
+                                        type: number
+                                        example: 500
+                                      maxNumEvents:
+                                        type: number
+                                        example: 150000
+                                      throttle:
+                                        type: number
+                                        example: 500
+                              description:
+                                type: string
+                                example: MQTT_TEST
+                              name:
+                                type: string
+                                example: MQTT_TEST
+                              options:
+                                type: object
+                                properties:
+                                  additional:
+                                    type: object
+                                    properties:
+                                      cleanSession:
+                                        type: boolean
+                                        example: true
+                                      clientId:
+                                        type: string
+                                        example: EV1
+                                      debug:
+                                        type: boolean
+                                        example: false
+                                      keepAlive:
+                                        type: number
+                                        example: 60
+                                      qos:
+                                        type: number
+                                        example: 0
+                                      reconnectDelay:
+                                        type: number
+                                        example: 1
+                                      reconnectDelayMax:
+                                        type: number
+                                        example: 5
+                                  enableSecurity:
+                                    type: boolean
+                                    example: false
+                                  endpoint:
+                                    type: object
+                                    properties:
+                                      hostName:
+                                        type: string
+                                        example: 10.117.229.9
+                                      port:
+                                        type: number
+                                        example: 1883
+                                      protocol:
+                                        type: string
+                                        example: tcp
+                                  publishTopic:
+                                    type: array
+                                    items:
+                                      type: string
+                                      example: tagevents_r2c_longrun
+                                    example:
+                                    - tagevents_r2c_longrun
+                                  security:
+                                    type: object
+                                    properties:
+                                      CACertificateFileLocation:
+                                        type: string
+                                        example: /home/root/broker.emqx.io-ca.crt
+                                      installedCertificateName:
+                                        type: string
+                                        example: Server
+                                      installedCertificateType:
+                                        type: string
+                                        example: server
+                                      keyAlgorithm:
+                                        type: string
+                                        example: RS256
+                                      keyFormat:
+                                        type: string
+                                        example: PEM
+                                      verifyHostName:
+                                        type: boolean
+                                        example: false
+                                      verifyPeer:
+                                        type: boolean
+                                        example: false
+                                  subscribeTopic:
+                                    type: array
+                                    items: {}
+                                    example: []
+                              type:
+                                type: string
+                                example: mqtt
+                          example:
+                          - additionalOptions:
+                              batching: null
+                              retention:
+                                maxEventRetentionTimeInMin: 500
+                                maxNumEvents: 150000
+                                throttle: 500
+                            description: MQTT_TEST
+                            name: MQTT_TEST
+                            options:
+                              additional:
+                                cleanSession: true
+                                clientId: EV1
+                                debug: false
+                                keepAlive: 60
+                                qos: 0
+                                reconnectDelay: 1
+                                reconnectDelayMax: 5
+                              enableSecurity: false
+                              endpoint:
+                                hostName: 10.117.229.9
+                                port: 1883
+                                protocol: tcp
+                              publishTopic:
+                              - tagevents_r2c_longrun
+                              security:
+                                CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+                                installedCertificateName: Server
+                                installedCertificateType: server
+                                keyAlgorithm: RS256
+                                keyFormat: PEM
+                                verifyHostName: false
+                                verifyPeer: false
+                              subscribeTopic: []
+                            type: mqtt
             batching:
-              $ref: '#/components/schemas/batching'
+              description: Global batching configuration applied across all data endpoints. Can be a single object (applied to all endpoints) or an array of objects (one per endpoint, array length must match number of data endpoint connections).
+              oneOf:
+              - type: object
+                description: Single batching config applied to all data endpoints
+                properties:
+                  maxPayloadSizePerReport:
+                    type: integer
+                    description: Maximum payload size in bytes (0 - 256000). -1 to disable.
+                    minimum: 0
+                    maximum: 256000
+                    example: 65536
+                  reportingInterval:
+                    type: integer
+                    description: Report interval in milliseconds (0 - 86400000). -1 to disable.
+                    minimum: 0
+                    maximum: 86400000
+                    example: 1000
+              - type: array
+                description: Per-endpoint batching config (one entry per data endpoint connection)
+                items:
+                  type: object
+                  properties:
+                    maxPayloadSizePerReport:
+                      type: integer
+                      minimum: 0
+                      maximum: 256000
+                      example: 65536
+                    reportingInterval:
+                      type: integer
+                      minimum: 0
+                      maximum: 86400000
+                      example: 1000
+            retention:
+              description: Global retention configuration for data events on connection loss. Can be a single object (applied to all endpoints) or an array of objects (one per endpoint, array length must match number of data endpoint connections).
+              oneOf:
+              - type: object
+                description: Single retention config applied to all data endpoints
+                properties:
+                  maxEventRetentionTimeInMin:
+                    type: integer
+                    description: Maximum event retention time in minutes (0 - 10080). 0 or -1 retains forever.
+                    minimum: 0
+                    maximum: 10080
+                    example: 1440
+                  maxNumEvents:
+                    type: integer
+                    description: Maximum number of events to retain (0 - 150000).
+                    minimum: 0
+                    maximum: 150000
+                    example: 150000
+                  throttle:
+                    type: integer
+                    description: Rate in events/sec to replay retained events on reconnect (0 - 1000).
+                    minimum: 0
+                    maximum: 1000
+                    example: 500
+              - type: array
+                description: Per-endpoint retention config (one entry per data endpoint connection)
+                items:
+                  type: object
+                  properties:
+                    maxEventRetentionTimeInMin:
+                      type: integer
+                      minimum: 0
+                      maximum: 10080
+                      example: 1440
+                    maxNumEvents:
+                      type: integer
+                      minimum: 0
+                      maximum: 150000
+                      example: 150000
+                    throttle:
+                      type: integer
+                      minimum: 0
+                      maximum: 1000
+                      example: 500
             managementEventConfig:
               $ref: '#/components/schemas/eventsConfig.v1'
-      description: Configuration body for the set_config request
+      title: Reader Configuration
     logLevel.v1:
       title: logLevel
       type: object
@@ -3968,6 +4197,9 @@ components:
       examples:
       - name: string
         description: string
+    setModeResponse:
+      type: string
+      example: ''
     localrestloginResponse:
       type: object
       properties:
@@ -4183,160 +4415,6 @@ components:
                 type: string
               isLBTConfigurable:
                 type: string
-    getModeResponse:
-      type: object
-      properties:
-        antennaStopCondition:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              value:
-                type: number
-        antennas:
-          type: array
-          items:
-            type: number
-        delayBetweenAntennaCycles:
-          type: object
-          properties:
-            duration:
-              type: number
-            type:
-              type: string
-        query:
-          type: array
-          items:
-            type: object
-            properties:
-              tagPopulation:
-                type: number
-        inventoryProtocol:
-          type: object
-          properties:
-            mode:
-              type: string
-              enum:
-              - GEN2X
-              - GEN2
-              - HYBRID
-        reportFilter:
-          type: object
-          properties:
-            duration:
-              type: number
-            type:
-              type: string
-        tagMetaData:
-          type: array
-          items:
-            type: string
-        transmitPower:
-          type: array
-          items:
-            type: number
-        type:
-          type: string
-    setModeRequest:
-      type: object
-      properties:
-        antennaStopCondition:
-          type: object
-          properties:
-            type:
-              type: string
-              example: DURATION
-            value:
-              type: number
-              example: 100
-        antennas:
-          type: array
-          items:
-            type: number
-            example: 1
-          example:
-          - 1
-        component:
-          type: string
-          example: RC
-        delayBetweenAntennaCycles:
-          type: object
-          properties:
-            duration:
-              type: number
-              example: 0
-            type:
-              type: string
-              example: DISABLED
-        linkProfile:
-          type: number
-          example: 3
-        payload:
-          type: string
-          example: status
-        query:
-          type: object
-          properties:
-            sel:
-              type: string
-              example: ALL
-            session:
-              type: string
-              example: S1
-            tagPopulation:
-              type: number
-              example: 256
-            target:
-              type: string
-              example: A
-        inventoryProtocol:
-          type: object
-          properties:
-            mode:
-              type: string
-              enum:
-              - GEN2X
-              - GEN2
-              - HYBRID
-              example: GEN2X
-        reportFilter:
-          type: object
-          properties:
-            duration:
-              type: number
-              example: 0
-            type:
-              type: string
-              example: PER_ANTENNA
-        tagMetaData:
-          type: array
-          items:
-            type: string
-            example: RSSI
-          example:
-          - RSSI
-          - PHASE
-          - SEEN_COUNT
-          - ANTENNA
-          - CHANNEL
-          - PC
-          - XPC
-          - CRC
-        transmitPower:
-          type: array
-          items:
-            type: number
-            example: 17
-          example:
-          - 17
-        type:
-          type: string
-          example: CUSTOM
-    setModeResponse:
-      type: string
-      example: ''
     startInventoryRequest:
       type: object
       properties:
@@ -4382,20 +4460,33 @@ components:
       properties:
         availableOsUpgrades:
           type: object
+          description: Key-value map of OS upgrade packages currently available to the reader.
         cloudAgentApplication:
           type: string
+          description: Version of the cloud agent application running on the reader.
         model:
           type: string
+          description: Hardware model identifier of the reader.
+          enum:
+          - FXR90
+          - FX7500
+          - FX9600
+          - ATR7000
         radioControlApplication:
           type: string
+          description: Version of the radio control application running on the reader.
         radioFirmware:
           type: string
+          description: Firmware version running on the RFID radio module.
         readerApplication:
           type: string
+          description: Version of the main reader application software.
         revertBackFirmware:
           type: object
+          description: Firmware rollback information available on the reader.
         serialNumber:
           type: string
+          description: Unique serial number assigned to the reader.
     getStatusResponse:
       type: object
       properties:
@@ -4404,23 +4495,51 @@ components:
           properties:
             1:
               type: string
+              description: Connection state for antenna port 1.
+              enum:
+              - connected
+              - disconnected
             2:
               type: string
+              description: Connection state for antenna port 2.
+              enum:
+              - connected
+              - disconnected
             3:
               type: string
+              description: Connection state for antenna port 3.
+              enum:
+              - connected
+              - disconnected
             4:
               type: string
+              description: Connection state for antenna port 4.
+              enum:
+              - connected
+              - disconnected
             5:
               type: string
+              description: Connection state for antenna port 5.
+              enum:
+              - connected
+              - disconnected
             6:
               type: string
+              description: Connection state for antenna port 6.
+              enum:
+              - connected
+              - disconnected
+          description: Antenna connection status keyed by antenna port.
         cpu:
           type: object
           properties:
             system:
               type: number
+              description: CPU utilization percentage consumed by system processes.
             user:
               type: number
+              description: CPU utilization percentage consumed by user processes.
+          description: Current CPU utilization percentages.
         flash:
           type: object
           properties:
@@ -4429,37 +4548,54 @@ components:
               properties:
                 free:
                   type: number
+                  description: Free flash space in the platform partition.
                 total:
                   type: number
+                  description: Total flash space in the platform partition.
                 used:
                   type: number
+                  description: Used flash space in the platform partition.
+              description: Flash usage for the platform partition.
             readerConfig:
               type: object
               properties:
                 free:
                   type: number
+                  description: Free flash space in the reader configuration partition.
                 total:
                   type: number
+                  description: Total flash space in the reader configuration partition.
                 used:
                   type: number
+                  description: Used flash space in the reader configuration partition.
+              description: Flash usage for the reader configuration partition.
             readerData:
               type: object
               properties:
                 free:
                   type: number
+                  description: Free flash space in the reader data partition.
                 total:
                   type: number
+                  description: Total flash space in the reader data partition.
                 used:
                   type: number
+                  description: Used flash space in the reader data partition.
+              description: Flash usage for the reader data partition.
             rootFileSystem:
               type: object
               properties:
                 free:
                   type: number
+                  description: Free flash space in the root file system partition.
                 total:
                   type: number
+                  description: Total flash space in the root file system partition.
                 used:
                   type: number
+                  description: Used flash space in the root file system partition.
+              description: Flash usage for the root file system partition.
+          description: Flash storage usage statistics by partition.
         interfaceConnectionStatus:
           type: object
           properties:
@@ -4470,63 +4606,90 @@ components:
                 properties:
                   connectionError:
                     type: string
+                    description: Most recent connection error message, or an empty string when no error is present.
                   connectionStatus:
                     type: string
+                    description: Current connection state of the endpoint.
                   description:
                     type: string
+                    description: Configured description of the endpoint connection.
                   interface:
                     type: string
+                    description: Configured endpoint interface name.
+              description: Connection status entries for data event endpoints.
+          description: Cloud interface connection status grouped by endpoint class.
         ntp:
           type: object
           properties:
             offset:
               type: number
+              description: Current NTP clock offset reported by the reader.
             reach:
               type: number
+              description: NTP reachability value reported by the reader.
+          description: NTP synchronization status for the reader clock.
         powerNegotiation:
           type: string
+          description: Power level negotiated with the reader power source.
         powerSource:
           type: string
+          description: Detected power source for the reader.
         radioActivity:
           type: string
+          description: Current RFID radio activity state.
+          enum:
+          - active
+          - inactive
         radioConnection:
           type: string
+          description: Current connection state of the RFID radio.
+          enum:
+          - connected
+          - disconnected
         ram:
           type: object
           properties:
             free:
               type: number
+              description: Free RAM percentage or amount reported by the reader.
             total:
               type: number
+              description: Total RAM percentage or amount reported by the reader.
             used:
               type: number
+              description: Used RAM percentage or amount reported by the reader.
+          description: RAM usage statistics.
         systemTime:
           type: string
+          description: Current reader system time.
         temperature:
           type: number
+          description: Current reader internal temperature in degrees Celsius.
         uptime:
           type: string
+          description: Elapsed time since the reader last started.
         impinjGen2X:
           type: object
           properties:
             active:
               type: boolean
-              description: Indicates whether an Impinj Gen2X feature is currently active
+              description: Whether an Impinj Gen2X feature is currently active.
             feature:
               type: string
-              description: The name of the active Impinj Gen2X feature
+              description: Name of the active Impinj Gen2X feature.
               enum:
               - fastId
               - tagFocus
               - tagProtect
               - tagQuieting
+          description: Runtime status of active Impinj Gen2X features.
         ble:
           type: object
           description: BLE scanner runtime status. Present only when BLE is supported and status is available.
           properties:
             scanState:
               type: string
-              description: Current state of the BLE scanner.
+              description: Current BLE scanner state.
               enum:
               - running
               - stopped
@@ -4537,23 +4700,23 @@ components:
               example: '2026-05-21T13:46:16.955Z'
             beaconCounts:
               type: object
-              description: Counts of BLE beacons detected since the last scan start.
+              description: BLE advertisement counts by beacon format.
               properties:
                 total:
                   type: integer
-                  description: Total number of beacons detected.
+                  description: Total number of BLE advertisements observed in the current scan window.
                 iBeacon:
                   type: integer
-                  description: Number of iBeacon advertisements detected.
+                  description: Number of iBeacon advertisements observed in the current scan window.
                 altBeacon:
                   type: integer
-                  description: Number of AltBeacon advertisements detected.
+                  description: Number of AltBeacon advertisements observed in the current scan window.
                 eddystone:
                   type: integer
-                  description: Number of Eddystone advertisements detected.
+                  description: Number of Eddystone advertisements observed in the current scan window.
                 generic:
                   type: integer
-                  description: Number of generic (unclassified) BLE advertisements detected.
+                  description: Number of generic BLE advertisements observed in the current scan window.
     getConfigResponse:
       type: object
       properties:
@@ -5356,9 +5519,11 @@ components:
                           description:
                             type: string
                             example: MQTT_TEST
+                            description: Human-readable description of the endpoint connection.
                           name:
                             type: string
                             example: MQTT_TEST
+                            description: Unique name assigned to the endpoint connection.
                           options:
                             type: object
                             properties:
@@ -5368,39 +5533,52 @@ components:
                                   cleanSession:
                                     type: boolean
                                     example: true
+                                    description: Whether the MQTT client starts a clean broker session when connecting.
                                   clientId:
                                     type: string
                                     example: FX9600FCC017
+                                    description: MQTT client identifier used by the reader for this connection.
                                   debug:
                                     type: boolean
                                     example: false
+                                    description: Whether debug logging is enabled for this endpoint connection.
                                   keepAlive:
                                     type: number
                                     example: 60
+                                    description: MQTT keep-alive interval, in seconds.
                                   qos:
                                     type: number
                                     example: 0
+                                    description: MQTT quality of service level used for publishing messages.
                                   reconnectDelay:
                                     type: number
                                     example: 1
+                                    description: Initial reconnect delay, in seconds, after a connection failure.
                                   reconnectDelayMax:
                                     type: number
                                     example: 5
+                                    description: Maximum reconnect delay, in seconds, after repeated connection failures.
+                                description: Additional MQTT client behavior options for this endpoint.
                               enableSecurity:
                                 type: boolean
                                 example: false
+                                description: Whether TLS or certificate-based security is enabled for this endpoint.
                               endpoint:
                                 type: object
                                 properties:
                                   hostName:
                                     type: string
                                     example: broker.emqx.io
+                                    description: Broker or server host name or IP address.
                                   port:
                                     type: number
                                     example: 1883
+                                    description: Broker or server TCP port.
                                   protocol:
                                     type: string
                                     example: tcp
+                                    description: Transport protocol used by the endpoint connection.
+                                description: Remote broker or server address for this connection.
                               publishTopic:
                                 type: array
                                 items:
@@ -5408,30 +5586,39 @@ components:
                                   example: FX9600FCC017/rsp
                                 example:
                                 - FX9600FCC017/rsp
+                                description: MQTT topics where the reader publishes data for this channel.
                               security:
                                 type: object
                                 properties:
                                   CACertificateFileLocation:
                                     type: string
                                     example: /home/root/broker.emqx.io-ca.crt
+                                    description: Path to the CA certificate file used to validate the remote endpoint.
                                   installedCertificateName:
                                     type: string
                                     example: Server
+                                    description: Name of the installed certificate used by this connection.
                                   installedCertificateType:
                                     type: string
                                     example: server
+                                    description: Type of installed certificate used by this connection.
                                   keyAlgorithm:
                                     type: string
                                     example: RS256
+                                    description: Key algorithm used by the configured certificate or private key.
                                   keyFormat:
                                     type: string
                                     example: PEM
+                                    description: Encoding format of the configured certificate or private key.
                                   verifyHostName:
                                     type: boolean
                                     example: false
+                                    description: Whether the reader verifies that the remote certificate matches the configured host name.
                                   verifyPeer:
                                     type: boolean
                                     example: false
+                                    description: Whether the reader verifies the remote certificate chain.
+                                description: TLS certificate and verification settings for secure endpoint connections.
                               subscribeTopic:
                                 type: array
                                 items:
@@ -5439,9 +5626,12 @@ components:
                                   example: FX9600FCC017/cmd
                                 example:
                                 - FX9600FCC017/cmd
+                                description: MQTT topics where the reader subscribes for commands or control messages.
+                            description: Connection-specific transport, security, topic, and authentication options.
                           type:
                             type: string
                             example: mqtt
+                            description: Endpoint transport type used for control command responses.
                       example:
                       - description: MQTT_TEST
                         name: MQTT_TEST
@@ -5472,9 +5662,13 @@ components:
                           subscribeTopic:
                           - FX9600FCC017/cmd
                         type: mqtt
+                      description: List of endpoint connections configured for this channel.
                     enableLocalRest:
                       type: boolean
                       example: true
+                      description: Whether the local REST interface remains enabled for this command-response channel.
+                  description: Endpoint settings used to publish command responses.
+              description: Configuration for control-plane command response delivery.
             data:
               type: object
               properties:
@@ -5494,24 +5688,32 @@ components:
                                 - object
                                 - 'null'
                                 example: null
+                                description: Batching settings that control how events are grouped before publishing.
                               retention:
                                 type: object
                                 properties:
                                   maxEventRetentionTimeInMin:
                                     type: number
                                     example: 500
+                                    description: Maximum time, in minutes, that retained events are kept before being dropped.
                                   maxNumEvents:
                                     type: number
                                     example: 150000
+                                    description: Maximum number of events retained for this endpoint.
                                   throttle:
                                     type: number
                                     example: 500
+                                    description: Maximum event publishing rate or throttle value for retained events.
+                                description: Retention settings used when events cannot be delivered immediately.
+                            description: Per-endpoint batching and retention options applied to generated events.
                           description:
                             type: string
                             example: MQTT_TEST
+                            description: Human-readable description of the endpoint connection.
                           name:
                             type: string
                             example: MQTT_TEST
+                            description: Unique name assigned to the endpoint connection.
                           options:
                             type: object
                             properties:
@@ -5521,39 +5723,52 @@ components:
                                   cleanSession:
                                     type: boolean
                                     example: true
+                                    description: Whether the MQTT client starts a clean broker session when connecting.
                                   clientId:
                                     type: string
                                     example: FX9600FCC017
+                                    description: MQTT client identifier used by the reader for this connection.
                                   debug:
                                     type: boolean
                                     example: false
+                                    description: Whether debug logging is enabled for this endpoint connection.
                                   keepAlive:
                                     type: number
                                     example: 60
+                                    description: MQTT keep-alive interval, in seconds.
                                   qos:
                                     type: number
                                     example: 0
+                                    description: MQTT quality of service level used for publishing messages.
                                   reconnectDelay:
                                     type: number
                                     example: 1
+                                    description: Initial reconnect delay, in seconds, after a connection failure.
                                   reconnectDelayMax:
                                     type: number
                                     example: 5
+                                    description: Maximum reconnect delay, in seconds, after repeated connection failures.
+                                description: Additional MQTT client behavior options for this endpoint.
                               enableSecurity:
                                 type: boolean
                                 example: false
+                                description: Whether TLS or certificate-based security is enabled for this endpoint.
                               endpoint:
                                 type: object
                                 properties:
                                   hostName:
                                     type: string
                                     example: broker.emqx.io
+                                    description: Broker or server host name or IP address.
                                   port:
                                     type: number
                                     example: 1883
+                                    description: Broker or server TCP port.
                                   protocol:
                                     type: string
                                     example: tcp
+                                    description: Transport protocol used by the endpoint connection.
+                                description: Remote broker or server address for this connection.
                               publishTopic:
                                 type: array
                                 items:
@@ -5561,37 +5776,49 @@ components:
                                   example: FX9600FCC017/tevents
                                 example:
                                 - FX9600FCC017/tevents
+                                description: MQTT topics where the reader publishes data for this channel.
                               security:
                                 type: object
                                 properties:
                                   CACertificateFileLocation:
                                     type: string
                                     example: /home/root/broker.emqx.io-ca.crt
+                                    description: Path to the CA certificate file used to validate the remote endpoint.
                                   installedCertificateName:
                                     type: string
                                     example: Server
+                                    description: Name of the installed certificate used by this connection.
                                   installedCertificateType:
                                     type: string
                                     example: server
+                                    description: Type of installed certificate used by this connection.
                                   keyAlgorithm:
                                     type: string
                                     example: RS256
+                                    description: Key algorithm used by the configured certificate or private key.
                                   keyFormat:
                                     type: string
                                     example: PEM
+                                    description: Encoding format of the configured certificate or private key.
                                   verifyHostName:
                                     type: boolean
                                     example: false
+                                    description: Whether the reader verifies that the remote certificate matches the configured host name.
                                   verifyPeer:
                                     type: boolean
                                     example: false
+                                    description: Whether the reader verifies the remote certificate chain.
+                                description: TLS certificate and verification settings for secure endpoint connections.
                               subscribeTopic:
                                 type: array
                                 items: {}
                                 example: []
+                                description: MQTT topics where the reader subscribes for commands or control messages.
+                            description: Connection-specific transport, security, topic, and authentication options.
                           type:
                             type: string
                             example: mqtt
+                            description: Endpoint transport type used for tag data event delivery.
                       example:
                       - additionalOptions:
                           batching: null
@@ -5627,6 +5854,9 @@ components:
                             verifyPeer: false
                           subscribeTopic: []
                         type: mqtt
+                      description: List of endpoint connections configured for this channel.
+                  description: Endpoint settings used to publish event data.
+              description: Configuration for tag data event delivery.
             management:
               type: object
               properties:
@@ -5641,9 +5871,11 @@ components:
                           description:
                             type: string
                             example: MQTT_TEST
+                            description: Human-readable description of the endpoint connection.
                           name:
                             type: string
                             example: MQTT_TEST
+                            description: Unique name assigned to the endpoint connection.
                           options:
                             type: object
                             properties:
@@ -5653,39 +5885,52 @@ components:
                                   cleanSession:
                                     type: boolean
                                     example: true
+                                    description: Whether the MQTT client starts a clean broker session when connecting.
                                   clientId:
                                     type: string
                                     example: FX9600FCC017
+                                    description: MQTT client identifier used by the reader for this connection.
                                   debug:
                                     type: boolean
                                     example: false
+                                    description: Whether debug logging is enabled for this endpoint connection.
                                   keepAlive:
                                     type: number
                                     example: 60
+                                    description: MQTT keep-alive interval, in seconds.
                                   qos:
                                     type: number
                                     example: 0
+                                    description: MQTT quality of service level used for publishing messages.
                                   reconnectDelay:
                                     type: number
                                     example: 1
+                                    description: Initial reconnect delay, in seconds, after a connection failure.
                                   reconnectDelayMax:
                                     type: number
                                     example: 5
+                                    description: Maximum reconnect delay, in seconds, after repeated connection failures.
+                                description: Additional MQTT client behavior options for this endpoint.
                               enableSecurity:
                                 type: boolean
                                 example: false
+                                description: Whether TLS or certificate-based security is enabled for this endpoint.
                               endpoint:
                                 type: object
                                 properties:
                                   hostName:
                                     type: string
                                     example: broker.emqx.io
+                                    description: Broker or server host name or IP address.
                                   port:
                                     type: number
                                     example: 1883
+                                    description: Broker or server TCP port.
                                   protocol:
                                     type: string
                                     example: tcp
+                                    description: Transport protocol used by the endpoint connection.
+                                description: Remote broker or server address for this connection.
                               publishTopic:
                                 type: array
                                 items:
@@ -5693,30 +5938,39 @@ components:
                                   example: FX9600FCC017/rsp
                                 example:
                                 - FX9600FCC017/rsp
+                                description: MQTT topics where the reader publishes data for this channel.
                               security:
                                 type: object
                                 properties:
                                   CACertificateFileLocation:
                                     type: string
                                     example: /home/root/broker.emqx.io-ca.crt
+                                    description: Path to the CA certificate file used to validate the remote endpoint.
                                   installedCertificateName:
                                     type: string
                                     example: Server
+                                    description: Name of the installed certificate used by this connection.
                                   installedCertificateType:
                                     type: string
                                     example: server
+                                    description: Type of installed certificate used by this connection.
                                   keyAlgorithm:
                                     type: string
                                     example: RS256
+                                    description: Key algorithm used by the configured certificate or private key.
                                   keyFormat:
                                     type: string
                                     example: PEM
+                                    description: Encoding format of the configured certificate or private key.
                                   verifyHostName:
                                     type: boolean
                                     example: false
+                                    description: Whether the reader verifies that the remote certificate matches the configured host name.
                                   verifyPeer:
                                     type: boolean
                                     example: false
+                                    description: Whether the reader verifies the remote certificate chain.
+                                description: TLS certificate and verification settings for secure endpoint connections.
                               subscribeTopic:
                                 type: array
                                 items:
@@ -5724,9 +5978,12 @@ components:
                                   example: FX9600FCC017/cmd
                                 example:
                                 - FX9600FCC017/cmd
+                                description: MQTT topics where the reader subscribes for commands or control messages.
+                            description: Connection-specific transport, security, topic, and authentication options.
                           type:
                             type: string
                             example: mqtt
+                            description: Endpoint transport type used for management command responses.
                       example:
                       - description: MQTT_TEST
                         name: MQTT_TEST
@@ -5757,9 +6014,12 @@ components:
                           subscribeTopic:
                           - FX9600FCC017/cmd
                         type: mqtt
+                      description: List of endpoint connections configured for this channel.
                     enableLocalRest:
                       type: boolean
                       example: true
+                      description: Whether the local REST interface remains enabled for this command-response channel.
+                  description: Endpoint settings used to publish command responses.
                 event:
                   type: object
                   properties:
@@ -5771,9 +6031,11 @@ components:
                           description:
                             type: string
                             example: MQTT_TEST
+                            description: Human-readable description of the endpoint connection.
                           name:
                             type: string
                             example: MQTT_TEST
+                            description: Unique name assigned to the endpoint connection.
                           options:
                             type: object
                             properties:
@@ -5783,39 +6045,52 @@ components:
                                   cleanSession:
                                     type: boolean
                                     example: true
+                                    description: Whether the MQTT client starts a clean broker session when connecting.
                                   clientId:
                                     type: string
                                     example: FX9600FCC017
+                                    description: MQTT client identifier used by the reader for this connection.
                                   debug:
                                     type: boolean
                                     example: false
+                                    description: Whether debug logging is enabled for this endpoint connection.
                                   keepAlive:
                                     type: number
                                     example: 60
+                                    description: MQTT keep-alive interval, in seconds.
                                   qos:
                                     type: number
                                     example: 0
+                                    description: MQTT quality of service level used for publishing messages.
                                   reconnectDelay:
                                     type: number
                                     example: 1
+                                    description: Initial reconnect delay, in seconds, after a connection failure.
                                   reconnectDelayMax:
                                     type: number
                                     example: 5
+                                    description: Maximum reconnect delay, in seconds, after repeated connection failures.
+                                description: Additional MQTT client behavior options for this endpoint.
                               enableSecurity:
                                 type: boolean
                                 example: false
+                                description: Whether TLS or certificate-based security is enabled for this endpoint.
                               endpoint:
                                 type: object
                                 properties:
                                   hostName:
                                     type: string
                                     example: broker.emqx.io
+                                    description: Broker or server host name or IP address.
                                   port:
                                     type: number
                                     example: 1883
+                                    description: Broker or server TCP port.
                                   protocol:
                                     type: string
                                     example: tcp
+                                    description: Transport protocol used by the endpoint connection.
+                                description: Remote broker or server address for this connection.
                               publishTopic:
                                 type: array
                                 items:
@@ -5823,37 +6098,49 @@ components:
                                   example: FX9600FCC017/mevents
                                 example:
                                 - FX9600FCC017/mevents
+                                description: MQTT topics where the reader publishes data for this channel.
                               security:
                                 type: object
                                 properties:
                                   CACertificateFileLocation:
                                     type: string
                                     example: /home/root/broker.emqx.io-ca.crt
+                                    description: Path to the CA certificate file used to validate the remote endpoint.
                                   installedCertificateName:
                                     type: string
                                     example: Server
+                                    description: Name of the installed certificate used by this connection.
                                   installedCertificateType:
                                     type: string
                                     example: server
+                                    description: Type of installed certificate used by this connection.
                                   keyAlgorithm:
                                     type: string
                                     example: RS256
+                                    description: Key algorithm used by the configured certificate or private key.
                                   keyFormat:
                                     type: string
                                     example: PEM
+                                    description: Encoding format of the configured certificate or private key.
                                   verifyHostName:
                                     type: boolean
                                     example: false
+                                    description: Whether the reader verifies that the remote certificate matches the configured host name.
                                   verifyPeer:
                                     type: boolean
                                     example: false
+                                    description: Whether the reader verifies the remote certificate chain.
+                                description: TLS certificate and verification settings for secure endpoint connections.
                               subscribeTopic:
                                 type: array
                                 items: {}
                                 example: []
+                                description: MQTT topics where the reader subscribes for commands or control messages.
+                            description: Connection-specific transport, security, topic, and authentication options.
                           type:
                             type: string
                             example: mqtt
+                            description: Endpoint transport type used for management event delivery.
                       example:
                       - description: MQTT_TEST
                         name: MQTT_TEST
@@ -5875,6 +6162,10 @@ components:
                           - FX9600FCC017/mevents
                           subscribeTopic: []
                         type: mqtt
+                      description: List of endpoint connections configured for this channel.
+                  description: Endpoint settings used to publish event data.
+              description: Configuration for management command responses and management event delivery.
+          description: Cloud endpoint configuration for command responses, tag data events, and management events.
     setImportcloudconfigResponse:
       type: string
       example: ''

@@ -1,226 +1,12 @@
-title: success
 type: object
-x-examples:
-  example-1: {}
-examples:
-- xml: string
-  GPIO-LED:
-    GPODefaults:
-      '1': HIGH
-      '2': LOW
-      '3': HIGH
-      '4': HIGH
-    LEDDefaults:
-      '3': GREEN
-    GPI_1_H:
-    - type: GPO
-      pin: 1
-      state: HIGH
-      postActionState: HIGH
-      blink:
-        'ON': 0
-        'OFF': 0
-        DURATION: 0
-      conditions:
-      - IS_CLOUD_CONNECTED
-    GPI_1_L:
-    - type: GPO
-      pin: 1
-      state: HIGH
-      postActionState: HIGH
-      blink:
-        'ON': 0
-        'OFF': 0
-        DURATION: 0
-      conditions:
-      - IS_CLOUD_CONNECTED
-    GPI_2_H:
-    - type: GPO
-      pin: 1
-      state: HIGH
-      postActionState: HIGH
-      blink:
-        'ON': 0
-        'OFF': 0
-        DURATION: 0
-      conditions:
-      - IS_CLOUD_CONNECTED
-    GPI_2_L:
-    - type: GPO
-      pin: 1
-      state: HIGH
-      postActionState: HIGH
-      blink:
-        'ON': 0
-        'OFF': 0
-        DURATION: 0
-      conditions:
-      - IS_CLOUD_CONNECTED
-    CLOUD_DISCONNECT:
-    - type: GPO
-      pin: 1
-      state: HIGH
-      postActionState: HIGH
-      blink:
-        'ON': 0
-        'OFF': 0
-        DURATION: 0
-      conditions:
-      - IS_CLOUD_CONNECTED
-    CLOUD_CONNECT:
-    - type: GPO
-      pin: 1
-      state: HIGH
-      postActionState: HIGH
-      blink:
-        'ON': 0
-        'OFF': 0
-        DURATION: 0
-      conditions:
-      - IS_CLOUD_CONNECTED
-    TAG_READ:
-    - type: GPO
-      pin: 1
-      state: HIGH
-      postActionState: HIGH
-      blink:
-        'ON': 0
-        'OFF': 0
-        DURATION: 0
-      conditions:
-      - IS_CLOUD_CONNECTED
-    RADIO_START:
-    - type: GPO
-      pin: 1
-      state: HIGH
-      postActionState: HIGH
-      blink:
-        'ON': 0
-        'OFF': 0
-        DURATION: 0
-      conditions:
-      - IS_CLOUD_CONNECTED
-    RADIO_STOP:
-    - type: GPO
-      pin: 1
-      state: HIGH
-      postActionState: HIGH
-      blink:
-        'ON': 0
-        'OFF': 0
-        DURATION: 0
-      conditions:
-      - IS_CLOUD_CONNECTED
-  READER-GATEWAY:
-    retention:
-      throttle: 200
-      maxNumEvents: 150000
-      maxEventRetentionTimeInMin: 10
-    batching:
-      reportingInterval: 1000
-      maxPayloadSizePerReport: 256KB
-    managementEventConfig:
-      errors:
-        cpu:
-          threshold: 90
-          reportIntervalInSec: 1800
-        flash:
-          threshold: 90
-          reportIntervalInSec: 1800
-        ram:
-          threshold: 90
-          reportIntervalInSec: 1800
-        reader_gateway: true
-        antenna: true
-        database: true
-        radio: true
-        radio_control: true
-      warnings:
-        cpu:
-          threshold: 80
-          reportIntervalInSec: 1800
-        flash:
-          threshold: 90
-          reportIntervalInSec: 1800
-        ram:
-          threshold: 90
-          reportIntervalInSec: 1800
-        ntp:
-          threshold: 0
-          reportIntervalInSec: 0
-        temperature:
-          ambient: 75
-          pa: 105
-        database: true
-        radio_api: true
-        radio_control: true
-        reader_gateway: true
-      heartbeat:
-        fields:
-          radio_control:
-          - ANTENNAS
-          reader_gateway:
-          - NUM_DATA_MESSAGES_RXED
-          system:
-          - CPU
-          userapps:
-          - STATUS
-          userDefined: string
-        interval: 60
-      gpiEvents: true
-      userappEvents: true
-    endpointConfig:
-      data:
-        event:
-          connections:
-          - type: mqtt
-            options:
-              endpoint:
-                hostName: 10.17.231.77
-                port: 8883
-                protocol: tcp
-              enableSecurity: true
-              security:
-                keyFormat: PEM
-                keyAlgorithm: RSA256
-                CACertificateFileLocation: string
-                publicKeyFileLocation: string
-                privateKeyFileLocation: string
-                verifyHostName: true
-              basicAuthentication:
-                username: string
-                password: string
-              additional:
-                keepAlive: 0
-                cleanSession: true
-                debug: true
-                reconnectDelay: 0
-                reconnectDelayMax: 0
-                clientId: string
-                qos: 0
-              publishTopic:
-              - string
-              subscribeTopic:
-              - string
-            name: string
-            description: string
-            additionalOptions:
-              batching:
-                reportingInterval: 1000
-                maxPayloadSizePerReport: 256000
-              retention:
-                throttle: 200
-                maxNumEvents: 150000
-                maxEventRetentionTimeInMin: 10
+description: At least one of xml, GPIO-LED, or READER-GATEWAY must be provided.
 properties:
   xml:
     type: string
-    description: Current reader XML configuration
+    description: Raw XML reader configuration string.
   GPIO-LED:
     title: GPIO-LED configuration
-    oneOf:
-    - type: string
-    - type: object
+    type: object
     description: 'GPIO-LED module configuration
 
 
@@ -247,30 +33,6 @@ properties:
 
       9. RADIO_STOP: event raised when inventory operation stopped using STOP API'
     properties:
-      GPIDebounce:
-        type: object
-        description: GPI Debounce Configuration
-        properties:
-          '1':
-            type: number
-            description: GPI Debounce for pin 1 in milliseconds
-            minimum: 0
-            default: 50
-          '2':
-            description: GPI Debounce for pin 2 in milliseconds
-            minimum: 0
-            default: 50
-            type: number
-          '3':
-            description: GPI Debounce for pin 3 in milliseconds (only applicable to FX9600 readers)
-            minimum: 0
-            default: 50
-            type: number
-          '4':
-            description: GPI Debounce for pin 4 in milliseconds (only applicable to FX9600 readers)
-            minimum: 0
-            default: 50
-            type: number
       GPODefaults:
         type: object
         description: GPO default configurations
@@ -303,13 +65,27 @@ properties:
         type: object
         description: LED default configurations
         properties:
-          '3':
+          '1':
+            type: string
+            enum:
+            - GREEN
+            - RED
+            - AMBER
+            description: set default color for LED 2
+          '2':
             type: string
             enum:
             - GREEN
             - RED
             - AMBER
             description: set default color for LED 3
+          '3':
+            type: string
+            enum:
+            - RED
+            - GREEN
+            - AMBER
+            description: set default color for LED 4
       GPI_1_H:
         title: GPO-LED Action
         type: array
@@ -318,6 +94,7 @@ properties:
         items:
           anyOf:
           - title: GPO Action
+            type: object
             description: 'Configuration to define operations on single GPO.
 
 
@@ -353,7 +130,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -371,6 +147,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -384,13 +161,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -398,6 +174,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -405,7 +182,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -418,13 +195,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -432,6 +208,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -448,6 +225,7 @@ properties:
             - pin
             - state
           - title: LED Action
+            type: object
             description: 'Configuration to define operations on single LED.
 
 
@@ -462,6 +240,8 @@ properties:
                 type: number
                 description: LED number
                 enum:
+                - 1
+                - 2
                 - 3
               color:
                 type: string
@@ -481,7 +261,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -499,6 +278,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -512,13 +292,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -526,6 +305,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -533,7 +313,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -546,13 +326,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -560,6 +339,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -575,7 +355,6 @@ properties:
             - type
             - led
             - color
-          type: object
       GPI_1_L:
         title: GPO-LED Action
         type: array
@@ -584,6 +363,7 @@ properties:
         items:
           anyOf:
           - title: GPO Action
+            type: object
             description: 'Configuration to define operations on single GPO.
 
 
@@ -619,7 +399,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -637,6 +416,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -650,13 +430,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -664,6 +443,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -671,7 +451,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -684,13 +464,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -698,6 +477,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -714,6 +494,7 @@ properties:
             - pin
             - state
           - title: LED Action
+            type: object
             description: 'Configuration to define operations on single LED.
 
 
@@ -728,6 +509,8 @@ properties:
                 type: number
                 description: LED number
                 enum:
+                - 1
+                - 2
                 - 3
               color:
                 type: string
@@ -747,7 +530,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -765,6 +547,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -778,13 +561,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -792,6 +574,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -799,7 +582,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -812,13 +595,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -826,6 +608,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -841,7 +624,6 @@ properties:
             - type
             - led
             - color
-          type: object
       GPI_2_H:
         title: GPO-LED Action
         type: array
@@ -850,6 +632,7 @@ properties:
         items:
           anyOf:
           - title: GPO Action
+            type: object
             description: 'Configuration to define operations on single GPO.
 
 
@@ -885,7 +668,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -903,6 +685,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -916,13 +699,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -930,6 +712,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -937,7 +720,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -950,13 +733,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -964,6 +746,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -980,6 +763,7 @@ properties:
             - pin
             - state
           - title: LED Action
+            type: object
             description: 'Configuration to define operations on single LED.
 
 
@@ -994,6 +778,8 @@ properties:
                 type: number
                 description: LED number
                 enum:
+                - 1
+                - 2
                 - 3
               color:
                 type: string
@@ -1013,7 +799,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -1031,6 +816,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1044,13 +830,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -1058,6 +843,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1065,7 +851,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -1078,13 +864,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -1092,6 +877,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1107,7 +893,6 @@ properties:
             - type
             - led
             - color
-          type: object
       GPI_2_L:
         title: GPO-LED Action
         type: array
@@ -1116,6 +901,7 @@ properties:
         items:
           anyOf:
           - title: GPO Action
+            type: object
             description: 'Configuration to define operations on single GPO.
 
 
@@ -1151,7 +937,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -1169,6 +954,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1182,13 +968,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -1196,6 +981,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1203,7 +989,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -1216,13 +1002,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -1230,6 +1015,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1246,6 +1032,7 @@ properties:
             - pin
             - state
           - title: LED Action
+            type: object
             description: 'Configuration to define operations on single LED.
 
 
@@ -1260,6 +1047,8 @@ properties:
                 type: number
                 description: LED number
                 enum:
+                - 1
+                - 2
                 - 3
               color:
                 type: string
@@ -1279,7 +1068,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -1297,6 +1085,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1310,13 +1099,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -1324,6 +1112,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1331,7 +1120,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -1344,13 +1133,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -1358,6 +1146,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1373,7 +1162,6 @@ properties:
             - type
             - led
             - color
-          type: object
       CLOUD_DISCONNECT:
         title: GPO-LED Action
         type: array
@@ -1382,6 +1170,7 @@ properties:
         items:
           anyOf:
           - title: GPO Action
+            type: object
             description: 'Configuration to define operations on single GPO.
 
 
@@ -1417,7 +1206,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -1435,6 +1223,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1448,13 +1237,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -1462,6 +1250,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1469,7 +1258,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -1482,13 +1271,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -1496,6 +1284,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1512,6 +1301,7 @@ properties:
             - pin
             - state
           - title: LED Action
+            type: object
             description: 'Configuration to define operations on single LED.
 
 
@@ -1526,6 +1316,8 @@ properties:
                 type: number
                 description: LED number
                 enum:
+                - 1
+                - 2
                 - 3
               color:
                 type: string
@@ -1545,7 +1337,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -1563,6 +1354,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1576,13 +1368,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -1590,6 +1381,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1597,7 +1389,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -1610,13 +1402,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -1624,6 +1415,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1639,7 +1431,6 @@ properties:
             - type
             - led
             - color
-          type: object
       CLOUD_CONNECT:
         title: GPO-LED Action
         type: array
@@ -1648,6 +1439,7 @@ properties:
         items:
           anyOf:
           - title: GPO Action
+            type: object
             description: 'Configuration to define operations on single GPO.
 
 
@@ -1683,7 +1475,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -1701,6 +1492,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1714,13 +1506,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -1728,6 +1519,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1735,7 +1527,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -1748,13 +1540,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -1762,6 +1553,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1778,6 +1570,7 @@ properties:
             - pin
             - state
           - title: LED Action
+            type: object
             description: 'Configuration to define operations on single LED.
 
 
@@ -1792,6 +1585,8 @@ properties:
                 type: number
                 description: LED number
                 enum:
+                - 1
+                - 2
                 - 3
               color:
                 type: string
@@ -1811,7 +1606,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -1829,6 +1623,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1842,13 +1637,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -1856,6 +1650,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1863,7 +1658,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -1876,13 +1671,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -1890,6 +1684,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1905,7 +1700,6 @@ properties:
             - type
             - led
             - color
-          type: object
       TAG_READ:
         title: GPO-LED Action
         type: array
@@ -1914,6 +1708,7 @@ properties:
         items:
           anyOf:
           - title: GPO Action
+            type: object
             description: 'Configuration to define operations on single GPO.
 
 
@@ -1949,7 +1744,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -1967,6 +1761,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1980,13 +1775,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -1994,6 +1788,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -2001,7 +1796,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -2014,13 +1809,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -2028,6 +1822,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -2044,6 +1839,7 @@ properties:
             - pin
             - state
           - title: LED Action
+            type: object
             description: 'Configuration to define operations on single LED.
 
 
@@ -2058,6 +1854,8 @@ properties:
                 type: number
                 description: LED number
                 enum:
+                - 1
+                - 2
                 - 3
               color:
                 type: string
@@ -2077,7 +1875,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -2095,6 +1892,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -2108,13 +1906,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -2122,6 +1919,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -2129,7 +1927,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -2142,13 +1940,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -2156,6 +1953,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -2171,7 +1969,6 @@ properties:
             - type
             - led
             - color
-          type: object
       RADIO_START:
         title: GPO-LED Action
         type: array
@@ -2180,6 +1977,7 @@ properties:
         items:
           anyOf:
           - title: GPO Action
+            type: object
             description: 'Configuration to define operations on single GPO.
 
 
@@ -2215,7 +2013,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -2233,6 +2030,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -2246,13 +2044,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -2260,6 +2057,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -2267,7 +2065,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -2280,13 +2078,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -2294,6 +2091,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -2310,6 +2108,7 @@ properties:
             - pin
             - state
           - title: LED Action
+            type: object
             description: 'Configuration to define operations on single LED.
 
 
@@ -2324,6 +2123,8 @@ properties:
                 type: number
                 description: LED number
                 enum:
+                - 1
+                - 2
                 - 3
               color:
                 type: string
@@ -2343,7 +2144,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -2361,6 +2161,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -2374,13 +2175,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -2388,6 +2188,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -2395,7 +2196,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -2408,13 +2209,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -2422,6 +2222,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -2437,7 +2238,6 @@ properties:
             - type
             - led
             - color
-          type: object
       RADIO_STOP:
         title: GPO-LED Action
         type: array
@@ -2446,6 +2246,7 @@ properties:
         items:
           anyOf:
           - title: GPO Action
+            type: object
             description: 'Configuration to define operations on single GPO.
 
 
@@ -2481,7 +2282,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -2499,6 +2299,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -2512,13 +2313,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -2526,6 +2326,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -2533,7 +2334,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -2546,13 +2347,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -2560,6 +2360,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -2576,6 +2377,7 @@ properties:
             - pin
             - state
           - title: LED Action
+            type: object
             description: 'Configuration to define operations on single LED.
 
 
@@ -2590,6 +2392,8 @@ properties:
                 type: number
                 description: LED number
                 enum:
+                - 1
+                - 2
                 - 3
               color:
                 type: string
@@ -2609,7 +2413,6 @@ properties:
                 title: Action Blink Configuration
                 type: object
                 description: action blink configuration for GPO or LED
-                x-internal: true
                 properties:
                   'ON':
                     type: number
@@ -2627,6 +2430,7 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
+                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -2640,13 +2444,12 @@ properties:
                     ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                    IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                    ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                   uniqueItems: true
                   minItems: 0
-                  x-internal: true
                   items:
                     type: string
                     enum:
@@ -2654,6 +2457,7 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
+                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -2661,7 +2465,7 @@ properties:
                       enum:
                       - and
                       - or
-                      description: operator tobe used for conditions validation
+                      description: Operator to be used for conditions validation
                     operands:
                       type: array
                       title: Conditions Array
@@ -2674,13 +2478,12 @@ properties:
                         ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
 
 
-                        IS_RADIO_ONGOING    : Condition will be true when reader is currenty performing inventory or started inventory operation.
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
 
 
-                        ~IS_RADIO_ONGOING   : Condition will be true when reader is not performing inventory or stoped inventory operation.'
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
                       uniqueItems: true
                       minItems: 0
-                      x-internal: true
                       items:
                         type: string
                         enum:
@@ -2688,6 +2491,7 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
+                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -2703,72 +2507,243 @@ properties:
             - type
             - led
             - color
-          type: object
   READER-GATEWAY:
     type: object
-    description: Gateway specific configuration
+    description: 'Cloud gateway configuration. Must contain at least one of: endpointConfig, batching, retention, or managementEventConfig.'
     properties:
-      retention:
-        title: Tag Data Events Retention Configuration
-        oneOf:
-        - type: object
-        - type: array
-          items:
-            type: object
-        description: 'Tag Data Events Retention Configuration on connection lost'
+      endpointConfig:
+        type: object
+        description: Endpoint connections configuration. Only the data endpoint is configurable via this API.
         properties:
-          throttle:
-            type: integer
-            default: 100
-            description: Rate (in events per second) to report data events when network is reconnected
-            minimum: 1
-            example: 200
-            maximum: 1000
-          maxNumEvents:
-            type: integer
-            default: 150000
-            description: Maximum number of events to retain
-            maximum: 150000
-            minimum: 1
-            example: 150000
-          maxEventRetentionTimeInMin:
-            type: integer
-            description: 'Maximum event retention time (in minutes)
-
-
-              0 indicate Events will be retained Forever
-
-
-              Example:
-
-              10 indicate Events generated in last 10 minutes will be retained'
-            example: 10
-            default: 500
-            minimum: 0
-            maximum: 10080
+          data:
+            type: object
+            properties:
+              event:
+                type: object
+                properties:
+                  connections:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        additionalOptions:
+                          type: object
+                          properties:
+                            batching:
+                              type:
+                              - object
+                              - 'null'
+                              example: null
+                            retention:
+                              type: object
+                              properties:
+                                maxEventRetentionTimeInMin:
+                                  type: number
+                                  example: 500
+                                maxNumEvents:
+                                  type: number
+                                  example: 150000
+                                throttle:
+                                  type: number
+                                  example: 500
+                        description:
+                          type: string
+                          example: MQTT_TEST
+                        name:
+                          type: string
+                          example: MQTT_TEST
+                        options:
+                          type: object
+                          properties:
+                            additional:
+                              type: object
+                              properties:
+                                cleanSession:
+                                  type: boolean
+                                  example: true
+                                clientId:
+                                  type: string
+                                  example: EV1
+                                debug:
+                                  type: boolean
+                                  example: false
+                                keepAlive:
+                                  type: number
+                                  example: 60
+                                qos:
+                                  type: number
+                                  example: 0
+                                reconnectDelay:
+                                  type: number
+                                  example: 1
+                                reconnectDelayMax:
+                                  type: number
+                                  example: 5
+                            enableSecurity:
+                              type: boolean
+                              example: false
+                            endpoint:
+                              type: object
+                              properties:
+                                hostName:
+                                  type: string
+                                  example: 10.117.229.9
+                                port:
+                                  type: number
+                                  example: 1883
+                                protocol:
+                                  type: string
+                                  example: tcp
+                            publishTopic:
+                              type: array
+                              items:
+                                type: string
+                                example: tagevents_r2c_longrun
+                              example:
+                              - tagevents_r2c_longrun
+                            security:
+                              type: object
+                              properties:
+                                CACertificateFileLocation:
+                                  type: string
+                                  example: /home/root/broker.emqx.io-ca.crt
+                                installedCertificateName:
+                                  type: string
+                                  example: Server
+                                installedCertificateType:
+                                  type: string
+                                  example: server
+                                keyAlgorithm:
+                                  type: string
+                                  example: RS256
+                                keyFormat:
+                                  type: string
+                                  example: PEM
+                                verifyHostName:
+                                  type: boolean
+                                  example: false
+                                verifyPeer:
+                                  type: boolean
+                                  example: false
+                            subscribeTopic:
+                              type: array
+                              items: {}
+                              example: []
+                        type:
+                          type: string
+                          example: mqtt
+                    example:
+                    - additionalOptions:
+                        batching: null
+                        retention:
+                          maxEventRetentionTimeInMin: 500
+                          maxNumEvents: 150000
+                          throttle: 500
+                      description: MQTT_TEST
+                      name: MQTT_TEST
+                      options:
+                        additional:
+                          cleanSession: true
+                          clientId: EV1
+                          debug: false
+                          keepAlive: 60
+                          qos: 0
+                          reconnectDelay: 1
+                          reconnectDelayMax: 5
+                        enableSecurity: false
+                        endpoint:
+                          hostName: 10.117.229.9
+                          port: 1883
+                          protocol: tcp
+                        publishTopic:
+                        - tagevents_r2c_longrun
+                        security:
+                          CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+                          installedCertificateName: Server
+                          installedCertificateType: server
+                          keyAlgorithm: RS256
+                          keyFormat: PEM
+                          verifyHostName: false
+                          verifyPeer: false
+                        subscribeTopic: []
+                      type: mqtt
       batching:
-        title: Tag Data Events batching configuration
+        description: Global batching configuration applied across all data endpoints. Can be a single object (applied to all endpoints) or an array of objects (one per endpoint, array length must match number of data endpoint connections).
         oneOf:
         - type: object
+          description: Single batching config applied to all data endpoints
+          properties:
+            maxPayloadSizePerReport:
+              type: integer
+              description: Maximum payload size in bytes (0 - 256000). -1 to disable.
+              minimum: 0
+              maximum: 256000
+              example: 65536
+            reportingInterval:
+              type: integer
+              description: Report interval in milliseconds (0 - 86400000). -1 to disable.
+              minimum: 0
+              maximum: 86400000
+              example: 1000
         - type: array
+          description: Per-endpoint batching config (one entry per data endpoint connection)
           items:
             type: object
-        description: 'Tag Data Events batching configuration
-
-
-          NOTE : Batching can be disabled by configuring maxPayloadSizePerReport and reportingInterval to 0.'
-        properties:
-          reportingInterval:
-            type: number
-            description: 'Event Report interval in milliseconds.(default: 2000 milliseconds for HTTP POST Endpoint).'
-            minimum: 0
-            example: 1000
-            maximum: 86400000
-          maxPayloadSizePerReport:
-            type: number
-            description: 'Maximum payload size in bytes.(default: 256000 bytes for HTTP POST Endpoint).'
-            minimum: 0
-            maximum: 256000
+            properties:
+              maxPayloadSizePerReport:
+                type: integer
+                minimum: 0
+                maximum: 256000
+                example: 65536
+              reportingInterval:
+                type: integer
+                minimum: 0
+                maximum: 86400000
+                example: 1000
+      retention:
+        description: Global retention configuration for data events on connection loss. Can be a single object (applied to all endpoints) or an array of objects (one per endpoint, array length must match number of data endpoint connections).
+        oneOf:
+        - type: object
+          description: Single retention config applied to all data endpoints
+          properties:
+            maxEventRetentionTimeInMin:
+              type: integer
+              description: Maximum event retention time in minutes (0 - 10080). 0 or -1 retains forever.
+              minimum: 0
+              maximum: 10080
+              example: 1440
+            maxNumEvents:
+              type: integer
+              description: Maximum number of events to retain (0 - 150000).
+              minimum: 0
+              maximum: 150000
+              example: 150000
+            throttle:
+              type: integer
+              description: Rate in events/sec to replay retained events on reconnect (0 - 1000).
+              minimum: 0
+              maximum: 1000
+              example: 500
+        - type: array
+          description: Per-endpoint retention config (one entry per data endpoint connection)
+          items:
+            type: object
+            properties:
+              maxEventRetentionTimeInMin:
+                type: integer
+                minimum: 0
+                maximum: 10080
+                example: 1440
+              maxNumEvents:
+                type: integer
+                minimum: 0
+                maximum: 150000
+                example: 150000
+              throttle:
+                type: integer
+                minimum: 0
+                maximum: 1000
+                example: 500
       managementEventConfig:
         description: Asynchronous management events configuration
         type: object
@@ -2870,7 +2845,7 @@ properties:
                     default: 90
                     example: 90
                     minimum: 1
-                    maximum: 100
+                    maximum: 99
                   reportIntervalInSec:
                     type: number
                     default: 1800
@@ -2889,7 +2864,7 @@ properties:
                     default: 90
                     example: 90
                     minimum: 1
-                    maximum: 100
+                    maximum: 99
                   reportIntervalInSec:
                     type: number
                     description: Error Report Interval in seconds.
@@ -2908,7 +2883,7 @@ properties:
                     default: 90
                     example: 90
                     minimum: 1
-                    maximum: 100
+                    maximum: 99
                   reportIntervalInSec:
                     type: number
                     description: Error Report Interval in seconds.
@@ -2917,6 +2892,10 @@ properties:
                     example: 1800
                 required:
                 - threshold
+              reader_gateway:
+                type: boolean
+                default: true
+                description: Reader Gateway Errors
               antenna:
                 type: boolean
                 description: Antenna Connect/Disconnect Alerts
@@ -2933,30 +2912,6 @@ properties:
                 type: boolean
                 default: true
                 description: Radio Control Error Alerts
-              userApp:
-                type: object
-                description: userApp Error Alert
-                properties:
-                  threshold:
-                    type: number
-                    example: 35
-                    description: Error userApp usage limit
-                    minimum: 30
-                    maximum: 86400
-                    default: 120
-                  reportIntervalInSec:
-                    type: number
-                    example: 35
-                    maximum: 86400
-                    description: Error Report Interval in seconds.
-                    minimum: 30
-                    default: 1800
-                required:
-                - threshold
-              ntp:
-                type: boolean
-                description: NTP Error Alert
-                default: true
           warnings:
             type: object
             description: Asynchronous Management Warnings
@@ -2971,7 +2926,7 @@ properties:
                     default: 80
                     example: 80
                     minimum: 1
-                    maximum: 100
+                    maximum: 99
                   reportIntervalInSec:
                     type: number
                     default: 1800
@@ -2990,7 +2945,7 @@ properties:
                     default: 80
                     example: 90
                     minimum: 1
-                    maximum: 100
+                    maximum: 99
                   reportIntervalInSec:
                     type: number
                     description: Warning Report Interval in seconds.
@@ -3009,7 +2964,7 @@ properties:
                     default: 90
                     example: 90
                     minimum: 1
-                    maximum: 100
+                    maximum: 99
                   reportIntervalInSec:
                     type: number
                     description: Warning Report Interval in seconds.
@@ -3018,6 +2973,23 @@ properties:
                     example: 1800
                 required:
                 - threshold
+              ntp:
+                description: NTP Warning Alert
+                oneOf:
+                - type: object
+                  description: NTP offset warnings config
+                  properties:
+                    threshold:
+                      type: number
+                      description: NTP offset threshold
+                    reportIntervalInSec:
+                      type: number
+                      description: Warning Report Interval in seconds.
+                  required:
+                  - threshold
+                - type: boolean
+                  description: NTP sync warning alerts
+                  default: true
               temperature:
                 type: object
                 description: Reader temperature warning limits
@@ -3030,6 +3002,9 @@ properties:
                     type: number
                     description: PA temperature limit
                     default: 105
+                required:
+                - ambient
+                - pa
               database:
                 type: boolean
                 default: true
@@ -3042,30 +3017,10 @@ properties:
                 type: boolean
                 default: true
                 description: Radio Control warnings
-              ntp:
+              reader_gateway:
                 type: boolean
-                description: NTP Warning Alert
                 default: true
-              userApp:
-                type: object
-                description: userApp Warning Alert
-                properties:
-                  threshold:
-                    type: number
-                    description: Error userApp usage limit
-                    maximum: 86400
-                    default: 60
-                    minimum: 30
-                    example: 35
-                  reportIntervalInSec:
-                    type: number
-                    description: Error Report Interval in seconds.
-                    default: 1800
-                    example: 35
-                    minimum: 30
-                    maximum: 86400
-                required:
-                - threshold
+                description: Reader Gateway Errors
           heartbeat:
             type: object
             description: Asynchronous Heartbeat Events
@@ -3107,8 +3062,6 @@ properties:
                       - UPTIME
                       - NUM_ERRORS
                       - NUM_WARNINGS
-                      - INTERFACE_CONNECTION_STATUS
-                      - NOLOCKQ_DEPTH
                   system:
                     type: array
                     items:
@@ -3121,12 +3074,8 @@ properties:
                       - SYSTEMTIME
                       - TEMPERATURE
                       - UPTIME
-                      - GPO
-                      - GPI
-                      - POWER_NEGOTIATION
-                      - POWER_SOURCE
-                      - MAC_ADDRESS
                       - HOSTNAME
+                      - MACADDRESS
                   userapps:
                     type: array
                     items:
@@ -3142,7 +3091,7 @@ properties:
                       - OUTGOING_DATA_BUFFER_PERCENTAGE_REMAINING
                   userDefined:
                     type: object
-                    description: 'Custom user defined field'
+                    description: Custom user defined field
               interval:
                 type: number
                 description: heartbeat report interval in seconds
@@ -3154,19 +3103,8 @@ properties:
             type: boolean
             description: GPI Events
             default: true
-          gpoEvents:
-            type: boolean
-            description: GPO Events
-            default: true
           userappEvents:
             type: boolean
             default: true
-            description: 'asyncronous events from user applications '
-      endpointConfig:
-        type: object
-        properties:
-          data:
-            type: object
-            properties:
-              event:
-                $ref: ../shared/event.v1.yaml
+            description: Asynchronous events from user applications
+title: Reader Configuration

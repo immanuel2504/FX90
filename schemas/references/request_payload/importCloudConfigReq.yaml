@@ -1,171 +1,670 @@
-title: Import Cloud Config Request
-x-stoplight:
-  id: ykvtb3ll3v3cw
 type: object
-examples:
-- endpointConfig:
-    control:
-      commandResponse:
-        connections:
-        - description: MQTT_TEST
-          name: MQTT_TEST
-          options:
-            additional:
-              cleanSession: true
-              clientId: FX9600FCC017
-              debug: false
-              keepAlive: 60
-              qos: 0
-              reconnectDelay: 1
-              reconnectDelayMax: 5
-            enableSecurity: false
-            endpoint:
-              hostName: broker.emqx.io
-              port: 1883
-              protocol: tcp
-            publishTopic:
-            - FX9600FCC017/rsp
-            security:
-              CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
-              installedCertificateName: Server
-              installedCertificateType: server
-              keyAlgorithm: RS256
-              keyFormat: PEM
-              verifyHostName: false
-              verifyPeer: false
-            subscribeTopic:
-            - FX9600FCC017/cmd
-          type: mqtt
-        enableLocalRest: true
-    data:
-      event:
-        connections:
-        - additionalOptions:
-            batching: null
-            retention:
-              maxEventRetentionTimeInMin: 500
-              maxNumEvents: 150000
-              throttle: 500
-          description: MQTT_TEST
-          name: MQTT_TEST
-          options:
-            additional:
-              cleanSession: true
-              clientId: FX9600FCC017
-              debug: false
-              keepAlive: 60
-              qos: 0
-              reconnectDelay: 1
-              reconnectDelayMax: 5
-            enableSecurity: false
-            endpoint:
-              hostName: broker.emqx.io
-              port: 1883
-              protocol: tcp
-            publishTopic:
-            - FX9600FCC017/tevents
-            security:
-              CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
-              installedCertificateName: Server
-              installedCertificateType: server
-              keyAlgorithm: RS256
-              keyFormat: PEM
-              verifyHostName: false
-              verifyPeer: false
-            subscribeTopic: []
-          type: mqtt
-    management:
-      commandResponse:
-        connections:
-        - description: MQTT_TEST
-          name: MQTT_TEST
-          options:
-            additional:
-              cleanSession: true
-              clientId: FX9600FCC017
-              debug: false
-              keepAlive: 60
-              qos: 0
-              reconnectDelay: 1
-              reconnectDelayMax: 5
-            enableSecurity: false
-            endpoint:
-              hostName: broker.emqx.io
-              port: 1883
-              protocol: tcp
-            publishTopic:
-            - FX9600FCC017/rsp
-            security:
-              CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
-              installedCertificateName: Server
-              installedCertificateType: server
-              keyAlgorithm: RS256
-              keyFormat: PEM
-              verifyHostName: false
-              verifyPeer: false
-            subscribeTopic:
-            - FX9600FCC017/cmd
-          type: mqtt
-        enableLocalRest: true
-      event:
-        connections:
-        - description: MQTT_TEST
-          name: MQTT_TEST
-          options:
-            additional:
-              cleanSession: true
-              clientId: FX9600FCC017
-              debug: false
-              keepAlive: 60
-              qos: 0
-              reconnectDelay: 1
-              reconnectDelayMax: 5
-            enableSecurity: false
-            endpoint:
-              hostName: broker.emqx.io
-              port: 1883
-              protocol: tcp
-            publishTopic:
-            - FX9600FCC017/mevents
-            subscribeTopic: []
-          type: mqtt
-description: Imports Cloud Configuration
+required:
+- endpointConfig
 properties:
   endpointConfig:
     type: object
-    x-stoplight:
-      id: lq94d22unugji
     properties:
-      data:
-        type: object
-        x-stoplight:
-          id: 3v14mz45s5qlx
-        properties:
-          event:
-            $ref: ../shared/event.v1.yaml
-            x-stoplight:
-              id: fkuxodt97brxb
       control:
         type: object
-        x-stoplight:
-          id: zuhe4tlmzph3e
         properties:
           commandResponse:
-            $ref: ../shared/ctrl_cmdresp.yaml
-            x-stoplight:
-              id: dkgtkjtr2tvz7
-      management:
+            type: object
+            properties:
+              connections:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                      example: MQTT_TEST
+                      description: Human-readable description of the endpoint connection.
+                    name:
+                      type: string
+                      example: MQTT_TEST
+                      description: Unique name assigned to the endpoint connection.
+                    options:
+                      type: object
+                      properties:
+                        additional:
+                          type: object
+                          properties:
+                            cleanSession:
+                              type: boolean
+                              example: true
+                              description: Whether the MQTT client starts a clean broker session when connecting.
+                            clientId:
+                              type: string
+                              example: FX9600FCC017
+                              description: MQTT client identifier used by the reader for this connection.
+                            debug:
+                              type: boolean
+                              example: false
+                              description: Whether debug logging is enabled for this endpoint connection.
+                            keepAlive:
+                              type: number
+                              example: 60
+                              description: MQTT keep-alive interval, in seconds.
+                            qos:
+                              type: number
+                              example: 0
+                              description: MQTT quality of service level used for publishing messages.
+                            reconnectDelay:
+                              type: number
+                              example: 1
+                              description: Initial reconnect delay, in seconds, after a connection failure.
+                            reconnectDelayMax:
+                              type: number
+                              example: 5
+                              description: Maximum reconnect delay, in seconds, after repeated connection failures.
+                          description: Additional MQTT client behavior options for this endpoint.
+                        enableSecurity:
+                          type: boolean
+                          example: false
+                          description: Whether TLS or certificate-based security is enabled for this endpoint.
+                        endpoint:
+                          type: object
+                          properties:
+                            hostName:
+                              type: string
+                              example: broker.emqx.io
+                              description: Broker or server host name or IP address.
+                            port:
+                              type: number
+                              example: 1883
+                              description: Broker or server TCP port.
+                            protocol:
+                              type: string
+                              example: tcp
+                              description: Transport protocol used by the endpoint connection.
+                          description: Remote broker or server address for this connection.
+                        publishTopic:
+                          type: array
+                          items:
+                            type: string
+                            example: FX9600FCC017/rsp
+                          example:
+                          - FX9600FCC017/rsp
+                          description: MQTT topics where the reader publishes data for this channel.
+                        security:
+                          type: object
+                          properties:
+                            CACertificateFileLocation:
+                              type: string
+                              example: /home/root/broker.emqx.io-ca.crt
+                              description: Path to the CA certificate file used to validate the remote endpoint.
+                            installedCertificateName:
+                              type: string
+                              example: Server
+                              description: Name of the installed certificate used by this connection.
+                            installedCertificateType:
+                              type: string
+                              example: server
+                              description: Type of installed certificate used by this connection.
+                            keyAlgorithm:
+                              type: string
+                              example: RS256
+                              description: Key algorithm used by the configured certificate or private key.
+                            keyFormat:
+                              type: string
+                              example: PEM
+                              description: Encoding format of the configured certificate or private key.
+                            verifyHostName:
+                              type: boolean
+                              example: false
+                              description: Whether the reader verifies that the remote certificate matches the configured host name.
+                            verifyPeer:
+                              type: boolean
+                              example: false
+                              description: Whether the reader verifies the remote certificate chain.
+                          description: TLS certificate and verification settings for secure endpoint connections.
+                        subscribeTopic:
+                          type: array
+                          items:
+                            type: string
+                            example: FX9600FCC017/cmd
+                          example:
+                          - FX9600FCC017/cmd
+                          description: MQTT topics where the reader subscribes for commands or control messages.
+                      description: Connection-specific transport, security, topic, and authentication options.
+                    type:
+                      type: string
+                      example: mqtt
+                      description: Endpoint transport type used for control command responses.
+                example:
+                - description: MQTT_TEST
+                  name: MQTT_TEST
+                  options:
+                    additional:
+                      cleanSession: true
+                      clientId: FX9600FCC017
+                      debug: false
+                      keepAlive: 60
+                      qos: 0
+                      reconnectDelay: 1
+                      reconnectDelayMax: 5
+                    enableSecurity: false
+                    endpoint:
+                      hostName: broker.emqx.io
+                      port: 1883
+                      protocol: tcp
+                    publishTopic:
+                    - FX9600FCC017/rsp
+                    security:
+                      CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+                      installedCertificateName: Server
+                      installedCertificateType: server
+                      keyAlgorithm: RS256
+                      keyFormat: PEM
+                      verifyHostName: false
+                      verifyPeer: false
+                    subscribeTopic:
+                    - FX9600FCC017/cmd
+                  type: mqtt
+                description: List of endpoint connections configured for this channel.
+              enableLocalRest:
+                type: boolean
+                example: true
+                description: Whether the local REST interface remains enabled for this command-response channel.
+            description: Endpoint settings used to publish command responses.
+        description: Configuration for control-plane command response delivery.
+      data:
         type: object
-        x-stoplight:
-          id: kceoheiqj6ag1
         properties:
           event:
-            $ref: ../shared/mgmt_event.yaml
-            x-stoplight:
-              id: xfq7xd0vq2l5b
+            type: object
+            properties:
+              connections:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    additionalOptions:
+                      type: object
+                      properties:
+                        batching:
+                          type:
+                          - object
+                          - 'null'
+                          example: null
+                          description: Batching settings that control how events are grouped before publishing.
+                        retention:
+                          type: object
+                          properties:
+                            maxEventRetentionTimeInMin:
+                              type: number
+                              example: 500
+                              description: Maximum time, in minutes, that retained events are kept before being dropped.
+                            maxNumEvents:
+                              type: number
+                              example: 150000
+                              description: Maximum number of events retained for this endpoint.
+                            throttle:
+                              type: number
+                              example: 500
+                              description: Maximum event publishing rate or throttle value for retained events.
+                          description: Retention settings used when events cannot be delivered immediately.
+                      description: Per-endpoint batching and retention options applied to generated events.
+                    description:
+                      type: string
+                      example: MQTT_TEST
+                      description: Human-readable description of the endpoint connection.
+                    name:
+                      type: string
+                      example: MQTT_TEST
+                      description: Unique name assigned to the endpoint connection.
+                    options:
+                      type: object
+                      properties:
+                        additional:
+                          type: object
+                          properties:
+                            cleanSession:
+                              type: boolean
+                              example: true
+                              description: Whether the MQTT client starts a clean broker session when connecting.
+                            clientId:
+                              type: string
+                              example: FX9600FCC017
+                              description: MQTT client identifier used by the reader for this connection.
+                            debug:
+                              type: boolean
+                              example: false
+                              description: Whether debug logging is enabled for this endpoint connection.
+                            keepAlive:
+                              type: number
+                              example: 60
+                              description: MQTT keep-alive interval, in seconds.
+                            qos:
+                              type: number
+                              example: 0
+                              description: MQTT quality of service level used for publishing messages.
+                            reconnectDelay:
+                              type: number
+                              example: 1
+                              description: Initial reconnect delay, in seconds, after a connection failure.
+                            reconnectDelayMax:
+                              type: number
+                              example: 5
+                              description: Maximum reconnect delay, in seconds, after repeated connection failures.
+                          description: Additional MQTT client behavior options for this endpoint.
+                        enableSecurity:
+                          type: boolean
+                          example: false
+                          description: Whether TLS or certificate-based security is enabled for this endpoint.
+                        endpoint:
+                          type: object
+                          properties:
+                            hostName:
+                              type: string
+                              example: broker.emqx.io
+                              description: Broker or server host name or IP address.
+                            port:
+                              type: number
+                              example: 1883
+                              description: Broker or server TCP port.
+                            protocol:
+                              type: string
+                              example: tcp
+                              description: Transport protocol used by the endpoint connection.
+                          description: Remote broker or server address for this connection.
+                        publishTopic:
+                          type: array
+                          items:
+                            type: string
+                            example: FX9600FCC017/tevents
+                          example:
+                          - FX9600FCC017/tevents
+                          description: MQTT topics where the reader publishes data for this channel.
+                        security:
+                          type: object
+                          properties:
+                            CACertificateFileLocation:
+                              type: string
+                              example: /home/root/broker.emqx.io-ca.crt
+                              description: Path to the CA certificate file used to validate the remote endpoint.
+                            installedCertificateName:
+                              type: string
+                              example: Server
+                              description: Name of the installed certificate used by this connection.
+                            installedCertificateType:
+                              type: string
+                              example: server
+                              description: Type of installed certificate used by this connection.
+                            keyAlgorithm:
+                              type: string
+                              example: RS256
+                              description: Key algorithm used by the configured certificate or private key.
+                            keyFormat:
+                              type: string
+                              example: PEM
+                              description: Encoding format of the configured certificate or private key.
+                            verifyHostName:
+                              type: boolean
+                              example: false
+                              description: Whether the reader verifies that the remote certificate matches the configured host name.
+                            verifyPeer:
+                              type: boolean
+                              example: false
+                              description: Whether the reader verifies the remote certificate chain.
+                          description: TLS certificate and verification settings for secure endpoint connections.
+                        subscribeTopic:
+                          type: array
+                          items: {}
+                          example: []
+                          description: MQTT topics where the reader subscribes for commands or control messages.
+                      description: Connection-specific transport, security, topic, and authentication options.
+                    type:
+                      type: string
+                      example: mqtt
+                      description: Endpoint transport type used for tag data event delivery.
+                example:
+                - additionalOptions:
+                    batching: null
+                    retention:
+                      maxEventRetentionTimeInMin: 500
+                      maxNumEvents: 150000
+                      throttle: 500
+                  description: MQTT_TEST
+                  name: MQTT_TEST
+                  options:
+                    additional:
+                      cleanSession: true
+                      clientId: FX9600FCC017
+                      debug: false
+                      keepAlive: 60
+                      qos: 0
+                      reconnectDelay: 1
+                      reconnectDelayMax: 5
+                    enableSecurity: false
+                    endpoint:
+                      hostName: broker.emqx.io
+                      port: 1883
+                      protocol: tcp
+                    publishTopic:
+                    - FX9600FCC017/tevents
+                    security:
+                      CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+                      installedCertificateName: Server
+                      installedCertificateType: server
+                      keyAlgorithm: RS256
+                      keyFormat: PEM
+                      verifyHostName: false
+                      verifyPeer: false
+                    subscribeTopic: []
+                  type: mqtt
+                description: List of endpoint connections configured for this channel.
+            description: Endpoint settings used to publish event data.
+        description: Configuration for tag data event delivery.
+      management:
+        type: object
+        properties:
           commandResponse:
-            $ref: ../shared/mgmt_cmdresp.yaml
-            x-stoplight:
-              id: p5o8vwwnyv7ui
-required:
-- endpointConfig
+            type: object
+            properties:
+              connections:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                      example: MQTT_TEST
+                      description: Human-readable description of the endpoint connection.
+                    name:
+                      type: string
+                      example: MQTT_TEST
+                      description: Unique name assigned to the endpoint connection.
+                    options:
+                      type: object
+                      properties:
+                        additional:
+                          type: object
+                          properties:
+                            cleanSession:
+                              type: boolean
+                              example: true
+                              description: Whether the MQTT client starts a clean broker session when connecting.
+                            clientId:
+                              type: string
+                              example: FX9600FCC017
+                              description: MQTT client identifier used by the reader for this connection.
+                            debug:
+                              type: boolean
+                              example: false
+                              description: Whether debug logging is enabled for this endpoint connection.
+                            keepAlive:
+                              type: number
+                              example: 60
+                              description: MQTT keep-alive interval, in seconds.
+                            qos:
+                              type: number
+                              example: 0
+                              description: MQTT quality of service level used for publishing messages.
+                            reconnectDelay:
+                              type: number
+                              example: 1
+                              description: Initial reconnect delay, in seconds, after a connection failure.
+                            reconnectDelayMax:
+                              type: number
+                              example: 5
+                              description: Maximum reconnect delay, in seconds, after repeated connection failures.
+                          description: Additional MQTT client behavior options for this endpoint.
+                        enableSecurity:
+                          type: boolean
+                          example: false
+                          description: Whether TLS or certificate-based security is enabled for this endpoint.
+                        endpoint:
+                          type: object
+                          properties:
+                            hostName:
+                              type: string
+                              example: broker.emqx.io
+                              description: Broker or server host name or IP address.
+                            port:
+                              type: number
+                              example: 1883
+                              description: Broker or server TCP port.
+                            protocol:
+                              type: string
+                              example: tcp
+                              description: Transport protocol used by the endpoint connection.
+                          description: Remote broker or server address for this connection.
+                        publishTopic:
+                          type: array
+                          items:
+                            type: string
+                            example: FX9600FCC017/rsp
+                          example:
+                          - FX9600FCC017/rsp
+                          description: MQTT topics where the reader publishes data for this channel.
+                        security:
+                          type: object
+                          properties:
+                            CACertificateFileLocation:
+                              type: string
+                              example: /home/root/broker.emqx.io-ca.crt
+                              description: Path to the CA certificate file used to validate the remote endpoint.
+                            installedCertificateName:
+                              type: string
+                              example: Server
+                              description: Name of the installed certificate used by this connection.
+                            installedCertificateType:
+                              type: string
+                              example: server
+                              description: Type of installed certificate used by this connection.
+                            keyAlgorithm:
+                              type: string
+                              example: RS256
+                              description: Key algorithm used by the configured certificate or private key.
+                            keyFormat:
+                              type: string
+                              example: PEM
+                              description: Encoding format of the configured certificate or private key.
+                            verifyHostName:
+                              type: boolean
+                              example: false
+                              description: Whether the reader verifies that the remote certificate matches the configured host name.
+                            verifyPeer:
+                              type: boolean
+                              example: false
+                              description: Whether the reader verifies the remote certificate chain.
+                          description: TLS certificate and verification settings for secure endpoint connections.
+                        subscribeTopic:
+                          type: array
+                          items:
+                            type: string
+                            example: FX9600FCC017/cmd
+                          example:
+                          - FX9600FCC017/cmd
+                          description: MQTT topics where the reader subscribes for commands or control messages.
+                      description: Connection-specific transport, security, topic, and authentication options.
+                    type:
+                      type: string
+                      example: mqtt
+                      description: Endpoint transport type used for management command responses.
+                example:
+                - description: MQTT_TEST
+                  name: MQTT_TEST
+                  options:
+                    additional:
+                      cleanSession: true
+                      clientId: FX9600FCC017
+                      debug: false
+                      keepAlive: 60
+                      qos: 0
+                      reconnectDelay: 1
+                      reconnectDelayMax: 5
+                    enableSecurity: false
+                    endpoint:
+                      hostName: broker.emqx.io
+                      port: 1883
+                      protocol: tcp
+                    publishTopic:
+                    - FX9600FCC017/rsp
+                    security:
+                      CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
+                      installedCertificateName: Server
+                      installedCertificateType: server
+                      keyAlgorithm: RS256
+                      keyFormat: PEM
+                      verifyHostName: false
+                      verifyPeer: false
+                    subscribeTopic:
+                    - FX9600FCC017/cmd
+                  type: mqtt
+                description: List of endpoint connections configured for this channel.
+              enableLocalRest:
+                type: boolean
+                example: true
+                description: Whether the local REST interface remains enabled for this command-response channel.
+            description: Endpoint settings used to publish command responses.
+          event:
+            type: object
+            properties:
+              connections:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                      example: MQTT_TEST
+                      description: Human-readable description of the endpoint connection.
+                    name:
+                      type: string
+                      example: MQTT_TEST
+                      description: Unique name assigned to the endpoint connection.
+                    options:
+                      type: object
+                      properties:
+                        additional:
+                          type: object
+                          properties:
+                            cleanSession:
+                              type: boolean
+                              example: true
+                              description: Whether the MQTT client starts a clean broker session when connecting.
+                            clientId:
+                              type: string
+                              example: FX9600FCC017
+                              description: MQTT client identifier used by the reader for this connection.
+                            debug:
+                              type: boolean
+                              example: false
+                              description: Whether debug logging is enabled for this endpoint connection.
+                            keepAlive:
+                              type: number
+                              example: 60
+                              description: MQTT keep-alive interval, in seconds.
+                            qos:
+                              type: number
+                              example: 0
+                              description: MQTT quality of service level used for publishing messages.
+                            reconnectDelay:
+                              type: number
+                              example: 1
+                              description: Initial reconnect delay, in seconds, after a connection failure.
+                            reconnectDelayMax:
+                              type: number
+                              example: 5
+                              description: Maximum reconnect delay, in seconds, after repeated connection failures.
+                          description: Additional MQTT client behavior options for this endpoint.
+                        enableSecurity:
+                          type: boolean
+                          example: false
+                          description: Whether TLS or certificate-based security is enabled for this endpoint.
+                        endpoint:
+                          type: object
+                          properties:
+                            hostName:
+                              type: string
+                              example: broker.emqx.io
+                              description: Broker or server host name or IP address.
+                            port:
+                              type: number
+                              example: 1883
+                              description: Broker or server TCP port.
+                            protocol:
+                              type: string
+                              example: tcp
+                              description: Transport protocol used by the endpoint connection.
+                          description: Remote broker or server address for this connection.
+                        publishTopic:
+                          type: array
+                          items:
+                            type: string
+                            example: FX9600FCC017/mevents
+                          example:
+                          - FX9600FCC017/mevents
+                          description: MQTT topics where the reader publishes data for this channel.
+                        security:
+                          type: object
+                          properties:
+                            CACertificateFileLocation:
+                              type: string
+                              example: /home/root/broker.emqx.io-ca.crt
+                              description: Path to the CA certificate file used to validate the remote endpoint.
+                            installedCertificateName:
+                              type: string
+                              example: Server
+                              description: Name of the installed certificate used by this connection.
+                            installedCertificateType:
+                              type: string
+                              example: server
+                              description: Type of installed certificate used by this connection.
+                            keyAlgorithm:
+                              type: string
+                              example: RS256
+                              description: Key algorithm used by the configured certificate or private key.
+                            keyFormat:
+                              type: string
+                              example: PEM
+                              description: Encoding format of the configured certificate or private key.
+                            verifyHostName:
+                              type: boolean
+                              example: false
+                              description: Whether the reader verifies that the remote certificate matches the configured host name.
+                            verifyPeer:
+                              type: boolean
+                              example: false
+                              description: Whether the reader verifies the remote certificate chain.
+                          description: TLS certificate and verification settings for secure endpoint connections.
+                        subscribeTopic:
+                          type: array
+                          items: {}
+                          example: []
+                          description: MQTT topics where the reader subscribes for commands or control messages.
+                      description: Connection-specific transport, security, topic, and authentication options.
+                    type:
+                      type: string
+                      example: mqtt
+                      description: Endpoint transport type used for management event delivery.
+                example:
+                - description: MQTT_TEST
+                  name: MQTT_TEST
+                  options:
+                    additional:
+                      cleanSession: true
+                      clientId: FX9600FCC017
+                      debug: false
+                      keepAlive: 60
+                      qos: 0
+                      reconnectDelay: 1
+                      reconnectDelayMax: 5
+                    enableSecurity: false
+                    endpoint:
+                      hostName: broker.emqx.io
+                      port: 1883
+                      protocol: tcp
+                    publishTopic:
+                    - FX9600FCC017/mevents
+                    subscribeTopic: []
+                  type: mqtt
+                description: List of endpoint connections configured for this channel.
+            description: Endpoint settings used to publish event data.
+        description: Configuration for management command responses and management event delivery.
+    description: Cloud endpoint configuration for command responses, tag data events, and management events.
+title: Import Cloud Config Request
+description: Imports cloud endpoint configuration for command responses, tag data events, and management events.
