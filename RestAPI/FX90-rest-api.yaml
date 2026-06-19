@@ -34,7 +34,50 @@ paths:
       tags:
       - Login
       summary: Reader Login
-      description: MQTT API :- localrest_login <br> Logs in to the reader
+      description: '# `GET /cloud/localRestLogin` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/localRestLogin` REST endpoint is used to reader Login.
+
+
+        Use this endpoint to:
+
+
+        - Reader Login.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/localRestLogin` |
+
+        | Operation ID | `localrestlogin` |
+
+        | MQTT Command | `localrest_login` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `localrest_login` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: localrestlogin
       responses:
         '200':
@@ -50,7 +93,50 @@ paths:
       tags:
       - App-led
       summary: Retrieves application LED state
-      description: MQTT API :-  get_appled <br> Retrieves a value indicating the current state of the application LED
+      description: '# `GET /cloud/app-led` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/app-led` REST endpoint is used to retrieves application LED state.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves application LED state.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/app-led` |
+
+        | Operation ID | `getAppled` |
+
+        | MQTT Command | `get_appled` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_appled` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getAppled
       responses:
         '200':
@@ -65,7 +151,50 @@ paths:
       tags:
       - App-led
       summary: Updates application LED state
-      description: MQTT API :-  set_appled <br> Updates the application LED state on the reader to the state specified
+      description: '# `PUT /cloud/app-led` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/app-led` REST endpoint is used to updates application LED state.
+
+
+        Use this endpoint to:
+
+
+        - Updates application LED state.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/app-led` |
+
+        | Operation ID | `setAppled` |
+
+        | MQTT Command | `set_appled` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_appled` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setAppled
       requestBody:
         content:
@@ -92,7 +221,50 @@ paths:
       tags:
       - Stack-led
       summary: Retrieves stack LED state
-      description: MQTT API :-  get_stackled <br> Retrieves the current status, color, brightness, and remaining time of the stack LED
+      description: '# `GET /cloud/stack-led` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/stack-led` REST endpoint is used to retrieves stack LED state.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves stack LED state.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/stack-led` |
+
+        | Operation ID | `getStackled` |
+
+        | MQTT Command | `get_stackled` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_stackled` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getStackled
       responses:
         '200':
@@ -107,7 +279,50 @@ paths:
       tags:
       - Stack-led
       summary: Updates stack LED state
-      description: 'MQTT API :-  set_stackled <br> Updates the stack LED state on the reader to the state specified. <br><br> Supported Colors: red, amber, green, blue, off <br> Supported Brightness: low, med, high (Defaults to low)'
+      description: '# `PUT /cloud/stack-led` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/stack-led` REST endpoint is used to color:Green, Brightness:Low(Default), Solid.
+
+
+        Use this endpoint to:
+
+
+        - Color:Green, Brightness:Low(Default), Solid.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/stack-led` |
+
+        | Operation ID | `setStackled` |
+
+        | MQTT Command | `set_stackled` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_stackled` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setStackled
       requestBody:
         content:
@@ -144,7 +359,50 @@ paths:
       tags:
       - Gpio
       summary: Retrieves the GPO status
-      description: 'MQTT API :-  get_gpoStatus <br> Retrieves the current GPO port states. Maximum number of ports available per device type: FX7500 = 3 GPO pins, FX9600 = 4 GPO pins, ATR7000 = 3 GPO pins.'
+      description: '# `GET /cloud/gpo` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/gpo` REST endpoint is used to retrieves the GPO status.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves the GPO status.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/gpo` |
+
+        | Description Key | `GET__cloud__gpo` |
+
+        | MQTT Command | `get_gpoStatus` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_gpoStatus` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       responses:
         '200':
           description: OK
@@ -158,7 +416,50 @@ paths:
       tags:
       - Gpio
       summary: Updates GPO port state
-      description: 'MQTT API :-  set_gpo <br> Updates the state of the specified GPO port. Maximum number of ports available per device type: FX7500 = 3 GPO pins, FX9600 = 4 GPO pins, ATR7000 = 3 GPO pins.'
+      description: '# `PUT /cloud/gpo` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/gpo` REST endpoint is used to updates GPO port state.
+
+
+        Use this endpoint to:
+
+
+        - Updates GPO port state.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/gpo` |
+
+        | Operation ID | `setGpo` |
+
+        | MQTT Command | `set_gpo` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_gpo` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setGpo
       requestBody:
         content:
@@ -184,7 +485,50 @@ paths:
       tags:
       - Gpio
       summary: Get GPI Status
-      description: 'MQTT API :-  get_gpiStatus <br> Retrieves the current GPI port states. Maximum number of ports available per device type: FX7500 = 2 GPI pins, FX9600 = 4 GPI pins, ATR7000 = 2 GPI pins.'
+      description: '# `GET /cloud/gpi` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/gpi` REST endpoint is used to get GPI Status.
+
+
+        Use this endpoint to:
+
+
+        - Get GPI Status.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/gpi` |
+
+        | Operation ID | `getGPIStatus` |
+
+        | MQTT Command | `get_gpiStatus` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_gpiStatus` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getGPIStatus
       responses:
         '200':
@@ -200,7 +544,50 @@ paths:
       tags:
       - Region
       summary: Retrieves reader region information
-      description: MQTT API :-  get_region <br> Retrieves reader region (country) information
+      description: '# `GET /cloud/region` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/region` REST endpoint is used to retrieves reader region information.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves reader region information.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/region` |
+
+        | Operation ID | `getRegion` |
+
+        | MQTT Command | `get_region` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_region` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getRegion
       responses:
         '200':
@@ -230,7 +617,50 @@ paths:
       tags:
       - Region
       summary: Update region information
-      description: MQTT API :-  set_region <br> Updates the reader region information
+      description: '# `PUT /cloud/region` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/region` REST endpoint is used to update region information.
+
+
+        Use this endpoint to:
+
+
+        - Update region information.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/region` |
+
+        | Operation ID | `setRegion` |
+
+        | MQTT Command | `set_region` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_region` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setRegion
       requestBody:
         content:
@@ -256,7 +686,50 @@ paths:
       tags:
       - Region
       summary: Retrieves the supported region list based on the reader type
-      description: MQTT API :-  get_SupportedRegionList <br> Gets the list of regions supported by the reader based on the reader type
+      description: '# `GET /cloud/supportedRegionList` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/supportedRegionList` REST endpoint is used to retrieves the supported region list based on the reader type.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves the supported region list based on the reader type.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/supportedRegionList` |
+
+        | Operation ID | `getSupportedregionlist` |
+
+        | MQTT Command | `get_SupportedRegionList` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_SupportedRegionList` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getSupportedregionlist
       responses:
         '200':
@@ -306,7 +779,50 @@ paths:
       tags:
       - Region
       summary: Retrieves the standard channels of the supported regions
-      description: MQTT API :-  get_supportedStandardList <br> Based on the region name provided, retrieves the standard channel list
+      description: '# `GET /cloud/supportedStandardList` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/supportedStandardList` REST endpoint is used to retrieves the standard channels of the supported regions.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves the standard channels of the supported regions.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/supportedStandardList` |
+
+        | Operation ID | `getSupportedstandardlist` |
+
+        | MQTT Command | `get_supportedStandardList` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_supportedStandardList` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getSupportedstandardlist
       parameters:
       - name: region
@@ -1023,7 +1539,50 @@ paths:
       tags:
       - System
       summary: Retrieves reader operational statistics
-      description: MQTT API :-  get_status <br> Retrieves reader operational statistics. <br> This call must be made no less frequently than every 30 seconds.
+      description: '# `GET /cloud/status` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/status` REST endpoint is used to retrieves reader operational statistics.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves reader operational statistics.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/status` |
+
+        | Operation ID | `getStatus` |
+
+        | MQTT Command | `get_status` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_status` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getStatus
       responses:
         '200':
@@ -1099,7 +1658,50 @@ paths:
       tags:
       - System
       summary: Retrieves reader configuration
-      description: MQTT API :-  get_config <br> Retrieves reader configuration
+      description: '# `GET /cloud/config` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/config` REST endpoint is used to retrieves reader configuration.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves reader configuration.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/config` |
+
+        | Operation ID | `getConfig` |
+
+        | MQTT Command | `get_config` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_config` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getConfig
       responses:
         '200':
@@ -1265,7 +1867,50 @@ paths:
       tags:
       - System
       summary: Updates reader configuration
-      description: 'MQTT API :- set_config <br> Updates reader configuration. Accepts one or more of the following top-level keys: **xml** (string) - raw XML reader config; **GPIO-LED** (object) - GPIO and LED event-action configuration; **READER-GATEWAY** (object) - cloud gateway configuration accepting at least one of: endpointConfig (data endpoint configuration only - control/management endpoints are not configurable here; use /cloud/cloudConfig for that), batching (global batching settings for data events), retention (global retention settings for data events), managementEventConfig (asynchronous management events, heartbeat, warnings, errors configuration).'
+      description: '# `PUT /cloud/config` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/config` REST endpoint is used to updates reader configuration.
+
+
+        Use this endpoint to:
+
+
+        - Updates reader configuration.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/config` |
+
+        | Operation ID | `setConfigMqtt` |
+
+        | MQTT Command | `set_config` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_config` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setConfigMqtt
       requestBody:
         content:
@@ -1586,7 +2231,50 @@ paths:
       tags:
       - System
       summary: Pass-through command
-      description: MQTT API :-  set_passthru <br> Sends a pass-through command to a reader component
+      description: '# `PUT /cloud/pass-through` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/pass-through` REST endpoint is used to pass-through command.
+
+
+        Use this endpoint to:
+
+
+        - Pass-through command.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/pass-through` |
+
+        | Operation ID | `status` |
+
+        | MQTT Command | `set_passthru` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_passthru` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: status
       requestBody:
         content:
@@ -1841,7 +2529,50 @@ paths:
       tags:
       - System
       summary: Retrieves the Reader Capabilities
-      description: MQTT API :-  get_readerCapabilities <br> Gets the list of supported capabilities on the current reader.
+      description: '# `GET /cloud/readerCapabilities` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/readerCapabilities` REST endpoint is used to retrieves the Reader Capabilities.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves the Reader Capabilities.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/readerCapabilities` |
+
+        | Operation ID | `getReadercapabilities` |
+
+        | MQTT Command | `get_readerCapabilities` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_readerCapabilities` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getReadercapabilities
       responses:
         '200':
@@ -1960,7 +2691,50 @@ paths:
       tags:
       - System
       summary: Retrieves the cableLossCompensation
-      description: MQTT API :-  get_cableLossCompensation <br> Gets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet
+      description: '# `GET /cloud/cableLossCompensation` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/cableLossCompensation` REST endpoint is used to retrieves the cableLossCompensation.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves the cableLossCompensation.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/cableLossCompensation` |
+
+        | Operation ID | `getCablelosscompensation` |
+
+        | MQTT Command | `get_cableLossCompensation` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_cableLossCompensation` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getCablelosscompensation
       responses:
         '200':
@@ -1988,7 +2762,50 @@ paths:
       tags:
       - System
       summary: Sets the cableLossCompensation
-      description: MQTT API :-  set_cableLossCompensation <br> Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet
+      description: '# `PUT /cloud/cableLossCompensation` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/cableLossCompensation` REST endpoint is used to sets the cableLossCompensation.
+
+
+        Use this endpoint to:
+
+
+        - Sets the cableLossCompensation.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/cableLossCompensation` |
+
+        | Operation ID | `setCablelosscompensation` |
+
+        | MQTT Command | `set_cableLossCompensation` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_cableLossCompensation` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setCablelosscompensation
       requestBody:
         content:
@@ -2036,7 +2853,50 @@ paths:
       tags:
       - System
       summary: Restarts reader
-      description: MQTT API :-  reboot <br> Restarts the reader with the device ID provided
+      description: '# `PUT /cloud/reboot` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/reboot` REST endpoint is used to restarts reader.
+
+
+        Use this endpoint to:
+
+
+        - Restarts reader.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/reboot` |
+
+        | Operation ID | `reboot` |
+
+        | MQTT Command | `reboot` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `reboot` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: reboot
       responses:
         '200':
@@ -2052,7 +2912,50 @@ paths:
       tags:
       - Control
       summary: Returns whether the rxSawFilter is enabled or disabled
-      description: MQTT API :-  get_preSelection <br> Returns whether the rxSawFilter is enabled or disabled
+      description: '# `GET /cloud/preSelection` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/preSelection` REST endpoint is used to returns whether the rxSawFilter is enabled or disabled.
+
+
+        Use this endpoint to:
+
+
+        - Returns whether the rxSawFilter is enabled or disabled.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/preSelection` |
+
+        | Description Key | `GET__cloud__preSelection` |
+
+        | MQTT Command | `get_preSelection` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_preSelection` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       responses:
         '200':
           description: OK
@@ -2066,7 +2969,50 @@ paths:
       tags:
       - Control
       summary: Enables or disables the rxSawFilter
-      description: MQTT API :-  set_preSelection <br> Enables or disables the rxSawFilter. Set to true to enable, false to disable
+      description: '# `PUT /cloud/preSelection` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/preSelection` REST endpoint is used to enables or disables the rxSawFilter.
+
+
+        Use this endpoint to:
+
+
+        - Enables or disables the rxSawFilter.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/preSelection` |
+
+        | Description Key | `PUT__cloud__preSelection` |
+
+        | MQTT Command | `set_preSelection` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_preSelection` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       requestBody:
         content:
           application/json:
@@ -2090,7 +3036,50 @@ paths:
       tags:
       - System
       summary: Changes the password on the reader
-      description: MQTT API :-  set_password <br> Changes the password on the reader
+      description: '# `PUT /cloud/updatePassword` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/updatePassword` REST endpoint is used to changes the password on the reader.
+
+
+        Use this endpoint to:
+
+
+        - Changes the password on the reader.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/updatePassword` |
+
+        | Description Key | `PUT__cloud__updatePassword` |
+
+        | MQTT Command | `set_password` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_password` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       requestBody:
         content:
           application/json:
@@ -2116,7 +3105,50 @@ paths:
       tags:
       - Logs
       summary: Log Configuration
-      description: MQTT API :-  get_logs <br> Retrieves reader log configuration
+      description: '# `GET /cloud/logs` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/logs` REST endpoint is used to log Configuration.
+
+
+        Use this endpoint to:
+
+
+        - Log Configuration.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/logs` |
+
+        | Operation ID | `getLogs` |
+
+        | MQTT Command | `get_logs` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_logs` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getLogs
       responses:
         '200':
@@ -2138,7 +3170,50 @@ paths:
       tags:
       - Logs
       summary: Configures the logs
-      description: MQTT API :-  set_logs <br> Changes logging level
+      description: '# `PUT /cloud/logs` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/logs` REST endpoint is used to configures the logs.
+
+
+        Use this endpoint to:
+
+
+        - Configures the logs.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/logs` |
+
+        | Operation ID | `setLogs` |
+
+        | MQTT Command | `set_logs` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_logs` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setLogs
       requestBody:
         content:
@@ -2168,7 +3243,50 @@ paths:
       tags:
       - Logs
       summary: Retrieve Syslog
-      description: MQTT API :-  get_logs_syslog <br> Retrieves the syslog from the reader.
+      description: '# `GET /cloud/logs/syslog` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/logs/syslog` REST endpoint is used to retrieve Syslog.
+
+
+        Use this endpoint to:
+
+
+        - Retrieve Syslog.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/logs/syslog` |
+
+        | Description Key | `GET__cloud__logs__syslog` |
+
+        | MQTT Command | `get_logs_syslog` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_logs_syslog` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       responses:
         '200':
           description: OK
@@ -2182,7 +3300,50 @@ paths:
       tags:
       - Logs
       summary: Purge Log
-      description: MQTT API :-  del_logs_syslog <br> Purges syslog.
+      description: '# `DELETE /cloud/logs/syslog` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `DELETE /cloud/logs/syslog` REST endpoint is used to purge Log.
+
+
+        Use this endpoint to:
+
+
+        - Purge Log.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `DELETE /cloud/logs/syslog` |
+
+        | Description Key | `DELETE__cloud__logs__syslog` |
+
+        | MQTT Command | `del_logs_syslog` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `del_logs_syslog` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       responses:
         '200':
           description: OK
@@ -2193,7 +3354,50 @@ paths:
       tags:
       - Logs
       summary: Retrieve RcInfoLog
-      description: MQTT API :-  get_logs_rcLog <br> Retrieves the rc log (radio-control.log) from the reader.
+      description: '# `GET /cloud/logs/RcLog` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/logs/RcLog` REST endpoint is used to retrieve RcInfoLog.
+
+
+        Use this endpoint to:
+
+
+        - Retrieve RcInfoLog.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/logs/RcLog` |
+
+        | Description Key | `GET__cloud__logs__RcLog` |
+
+        | MQTT Command | `get_logs_rcLog` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_logs_rcLog` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       responses:
         '200':
           description: OK
@@ -2208,7 +3412,50 @@ paths:
       tags:
       - Logs
       summary: Retrieve RgWarningLog
-      description: MQTT API :-  get_logs_rgWarningLog <br> Retrieves the RgWarningLog from the reader.
+      description: '# `GET /cloud/logs/RgWarningLog` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/logs/RgWarningLog` REST endpoint is used to retrieve RgWarningLog.
+
+
+        Use this endpoint to:
+
+
+        - Retrieve RgWarningLog.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/logs/RgWarningLog` |
+
+        | Description Key | `GET__cloud__logs__RgWarningLog` |
+
+        | MQTT Command | `get_logs_rgWarningLog` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_logs_rgWarningLog` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       responses:
         '200':
           description: OK
@@ -2223,7 +3470,50 @@ paths:
       tags:
       - Logs
       summary: Retrieve RgErrorLog
-      description: MQTT API :-  get_logs_rgErrorLog <br> Retrieves the RgErrorLog from the reader.
+      description: '# `GET /cloud/logs/RgErrorLog` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/logs/RgErrorLog` REST endpoint is used to retrieve RgErrorLog.
+
+
+        Use this endpoint to:
+
+
+        - Retrieve RgErrorLog.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/logs/RgErrorLog` |
+
+        | Description Key | `GET__cloud__logs__RgErrorLog` |
+
+        | MQTT Command | `get_logs_rgErrorLog` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_logs_rgErrorLog` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       responses:
         '200':
           description: OK
@@ -2238,7 +3528,50 @@ paths:
       tags:
       - Logs
       summary: Retrieve radioPacketLog
-      description: MQTT API :-  get_logs_radioPacketLog <br> Retrieves the radioPacketLog from the reader.
+      description: '# `GET /cloud/logs/radioPacketLog` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/logs/radioPacketLog` REST endpoint is used to retrieve radioPacketLog.
+
+
+        Use this endpoint to:
+
+
+        - Retrieve radioPacketLog.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/logs/radioPacketLog` |
+
+        | Description Key | `GET__cloud__logs__radioPacketLog` |
+
+        | MQTT Command | `get_logs_radioPacketLog` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_logs_radioPacketLog` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       security:
       - bearerAuth: []
       responses:
@@ -2252,7 +3585,50 @@ paths:
       tags:
       - Logs
       summary: Purge Log
-      description: MQTT API :-  del_logs_radioPacketLog <br> Purges radioPacketLog.
+      description: '# `DELETE /cloud/logs/radioPacketLog` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `DELETE /cloud/logs/radioPacketLog` REST endpoint is used to purge Log.
+
+
+        Use this endpoint to:
+
+
+        - Purge Log.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `DELETE /cloud/logs/radioPacketLog` |
+
+        | Description Key | `DELETE__cloud__logs__radioPacketLog` |
+
+        | MQTT Command | `del_logs_radioPacketLog` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `del_logs_radioPacketLog` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       security:
       - bearerAuth: []
       responses:
@@ -2263,7 +3639,50 @@ paths:
       tags:
       - Date&Time
       summary: Retrieves the reader timezone
-      description: MQTT API :-  get_timeZone <br> Gets the active timezone
+      description: '# `GET /cloud/timeZone` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/timeZone` REST endpoint is used to retrieves the reader timezone.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves the reader timezone.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/timeZone` |
+
+        | Operation ID | `getTimezone` |
+
+        | MQTT Command | `get_timeZone` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_timeZone` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getTimezone
       responses:
         '200':
@@ -2278,7 +3697,50 @@ paths:
       tags:
       - Date&Time
       summary: Sets the timezone
-      description: MQTT API :-  set_timeZone
+      description: '# `PUT /cloud/timeZone` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/timeZone` REST endpoint is used to sets the timezone.
+
+
+        Use this endpoint to:
+
+
+        - Sets the timezone.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/timeZone` |
+
+        | Operation ID | `setTimezone` |
+
+        | MQTT Command | `set_timeZone` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_timeZone` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setTimezone
       requestBody:
         content:
@@ -2299,7 +3761,50 @@ paths:
       tags:
       - Date&Time
       summary: Retrieve the NTP server
-      description: MQTT API :-  get_ntpServer <br> Retrieves the configured NTP server on the reader
+      description: '# `GET /cloud/ntpServer` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/ntpServer` REST endpoint is used to retrieve the NTP server.
+
+
+        Use this endpoint to:
+
+
+        - Retrieve the NTP server.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/ntpServer` |
+
+        | Description Key | `GET__cloud__ntpServer` |
+
+        | MQTT Command | `get_ntpServer` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_ntpServer` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       responses:
         '200':
           description: OK
@@ -2313,7 +3818,50 @@ paths:
       tags:
       - Date&Time
       summary: Set NTP server
-      description: MQTT API :-  set_ntpServer <br> Configures the NTP server on the reader
+      description: '# `PUT /cloud/ntpServer` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/ntpServer` REST endpoint is used to set NTP server.
+
+
+        Use this endpoint to:
+
+
+        - Set NTP server.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/ntpServer` |
+
+        | Operation ID | `updateNtpServer` |
+
+        | MQTT Command | `set_ntpServer` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_ntpServer` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: updateNtpServer
       requestBody:
         content:
@@ -2343,7 +3891,50 @@ paths:
       tags:
       - Certificate
       summary: Retrieve installed certificate details
-      description: MQTT API :-  get_certificates <br> Retrieve installed certificate details
+      description: '# `GET /cloud/certificates` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/certificates` REST endpoint is used to retrieve installed certificate details.
+
+
+        Use this endpoint to:
+
+
+        - Retrieve installed certificate details.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/certificates` |
+
+        | Operation ID | `getCertificates` |
+
+        | MQTT Command | `get_certificates` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_certificates` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getCertificates
       responses:
         '200':
@@ -2358,7 +3949,50 @@ paths:
       tags:
       - Certificate
       summary: Install certificate
-      description: MQTT API :-  set_updateCertificate <br> Installs a certificate on the device
+      description: '# `PUT /cloud/certificates` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/certificates` REST endpoint is used to install certificate.
+
+
+        Use this endpoint to:
+
+
+        - Install certificate.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/certificates` |
+
+        | Operation ID | `setUpdatecertificate` |
+
+        | MQTT Command | `set_updateCertificate` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_updateCertificate` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setUpdatecertificate
       requestBody:
         content:
@@ -2392,7 +4026,50 @@ paths:
       tags:
       - Certificate
       summary: Refresh certificate
-      description: MQTT API :-  set_refreshCertificate <br> Refreshes the specified certificate on the device
+      description: '# `PUT /cloud/certificates/{certname}` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/certificates/{certname}` REST endpoint is used to refresh certificate.
+
+
+        Use this endpoint to:
+
+
+        - Refresh certificate.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/certificates/{certname}` |
+
+        | Operation ID | `setRefreshcertificate` |
+
+        | MQTT Command | `set_refreshCertificate` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_refreshCertificate` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setRefreshcertificate
       requestBody:
         content:
@@ -2413,7 +4090,50 @@ paths:
       tags:
       - Certificate
       summary: Delete certificate
-      description: MQTT API :-  del_certificate <br> Delete the specified certificate from the device
+      description: '# `DELETE /cloud/certificates/{certname}` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `DELETE /cloud/certificates/{certname}` REST endpoint is used to delete certificate.
+
+
+        Use this endpoint to:
+
+
+        - Delete certificate.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `DELETE /cloud/certificates/{certname}` |
+
+        | Operation ID | `delCertificate` |
+
+        | MQTT Command | `del_certificate` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `del_certificate` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: delCertificate
       requestBody:
         content:
@@ -2435,7 +4155,50 @@ paths:
       tags:
       - Network
       summary: Retrieves reader network configuration
-      description: MQTT API :-  get_network <br> Retrieves reader network information including IP address, subnet mask, gateway and DNS
+      description: '# `GET /cloud/network` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/network` REST endpoint is used to retrieves reader network configuration.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves reader network configuration.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/network` |
+
+        | Operation ID | `getNetwork` |
+
+        | MQTT Command | `get_network` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_network` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getNetwork
       responses:
         '200':
@@ -2539,9 +4302,50 @@ paths:
       tags:
       - Network
       summary: Updates reader network configuration
-      description: 'MQTT API :-  set_network <br> Updates the reader network configuration settings. Only one interface key (`eth0`, `mlan0`, `bnep0`, `wan0`, or `uap0`) may be present per request.
+      description: '# `PUT /cloud/network` - REST Endpoint Reference
 
-        '
+
+        ## 1. Description
+
+
+        The `PUT /cloud/network` REST endpoint is used to wiFi Hotspot (uap0).
+
+
+        Use this endpoint to:
+
+
+        - WiFi Hotspot (uap0).
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/network` |
+
+        | Operation ID | `updateNetwork` |
+
+        | MQTT Command | `set_network` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_network` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: updateNetwork
       requestBody:
         content:
@@ -2704,7 +4508,50 @@ paths:
       tags:
       - Network
       summary: Retrieves available Wi-Fi networks
-      description: MQTT API :-  get_availableWifiNetworks <br> Retrieves a list of available Wi-Fi networks visible to the reader
+      description: '# `GET /cloud/wifiNetworks` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/wifiNetworks` REST endpoint is used to retrieves available Wi-Fi networks.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves available Wi-Fi networks.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/wifiNetworks` |
+
+        | Operation ID | `getAvailablewifinetworks` |
+
+        | MQTT Command | `get_availableWifiNetworks` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_availableWifiNetworks` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getAvailablewifinetworks
       responses:
         '200':
@@ -2941,7 +4788,50 @@ paths:
       tags:
       - Network
       summary: Gets the read points on the reader
-      description: MQTT API :-  get_readPoints <br> Gets the read points on the reader
+      description: '# `GET /cloud/readPoints` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/readPoints` REST endpoint is used to gets the read points on the reader.
+
+
+        Use this endpoint to:
+
+
+        - Gets the read points on the reader.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/readPoints` |
+
+        | Operation ID | `getReadpoints` |
+
+        | MQTT Command | `get_readPoints` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_readPoints` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getReadpoints
       responses:
         '200':
@@ -2964,7 +4854,50 @@ paths:
       tags:
       - Network
       summary: Gets the GPS coordinates (lat/long)
-      description: MQTT API :-  get_gpsCoordinates <br> Gets the GPS coordinates (lat/long)
+      description: '# `GET /cloud/readerLocation` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/readerLocation` REST endpoint is used to gets the GPS coordinates (lat/long).
+
+
+        Use this endpoint to:
+
+
+        - Gets the GPS coordinates (lat/long).
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/readerLocation` |
+
+        | Operation ID | `getGpsCoordinates` |
+
+        | MQTT Command | `get_gpsCoordinates` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_gpsCoordinates` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getGpsCoordinates
       responses:
         '200':
@@ -2980,7 +4913,50 @@ paths:
       tags:
       - Network
       summary: Gets the eSIM configuration
-      description: MQTT API :- get_eSimConfig <br> Gets the eSIM configuration
+      description: '# `GET /cloud/eSimConfig` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/eSimConfig` REST endpoint is used to gets the eSIM configuration.
+
+
+        Use this endpoint to:
+
+
+        - Gets the eSIM configuration.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/eSimConfig` |
+
+        | Description Key | `GET__cloud__eSimConfig` |
+
+        | MQTT Command | `get_eSimConfig` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_eSimConfig` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       responses:
         '200':
           description: OK
@@ -2994,7 +4970,50 @@ paths:
       tags:
       - Network
       summary: Sets the eSIM configuration
-      description: MQTT API :-  set_eSimConfig <br> Sets the eSIM configuration
+      description: '# `PUT /cloud/eSimConfig` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/eSimConfig` REST endpoint is used to sets the eSIM configuration.
+
+
+        Use this endpoint to:
+
+
+        - Sets the eSIM configuration.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/eSimConfig` |
+
+        | Operation ID | `setEsimConfig` |
+
+        | MQTT Command | `set_eSimConfig` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_eSimConfig` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setEsimConfig
       requestBody:
         content:
@@ -3016,7 +5035,50 @@ paths:
       tags:
       - Firmware
       summary: Updates OS software on device
-      description: MQTT API :-  set_os <br> Updates the OS software on the device
+      description: '# `PUT /cloud/os` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/os` REST endpoint is used to updates OS software on device.
+
+
+        Use this endpoint to:
+
+
+        - Updates OS software on device.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/os` |
+
+        | Operation ID | `setOs` |
+
+        | MQTT Command | `set_os` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_os` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setOs
       requestBody:
         content:
@@ -3041,7 +5103,50 @@ paths:
       tags:
       - Firmware
       summary: Revert to previous OS version
-      description: MQTT API :-  revertback <br> Reverts the device to the previously installed OS version
+      description: '# `PUT /cloud/revertbackOS` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/revertbackOS` REST endpoint is used to revert to previous OS version.
+
+
+        Use this endpoint to:
+
+
+        - Revert to previous OS version.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/revertbackOS` |
+
+        | Operation ID | `setRevertbackos` |
+
+        | MQTT Command | `revertback` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `revertback` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setRevertbackos
       requestBody:
         content:
@@ -3061,7 +5166,50 @@ paths:
       tags:
       - userapp
       summary: Install user application
-      description: MQTT API :-  install_user_app <br> Installs a user application
+      description: '# `PUT /cloud/apps/install` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/apps/install` REST endpoint is used to install user application.
+
+
+        Use this endpoint to:
+
+
+        - Install user application.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/apps/install` |
+
+        | Operation ID | `setInstalluserapp` |
+
+        | MQTT Command | `install_user_app` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `install_user_app` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setInstalluserapp
       requestBody:
         content:
@@ -3091,7 +5239,50 @@ paths:
       tags:
       - userapp
       summary: Start user application
-      description: MQTT API :-  start_user_app <br> Starts a user application. For REST, the application is identified by the `{appname}` path parameter. For MQTT, the application is identified by the `appname` payload field.
+      description: '# `PUT /cloud/apps/{appname}/start` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/apps/{appname}/start` REST endpoint is used to start user application.
+
+
+        Use this endpoint to:
+
+
+        - Start user application.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/apps/{appname}/start` |
+
+        | Operation ID | `setStartuserapp` |
+
+        | MQTT Command | `start_user_app` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `start_user_app` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setStartuserapp
       requestBody:
         content:
@@ -3118,7 +5309,50 @@ paths:
       tags:
       - userapp
       summary: Stop user application
-      description: MQTT API :-  stop_user_app <br> Stops a user application. For REST, the application is identified by the `{appname}` path parameter. For MQTT, the application is identified by the `appname` payload field.
+      description: '# `PUT /cloud/apps/{appname}/stop` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/apps/{appname}/stop` REST endpoint is used to stop user application.
+
+
+        Use this endpoint to:
+
+
+        - Stop user application.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/apps/{appname}/stop` |
+
+        | Operation ID | `setStopuserapp` |
+
+        | MQTT Command | `stop_user_app` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `stop_user_app` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setStopuserapp
       requestBody:
         content:
@@ -3145,7 +5379,50 @@ paths:
       tags:
       - userapp
       summary: Autostart user application
-      description: MQTT API :-  autostart_user_app <br> Configures autostart for a user application. For REST, the application is identified by the `{appname}` path parameter. For MQTT, the application is identified by the `appname` payload field.
+      description: '# `PUT /cloud/apps/{appname}/autostart` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/apps/{appname}/autostart` REST endpoint is used to autostart user application.
+
+
+        Use this endpoint to:
+
+
+        - Autostart user application.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/apps/{appname}/autostart` |
+
+        | Operation ID | `setAutostartuserapp` |
+
+        | MQTT Command | `autostart_user_app` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `autostart_user_app` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setAutostartuserapp
       requestBody:
         content:
@@ -3177,7 +5454,50 @@ paths:
       tags:
       - userapp
       summary: List user applications
-      description: MQTT API :-  get_user_apps <br> Lists all installed user applications
+      description: '# `GET /cloud/apps` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/apps` REST endpoint is used to list user applications.
+
+
+        Use this endpoint to:
+
+
+        - List user applications.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/apps` |
+
+        | Operation ID | `getUserapps` |
+
+        | MQTT Command | `get_user_apps` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_user_apps` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getUserapps
       responses:
         '200':
@@ -3202,7 +5522,50 @@ paths:
       tags:
       - userapp
       summary: Set Data to RG
-      description: MQTT API :-  set_dataToRG <br> Sets data to RG.
+      description: '# `PUT /cloud/setdataToRG` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/setdataToRG` REST endpoint is used to set Data to RG.
+
+
+        Use this endpoint to:
+
+
+        - Set Data to RG.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/setdataToRG` |
+
+        | Operation ID | `setDataToRG` |
+
+        | MQTT Command | `set_dataToRG` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_dataToRG` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setDataToRG
       responses:
         '200':
@@ -3218,7 +5581,50 @@ paths:
       tags:
       - userapp
       summary: Send Request to Userapp
-      description: MQTT API :-  set_req_usr_app <br> Sends a request to a user application. For REST, the application is identified by the `{appname}` path parameter. For MQTT, the target application is identified by the `userapp` payload field.
+      description: '# `PUT /cloud/apps/{appname}/pass-through` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/apps/{appname}/pass-through` REST endpoint is used to send Request to Userapp.
+
+
+        Use this endpoint to:
+
+
+        - Send Request to Userapp.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/apps/{appname}/pass-through` |
+
+        | Operation ID | `setReqtouserapp` |
+
+        | MQTT Command | `set_req_usr_app` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_req_usr_app` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setReqtouserapp
       requestBody:
         content:
@@ -3251,7 +5657,50 @@ paths:
       tags:
       - userapp
       summary: Uninstall User Application
-      description: MQTT API :-  uninstall-user-app <br> Uninstalls a user application. For REST, the application is identified by the `{appname}` path parameter. For MQTT, the application is identified by the `appname` payload field.
+      description: '# `PUT /cloud/apps/{appname}/uninstall` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/apps/{appname}/uninstall` REST endpoint is used to uninstall User Application.
+
+
+        Use this endpoint to:
+
+
+        - Uninstall User Application.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/apps/{appname}/uninstall` |
+
+        | Operation ID | `setUninstalluserapp` |
+
+        | MQTT Command | `uninstall-user-app` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `uninstall-user-app` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setUninstalluserapp
       requestBody:
         content:
@@ -3278,7 +5727,50 @@ paths:
       tags:
       - Network
       summary: Retrieves reader hostname
-      description: MQTT API :-  get_hostName <br> Retrieves the hostname of the reader
+      description: '# `GET /cloud/hostName` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `GET /cloud/hostName` REST endpoint is used to retrieves reader hostname.
+
+
+        Use this endpoint to:
+
+
+        - Retrieves reader hostname.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `GET /cloud/hostName` |
+
+        | Operation ID | `getHostName` |
+
+        | MQTT Command | `get_hostName` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `get_hostName` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: getHostName
       responses:
         '200':
@@ -3293,7 +5785,50 @@ paths:
       tags:
       - Network
       summary: Sets reader hostname
-      description: MQTT API :-  set_hostName <br> Sets the hostname of the reader
+      description: '# `PUT /cloud/hostName` - REST Endpoint Reference
+
+
+        ## 1. Description
+
+
+        The `PUT /cloud/hostName` REST endpoint is used to sets reader hostname.
+
+
+        Use this endpoint to:
+
+
+        - Sets reader hostname.
+
+        - Perform the operation through the REST API using bearer-token authentication.
+
+        - Keep REST behavior aligned with the documented reader workflow.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | REST Endpoint | `PUT /cloud/hostName` |
+
+        | Operation ID | `setHostName` |
+
+        | MQTT Command | `set_hostName` |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` where a request body is required |
+
+
+        ## 3. Usage Notes
+
+
+        This REST endpoint corresponds to the `set_hostName` MQTT command where applicable.
+
+
+        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
       operationId: setHostName
       requestBody:
         content:
