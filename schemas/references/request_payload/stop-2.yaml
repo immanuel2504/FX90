@@ -15,18 +15,7 @@ description: |
 properties:
   scanType:
     type: array
-    description: |
-      The optional `scanType` array controls what is stopped.
-
-      Possible values:
-      - "rfid"
-      - "ble"
-
-      Behaviour:
-      - Omitted → stops RFID only (default)
-      - ["ble"] → stops BLE only
-      - ["rfid"] → stops RFID only
-      - ["ble","rfid"] → stops both BLE and RFID
+    description: Which scan types to stop. Omit for RFID-only (default).
     items:
       type: string
       enum:

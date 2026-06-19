@@ -19,7 +19,6 @@
     "payload": {
       "title": "set_bleConfig_command",
       "type": "object",
-      "description": "Configure the BLE scanner. The ble.enable field is required.",
       "required": [
         "ble"
       ],
@@ -32,13 +31,11 @@
           "properties": {
             "enable": {
               "type": "boolean",
-              "description": "Enable or disable the BLE scanner.",
               "example": true
             },
             "scanIntervalSec": {
               "type": "integer",
               "minimum": 1,
-              "description": "Scan interval in seconds.",
               "example": 5
             },
             "additionalFilters": {
@@ -48,12 +45,10 @@
                   "type": "integer",
                   "minimum": -127,
                   "maximum": 0,
-                  "description": "Minimum RSSI threshold for forwarding BLE data.",
                   "example": -70
                 },
                 "serviceUuids16": {
                   "type": "array",
-                  "description": "16-bit service UUID filters.",
                   "items": {
                     "type": "string"
                   },
@@ -64,7 +59,6 @@
                 },
                 "serviceUuids128": {
                   "type": "array",
-                  "description": "128-bit service UUID filters.",
                   "items": {
                     "type": "string"
                   },
@@ -92,22 +86,22 @@
                         "properties": {
                           "uuid": {
                             "type": "string",
-                            "description": "Proximity UUID.",
+                            "description": "Proximity UUID",
                             "example": "FDA50693-A4E2-4FB1-AFCF-C6EB07647825"
                           },
                           "major": {
                             "type": "integer",
-                            "description": "Major value.",
+                            "description": "Major value",
                             "example": 10001
                           },
                           "minor": {
                             "type": "integer",
-                            "description": "Minor value.",
+                            "description": "Minor value",
                             "example": 20002
                           },
                           "txPower": {
                             "type": "integer",
-                            "description": "TX power or calibrated RSSI at 1 meter.",
+                            "description": "TX power / calibrated RSSI at 1m",
                             "example": -59
                           }
                         }
@@ -129,27 +123,27 @@
                         "properties": {
                           "mfgId": {
                             "type": "string",
-                            "description": "Manufacturer ID as a hex string.",
+                            "description": "Manufacturer ID (hex string)",
                             "example": "0118"
                           },
                           "beaconId": {
                             "type": "string",
-                            "description": "Beacon ID UUID string.",
+                            "description": "Beacon ID (UUID string)",
                             "example": "2F234454-CF6D-4A0F-ADF2-F4911BA9FFA7"
                           },
                           "major": {
                             "type": "integer",
-                            "description": "Major value.",
+                            "description": "Major value",
                             "example": 4
                           },
                           "minor": {
                             "type": "integer",
-                            "description": "Minor value.",
+                            "description": "Minor value",
                             "example": 4
                           },
                           "refRssi": {
                             "type": "integer",
-                            "description": "Reference RSSI or TX power at 1 meter.",
+                            "description": "Reference RSSI (TX power at 1m)",
                             "example": -100
                           }
                         }
@@ -166,7 +160,7 @@
                     },
                     "filters": {
                       "type": "array",
-                      "description": "Filter by Eddystone frame fields.",
+                      "description": "Filter by Eddystone frame fields. Use `frameType` to target a specific frame type (URL, UID, EID). All other fields are optional and frame-type-specific.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -178,32 +172,32 @@
                               "EID",
                               "TLM"
                             ],
-                            "description": "Eddystone frame type.",
+                            "description": "Eddystone frame type",
                             "example": "URL"
                           },
                           "txPower": {
                             "type": "integer",
-                            "description": "TX power at 0 meters.",
+                            "description": "TX power at 0m (calibrated RSSI)",
                             "example": -59
                           },
                           "url": {
                             "type": "string",
-                            "description": "Advertised URL for Eddystone-URL.",
+                            "description": "Advertised URL (Eddystone-URL only)",
                             "example": "https://www.zebra.com"
                           },
                           "namespace": {
                             "type": "string",
-                            "description": "10-byte namespace hex string for Eddystone-UID.",
+                            "description": "10-byte namespace (Eddystone-UID only, hex string)",
                             "example": "0102030405060708090A"
                           },
                           "instance": {
                             "type": "string",
-                            "description": "6-byte instance ID hex string for Eddystone-UID.",
+                            "description": "6-byte instance ID (Eddystone-UID only, hex string)",
                             "example": "000000000001"
                           },
                           "ephemeralId": {
                             "type": "string",
-                            "description": "8-byte ephemeral ID hex string for Eddystone-EID.",
+                            "description": "8-byte ephemeral ID (Eddystone-EID only, hex string)",
                             "example": "0102030405060708"
                           }
                         }
@@ -213,7 +207,7 @@
                 },
                 "generic": {
                   "type": "object",
-                  "description": "Configuration for generic BLE beacons.",
+                  "description": "Configuration for GENERIC_BLE beacons. Filters match on device-level advertisement fields.",
                   "properties": {
                     "enabled": {
                       "type": "boolean",
@@ -226,7 +220,7 @@
                         "properties": {
                           "address": {
                             "type": "string",
-                            "description": "Bluetooth device address to match.",
+                            "description": "Bluetooth device address to match (e.g. \"7E:41:25:1E:D5:16\").",
                             "example": "7E:41:25:1E:D5:16"
                           },
                           "addressType": {
@@ -240,16 +234,17 @@
                           },
                           "name": {
                             "type": "string",
-                            "description": "Device name to match.",
+                            "description": "Device name to match against the \"Name\" field in the BLE advertisement.",
                             "example": "BLEPeripheralApp"
                           },
                           "alias": {
                             "type": "string",
-                            "description": "Device alias to match.",
+                            "description": "Device alias to match against the \"Alias\" field in the BLE advertisement.",
                             "example": "BLEPeripheralApp"
                           }
                         }
-                      }
+                      },
+                      "description": "List of filter objects for GENERIC_BLE beacons. A beacon is forwarded if it matches any one filter entry."
                     }
                   }
                 }

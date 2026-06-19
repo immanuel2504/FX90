@@ -35,7 +35,6 @@
     "get_gpi_status": "gpio",
     "get_region": "region",
     "get_SupportedRegionList": "region",
-    "get_SupportedStandardlist": "region",
     "set_region": "region",
     "get_mode": "control",
     "set_mode": "control",
@@ -71,9 +70,6 @@
     "del_certs": "certificate",
     "set_update_cert": "certificate",
     "refresh-cert": "certificate",
-    "set_installCACertificate": "certificate",
-    "get_CACertificates": "certificate",
-    "del_CACertificate": "certificate",
     "get_network": "network",
     "set_network": "network",
     "get_hostname": "network",
@@ -84,8 +80,6 @@
     "get_gpsCoordinates": "network",
     "get_eSimConfig": "network",
     "set_eSimConfig": "network",
-    "set_nameAndDescription": "network",
-    "get_nameAndDescription": "network",
     "set_os": "firmware",
     "revertback": "firmware",
     "get_user_apps": "userapp",
@@ -112,7 +106,8 @@
     "mode_tag_data_events": "tag-data-events",
     "directionality_tag_data_events": "tag-data-events",
     "zoneHistory": "tag-data-events",
-    "locationHistory": "tag-data-events"
+    "locationHistory": "tag-data-events",
+    "get_supportedStandardList": "region"
   },
   "operation_order": {
     "control": [
@@ -157,7 +152,7 @@
       "get_region",
       "set_region",
       "get_SupportedRegionList",
-      "get_SupportedStandardlist"
+      "get_supportedStandardList"
     ],
     "logs": [
       "get_logs",
@@ -180,10 +175,7 @@
       "get_certs",
       "del_certs",
       "set_update_cert",
-      "refresh-cert",
-      "set_installCACertificate",
-      "get_CACertificates",
-      "del_CACertificate"
+      "refresh-cert"
     ],
     "firmware": [
       "set_os",
@@ -209,9 +201,7 @@
       "get_eSimConfig",
       "set_eSimConfig",
       "get_hostname",
-      "set_hostname",
-      "set_nameAndDescription",
-      "get_nameAndDescription"
+      "set_hostname"
     ],
     "ble": [
       "get_bleConfig",

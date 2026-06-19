@@ -4,7 +4,8 @@ description: Retrieves the region list supported by the reader based on the read
 properties:
   SupportedRegions:
     type: array
-    description: It contains SupportedRegions array with list of countries supported by the reader
+    description: It contains SupportedRegions array with list of countries supported
+      by the reader
     example:
     - Argentina
     - Australia

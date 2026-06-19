@@ -23,9 +23,9 @@ get:
                 country: Canada
                 lbtEnabled: false
                 maxTxPowerSupported: 300
-                minTxPowerSupported: 100
-                region: US
-                regulatoryStandard: FCC
+                minTxPowerSupported: 0
+                region: FCC_Generic
+                regulatoryStandard: CANADA_FCC_15
   security:
   - bearerAuth: []
 put:

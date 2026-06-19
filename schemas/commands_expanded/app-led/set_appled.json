@@ -22,11 +22,11 @@
     "payload": {
       "title": "set_appled",
       "type": "object",
-      "description": "Sets the reader APP LED to the specified color\n\nNote: whenever the seconds is set to 0 it is necessary to turn off the LED by setting it to off ",
+      "description": "Sets the reader App LED to the specified color and behavior.",
       "properties": {
         "color": {
           "type": "string",
-          "description": "The color of the LED (red, amber, green)",
+          "description": "LED color to apply. Allowed values: red, amber, green, off.",
           "enum": [
             "red",
             "amber",
@@ -36,12 +36,12 @@
         },
         "seconds": {
           "type": "integer",
-          "description": "The duration in seconds for the LED state to be in effect",
+          "description": "Duration in seconds for the LED state to remain active.",
           "default": 60
         },
         "flash": {
           "type": "boolean",
-          "description": "A value indicating whether to flash the LED"
+          "description": "Whether the LED should flash while the state is active."
         }
       },
       "required": [

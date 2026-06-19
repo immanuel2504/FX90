@@ -4,7 +4,7 @@
     "id": "3d4013ydr4ivw"
   },
   "type": "object",
-  "description": "Gets the GPO status",
+  "description": "Retrieves the current GPO port states.",
   "properties": {
     "command": {
       "type": "string",
@@ -12,7 +12,7 @@
         "get_gpoStatus"
       ],
       "example": "get_gpoStatus",
-      "description": "The value for the key command must be get_gpoStatus\n\nNote :\u00a0\nMaximum number of ports available per device type\n1. FX7500 = 3 GPO pins\n2. FX9600 = 4 GPO pins\n3. ATR7000 = 3 GPO pins"
+      "description": "The value for the key command must be get_gpoStatus. Maximum number of ports available per device type: FX7500 = 3 GPO pins, FX9600 = 4 GPO pins, ATR7000 = 3 GPO pins."
     },
     "command_id": {
       "type": "string",
@@ -30,7 +30,7 @@
     "payload": {
       "oneOf": [
         {
-          "description": "Retrive current GPO pin statuses",
+          "description": "Retrieves the current GPO port states.",
           "type": "object",
           "x-examples": {
             "example-1": {
@@ -47,7 +47,8 @@
               "enum": [
                 "HIGH",
                 "LOW"
-              ]
+              ],
+              "description": "State of GPO port 1. Allowed values: HIGH, LOW."
             },
             "2": {
               "type": "string",
@@ -55,7 +56,8 @@
               "enum": [
                 "HIGH",
                 "LOW"
-              ]
+              ],
+              "description": "State of GPO port 2. Allowed values: HIGH, LOW."
             },
             "3": {
               "type": "string",
@@ -63,7 +65,8 @@
               "enum": [
                 "HIGH",
                 "LOW"
-              ]
+              ],
+              "description": "State of GPO port 3. Allowed values: HIGH, LOW."
             },
             "4": {
               "type": "string",
@@ -71,7 +74,8 @@
               "enum": [
                 "HIGH",
                 "LOW"
-              ]
+              ],
+              "description": "State of GPO port 4. Allowed values: HIGH, LOW."
             }
           },
           "required": [

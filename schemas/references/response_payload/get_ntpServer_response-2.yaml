@@ -5,9 +5,9 @@ type: object
 properties:
   server:
     type: string
-    description: Server Host Name or IP Address
+    description: NTP server host name or IP address.
 required:
 - server
 examples:
 - server: time.google.com
-description: Gets the Reader NTP Server
+description: Gets the reader NTP server configuration.

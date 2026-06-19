@@ -3,12 +3,14 @@ description: Basic TagQuieting configuration for quieting or unquieting specific
 properties:
   action:
     type: string
+    description: quiet silences the specified tags for the current inventory round; unquiet restores previously quieted tags.
     enum:
     - quiet
     - unquiet
     example: quiet
   tagIDs:
     type: array
+    description: Non-empty list of hexadecimal EPC strings identifying the tags to quiet or unquiet.
     minItems: 1
     items:
       type: string

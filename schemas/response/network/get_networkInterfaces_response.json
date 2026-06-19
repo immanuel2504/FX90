@@ -51,7 +51,6 @@
           "eth0",
           "mlan0",
           "bnep0",
-          "uap0",
           "wan0"
         ]
       },

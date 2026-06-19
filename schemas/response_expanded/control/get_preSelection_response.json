@@ -29,6 +29,7 @@
           "properties": {
             "preSelection": {
               "type": "string",
+              "description": "Indicates whether rxSawFilter preSelection is enabled or disabled.",
               "example": "disabled"
             }
           },

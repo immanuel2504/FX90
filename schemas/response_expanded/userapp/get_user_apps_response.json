@@ -50,22 +50,22 @@
               "appname": {
                 "type": "string",
                 "minLength": 1,
-                "description": "userapp name",
+                "description": "User application name.",
                 "example": "sample"
               },
               "autostart": {
                 "type": "boolean",
                 "default": true,
-                "description": "autostart setting"
+                "description": "Whether the user application is configured to start automatically."
               },
               "metadata": {
                 "type": "string",
                 "minLength": 1,
-                "description": "userapp metadata"
+                "description": "User application metadata reported by the reader."
               },
               "runningStatus": {
                 "type": "boolean",
-                "description": "userapp running status"
+                "description": "Whether the user application is currently running."
               }
             },
             "required": [

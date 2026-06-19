@@ -4,7 +4,7 @@
     "id": "gfaepkncr3sor"
   },
   "type": "object",
-  "description": "Sets the specified GPO on the reader to the value specified.",
+  "description": "Updates the state of the specified GPO port.",
   "properties": {
     "command": {
       "type": "string",
@@ -12,7 +12,7 @@
         "set_gpo"
       ],
       "example": "set_gpo",
-      "description": "The value for the key command must be set_gpo\n\nNote : \nMaximum number of ports available per device type\n1. FX7500 = 3 GPO pins\n2. FX9600 = 4 GPO pins\n3. ATR7000 = 3 GPO pins"
+      "description": "The value for the key command must be set_gpo. Maximum number of ports available per device type: FX7500 = 3 GPO pins, FX9600 = 4 GPO pins, ATR7000 = 3 GPO pins."
     },
     "command_id": {
       "type": "string",

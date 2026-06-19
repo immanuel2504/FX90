@@ -27,5 +27,19 @@
     "command",
     "command_id",
     "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_os",
+      "command_id": "abcd1234",
+      "payload": {
+        "authenticationType": "NONE",
+        "url": "http://10.17.231.168:8003/3_20_4",
+        "options": {
+          "username": "XXXX",
+          "password": "XXXX"
+        }
+      }
+    }
   ]
 }

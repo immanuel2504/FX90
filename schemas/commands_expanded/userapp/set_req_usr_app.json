@@ -9,10 +9,10 @@
     "command": {
       "type": "string",
       "enum": [
-        "set_reqToUserapp"
+        "set_req_usr_app"
       ],
-      "example": "set_reqToUserapp",
-      "description": "The value for the key command must be set_reqToUserapp"
+      "example": "set_req_usr_app",
+      "description": "The value for the key command must be set_req_usr_app"
     },
     "command_id": {
       "type": "string",
@@ -22,33 +22,37 @@
     "payload": {
       "description": "Send request to userapp",
       "type": "object",
-      "x-examples": {
-        "example-1": {
-          "userapp": "sample",
-          "command": "get_first"
-        }
-      },
       "title": "set_reqToUserapp",
       "properties": {
         "userapp": {
           "type": "string",
           "minLength": 1,
-          "description": "name of userapp to send command",
+          "description": "User application name. For REST, the application is identified by the appname path parameter; for MQTT, the application is identified by the userapp payload field.",
           "example": "sample"
         },
         "command": {
-          "type": [
-            "string",
-            "object"
-          ],
-          "minLength": 1,
-          "description": "custom command or data to send",
-          "example": "version"
+          "type": "object",
+          "description": "Command object to send to the user application.",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message value to send to the user application.",
+              "example": "hello"
+            }
+          }
         }
       },
       "required": [
         "userapp",
         "command"
+      ],
+      "examples": [
+        {
+          "userapp": "sample",
+          "command": {
+            "message": "hello"
+          }
+        }
       ]
     }
   },
@@ -56,5 +60,17 @@
     "command",
     "command_id",
     "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_req_usr_app",
+      "command_id": "abcd1234",
+      "payload": {
+        "userapp": "sample",
+        "command": {
+          "message": "hello"
+        }
+      }
+    }
   ]
 }

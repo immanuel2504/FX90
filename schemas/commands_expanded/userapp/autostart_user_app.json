@@ -9,10 +9,10 @@
     "command": {
       "type": "string",
       "enum": [
-        "set_autostartUserapp"
+        "autostart_user_app"
       ],
-      "example": "set_autostartUserapp",
-      "description": "The value for the key command must be set_autostartUserapp"
+      "example": "autostart_user_app",
+      "description": "The value for the key command must be autostart_user_app"
     },
     "command_id": {
       "type": "string",
@@ -26,13 +26,13 @@
       "properties": {
         "appname": {
           "type": "string",
-          "description": "userapp name",
+          "description": "Application name. For REST, the application is identified by the appname path parameter; for MQTT, the application is identified by the appname payload field.",
           "example": "userapp name"
         },
         "autostart": {
           "type": "boolean",
           "default": true,
-          "description": "toggle userapp autostart settings"
+          "description": "Whether the application should start automatically when the reader starts."
         }
       },
       "required": [

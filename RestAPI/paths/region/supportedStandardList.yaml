@@ -2,7 +2,7 @@ get:
   tags:
   - Region
   summary: Retrieves the standard channels of the supported regions
-  description: MQTT API :-  get_SupportedStandardList <br> Based on the region name provided, retrieves the standard channel list
+  description: MQTT API :-  get_supportedStandardList <br> Based on the region name provided, retrieves the standard channel list
   operationId: getSupportedstandardlist
   parameters:
   - name: region
@@ -72,8 +72,8 @@ get:
               - '922750'
               - '902750'
               - '923250'
-              isChannelSelectable: 'false'
-              isHoppingConfigurable: 'false'
-              isLBTConfigurable: 'false'
+              isChannelSelectable: false
+              isHoppingConfigurable: false
+              isLBTConfigurable: false
   security:
   - bearerAuth: []

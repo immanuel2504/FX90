@@ -9,10 +9,10 @@
     "command": {
       "type": "string",
       "enum": [
-        "set_autostartUserapp"
+        "autostart_user_app"
       ],
-      "example": "set_autostartUserapp",
-      "description": "The value for the key command must be set_autostartUserapp"
+      "example": "autostart_user_app",
+      "description": "The value for the key command must be autostart_user_app"
     },
     "command_id": {
       "type": "string",

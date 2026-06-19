@@ -4,7 +4,7 @@
     "id": "0u5pkv9h4x124"
   },
   "type": "object",
-  "description": "Gets the GPI status",
+  "description": "Retrieves the current GPI port states.",
   "properties": {
     "command": {
       "type": "string",
@@ -12,7 +12,7 @@
         "get_gpiStatus"
       ],
       "example": "get_gpiStatus",
-      "description": "The value for the key command must be get_gpiStatus\n\nNote:\nMaximum number of ports available per device type\n1. FX7500 = 2 GPI pins\n2. FX9600 = 4 GPI pins\n3. ATR7000 = 2 GPI pins"
+      "description": "The value for the key command must be get_gpiStatus. Maximum number of ports available per device type: FX7500 = 2 GPI pins, FX9600 = 4 GPI pins, ATR7000 = 2 GPI pins."
     },
     "command_id": {
       "type": "string",
@@ -22,7 +22,7 @@
     "payload": {
       "title": "get_gpiStatus",
       "type": "object",
-      "description": "Retrive current GPI pin statuses"
+      "description": "Retrieves the current GPI port states."
     }
   },
   "required": [

@@ -42,11 +42,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "certificate name"
+          "description": "Certificate name. For REST, the certificate is identified by the certname path parameter; for MQTT, the certificate is identified by the name payload field."
         },
         "type": {
           "type": "string",
-          "description": "certificate type",
+          "description": "Certificate type. Allowed values: client, server, app.",
           "example": "server",
           "enum": [
             "client",

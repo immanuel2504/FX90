@@ -1,4 +1,4 @@
-description: Retrive current GPO pin statuses
+description: Retrieves the current GPO port states.
 type: object
 x-examples:
   example-1:
@@ -10,27 +10,25 @@ properties:
   '1':
     type: string
     minLength: 1
-    enum:
+    enum: &id001
     - HIGH
     - LOW
+    description: 'State of GPO port 1. Allowed values: HIGH, LOW.'
   '2':
     type: string
     minLength: 1
-    enum:
-    - HIGH
-    - LOW
+    enum: *id001
+    description: 'State of GPO port 2. Allowed values: HIGH, LOW.'
   '3':
     type: string
     minLength: 1
-    enum:
-    - HIGH
-    - LOW
+    enum: *id001
+    description: 'State of GPO port 3. Allowed values: HIGH, LOW.'
   '4':
     type: string
     minLength: 1
-    enum:
-    - HIGH
-    - LOW
+    enum: *id001
+    description: 'State of GPO port 4. Allowed values: HIGH, LOW.'
 required:
 - '1'
 - '2'

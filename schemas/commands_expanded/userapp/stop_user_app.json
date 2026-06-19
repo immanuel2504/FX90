@@ -9,10 +9,10 @@
     "command": {
       "type": "string",
       "enum": [
-        "set_stopUserapp"
+        "stop_user_app"
       ],
-      "example": "set_stopUserapp",
-      "description": "The value for the key command must be set_stopUserapp"
+      "example": "stop_user_app",
+      "description": "The value for the key command must be stop_user_app"
     },
     "command_id": {
       "type": "string",
@@ -26,7 +26,7 @@
       "properties": {
         "appname": {
           "type": "string",
-          "description": "userapp name",
+          "description": "Application name. For REST, the application is identified by the appname path parameter; for MQTT, the application is identified by the appname payload field.",
           "example": "sample"
         }
       },

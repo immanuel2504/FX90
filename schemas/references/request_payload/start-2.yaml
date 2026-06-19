@@ -15,14 +15,7 @@ description: |
 properties:
   scanType:
     type: array
-    description: |
-      The optional `scanType` array controls which scan types are activated.
-
-      Possible values:
-      - "rfid"
-      - "ble"
-
-      Omitting this field defaults to RFID-only.
+    description: Which scan types to start. Omit for RFID-only (default).
     items:
       type: string
       enum:
@@ -31,16 +24,11 @@ properties:
 
   doNotPersistState:
     type: boolean
-    description: |
-      Set to false to allow the reader to persist the state.
-      If omitted, default behavior applies.
+    description: Controls whether the started inventory state is persisted across reboot. If `true`, the state is not persisted and auto-start is not enabled after reboot. If `false`, the state is persisted across reboot, enabling auto-start.
 
   applyImpinjGen2X:
     type: boolean
-    description: |
-      Enables Impinj Gen2X feature.
-
-      `scanType` with "ble" cannot be combined with this field.
+    description: 'When true, applies the previously configured Impinj Gen2X features (FastID, TagProtect, TagFocus, TagQuieting) on start. Cannot be used with `scanType: ["ble"]`.'
 
 examples:
   - {}

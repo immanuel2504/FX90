@@ -4,7 +4,7 @@
     "id": "ejdxeu0l48sj4"
   },
   "type": "object",
-  "description": "Gets the GPO status",
+  "description": "Retrieves the current GPO port states.",
   "examples": [],
   "properties": {
     "command": {
@@ -13,7 +13,7 @@
         "get_gpoStatus"
       ],
       "example": "get_gpoStatus",
-      "description": "The value for the key command must be get_gpoStatus\n\nNote : \nMaximum number of ports available per device type\n1. FX7500 = 3 GPO pins\n2. FX9600 = 4 GPO pins\n3. ATR7000 = 3 GPO pins"
+      "description": "The value for the key command must be get_gpoStatus. Maximum number of ports available per device type: FX7500 = 3 GPO pins, FX9600 = 4 GPO pins, ATR7000 = 3 GPO pins."
     },
     "command_id": {
       "type": "string",

@@ -2,7 +2,7 @@ put:
   tags:
   - userapp
   summary: Install user application
-  description: MQTT API :-  set_installUserapp <br> Installs a user application
+  description: MQTT API :-  install_user_app <br> Installs a user application
   operationId: setInstalluserapp
   requestBody:
     content:

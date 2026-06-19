@@ -50,21 +50,14 @@
         "availableWifiNetworks": [
           {
             "capabilities": [
-              "WPA3-802.1X"
+              "WPA2",
+              "WPA3"
             ],
             "configuration": {
-              "autoConnect": true,
-              "security": {
-                "details": {
-                  "auth": "PEAP",
-                  "cert": "COMMON",
-                  "innerAuth": "TLS"
-                },
-                "type": "WPA3Enterprise"
-              }
+              "autoConnect": false
             },
-            "essid": "RFID_WPA3_GCMP 256_ENT_5GHz",
-            "signalStrength": "59%"
+            "essid": "GLaDOS",
+            "signalStrength": "100%"
           },
           {
             "capabilities": [
@@ -74,8 +67,8 @@
             "configuration": {
               "autoConnect": false
             },
-            "essid": "zebra_24",
-            "signalStrength": "100%"
+            "essid": "Bodhi",
+            "signalStrength": "99%"
           }
         ]
       },
@@ -83,4 +76,3 @@
     }
   ]
 }
-

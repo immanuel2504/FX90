@@ -57,13 +57,13 @@
               "name": {
                 "type": "string",
                 "minLength": 1,
-                "description": "certificate name",
+                "description": "Certificate name on the reader.",
                 "example": "Reader Main Certificates"
               },
               "type": {
                 "type": "string",
                 "minLength": 1,
-                "description": "certificate type",
+                "description": "Certificate type. Allowed values: server, client, app.",
                 "example": "server",
                 "enum": [
                   "server",
@@ -74,41 +74,41 @@
               "installTime": {
                 "type": "string",
                 "minLength": 1,
-                "description": "certificate installation time",
+                "description": "Time when the certificate was installed on the reader.",
                 "example": "Mon Jun 21 12:38:03 2021"
               },
               "issuerName": {
                 "type": "string",
                 "minLength": 1,
-                "description": "Certificate issuer name",
+                "description": "Issuer name recorded in the certificate.",
                 "example": "FX9600EE5729"
               },
               "publickey": {
                 "type": "string",
-                "description": "public key content"
+                "description": "Public key content for the certificate."
               },
               "serial": {
                 "type": "string",
                 "minLength": 1,
-                "description": "certificate serial",
+                "description": "Certificate serial number.",
                 "example": "410835777"
               },
               "subjectName": {
                 "type": "string",
                 "minLength": 1,
-                "description": "certificate subject name",
+                "description": "Subject name recorded in the certificate.",
                 "example": "FX9600EE5729"
               },
               "validityStart": {
                 "type": "string",
                 "minLength": 1,
-                "description": "certificate validity start date (DD/MM/YYYY)",
+                "description": "Certificate validity start date.",
                 "example": "21/06/2021"
               },
               "validityEnd": {
                 "type": "string",
                 "minLength": 1,
-                "description": "certificate validity end date (DD/MM/YYYY)",
+                "description": "Certificate validity end date.",
                 "example": "16/06/2041"
               }
             },

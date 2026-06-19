@@ -15,7 +15,7 @@ No additional payload fields are required to retrieve the hostname.
 | Pattern Name | Hostname Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | set_hostname, get_network, get_nameAndDescription |
+| Related Commands | set_hostname, get_network |
 | Supported Operations | Retrieve the reader hostname |
 | Supported API Versions | V1.0 |
 

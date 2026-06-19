@@ -21,7 +21,7 @@
       "properties": {
         "scanType": {
           "type": "array",
-          "description": "The optional `scanType` array controls what is stopped.\n\nPossible values:\n- \"rfid\"\n- \"ble\"\n\nBehaviour:\n- Omitted \u2192 stops RFID only (default)\n- [\"ble\"] \u2192 stops BLE only\n- [\"rfid\"] \u2192 stops RFID only\n- [\"ble\",\"rfid\"] \u2192 stops both BLE and RFID\n",
+          "description": "Which scan types to stop. Omit for RFID-only (default).",
           "items": {
             "type": "string",
             "enum": [

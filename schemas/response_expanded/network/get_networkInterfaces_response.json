@@ -24,21 +24,13 @@
     "payload": {
       "title": "Get Network Interfaces Response Payload",
       "type": "object",
-      "description": "Contains the network interfaces configuration",
+      "description": "Contains the available network interfaces reported by the reader.",
       "properties": {
         "availableNetworkInterfaces": {
           "type": "array",
-          "description": "List of physical and virtual network interfaces currently available on the device",
+          "description": "Available network interface names reported by the reader.",
           "items": {
-            "type": "string",
-            "description": "The network interface identifier",
-            "enum": [
-              "eth0",
-              "mlan0",
-              "bnep0",
-              "uap0",
-              "wan0"
-            ]
+            "type": "string"
           }
         }
       },
@@ -73,7 +65,6 @@
           "eth0",
           "mlan0",
           "bnep0",
-          "uap0",
           "wan0"
         ]
       },

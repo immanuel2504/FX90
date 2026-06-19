@@ -9,10 +9,10 @@
     "command": {
       "type": "string",
       "enum": [
-        "set_reqToUserapp"
+        "set_req_usr_app"
       ],
-      "example": "set_reqToUserapp",
-      "description": "The value for the key command must be set_reqToUserapp"
+      "example": "set_req_usr_app",
+      "description": "The value for the key command must be set_req_usr_app"
     },
     "command_id": {
       "type": "string",
@@ -27,5 +27,17 @@
     "command",
     "command_id",
     "payload"
+  ],
+  "examples": [
+    {
+      "command": "set_req_usr_app",
+      "command_id": "abcd1234",
+      "payload": {
+        "userapp": "sample",
+        "command": {
+          "message": "hello"
+        }
+      }
+    }
   ]
 }

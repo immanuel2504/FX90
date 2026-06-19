@@ -20,10 +20,7 @@
       "description": "A Unique Id echoed by the reader in the response"
     },
     "payload": {
-      "title": "Get Available Wi-Fi Networks Request Payload",
-      "type": "object",
-      "description": "An empty object as no additional parameters are required to execute this command.",
-      "additionalProperties": false,
+      "$ref": "../../references/request_payload/get_availableWifiNetworks_command.yaml",
       "x-stoplight": {
         "id": "p7a8y9l0o1a2d"
       }

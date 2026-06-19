@@ -10,7 +10,9 @@
       "command": "set_ntpServer",
       "command_id": "abcd1324",
       "payload": {
-        "server": "time.google.com"
+        "server": "time.google.com",
+        "server1": "time1.google.com",
+        "server2": "time2.google.com"
       }
     }
   ],

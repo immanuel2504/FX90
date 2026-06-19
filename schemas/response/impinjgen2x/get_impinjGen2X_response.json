@@ -26,16 +26,20 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Current Impinj Gen2X feature configuration as last saved via set_impinjGen2X. Returns an empty object if no Gen2X configuration has been set yet. Only feature objects that were previously configured are included in the response.",
           "properties": {
             "fastID": {
               "type": "object",
+              "description": "FastID configuration. Present only if fastID was previously configured.",
               "properties": {
                 "enabled": {
                   "type": "boolean",
+                  "description": "Whether FastID is enabled.",
                   "example": true
                 },
                 "tidSelector": {
                   "type": "string",
+                  "description": "TID word selector mask, if one was configured.",
                   "enum": [
                     "TID[0]",
                     "TID[1]",
@@ -51,9 +55,11 @@
             },
             "tagProtect": {
               "type": "object",
+              "description": "TagProtect configuration. Present only if tagProtect was previously configured.",
               "properties": {
                 "action": {
                   "type": "string",
+                  "description": "Last configured protection action.",
                   "enum": [
                     "enableTagProtection",
                     "disableTagProtection",
@@ -64,6 +70,7 @@
                 },
                 "password": {
                   "type": "string",
+                  "description": "8-character hexadecimal 32-bit password.",
                   "minLength": 8,
                   "maxLength": 8,
                   "pattern": "^[0-9A-Fa-f]{8}$",
@@ -71,11 +78,13 @@
                 },
                 "tagID": {
                   "type": "string",
+                  "description": "Hexadecimal tagID (EPC) of the target tag. Only present when action is enableTagProtection or disableTagProtection.",
                   "pattern": "^[0-9A-Fa-f]+$",
                   "example": "e2801191a5030069073b426d"
                 },
                 "enableShortRange": {
                   "type": "boolean",
+                  "description": "Whether short-range protection mode is enabled.",
                   "example": true
                 }
               },
@@ -86,9 +95,11 @@
             },
             "tagFocus": {
               "type": "object",
+              "description": "TagFocus configuration. Present only if tagFocus was previously configured.",
               "properties": {
                 "enabled": {
                   "type": "boolean",
+                  "description": "Whether TagFocus is enabled.",
                   "example": true
                 }
               },

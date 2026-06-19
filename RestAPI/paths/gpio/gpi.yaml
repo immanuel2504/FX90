@@ -2,7 +2,7 @@ get:
   tags:
   - Gpio
   summary: Get GPI Status
-  description: MQTT API :-  get_gpiStatus <br> Retrieves the GPI status.
+  description: 'MQTT API :-  get_gpiStatus <br> Retrieves the current GPI port states. Maximum number of ports available per device type: FX7500 = 2 GPI pins, FX9600 = 4 GPI pins, ATR7000 = 2 GPI pins.'
   operationId: getGPIStatus
   responses:
     '200':

@@ -1,6 +1,6 @@
 ## 1. Description
 
-The `get_SupportedStandardlist` command retrieves the list of RF regulatory standards supported by the reader and the channel details for each.
+The `get_supportedStandardList` command retrieves the list of RF regulatory standards supported by the reader and the channel details for each.
 
 This command returns:
 
@@ -23,7 +23,7 @@ No additional payload fields are required to retrieve the supported standard lis
 
 ## 3. When to Use This Command
 
-Use `get_SupportedStandardlist` to:
+Use `get_supportedStandardList` to:
 
 - Discover which regulatory standards apply for a region
 - Determine whether LBT or channel hopping is configurable

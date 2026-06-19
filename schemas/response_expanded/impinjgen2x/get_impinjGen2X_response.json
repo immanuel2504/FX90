@@ -26,16 +26,20 @@
       "oneOf": [
         {
           "type": "object",
+          "description": "Current Impinj Gen2X feature configuration as last saved via set_impinjGen2X. Returns an empty object if no Gen2X configuration has been set yet. Only feature objects that were previously configured are included in the response.",
           "properties": {
             "fastID": {
               "type": "object",
+              "description": "FastID configuration. Present only if fastID was previously configured.",
               "properties": {
                 "enabled": {
                   "type": "boolean",
+                  "description": "Whether FastID is enabled.",
                   "example": true
                 },
                 "tidSelector": {
                   "type": "string",
+                  "description": "TID word selector mask, if one was configured.",
                   "enum": [
                     "TID[0]",
                     "TID[1]",
@@ -51,9 +55,11 @@
             },
             "tagProtect": {
               "type": "object",
+              "description": "TagProtect configuration. Present only if tagProtect was previously configured.",
               "properties": {
                 "action": {
                   "type": "string",
+                  "description": "Last configured protection action.",
                   "enum": [
                     "enableTagProtection",
                     "disableTagProtection",
@@ -64,6 +70,7 @@
                 },
                 "password": {
                   "type": "string",
+                  "description": "8-character hexadecimal 32-bit password.",
                   "minLength": 8,
                   "maxLength": 8,
                   "pattern": "^[0-9A-Fa-f]{8}$",
@@ -71,11 +78,13 @@
                 },
                 "tagID": {
                   "type": "string",
+                  "description": "Hexadecimal tagID (EPC) of the target tag. Only present when action is enableTagProtection or disableTagProtection.",
                   "pattern": "^[0-9A-Fa-f]+$",
                   "example": "e2801191a5030069073b426d"
                 },
                 "enableShortRange": {
                   "type": "boolean",
+                  "description": "Whether short-range protection mode is enabled.",
                   "example": true
                 }
               },
@@ -86,9 +95,11 @@
             },
             "tagFocus": {
               "type": "object",
+              "description": "TagFocus configuration. Present only if tagFocus was previously configured.",
               "properties": {
                 "enabled": {
                   "type": "boolean",
+                  "description": "Whether TagFocus is enabled.",
                   "example": true
                 }
               },
@@ -118,6 +129,7 @@
                   "properties": {
                     "action": {
                       "type": "string",
+                      "description": "quiet silences the specified tags for the current inventory round; unquiet restores previously quieted tags.",
                       "enum": [
                         "quiet",
                         "unquiet"
@@ -126,6 +138,7 @@
                     },
                     "tagIDs": {
                       "type": "array",
+                      "description": "Non-empty list of hexadecimal EPC strings identifying the tags to quiet or unquiet.",
                       "minItems": 1,
                       "items": {
                         "type": "string",
@@ -145,12 +158,14 @@
                   "properties": {
                     "preSelect": {
                       "type": "array",
+                      "description": "Optional array of SELECT operations to position tags into specific session states before applying state-aware SELECT. Maximum 31 items allowed.",
                       "maxItems": 31,
                       "items": {
                         "type": "object",
                         "properties": {
                           "target": {
                             "type": "string",
+                            "description": "Session or flag to target.",
                             "enum": [
                               "S0",
                               "S1",
@@ -162,6 +177,7 @@
                           },
                           "action": {
                             "type": "string",
+                            "description": "Action to perform on the target session or flag.",
                             "enum": [
                               "ASSERTSL_NOTHING",
                               "DEASSERTSL_NOTHING",
@@ -186,9 +202,11 @@
                           },
                           "mask": {
                             "type": "object",
+                            "description": "Memory mask for tag selection.",
                             "properties": {
                               "bank": {
                                 "type": "string",
+                                "description": "Memory bank to match against.",
                                 "enum": [
                                   "EPC",
                                   "TID",
@@ -199,18 +217,21 @@
                               },
                               "pointer": {
                                 "type": "integer",
+                                "description": "Bit offset in memory bank.",
                                 "minimum": 0,
                                 "maximum": 65535,
                                 "example": 32
                               },
                               "length": {
                                 "type": "integer",
+                                "description": "Number of bits to match.",
                                 "minimum": 1,
                                 "maximum": 255,
                                 "example": 96
                               },
                               "value": {
                                 "type": "string",
+                                "description": "Hex string value to match (even length, valid hex characters).",
                                 "pattern": "^[0-9A-Fa-f]+$",
                                 "example": "A55E551ABE1C0DE869C7A459"
                               }
@@ -232,6 +253,7 @@
                     },
                     "tagQuietMasks": {
                       "type": "array",
+                      "description": "Session-state combinations to check in TID memory. Minimum 1, maximum 3 items. No duplicate session prefixes allowed (e.g., S0A and S0B together).",
                       "minItems": 1,
                       "maxItems": 3,
                       "uniqueItems": true,
@@ -248,10 +270,77 @@
                           "SL_DEASSERT"
                         ],
                         "example": "S0A"
-                      }
+                      },
+                      "allOf": [
+                        {
+                          "not": {
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "S0A"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "S0B"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "not": {
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "S2A"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "S2B"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "not": {
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "S3A"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "S3B"
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "not": {
+                            "allOf": [
+                              {
+                                "contains": {
+                                  "const": "SL_ASSERT"
+                                }
+                              },
+                              {
+                                "contains": {
+                                  "const": "SL_DEASSERT"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     },
                     "target": {
                       "type": "string",
+                      "description": "Which flag to manipulate based on state check.",
                       "enum": [
                         "SL",
                         "S0",
@@ -263,6 +352,7 @@
                     },
                     "stateAwareAction": {
                       "type": "string",
+                      "description": "Action to perform on target flag when tags match the tagQuietMasks pattern.",
                       "enum": [
                         "ASSERTSL",
                         "DEASSERTSL",

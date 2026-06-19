@@ -4,7 +4,7 @@
     "id": "kc5fq9z8wsv82"
   },
   "type": "object",
-  "description": "Sets the specified GPO on the reader to the value specified.",
+  "description": "Updates the state of the specified GPO port.",
   "properties": {
     "command": {
       "type": "string",
@@ -12,7 +12,7 @@
         "set_gpo"
       ],
       "example": "set_gpo",
-      "description": "The value for the key command must be set_gpo\n\nNote :\u00a0\nMaximum number of ports available per device type\n1. FX7500 = 3 GPO pins\n2. FX9600 = 4 GPO pins\n3. ATR7000 = 3 GPO pins"
+      "description": "The value for the key command must be set_gpo. Maximum number of ports available per device type: FX7500 = 3 GPO pins, FX9600 = 4 GPO pins, ATR7000 = 3 GPO pins."
     },
     "command_id": {
       "type": "string",
@@ -22,18 +22,18 @@
     "payload": {
       "title": "set_gpo",
       "type": "object",
-      "description": "Updates GPO port state",
+      "description": "Updates the state of the specified GPO port.",
       "properties": {
         "port": {
           "type": "integer",
-          "description": "The GPO port ID",
+          "description": "GPO port number to update. Valid values are 1 through 4.",
           "minimum": 1,
           "maximum": 4,
           "example": 1
         },
         "state": {
           "type": "boolean",
-          "description": "The GPO state signal to send",
+          "description": "Desired GPO output state. true sets the output HIGH; false sets the output LOW.",
           "default": false
         }
       },
@@ -52,15 +52,5 @@
         "state": false
       }
     }
-  ],
-  "x-examples": {
-    "example-1": {
-      "command": "set_gpo",
-      "command_id": "abcd1324",
-      "payload": {
-        "port": 1,
-        "state": false
-      }
-    }
-  }
+  ]
 }

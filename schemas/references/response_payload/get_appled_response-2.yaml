@@ -1,6 +1,6 @@
 title: success
 type: object
-description: Represents current userapp led status
+description: Represents the current App LED status.
 properties:
   status:
     type: string
@@ -9,5 +9,6 @@ properties:
     - NOT_DEFAULT
     example: DEFAULT
     default: DEFAULT
+    description: Current App LED configuration status reported by the reader.
 required:
 - status

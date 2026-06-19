@@ -1,4 +1,4 @@
-description: Retrive GPI pin statuses
+description: Retrieves the current GPI port states.
 type: object
 x-examples:
   example-1:
@@ -10,31 +10,29 @@ properties:
   '1':
     type: string
     minLength: 1
-    enum:
+    enum: &id001
     - HIGH
     - LOW
     example: HIGH
+    description: 'State of GPI port 1. Allowed values: HIGH, LOW.'
   '2':
     type: string
     minLength: 1
-    enum:
-    - HIGH
-    - LOW
+    enum: *id001
     example: HIGH
+    description: 'State of GPI port 2. Allowed values: HIGH, LOW.'
   '3':
     type: string
     minLength: 1
-    enum:
-    - HIGH
-    - LOW
+    enum: *id001
     example: HIGH
+    description: 'State of GPI port 3. Allowed values: HIGH, LOW.'
   '4':
     type: string
     minLength: 1
-    enum:
-    - HIGH
-    - LOW
+    enum: *id001
     example: LOW
+    description: 'State of GPI port 4. Allowed values: HIGH, LOW.'
 required:
 - '1'
 - '2'

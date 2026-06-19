@@ -9,10 +9,10 @@
     "command": {
       "type": "string",
       "enum": [
-        "set_installUserapp"
+        "install_user_app"
       ],
-      "example": "set_installUserapp",
-      "description": "The value for the key command must be set_installUserapp"
+      "example": "install_user_app",
+      "description": "The value for the key command must be install_user_app"
     },
     "command_id": {
       "type": "string",
@@ -30,74 +30,17 @@
   ],
   "examples": [
     {
-      "command": "set_installUserapp",
+      "command": "install_user_app",
       "command_id": "abcd123",
       "payload": {
-        "url": "https://example.com/apps/",
-        "filename": "sample_1.0.0.deb",
-        "authenticationType": "NONE",
-        "options": {
-          "username": "string",
-          "password": "string"
-        },
-        "verifyPeer": true,
-        "verifyHost": true,
-        "CACertificateFileLocation": "/apps/ca.pem",
-        "CACertificateFileContent": "string",
-        "headers": {
-          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
-        },
-        "retry": {
-          "type": "randomWait",
-          "policy": {
-            "retries": 3,
-            "wait": {
-              "min": 60,
-              "max": 600
-            }
-          }
-        },
-        "timeouts": {
-          "connection": 120,
-          "read": 180
+        "authenticationType": "BASIC",
+        "filename": "mylogger_1.0.1.deb",
+        "url": "sftp://10.117.229.15/home/labuser/EV1/",
+        "authenticationOptions": {
+          "username": "labuser",
+          "password": "L@bu$3rs"
         }
       }
     }
-  ],
-  "x-examples": {
-    "Example 1": {
-      "command": "set_installUserapp",
-      "command_id": "abcd123",
-      "payload": {
-        "url": "https://example.com/apps/",
-        "filename": "sample_1.0.0.deb",
-        "authenticationType": "NONE",
-        "options": {
-          "username": "string",
-          "password": "string"
-        },
-        "verifyPeer": true,
-        "verifyHost": true,
-        "CACertificateFileLocation": "/apps/ca.pem",
-        "CACertificateFileContent": "string",
-        "headers": {
-          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
-        },
-        "retry": {
-          "type": "randomWait",
-          "policy": {
-            "retries": 3,
-            "wait": {
-              "min": 60,
-              "max": 600
-            }
-          }
-        },
-        "timeouts": {
-          "connection": 120,
-          "read": 180
-        }
-      }
-    }
-  }
+  ]
 }

@@ -27,7 +27,7 @@ put:
         examples:
           set_timeZone:
             value:
-              timeZone: Asia/Dubai
+              timeZone: International Date Line West
   responses:
     '200':
       description: OK

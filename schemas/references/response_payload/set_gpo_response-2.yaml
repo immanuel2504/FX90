@@ -1,3 +1,3 @@
 title: success
 type: object
-description: Updates GPO port state
+description: Updates the state of the specified GPO port.

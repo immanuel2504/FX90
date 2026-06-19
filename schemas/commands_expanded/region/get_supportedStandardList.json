@@ -3,10 +3,10 @@
   "x-stoplight": {
     "id": "x3kzpuyewquvx"
   },
-  "description": "Retrieves the standard channel list based on the region name provided",
+  "description": "Retrieves the supported regulatory standards and channel settings for the requested region.",
   "examples": [
     {
-      "command": "get_supportedStandardlist",
+      "command": "get_supportedStandardList",
       "command_id": "sdgf",
       "payload": {
         "region": "Argentina"
@@ -16,10 +16,10 @@
   "properties": {
     "command": {
       "type": "string",
-      "example": "get_supportedStandardlist",
-      "description": "The value for the key command must be get_supportedRegionStandard\n",
+      "example": "get_supportedStandardList",
+      "description": "The value for the key command must be get_supportedStandardList",
       "enum": [
-        "get_supportedstandardList"
+        "get_supportedStandardList"
       ]
     },
     "command_id": {

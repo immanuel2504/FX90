@@ -4,21 +4,175 @@ x-stoplight:
 type: object
 description: Gets Current Reader Time Zone
 examples:
-- timeZone: (GMT-12:00) International Date Line West
+- timeZone: International Date Line West
 properties:
   timeZone:
     type: string
     description: Allowed time zones on the reader
     enum:
+    - International Date Line West
+    - Midway Island
+    - Samoa
+    - Hawaii
+    - Alaska
+    - Pacific Time (US & Canada)
+    - Tijuana
+    - Baja California
+    - Mountain Time (US & Canada)
+    - Arizona
+    - Chihuahua
+    - La Paz
+    - Mazatlan
+    - Central Time (US & Canada)
+    - Saskatchewan
+    - Central America
+    - Guadalajara
+    - Mexico City
+    - Monterrey
+    - Eastern Time (US & Canada)
+    - Indiana (East)
+    - Bogota
+    - Lima
+    - Quito
+    - Caracas
+    - Atlantic Time (Canada)
+    - Georgetown
+    - La Paz
+    - San Juan
+    - Santiago
+    - Manaus
+    - Asuncion
+    - Greenland
+    - Newfoundland
+    - Brasilia
+    - Cayenne
+    - Buenos Aires
+    - Montevideo
+    - Mid-Atlantic
+    - Azores
+    - Cape Verde Is.
+    - Dublin
+    - Edinburgh
+    - Lisbon
+    - London
+    - Monrovia
+    - Reykjavik
+    - Casablanca
+    - Coordinated Universal Time
+    - Belgrade
+    - Bratislava
+    - Budapest
+    - Ljubljana
+    - Prague
+    - Sarajevo
+    - Skopje
+    - Warsaw
+    - Zagreb
+    - Brussels
+    - Copenhagen
+    - Madrid
+    - Paris
+    - Amsterdam
+    - Berlin
+    - Bern
+    - Rome
+    - Stockholm
+    - Vienna
+    - West Central Africa
+    - Cairo
+    - Helsinki
+    - Kyiv
+    - Riga
+    - Sofia
+    - Tallinn
+    - Vilnius
+    - Athens
+    - Bucharest
+    - Harare
+    - Pretoria
+    - Jerusalem
+    - Windhoek
+    - Amman
+    - Beirut
+    - Minsk
+    - Istanbul
+    - Moscow
+    - St. Petersburg
+    - Volgograd
+    - Kuwait
+    - Riyadh
+    - Nairobi
+    - Baghdad
+    - Tbilisi
+    - Tehran
+    - Abu Dhabi
+    - Muscat
+    - Yerevan
+    - Baku
+    - Port Louis
+    - Kabul
+    - Ekaterinburg
+    - Tashkent
+    - Islamabad
+    - Karachi
+    - Chennai
+    - Kolkata
+    - Mumbai
+    - New Delhi
+    - Sri Jayawardenepura
+    - Kathmandu
+    - Almaty
+    - Astana
+    - Dhaka
+    - Yangon (Rangoon)
+    - Novosibirsk
+    - Bangkok
+    - Hanoi
+    - Jakarta
+    - Krasnoyarsk
+    - Beijing
+    - Chongqing
+    - Hong Kong
+    - Urumqi
+    - Taipei
+    - Perth
+    - Irkutsk
+    - Kuala Lumpur
+    - Singapore
+    - Ulaanbaatar
+    - Seoul
+    - Osaka
+    - Sapporo
+    - Tokyo
+    - Yakutsk
+    - Darwin
+    - Adelaide
+    - Canberra
+    - Melbourne
+    - Sydney
+    - Brisbane
+    - Hobart
+    - Vladivostok
+    - Guam
+    - Port Moresby
+    - New Caledonia
+    - Solomon Is.
+    - Magadan
+    - Fiji
+    - Marshall Is.
+    - Auckland
+    - Wellington
+    - Petropavlovsk-Kamchatsky
+    - Nuku'alofa
     - (GMT-12:00) International Date Line West
-    - (GMT-10:00) Hawaii
+    - (GMT-11:00) Midway Island, Samoa
     - (GMT-10:00) Hawaii
     - (GMT-09:00) Alaska
     - (GMT-08:00) Pacific Time (US & Canada)
-    - (GMT-08:00) Tijuana
+    - (GMT-08:00) Tijuana, Baja California
     - (GMT-07:00) Mountain Time (US & Canada)
-    - (GMT-07:00) Arizona'
-    - (GMT-07:00) Chihuahua
+    - (GMT-07:00) Arizona
+    - (GMT-07:00) Chihuahua, La Paz, Mazatlan
     - (GMT-06:00) Central Time (US & Canada)
     - (GMT-06:00) Saskatchewan
     - (GMT-06:00) Central America

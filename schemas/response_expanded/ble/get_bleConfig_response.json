@@ -29,7 +29,6 @@
         {
           "title": "get_bleConfig_response",
           "type": "object",
-          "description": "Current BLE scanner configuration.",
           "properties": {
             "ble": {
               "type": "object",
@@ -78,16 +77,20 @@
                             "type": "object",
                             "properties": {
                               "uuid": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Proximity UUID"
                               },
                               "major": {
-                                "type": "integer"
+                                "type": "integer",
+                                "description": "Major value"
                               },
                               "minor": {
-                                "type": "integer"
+                                "type": "integer",
+                                "description": "Minor value"
                               },
                               "txPower": {
-                                "type": "integer"
+                                "type": "integer",
+                                "description": "TX power / calibrated RSSI at 1m"
                               }
                             }
                           }
@@ -106,19 +109,24 @@
                             "type": "object",
                             "properties": {
                               "mfgId": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Manufacturer ID (hex string)"
                               },
                               "beaconId": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Beacon ID (UUID string)"
                               },
                               "major": {
-                                "type": "integer"
+                                "type": "integer",
+                                "description": "Major value"
                               },
                               "minor": {
-                                "type": "integer"
+                                "type": "integer",
+                                "description": "Minor value"
                               },
                               "refRssi": {
-                                "type": "integer"
+                                "type": "integer",
+                                "description": "Reference RSSI (TX power at 1m)"
                               }
                             }
                           }
@@ -143,25 +151,32 @@
                                   "UID",
                                   "EID",
                                   "TLM"
-                                ]
+                                ],
+                                "description": "Eddystone frame type"
                               },
                               "txPower": {
-                                "type": "integer"
+                                "type": "integer",
+                                "description": "TX power at 0m"
                               },
                               "url": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Advertised URL (Eddystone-URL only)"
                               },
                               "namespace": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "10-byte namespace hex string (Eddystone-UID only)"
                               },
                               "instance": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "6-byte instance ID hex string (Eddystone-UID only)"
                               },
                               "ephemeralId": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "8-byte ephemeral ID hex string (Eddystone-EID only)"
                               }
                             }
-                          }
+                          },
+                          "description": "Filter by Eddystone frame fields. Use `frameType` to target a specific frame type (URL, UID, EID)."
                         }
                       }
                     },
@@ -177,27 +192,34 @@
                             "type": "object",
                             "properties": {
                               "address": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Bluetooth device address to match."
                               },
                               "addressType": {
                                 "type": "string",
                                 "enum": [
                                   "public",
                                   "random"
-                                ]
+                                ],
+                                "description": "Bluetooth address type to match."
                               },
                               "name": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Device name to match."
                               },
                               "alias": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "Device alias to match."
                               }
                             }
-                          }
+                          },
+                          "description": "List of filter objects for GENERIC_BLE beacons."
                         }
-                      }
+                      },
+                      "description": "Configuration for GENERIC_BLE beacons. Filters match on device-level advertisement fields."
                     }
-                  }
+                  },
+                  "description": "Protocol-specific BLE scanner configurations."
                 }
               }
             }

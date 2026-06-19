@@ -1,14 +1,12 @@
-title: get_hostname
+title: get_hostName
 x-stoplight:
   id: 66v28ebog3asj
 type: object
 description: Reader hostname information
 properties:
-  hostname:
+  hostName:
     type: string
-    x-stoplight:
-      id: mzv0bwgf2igo5
-    example: FX75006A0B8C
+    example: FXR90C60C001
     description: Hostname of the reader
 required:
-- hostname
+- hostName
