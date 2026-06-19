@@ -42,7 +42,6 @@ def is_schema_file(filename):
 def op_name_of(filename):
     return os.path.splitext(filename)[0]
 UNSUPPORTED_DETAIL_ROWS = {
-    "communication type",
     "supported response sections",
     "supported api versions",
 }

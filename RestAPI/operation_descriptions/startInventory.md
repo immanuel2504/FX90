@@ -1,31 +1,90 @@
-The `PUT /cloud/start` REST endpoint and the `start` MQTT command start RFID inventory, BLE scanning, or both.
+# `PUT /cloud/start` - REST Endpoint Reference
 
-By default, an empty request starts RFID inventory only. Use `scanType` to explicitly start BLE, RFID, or both.
+## 1. Description
 
-## 1. Operation Details
+The `PUT /cloud/start` REST endpoint starts RFID inventory, BLE scanning, or both on the FXR90 reader.
+
+By default, an empty request body starts RFID inventory only. Use the `scanType` field to explicitly start BLE, RFID, or both together. Optional flags allow you to apply a previously saved Impinj Gen2X configuration or control whether the start state persists across reboots.
+
+**Use this endpoint to:**
+
+- Start RFID inventory using the currently configured operating mode
+- Start BLE scanning using the currently configured BLE settings
+- Start RFID and BLE scanning together in a single inventory session
+- Apply a previously saved Impinj Gen2X configuration when starting RFID inventory
+- Control whether the reader automatically resumes scanning after reboot
+
+### Endpoint Details
 
 | Property | Value |
 |---|---|
 | Pattern Name | Scan Control - Start |
-| Supported Protocols | REST (HTTP/HTTPS), MQTT |
-| Applies To | FXR90 |
-| Related Operations | `stopInventory`, `setBleConfig`, `setImpinjGen2X`, `setMode` |
-| REST Endpoint | `PUT /cloud/start` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 Series |
 | MQTT Command | `start` |
+| Related Endpoints | `PUT /cloud/stop`, `PUT /cloud/ble-config`, `PUT /cloud/impinjGen2X`, `PUT /cloud/mode` |
+| Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Content-Type | `application/json` |
+| Supported Scan Types | `rfid`, `ble`, or both combined |
 
-## 2. Start Behavior
+---
 
-| Payload | Result |
+## 2. Before You Begin
+
+Make sure the relevant scanners are configured before sending this request.
+
+| What You Need | Details |
 |---|---|
-| `{}` | Starts RFID inventory only. |
-| `{ "scanType": ["rfid"] }` | Starts RFID inventory explicitly. |
-| `{ "scanType": ["ble"] }` | Starts BLE scanning only. |
-| `{ "scanType": ["ble", "rfid"] }` | Starts BLE scanning and RFID inventory together. |
-| `{ "applyImpinjGen2X": true }` | Starts RFID inventory and applies the saved Impinj Gen2X configuration. |
+| Authentication | Obtain a valid bearer token and include it in the `Authorization` header of every request. |
+| Network reachability | The reader's HTTPS endpoint must be reachable from your client. |
+| RFID configuration | Operating mode must be configured via `PUT /cloud/mode` (or default) before starting RFID inventory. |
+| BLE configuration | If starting BLE, the BLE scanner must be configured via `PUT /cloud/ble-config` with `ble.enable: true`. |
+| Gen2X configuration | If using `applyImpinjGen2X: true`, the Gen2X configuration must be saved via `PUT /cloud/impinjGen2X` beforehand. |
 
-## 3. Before You Begin
+---
 
-Configure the scan mode before starting:
-- RFID inventory should be configured with mode settings.
-- BLE scanning requires BLE configuration from `PUT /cloud/ble-config`.
-- Gen2X settings must be saved before using `applyImpinjGen2X`.
+## 3. What Happens After Start
+
+Once the `PUT /cloud/start` request succeeds, the reader transitions from **Idle** to **Running**. Two important behaviors govern the running session.
+
+### Scan Type
+
+The `scanType` field determines which scanners run and where the data is published.
+
+| Scan Type | Behavior |
+|---|---|
+| `rfid` (default) | Starts RFID inventory only. Tag read events stream on the reader's RFID data topic. |
+| `ble` | Starts BLE scanning only. BLE advertisement events stream on the reader's BLE data topic. |
+| `["ble", "rfid"]` | Starts both scanners in a single session. RFID and BLE events stream independently on their respective data topics. |
+
+### Persistence Across Reboots
+
+The `doNotPersistState` field controls whether the reader resumes scanning automatically after a reboot or reconnect.
+
+| `doNotPersistState` | Behavior on Reboot or Reconnect |
+|---|---|
+| `false` (default) | The reader **remembers the running state** and automatically resumes scanning. |
+| `true` | The running state is **not saved**. The reader stays Idle until `PUT /cloud/start` is called again. |
+
+> Tip: Use `doNotPersistState: true` for one-time or debugging sessions where automatic resume after reboot is not desired.
+
+---
+
+## 4. Rules and Constraints
+
+### Request Format
+
+- HTTP method must be `PUT`.
+- `Content-Type` header must be `application/json`.
+- `Authorization` header must contain a valid bearer token.
+- Request body may be empty (`{}`) or contain optional fields.
+
+### Field-Level Rules
+
+- `scanType` - array of strings. Allowed values: `"rfid"`, `"ble"`.
+- `applyImpinjGen2X` - boolean.
+- `doNotPersistState` - boolean.
+
+### Inventory State
+
+- Only one inventory session may be active at a time.

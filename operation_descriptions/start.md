@@ -1,52 +1,87 @@
-## Description
+# `start` - MQTT Command Reference
 
-The `start` command starts RFID inventory, BLE scanning, or both at the same time.
+## 1. Description
 
-By default, if `payload` is empty or `scanType` is not provided, the reader starts RFID inventory only. Use `scanType` when you need to explicitly start BLE, RFID, or both.
+The `start` MQTT command starts RFID inventory, BLE scanning, or both on the FXR90 reader.
 
-Use this command to:
+By default, an empty payload starts RFID inventory only. Use the `scanType` field to explicitly start BLE, RFID, or both together. Optional flags allow you to apply a previously saved Impinj Gen2X configuration or control whether the start state persists across reboots.
 
-- Start RFID inventory after configuring the reader mode with `set_mode`
-- Start BLE scanning after configuring BLE with `set_bleConfig`
-- Start RFID and BLE together for mixed tag/beacon workflows
-- Apply a previously saved Impinj Gen2X configuration when starting RFID
+**Use this command to:**
 
-## Command Details
+- Start RFID inventory using the currently configured operating mode
+- Start BLE scanning using the currently configured BLE settings
+- Start RFID and BLE scanning together in a single inventory session
+- Apply a previously saved Impinj Gen2X configuration when starting RFID inventory
+- Control whether the reader automatically resumes scanning after reboot
+
+### Command Details
 
 | Property | Value |
 |---|---|
-| Pattern Name | RFID/BLE Scan Control - Start |
+| Pattern Name | Scan Control - Start |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FXR90 |
-| Related Commands | [stop](stop.md), [set_bleConfig](set_bleConfig.md), [get_bleConfig](get_bleConfig.md), [set_mode](set_mode.md), [get_mode](get_mode.md), [set_impinjGen2X](set_impinjGen2X.md) |
-| Supported Operations | Start RFID inventory, BLE scan, or both |
-| Supported API Versions | V1.0 |
+| Applies To | FXR90 Series |
+| MQTT Command | `start` |
+| REST Endpoint | `PUT /cloud/start` |
+| Related Commands | `stop`, `set_bleConfig`, `set_impinjGen2X`, `set_mode` |
+| Supported Scan Types | `rfid`, `ble`, or both combined |
 
-## Before You Begin
+---
 
-Configure the scan type you plan to start.
+## 2. Before You Begin
+
+Make sure the relevant scanners are configured before publishing this command.
 
 | What You Need | Details |
 |---|---|
-| RFID inventory | Configure inventory behavior with `set_mode` before starting RFID. |
-| BLE scanning | Configure BLE first with `set_bleConfig`. |
-| Impinj Gen2X | Configure Gen2X first with `set_impinjGen2X`, then start with `applyImpinjGen2X: true`. |
-| Reader status | Use `get_status` to confirm the radio is connected and ready. |
+| MQTT connectivity | The reader must be connected to the MQTT broker and subscribed to its command topic. |
+| RFID configuration | Operating mode must be configured via `set_mode` (or default) before starting RFID inventory. |
+| BLE configuration | If starting BLE, the BLE scanner must be configured via `set_bleConfig` with `ble.enable: true`. |
+| Gen2X configuration | If using `applyImpinjGen2X: true`, the Gen2X configuration must be saved via `set_impinjGen2X` beforehand. |
 
-## Start Behavior
+---
 
-| Payload | Result |
+## 3. What Happens After Start
+
+Once the `start` command succeeds, the reader transitions from **Idle** to **Running**. Two important behaviors govern the running session.
+
+### Scan Type
+
+The `scanType` field determines which scanners run and where the data is published.
+
+| Scan Type | Behavior |
 |---|---|
-| `{}` | Starts RFID inventory only. This is the default behavior. |
-| `{ "scanType": ["rfid"] }` | Starts RFID inventory explicitly. |
-| `{ "scanType": ["ble"] }` | Starts BLE scanning only. |
-| `{ "scanType": ["ble", "rfid"] }` | Starts BLE scanning and RFID inventory together. |
-| `{ "applyImpinjGen2X": true }` | Starts RFID inventory and applies the saved Impinj Gen2X configuration. |
+| `rfid` (default) | Starts RFID inventory only. Tag read events stream on the reader's RFID data topic. |
+| `ble` | Starts BLE scanning only. BLE advertisement events stream on the reader's BLE data topic. |
+| `["ble", "rfid"]` | Starts both scanners in a single session. RFID and BLE events stream independently on their respective data topics. |
 
-## Important Rules
+### Persistence Across Reboots
 
-- `scanType` may contain `rfid`, `ble`, or both.
-- If `scanType` is omitted, the reader defaults to RFID-only.
-- BLE scanning requires BLE configuration from `set_bleConfig`.
-- `scanType` containing `ble` cannot be combined with `applyImpinjGen2X`.
-- `applyImpinjGen2X` is for RFID Gen2X operations, not BLE scanning.
+The `doNotPersistState` field controls whether the reader resumes scanning automatically after a reboot or MQTT reconnect.
+
+| `doNotPersistState` | Behavior on Reboot or Reconnect |
+|---|---|
+| `false` (default) | The reader **remembers the running state** and automatically resumes scanning. |
+| `true` | The running state is **not saved**. The reader stays Idle until `start` is published again. |
+
+> Tip: Use `doNotPersistState: true` for one-time or debugging sessions where automatic resume after reboot is not desired.
+
+---
+
+## 4. Rules and Constraints
+
+### Command Envelope
+
+- `command` must be exactly `start`.
+- `command_id` must be a unique, non-empty string.
+- `payload` must be present; it may be empty (`{}`).
+
+### Field-Level Rules
+
+- `scanType` - array of strings. Allowed values: `"rfid"`, `"ble"`.
+- `applyImpinjGen2X` - boolean.
+- `doNotPersistState` - boolean.
+
+### Inventory State
+
+- Only one inventory session may be active at a time.
