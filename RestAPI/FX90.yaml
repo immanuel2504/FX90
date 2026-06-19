@@ -8402,7 +8402,7 @@ components:
 
           “HOSTNAME” will report the hostname of the reader reporting the tag.
 
-        The array may also contain an object or objects. The object must contain a single name value pair with the name being set to “userDefined” or “antennaNames”
+        The array may also contain an object or objects. The object must contain a single name value pair with the name being set to “userDefined” or “antennaPortNames”
 
 
         If absent,
@@ -8428,13 +8428,14 @@ components:
           - EPC
           - TID
           - USER
+          - RESERVED
           - MAC
           - HOSTNAME
         properties:
           userDefined:
             type: string
             description: A user defined field to report each time a tag is reported
-          antennaNames:
+          antennaPortNames:
             type: array
             description: |-
               Used to give antenna ports descriptive names
@@ -8526,6 +8527,18 @@ components:
             - PER_ANTENNA
           description: |
             Configures the timeout (in seconds) by antenna or for entire radio 
+        addl_keys:
+          title: addl_keys
+          type: array
+          description: |-
+            Filters tag reports based on additional configured keys.
+
+            In order to add additional keys, the tag metadata must be configured to report "TID", "PC" and "CRC".
+            However, if the radio type is set to PER_ANTENNA, the "ANTENNA" field must also be added to tag metadata.
+          items:
+            type: string
+            enum:
+              - TID
       required:
         - duration
         - type
@@ -8765,6 +8778,40 @@ components:
           $ref: '#/components/schemas/tagReportFilter.v1'
         rssiFilter:
           $ref: '#/components/schemas/rssiFilter.v1'
+        beams:
+          type: array
+          description: Array of beams to use
+          items:
+            type: object
+            properties:
+              azimuth:
+                type: integer
+                description: Azimuth of beam (in degrees)
+                multipleOf: 5
+                maximum: 360
+                minimum: 0
+                example: 65
+              elevation:
+                type: integer
+                description: Elevation of beam (in degrees)
+                multipleOf: 5
+                minimum: 0
+                maximum: 70
+                example: 45
+              polarization:
+                type: string
+                description: Polarization of beam
+                default: LHCP
+                enum:
+                  - TOTAL
+                  - THETA
+                  - PHI
+                  - RHCP
+                  - LHCP
+                example: TOTAL
+            required:
+              - azimuth
+              - elevation
       required:
         - type
     getmodePayload:
