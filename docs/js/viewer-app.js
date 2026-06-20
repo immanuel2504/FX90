@@ -1,8 +1,7 @@
 (function() {
 'use strict';
 
-var DOCS_ASSET_VERSION = '20260610-3';
-var OPS_PER_FRAME = 4;
+var DOCS_ASSET_VERSION = '20260620-1';
 
 var CATEGORY_LABELS = {
   login: 'Login',
@@ -424,16 +423,35 @@ function errorTable(codes) {
 }
  
 /* ── Auto-generate example from schema properties ── */
+function normalizeMqttExample(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return value;
+  Object.keys(value).forEach(function (key) {
+    if (key === 'payload' && value[key] === '') value[key] = {};
+    else if (value[key] && typeof value[key] === 'object' && !Array.isArray(value[key])) {
+      normalizeMqttExample(value[key]);
+    }
+  });
+  return value;
+}
+
 function generateExampleValue(prop, fieldName, isRequired) {
    if (!prop) return fieldName === 'payload' ? {} : null;
-   if (prop.example !== undefined) return prop.example;
-   if (Array.isArray(prop.examples) && prop.examples.length) return prop.examples[0];
+   if (prop.example !== undefined) {
+     if (fieldName === 'payload' && prop.example === '') return {};
+     return prop.example;
+   }
+   if (Array.isArray(prop.examples) && prop.examples.length) {
+     if (fieldName === 'payload' && prop.examples[0] === '') return {};
+     return prop.examples[0];
+   }
    if (prop.enum && prop.enum.length) return prop.enum[0];
    if (prop.const !== undefined) return prop.const;
    if (prop.default !== undefined) return prop.default;
    if (prop.oneOf || prop.anyOf || prop.allOf) return generateExampleFromSchema(prop, fieldName);
    switch (prop.type) {
-     case 'string':  return prop.format === 'date-time' ? '2026-01-01T00:00:00Z' : 'string';
+     case 'string':
+       if (fieldName === 'payload' && prop.example === '') return {};
+       return prop.format === 'date-time' ? '2026-01-01T00:00:00Z' : 'string';
      case 'integer': return prop.minimum !== undefined ? prop.minimum : 0;
      case 'number':  return prop.minimum !== undefined ? prop.minimum : 0.0;
      case 'boolean': return false;
@@ -447,8 +465,14 @@ function generateExampleValue(prop, fieldName, isRequired) {
 
 function generateExampleFromSchema(schema, fieldName) {
    if (!schema) return fieldName === 'payload' ? {} : {};
-   if (schema.example !== undefined) return schema.example;
-   if (Array.isArray(schema.examples) && schema.examples.length) return schema.examples[0];
+   if (schema.example !== undefined) {
+     if (fieldName === 'payload' && schema.example === '') return {};
+     return normalizeMqttExample(schema.example);
+   }
+   if (Array.isArray(schema.examples) && schema.examples.length) {
+     if (fieldName === 'payload' && schema.examples[0] === '') return {};
+     return normalizeMqttExample(schema.examples[0]);
+   }
 
    var variants = schema.oneOf || schema.anyOf;
    if (variants && variants.length) {
@@ -480,6 +504,7 @@ function generateExampleFromSchema(schema, fieldName) {
        var prop = schema.properties[key];
        var isRequired = required.indexOf(key) !== -1;
        var value = generateExampleValue(prop, key, isRequired);
+       if (key === 'payload' && value === '') value = {};
        if (key === 'payload' && (value === null || value === undefined)) value = {};
        if (key === 'payload' && value && typeof value === 'object' && !Array.isArray(value)) {
          var payloadRequired = (prop && prop.required) || [];
@@ -494,7 +519,7 @@ function generateExampleFromSchema(schema, fieldName) {
        if (value !== null && value !== undefined) result[key] = value;
        else if (isRequired) result[key] = key === 'payload' ? {} : value;
      });
-     return result;
+     return normalizeMqttExample(result);
    }
 
    if (schema.type === 'object' || fieldName === 'payload') return {};
@@ -832,351 +857,15 @@ function addCopyButtons(root) {
    });
 }
  
-function jsonToken(text, cls) {
-  var span = document.createElement('span');
-  span.className = cls;
-  span.textContent = text;
-  return span;
-}
-
-function jsonValuePreview(value) {
-  if (value === null) return 'null';
-  if (Array.isArray(value)) return '[ ... ]';
-  if (typeof value === 'object') return '{ ... }';
-  return JSON.stringify(value);
-}
-
-function jsonCollapsedPreview(value, isLast) {
-  var text;
-  if (Array.isArray(value)) {
-    text = '[ ' + value.length + ' item' + (value.length === 1 ? '' : 's') + ' ]';
-  } else {
-    var keys = Object.keys(value || {});
-    if (!keys.length) {
-      text = '{ }';
-    } else {
-      var firstKey = keys[0];
-      var firstVal = jsonValuePreview(value[firstKey]);
-      text = '{ ' + JSON.stringify(firstKey) + ': ' + firstVal + (keys.length > 1 ? ', ...' : '') + ' }';
-    }
-  }
-  if (!isLast) text += ',';
-  return text;
-}
-
-function createJsonLine(options) {
-  var line = document.createElement('div');
-  line.className = 'jl';
-  line.style.display = 'flex';
-  if (options.nodeId) line.setAttribute('data-node-id', options.nodeId);
-  line.setAttribute('data-parent-node', options.parentNodeId !== undefined && options.parentNodeId !== null ? options.parentNodeId : '');
-
-  var indent = document.createElement('span');
-  indent.className = 'ji';
-  indent.style.width = (options.depth * 16) + 'px';
-  line.appendChild(indent);
-
-  if (options.toggleNodeId) {
-    var toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'jt';
-    toggle.textContent = '−';
-    toggle.setAttribute('aria-label', 'Toggle JSON node');
-    toggle.setAttribute('data-node-id', options.toggleNodeId);
-    line.appendChild(toggle);
-  } else {
-    var spacer = document.createElement('span');
-    spacer.className = 'jt-spacer';
-    line.appendChild(spacer);
-  }
-
-  if (options.key !== undefined && options.key !== null) {
-    line.appendChild(jsonToken(JSON.stringify(String(options.key)), 'jk'));
-    line.appendChild(jsonToken(': ', 'jp'));
-  }
-
-  if (options.openToken) {
-    line.appendChild(jsonToken(options.openToken, 'jp jopen-token'));
-  }
-
-  if (options.valueToken) {
-    line.appendChild(jsonToken(options.valueToken.text, options.valueToken.cls));
-  }
-
-  if (options.trailingComma) {
-    line.appendChild(jsonToken(',', 'jp'));
-  }
-
-  if (options.previewText) {
-    var preview = document.createElement('span');
-    preview.className = 'jpreview';
-    preview.textContent = ' ' + options.previewText;
-    preview.style.display = 'none';
-    line.appendChild(preview);
-  }
-
-  return line;
-}
-
-function buildJsonInteractive(value) {
-  var viewer = document.createElement('div');
-  viewer.className = 'json-interactive';
-  var nodeSeq = 0;
-
-  function renderNode(nodeValue, depth, key, isLast, parentNodeId) {
-    var isArray = Array.isArray(nodeValue);
-    var isObject = nodeValue !== null && typeof nodeValue === 'object' && !isArray;
-    if (!isArray && !isObject) {
-      var token;
-      if (nodeValue === null) token = { text: 'null', cls: 'jnull' };
-      else if (typeof nodeValue === 'string') token = { text: JSON.stringify(nodeValue), cls: 'jstr' };
-      else if (typeof nodeValue === 'number') token = { text: String(nodeValue), cls: 'jnum' };
-      else if (typeof nodeValue === 'boolean') token = { text: nodeValue ? 'true' : 'false', cls: 'jbool' };
-      else token = { text: JSON.stringify(nodeValue), cls: 'jstr' };
-      viewer.appendChild(createJsonLine({
-        depth: depth,
-        key: key,
-        valueToken: token,
-        trailingComma: !isLast,
-        parentNodeId: parentNodeId
-      }));
-      return;
-    }
-
-    var nodeId = 'jn-' + (++nodeSeq);
-    var openChar = isArray ? '[' : '{';
-    var closeChar = isArray ? ']' : '}';
-    viewer.appendChild(createJsonLine({
-      depth: depth,
-      key: key,
-      openToken: openChar,
-      previewText: jsonCollapsedPreview(nodeValue, isLast),
-      toggleNodeId: nodeId,
-      nodeId: nodeId,
-      parentNodeId: parentNodeId
-    }));
-
-    var entries;
-    if (isArray) {
-      entries = nodeValue.map(function (item, index) {
-        return { key: null, value: item, isLast: index === nodeValue.length - 1 };
-      });
-    } else {
-      var keys = Object.keys(nodeValue);
-      entries = keys.map(function (entryKey, index) {
-        return { key: entryKey, value: nodeValue[entryKey], isLast: index === keys.length - 1 };
-      });
-    }
-
-    entries.forEach(function (entry) {
-      renderNode(entry.value, depth + 1, entry.key, entry.isLast, nodeId);
-    });
-
-    viewer.appendChild(createJsonLine({
-      depth: depth,
-      valueToken: { text: closeChar, cls: 'jp' },
-      trailingComma: !isLast,
-      parentNodeId: nodeId
-    }));
-  }
-
-  renderNode(value, 0, null, true, null);
-  return viewer;
-}
-
-function getChildLines(root, nodeId) {
-  return Array.prototype.slice.call(root.querySelectorAll('.jl[data-parent-node="' + nodeId + '"]'));
-}
-
-function getDescendantLines(root, nodeId) {
-  var results = [];
-  var queue = getChildLines(root, nodeId).slice();
-  while (queue.length) {
-    var line = queue.shift();
-    results.push(line);
-    var childNodeId = line.getAttribute('data-node-id');
-    if (childNodeId) {
-      getChildLines(root, childNodeId).forEach(function (child) { queue.push(child); });
-    }
-  }
-  return results;
-}
-
-function expandNode(root, nodeId) {
-  var opener = root.querySelector('.jl[data-node-id="' + nodeId + '"]');
-  if (!opener) return;
-  var button = opener.querySelector('.jt[data-node-id="' + nodeId + '"]');
-  var preview = opener.querySelector('.jpreview');
-  var openToken = opener.querySelector('.jopen-token');
-  if (button) button.textContent = '−';
-  if (preview) preview.style.display = 'none';
-  if (openToken) openToken.style.display = '';
-  getChildLines(root, nodeId).forEach(function (line) {
-    line.style.display = 'flex';
-  });
-}
-
-function collapseNode(root, nodeId) {
-  var opener = root.querySelector('.jl[data-node-id="' + nodeId + '"]');
-  if (!opener) return;
-  var button = opener.querySelector('.jt[data-node-id="' + nodeId + '"]');
-  var preview = opener.querySelector('.jpreview');
-  var openToken = opener.querySelector('.jopen-token');
-  if (button) button.textContent = '+';
-  if (preview) preview.style.display = 'inline';
-  if (openToken) openToken.style.display = 'none';
-  getDescendantLines(root, nodeId).forEach(function (line) {
-    line.style.display = 'none';
-    var nestedNodeId = line.getAttribute('data-node-id');
-    if (nestedNodeId) {
-      var nestedBtn = line.querySelector('.jt[data-node-id="' + nestedNodeId + '"]');
-      var nestedPreview = line.querySelector('.jpreview');
-      var nestedOpenToken = line.querySelector('.jopen-token');
-      if (nestedBtn) nestedBtn.textContent = '+';
-      if (nestedPreview) nestedPreview.style.display = 'inline';
-      if (nestedOpenToken) nestedOpenToken.style.display = 'none';
-    }
-  });
-}
-
-function expandAllJson(viewer) {
-  if (!viewer) return;
-  viewer.querySelectorAll('.jl').forEach(function (line) {
-    line.style.display = 'flex';
-  });
-  viewer.querySelectorAll('.jt').forEach(function (btn) {
-    btn.textContent = '−';
-  });
-  viewer.querySelectorAll('.jpreview').forEach(function (preview) {
-    preview.style.display = 'none';
-  });
-  viewer.querySelectorAll('.jopen-token').forEach(function (token) {
-    token.style.display = '';
-  });
-}
-
-function collapseTopLevelJson(viewer) {
-  if (!viewer) return;
-  expandAllJson(viewer);
-  viewer.querySelectorAll('.jl[data-node-id][data-parent-node=""]').forEach(function (line) {
-    var nodeId = line.getAttribute('data-node-id');
-    if (nodeId) collapseNode(viewer, nodeId);
-  });
-}
-
-function expandFirstLevelJson(viewer) {
-  if (!viewer) return;
-  collapseTopLevelJson(viewer);
-  viewer.querySelectorAll('.jl[data-parent-node=""]').forEach(function (line) {
-    var nodeId = line.getAttribute('data-node-id');
-    if (nodeId) expandNode(viewer, nodeId);
-  });
-}
-
-function wireJsonInteractive(viewer) {
-  if (!viewer) return;
-  viewer.addEventListener('click', function (event) {
-    var btn = event.target.closest('.jt');
-    if (!btn) return;
-    var nodeId = btn.getAttribute('data-node-id');
-    if (!nodeId) return;
-    if (btn.textContent === '−') collapseNode(viewer, nodeId);
-    else expandNode(viewer, nodeId);
-  });
-}
-
-function buildJsonViewerWrap(rawText) {
-  var parsed = JSON.parse(rawText);
-  var wrapper = document.createElement('div');
-  wrapper.className = 'json-viewer-wrap';
-
-  var toolbar = document.createElement('div');
-  toolbar.className = 'jv-toolbar';
-
-  var left = document.createElement('div');
-  left.className = 'jv-toolbar-left';
-
-  var expandBtn = document.createElement('button');
-  expandBtn.type = 'button';
-  expandBtn.className = 'jv-toolbar-btn';
-  expandBtn.textContent = 'Expand all';
-
-  var collapseBtn = document.createElement('button');
-  collapseBtn.type = 'button';
-  collapseBtn.className = 'jv-toolbar-btn';
-  collapseBtn.textContent = 'Collapse all';
-
-  left.appendChild(expandBtn);
-  left.appendChild(collapseBtn);
-
-  var label = document.createElement('div');
-  label.className = 'jv-lang-label';
-  label.textContent = 'JSON';
-
-  var copyBtn = document.createElement('button');
-  copyBtn.type = 'button';
-  copyBtn.className = 'jv-toolbar-btn jv-copy-btn';
-  copyBtn.textContent = 'Copy';
-
-  var interactive = buildJsonInteractive(parsed);
-  wireJsonInteractive(interactive);
-
-  expandBtn.addEventListener('click', function () {
-    expandAllJson(interactive);
-  });
-  collapseBtn.addEventListener('click', function () {
-    collapseTopLevelJson(interactive);
-  });
-  copyBtn.addEventListener('click', function () {
-    navigator.clipboard.writeText(getJsonViewerRaw(wrapper));
-    copyBtn.textContent = 'Copied!';
-    setTimeout(function () { copyBtn.textContent = 'Copy'; }, 1500);
-  });
-
-  toolbar.appendChild(left);
-  toolbar.appendChild(label);
-  toolbar.appendChild(copyBtn);
-  wrapper.appendChild(toolbar);
-  wrapper.appendChild(interactive);
-  wrapper.setAttribute('data-json-raw', rawText);
-
-  expandFirstLevelJson(interactive);
-  return wrapper;
-}
-
-function getJsonViewerRaw(container) {
-  return container.getAttribute('data-json-raw') || '';
-}
-
-function setJsonViewerData(container, value) {
-  if (!container) return;
-  var raw = JSON.stringify(value, null, 2);
-  var interactive = container.querySelector('.json-interactive');
-  if (!interactive) return;
-  var newInteractive;
-  try {
-    newInteractive = buildJsonInteractive(JSON.parse(raw));
-  } catch (e) {
-    return;
-  }
-  wireJsonInteractive(newInteractive);
-  interactive.parentNode.replaceChild(newInteractive, interactive);
-  container.setAttribute('data-json-raw', raw);
-  expandFirstLevelJson(newInteractive);
-}
-
 function addCollapseToggles(root) {
   var scope = root || document;
   scope.querySelectorAll('pre:not([data-json-processed])').forEach(function (pre) {
     var code = pre.querySelector('code.language-json');
     if (!code) return;
     pre.setAttribute('data-json-processed', '1');
-    var rawText = code.textContent.trim();
-    try {
-      var wrapper = buildJsonViewerWrap(rawText);
-      pre.parentNode.replaceChild(wrapper, pre);
-    } catch (e) {
-      if (window.Prism) Prism.highlightElement(code);
+    if (window.Prism && !code.getAttribute('data-prism-highlighted')) {
+      Prism.highlightElement(code);
+      code.setAttribute('data-prism-highlighted', '1');
     }
   });
 }
@@ -1187,39 +876,10 @@ function highlightVisibleJsonBlocks(root) {
   scope.querySelectorAll('pre code.language-json').forEach(function (code) {
     var panel = code.closest('.tab-panel');
     if (panel && !panel.classList.contains('active')) return;
-    if (code.closest('.json-viewer-wrap')) return;
     if (code.getAttribute('data-prism-highlighted')) return;
     Prism.highlightElement(code);
     code.setAttribute('data-prism-highlighted', '1');
   });
-}
-
-var operationViewportObserver = null;
-var enhancedOperations = new WeakSet();
-
-function enhanceOperation(op) {
-  if (!op || enhancedOperations.has(op)) return;
-  enhancedOperations.add(op);
-  addCollapseToggles(op);
-  highlightVisibleJsonBlocks(op);
-  addCopyButtons(op);
-  wireSchemaToggles(op);
-  wireSchemaToolbars(op);
-}
-
-function initOperationViewportObserver() {
-  if (!window.IntersectionObserver) return null;
-  return new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) enhanceOperation(entry.target);
-    });
-  }, { rootMargin: '320px 0px', threshold: 0.01 });
-}
-
-function observeOperation(op) {
-  if (!op) return;
-  if (operationViewportObserver) operationViewportObserver.observe(op);
-  else enhanceOperation(op);
 }
 
 function highlightJsonBlocks(root) {
@@ -1700,7 +1360,6 @@ function wireExampleSelects(root) {
       var panelId = sel.getAttribute('data-panel');
       var panel = document.getElementById(panelId);
       if (!panel) return;
-      var viewerWrap = panel.querySelector('.json-viewer-wrap');
       var pre = panel.querySelector('pre code');
       var descEl = panel.querySelector('.example-description');
       var examplesJson = sel.getAttribute('data-examples');
@@ -1725,16 +1384,10 @@ function wireExampleSelects(root) {
             descEl.style.display = 'none';
           }
         }
-        if (val !== undefined) {
-          if (viewerWrap) {
-            setJsonViewerData(viewerWrap, val);
-            return;
-          }
-          if (pre) {
-            pre.textContent = JSON.stringify(val, null, 2);
-            pre.removeAttribute('data-prism-highlighted');
-            if (window.Prism) Prism.highlightElement(pre);
-          }
+        if (val !== undefined && pre) {
+          pre.textContent = JSON.stringify(val, null, 2);
+          pre.removeAttribute('data-prism-highlighted');
+          if (window.Prism) Prism.highlightElement(pre);
         }
       } catch (e) {}
     });
@@ -1781,7 +1434,6 @@ function wireOperationInteractions(op) {
   });
 
   wireExampleSelects(op);
-  observeOperation(op);
 }
 
 function finalizeTagOperations(tagMap, spec) {
@@ -1816,13 +1468,12 @@ function render(spec) {
    var content = document.getElementById('content');
    var nav = document.getElementById('nav-content');
    var searchInput = document.getElementById('sidebar-search');
-   var headerHtml = '';
+   var html = '';
    var navHtml = '';
-   var renderQueue = [];
 
    if (spec.info && spec.info.description) {
-     headerHtml += '<div class="info-description md-content">' + md(spec.info.description, { idPrefix: 'info' }) + '</div>';
-     headerHtml += buildStatsBar(spec);
+     html += '<div class="info-description md-content">' + md(spec.info.description, { idPrefix: 'info' }) + '</div>';
+     html += buildStatsBar(spec);
      var infoSections = [];
      spec.info.description.replace(/^## (.+)$/gm, function (_, t) { infoSections.push(t); });
      if (infoSections.length) {
@@ -1853,48 +1504,32 @@ function render(spec) {
          var opId = opIdFromPath(entry.path);
          navHtml += '<a class="nav-op" href="#op-' + opId + '">' + escHtml(entry.op.summary) + '</a>';
        });
-       var sectionStart = '<div class="tag-section" id="tag-' + tagId + '">';
-       sectionStart += '<h2 class="tag-heading">' + escHtml(tagLabel) + '</h2>';
+       html += '<div class="tag-section" id="tag-' + tagId + '">';
+       html += '<h2 class="tag-heading">' + escHtml(tagLabel) + '</h2>';
        if (tag.description) {
-         sectionStart += '<div class="tag-description md-content">' + md(tag.description) + '</div>';
+         html += '<div class="tag-description md-content">' + md(tag.description) + '</div>';
        }
-       renderQueue.push({ kind: 'html', html: sectionStart });
        tag.operations.forEach(function (entry) {
-         var opId = opIdFromPath(entry.path);
-         renderQueue.push({
-           kind: 'op',
-           id: 'op-' + opId,
-           html: renderOperation(entry.path, entry.method, entry.op)
-         });
+         html += renderOperation(entry.path, entry.method, entry.op);
        });
-       renderQueue.push({ kind: 'html', html: '</div><hr class="tag-divider">' });
+       html += '</div><hr class="tag-divider">';
      });
      navHtml += '</div>';
    });
 
    nav.innerHTML = navHtml;
-   content.innerHTML = headerHtml;
+   content.innerHTML = html;
    content.classList.remove('is-loading');
 
-   var stream = document.createElement('div');
-   stream.id = 'ops-stream';
-   content.appendChild(stream);
+   addCollapseToggles(content);
+   highlightVisibleJsonBlocks(content);
+   addCopyButtons(content);
+   wireSchemaToggles(content);
+   wireSchemaToolbars(content);
+   content.querySelectorAll('.operation').forEach(wireOperationInteractions);
 
-   var totalOps = renderQueue.filter(function (item) { return item.kind === 'op'; }).length;
-   var progress = document.createElement('p');
-   progress.className = 'render-progress';
-   progress.setAttribute('aria-live', 'polite');
-   progress.textContent = totalOps ? ('Loading commands… 0 / ' + totalOps) : '';
-   if (totalOps) content.appendChild(progress);
-
-   if (operationViewportObserver) operationViewportObserver.disconnect();
-   operationViewportObserver = initOperationViewportObserver();
-
-   var queueIndex = 0;
-   var opsRendered = 0;
-   var operationSections = [];
-   var tagSections = [];
-   var pendingHash = (location.hash || '').slice(1);
+   var operationSections = Array.prototype.slice.call(content.querySelectorAll('.operation'));
+   var tagSections = Array.prototype.slice.call(content.querySelectorAll('.tag-section'));
    var TOPBAR_H = document.getElementById('topbar') ? document.getElementById('topbar').offsetHeight : 52;
 
    function scrollToTarget(el, behavior) {
@@ -1903,53 +1538,12 @@ function render(spec) {
      window.scrollTo({ top: top, behavior: behavior || 'auto' });
    }
 
-   function pumpRenderQueue() {
-     var opsThisFrame = 0;
-     while (queueIndex < renderQueue.length && opsThisFrame < OPS_PER_FRAME) {
-       var item = renderQueue[queueIndex++];
-       stream.insertAdjacentHTML('beforeend', item.html);
-       if (item.kind === 'op') {
-         opsThisFrame += 1;
-         opsRendered += 1;
-         var op = document.getElementById(item.id);
-         if (op) {
-           operationSections.push(op);
-           wireOperationInteractions(op);
-           if (pendingHash && op.id === pendingHash) {
-             scrollToTarget(op, 'auto');
-             pendingHash = '';
-           }
-         }
-         if (progress.parentNode) {
-           progress.textContent = 'Loading commands… ' + opsRendered + ' / ' + totalOps;
-         }
-       } else if (item.kind === 'html' && item.html.indexOf('tag-section') !== -1) {
-         var tagSection = stream.querySelector('.tag-section:last-of-type');
-         if (tagSection) tagSections.push(tagSection);
-       }
-     }
-     if (queueIndex < renderQueue.length) {
-       requestAnimationFrame(pumpRenderQueue);
-     } else {
-       if (progress.parentNode) progress.remove();
-       finishRender();
-     }
+   if (location.hash) {
+     var hashTarget = document.getElementById(location.hash.slice(1));
+     if (hashTarget) scrollToTarget(hashTarget, 'auto');
    }
 
-   function finishRender() {
-     var infoSection = content.querySelector('.info-description');
-     if (infoSection) {
-       addCollapseToggles(infoSection);
-       highlightVisibleJsonBlocks(infoSection);
-       addCopyButtons(infoSection);
-     }
-     if (pendingHash) {
-       var hashTarget = document.getElementById(pendingHash);
-       if (hashTarget) scrollToTarget(hashTarget, 'auto');
-       pendingHash = '';
-     }
-     bindRenderInteractions();
-   }
+   bindRenderInteractions();
 
    function bindRenderInteractions() {
      document.querySelectorAll('.nav-group').forEach(function (group) {
@@ -2211,8 +1805,6 @@ function render(spec) {
        });
      })();
    }
-
-   requestAnimationFrame(pumpRenderQueue);
 }
 
 function wireBackToTop() {

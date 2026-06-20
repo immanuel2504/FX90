@@ -226,6 +226,26 @@ def get_response_path(operation, source):
     return candidates[0]
 
 
+def normalize_mqtt_example(value):
+    """MQTT payloads must be objects, not empty strings."""
+    if isinstance(value, dict):
+        normalized = OrderedDict()
+        for key, item in value.items():
+            if key == "payload" and item == "":
+                normalized[key] = {}
+            elif isinstance(item, dict):
+                normalized[key] = normalize_mqtt_example(item)
+            elif isinstance(item, list):
+                normalized[key] = [
+                    normalize_mqtt_example(entry) if isinstance(entry, dict) else entry
+                    for entry in item
+                ]
+            else:
+                normalized[key] = item
+        return normalized
+    return value
+
+
 def extract_examples(schema, title, example_data):
     if "examples" not in schema:
         return {}
@@ -245,7 +265,7 @@ def extract_examples(schema, title, example_data):
         entry = OrderedDict()
         if desc:
             entry["description"] = desc
-        entry["value"] = example
+        entry["value"] = normalize_mqtt_example(example)
         result[label] = entry
     return result
 
@@ -336,6 +356,8 @@ def synthesize_example_value(schema, field_name=None, is_required=False):
 
     schema_type = schema.get("type")
     if schema_type == "string":
+        if field_name == "payload" and schema.get("example") == "":
+            return {}
         return (
             "2026-01-01T00:00:00Z"
             if schema.get("format") == "date-time"
@@ -365,7 +387,7 @@ def synthesize_example_value(schema, field_name=None, is_required=False):
 
 def build_fallback_examples(schema):
     """Return OpenAPI examples when the schema file has no explicit examples array."""
-    value = synthesize_example_from_schema(schema)
+    value = normalize_mqtt_example(synthesize_example_from_schema(schema))
     if not isinstance(value, dict) or not value:
         return OrderedDict()
     return OrderedDict([("default", OrderedDict([("value", value)]))])

@@ -11641,9 +11641,9 @@
                                             "oneOf": [
                                                 {
                                                     "title": "Set Config Response Payload",
-                                                    "type": "string",
+                                                    "type": "object",
                                                     "description": "Empty response payload returned after a successful reader configuration update.",
-                                                    "example": ""
+                                                    "example": {}
                                                 },
                                                 {
                                                     "title": "failure",
@@ -11686,7 +11686,7 @@
                                             "command": "set_config",
                                             "command_id": "abdc2134",
                                             "response": "success",
-                                            "payload": ""
+                                            "payload": {}
                                         }
                                     }
                                 }
@@ -12999,9 +12999,9 @@
                                             "oneOf": [
                                                 {
                                                     "title": "Import Cloud Config Response",
-                                                    "type": "string",
+                                                    "type": "object",
                                                     "description": "Empty response payload returned after a successful cloud endpoint configuration import.",
-                                                    "example": "",
+                                                    "example": {},
                                                     "x-stoplight": {
                                                         "id": "b8aznc38e0bm3"
                                                     }
@@ -13056,7 +13056,7 @@
                                             "command": "set_importCloudConfig",
                                             "command_id": "abdc453254",
                                             "response": "success",
-                                            "payload": ""
+                                            "payload": {}
                                         }
                                     }
                                 }
