@@ -250,6 +250,127 @@ def extract_examples(schema, title, example_data):
     return result
 
 
+def synthesize_example_from_schema(schema, field_name=None):
+    """Build a representative example object from an inlined JSON Schema."""
+    if not isinstance(schema, dict):
+        return None
+
+    if "example" in schema:
+        return schema["example"]
+
+    examples = schema.get("examples")
+    if isinstance(examples, list) and examples:
+        return examples[0]
+
+    for key in ("oneOf", "anyOf"):
+        variants = schema.get(key)
+        if isinstance(variants, list) and variants:
+            success = next(
+                (
+                    variant
+                    for variant in variants
+                    if isinstance(variant, dict)
+                    and str(variant.get("title", "")).lower() == "success"
+                ),
+                None,
+            )
+            branch = success or variants[0]
+            if isinstance(branch, dict):
+                return synthesize_example_from_schema(branch, field_name)
+
+    all_of = schema.get("allOf")
+    if isinstance(all_of, list) and all_of:
+        merged = OrderedDict()
+        for part in all_of:
+            part_val = synthesize_example_from_schema(part, field_name)
+            if isinstance(part_val, dict):
+                for merge_key, merge_val in part_val.items():
+                    merged[merge_key] = merge_val
+        return merged if merged else {}
+
+    props = schema.get("properties")
+    if isinstance(props, dict):
+        required = set(schema.get("required") or [])
+        result = OrderedDict()
+        for prop_name, prop_schema in props.items():
+            if not isinstance(prop_schema, dict):
+                continue
+            value = synthesize_example_value(
+                prop_schema, prop_name, prop_name in required
+            )
+            if prop_name == "payload" and value is None:
+                value = {}
+            if value is not None or prop_name in required:
+                result[prop_name] = value
+        return result
+
+    if schema.get("type") == "object" or field_name == "payload":
+        return {}
+
+    return None
+
+
+def synthesize_example_value(schema, field_name=None, is_required=False):
+    if not isinstance(schema, dict):
+        return {} if field_name == "payload" else None
+
+    if "example" in schema:
+        return schema["example"]
+
+    examples = schema.get("examples")
+    if isinstance(examples, list) and examples:
+        return examples[0]
+
+    enum_vals = schema.get("enum")
+    if isinstance(enum_vals, list) and enum_vals:
+        return enum_vals[0]
+
+    if "const" in schema:
+        return schema["const"]
+
+    if "default" in schema:
+        return schema["default"]
+
+    if "oneOf" in schema or "anyOf" in schema or "allOf" in schema:
+        return synthesize_example_from_schema(schema, field_name)
+
+    schema_type = schema.get("type")
+    if schema_type == "string":
+        return (
+            "2026-01-01T00:00:00Z"
+            if schema.get("format") == "date-time"
+            else "string"
+        )
+    if schema_type == "integer":
+        return schema.get("minimum", 0)
+    if schema_type == "number":
+        return schema.get("minimum", 0.0)
+    if schema_type == "boolean":
+        return False
+    if schema_type == "array":
+        return []
+    if schema_type == "object" or "properties" in schema:
+        inner = synthesize_example_from_schema(schema, field_name)
+        if field_name == "payload":
+            inner_required = set(schema.get("required") or [])
+            if not inner_required:
+                return {}
+        return inner if inner is not None else {}
+
+    if field_name == "payload":
+        return {}
+
+    return None if not is_required else {}
+
+
+def build_fallback_examples(schema):
+    """Return OpenAPI examples when the schema file has no explicit examples array."""
+    value = synthesize_example_from_schema(schema)
+    if not isinstance(value, dict) or not value:
+        return OrderedDict()
+    return OrderedDict([("default", OrderedDict([("value", value)]))])
+
+
 def replace_const_with_enum(obj):
     """Recursively replace 'const': value with 'enum': [value] in dicts/lists."""
     if isinstance(obj, dict):
@@ -719,6 +840,8 @@ def build_openapi():
         if source in ("events", "tag-events"):
             evt_examples = extract_examples(req_schema, title, example_data)
             evt_schema_clean = extract_schema(req_schema, req_path)
+            if not evt_examples:
+                evt_examples = build_fallback_examples(evt_schema_clean)
             evt_content = OrderedDict()
             evt_content["application/json"] = OrderedDict()
             evt_content["application/json"]["schema"] = evt_schema_clean
@@ -740,6 +863,8 @@ def build_openapi():
         else:
             req_examples = extract_examples(req_schema, title, example_data)
             req_schema_clean = extract_schema(req_schema, req_path)
+            if not req_examples:
+                req_examples = build_fallback_examples(req_schema_clean)
             req_content = OrderedDict()
             req_content["application/json"] = OrderedDict()
             req_content["application/json"]["schema"] = req_schema_clean
@@ -762,6 +887,8 @@ def build_openapi():
                     resp_schema_clean = enrich_response_code_description(
                         resp_schema_clean, error_codes_for_cmd
                     )
+                    if not resp_examples:
+                        resp_examples = build_fallback_examples(resp_schema_clean)
                     resp_content = OrderedDict()
                     resp_content["application/json"] = OrderedDict()
                     resp_content["application/json"]["schema"] = resp_schema_clean

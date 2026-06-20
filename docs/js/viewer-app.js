@@ -424,34 +424,81 @@ function errorTable(codes) {
 }
  
 /* ── Auto-generate example from schema properties ── */
-function generateExampleFromSchema(schema) {
-   if (!schema) return {};
-   var result = {};
-   if (schema.properties) {
-     Object.keys(schema.properties).forEach(function (key) {
-       var prop = schema.properties[key];
-       if (prop.example !== undefined) {
-         result[key] = prop.example;
-       } else if (prop.enum && prop.enum.length) {
-         result[key] = prop.enum[0];
-       } else if (prop.const !== undefined) {
-         result[key] = prop.const;
-       } else if (prop.default !== undefined) {
-         result[key] = prop.default;
-       } else {
-         switch (prop.type) {
-           case 'string':  result[key] = prop.format === 'date-time' ? '2026-01-01T00:00:00Z' : 'string'; break;
-           case 'integer': result[key] = prop.minimum !== undefined ? prop.minimum : 0; break;
-           case 'number':  result[key] = prop.minimum !== undefined ? prop.minimum : 0.0; break;
-           case 'boolean': result[key] = false; break;
-           case 'array':   result[key] = []; break;
-           case 'object':  result[key] = prop.properties ? generateExampleFromSchema(prop) : {}; break;
-           default:        result[key] = null;
-         }
+function generateExampleValue(prop, fieldName, isRequired) {
+   if (!prop) return fieldName === 'payload' ? {} : null;
+   if (prop.example !== undefined) return prop.example;
+   if (Array.isArray(prop.examples) && prop.examples.length) return prop.examples[0];
+   if (prop.enum && prop.enum.length) return prop.enum[0];
+   if (prop.const !== undefined) return prop.const;
+   if (prop.default !== undefined) return prop.default;
+   if (prop.oneOf || prop.anyOf || prop.allOf) return generateExampleFromSchema(prop, fieldName);
+   switch (prop.type) {
+     case 'string':  return prop.format === 'date-time' ? '2026-01-01T00:00:00Z' : 'string';
+     case 'integer': return prop.minimum !== undefined ? prop.minimum : 0;
+     case 'number':  return prop.minimum !== undefined ? prop.minimum : 0.0;
+     case 'boolean': return false;
+     case 'array':   return [];
+     case 'object':  return generateExampleFromSchema(prop, fieldName);
+     default:
+       if (prop.properties) return generateExampleFromSchema(prop, fieldName);
+       return fieldName === 'payload' ? {} : (isRequired ? {} : null);
+   }
+}
+
+function generateExampleFromSchema(schema, fieldName) {
+   if (!schema) return fieldName === 'payload' ? {} : {};
+   if (schema.example !== undefined) return schema.example;
+   if (Array.isArray(schema.examples) && schema.examples.length) return schema.examples[0];
+
+   var variants = schema.oneOf || schema.anyOf;
+   if (variants && variants.length) {
+     var successBranch = null;
+     for (var i = 0; i < variants.length; i++) {
+       if (variants[i] && String(variants[i].title || '').toLowerCase() === 'success') {
+         successBranch = variants[i];
+         break;
+       }
+     }
+     return generateExampleFromSchema(successBranch || variants[0], fieldName);
+   }
+
+   if (schema.allOf && schema.allOf.length) {
+     var merged = {};
+     schema.allOf.forEach(function (part) {
+       var partValue = generateExampleFromSchema(part, fieldName);
+       if (partValue && typeof partValue === 'object' && !Array.isArray(partValue)) {
+         Object.keys(partValue).forEach(function (key) { merged[key] = partValue[key]; });
        }
      });
+     return merged;
    }
-   return result;
+
+   if (schema.properties) {
+     var required = schema.required || [];
+     var result = {};
+     Object.keys(schema.properties).forEach(function (key) {
+       var prop = schema.properties[key];
+       var isRequired = required.indexOf(key) !== -1;
+       var value = generateExampleValue(prop, key, isRequired);
+       if (key === 'payload' && (value === null || value === undefined)) value = {};
+       if (key === 'payload' && value && typeof value === 'object' && !Array.isArray(value)) {
+         var payloadRequired = (prop && prop.required) || [];
+         if (!payloadRequired.length && !prop.example && !(prop.examples && prop.examples.length)) {
+           var hasMeaningfulProps = Object.keys(value).some(function (propKey) {
+             var inner = prop && prop.properties ? prop.properties[propKey] : null;
+             return inner && (inner.example !== undefined || (inner.examples && inner.examples.length));
+           });
+           if (!hasMeaningfulProps) value = {};
+         }
+       }
+       if (value !== null && value !== undefined) result[key] = value;
+       else if (isRequired) result[key] = key === 'payload' ? {} : value;
+     });
+     return result;
+   }
+
+   if (schema.type === 'object' || fieldName === 'payload') return {};
+   return {};
 }
  
 /* ── PDF Generator ── */

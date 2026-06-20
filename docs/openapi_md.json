@@ -279,6 +279,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_mode",
+                                        "command_id": "a134454",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -2131,6 +2140,51 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_mode",
+                                            "command_id": "a134454",
+                                            "response": "success",
+                                            "payload": {
+                                                "type": "INVENTORY",
+                                                "antennas": [
+                                                    1,
+                                                    2,
+                                                    3
+                                                ],
+                                                "transmitPower": 30.1,
+                                                "antennaStopCondition": [
+                                                    {
+                                                        "type": "DURATION",
+                                                        "value": 500
+                                                    },
+                                                    {
+                                                        "type": "INVENTORY_COUNT",
+                                                        "value": 1
+                                                    },
+                                                    {
+                                                        "type": "GPI",
+                                                        "value": {
+                                                            "port": 2,
+                                                            "signal": "HIGH"
+                                                        }
+                                                    }
+                                                ],
+                                                "tagMetaData": [
+                                                    "PC",
+                                                    "CRC",
+                                                    {
+                                                        "userDefined": "readerABC"
+                                                    }
+                                                ],
+                                                "rssiFilter": {
+                                                    "threshold": -72
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -3949,6 +4003,50 @@
                                         ]
                                     }
                                 }
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "set_mode",
+                                        "command_id": "abcd134",
+                                        "payload": {
+                                            "type": "INVENTORY",
+                                            "antennas": [
+                                                1,
+                                                2,
+                                                3
+                                            ],
+                                            "transmitPower": 30.1,
+                                            "antennaStopCondition": [
+                                                {
+                                                    "type": "DURATION",
+                                                    "value": 500
+                                                },
+                                                {
+                                                    "type": "INVENTORY_COUNT",
+                                                    "value": 1
+                                                },
+                                                {
+                                                    "type": "GPI",
+                                                    "value": {
+                                                        "port": 2,
+                                                        "signal": "HIGH"
+                                                    }
+                                                }
+                                            ],
+                                            "tagMetaData": [
+                                                "PC",
+                                                "CRC",
+                                                {
+                                                    "userDefined": "readerABC"
+                                                }
+                                            ],
+                                            "rssiFilter": {
+                                                "threshold": -72
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -4017,6 +4115,16 @@
                                                     ]
                                                 }
                                             ]
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_mode",
+                                            "command_id": "abcd134",
+                                            "response": "success",
+                                            "payload": {}
                                         }
                                     }
                                 }
@@ -4417,6 +4525,16 @@
                                         "response",
                                         "payload"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "stop",
+                                            "command_id": "abcd1324",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -6051,6 +6169,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_status",
+                                        "command_id": "abcd1234",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -11552,6 +11679,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_config",
+                                            "command_id": "abdc2134",
+                                            "response": "success",
+                                            "payload": ""
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -14181,6 +14318,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "reboot",
+                                        "command_id": "abcd1431243",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -14255,6 +14401,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "reboot",
+                                            "command_id": "abcd1431243",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -14452,6 +14608,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_appled",
+                                        "command_id": "string",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -14541,6 +14706,18 @@
                                         "command_id",
                                         "response"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_appled",
+                                            "command_id": "string",
+                                            "response": "success",
+                                            "payload": {
+                                                "status": "DEFAULT"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -14605,6 +14782,19 @@
                                             "seconds",
                                             "flash"
                                         ]
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "set_appled",
+                                        "command_id": "abcd1243",
+                                        "payload": {
+                                            "color": "red",
+                                            "seconds": 60,
+                                            "flash": false
+                                        }
                                     }
                                 }
                             }
@@ -14682,6 +14872,16 @@
                                         "command_id",
                                         "response"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_appled",
+                                            "command_id": "abcd1243",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -15079,6 +15279,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_gpoStatus",
+                                        "command_id": "abdc453254",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -15203,6 +15412,21 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_gpoStatus",
+                                            "command_id": "abdc453254",
+                                            "response": "success",
+                                            "payload": {
+                                                "1": "HIGH",
+                                                "2": "HIGH",
+                                                "3": "HIGH",
+                                                "4": "HIGH"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -15348,6 +15572,16 @@
                                         "command_id",
                                         "response"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_gpo",
+                                            "command_id": "abcd1324",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -15393,6 +15627,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_gpiStatus",
+                                        "command_id": "abcd21344",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -15521,6 +15764,21 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_gpiStatus",
+                                            "command_id": "abcd21344",
+                                            "response": "success",
+                                            "payload": {
+                                                "1": "HIGH",
+                                                "2": "HIGH",
+                                                "3": "HIGH",
+                                                "4": "LOW"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -16405,6 +16663,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_logs",
+                                        "command_id": "a2134",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -16515,6 +16782,19 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_logs",
+                                            "command_id": "a2134",
+                                            "response": "success",
+                                            "payload": {
+                                                "radioPacketLog": false,
+                                                "components": []
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -16604,6 +16884,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "set_logs",
+                                        "command_id": "abcd2134234",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -16678,6 +16967,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_logs",
+                                            "command_id": "abcd2134234",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -16723,6 +17022,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_logs_syslog",
+                                        "command_id": "a132234",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -16808,6 +17116,19 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_logs_syslog",
+                                            "command_id": "a132234",
+                                            "response": "success",
+                                            "payload": {
+                                                "filename": "syslog.tar.gz",
+                                                "binary": "string"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -16853,6 +17174,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "del_logs_syslog",
+                                        "command_id": "abcd1234",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -16927,6 +17257,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "del_logs_syslog",
+                                            "command_id": "abcd1234",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -16973,6 +17313,15 @@
                                     "command",
                                     "command_id"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_logs_rcLog",
+                                        "command_id": "abd12354",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -17067,6 +17416,19 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_logs_rcLog",
+                                            "command_id": "abd12354",
+                                            "response": "success",
+                                            "payload": {
+                                                "filename": "rcLog.tar.gz",
+                                                "binary": "string"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -17112,6 +17474,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_logs_rgWarningLog",
+                                        "command_id": "abf868234",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -17197,6 +17568,19 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_logs_rgWarningLog",
+                                            "command_id": "abf868234",
+                                            "response": "success",
+                                            "payload": {
+                                                "filename": "rgWarningLog.tar.gz",
+                                                "binary": "string"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -17242,6 +17626,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_logs_rgErrorLog",
+                                        "command_id": "ab32445",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -17327,6 +17720,19 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_logs_rgErrorLog",
+                                            "command_id": "ab32445",
+                                            "response": "success",
+                                            "payload": {
+                                                "filename": "rgErrorLog.tar.gz",
+                                                "binary": "string"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -17372,6 +17778,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_logs_radioPacketLog",
+                                        "command_id": "a1324",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -17458,6 +17873,19 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_logs_radioPacketLog",
+                                            "command_id": "a1324",
+                                            "response": "success",
+                                            "payload": {
+                                                "filename": "radioPktLog.tar.gz",
+                                                "binary": "string"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -17503,6 +17931,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "del_logs_radioPacketLog",
+                                        "command_id": "abcd2342",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -17577,6 +18014,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "del_logs_radioPacketLog",
+                                            "command_id": "abcd2342",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -17625,6 +18072,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_timeZone",
+                                        "command_id": "abcd21344",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -17961,6 +18417,18 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_timeZone",
+                                            "command_id": "abdc453254",
+                                            "response": "success",
+                                            "payload": {
+                                                "timeZone": "International Date Line West"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -18733,6 +19201,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_certificates",
+                                        "command_id": "abcd12354",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -18898,6 +19375,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_certificates",
+                                            "command_id": "abcd12354",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -18963,6 +19450,18 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "del_certificate",
+                                        "command_id": "abcd1234",
+                                        "payload": {
+                                            "name": "string",
+                                            "type": "client"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -19038,6 +19537,16 @@
                                         "command_id",
                                         "response"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "del_certificate",
+                                            "command_id": "abcd1234",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -19508,6 +20017,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_updateCertificate",
+                                            "command_id": "abcd1324",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -19655,6 +20174,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_refreshCertificate",
+                                            "command_id": "abcd1324",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -19715,6 +20244,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_network",
+                                        "command_id": "a12cb345654",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -20344,6 +20882,23 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "set_network",
+                                        "command_id": "abcd345",
+                                        "payload": {
+                                            "hostName": "FX9600F0F4B5",
+                                            "ipAddress": "192.168.1.10",
+                                            "gatewayAddress": "192.168.1.1",
+                                            "subnetMask": "255.255.255.0",
+                                            "dnsAddress": "8.8.8.8",
+                                            "dhcp": "true",
+                                            "macAddress": "84:24:8D:F0:F4:B5"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -20418,6 +20973,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_network",
+                                            "command_id": "abcd345",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -20471,6 +21036,15 @@
                                     "command": "get_availableWifiNetworks",
                                     "command_id": "a12cb345654",
                                     "payload": {}
+                                }
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_availableWifiNetworks",
+                                        "command_id": "a12cb345654",
+                                        "payload": {}
+                                    }
                                 }
                             }
                         }
@@ -20642,6 +21216,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_networkInterfaces",
+                                        "command_id": "a12cb345654",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -21408,6 +21991,15 @@
                                         "payload": {}
                                     }
                                 }
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_hostname",
+                                        "command_id": "a12cb345654",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -21830,6 +22422,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_os",
+                                            "command_id": "abdc123",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -21875,6 +22477,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "set_revertbackOS",
+                                        "command_id": "abcd1434",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -21949,6 +22560,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_revertbackOS",
+                                            "command_id": "abcd1434",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -22127,6 +22748,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "install_user_app",
+                                            "command_id": "abcd123",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -22182,6 +22813,17 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "start_user_app",
+                                        "command_id": "abcd1324",
+                                        "payload": {
+                                            "appname": "sample"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -22256,6 +22898,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "start_user_app",
+                                            "command_id": "abcd1324",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -22311,6 +22963,17 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "stop_user_app",
+                                        "command_id": "abcd1324",
+                                        "payload": {
+                                            "appname": "sample"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -22385,6 +23048,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "stop_user_app",
+                                            "command_id": "abcd1324",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -22446,6 +23119,18 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "autostart_user_app",
+                                        "command_id": "abcd1234",
+                                        "payload": {
+                                            "appname": "userapp name",
+                                            "autostart": true
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -22521,6 +23206,16 @@
                                         "command_id",
                                         "response"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "autostart_user_app",
+                                            "command_id": "abcd1234",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -22566,6 +23261,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_userapps",
+                                        "command_id": "abcd243324",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -22683,6 +23387,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_userapps",
+                                            "command_id": "abcd243324",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -22991,6 +23705,18 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "set_req_usr_app",
+                                            "command_id": "abcd13212",
+                                            "response": "success",
+                                            "payload": {
+                                                "response": "string"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -23046,6 +23772,17 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "uninstall-user-app",
+                                        "command_id": "abcd134",
+                                        "payload": {
+                                            "appname": "sample"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -23120,6 +23857,16 @@
                                         "command",
                                         "command_id"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "uninstall-user-app",
+                                            "command_id": "abcd134",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -23166,6 +23913,15 @@
                                     "command_id",
                                     "payload"
                                 ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_bleConfig",
+                                        "command_id": "ble-get-001",
+                                        "payload": {}
+                                    }
+                                }
                             }
                         }
                     }
@@ -26141,6 +26897,16 @@
                                         "overallUpdateProgress",
                                         "updateProgressDetails"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "status": "started",
+                                            "imageDownloadProgress": 0,
+                                            "overallUpdateProgress": 0,
+                                            "updateProgressDetails": null
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -26190,6 +26956,14 @@
                                         "pin",
                                         "state"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "pin": 2,
+                                            "state": "LOW"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -26277,6 +27051,13 @@
                                     "required": [
                                         "message"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "message": "string"
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -26307,6 +27088,13 @@
                                     "required": [
                                         "message"
                                     ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "message": "string"
+                                        }
+                                    }
                                 }
                             }
                         }
