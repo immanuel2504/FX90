@@ -1,7 +1,3 @@
-﻿# `DELETE /cloud/certificates/{certname}` - REST Endpoint Reference
-
-## 1. Description
-
 The `DELETE /cloud/certificates/{certname}` REST endpoint is used to delete certificate.
 
 Use this endpoint to:

@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/stack-led` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/stack-led` REST endpoint is used to color:Green, Brightness:Low(Default), Solid.
 
 Use this endpoint to:

@@ -1,5 +1,3 @@
-## Description
-
 The `get_preSelection` command retrieves the current rxSawFilter pre-selection state.
 
 Use this command to:

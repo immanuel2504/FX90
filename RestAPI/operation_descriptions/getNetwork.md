@@ -1,7 +1,3 @@
-﻿# `GET /cloud/network` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/network` REST endpoint is used to retrieves reader network configuration.
 
 Use this endpoint to:

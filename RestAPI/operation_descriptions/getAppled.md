@@ -1,7 +1,3 @@
-﻿# `GET /cloud/app-led` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/app-led` REST endpoint is used to retrieves application LED state.
 
 Use this endpoint to:

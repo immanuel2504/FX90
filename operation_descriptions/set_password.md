@@ -1,5 +1,3 @@
-## Description
-
 The `set_password` command changes a reader user's password.
 
 Use this command to:

@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/revertbackOS` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/revertbackOS` REST endpoint is used to revert to previous OS version.
 
 Use this endpoint to:

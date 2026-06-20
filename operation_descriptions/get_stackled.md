@@ -1,5 +1,3 @@
-## Description
-
 The `get_stackled` command retrieves the current stack LED state.
 
 Use this command to:

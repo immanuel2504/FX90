@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_timeZone` command retrieves the time zone currently configured on the reader.
 
 This command returns:

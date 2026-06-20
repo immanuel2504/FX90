@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/logs` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/logs` REST endpoint is used to configures the logs.
 
 Use this endpoint to:

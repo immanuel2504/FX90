@@ -1,5 +1,3 @@
-## Description
-
 The `get_networkInterfaces` command retrieves the network interfaces available on the reader.
 
 Use this command to:

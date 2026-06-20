@@ -1,5 +1,3 @@
-## Description
-
 The `set_eSimConfig` command updates the eSIM profile state on the reader.
 
 Use this command to:

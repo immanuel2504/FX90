@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/timeZone` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/timeZone` REST endpoint is used to sets the timezone.
 
 Use this endpoint to:

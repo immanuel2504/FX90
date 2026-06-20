@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_hostname` command retrieves the reader's configured hostname.
 
 This command returns:

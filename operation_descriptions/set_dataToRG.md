@@ -1,5 +1,3 @@
-## Description
-
 The `set_dataToRG` command sends data to the reader gateway layer.
 
 Use this command to:

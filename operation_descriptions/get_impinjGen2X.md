@@ -1,5 +1,3 @@
-## Description
-
 The `get_impinjGen2X` command retrieves the Impinj Gen2X configuration currently saved on the reader.
 
 Use this command to:

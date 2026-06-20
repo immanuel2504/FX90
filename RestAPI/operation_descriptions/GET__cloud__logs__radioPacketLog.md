@@ -1,7 +1,3 @@
-﻿# `GET /cloud/logs/radioPacketLog` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/logs/radioPacketLog` REST endpoint is used to retrieve radioPacketLog.
 
 Use this endpoint to:

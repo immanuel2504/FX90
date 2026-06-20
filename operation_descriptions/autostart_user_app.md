@@ -1,5 +1,3 @@
-## Description
-
 The `autostart_user_app` command configures whether a user application starts automatically when the reader boots.
 
 Use this command to:

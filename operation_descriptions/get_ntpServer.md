@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_ntpServer` command retrieves the NTP server currently configured for time synchronization on the reader.
 
 This command returns:

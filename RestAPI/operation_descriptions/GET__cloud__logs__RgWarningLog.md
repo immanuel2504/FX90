@@ -1,7 +1,3 @@
-﻿# `GET /cloud/logs/RgWarningLog` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/logs/RgWarningLog` REST endpoint is used to retrieve RgWarningLog.
 
 Use this endpoint to:

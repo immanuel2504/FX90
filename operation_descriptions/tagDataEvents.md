@@ -1,5 +1,3 @@
-## 1. Description
-
 The `tagDataEvents` envelope is the common wrapper for all RFID tag read payloads the reader publishes to configured data endpoints.
 
 This event includes:

@@ -1,5 +1,3 @@
-## Description
-
 The `set_impinjGen2X` command configures Impinj Gen2X proprietary RFID features on the reader.
 
 Use this command to:

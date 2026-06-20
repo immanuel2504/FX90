@@ -1,5 +1,3 @@
-## Description
-
 The `del_radio_pkt_logs` command purges radio packet logs stored on the reader.
 
 Use this command to:

@@ -1,5 +1,3 @@
-## Description
-
 The `uninstall-user-app` command removes a user application from the reader.
 
 Use this command to:

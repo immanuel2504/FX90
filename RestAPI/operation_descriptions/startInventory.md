@@ -1,7 +1,3 @@
-# `PUT /cloud/start` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/start` REST endpoint starts RFID inventory, BLE scanning, or both on the FXR90 reader.
 
 By default, an empty request body starts RFID inventory only. Use the `scanType` field to explicitly start BLE, RFID, or both together. Optional flags allow you to apply a previously saved Impinj Gen2X configuration or control whether the start state persists across reboots.

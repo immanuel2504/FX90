@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_installCACertificate` command installs a CA (Certificate Authority) root certificate on the reader.
 
 Use it to:

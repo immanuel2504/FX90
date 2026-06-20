@@ -1,5 +1,3 @@
-## 1. Description
-
 The `gpo` event reports a change in the state of a general-purpose output (GPO) pin.
 
 This event includes:

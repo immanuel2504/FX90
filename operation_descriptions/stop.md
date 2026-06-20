@@ -1,5 +1,3 @@
-## Description
-
 The `stop` command stops RFID inventory, BLE scanning, or both.
 
 By default, if `payload` is empty or `scanType` is not provided, the reader stops RFID inventory only. Use `scanType` when you need to stop BLE separately or stop both scan types together.

@@ -1,5 +1,3 @@
-## Description
-
 The `install_user_app` command installs a user application (`.deb` package) on the reader from an HTTP(S) file server.
 
 Use this command to:

@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/apps/{appname}/autostart` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/apps/{appname}/autostart` REST endpoint is used to autostart user application.
 
 Use this endpoint to:

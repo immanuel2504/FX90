@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/gpo` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/gpo` REST endpoint is used to updates GPO port state.
 
 Use this endpoint to:

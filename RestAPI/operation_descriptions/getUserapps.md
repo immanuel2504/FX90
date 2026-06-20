@@ -1,7 +1,3 @@
-﻿# `GET /cloud/apps` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/apps` REST endpoint is used to list user applications.
 
 Use this endpoint to:

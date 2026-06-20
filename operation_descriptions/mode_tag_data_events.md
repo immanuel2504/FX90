@@ -1,5 +1,3 @@
-## 1. Description
-
 The `mode_tag_data_events` payload carries RFID tag read data during SIMPLE, INVENTORY, PORTAL, CONVEYOR, or CUSTOM operating modes.
 
 This event includes:

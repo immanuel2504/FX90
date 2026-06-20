@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_os` command updates the reader's operating system firmware from an HTTP(S) URL.
 
 Use it to:

@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_radio_pkt_logs` command retrieves the radio packet log as a downloadable archive.
 
 This command returns:

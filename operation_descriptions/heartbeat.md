@@ -1,5 +1,3 @@
-## 1. Description
-
 The `heartbeat` event provides a periodic health and activity snapshot of the reader for operational monitoring.
 
 This event includes:

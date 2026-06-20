@@ -1,5 +1,3 @@
-## Description
-
 The `del_syslogs` command purges system logs stored on the reader, allowing a fresh log collection cycle.
 
 Use this command to:

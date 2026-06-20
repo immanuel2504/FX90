@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/os` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/os` REST endpoint is used to updates OS software on device.
 
 Use this endpoint to:

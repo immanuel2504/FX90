@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_timeZone` command sets the time zone on the reader.
 
 Use it to:

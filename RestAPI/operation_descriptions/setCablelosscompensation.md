@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/cableLossCompensation` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/cableLossCompensation` REST endpoint is used to sets the cableLossCompensation.
 
 Use this endpoint to:

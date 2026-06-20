@@ -1,5 +1,3 @@
-## 1. Description
-
 The `locationHistory` payload records estimated x/y location points for a tag before it timed out in directionality mode.
 
 This event includes:

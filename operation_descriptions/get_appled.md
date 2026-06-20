@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_appled` command retrieves the current state of the application LED on the reader.
 
 This command returns:

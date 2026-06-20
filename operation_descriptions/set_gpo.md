@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_gpo` command sets the output state of a general-purpose output (GPO) pin on the reader.
 
 Use it to:

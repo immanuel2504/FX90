@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_update_cert` command installs or updates a certificate on the reader, fetched from an FTPS URL or supplied inline as PFX content.
 
 Use it to:

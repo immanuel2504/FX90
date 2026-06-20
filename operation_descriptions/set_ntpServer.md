@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_ntpServer` command sets the NTP server used by the reader for time synchronization.
 
 Use it to:

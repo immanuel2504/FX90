@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_network` command retrieves the reader's network configuration across its interfaces.
 
 This command returns:

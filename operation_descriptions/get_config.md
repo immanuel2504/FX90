@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_config` command retrieves the reader's full configuration, including RF/XML configuration, GPIO and LED defaults, and reader-gateway endpoint settings.
 
 This command returns:

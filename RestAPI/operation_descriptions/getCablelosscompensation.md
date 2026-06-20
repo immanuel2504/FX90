@@ -1,7 +1,3 @@
-﻿# `GET /cloud/cableLossCompensation` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/cableLossCompensation` REST endpoint is used to retrieves the cableLossCompensation.
 
 Use this endpoint to:

@@ -1,5 +1,3 @@
-## Description
-
 The `get_gpsCoordinates` command retrieves the reader's last reported GPS coordinates.
 
 Use this command to:

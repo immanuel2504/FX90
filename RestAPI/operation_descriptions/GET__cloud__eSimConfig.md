@@ -1,7 +1,3 @@
-﻿# `GET /cloud/eSimConfig` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/eSimConfig` REST endpoint is used to gets the eSIM configuration.
 
 Use this endpoint to:

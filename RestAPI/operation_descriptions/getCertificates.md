@@ -1,7 +1,3 @@
-﻿# `GET /cloud/certificates` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/certificates` REST endpoint is used to retrieve installed certificate details.
 
 Use this endpoint to:

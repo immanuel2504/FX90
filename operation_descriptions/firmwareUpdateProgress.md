@@ -1,5 +1,3 @@
-## 1. Description
-
 The `firmwareUpdateProgress` event reports the status and progress of an in-flight firmware update.
 
 This event includes:

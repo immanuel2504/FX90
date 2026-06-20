@@ -1,7 +1,3 @@
-﻿# `GET /cloud/stack-led` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/stack-led` REST endpoint is used to retrieves stack LED state.
 
 Use this endpoint to:

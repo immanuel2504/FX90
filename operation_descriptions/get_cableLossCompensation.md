@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_cableLossCompensation` command retrieves the per-read-point cable loss compensation values configured on the reader.
 
 This command returns:

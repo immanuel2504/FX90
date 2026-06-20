@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_hostname` command sets the network hostname of the reader.
 
 Use it to:

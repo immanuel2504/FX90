@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/ntpServer` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/ntpServer` REST endpoint is used to set NTP server.
 
 Use this endpoint to:

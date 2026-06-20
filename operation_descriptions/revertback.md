@@ -1,5 +1,3 @@
-## Description
-
 The `revertback` command reverts the reader firmware to the previous OS version on the secondary partition.
 
 Use this command to:

@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_rc_log` command retrieves the radio-control information log as a downloadable archive.
 
 This command returns:

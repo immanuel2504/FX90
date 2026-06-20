@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/certificates` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/certificates` REST endpoint is used to install certificate.
 
 Use this endpoint to:

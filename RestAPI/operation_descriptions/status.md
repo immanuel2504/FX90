@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/pass-through` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/pass-through` REST endpoint is used to pass-through command.
 
 Use this endpoint to:

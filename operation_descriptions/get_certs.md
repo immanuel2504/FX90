@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_certs` command retrieves the list of certificates installed on the reader.
 
 This command returns:

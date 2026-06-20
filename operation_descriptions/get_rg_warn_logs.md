@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_rg_warn_logs` command retrieves the reader-gateway warning log as a downloadable archive.
 
 This command returns:

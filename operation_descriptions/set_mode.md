@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_mode` command configures the reader's operating mode and the RF settings associated with that mode.
 
 Use it to:

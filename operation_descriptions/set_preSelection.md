@@ -1,5 +1,3 @@
-## Description
-
 The `set_preSelection` command enables or disables the rxSawFilter pre-selection feature.
 
 Use this command to:

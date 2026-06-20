@@ -1,7 +1,3 @@
-# `PUT /cloud/impinjGen2X` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/impinjGen2X` REST endpoint configures Impinj Gen2X proprietary RFID features on the FXR90 reader, covering FastID acceleration, TagProtect security, TagFocus singulation control, and TagQuieting (basic and advanced) behavior.
 
 **This endpoint allows you to configure:**

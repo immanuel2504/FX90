@@ -1,7 +1,3 @@
-﻿# `DELETE /cloud/logs/syslog` - REST Endpoint Reference
-
-## 1. Description
-
 The `DELETE /cloud/logs/syslog` REST endpoint is used to purge Log.
 
 Use this endpoint to:

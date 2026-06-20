@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_region` command retrieves the reader's currently configured RF region and the regulatory parameters in effect.
 
 This command returns:

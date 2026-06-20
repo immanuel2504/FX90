@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/network` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/network` REST endpoint is used to wiFi Hotspot (uap0).
 
 Use this endpoint to:

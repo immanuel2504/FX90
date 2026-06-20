@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/reboot` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/reboot` REST endpoint is used to restarts reader.
 
 Use this endpoint to:

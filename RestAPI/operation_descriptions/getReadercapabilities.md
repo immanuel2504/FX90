@@ -1,7 +1,3 @@
-﻿# `GET /cloud/readerCapabilities` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/readerCapabilities` REST endpoint is used to retrieves the Reader Capabilities.
 
 Use this endpoint to:

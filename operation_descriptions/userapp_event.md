@@ -1,5 +1,3 @@
-## 1. Description
-
 The `userapp_event` event delivers asynchronous custom events emitted by a user application running on the reader.
 
 This event includes:

@@ -1,5 +1,3 @@
-## 1. Description
-
 The `directionality_tag_data_events` payload carries zone-based tag state and direction information during DIRECTIONALITY operating mode.
 
 This event includes:

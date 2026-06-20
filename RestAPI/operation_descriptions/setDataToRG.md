@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/setdataToRG` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/setdataToRG` REST endpoint is used to set Data to RG.
 
 Use this endpoint to:

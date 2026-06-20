@@ -1,7 +1,3 @@
-﻿# `GET /cloud/supportedStandardList` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/supportedStandardList` REST endpoint is used to retrieves the standard channels of the supported regions.
 
 Use this endpoint to:

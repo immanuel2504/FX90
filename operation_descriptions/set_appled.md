@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_appled` command sets the color, duration, and flash behavior of the application LED on the reader.
 
 Use it to:

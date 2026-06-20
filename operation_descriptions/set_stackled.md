@@ -1,5 +1,3 @@
-## Description
-
 The `set_stackled` command updates the stack LED state on the reader.
 
 Use this command to:

@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_gpi_status` command retrieves the current state of each general-purpose input (GPI) pin on the reader.
 
 This command returns:

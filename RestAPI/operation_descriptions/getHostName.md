@@ -1,7 +1,3 @@
-﻿# `GET /cloud/hostName` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/hostName` REST endpoint is used to retrieves reader hostname.
 
 Use this endpoint to:

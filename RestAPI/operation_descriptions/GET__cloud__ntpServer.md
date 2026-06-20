@@ -1,7 +1,3 @@
-﻿# `GET /cloud/ntpServer` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/ntpServer` REST endpoint is used to retrieve the NTP server.
 
 Use this endpoint to:

@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/apps/{appname}/pass-through` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/apps/{appname}/pass-through` REST endpoint is used to send Request to Userapp.
 
 Use this endpoint to:

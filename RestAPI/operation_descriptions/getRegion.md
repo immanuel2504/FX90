@@ -1,7 +1,3 @@
-﻿# `GET /cloud/region` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/region` REST endpoint is used to retrieves reader region information.
 
 Use this endpoint to:

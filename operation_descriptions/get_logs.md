@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_logs` command retrieves the reader's current log configuration, including per-component log levels.
 
 This command returns:

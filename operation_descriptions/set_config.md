@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_config` command updates the reader's full configuration, including RF/XML settings, GPIO and LED defaults, and reader-gateway endpoint configuration.
 
 Use it to:

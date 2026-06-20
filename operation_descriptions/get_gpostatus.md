@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_gpostatus` command retrieves the current state of each general-purpose output (GPO) pin on the reader.
 
 This command returns:

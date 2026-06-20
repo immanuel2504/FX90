@@ -1,5 +1,3 @@
-## Description
-
 The `get_readPoints` command retrieves the read points available on the reader.
 
 Use this command to:

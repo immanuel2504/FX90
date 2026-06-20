@@ -1,5 +1,3 @@
-## Description
-
 The `del_certs` command removes an installed certificate from the reader by name and type.
 
 Use this command to:

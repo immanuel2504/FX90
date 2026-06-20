@@ -1,7 +1,3 @@
-﻿# `DELETE /cloud/logs/radioPacketLog` - REST Endpoint Reference
-
-## 1. Description
-
 The `DELETE /cloud/logs/radioPacketLog` REST endpoint is used to purge Log.
 
 Use this endpoint to:

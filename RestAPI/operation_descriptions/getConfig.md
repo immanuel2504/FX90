@@ -1,7 +1,3 @@
-﻿# `GET /cloud/config` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/config` REST endpoint is used to retrieves reader configuration.
 
 Use this endpoint to:

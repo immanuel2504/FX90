@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/config` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/config` REST endpoint is used to updates reader configuration.
 
 Use this endpoint to:

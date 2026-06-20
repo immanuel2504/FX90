@@ -1,7 +1,3 @@
-﻿# `GET /cloud/status` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/status` REST endpoint is used to retrieves reader operational statistics.
 
 Use this endpoint to:

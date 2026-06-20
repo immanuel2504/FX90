@@ -1,7 +1,3 @@
-﻿# `GET /cloud/preSelection` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/preSelection` REST endpoint is used to returns whether the rxSawFilter is enabled or disabled.
 
 Use this endpoint to:

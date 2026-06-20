@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/preSelection` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/preSelection` REST endpoint is used to enables or disables the rxSawFilter.
 
 Use this endpoint to:

@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_supportedStandardList` command retrieves the list of RF regulatory standards supported by the reader and the channel details for each.
 
 This command returns:

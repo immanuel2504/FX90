@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_req_usr_app` command sends a custom request or data payload to a user application running on the reader.
 
 Use it to:

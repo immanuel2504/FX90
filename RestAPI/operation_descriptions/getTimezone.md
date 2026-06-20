@@ -1,7 +1,3 @@
-﻿# `GET /cloud/timeZone` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/timeZone` REST endpoint is used to retrieves the reader timezone.
 
 Use this endpoint to:

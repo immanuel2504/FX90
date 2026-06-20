@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_mode` command retrieves the reader's current operating mode and the RF settings associated with that mode.
 
 This command returns:

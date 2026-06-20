@@ -1,7 +1,3 @@
-﻿# `GET /cloud/gpo` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/gpo` REST endpoint is used to retrieves the GPO status.
 
 Use this endpoint to:

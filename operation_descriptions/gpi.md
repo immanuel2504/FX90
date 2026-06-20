@@ -1,5 +1,3 @@
-## 1. Description
-
 The `gpi` event reports a change in the state of a general-purpose input (GPI) pin.
 
 This event includes:

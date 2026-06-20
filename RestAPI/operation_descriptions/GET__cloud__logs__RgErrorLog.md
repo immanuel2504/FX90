@@ -1,7 +1,3 @@
-﻿# `GET /cloud/logs/RgErrorLog` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/logs/RgErrorLog` REST endpoint is used to retrieve RgErrorLog.
 
 Use this endpoint to:

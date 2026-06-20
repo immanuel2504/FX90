@@ -1,5 +1,3 @@
-## Description
-
 The `set_passthru` command sends a pass-through payload to a reader component.
 
 Use this command to:

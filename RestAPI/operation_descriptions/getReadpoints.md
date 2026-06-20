@@ -1,7 +1,3 @@
-﻿# `GET /cloud/readPoints` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/readPoints` REST endpoint is used to gets the read points on the reader.
 
 Use this endpoint to:

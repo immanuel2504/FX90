@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_cableLossCompensation` command sets cable loss compensation values on the reader, either globally for all read points or individually per read point.
 
 Use it to:

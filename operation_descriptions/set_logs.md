@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_logs` command configures logging on the reader, including per-component log levels and radio packet logging.
 
 Use it to:

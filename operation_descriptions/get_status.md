@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_status` command retrieves operational statistics and health information from the reader at the moment of the request.
 
 This command returns:

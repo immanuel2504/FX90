@@ -1,7 +1,3 @@
-﻿# `GET /cloud/readerLocation` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/readerLocation` REST endpoint is used to gets the GPS coordinates (lat/long).
 
 Use this endpoint to:

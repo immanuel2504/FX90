@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/updatePassword` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/updatePassword` REST endpoint is used to changes the password on the reader.
 
 Use this endpoint to:

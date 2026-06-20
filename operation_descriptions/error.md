@@ -1,5 +1,3 @@
-## 1. Description
-
 The `error` event reports an error-level diagnostic message from the reader's Reader Gateway (RG) or Radio Control (RC) subsystems.
 
 This event includes:

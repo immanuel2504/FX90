@@ -1,5 +1,3 @@
-## Description
-
 The `start_user_app` command starts a user application installed on the reader.
 
 Use this command to:

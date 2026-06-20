@@ -1,5 +1,3 @@
-## Description
-
 The `stop_user_app` command stops a running user application on the reader.
 
 Use this command to:

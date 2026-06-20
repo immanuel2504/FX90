@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/eSimConfig` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/eSimConfig` REST endpoint is used to sets the eSIM configuration.
 
 Use this endpoint to:

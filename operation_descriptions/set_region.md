@@ -1,5 +1,3 @@
-## Description
-
 The `set_region` command updates the reader's RF region and regulatory standard.
 
 Use this command to:

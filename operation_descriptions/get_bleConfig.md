@@ -1,5 +1,3 @@
-## Description
-
 The `get_bleConfig` command retrieves the current Bluetooth Low Energy scanner configuration.
 
 Use this command to:

@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/apps/install` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/apps/install` REST endpoint is used to install user application.
 
 Use this endpoint to:

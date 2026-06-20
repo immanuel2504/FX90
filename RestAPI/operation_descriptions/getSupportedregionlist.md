@@ -1,7 +1,3 @@
-﻿# `GET /cloud/supportedRegionList` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/supportedRegionList` REST endpoint is used to retrieves the supported region list based on the reader type.
 
 Use this endpoint to:

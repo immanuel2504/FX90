@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/hostName` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/hostName` REST endpoint is used to sets reader hostname.
 
 Use this endpoint to:

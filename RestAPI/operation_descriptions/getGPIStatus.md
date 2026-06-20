@@ -1,7 +1,3 @@
-﻿# `GET /cloud/gpi` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/gpi` REST endpoint is used to get GPI Status.
 
 Use this endpoint to:

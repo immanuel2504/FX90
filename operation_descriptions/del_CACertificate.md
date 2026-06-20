@@ -1,5 +1,3 @@
-## Description
-
 The `del_CACertificate` command removes an installed CA (Certificate Authority) root certificate from the reader.
 
 Use this command to:

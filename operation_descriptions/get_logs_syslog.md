@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_logs_syslog` command retrieves the reader's system log as a downloadable archive.
 
 This command returns:

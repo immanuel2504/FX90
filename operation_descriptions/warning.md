@@ -1,5 +1,3 @@
-## 1. Description
-
 The `warning` event reports a warning-level diagnostic message from the reader's Reader Gateway (RG) or Radio subsystems.
 
 This event includes:

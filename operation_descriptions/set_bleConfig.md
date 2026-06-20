@@ -1,7 +1,3 @@
-# `set_bleConfig` - MQTT Command Reference
-
-## 1. Description
-
 The `set_bleConfig` MQTT command configures the Bluetooth Low Energy (BLE) scanner on the FXR90 reader, covering scanner enable/disable, scan interval, RSSI and service UUID filtering, and protocol-specific filters for iBeacon, AltBeacon, Eddystone, and generic BLE devices.
 
 **This command allows you to configure:**

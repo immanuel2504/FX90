@@ -1,7 +1,3 @@
-﻿# `GET /cloud/logs/syslog` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/logs/syslog` REST endpoint is used to retrieve Syslog.
 
 Use this endpoint to:

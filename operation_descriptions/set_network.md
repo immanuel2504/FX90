@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_network` command configures the reader's network identity and IP settings (DHCP or static).
 
 Use it to:

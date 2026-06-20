@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_rg_error_logs` command retrieves the reader-gateway error log as a downloadable archive.
 
 This command returns:

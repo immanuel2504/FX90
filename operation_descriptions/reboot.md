@@ -1,5 +1,3 @@
-## Description
-
 The `reboot` command restarts the reader. All in-progress operations stop and the reader briefly disconnects from MQTT.
 
 Use this command to:

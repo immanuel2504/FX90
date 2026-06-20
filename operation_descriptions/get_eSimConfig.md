@@ -1,5 +1,3 @@
-## Description
-
 The `get_eSimConfig` command retrieves eSIM identity and profile information from the reader.
 
 Use this command to:

@@ -1,5 +1,3 @@
-## 1. Description
-
 The `set_importCloudConfig` command imports a cloud endpoint configuration onto the reader, defining how tag data, control responses, and management events are delivered.
 
 Use it to:

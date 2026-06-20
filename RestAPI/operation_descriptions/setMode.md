@@ -1,7 +1,3 @@
-# `PUT /cloud/mode` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/mode` REST endpoint configures the reader's operating mode using the same `operatingMode.v1` payload shape supported by the MQTT `set_mode` command.
 
 Use this endpoint to:

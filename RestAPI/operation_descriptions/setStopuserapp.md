@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/apps/{appname}/stop` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/apps/{appname}/stop` REST endpoint is used to stop user application.
 
 Use this endpoint to:

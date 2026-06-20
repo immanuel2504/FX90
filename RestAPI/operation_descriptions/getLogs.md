@@ -1,7 +1,3 @@
-﻿# `GET /cloud/logs` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/logs` REST endpoint is used to log Configuration.
 
 Use this endpoint to:

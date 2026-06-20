@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/certificates/{certname}` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/certificates/{certname}` REST endpoint is used to refresh certificate.
 
 Use this endpoint to:

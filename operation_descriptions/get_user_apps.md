@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_user_apps` command retrieves the list of user applications installed on the reader.
 
 This command returns:

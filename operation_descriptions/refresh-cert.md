@@ -1,5 +1,3 @@
-## Description
-
 The `refresh-cert` command refreshes an already-installed certificate on the reader by re-fetching or re-applying it from its configured source.
 
 Use this command to:

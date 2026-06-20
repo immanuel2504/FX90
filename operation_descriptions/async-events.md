@@ -1,5 +1,3 @@
-## 1. Description
-
 The `async-events` envelope is the common wrapper for all asynchronous management events the reader publishes to configured management endpoints (`managementEventConfig` in reader configuration).
 
 This event includes:

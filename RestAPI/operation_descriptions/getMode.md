@@ -1,7 +1,3 @@
-# `GET /cloud/mode` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/mode` REST endpoint retrieves the reader's current operating mode using the same `operatingMode.v1` schema used by the MQTT `get_mode` response payload.
 
 This endpoint returns:

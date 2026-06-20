@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_readerCapabilites` command retrieves the static hardware and software capabilities of the reader.
 
 This command returns:

@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_availableWifiNetworks` command triggers a Wi-Fi scan and retrieves a list of all visible Wi-Fi networks in the reader's vicinity. 
 
 This command returns:

@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_CACertificates` command lists CA certificates installed on the reader.
 
 Use this command to:

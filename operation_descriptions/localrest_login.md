@@ -1,5 +1,3 @@
-## Description
-
 The `localrest_login` command authenticates a session with the reader's local REST interface.
 
 Use this command to:

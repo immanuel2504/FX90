@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/region` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/region` REST endpoint is used to update region information.
 
 Use this endpoint to:

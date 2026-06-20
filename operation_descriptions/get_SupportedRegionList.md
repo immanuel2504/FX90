@@ -1,5 +1,3 @@
-## 1. Description
-
 The `get_SupportedRegionList` command retrieves the list of RF regions this reader is permitted to operate in.
 
 This command returns:

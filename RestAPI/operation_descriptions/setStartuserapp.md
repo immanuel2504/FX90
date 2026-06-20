@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/apps/{appname}/start` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/apps/{appname}/start` REST endpoint is used to start user application.
 
 Use this endpoint to:

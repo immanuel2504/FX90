@@ -1,7 +1,3 @@
-﻿# `GET /cloud/logs/RcLog` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/logs/RcLog` REST endpoint is used to retrieve RcInfoLog.
 
 Use this endpoint to:

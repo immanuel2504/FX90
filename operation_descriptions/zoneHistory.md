@@ -1,5 +1,3 @@
-## 1. Description
-
 The `zoneHistory` payload records the sequence of zones a tag traversed before timing out in directionality mode.
 
 This event includes:

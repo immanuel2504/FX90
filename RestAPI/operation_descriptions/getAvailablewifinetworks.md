@@ -1,7 +1,3 @@
-﻿# `GET /cloud/wifiNetworks` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/wifiNetworks` REST endpoint is used to retrieves available Wi-Fi networks.
 
 Use this endpoint to:

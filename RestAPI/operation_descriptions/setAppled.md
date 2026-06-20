@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/app-led` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/app-led` REST endpoint is used to updates application LED state.
 
 Use this endpoint to:

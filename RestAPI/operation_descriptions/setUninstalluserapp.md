@@ -1,7 +1,3 @@
-﻿# `PUT /cloud/apps/{appname}/uninstall` - REST Endpoint Reference
-
-## 1. Description
-
 The `PUT /cloud/apps/{appname}/uninstall` REST endpoint is used to uninstall User Application.
 
 Use this endpoint to:

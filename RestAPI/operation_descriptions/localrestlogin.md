@@ -1,7 +1,3 @@
-﻿# `GET /cloud/localRestLogin` - REST Endpoint Reference
-
-## 1. Description
-
 The `GET /cloud/localRestLogin` REST endpoint is used to reader Login.
 
 Use this endpoint to:

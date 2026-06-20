@@ -1,7 +1,3 @@
-# `start` - MQTT Command Reference
-
-## 1. Description
-
 The `start` MQTT command starts RFID inventory, BLE scanning, or both on the FXR90 reader.
 
 By default, an empty payload starts RFID inventory only. Use the `scanType` field to explicitly start BLE, RFID, or both together. Optional flags allow you to apply a previously saved Impinj Gen2X configuration or control whether the start state persists across reboots.
