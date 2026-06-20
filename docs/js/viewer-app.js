@@ -1,11 +1,14 @@
 (function() {
 'use strict';
 
+var DOCS_ASSET_VERSION = '20260610-3';
+var OPS_PER_FRAME = 4;
+
 var CATEGORY_LABELS = {
   login: 'Login',
   system: 'System',
   network: 'Network',
-  control: 'Control Commands',
+  control: 'Control',
   region: 'Region',
   gpio: 'GPIO',
   'app-led': 'App LED',
@@ -32,6 +35,21 @@ function formatExampleLabel(key) {
   if (/^example\s*\d+$/i.test(key)) return 'Example ' + (key.match(/\d+/) || [''])[0];
   if (/^Example\s*\d+$/i.test(key)) return key;
   return key.replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+}
+
+function buildStatsBar(spec) {
+  var opCount = 0;
+  var paths = spec.paths || {};
+  Object.keys(paths).forEach(function (p) {
+    opCount += Object.keys(paths[p]).length;
+  });
+  var tagCount = (spec.tags || []).length;
+  var version = (spec.info && spec.info.version) ? spec.info.version : '';
+  return '<div class="api-stats-bar" role="status">' +
+    '<span class="api-stat"><strong>' + opCount + '</strong> commands</span>' +
+    '<span class="api-stat"><strong>' + tagCount + '</strong> categories</span>' +
+    (version ? '<span class="api-stat">Version <strong>' + escHtml(version) + '</strong></span>' : '') +
+    '</div>';
 }
 
 function md(text, options) {
@@ -408,15 +426,6 @@ function errorTable(codes) {
 /* ── Auto-generate example from schema properties ── */
 function generateExampleFromSchema(schema) {
    if (!schema) return {};
-   if (schema.oneOf || schema.anyOf || schema.allOf) {
-     var variants = schema.oneOf || schema.anyOf || schema.allOf || [];
-     var selected = variants.find(function (item) {
-       return item && item.type === 'object' && item.properties;
-     }) || variants.find(function (item) {
-       return item && item.type === 'object';
-     }) || variants[0];
-     return generateExampleFromSchema(selected);
-   }
    var result = {};
    if (schema.properties) {
      Object.keys(schema.properties).forEach(function (key) {
@@ -429,8 +438,6 @@ function generateExampleFromSchema(schema) {
          result[key] = prop.const;
        } else if (prop.default !== undefined) {
          result[key] = prop.default;
-       } else if (prop.oneOf || prop.anyOf || prop.allOf) {
-         result[key] = generateExampleFromSchema(prop);
        } else {
          switch (prop.type) {
            case 'string':  result[key] = prop.format === 'date-time' ? '2026-01-01T00:00:00Z' : 'string'; break;
@@ -448,6 +455,32 @@ function generateExampleFromSchema(schema) {
 }
  
 /* ── PDF Generator ── */
+var jsPdfLoadPromise = null;
+
+function loadJsPdfLibraries() {
+  if (window.jspdf && window.jspdf.jsPDF) return Promise.resolve();
+  if (jsPdfLoadPromise) return jsPdfLoadPromise;
+  jsPdfLoadPromise = new Promise(function (resolve, reject) {
+    function loadScript(src) {
+      return new Promise(function (res, rej) {
+        var script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        script.onload = function () { res(); };
+        script.onerror = function () { rej(new Error('Failed to load ' + src)); };
+        document.head.appendChild(script);
+      });
+    }
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
+      .then(function () {
+        return loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js');
+      })
+      .then(resolve)
+      .catch(reject);
+  });
+  return jsPdfLoadPromise;
+}
+
 function generatePDF(op, path) {
    var jsPDF = window.jspdf.jsPDF;
    var doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
@@ -735,8 +768,9 @@ function generatePDF(op, path) {
    doc.save(filename);
 }
  
-function addCopyButtons() {
-   document.querySelectorAll('pre:not([data-copy])').forEach(function (pre) {
+function addCopyButtons(root) {
+   var scope = root || document;
+   scope.querySelectorAll('pre:not([data-copy])').forEach(function (pre) {
      pre.setAttribute('data-copy', '1');
      var btn = document.createElement('button');
      btn.className = 'copy-btn';
@@ -1100,16 +1134,54 @@ function addCollapseToggles(root) {
   });
 }
 
-function highlightJsonBlocks(root) {
+function highlightVisibleJsonBlocks(root) {
   if (!window.Prism) return;
   var scope = root || document;
   scope.querySelectorAll('pre code.language-json').forEach(function (code) {
+    var panel = code.closest('.tab-panel');
+    if (panel && !panel.classList.contains('active')) return;
+    if (code.closest('.json-viewer-wrap')) return;
+    if (code.getAttribute('data-prism-highlighted')) return;
     Prism.highlightElement(code);
+    code.setAttribute('data-prism-highlighted', '1');
   });
 }
 
-function wireSchemaToggles() {
-   document.querySelectorAll('.schema-toggle-inline').forEach(function (btn) {
+var operationViewportObserver = null;
+var enhancedOperations = new WeakSet();
+
+function enhanceOperation(op) {
+  if (!op || enhancedOperations.has(op)) return;
+  enhancedOperations.add(op);
+  addCollapseToggles(op);
+  highlightVisibleJsonBlocks(op);
+  addCopyButtons(op);
+  wireSchemaToggles(op);
+  wireSchemaToolbars(op);
+}
+
+function initOperationViewportObserver() {
+  if (!window.IntersectionObserver) return null;
+  return new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) enhanceOperation(entry.target);
+    });
+  }, { rootMargin: '320px 0px', threshold: 0.01 });
+}
+
+function observeOperation(op) {
+  if (!op) return;
+  if (operationViewportObserver) operationViewportObserver.observe(op);
+  else enhanceOperation(op);
+}
+
+function highlightJsonBlocks(root) {
+  highlightVisibleJsonBlocks(root);
+}
+
+function wireSchemaToggles(root) {
+   var scope = root || document;
+   scope.querySelectorAll('.schema-toggle-inline').forEach(function (btn) {
      if (btn.getAttribute('data-wired')) return;
      btn.setAttribute('data-wired', '1');
      var targetId = btn.getAttribute('data-target');
@@ -1135,8 +1207,9 @@ function collapseChildren(parentId, root) {
    });
 }
  
-function wireSchemaToolbars() {
-   document.querySelectorAll('.schema-toolbar-btn').forEach(function (btn) {
+function wireSchemaToolbars(root) {
+   var scope = root || document;
+   scope.querySelectorAll('.schema-toolbar-btn').forEach(function (btn) {
      if (btn.getAttribute('data-wired')) return;
      btn.setAttribute('data-wired', '1');
      btn.addEventListener('click', function () {
@@ -1382,7 +1455,7 @@ function wireTopbarSearch(spec) {
      input.value = item.summary;
      clearBtn.style.display = 'inline-block';
    }
- 
+
    input.addEventListener('input', function () {
      var q = normalizeQuery(input.value);
      clearBtn.style.display = q ? 'inline-block' : 'none';
@@ -1535,6 +1608,7 @@ function renderOperation(path, method, op) {
      '<div class="op-title-bar">' +
        '<div class="op-title-wrap">' +
          '<h3 class="op-title">' + escHtml(summary) + '</h3>' +
+         '<code class="op-mqtt-path" title="MQTT command key">' + escHtml(path) + '</code>' +
        '</div>' +
        '<button class="pdf-btn" data-op-id="' + id + '">⬇ Download PDF</button>' +
      '</div>' +
@@ -1550,6 +1624,118 @@ function slugify(text) {
 
 function opIdFromPath(path) {
    return slugify(String(path || '').replace(/^\//, ''));
+}
+
+function buildTagMapFromSpec(spec) {
+  var tagMap = {};
+  (spec.tags || []).forEach(function (t) {
+    tagMap[t.name] = { description: t.description || '', operations: [] };
+  });
+  var paths = spec.paths || {};
+  Object.keys(paths).forEach(function (path) {
+    Object.keys(paths[path]).forEach(function (method) {
+      var op = paths[path][method];
+      var opTags = op.tags || ['default'];
+      opTags.forEach(function (tagName) {
+        if (!tagMap[tagName]) tagMap[tagName] = { description: '', operations: [] };
+        tagMap[tagName].operations.push({ path: path, method: method, op: op });
+      });
+    });
+  });
+  finalizeTagOperations(tagMap, spec);
+  return tagMap;
+}
+
+function wireExampleSelects(root) {
+  root.querySelectorAll('.example-select').forEach(function (sel) {
+    if (sel.getAttribute('data-wired')) return;
+    sel.setAttribute('data-wired', '1');
+    sel.addEventListener('change', function () {
+      var panelId = sel.getAttribute('data-panel');
+      var panel = document.getElementById(panelId);
+      if (!panel) return;
+      var viewerWrap = panel.querySelector('.json-viewer-wrap');
+      var pre = panel.querySelector('pre code');
+      var descEl = panel.querySelector('.example-description');
+      var examplesJson = sel.getAttribute('data-examples');
+      if (!examplesJson) return;
+      try {
+        var examples = JSON.parse(decodeURIComponent(examplesJson));
+        var selectedExample = examples[sel.value];
+        var val;
+        var desc = '';
+        if (selectedExample && typeof selectedExample === 'object' && Object.prototype.hasOwnProperty.call(selectedExample, 'value')) {
+          val = selectedExample.value;
+          desc = typeof selectedExample.description === 'string' ? selectedExample.description : '';
+        } else {
+          val = selectedExample;
+        }
+        if (descEl) {
+          if (desc) {
+            descEl.innerHTML = md(desc);
+            descEl.style.display = '';
+          } else {
+            descEl.innerHTML = '';
+            descEl.style.display = 'none';
+          }
+        }
+        if (val !== undefined) {
+          if (viewerWrap) {
+            setJsonViewerData(viewerWrap, val);
+            return;
+          }
+          if (pre) {
+            pre.textContent = JSON.stringify(val, null, 2);
+            pre.removeAttribute('data-prism-highlighted');
+            if (window.Prism) Prism.highlightElement(pre);
+          }
+        }
+      } catch (e) {}
+    });
+  });
+}
+
+function wireOperationInteractions(op) {
+  if (!op || op.getAttribute('data-op-wired')) return;
+  op.setAttribute('data-op-wired', '1');
+
+  op.querySelectorAll('.pdf-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var opDiv = btn.closest('.operation');
+      if (!opDiv) return;
+      var opData = JSON.parse(decodeURIComponent(opDiv.getAttribute('data-op')));
+      var path = opDiv.getAttribute('data-path');
+      btn.textContent = '⏳ Generating...';
+      btn.disabled = true;
+      loadJsPdfLibraries().then(function () {
+        generatePDF(opData, path);
+      }).catch(function (e) {
+        console.error('PDF error:', e);
+      }).finally(function () {
+        btn.textContent = '⬇ Download PDF';
+        btn.disabled = false;
+      });
+    });
+  });
+
+  op.querySelectorAll('.tab-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var tabId = btn.getAttribute('data-tab');
+      var bar = btn.parentElement;
+      bar.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var section = bar.closest('.payload-section');
+      if (section) section.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
+      var target = document.getElementById(tabId);
+      if (target) {
+        target.classList.add('active');
+        highlightVisibleJsonBlocks(target);
+      }
+    });
+  });
+
+  wireExampleSelects(op);
+  observeOperation(op);
 }
 
 function finalizeTagOperations(tagMap, spec) {
@@ -1578,67 +1764,32 @@ function finalizeTagOperations(tagMap, spec) {
      tagMap[tagName].operations = ops;
    });
 }
-
-function groupedTagOperations(tagName, operations, spec) {
-   var subgroupConfig = (spec['x-operationSubgroups'] || {})[tagName];
-   if (!subgroupConfig || !subgroupConfig.length) {
-      return [{ name: '', operations: operations }];
-   }
-   var byName = {};
-   operations.forEach(function (entry) {
-      byName[opIdFromPath(entry.path)] = entry;
-   });
-   var used = {};
-   var groups = [];
-   subgroupConfig.forEach(function (group) {
-      var entries = [];
-      (group.operations || []).forEach(function (opName) {
-         var entry = byName[opName];
-         if (!entry) return;
-         entries.push(entry);
-         used[opName] = true;
-      });
-      if (entries.length) groups.push({ name: group.name || '', operations: entries });
-   });
-   var remaining = operations.filter(function (entry) {
-      return !used[opIdFromPath(entry.path)];
-   });
-   if (remaining.length) groups.push({ name: 'Other', operations: remaining });
-   return groups;
-}
  
 /* ── Main render ── */
 function render(spec) {
    var content = document.getElementById('content');
    var nav = document.getElementById('nav-content');
    var searchInput = document.getElementById('sidebar-search');
-   var html = '';
+   var headerHtml = '';
    var navHtml = '';
- 
-   /* No h1 page title — topbar handles it */
-   if (spec.info && spec.info.description) {
-     html += '<div class="info-description md-content">' + md(spec.info.description, { idPrefix: 'info' }) + '</div>';
-   }
- 
-   var tagMap = {};
-   (spec.tags || []).forEach(function (t) {
-     tagMap[t.name] = { description: t.description || '', operations: [] };
-   });
- 
-   var paths = spec.paths || {};
-   Object.keys(paths).forEach(function (path) {
-     Object.keys(paths[path]).forEach(function (method) {
-       var op = paths[path][method];
-       var opTags = op.tags || ['default'];
-       opTags.forEach(function (tagName) {
-         if (!tagMap[tagName]) tagMap[tagName] = { description: '', operations: [] };
-         tagMap[tagName].operations.push({ path: path, method: method, op: op });
-       });
-     });
-   });
+   var renderQueue = [];
 
-   finalizeTagOperations(tagMap, spec);
- 
+   if (spec.info && spec.info.description) {
+     headerHtml += '<div class="info-description md-content">' + md(spec.info.description, { idPrefix: 'info' }) + '</div>';
+     headerHtml += buildStatsBar(spec);
+     var infoSections = [];
+     spec.info.description.replace(/^## (.+)$/gm, function (_, t) { infoSections.push(t); });
+     if (infoSections.length) {
+       infoSections.forEach(function (t) {
+         if (t === 'Details') return;
+         var id = 'info-' + t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+         navHtml += '<a class="nav-tag" href="#' + id + '">' + escHtml(t) + '</a>';
+       });
+       navHtml += '<hr class="nav-divider">';
+     }
+   }
+
+   var tagMap = buildTagMapFromSpec(spec);
    var groups = spec['x-tagGroups'] || [{ name: 'API', tags: Object.keys(tagMap) }];
    groups.forEach(function (group) {
      navHtml += '<div class="nav-group" data-group="' + escHtml(group.name) + '">' +
@@ -1649,42 +1800,113 @@ function render(spec) {
      group.tags.forEach(function (tagName) {
        var tag = tagMap[tagName];
        if (!tag) return;
-      var tagId = slugify(tagName);
-      var tagLabel = formatCategoryLabel(tagName);
-      navHtml += '<a class="nav-tag" href="#tag-' + tagId + '">' + escHtml(tagLabel) + '</a>';
-      groupedTagOperations(tagName, tag.operations, spec).forEach(function (subgroup) {
-        if (subgroup.name) {
-          navHtml += '<div class="nav-subgroup">' + escHtml(subgroup.name) + '</div>';
-        }
-        subgroup.operations.forEach(function (entry) {
-          var opId = opIdFromPath(entry.path);
-          navHtml += '<a class="nav-op" href="#op-' + opId + '">' + escHtml(entry.op.summary) + '</a>';
-        });
-      });
-       html += '<div class="tag-section" id="tag-' + tagId + '">';
-       html += '<h2 class="tag-heading">' + escHtml(tagLabel) + '</h2>';
+       var tagId = slugify(tagName);
+       var tagLabel = formatCategoryLabel(tagName);
+       navHtml += '<a class="nav-tag" href="#tag-' + tagId + '">' + escHtml(tagLabel) + '</a>';
+       tag.operations.forEach(function (entry) {
+         var opId = opIdFromPath(entry.path);
+         navHtml += '<a class="nav-op" href="#op-' + opId + '">' + escHtml(entry.op.summary) + '</a>';
+       });
+       var sectionStart = '<div class="tag-section" id="tag-' + tagId + '">';
+       sectionStart += '<h2 class="tag-heading">' + escHtml(tagLabel) + '</h2>';
        if (tag.description) {
-         html += '<div class="tag-description md-content">' + md(tag.description) + '</div>';
+         sectionStart += '<div class="tag-description md-content">' + md(tag.description) + '</div>';
        }
-       groupedTagOperations(tagName, tag.operations, spec).forEach(function (subgroup) {
-         if (subgroup.name) {
-           html += '<h3 class="tag-subgroup-heading">' + escHtml(subgroup.name) + '</h3>';
-         }
-         subgroup.operations.forEach(function (entry) {
-           html += renderOperation(entry.path, entry.method, entry.op);
+       renderQueue.push({ kind: 'html', html: sectionStart });
+       tag.operations.forEach(function (entry) {
+         var opId = opIdFromPath(entry.path);
+         renderQueue.push({
+           kind: 'op',
+           id: 'op-' + opId,
+           html: renderOperation(entry.path, entry.method, entry.op)
          });
        });
-       html += '</div><hr class="tag-divider">';
+       renderQueue.push({ kind: 'html', html: '</div><hr class="tag-divider">' });
      });
-     navHtml += '</div>'; // close nav-group-children
+     navHtml += '</div>';
    });
- 
-   content.innerHTML = html;
-   content.classList.remove('is-loading');
+
    nav.innerHTML = navHtml;
- 
-   function wireNavGroups() {
-     document.querySelectorAll('.nav-group').forEach(function(group) {
+   content.innerHTML = headerHtml;
+   content.classList.remove('is-loading');
+
+   var stream = document.createElement('div');
+   stream.id = 'ops-stream';
+   content.appendChild(stream);
+
+   var totalOps = renderQueue.filter(function (item) { return item.kind === 'op'; }).length;
+   var progress = document.createElement('p');
+   progress.className = 'render-progress';
+   progress.setAttribute('aria-live', 'polite');
+   progress.textContent = totalOps ? ('Loading commands… 0 / ' + totalOps) : '';
+   if (totalOps) content.appendChild(progress);
+
+   if (operationViewportObserver) operationViewportObserver.disconnect();
+   operationViewportObserver = initOperationViewportObserver();
+
+   var queueIndex = 0;
+   var opsRendered = 0;
+   var operationSections = [];
+   var tagSections = [];
+   var pendingHash = (location.hash || '').slice(1);
+   var TOPBAR_H = document.getElementById('topbar') ? document.getElementById('topbar').offsetHeight : 52;
+
+   function scrollToTarget(el, behavior) {
+     if (!el) return;
+     var top = el.getBoundingClientRect().top + window.pageYOffset - TOPBAR_H - 8;
+     window.scrollTo({ top: top, behavior: behavior || 'auto' });
+   }
+
+   function pumpRenderQueue() {
+     var opsThisFrame = 0;
+     while (queueIndex < renderQueue.length && opsThisFrame < OPS_PER_FRAME) {
+       var item = renderQueue[queueIndex++];
+       stream.insertAdjacentHTML('beforeend', item.html);
+       if (item.kind === 'op') {
+         opsThisFrame += 1;
+         opsRendered += 1;
+         var op = document.getElementById(item.id);
+         if (op) {
+           operationSections.push(op);
+           wireOperationInteractions(op);
+           if (pendingHash && op.id === pendingHash) {
+             scrollToTarget(op, 'auto');
+             pendingHash = '';
+           }
+         }
+         if (progress.parentNode) {
+           progress.textContent = 'Loading commands… ' + opsRendered + ' / ' + totalOps;
+         }
+       } else if (item.kind === 'html' && item.html.indexOf('tag-section') !== -1) {
+         var tagSection = stream.querySelector('.tag-section:last-of-type');
+         if (tagSection) tagSections.push(tagSection);
+       }
+     }
+     if (queueIndex < renderQueue.length) {
+       requestAnimationFrame(pumpRenderQueue);
+     } else {
+       if (progress.parentNode) progress.remove();
+       finishRender();
+     }
+   }
+
+   function finishRender() {
+     var infoSection = content.querySelector('.info-description');
+     if (infoSection) {
+       addCollapseToggles(infoSection);
+       highlightVisibleJsonBlocks(infoSection);
+       addCopyButtons(infoSection);
+     }
+     if (pendingHash) {
+       var hashTarget = document.getElementById(pendingHash);
+       if (hashTarget) scrollToTarget(hashTarget, 'auto');
+       pendingHash = '';
+     }
+     bindRenderInteractions();
+   }
+
+   function bindRenderInteractions() {
+     document.querySelectorAll('.nav-group').forEach(function (group) {
        if (group.getAttribute('data-nav-wired')) return;
        group.setAttribute('data-nav-wired', '1');
        var groupName = group.getAttribute('data-group');
@@ -1701,338 +1923,250 @@ function render(spec) {
          children.classList.remove('collapsed');
          indicator.textContent = '−';
        }
-       group.addEventListener('click', function() {
+       group.addEventListener('click', function () {
          var collapsed = children.classList.toggle('collapsed');
          indicator.textContent = collapsed ? '+' : '−';
          sessionStorage.setItem('nav-group-' + groupName, collapsed ? 'collapsed' : 'expanded');
        });
      });
-   }
- 
-   wireNavGroups();
-   wireTopbarSearch(spec);
- 
-   document.querySelectorAll('.pdf-btn').forEach(function (btn) {
-     btn.addEventListener('click', function () {
-       var opDiv = btn.closest('.operation');
-       var opData = JSON.parse(decodeURIComponent(opDiv.getAttribute('data-op')));
-       var path = opDiv.getAttribute('data-path');
-       btn.textContent = '⏳ Generating...';
-       btn.disabled = true;
-       setTimeout(function () {
-         try { generatePDF(opData, path); } catch(e) { console.error('PDF error:', e); }
-         btn.textContent = '⬇ Download PDF';
-         btn.disabled = false;
-       }, 100);
-     });
-   });
- 
-   if (searchInput && !searchInput.getAttribute('data-wired')) {
-     searchInput.setAttribute('data-wired', '1');
-     searchInput.addEventListener('input', function () {
-      var q = (searchInput.value || '').toLowerCase().trim();
-      var tagLinks = Array.prototype.slice.call(nav.querySelectorAll('.nav-tag'));
-      var opLinks = Array.prototype.slice.call(nav.querySelectorAll('.nav-op'));
-      var subgroupLabels = Array.prototype.slice.call(nav.querySelectorAll('.nav-subgroup'));
-      if (!q) {
-        tagLinks.forEach(function (tag) { tag.style.display = ''; });
-        opLinks.forEach(function (op) { op.style.display = ''; });
-        subgroupLabels.forEach(function (label) { label.style.display = ''; });
-        /* Restore sessionStorage states when filter cleared */
-         document.querySelectorAll('.nav-group').forEach(function(group) {
-           var groupName = group.getAttribute('data-group');
-           var children = document.querySelector('.nav-group-children[data-group-children="' + groupName + '"]');
-           var indicator = group.querySelector('.nav-group-indicator');
-           if (!children || !indicator) return;
-           var stored = sessionStorage.getItem('nav-group-' + groupName);
-           if (stored === 'collapsed') {
-             children.classList.add('collapsed');
-             indicator.textContent = '+';
-           } else {
-             children.classList.remove('collapsed');
-             indicator.textContent = '−';
+
+     wireTopbarSearch(spec);
+
+     if (searchInput && !searchInput.getAttribute('data-wired')) {
+       searchInput.setAttribute('data-wired', '1');
+       searchInput.addEventListener('input', function () {
+         var q = (searchInput.value || '').toLowerCase().trim();
+         var tagLinks = Array.prototype.slice.call(nav.querySelectorAll('.nav-tag'));
+         var opLinks = Array.prototype.slice.call(nav.querySelectorAll('.nav-op'));
+         if (!q) {
+           tagLinks.forEach(function (tag) { tag.style.display = ''; });
+           opLinks.forEach(function (op) { op.style.display = ''; });
+           document.querySelectorAll('.nav-group').forEach(function (group) {
+             var groupName = group.getAttribute('data-group');
+             var children = document.querySelector('.nav-group-children[data-group-children="' + groupName + '"]');
+             var indicator = group.querySelector('.nav-group-indicator');
+             if (!children || !indicator) return;
+             var stored = sessionStorage.getItem('nav-group-' + groupName);
+             if (stored === 'collapsed') {
+               children.classList.add('collapsed');
+               indicator.textContent = '+';
+             } else {
+               children.classList.remove('collapsed');
+               indicator.textContent = '−';
+             }
+           });
+           return;
+         }
+         var opMatchByTag = {};
+         opLinks.forEach(function (op) {
+           var text = (op.textContent || '').toLowerCase();
+           var match = text.indexOf(q) !== -1;
+           op.style.display = match ? '' : 'none';
+           if (match) {
+             var prev = op.previousElementSibling;
+             while (prev && !prev.classList.contains('nav-tag')) prev = prev.previousElementSibling;
+             if (prev) opMatchByTag[prev.getAttribute('href')] = true;
            }
          });
-         return;
-       }
-       var opMatchByTag = {};
-       opLinks.forEach(function (op) {
-         var text = (op.textContent || '').toLowerCase();
-         var match = text.indexOf(q) !== -1;
-         op.style.display = match ? '' : 'none';
-         if (match) {
-           var prev = op.previousElementSibling;
-           while (prev && !prev.classList.contains('nav-tag')) prev = prev.previousElementSibling;
-           if (prev) opMatchByTag[prev.getAttribute('href')] = true;
-         }
-       });
-      tagLinks.forEach(function (tag) {
-        var tagText = (tag.textContent || '').toLowerCase();
-        var tagMatch = tagText.indexOf(q) !== -1;
-        var hasMatchingOp = !!opMatchByTag[tag.getAttribute('href')];
-        tag.style.display = (tagMatch || hasMatchingOp) ? '' : 'none';
-      });
-      subgroupLabels.forEach(function (label) {
-        var next = label.nextElementSibling;
-        var hasVisibleOp = false;
-        while (next && !next.classList.contains('nav-subgroup') && !next.classList.contains('nav-tag') && !next.classList.contains('nav-group')) {
-          if (next.classList.contains('nav-op') && next.style.display !== 'none') {
-            hasVisibleOp = true;
-            break;
-          }
-          next = next.nextElementSibling;
-        }
-        label.style.display = hasVisibleOp ? '' : 'none';
-      });
-      /* Auto-expand groups that have matching results */
-       document.querySelectorAll('.nav-group-children').forEach(function(children) {
-         var hasVisible = Array.prototype.slice.call(children.querySelectorAll('.nav-op, .nav-tag'))
-           .some(function(el) { return el.style.display !== 'none'; });
-         if (hasVisible) {
-           children.classList.remove('collapsed');
-           var groupName = children.getAttribute('data-group-children');
-           var indicator = document.querySelector('.nav-group[data-group="' + groupName + '"] .nav-group-indicator');
-           if (indicator) indicator.textContent = '−';
-         }
-       });
-     });
-   }
- 
-   document.querySelectorAll('.tab-btn').forEach(function (btn) {
-     btn.addEventListener('click', function () {
-       var tabId = btn.getAttribute('data-tab');
-       var bar = btn.parentElement;
-       bar.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
-       btn.classList.add('active');
-       var section = bar.closest('.payload-section');
-       if (section) section.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
-       var target = document.getElementById(tabId);
-       if (target) target.classList.add('active');
-     });
-   });
- 
-  addCollapseToggles(document.getElementById('content'));
-  highlightJsonBlocks(document.getElementById('content'));
-  addCopyButtons();
-  wireSchemaToggles();
-  wireSchemaToolbars();
- 
-   document.querySelectorAll('.example-select').forEach(function(sel) {
-     sel.addEventListener('change', function() {
-       var panelId = sel.getAttribute('data-panel');
-       var panel = document.getElementById(panelId);
-       if (!panel) return;
-       var viewerWrap = panel.querySelector('.json-viewer-wrap');
-       var pre = panel.querySelector('pre code');
-       var descEl = panel.querySelector('.example-description');
-       var examplesJson = sel.getAttribute('data-examples');
-       if (!examplesJson) return;
-       try {
-         var examples = JSON.parse(decodeURIComponent(examplesJson));
-         var selectedExample = examples[sel.value];
-         var val;
-         var desc = '';
-         if (selectedExample && typeof selectedExample === 'object' && Object.prototype.hasOwnProperty.call(selectedExample, 'value')) {
-           val = selectedExample.value;
-           desc = typeof selectedExample.description === 'string' ? selectedExample.description : '';
-         } else {
-           val = selectedExample;
-         }
-         if (descEl) {
-           if (desc) {
-             descEl.innerHTML = md(desc);
-             descEl.style.display = '';
-           } else {
-             descEl.innerHTML = '';
-             descEl.style.display = 'none';
+         tagLinks.forEach(function (tag) {
+           var tagText = (tag.textContent || '').toLowerCase();
+           var tagMatch = tagText.indexOf(q) !== -1;
+           var hasMatchingOp = !!opMatchByTag[tag.getAttribute('href')];
+           tag.style.display = (tagMatch || hasMatchingOp) ? '' : 'none';
+         });
+         document.querySelectorAll('.nav-group-children').forEach(function (children) {
+           var hasVisible = Array.prototype.slice.call(children.querySelectorAll('.nav-op, .nav-tag'))
+             .some(function (el) { return el.style.display !== 'none'; });
+           if (hasVisible) {
+             children.classList.remove('collapsed');
+             var groupName = children.getAttribute('data-group-children');
+             var indicator = document.querySelector('.nav-group[data-group="' + groupName + '"] .nav-group-indicator');
+             if (indicator) indicator.textContent = '−';
            }
-         }
-         if (val !== undefined) {
-           if (viewerWrap) {
-             setJsonViewerData(viewerWrap, val);
-             return;
-           }
-           if (pre) {
-             pre.textContent = JSON.stringify(val, null, 2);
-             if (window.Prism) Prism.highlightElement(pre);
-           }
-         }
-       } catch(e) {}
-     });
-   });
- 
-   /* ── Offset anchor scroll for fixed topbar ──────────────── */
-   var TOPBAR_H = document.getElementById('topbar') ? document.getElementById('topbar').offsetHeight : 52;
-   document.addEventListener('click', function (e) {
-     var anchor = e.target.closest('a[href^="#"]');
-     if (!anchor) return;
-     var id = anchor.getAttribute('href').slice(1);
-     var target = document.getElementById(id);
-     if (!target) return;
-     e.preventDefault();
-     /* If clicked link is inside a collapsed group, expand it */
-     var groupChildren = anchor.parentElement;
-     while (groupChildren && !groupChildren.classList.contains('nav-group-children')) groupChildren = groupChildren.parentElement;
-     if (groupChildren && groupChildren.classList.contains('collapsed')) {
-       var gName = groupChildren.getAttribute('data-group-children');
-       var gEl = nav.querySelector('.nav-group[data-group="' + gName + '"]');
-       if (gEl) {
-         groupChildren.classList.remove('collapsed');
-         var ind = gEl.querySelector('.nav-group-indicator');
-         if (ind) ind.textContent = '−';
-         sessionStorage.setItem('nav-group-' + gName, 'expanded');
-       }
-     }
-     var top = target.getBoundingClientRect().top + window.pageYOffset - TOPBAR_H - 8;
-     window.scrollTo({ top: top, behavior: 'smooth' });
-     history.pushState(null, '', '#' + id);
-     updateActiveNavState();
-   });
- 
-   var navTagLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-tag'));
-   var navOpLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-op'));
-   var tagSections = Array.prototype.slice.call(document.querySelectorAll('.tag-section'));
-   var operationSections = Array.prototype.slice.call(document.querySelectorAll('.operation'));
-   var lastActiveNavLink = null;
- 
-   function revealActiveNavLink(activeLink) {
-     if (!activeLink || activeLink === lastActiveNavLink) return;
-     lastActiveNavLink = activeLink;
-     activeLink.scrollIntoView({ block: 'nearest' });
-   }
- 
-   function updateActiveNavState() {
-     var threshold = TOPBAR_H + 12;
-     var bestOp = null;
-     var bestDistance = Infinity;
-     operationSections.forEach(function(op) {
-       var rect = op.getBoundingClientRect();
-       var isVisible = rect.bottom > threshold && rect.top < window.innerHeight;
-       if (!isVisible) return;
-       var distance = Math.abs(rect.top - threshold);
-       if (distance < bestDistance) {
-         bestDistance = distance;
-         bestOp = op;
-       }
-     });
-     if (!bestOp) {
-       var firstBelow = Infinity;
-       operationSections.forEach(function(op) {
-         var rect = op.getBoundingClientRect();
-         if (rect.top > threshold && rect.top < firstBelow) {
-           firstBelow = rect.top;
-           bestOp = op;
-         }
+         });
        });
      }
-     if (!bestOp) {
-       var nearestAbove = -Infinity;
-       operationSections.forEach(function(op) {
-         var rect = op.getBoundingClientRect();
-         if (rect.top <= threshold && rect.top > nearestAbove) {
-           nearestAbove = rect.top;
-           bestOp = op;
-         }
-       });
-     }
-     var activeOpId = bestOp ? bestOp.id : null;
-     /* Get parent tag from the active operation */
-     var activeTagId = null;
-     if (bestOp) {
-       var tagSection = bestOp.closest ? bestOp.closest('.tag-section') : null;
-       if (!tagSection) {
-         var el = bestOp.parentElement;
-         while (el && !el.classList.contains('tag-section')) el = el.parentElement;
-         tagSection = el;
-       }
-       if (tagSection) activeTagId = tagSection.id;
-     }
-     /* Fallback: nearest tag section when no op active */
-     if (!activeTagId) {
-       var bestTag = null;
-       var bestTagTop = -Infinity;
-       tagSections.forEach(function(tag) {
-         var rect = tag.getBoundingClientRect();
-         if (rect.top <= threshold && rect.top > bestTagTop) {
-           bestTagTop = rect.top;
-           bestTag = tag;
-         }
-       });
-       if (bestTag) activeTagId = bestTag.id;
-     }
-     navOpLinks.forEach(function(link) {
-       link.classList.toggle('active', !!activeOpId && link.getAttribute('href') === '#' + activeOpId);
-     });
-     navTagLinks.forEach(function(link) {
-       link.classList.toggle('active', !!activeTagId && link.getAttribute('href') === '#' + activeTagId);
-     });
-     /* Active group highlighting */
-     document.querySelectorAll('.nav-group').forEach(function(g) { g.classList.remove('active-group'); });
-     var activeOp = nav.querySelector('.nav-op.active');
-     if (activeOp) {
-       var activeChildren = activeOp.closest ? activeOp.closest('.nav-group-children') : null;
-       if (!activeChildren) {
-         var el2 = activeOp.parentElement;
-         while (el2 && !el2.classList.contains('nav-group-children')) el2 = el2.parentElement;
-         activeChildren = el2;
-       }
-       if (activeChildren) {
-         var activeGroupName = activeChildren.getAttribute('data-group-children');
-         var activeGroupEl = nav.querySelector('.nav-group[data-group="' + activeGroupName + '"]');
-         if (activeGroupEl) activeGroupEl.classList.add('active-group');
-         if (activeChildren.classList.contains('collapsed')) {
-           activeChildren.classList.remove('collapsed');
-           if (activeGroupEl) {
-             var activeIndicator = activeGroupEl.querySelector('.nav-group-indicator');
-             if (activeIndicator) activeIndicator.textContent = '−';
-           }
-           if (activeGroupName) sessionStorage.setItem('nav-group-' + activeGroupName, 'expanded');
-         }
-         /* Breadcrumb update */
-         var breadcrumb = document.getElementById('sidebar-breadcrumb');
-         if (breadcrumb) {
-           var parentTag = activeOp.previousElementSibling;
-           while (parentTag && !parentTag.classList.contains('nav-tag')) {
-             parentTag = parentTag.previousElementSibling;
-           }
-           var groupLabel = activeGroupEl ? activeGroupEl.querySelector('.nav-group-label') : null;
-           breadcrumb.textContent = (groupLabel ? groupLabel.textContent : '') + ' \u203a ' + (parentTag ? parentTag.textContent.trim() : '');
-         }
-       }
-     }
-     var activeNavLink = nav.querySelector('.nav-op.active') || nav.querySelector('.nav-tag.active');
-     revealActiveNavLink(activeNavLink);
-   }
- 
-   window.addEventListener('scroll', updateActiveNavState);
-   window.addEventListener('hashchange', updateActiveNavState);
-   updateActiveNavState();
- 
-   /* ── FIX 11 — Wire mobile sidebar ── */
-   (function wireMobileSidebar() {
-     var toggle = document.getElementById('sidebar-toggle');
-     var overlay = document.getElementById('sidebar-overlay');
-     var sidebar = document.getElementById('sidebar');
-     if (!toggle || !overlay || !sidebar) return;
-     function openSidebar() {
-       sidebar.classList.add('open');
-       overlay.classList.add('visible');
-       document.body.style.overflow = 'hidden';
-     }
-     function closeSidebar() {
-       sidebar.classList.remove('open');
-       overlay.classList.remove('visible');
-       document.body.style.overflow = '';
-     }
-     toggle.addEventListener('click', openSidebar);
-     overlay.addEventListener('click', closeSidebar);
-     document.querySelectorAll('.nav-tag, .nav-op').forEach(function (link) {
-       link.addEventListener('click', function () {
-         if (window.innerWidth <= 768) closeSidebar();
-       });
-     });
-   })();
 
+     if (!content.getAttribute('data-nav-click-wired')) {
+       content.setAttribute('data-nav-click-wired', '1');
+       document.addEventListener('click', function (e) {
+         var anchor = e.target.closest('a[href^="#"]');
+         if (!anchor) return;
+         var id = anchor.getAttribute('href').slice(1);
+         var target = document.getElementById(id);
+         if (!target) return;
+         e.preventDefault();
+         var groupChildren = anchor.parentElement;
+         while (groupChildren && !groupChildren.classList.contains('nav-group-children')) groupChildren = groupChildren.parentElement;
+         if (groupChildren && groupChildren.classList.contains('collapsed')) {
+           var gName = groupChildren.getAttribute('data-group-children');
+           var gEl = nav.querySelector('.nav-group[data-group="' + gName + '"]');
+           if (gEl) {
+             groupChildren.classList.remove('collapsed');
+             var ind = gEl.querySelector('.nav-group-indicator');
+             if (ind) ind.textContent = '−';
+             sessionStorage.setItem('nav-group-' + gName, 'expanded');
+           }
+         }
+         scrollToTarget(target, 'smooth');
+         history.pushState(null, '', '#' + id);
+         scheduleActiveNavUpdate();
+       });
+     }
+
+     var navTagLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-tag'));
+     var navOpLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-op'));
+     var lastActiveNavLink = null;
+
+     function revealActiveNavLink(activeLink) {
+       if (!activeLink || activeLink === lastActiveNavLink) return;
+       lastActiveNavLink = activeLink;
+       activeLink.scrollIntoView({ block: 'nearest' });
+     }
+
+     function updateActiveNavState() {
+       var threshold = TOPBAR_H + 12;
+       var bestOp = null;
+       var bestDistance = Infinity;
+       operationSections.forEach(function (op) {
+         var rect = op.getBoundingClientRect();
+         var isVisible = rect.bottom > threshold && rect.top < window.innerHeight;
+         if (!isVisible) return;
+         var distance = Math.abs(rect.top - threshold);
+         if (distance < bestDistance) {
+           bestDistance = distance;
+           bestOp = op;
+         }
+       });
+       if (!bestOp) {
+         var firstBelow = Infinity;
+         operationSections.forEach(function (op) {
+           var rect = op.getBoundingClientRect();
+           if (rect.top > threshold && rect.top < firstBelow) {
+             firstBelow = rect.top;
+             bestOp = op;
+           }
+         });
+       }
+       if (!bestOp) {
+         var nearestAbove = -Infinity;
+         operationSections.forEach(function (op) {
+           var rect = op.getBoundingClientRect();
+           if (rect.top <= threshold && rect.top > nearestAbove) {
+             nearestAbove = rect.top;
+             bestOp = op;
+           }
+         });
+       }
+       var activeOpId = bestOp ? bestOp.id : null;
+       var activeTagId = null;
+       if (bestOp) {
+         var tagSection = bestOp.closest ? bestOp.closest('.tag-section') : null;
+         if (!tagSection) {
+           var el = bestOp.parentElement;
+           while (el && !el.classList.contains('tag-section')) el = el.parentElement;
+           tagSection = el;
+         }
+         if (tagSection) activeTagId = tagSection.id;
+       }
+       if (!activeTagId) {
+         var bestTag = null;
+         var bestTagTop = -Infinity;
+         tagSections.forEach(function (tag) {
+           var rect = tag.getBoundingClientRect();
+           if (rect.top <= threshold && rect.top > bestTagTop) {
+             bestTagTop = rect.top;
+             bestTag = tag;
+           }
+         });
+         if (bestTag) activeTagId = bestTag.id;
+       }
+       navOpLinks.forEach(function (link) {
+         link.classList.toggle('active', !!activeOpId && link.getAttribute('href') === '#' + activeOpId);
+       });
+       navTagLinks.forEach(function (link) {
+         link.classList.toggle('active', !!activeTagId && link.getAttribute('href') === '#' + activeTagId);
+       });
+       document.querySelectorAll('.nav-group').forEach(function (g) { g.classList.remove('active-group'); });
+       var activeOp = nav.querySelector('.nav-op.active');
+       if (activeOp) {
+         var activeChildren = activeOp.closest ? activeOp.closest('.nav-group-children') : null;
+         if (!activeChildren) {
+           var el2 = activeOp.parentElement;
+           while (el2 && !el2.classList.contains('nav-group-children')) el2 = el2.parentElement;
+           activeChildren = el2;
+         }
+         if (activeChildren) {
+           var activeGroupName = activeChildren.getAttribute('data-group-children');
+           var activeGroupEl = nav.querySelector('.nav-group[data-group="' + activeGroupName + '"]');
+           if (activeGroupEl) activeGroupEl.classList.add('active-group');
+           if (activeChildren.classList.contains('collapsed')) {
+             activeChildren.classList.remove('collapsed');
+             if (activeGroupEl) {
+               var activeIndicator = activeGroupEl.querySelector('.nav-group-indicator');
+               if (activeIndicator) activeIndicator.textContent = '−';
+             }
+             if (activeGroupName) sessionStorage.setItem('nav-group-' + activeGroupName, 'expanded');
+           }
+           var breadcrumb = document.getElementById('sidebar-breadcrumb');
+           if (breadcrumb) {
+             var parentTag = activeOp.previousElementSibling;
+             while (parentTag && !parentTag.classList.contains('nav-tag')) {
+               parentTag = parentTag.previousElementSibling;
+             }
+             var groupLabel = activeGroupEl ? activeGroupEl.querySelector('.nav-group-label') : null;
+             breadcrumb.textContent = (groupLabel ? groupLabel.textContent : '') + ' \u203a ' + (parentTag ? parentTag.textContent.trim() : '');
+           }
+         }
+       }
+       var activeNavLink = nav.querySelector('.nav-op.active') || nav.querySelector('.nav-tag.active');
+       revealActiveNavLink(activeNavLink);
+     }
+
+     var scrollSpyScheduled = false;
+     function scheduleActiveNavUpdate() {
+       if (scrollSpyScheduled) return;
+       scrollSpyScheduled = true;
+       requestAnimationFrame(function () {
+         scrollSpyScheduled = false;
+         updateActiveNavState();
+       });
+     }
+
+     if (!window.__mqttDocsScrollSpyWired) {
+       window.__mqttDocsScrollSpyWired = true;
+       window.addEventListener('scroll', scheduleActiveNavUpdate, { passive: true });
+       window.addEventListener('hashchange', scheduleActiveNavUpdate);
+     }
+     scheduleActiveNavUpdate();
+
+     (function wireMobileSidebar() {
+       var toggle = document.getElementById('sidebar-toggle');
+       var overlay = document.getElementById('sidebar-overlay');
+       var sidebar = document.getElementById('sidebar');
+       if (!toggle || !overlay || !sidebar || toggle.getAttribute('data-wired')) return;
+       toggle.setAttribute('data-wired', '1');
+       function openSidebar() {
+         sidebar.classList.add('open');
+         overlay.classList.add('visible');
+         document.body.style.overflow = 'hidden';
+       }
+       function closeSidebar() {
+         sidebar.classList.remove('open');
+         overlay.classList.remove('visible');
+         document.body.style.overflow = '';
+       }
+       toggle.addEventListener('click', openSidebar);
+       overlay.addEventListener('click', closeSidebar);
+       document.querySelectorAll('.nav-tag, .nav-op').forEach(function (link) {
+         link.addEventListener('click', function () {
+           if (window.innerWidth <= 768) closeSidebar();
+         });
+       });
+     })();
+   }
+
+   requestAnimationFrame(pumpRenderQueue);
 }
 
 function wireBackToTop() {
@@ -2063,7 +2197,7 @@ function wireSearchShortcut() {
 wireBackToTop();
 wireSearchShortcut();
 
-fetch('openapi_md.json?v=' + Date.now())
+fetch('openapi_md.json?v=' + DOCS_ASSET_VERSION)
    .then(function (r) {
      if (!r.ok) throw new Error('Failed to load openapi_md.json: ' + r.status);
      return r.json();
