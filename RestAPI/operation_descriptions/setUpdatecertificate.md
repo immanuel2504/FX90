@@ -1,8 +1,10 @@
-The `PUT /cloud/certificates` REST endpoint is used to install certificate.
+The `PUT /cloud/certificates` REST endpoint is used to install or update a certificate on the reader by downloading a PFX file from a URL.
 
 Use this endpoint to:
 
-- Install certificate.
+- Install a client, server, or application certificate.
+- Download the certificate PFX file from the supplied `url`.
+- Use optional BASIC download credentials through `authenticationOptions`.
 - Perform the operation through the REST API using bearer-token authentication.
 - Keep REST behavior aligned with the documented reader workflow.
 
@@ -18,6 +20,6 @@ Use this endpoint to:
 
 ## 3. Usage Notes
 
-This REST endpoint corresponds to the `set_updateCertificate` MQTT command where applicable.
+This REST endpoint corresponds to the `set_updateCertificate` MQTT command where applicable. REST and MQTT use the same certificate install payload fields: `name`, `type`, `url`, `authenticationType`, `authenticationOptions`, and `pfxPassword`.
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+Allowed `type` values are `client`, `server`, and `app`. Allowed `authenticationType` values are `NONE` and `BASIC`.

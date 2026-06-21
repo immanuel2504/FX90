@@ -4,7 +4,7 @@
     "id": "gk4nxg46rugqz"
   },
   "type": "object",
-  "description": "Update the certficate on the reader",
+  "description": "Update the certificate on the reader.",
   "properties": {
     "command": {
       "type": "string",
@@ -33,48 +33,15 @@
       "command": "set_updateCertificate",
       "command_id": "abcd1324",
       "payload": {
-        "name": "test",
+        "name": "reader",
         "type": "client",
-        "url": "ftps://10.17.231.92/CA-Certs_3.18.2/myCA/reader.pfx",
-        "authenticationType": {
-          "authenticationType": "BASIC"
+        "url": "https://10.117.229.15/reader.pfx",
+        "authenticationType": "BASIC",
+        "authenticationOptions": {
+          "username": "zebra",
+          "password": "zebra"
         },
-        "pfxPassword": "abcd12345",
-        "pfxFileName": "dfbhnhf",
-        "pfxContent": "mhmfgm",
-        "timeoutInSec": 0,
-        "filename": "czdsvfs",
-        "verifyPeer": true,
-        "verifyHost": true,
-        "CACertificateFileLocation": "gfwwhg",
-        "CACertificateFileContent": "wehwe",
-        "installedCertificateType": "string",
-        "installedCertificateName": "string",
-        "publicKeyFileLocation": "string",
-        "publicKeyFileContent": "string",
-        "privateKeyFileLocation": "string",
-        "privateKeyFileContent": "string",
-        "options": {
-          "username": "rfid",
-          "password": "rfid"
-        },
-        "headers": {
-          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
-        },
-        "retry": {
-          "type": "randomWait",
-          "policy": {
-            "retries": 3,
-            "wait": {
-              "min": 60,
-              "max": 600
-            }
-          }
-        },
-        "timeouts": {
-          "connection": 120,
-          "read": 180
-        }
+        "pfxPassword": "abcd12345"
       }
     }
   ],
@@ -83,48 +50,15 @@
       "command": "set_updateCertificate",
       "command_id": "abcd1324",
       "payload": {
-        "name": "test",
+        "name": "reader",
         "type": "client",
-        "url": "ftps://10.17.231.92/CA-Certs_3.18.2/myCA/reader.pfx",
-        "authenticationType": {
-          "authenticationType": "BASIC"
+        "url": "https://10.117.229.15/reader.pfx",
+        "authenticationType": "BASIC",
+        "authenticationOptions": {
+          "username": "zebra",
+          "password": "zebra"
         },
-        "pfxPassword": "abcd12345",
-        "pfxFileName": "dfbhnhf",
-        "pfxContent": "mhmfgm",
-        "timeoutInSec": 0,
-        "filename": "czdsvfs",
-        "verifyPeer": true,
-        "verifyHost": true,
-        "CACertificateFileLocation": "gfwwhg",
-        "CACertificateFileContent": "wehwe",
-        "installedCertificateType": "string",
-        "installedCertificateName": "string",
-        "publicKeyFileLocation": "string",
-        "publicKeyFileContent": "string",
-        "privateKeyFileLocation": "string",
-        "privateKeyFileContent": "string",
-        "options": {
-          "username": "string",
-          "password": "string"
-        },
-        "headers": {
-          "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJaRUJSQSIsImV4cCI6MTc2MTY0"
-        },
-        "retry": {
-          "type": "randomWait",
-          "policy": {
-            "retries": 3,
-            "wait": {
-              "min": 60,
-              "max": 600
-            }
-          }
-        },
-        "timeouts": {
-          "connection": 120,
-          "read": 180
-        }
+        "pfxPassword": "abcd12345"
       }
     }
   }

@@ -4,7 +4,7 @@
     "id": "9413rc1200uqr"
   },
   "type": "object",
-  "description": "Gets Reader Capabilites",
+  "description": "Gets Reader Capabilities",
   "examples": [
     {
       "command": "get_readerCapabilities",
@@ -15,10 +15,11 @@
   "properties": {
     "command": {
       "type": "string",
-      "description": "The value for the key command must be get_readerCapabilites",
+      "description": "The value for the key command must be get_readerCapabilities",
       "enum": [
         "get_readerCapabilities"
-      ]
+      ],
+      "example": "get_readerCapabilities"
     },
     "command_id": {
       "type": "string",
@@ -26,7 +27,12 @@
       "description": "A unique ID that will be echoed back in the command response by the reader."
     },
     "payload": {
-      "$ref": "../../references/request_payload/get_readerCapabilites_command.yaml"
+      "title": "get_readerCapabilities_command",
+      "x-stoplight": {
+        "id": "xsotw7jkvu6rr"
+      },
+      "type": "object",
+      "description": "Get Reader Capabilities"
     }
   },
   "required": [
@@ -36,7 +42,7 @@
   ],
   "x-examples": {
     "example-1": {
-      "command": "get_readerCapabilites",
+      "command": "get_readerCapabilities",
       "command_id": "abcd21344",
       "payload": {}
     }

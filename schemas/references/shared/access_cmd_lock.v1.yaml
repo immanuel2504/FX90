@@ -21,6 +21,7 @@ properties:
           - PERMALOCK_USER_BANK
           - WRITE_LOCK_USER_BANK
           - WRITE_UNLOCK_USER_BANK
+          - WRITE_UNLOCK_USER_BANK
           - WRITE_LOCK_TID_BANK
           - WRITE_UNLOCK_TID_BANK
           - PERMALOCK_EPC_BANK
@@ -31,8 +32,5 @@ properties:
           - PERMALOCK_KILL_PASSWORD
           - READ_WRITE_LOCK_KILL_PASSWORD
           - READ_WRITE_UNLOCK_KILL_PASSWORD
-          - PERMALOCK_TID_BANK
-          - WRITE_UNLOCK_EPC_BANK
 required:
 - config
-examples: []

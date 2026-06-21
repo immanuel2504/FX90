@@ -1,9 +1,8 @@
-The `set_cableLossCompensation` command sets cable loss compensation values on the reader, either globally for all read points or individually per read point.
+The `set_cableLossCompensation` command sets cable loss compensation values on the reader for read points `1` through `4`.
 
 Use it to:
 
 - Compensate for signal loss due to antenna cable length
-- Apply the same compensation to all read points at once
 - Tune compensation per read point for multi-antenna deployments
 
 ## 2. Command Details
@@ -14,22 +13,19 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_cableLossCompensation](get_cableLossCompensation.md), [get_config](get_config.md) |
-| Supported Operations | Set cable loss compensation (all or per read point) |
+| Supported Operations | Set cable loss compensation per read point |
 | Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 
-Gather these details before sending the command. Use either the **All** variant (flat fields) or the **Each** variant (per read-point keys) — not both in the same payload.
+Gather these details before sending the command. The payload uses fixed read-point keys `1`, `2`, `3`, and `4`.
 
 | What You Need | Details |
 |---|---|
-| Variant | **All** — single `cableLength` + `cableLossPerHundredFt` for every read point. **Each** — per read-point keys `"1"` through `"8"`. |
-| Cable length | Length of antenna cable (integer; float values accepted). |
-| Cable loss | Loss per hundred feet of cable (integer; float values accepted). |
+| Read points | Per read-point keys `"1"`, `"2"`, `"3"`, and `"4"`. |
+| Cable length | Length of antenna cable. |
+| Cable loss | Loss per hundred feet of cable. |
 
-## 4. Payload Variants
+## 4. Payload Shape
 
-The payload shape is determined by whether you set all read points at once or individually.
-
-- **All** — Provide `cableLength` and `cableLossPerHundredFt` at the root of the payload. Applies the same values to every read point.
-- **Each** — Provide numeric string keys (`"1"`, `"2"`, … up to `"8"`), each containing its own `cableLength` and `cableLossPerHundredFt`.
+Provide numeric string keys `"1"` through `"4"`, each containing its own `cableLength` and `cableLossPerHundredFt`.

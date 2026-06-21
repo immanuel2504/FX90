@@ -36,8 +36,8 @@ put:
             value:
               components:
               - componentName: radio_control
-                level: DEBUG
-              - componentName: cloud_agent
+                level: INFO
+              - componentName: reader_gateway
                 level: DEBUG
               radioPacketLog: true
   responses:

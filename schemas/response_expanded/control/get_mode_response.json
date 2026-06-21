@@ -199,130 +199,169 @@
                   "type": "object",
                   "title": "directionalitySettings",
                   "description": "directionality mode settings",
-                  "examples": [],
+                  "examples": [
+                    {
+                      "advancedConfig": {
+                        "background_processing_interval_seconds": 0.5,
+                        "debug_level": "INFO",
+                        "hysteresis_feet": 2,
+                        "ma_duration_seconds": 3,
+                        "report_new": true,
+                        "report_update_duration_seconds": -1,
+                        "tag_timeout_seconds": 3,
+                        "report_transition": true,
+                        "report_timed_out": true,
+                        "report_direction": [
+                          "IN"
+                        ],
+                        "report_zone_history": false,
+                        "report_raw": false,
+                        "user_defined": "string"
+                      },
+                      "basicConfig": {
+                        "beamConfig": {
+                          "density": {
+                            "type": "DEFAULT",
+                            "polarization": "LHCP"
+                          },
+                          "beams": [
+                            {
+                              "azimuth": 0,
+                              "elevation": 0,
+                              "polarization": "LHCP"
+                            }
+                          ]
+                        },
+                        "innerZoneWidth": 10,
+                        "orientation": 0,
+                        "readerHeight": 15,
+                        "tagHeight": 5,
+                        "zoneExtension": 0,
+                        "zoneNames": [
+                          "out,in,right,left"
+                        ],
+                        "zonePlan": 4
+                      }
+                    }
+                  ],
                   "x-internal": false,
                   "properties": {
-                    "basicConfig": {
+                    "advancedConfig": {
                       "type": "object",
-                      "x-examples": {
-                        "Example 1": {
-                          "readerHeight": 15,
-                          "tagHeight": 3,
-                          "orientation": 90,
-                          "zonePlan": 4,
-                          "innerZoneWidth": 10,
-                          "zoneExtension": 0
-                        }
-                      },
-                      "examples": [
-                        {
-                          "readerHeight": 15,
-                          "tagHeight": 3,
-                          "orientation": 90,
-                          "zonePlan": 4,
-                          "innerZoneWidth": 10,
-                          "zoneExtension": 0,
-                          "beamConfig": {
-                            "density": "SPARSE"
-                          }
+                      "description": "Advanced Directionality Configuration\n\nNOTE: directionality operating mode is applicable for only ATR7000 reader and Type of operating mode - must be DIRECTIONALITY",
+                      "properties": {
+                        "background_processing_interval_seconds": {
+                          "type": "number",
+                          "example": 0.5,
+                          "description": "Interval between processing incoming raw messages (in seconds)",
+                          "default": 0.5
                         },
-                        {
-                          "readerHeight": 15,
-                          "tagHeight": 3,
-                          "orientation": 90,
-                          "zonePlan": 4,
-                          "innerZoneWidth": 10,
-                          "zoneExtension": 0,
-                          "beamConfig": {
-                            "density": "DENSE"
-                          },
-                          "zoneNames": [
-                            "in",
-                            "out",
-                            "right",
-                            "left"
+                        "debug_level": {
+                          "type": "string",
+                          "example": "INFO",
+                          "description": "Set the debug logging level",
+                          "default": "INFO",
+                          "enum": [
+                            "ERROR",
+                            "WARNING",
+                            "INFO",
+                            "DEBUG"
                           ]
                         },
-                        {
-                          "readerHeight": 15,
-                          "tagHeight": 3,
-                          "orientation": 90,
-                          "zonePlan": 4,
-                          "innerZoneWidth": 10,
-                          "zoneExtension": 0,
-                          "beamConfig": {
-                            "beams": [
-                              {
-                                "azimuth": 0,
-                                "elevation": 45
-                              },
-                              {
-                                "azimuth": 180,
-                                "elevation": 45
-                              }
-                            ]
-                          }
-                        }
-                      ],
-                      "description": "Basic Configuration\nThis Basic Configuration is a superset of standard ZIOTC operating mode",
-                      "properties": {
-                        "readerHeight": {
+                        "hysteresis_feet": {
                           "type": "number",
-                          "description": "Height of reader (in feet)",
-                          "default": 15,
-                          "minimum": 10,
-                          "maximum": 20
+                          "example": 2,
+                          "description": "Set the distance (in feet) a tag must travel into a zone to be able to move back into previous zone",
+                          "default": 2,
+                          "minimum": 0,
+                          "maximum": 50
                         },
-                        "tagHeight": {
+                        "ma_duration_seconds": {
                           "type": "number",
-                          "description": "Height of tag (in feet)",
+                          "example": 3,
+                          "description": "Moving Average Window Duration (in seconds). Must be less than tag_timeout_seconds",
                           "default": 3,
                           "minimum": 0,
-                          "maximum": 20
+                          "maximum": 86400
                         },
-                        "orientation": {
+                        "report_new": {
+                          "type": "boolean",
+                          "description": "Report (or do not report) \"NEW\" events",
+                          "default": true
+                        },
+                        "report_update_duration_seconds": {
                           "type": "number",
-                          "description": "Orientation of the Zone Map North with respect to the ATR North (in degrees, clockwise)",
-                          "default": 0,
+                          "example": -1,
+                          "description": "Duration to report tag updates even if no transition (value in seconds) (-1 is never report)",
+                          "default": -1,
+                          "minimum": -1,
+                          "maximum": 86400
+                        },
+                        "tag_timeout_seconds": {
+                          "type": "number",
+                          "example": 3,
+                          "description": "Duration until a tag is deemed \"gone\" (in seconds)",
+                          "default": 3,
                           "minimum": 0,
-                          "exclusiveMaximum": 360
+                          "maximum": 86400
                         },
-                        "zonePlan": {
-                          "type": "integer",
-                          "description": "4 or 6 zone zone plan",
-                          "default": 4,
-                          "enum": [
-                            4,
-                            6
-                          ]
+                        "report_transition": {
+                          "type": "boolean",
+                          "description": "Report (or do not report) \"TRANSITION\" events",
+                          "default": true
                         },
-                        "innerZoneWidth": {
-                          "type": "number",
-                          "description": "The width of the main zones (in feet)",
-                          "default": 10,
-                          "minimum": 0,
-                          "maximum": 50
+                        "report_timed_out": {
+                          "type": "boolean",
+                          "description": "Report (or do not report) \"TIMED_OUT\" events"
                         },
-                        "zoneExtension": {
-                          "type": "number",
-                          "description": "The extension of the main zone into one another (in feet)",
-                          "default": 0,
-                          "minimum": -50,
-                          "maximum": 50
+                        "report_direction": {
+                          "type": "array",
+                          "description": "Direction events to report in \"TIMED_OUT\" event. If \"TIMED_OUT\" event is enabled only report \"TIMED_OUT\" if one of the direction events in this list.",
+                          "items": {
+                            "type": "string",
+                            "enum": [
+                              "IN",
+                              "OUT",
+                              "NONE",
+                              "UNKNOWN",
+                              "ERROR"
+                            ]
+                          }
                         },
+                        "report_zone_history": {
+                          "type": "boolean",
+                          "description": "Report (or do not report) zone history in \"TIMED_OUT\" event",
+                          "default": false
+                        },
+                        "report_raw": {
+                          "type": "boolean",
+                          "description": "Report (or do not report) raw bearing/location messages",
+                          "default": false
+                        },
+                        "user_defined": {
+                          "type": [
+                            "string",
+                            "object"
+                          ],
+                          "description": "user defined value (string or object) that will be included in each directionality event"
+                        }
+                      }
+                    },
+                    "basicConfig": {
+                      "type": "object",
+                      "description": "Basic Directionality Configuration\n\nNOTE: directionality operating mode is applicable for only ATR7000 reader and Type of operating mode - must be DIRECTIONALITY",
+                      "properties": {
                         "beamConfig": {
                           "oneOf": [
                             {
-                              "type": [
-                                "object"
-                              ],
-                              "title": "density",
                               "properties": {
                                 "density": {
                                   "type": "object",
+                                  "description": "Type of density of Beams",
                                   "properties": {
                                     "type": {
                                       "type": "string",
+                                      "example": "DEFAULT",
                                       "enum": [
                                         "DENSE",
                                         "DEFAULT",
@@ -334,26 +373,20 @@
                                     "polarization": {
                                       "type": "string",
                                       "description": "Polarization of beams",
+                                      "default": "LHCP",
                                       "enum": [
                                         "TOTAL",
                                         "THETA",
                                         "PHI",
                                         "LHCP",
                                         "RHCP"
-                                      ],
-                                      "default": "LHCP"
+                                      ]
                                     }
                                   },
                                   "required": [
                                     "type"
                                   ]
-                                }
-                              }
-                            },
-                            {
-                              "type": "object",
-                              "title": "beams",
-                              "properties": {
+                                },
                                 "beams": {
                                   "type": "array",
                                   "description": "Array of beams to use",
@@ -377,14 +410,14 @@
                                       "polarization": {
                                         "type": "string",
                                         "description": "Polarization of beam",
+                                        "default": "LHCP",
                                         "enum": [
                                           "TOTAL",
                                           "THETA",
                                           "PHI",
                                           "RHCP",
                                           "LHCP"
-                                        ],
-                                        "default": "LHCP"
+                                        ]
                                       }
                                     },
                                     "required": [
@@ -395,327 +428,75 @@
                                 }
                               }
                             }
-                          ]
+                          ],
+                          "type": "object"
+                        },
+                        "innerZoneWidth": {
+                          "type": "number",
+                          "example": 10,
+                          "description": "The width of the main zones (in feet)",
+                          "default": 10
+                        },
+                        "orientation": {
+                          "type": "number",
+                          "example": 0,
+                          "description": "Orientation of tag (in degrees)",
+                          "default": 0,
+                          "minimum": 0,
+                          "exclusiveMaximum": 360
+                        },
+                        "readerHeight": {
+                          "type": "number",
+                          "example": 15,
+                          "description": "Height of reader (in feet)",
+                          "default": 15,
+                          "minimum": 10,
+                          "maximum": 20
+                        },
+                        "tagHeight": {
+                          "type": "number",
+                          "example": 5,
+                          "description": "Height of tag (in feet)",
+                          "default": 3,
+                          "minimum": 0,
+                          "maximum": 20
+                        },
+                        "zoneExtension": {
+                          "type": "number",
+                          "example": 0,
+                          "description": "The extension of the main zone into one another (in feet)",
+                          "default": 0
                         },
                         "zoneNames": {
                           "type": "array",
                           "description": "User defined names to zones. Array must have the same number of zones as specified in the zone plan",
                           "items": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "advancedConfig": {
-                      "description": "Advanced Directionality Configuration",
-                      "type": "object",
-                      "x-examples": {
-                        "Example 1": {
-                          "report_raw": false,
-                          "report_updates": false,
-                          "tag_timeout_seconds": 3,
-                          "background_processing_interval_seconds": 0.5
-                        }
-                      },
-                      "examples": [
-                        {
-                          "report_raw": false,
-                          "report_new": true,
-                          "report_transition": true,
-                          "report_timed_out": true,
-                          "report_zone_history": false,
-                          "report_direction": [
-                            "IN",
-                            "OUT",
-                            "NONE",
-                            "UNKNOWN",
-                            "ERROR"
-                          ],
-                          "report_update_duration_seconds": -1,
-                          "tag_timeout_seconds_min": 3,
-                          "tag_timeout_seconds_default": 30,
-                          "ma_duration_seconds": 3,
-                          "background_processing_interval_seconds": 0.5,
-                          "hysteresis_feet": 2,
-                          "debug_level": "INFO"
-                        }
-                      ],
-                      "properties": {
-                        "report_new": {
-                          "type": "boolean",
-                          "description": "Report (or do not report) \"NEW\" events",
-                          "default": true
-                        },
-                        "report_transition": {
-                          "type": "boolean",
-                          "description": "Report (or do not report) \"TRANSITION\" events",
-                          "default": true
-                        },
-                        "report_timed_out": {
-                          "type": "boolean",
-                          "description": "Report (or do not report) \"TIMED_OUT\" events",
-                          "default": true
-                        },
-                        "report_direction": {
-                          "type": "array",
-                          "description": "Direction events to report in \"TIMED_OUT\" event. If \"TIMED_OUT\" event is enabled only report \"TIMED_OUT\" if one of the direction events in this list.",
-                          "items": {
                             "type": "string",
                             "enum": [
-                              "IN",
-                              "OUT",
-                              "NONE",
-                              "UNKNOWN",
-                              "ERROR"
-                            ]
+                              "in",
+                              "out",
+                              "right",
+                              "left"
+                            ],
+                            "example": "out,in,right,left"
                           }
                         },
-                        "report_location_history": {
-                          "type": "boolean",
-                          "description": "Report (or do not report) location history in \"TIMED_OUT\" event",
-                          "default": false
-                        },
-                        "report_zone_history": {
-                          "type": "boolean",
-                          "description": "Report (or do not report) zone history in \"TIMED_OUT\" event",
-                          "default": false
-                        },
-                        "report_update_duration_seconds": {
-                          "type": "number",
-                          "description": "Duration to report tag updates even if no transition (value in seconds) (-1 is never report)",
-                          "default": -1,
-                          "minimum": -1,
-                          "maximum": 86400
-                        },
-                        "report_raw": {
-                          "type": "boolean",
-                          "description": "Report (or do not report) raw bearing/location messages",
-                          "default": false
-                        },
-                        "tag_timeout_seconds_min": {
-                          "type": "number",
-                          "description": "Minimum duration until a tag is deemed \"gone\" (in seconds)",
-                          "default": 30,
-                          "minimum": 0,
-                          "maximum": 3600
-                        },
-                        "tag_timeout_seconds_default": {
-                          "type": "number",
-                          "description": "Default duration until a tag is deemed \"gone\" (in seconds)",
-                          "default": 30,
-                          "minimum": 0,
-                          "maximum": 86400
-                        },
-                        "tag_timeout_seconds_max": {
-                          "type": "number",
-                          "description": "Maximum duration until a tag is deemed \"gone\" (in seconds)",
-                          "minimum": 0,
-                          "maximum": 86400,
-                          "default": 3600
-                        },
-                        "sigma_multiplier": {
+                        "zonePlan": {
                           "type": "integer",
-                          "default": 5,
-                          "description": "Multiple of standard deviation of time between reads to determine adaptive timeout."
-                        },
-                        "background_processing_interval_seconds": {
-                          "type": "number",
-                          "default": 0.5,
-                          "minimum": 0,
-                          "maximum": 60,
-                          "description": "Interval between processing incoming raw messages (in seconds)"
-                        },
-                        "direction_lookback_seconds": {
-                          "type": "number",
-                          "minimum": 0,
-                          "maximum": 86400,
-                          "description": "Duration (in seconds) prior to final tag read before timeout to consider for determining direction.",
-                          "default": 5
-                        },
-                        "ma_duration_seconds": {
-                          "type": "number",
-                          "description": "Moving Average Window Duration (in seconds). Must be less than tag_timeout_seconds",
-                          "minimum": 0,
-                          "maximum": 3600,
-                          "default": 4.5
-                        },
-                        "debug_level": {
-                          "type": "string",
+                          "example": 4,
+                          "description": "4 or 6 zone zone plan",
+                          "default": 4,
                           "enum": [
-                            "ERROR",
-                            "WARNING",
-                            "INFO",
-                            "DEBUG"
-                          ],
-                          "default": "INFO",
-                          "description": "Set the debug logging level "
-                        },
-                        "hysteresis_feet": {
-                          "type": "number",
-                          "minimum": 0,
-                          "maximum": 50,
-                          "default": 2,
-                          "description": "Set the distance (in feet) a tag must travel into a zone to be able to move back into previous zone"
-                        },
-                        "user_defined": {
-                          "type": [
-                            "string",
-                            "object"
-                          ],
-                          "description": "user defined value (string or object) that will be included in each directionality event"
-                        },
-                        "regression_min_n": {
-                          "type": "integer",
-                          "minimum": 0,
-                          "maximum": 255,
-                          "default": 3,
-                          "description": "Minimum number of data points required by regression to give non-Unknown Direction"
-                        },
-                        "regression_min_duration_seconds": {
-                          "type": "number",
-                          "minimum": 0,
-                          "default": 0.75,
-                          "description": "Minimum duration (in seconds) of samples required within lookback window by regression to give non-Unknown Direction. The value should always be less than direction_lookback_seconds.",
-                          "maximum": 86400
-                        },
-                        "regression_extrapolation_multiplier": {
-                          "type": "number",
-                          "minimum": 0,
-                          "default": 1,
-                          "description": "Value used by regression to determine how far to extrapolate crossing outside of lookback duration",
-                          "maximum": 1
-                        },
-                        "regression_slope_threshold": {
-                          "type": "number",
-                          "minimum": 0,
-                          "default": 0,
-                          "description": "Value of slope used by regression to distinguish between In and Out (and None) Direction",
-                          "maximum": 10
-                        },
-                        "confirm_direction_with_final_zone": {
-                          "type": "boolean",
-                          "default": false,
-                          "description": "Boolean to treat direction as \"unknown\" if final zone conflicts with direction determined in regression"
-                        },
-                        "max_tags_limit": {
-                          "type": "integer",
-                          "default": 2000,
-                          "minimum": 0,
-                          "maximum": 10000,
-                          "description": "Number of tags to keep in application memory"
-                        },
-                        "raw_location_conf_threshold": {
-                          "type": "integer",
-                          "minimum": 0,
-                          "maximum": 100,
-                          "default": 50,
-                          "description": "Minimum value of the confidence of a raw location estimate to be used in location/zone/direction deteremination"
-                        },
-                        "median_min_n": {
-                          "type": "integer",
-                          "x-stoplight": {
-                            "id": "noxunmkd8sy3t"
-                          },
-                          "minimum": 0,
-                          "maximum": 255,
-                          "description": "Number of reads in a zone window below which a median cannot be calculated.",
-                          "default": 2
-                        },
-                        "speed_threshold": {
-                          "type": "number",
-                          "x-stoplight": {
-                            "id": "t1gw1bnznu9b6"
-                          },
-                          "minimum": 0,
-                          "maximum": 30,
-                          "description": "Limit (in feet/second) above which a read is considered low quality as it\u2019s moving too fast. ",
-                          "default": 6
-                        },
-                        "high_quality_reads_threshold": {
-                          "type": "number",
-                          "x-stoplight": {
-                            "id": "uni2kcb15rkss"
-                          },
-                          "minimum": 0,
-                          "maximum": 1,
-                          "description": "Limit (in percentage) below which the percentage of high-quality reads is too low for the median filter to be reliable",
-                          "default": 0.67
-                        },
-                        "dfm_threshold": {
-                          "type": "number",
-                          "x-stoplight": {
-                            "id": "7tml8icw3c5x6"
-                          },
-                          "minimum": 0,
-                          "maximum": 50,
-                          "description": "Limit (in feet) beyond which distance of a read to the median XY is so large it\u2019s considered an outlier",
-                          "default": 4
-                        },
-                        "regression_error_threshold": {
-                          "type": "number",
-                          "x-stoplight": {
-                            "id": "3s3mbf19spsfb"
-                          },
-                          "minimum": 0,
-                          "maximum": 1,
-                          "default": 0.95,
-                          "description": "Error limit (between 0 & 1) below which the fit of a linear regression is poor enough to make it unreliable. "
-                        },
-                        "regression_window_duration_seconds": {
-                          "type": "number",
-                          "x-stoplight": {
-                            "id": "8fowg1fqp3isv"
-                          },
-                          "minimum": 0,
-                          "maximum": 3600,
-                          "default": 5.5,
-                          "description": "Duration (in seconds) of the regression window for outlier removal algorithm "
+                            4,
+                            6
+                          ]
                         }
                       }
-                    },
-                    "aar": {
-                      "description": "ATR information for 2 ATR Directionality",
-                      "title": "aar",
-                      "x-stoplight": {
-                        "id": "zd04939dcznyz"
-                      },
-                      "type": "object",
-                      "properties": {
-                        "address": {
-                          "type": "string",
-                          "description": "AAR IP Address and Port to connect to (e.g. 192.168.0.23:5160)"
-                        },
-                        "x": {
-                          "type": "number",
-                          "description": "X Location (in feet) of ATR relative to other ATR"
-                        },
-                        "y": {
-                          "type": "number",
-                          "description": "Y Location (in feet) of ATR relative to other ATR"
-                        },
-                        "z": {
-                          "type": "number",
-                          "description": "Height (in feet) of ATR "
-                        },
-                        "offset": {
-                          "type": "number",
-                          "minimum": 0,
-                          "maximum": 359,
-                          "description": "Degrees of offset of ATR from North"
-                        }
-                      },
-                      "required": [
-                        "address",
-                        "x",
-                        "y",
-                        "z",
-                        "offset"
-                      ]
                     }
                   },
                   "required": [
-                    "basicConfig",
-                    "advancedConfig"
+                    "advancedConfig",
+                    "basicConfig"
                   ]
                 }
               ]
@@ -1192,452 +973,15 @@
               "description": "Duration in milliseconds to wait after issuing the final select before issuing a query. If absent, the minimum time will be used. "
             },
             "accesses": {
-              "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesss in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.",
+              "description": "\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesss in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.",
               "oneOf": [
                 {
-                  "title": "access_cmds",
-                  "x-stoplight": {
-                    "id": "0zcutp2ppyogb"
-                  },
-                  "type": "array",
-                  "items": {
-                    "anyOf": [
-                      {
-                        "title": "read",
-                        "x-stoplight": {
-                          "id": "1apkl27d5ciin"
-                        },
-                        "type": "object",
-                        "properties": {
-                          "config": {
-                            "type": "object",
-                            "properties": {
-                              "membank": {
-                                "type": "string",
-                                "enum": [
-                                  "EPC",
-                                  "TID",
-                                  "USER",
-                                  "RESERVED"
-                                ],
-                                "description": "Membank Field (see EPC Gen2 Spec)"
-                              },
-                              "wordPointer": {
-                                "type": "integer",
-                                "description": "WordPointer Field (see EPC Gen2 Spec)"
-                              },
-                              "wordCount": {
-                                "type": "integer",
-                                "description": "wordCount Field (see EPC Gen2 Spec)",
-                                "x-stoplight": {
-                                  "id": "5p9ocsimx243x"
-                                }
-                              }
-                            },
-                            "required": [
-                              "membank",
-                              "wordPointer",
-                              "wordCount"
-                            ]
-                          },
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "READ"
-                            ]
-                          }
-                        },
-                        "required": [
-                          "type"
-                        ]
-                      },
-                      {
-                        "title": "write",
-                        "x-stoplight": {
-                          "id": "91z911vfjeequ"
-                        },
-                        "type": "object",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "WRITE"
-                            ]
-                          },
-                          "config": {
-                            "type": "object",
-                            "required": [
-                              "membank",
-                              "wordPointer",
-                              "data"
-                            ],
-                            "properties": {
-                              "membank": {
-                                "type": "string",
-                                "enum": [
-                                  "EPC",
-                                  "TID",
-                                  "USER",
-                                  "RESERVED"
-                                ],
-                                "description": "Membank Field (see EPC Gen2 Spec)"
-                              },
-                              "wordPointer": {
-                                "type": "integer",
-                                "description": "WordPtr Field (see EPC Gen2 Spec)"
-                              },
-                              "data": {
-                                "type": "string",
-                                "description": "Data Field (see EPC Gen2 Spec) Hex string indicating the word(s) to be written. Unlike the Gen2 Spec, the length of the data field can be more than a single 16 bit word. However, the length of the string must be a multiple of 16 bit words",
-                                "example": "11112222"
-                              },
-                              "blockSize": {
-                                "type": "integer",
-                                "description": "Block size - if set to non-zero value, the reader will use the BlockWrite command set write the data (and not the simple Write command). The value indicates the number of 16-bit words to use for each block"
-                              }
-                            }
-                          }
-                        },
-                        "required": [
-                          "type",
-                          "config"
-                        ]
-                      },
-                      {
-                        "title": "access",
-                        "x-stoplight": {
-                          "id": "q1exintgft9jj"
-                        },
-                        "type": "object",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "ACCESS"
-                            ]
-                          },
-                          "config": {
-                            "type": "object",
-                            "properties": {
-                              "password": {
-                                "type": "string",
-                                "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
-                              }
-                            },
-                            "required": [
-                              "password"
-                            ]
-                          }
-                        }
-                      },
-                      {
-                        "title": "lock",
-                        "x-stoplight": {
-                          "id": "0zfd32y0jjov5"
-                        },
-                        "type": "object",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "LOCK"
-                            ]
-                          },
-                          "config": {
-                            "type": "object",
-                            "required": [
-                              "actions"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Payload Field (see EPC Gen2 Spec)",
-                                "items": {
-                                  "type": "string",
-                                  "enum": [
-                                    "PERMALOCK_USER_BANK",
-                                    "WRITE_LOCK_USER_BANK",
-                                    "WRITE_UNLOCK_USER_BANK",
-                                    "WRITE_LOCK_TID_BANK",
-                                    "WRITE_UNLOCK_TID_BANK",
-                                    "PERMALOCK_EPC_BANK",
-                                    "WRITE_LOCK_EPC_BANK",
-                                    "PERMALOCK_ACCESS_PASSWORD",
-                                    "READ_WRITE_LOCK_ACCESS_PASSWORD",
-                                    "READ_WRITE_UNLOCK_ACCESS_PASSWORD",
-                                    "PERMALOCK_KILL_PASSWORD",
-                                    "READ_WRITE_LOCK_KILL_PASSWORD",
-                                    "READ_WRITE_UNLOCK_KILL_PASSWORD",
-                                    "PERMALOCK_TID_BANK",
-                                    "WRITE_UNLOCK_EPC_BANK"
-                                  ]
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "required": [
-                          "config"
-                        ],
-                        "examples": []
-                      },
-                      {
-                        "title": "kill",
-                        "x-stoplight": {
-                          "id": "vedcpho6hvsy1"
-                        },
-                        "type": "object",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "KILL"
-                            ]
-                          },
-                          "config": {
-                            "type": "object",
-                            "required": [
-                              "password"
-                            ],
-                            "properties": {
-                              "password": {
-                                "type": "string",
-                                "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
-                              }
-                            }
-                          }
-                        },
-                        "required": [
-                          "type",
-                          "config"
-                        ]
-                      }
-                    ]
-                  }
+                  "$ref": "#/components/schemas/access_cmds.v1"
                 },
                 {
                   "type": "array",
-                  "title": "access_cmds array",
                   "items": {
-                    "title": "access_cmds",
-                    "x-stoplight": {
-                      "id": "0zcutp2ppyogb"
-                    },
-                    "type": "array",
-                    "items": {
-                      "anyOf": [
-                        {
-                          "title": "read",
-                          "x-stoplight": {
-                            "id": "1apkl27d5ciin"
-                          },
-                          "type": "object",
-                          "properties": {
-                            "config": {
-                              "type": "object",
-                              "properties": {
-                                "membank": {
-                                  "type": "string",
-                                  "enum": [
-                                    "EPC",
-                                    "TID",
-                                    "USER",
-                                    "RESERVED"
-                                  ],
-                                  "description": "Membank Field (see EPC Gen2 Spec)"
-                                },
-                                "wordPointer": {
-                                  "type": "integer",
-                                  "description": "WordPointer Field (see EPC Gen2 Spec)"
-                                },
-                                "wordCount": {
-                                  "type": "integer",
-                                  "description": "wordCount Field (see EPC Gen2 Spec)",
-                                  "x-stoplight": {
-                                    "id": "5p9ocsimx243x"
-                                  }
-                                }
-                              },
-                              "required": [
-                                "membank",
-                                "wordPointer",
-                                "wordCount"
-                              ]
-                            },
-                            "type": {
-                              "type": "string",
-                              "enum": [
-                                "READ"
-                              ]
-                            }
-                          },
-                          "required": [
-                            "type"
-                          ]
-                        },
-                        {
-                          "title": "write",
-                          "x-stoplight": {
-                            "id": "91z911vfjeequ"
-                          },
-                          "type": "object",
-                          "properties": {
-                            "type": {
-                              "type": "string",
-                              "enum": [
-                                "WRITE"
-                              ]
-                            },
-                            "config": {
-                              "type": "object",
-                              "required": [
-                                "membank",
-                                "wordPointer",
-                                "data"
-                              ],
-                              "properties": {
-                                "membank": {
-                                  "type": "string",
-                                  "enum": [
-                                    "EPC",
-                                    "TID",
-                                    "USER",
-                                    "RESERVED"
-                                  ],
-                                  "description": "Membank Field (see EPC Gen2 Spec)"
-                                },
-                                "wordPointer": {
-                                  "type": "integer",
-                                  "description": "WordPtr Field (see EPC Gen2 Spec)"
-                                },
-                                "data": {
-                                  "type": "string",
-                                  "description": "Data Field (see EPC Gen2 Spec) Hex string indicating the word(s) to be written. Unlike the Gen2 Spec, the length of the data field can be more than a single 16 bit word. However, the length of the string must be a multiple of 16 bit words",
-                                  "example": "11112222"
-                                },
-                                "blockSize": {
-                                  "type": "integer",
-                                  "description": "Block size - if set to non-zero value, the reader will use the BlockWrite command set write the data (and not the simple Write command). The value indicates the number of 16-bit words to use for each block"
-                                }
-                              }
-                            }
-                          },
-                          "required": [
-                            "type",
-                            "config"
-                          ]
-                        },
-                        {
-                          "title": "access",
-                          "x-stoplight": {
-                            "id": "q1exintgft9jj"
-                          },
-                          "type": "object",
-                          "properties": {
-                            "type": {
-                              "type": "string",
-                              "enum": [
-                                "ACCESS"
-                              ]
-                            },
-                            "config": {
-                              "type": "object",
-                              "properties": {
-                                "password": {
-                                  "type": "string",
-                                  "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
-                                }
-                              },
-                              "required": [
-                                "password"
-                              ]
-                            }
-                          }
-                        },
-                        {
-                          "title": "lock",
-                          "x-stoplight": {
-                            "id": "0zfd32y0jjov5"
-                          },
-                          "type": "object",
-                          "properties": {
-                            "type": {
-                              "type": "string",
-                              "enum": [
-                                "LOCK"
-                              ]
-                            },
-                            "config": {
-                              "type": "object",
-                              "required": [
-                                "actions"
-                              ],
-                              "properties": {
-                                "actions": {
-                                  "type": "array",
-                                  "description": "Payload Field (see EPC Gen2 Spec)",
-                                  "items": {
-                                    "type": "string",
-                                    "enum": [
-                                      "PERMALOCK_USER_BANK",
-                                      "WRITE_LOCK_USER_BANK",
-                                      "WRITE_UNLOCK_USER_BANK",
-                                      "WRITE_LOCK_TID_BANK",
-                                      "WRITE_UNLOCK_TID_BANK",
-                                      "PERMALOCK_EPC_BANK",
-                                      "WRITE_LOCK_EPC_BANK",
-                                      "PERMALOCK_ACCESS_PASSWORD",
-                                      "READ_WRITE_LOCK_ACCESS_PASSWORD",
-                                      "READ_WRITE_UNLOCK_ACCESS_PASSWORD",
-                                      "PERMALOCK_KILL_PASSWORD",
-                                      "READ_WRITE_LOCK_KILL_PASSWORD",
-                                      "READ_WRITE_UNLOCK_KILL_PASSWORD",
-                                      "PERMALOCK_TID_BANK",
-                                      "WRITE_UNLOCK_EPC_BANK"
-                                    ]
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "required": [
-                            "config"
-                          ],
-                          "examples": []
-                        },
-                        {
-                          "title": "kill",
-                          "x-stoplight": {
-                            "id": "vedcpho6hvsy1"
-                          },
-                          "type": "object",
-                          "properties": {
-                            "type": {
-                              "type": "string",
-                              "enum": [
-                                "KILL"
-                              ]
-                            },
-                            "config": {
-                              "type": "object",
-                              "required": [
-                                "password"
-                              ],
-                              "properties": {
-                                "password": {
-                                  "type": "string",
-                                  "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
-                                }
-                              }
-                            }
-                          },
-                          "required": [
-                            "type",
-                            "config"
-                          ]
-                        }
-                      ]
-                    }
+                    "$ref": "#/components/schemas/access_cmds.v1"
                   }
                 }
               ]

@@ -1,60 +1,93 @@
 title: set_cableLossCompensation_command
 x-stoplight:
   id: n5amlaauzed2u
-examples:
-- cableLength: 0
-  cableLossPerHundredFt: 0
-- '1':
-    cableLossPerHundredFt: 0
-    cableLength: 5
-  '2':
-    cableLossPerHundredFt: 10
-    cableLength: 15
-  '3':
-    cableLossPerHundredFt: 20
-    cableLength: 25
-  '4':
-    cableLossPerHundredFt: 30
-    cableLength: 35
 description: Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)
-oneOf:
-- description: Adjust cable loss compensation for all available read points
-  title: All
-  properties:
-    cableLength:
-      type: integer
-      description: Cable Length Field. Accepts float values
-      minimum: 0
-    cableLossPerHundredFt:
-      type: integer
-      description: Cable Loss per Hundred Feet. Accepts float values
-      minimum: 0
-  required:
-  - cableLength
-  - cableLossPerHundredFt
-- description: Adjust Cable Loss Compensation for each read point. Can have as many keys as number of allowed read points on device
-  title: Each
-  maxProperties: 8
-  minProperties: 1
-  properties:
-    <readPoint>:
-      type: object
-      description: Adjust cable loss compensation per read point labeled 1,2,3... upto max supported read points
-      maxProperties: 2
-      required:
-      - cableLength
-      - cableLossPerHundredFt
-      properties:
-        cableLength:
-          type: integer
-          description: Cable Length Field. Accepts float values
-          example: 1
-          minimum: 0
-        cableLossPerHundredFt:
-          type: integer
-          minimum: 0
-          example: 1
-          description: Cable Loss per Hundred Feet. Accepts float values
-  required:
-  - <readPoint>
 type: object
+additionalProperties: false
+examples:
+- '1':
+    cableLength: 90
+    cableLossPerHundredFt: 18
+  '2':
+    cableLength: 18
+    cableLossPerHundredFt: 19
+  '3':
+    cableLength: 10
+    cableLossPerHundredFt: 11
+  '4':
+    cableLength: 10
+    cableLossPerHundredFt: 70
+properties:
+  '1':
+    type: object
+    description: Cable loss compensation values for read point 1.
+    required:
+    - cableLength
+    - cableLossPerHundredFt
+    properties:
+      cableLength:
+        type: number
+        description: Cable length for read point 1.
+        example: 90
+        minimum: 0
+      cableLossPerHundredFt:
+        type: number
+        description: Cable loss per hundred feet for read point 1.
+        example: 18
+        minimum: 0
+  '2':
+    type: object
+    description: Cable loss compensation values for read point 2.
+    required:
+    - cableLength
+    - cableLossPerHundredFt
+    properties:
+      cableLength:
+        type: number
+        description: Cable length for read point 2.
+        example: 18
+        minimum: 0
+      cableLossPerHundredFt:
+        type: number
+        description: Cable loss per hundred feet for read point 2.
+        example: 19
+        minimum: 0
+  '3':
+    type: object
+    description: Cable loss compensation values for read point 3.
+    required:
+    - cableLength
+    - cableLossPerHundredFt
+    properties:
+      cableLength:
+        type: number
+        description: Cable length for read point 3.
+        example: 10
+        minimum: 0
+      cableLossPerHundredFt:
+        type: number
+        description: Cable loss per hundred feet for read point 3.
+        example: 11
+        minimum: 0
+  '4':
+    type: object
+    description: Cable loss compensation values for read point 4.
+    required:
+    - cableLength
+    - cableLossPerHundredFt
+    properties:
+      cableLength:
+        type: number
+        description: Cable length for read point 4.
+        example: 10
+        minimum: 0
+      cableLossPerHundredFt:
+        type: number
+        description: Cable loss per hundred feet for read point 4.
+        example: 70
+        minimum: 0
+required:
+- '1'
+- '2'
+- '3'
+- '4'

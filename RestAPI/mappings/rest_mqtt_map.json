@@ -61,7 +61,7 @@
     },
     {
       "restLabel": "get_readerCapabilities",
-      "mqttCommand": "get_readerCapabilites"
+      "mqttCommand": "get_readerCapabilities"
     },
     {
       "restLabel": "get_userapps",
@@ -626,11 +626,11 @@
     {
       "restPath": "/cloud/readerCapabilities",
       "httpMethod": "GET",
-      "operationId": "getReadercapabilities",
+      "operationId": "getReaderCapabilities",
       "openApiTag": "System",
       "summary": "Retrieves the Reader Capabilities",
       "restMqttLabel": "get_readerCapabilities",
-      "mqttCommand": "get_readerCapabilites",
+      "mqttCommand": "get_readerCapabilities",
       "mqttTag": "system"
     },
     {

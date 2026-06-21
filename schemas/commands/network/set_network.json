@@ -4,7 +4,7 @@
     "id": "inu2ssrjr0qxn"
   },
   "type": "object",
-  "description": "Modifies the reader network configuration",
+  "description": "Modifies the reader network configuration using the REST per-interface model.",
   "properties": {
     "command": {
       "type": "string",
@@ -27,5 +27,443 @@
     "command",
     "command_id",
     "payload"
-  ]
+  ],
+  "examples": [
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "eth0": {
+          "IPV4": {
+            "dhcp": true
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "eth0": {
+          "IPV4": {
+            "dhcp": false,
+            "dnsAddress": "10.233.1.200",
+            "domainName": "zlab.com",
+            "gatewayAddress": "10.233.46.2",
+            "ipAddress": "10.233.46.47",
+            "subnetMask": "255.255.255.0"
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "eth0": {
+          "security": {
+            "enable": true,
+            "802_1xEAP": {
+              "authentication": "TLS",
+              "certificate": "my-client-cert"
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "eth0": {
+          "security": {
+            "enable": true,
+            "802_1xEAP": {
+              "authentication": "TTLS",
+              "innerAuthentication": "MSCHAPv2",
+              "username": "john.doe",
+              "password": "secret"
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "IPV4": {
+            "dhcp": true
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "IPV4": {
+            "dhcp": false,
+            "dnsAddress": "10.233.1.200",
+            "domainName": "zlab.com",
+            "gatewayAddress": "10.233.46.2",
+            "ipAddress": "10.233.46.47",
+            "subnetMask": "255.255.255.0"
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "autoConn": true,
+            "connect": true,
+            "essid": "Redmi Note 12 5G",
+            "security": {
+              "enable": true,
+              "WPA2Personal": {
+                "password": "12345678"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "OpenNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "enable": false
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "enable": true,
+              "WPA2Enterprise": {
+                "authentication": "TLS",
+                "certificate": "my-client-cert"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "enable": true,
+              "WPA2Enterprise": {
+                "authentication": "TTLS",
+                "innerAuthentication": "MSCHAPv2",
+                "username": "john.doe",
+                "password": "secret"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "bnep0": {
+          "dhcpEndAddress": "192.168.0.10",
+          "dhcpStartAddress": "192.168.0.2",
+          "discoverable": true,
+          "pairable": true,
+          "passKey": "1233",
+          "usePassKey": false,
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "wan0": {
+          "enable": true,
+          "activeSim": "psim",
+          "psim": {
+            "apn": "internet",
+            "preferredNetworkType": "AUTO",
+            "enableIPv6": true
+          }
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "uap0": {
+          "ssid": "FXR90Hotspot",
+          "ssidPassword": "MyP@ssword",
+          "countryCode": "US",
+          "securityType": "WPA3Personal",
+          "isHidden": false,
+          "enable": true
+        }
+      }
+    }
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "eth0": {
+          "IPV4": {
+            "dhcp": true
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-2": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "eth0": {
+          "IPV4": {
+            "dhcp": false,
+            "dnsAddress": "10.233.1.200",
+            "domainName": "zlab.com",
+            "gatewayAddress": "10.233.46.2",
+            "ipAddress": "10.233.46.47",
+            "subnetMask": "255.255.255.0"
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-3": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "eth0": {
+          "security": {
+            "enable": true,
+            "802_1xEAP": {
+              "authentication": "TLS",
+              "certificate": "my-client-cert"
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-4": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "eth0": {
+          "security": {
+            "enable": true,
+            "802_1xEAP": {
+              "authentication": "TTLS",
+              "innerAuthentication": "MSCHAPv2",
+              "username": "john.doe",
+              "password": "secret"
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-5": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "IPV4": {
+            "dhcp": true
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-6": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "IPV4": {
+            "dhcp": false,
+            "dnsAddress": "10.233.1.200",
+            "domainName": "zlab.com",
+            "gatewayAddress": "10.233.46.2",
+            "ipAddress": "10.233.46.47",
+            "subnetMask": "255.255.255.0"
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-7": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "autoConn": true,
+            "connect": true,
+            "essid": "Redmi Note 12 5G",
+            "security": {
+              "enable": true,
+              "WPA2Personal": {
+                "password": "12345678"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-8": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "OpenNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "enable": false
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-9": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "enable": true,
+              "WPA2Enterprise": {
+                "authentication": "TLS",
+                "certificate": "my-client-cert"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-10": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "enable": true,
+              "WPA2Enterprise": {
+                "authentication": "TTLS",
+                "innerAuthentication": "MSCHAPv2",
+                "username": "john.doe",
+                "password": "secret"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-11": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "bnep0": {
+          "dhcpEndAddress": "192.168.0.10",
+          "dhcpStartAddress": "192.168.0.2",
+          "discoverable": true,
+          "pairable": true,
+          "passKey": "1233",
+          "usePassKey": false,
+          "enable": true
+        }
+      }
+    },
+    "example-12": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "wan0": {
+          "enable": true,
+          "activeSim": "psim",
+          "psim": {
+            "apn": "internet",
+            "preferredNetworkType": "AUTO",
+            "enableIPv6": true
+          }
+        }
+      }
+    },
+    "example-13": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "uap0": {
+          "ssid": "FXR90Hotspot",
+          "ssidPassword": "MyP@ssword",
+          "countryCode": "US",
+          "securityType": "WPA3Personal",
+          "isHidden": false,
+          "enable": true
+        }
+      }
+    }
+  }
 }

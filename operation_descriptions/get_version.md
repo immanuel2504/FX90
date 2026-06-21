@@ -14,7 +14,7 @@ No additional payload fields are required to retrieve the full version set. The 
 | Pattern Name | Version Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | get_status, get_readerCapabilites, set_os, revertback |
+| Related Commands | get_status, get_readerCapabilities, set_os, revertback |
 | Supported Operations | Retrieve firmware, model, serial number, and upgrade details |
 | Supported API Versions | V1.0 |
 

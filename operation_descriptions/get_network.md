@@ -1,12 +1,15 @@
-The `get_network` command retrieves the reader's network configuration across its interfaces.
+The `get_network` command retrieves the reader network configuration using the same response shape as REST `GET /cloud/network`.
 
 This command returns:
 
 - The device hostname
 - Ethernet (`eth0`) interface configuration and status
-- Wi-Fi (`mlan0`) interface configuration
+- Wi-Fi station (`mlan0`) interface configuration and access point details
+- Bluetooth PAN (`bnep0`) configuration and status
+- Cellular (`wan0`) configuration and status
+- Wi-Fi hotspot (`uap0`) configuration, clients, and status
 
-No additional payload fields are required to retrieve the full network configuration.
+No payload fields are required to retrieve the full network configuration.
 
 ## 2. Command Details
 
@@ -24,6 +27,6 @@ No additional payload fields are required to retrieve the full network configura
 Use `get_network` to:
 
 - Confirm the reader's IP addressing before changing it
-- Verify which interface (Ethernet/Wi-Fi) is connected
-- Audit network identity (hostname) across devices
-- Review interface status during connectivity troubleshooting
+- Verify which interfaces are connected or enabled
+- Audit network identity and interface status across devices
+- Review Wi-Fi, Bluetooth, cellular, and hotspot state during connectivity troubleshooting

@@ -4,15 +4,17 @@ description: Reader Logging Configuration
 properties:
   radioPacketLog:
     type: boolean
+    description: Indicates whether radio packet logging is enabled.
   components:
     type: array
+    description: Log level configuration per reader subcomponent.
     items:
       type: object
       properties:
         componentName:
           type: string
           example: RC
-          description: "Name of subcomponent\nNote:\n  For radio_control, only the INFO log level is supported. For reader_gateway, the supported log levels are INFO, DEBUG, WARNING, and ERROR"
+          description: Name of subcomponent. For radio_control, only the INFO log level is supported. For reader_gateway, supported log levels are INFO, DEBUG, WARNING, and ERROR.
           enum:
           - radio_control
           - reader_gateway

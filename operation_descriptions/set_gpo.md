@@ -23,5 +23,5 @@ Gather these details before sending the command. Targeting a port beyond the mod
 
 | What You Need | Details |
 |---|---|
-| Port number | GPO port ID (1–4; max depends on model — see `get_readerCapabilites`). |
+| Port number | GPO port ID (1–4; max depends on model — see `get_readerCapabilities`). |
 | State | Desired output state (`true` = HIGH, `false` = LOW). |

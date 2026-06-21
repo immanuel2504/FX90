@@ -67,7 +67,7 @@ Regenerate: `python scripts/generate_rest_mqtt_map.py`
 | Control | GET | `/cloud/preSelection` | `get_preSelection` |  |
 | Control | PUT | `/cloud/preSelection` | `set_preSelection` |  |
 | Network | GET | `/cloud/readPoints` | `get_readPoints` | getReadpoints |
-| System | GET | `/cloud/readerCapabilities` | `get_readerCapabilites` | getReadercapabilities |
+| System | GET | `/cloud/readerCapabilities` | `get_readerCapabilities` | getReaderCapabilities |
 | Network | GET | `/cloud/readerLocation` | `get_gpsCoordinates` | getGpsCoordinates |
 | System | PUT | `/cloud/reboot` | `reboot` | reboot |
 | Region | GET | `/cloud/region` | `get_region` | getRegion |
@@ -135,7 +135,7 @@ FX90.yaml `description` uses alternate names; normalized to canonical MQTT comma
 | `get_logs_rcLog` | `get_rc_log` |
 | `get_logs_rgErrorLog` | `get_rg_error_logs` |
 | `get_logs_rgWarningLog` | `get_rg_warn_logs` |
-| `get_readerCapabilities` | `get_readerCapabilites` |
+| `get_readerCapabilities` | `get_readerCapabilities` |
 | `get_userapps` | `get_user_apps` |
 | `localrestlogin` | `localrest_login` |
 | `set_autostartUserapp` | `autostart_user_app` |

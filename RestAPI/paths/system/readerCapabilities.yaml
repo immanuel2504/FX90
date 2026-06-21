@@ -3,20 +3,32 @@ get:
   - System
   summary: Retrieves the Reader Capabilities
   description: MQTT API :-  get_readerCapabilities <br> Gets the list of supported capabilities on the current reader.
-  operationId: getReadercapabilities
+  operationId: getReaderCapabilities
   responses:
     '200':
       description: OK
       content:
         application/json:
           schema:
-            $ref: ../../openapi.yaml#/components/schemas/getReadercapabilitiesResponse
+            $ref: ../../openapi.yaml#/components/schemas/getReaderCapabilitiesResponse
           example:
             capabilities:
-              antennas: []
+              antennas:
+              - port: 1
+                type: external
+              - port: 2
+                type: external
+              - port: 3
+                type: external
+              - port: 4
+                type: external
+              - port: 5
+                type: internal
+              - port: 6
+                type: internal
               apiSupported:
                 versions:
-                - documentation: https://zebradevs.github.io/rfid-ziotc-docs/about/index.html
+                - documentation: https://zebradevs.github.io/rfid-ziotc-docs/index.html
                   version: v1
               appLEDColors:
               - RED
@@ -31,7 +43,7 @@ get:
               daLanguageBindings:
               - PYTHON
               - NODEJS
-              directionalitySupported: true
+              directionalitySupported: false
               endpointTypesSupported:
               - SSLSupported: true
                 authenticationTypesSupported:
@@ -49,12 +61,12 @@ get:
                 type: MQTT_WS
               - SSLSupported: true
                 authenticationTypesSupported:
-                - MTLS
+                - TLS
                 batchingSupported: true
                 dataOnly: true
                 retentionSupported: true
                 type: TCPIP
-              - SSLSupported: false
+              - SSLSupported: true
                 authenticationTypesSupported:
                 - TLS
                 batchingSupported: true
@@ -70,13 +82,6 @@ get:
                 type: AWS_IOT_CORE
               - SSLSupported: true
                 authenticationTypesSupported:
-                - MTLS
-                batchingSupported: true
-                dataOnly: false
-                retentionSupported: true
-                type: IBM_WATSON_IOT
-              - SSLSupported: true
-                authenticationTypesSupported:
                 - BASIC
                 - DIGEST
                 - NTLM
@@ -90,24 +95,60 @@ get:
                 dataOnly: true
                 retentionSupported: true
                 type: HTTP
-              externalSerialPort: []
+              - SSLSupported: true
+                authenticationTypesSupported:
+                - TLS
+                batchingSupported: true
+                dataOnly: false
+                retentionSupported: true
+                type: AZURE_IOT_HUB
+              externalSerialPort:
+              - NONE
               keypadSupport:
               - NONE
               llrpSupported: true
               maxAppLEDs: 1
               maxDataEndpoints: 2
               maxNumOperationsInAccessSequence: 32
-              maxNumPreFilters: 64
+              maxNumPreFilters: 32
               messageFormatsSupported:
               - JSON
-              networkInterfaces: null
-              numGPIs: 491980688
-              numGPOs: 43691
+              networkInterfaces:
+              - 802.1x: true
+                internal: true
+                ipAssignment:
+                - STATIC
+                - DHCP
+                ipStack:
+                - IPv4
+                - IPv6
+                type: ETHERNET
+              - 802.1x: true
+                internal: true
+                ipAssignment:
+                - STATIC
+                - DHCP
+                ipStack:
+                - IPv4
+                - IPv6
+                type: WIFI
+              - 802.1x: false
+                internal: true
+                ipAssignment:
+                - DHCP
+                ipStack:
+                - IPv4
+                type: BLUETOOTH
+              numGPIs: 4
+              numGPOs: 4
               restAPISupported: true
               rssiFilterSupported: true
               supportedDisplayType:
               - NONE
-              supportedPowerSource: []
+              supportedPowerSource:
+              - POWERBRICK
+              - POE
+              - POE+
               supportedTagDataFormat:
               - GS1
               - HEX

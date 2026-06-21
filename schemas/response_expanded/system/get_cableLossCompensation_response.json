@@ -12,20 +12,20 @@
       "response": "success",
       "payload": {
         "1": {
-          "cableLossPerHundredFt": 0,
-          "cableLength": 5
+          "cableLength": 10,
+          "cableLossPerHundredFt": 10
         },
         "2": {
-          "cableLossPerHundredFt": 10,
-          "cableLength": 15
+          "cableLength": 10,
+          "cableLossPerHundredFt": 10
         },
         "3": {
-          "cableLossPerHundredFt": 20,
-          "cableLength": 25
+          "cableLength": 10,
+          "cableLossPerHundredFt": 10
         },
         "4": {
-          "cableLossPerHundredFt": 30,
-          "cableLength": 35
+          "cableLength": 10,
+          "cableLossPerHundredFt": 10
         }
       }
     }
@@ -59,57 +59,124 @@
           "x-stoplight": {
             "id": "317p8m75fqpxl"
           },
+          "description": "Gets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)",
+          "type": "object",
+          "additionalProperties": false,
           "examples": [
             {
               "1": {
-                "cableLossPerHundredFt": 0,
-                "cableLength": 5
+                "cableLength": 10,
+                "cableLossPerHundredFt": 10
               },
               "2": {
-                "cableLossPerHundredFt": 10,
-                "cableLength": 15
+                "cableLength": 10,
+                "cableLossPerHundredFt": 10
               },
               "3": {
-                "cableLossPerHundredFt": 20,
-                "cableLength": 25
+                "cableLength": 10,
+                "cableLossPerHundredFt": 10
               },
               "4": {
-                "cableLossPerHundredFt": 30,
-                "cableLength": 35
+                "cableLength": 10,
+                "cableLossPerHundredFt": 10
               }
             }
           ],
-          "description": "Gets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)",
-          "type": "object",
           "properties": {
-            "<readPoint>": {
+            "1": {
               "type": "object",
-              "minProperties": 1,
-              "maxProperties": 8,
-              "additionalProperties": false,
-              "description": "Returns cable loss compensation per read point labeled 1,2,3... upto max supported read points",
+              "description": "Cable loss compensation values for read point 1.",
               "required": [
                 "cableLength",
                 "cableLossPerHundredFt"
               ],
               "properties": {
                 "cableLength": {
-                  "type": "integer",
-                  "example": 1,
-                  "minimum": 0,
-                  "description": "Cable Length Field. Returns float values"
+                  "type": "number",
+                  "description": "Cable length for read point 1.",
+                  "example": 10,
+                  "minimum": 0
                 },
                 "cableLossPerHundredFt": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "example": 1,
-                  "description": "Cable Loss per Hundred Feet. Returns float values"
+                  "type": "number",
+                  "description": "Cable loss per hundred feet for read point 1.",
+                  "example": 10,
+                  "minimum": 0
+                }
+              }
+            },
+            "2": {
+              "type": "object",
+              "description": "Cable loss compensation values for read point 2.",
+              "required": [
+                "cableLength",
+                "cableLossPerHundredFt"
+              ],
+              "properties": {
+                "cableLength": {
+                  "type": "number",
+                  "description": "Cable length for read point 2.",
+                  "example": 10,
+                  "minimum": 0
+                },
+                "cableLossPerHundredFt": {
+                  "type": "number",
+                  "description": "Cable loss per hundred feet for read point 2.",
+                  "example": 10,
+                  "minimum": 0
+                }
+              }
+            },
+            "3": {
+              "type": "object",
+              "description": "Cable loss compensation values for read point 3.",
+              "required": [
+                "cableLength",
+                "cableLossPerHundredFt"
+              ],
+              "properties": {
+                "cableLength": {
+                  "type": "number",
+                  "description": "Cable length for read point 3.",
+                  "example": 10,
+                  "minimum": 0
+                },
+                "cableLossPerHundredFt": {
+                  "type": "number",
+                  "description": "Cable loss per hundred feet for read point 3.",
+                  "example": 10,
+                  "minimum": 0
+                }
+              }
+            },
+            "4": {
+              "type": "object",
+              "description": "Cable loss compensation values for read point 4.",
+              "required": [
+                "cableLength",
+                "cableLossPerHundredFt"
+              ],
+              "properties": {
+                "cableLength": {
+                  "type": "number",
+                  "description": "Cable length for read point 4.",
+                  "example": 10,
+                  "minimum": 0
+                },
+                "cableLossPerHundredFt": {
+                  "type": "number",
+                  "description": "Cable loss per hundred feet for read point 4.",
+                  "example": 10,
+                  "minimum": 0
                 }
               }
             }
           },
           "required": [
-            "<readPoint>"
+            "1",
+            "2",
+            "3",
+            "4"
           ]
         },
         {
@@ -159,20 +226,20 @@
       "response": "success",
       "payload": {
         "1": {
-          "cableLossPerHundredFt": 0,
-          "cableLength": 5
+          "cableLength": 10,
+          "cableLossPerHundredFt": 10
         },
         "2": {
-          "cableLossPerHundredFt": 10,
-          "cableLength": 15
+          "cableLength": 10,
+          "cableLossPerHundredFt": 10
         },
         "3": {
-          "cableLossPerHundredFt": 20,
-          "cableLength": 25
+          "cableLength": 10,
+          "cableLossPerHundredFt": 10
         },
         "4": {
-          "cableLossPerHundredFt": 30,
-          "cableLength": 35
+          "cableLength": 10,
+          "cableLossPerHundredFt": 10
         }
       }
     }

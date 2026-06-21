@@ -1,4 +1,4 @@
-The `set_update_cert` command installs or updates a certificate on the reader, fetched from an FTPS URL or supplied inline as PFX content.
+The `set_update_cert` command installs or updates a certificate on the reader by downloading a PFX file from a URL.
 
 Use it to:
 
@@ -20,21 +20,21 @@ Use it to:
 
 ## 3. Before You Begin
 
-Gather these details before sending the command. An invalid URL, wrong certificate type, or bad PFX password will cause installation to fail.
+Gather these details before sending the command. An invalid URL, wrong certificate type, missing download credentials, or bad PFX password will cause installation to fail.
 
 | What You Need | Details |
 |---|---|
 | Certificate name | Unique name for the certificate on the reader. |
-| Certificate type | `server`, `client`, or `app`. |
-| Source | FTPS `url` hosting the certificate/PFX, **or** inline `pfxFileName` + `pfxContent`. |
-| FTPS authentication | `NONE` or `BASIC` (with `options.username` / `options.password`). |
-| PFX password | Password for the PFX file, if applicable. |
+| Certificate type | `client`, `server`, or `app`. |
+| Source | `url` where the certificate PFX file can be downloaded. |
+| Download authentication | `NONE` or `BASIC` (with `authenticationOptions.username` / `authenticationOptions.password`). |
+| PFX password | Password for the PFX certificate file, if applicable. |
 
 ## 4. Authentication Types
 
-The `authenticationType` field controls FTPS server authentication.
+The `authenticationType` field controls authentication for downloading the certificate.
 
 | authenticationType | Description | Credentials Required |
 |---|---|---|
-| `NONE` | No FTPS authentication | None |
-| `BASIC` | Username/password FTPS auth | `options.username`, `options.password` |
+| `NONE` | No download authentication | None |
+| `BASIC` | Username/password authentication | `authenticationOptions.username`, `authenticationOptions.password` |

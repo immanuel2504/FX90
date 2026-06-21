@@ -1,4 +1,4 @@
-The `get_readerCapabilites` command retrieves the static hardware and software capabilities of the reader.
+The `get_readerCapabilities` command retrieves the static hardware and software capabilities of the reader.
 
 This command returns:
 
@@ -21,7 +21,7 @@ No additional payload fields are required to retrieve the capability set.
 
 ## 3. When to Use This Command
 
-Use `get_readerCapabilites` to:
+Use `get_readerCapabilities` to:
 
 - Discover how many GPI/GPO pins are available before wiring logic
 - Confirm whether LLRP is supported on this model

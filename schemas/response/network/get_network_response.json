@@ -5,63 +5,111 @@
   "examples": [
     {
       "command": "get_network",
-      "command_id": "string",
+      "command_id": "a12cb345654",
       "response": "success",
       "payload": {
-        "hostName": "FX9600F0F4B5",
+        "hostName": "FXR90C5F1AB",
         "networkInterface": {
           "eth0": {
             "IPV4": {
               "dhcp": true,
-              "ipAddress": "192.168.1.10",
-              "subnetMask": "255.255.255.0",
-              "gatewayAddress": "192.168.1.1",
-              "dnsAddress": "8.8.8.8",
-              "domainName": "example.com"
+              "dnsAddress": "10.233.1.200",
+              "domainName": "zlab.com",
+              "gatewayAddress": "10.233.45.2",
+              "ipAddress": "10.233.45.235",
+              "subnetMask": "255.255.255.0"
             },
             "IPV6": {
               "dhcp": true,
-              "ipAddress": "fe80::8624:8dff:fefb:6dd0",
-              "gatewayAddress": "fe80::10",
-              "dnsAddress": "fe80::20",
-              "domainName": "example.com"
+              "dnsAddress": "fd6c:10:233:1::201",
+              "domainName": "zlab.com",
+              "gatewayAddress": "fe80::f6ee:31ff:fe0c:5a1f",
+              "ipAddress": "fd6c:10:233:45:eab:f51f:957e:f729"
             },
             "Status": "connected",
             "isEnabled": true,
-            "macAddress": "84:24:8D:FB:6D:D0",
-            "security": {
-              "securityType": "802_1xEAP",
-              "authentication": "PEAP",
-              "innerAuthentication": "MSCHAPv2",
-              "certificates": "/etc/certificates/client.pem"
-            }
+            "macAddress": "C8:1C:FE:C5:F1:AB"
           },
           "mlan0": {
             "IPV4": {
               "dhcp": true,
-              "ipAddress": "192.168.1.11",
-              "subnetMask": "255.255.255.0",
-              "gatewayAddress": "192.168.1.1",
-              "dnsAddress": "8.8.8.8",
-              "domainName": "example.com"
+              "dnsAddress": "1.1.1.1",
+              "domainName": "FXR90C5F1AB",
+              "gatewayAddress": "192.168.0.1",
+              "ipAddress": "192.168.0.201",
+              "subnetMask": "255.255.255.0"
             },
             "IPV6": {
               "dhcp": true,
-              "ipAddress": "fe80::8624:8dff:fefb:6dd1",
-              "gatewayAddress": "fe80::10",
-              "dnsAddress": "fe80::20",
-              "domainName": "example.com"
+              "dnsAddress": "fd6c:10:233:1::201",
+              "domainName": "FXR90C5F1AB",
+              "gatewayAddress": "fe80::c206:c3ff:febe:ee3c",
+              "ipAddress": "fe80::3626:9125:eda5:36d7"
             },
             "Status": "connected",
-            "isEnabled": true,
-            "macAddress": "84:24:8D:FB:6D:D1",
             "accesspoint": {
-              "essid": "ZebraWiFi",
+              "autoConn": false,
+              "essid": "GLaDOS",
               "status": "connected",
-              "signalstrength": "-45dBm",
-              "autoConn": true,
-              "ipaddress": "192.168.1.11"
+              "security": {
+                "securityType": "WPA2Personal"
+              }
+            },
+            "isEnabled": true,
+            "macAddress": "48:A4:93:BF:A9:50"
+          },
+          "bnep0": {
+            "Status": "active",
+            "deviceDiscoverableName": "FXR90C5F1AB",
+            "dhcpEndAddress": "192.168.0.10",
+            "dhcpStartAddress": "192.168.0.2",
+            "ipAddress": "192.168.241.171",
+            "isDiscoverable": true,
+            "isEnabled": true,
+            "isPairable": true,
+            "macAddress": "48:A4:93:BF:A9:52",
+            "passKey": "1234",
+            "subnetMask": "255.255.0.0",
+            "usePassKey": true
+          },
+          "wan0": {
+            "Status": "online",
+            "activeSim": "psim",
+            "isEnabled": true,
+            "psim": {
+              "currentDataClass": "LTE",
+              "currentServiceProvider": "Vi India",
+              "enableIPv6": false,
+              "enablePin": false,
+              "enableRoaming": false,
+              "highestAvailableDataClass": "LTE",
+              "internetAccess": true,
+              "packetServiceState": "Attached",
+              "preferredNetworkType": "AUTO",
+              "registerState": "Home",
+              "rsrp": "-103.7dBm",
+              "rsrq": "-5.5dB",
+              "rssi": "-82.7dBm",
+              "signalBar": 1,
+              "simState": "Initialized",
+              "snr": "0.0dB"
             }
+          },
+          "uap0": {
+            "ssid": "FXR90Hotspot",
+            "ssidPassword": "MyP@ssword",
+            "isHidden": false,
+            "securityType": "WPA3Personal",
+            "Status": "active",
+            "isEnabled": true,
+            "macAddress": "48:A4:93:BF:A9:53",
+            "Clients": [
+              {
+                "hostName": "my-laptop",
+                "IP": "192.168.43.2",
+                "MAC": "AA:BB:CC:DD:EE:FF"
+              }
+            ]
           }
         }
       }
@@ -119,62 +167,113 @@
     "response"
   ],
   "x-examples": {
-    "Example 1 - All Interfaces with Full Configuration": {
-      "value": {
-        "hostName": "FX9600F0F4B5",
+    "example-1": {
+      "command": "get_network",
+      "command_id": "a12cb345654",
+      "response": "success",
+      "payload": {
+        "hostName": "FXR90C5F1AB",
         "networkInterface": {
           "eth0": {
             "IPV4": {
               "dhcp": true,
               "dnsAddress": "10.233.1.200",
               "domainName": "zlab.com",
-              "gatewayAddress": "10.233.46.2",
-              "ipAddress": "10.233.46.124",
+              "gatewayAddress": "10.233.45.2",
+              "ipAddress": "10.233.45.235",
               "subnetMask": "255.255.255.0"
             },
             "IPV6": {
               "dhcp": true,
-              "dnsAddress": "fe80::20",
+              "dnsAddress": "fd6c:10:233:1::201",
               "domainName": "zlab.com",
-              "gatewayAddress": "fe80::10",
-              "ipAddress": "fe80::8624:8dff:fefb:6dd0"
+              "gatewayAddress": "fe80::f6ee:31ff:fe0c:5a1f",
+              "ipAddress": "fd6c:10:233:45:eab:f51f:957e:f729"
             },
             "Status": "connected",
             "isEnabled": true,
-            "macAddress": "84:24:8D:FB:6D:D0",
-            "security": {
-              "securityType": "802_1xEAP",
-              "authentication": "PEAP",
-              "innerAuthentication": "MSCHAPv2",
-              "certificates": "/etc/certificates/client.pem"
-            }
+            "macAddress": "C8:1C:FE:C5:F1:AB"
           },
           "mlan0": {
             "IPV4": {
               "dhcp": true,
-              "dnsAddress": "10.233.1.200",
-              "domainName": "zlab.com",
-              "gatewayAddress": "10.233.46.2",
-              "ipAddress": "10.233.46.125",
+              "dnsAddress": "1.1.1.1",
+              "domainName": "FXR90C5F1AB",
+              "gatewayAddress": "192.168.0.1",
+              "ipAddress": "192.168.0.201",
               "subnetMask": "255.255.255.0"
             },
             "IPV6": {
               "dhcp": true,
-              "dnsAddress": "fe80::20",
-              "domainName": "zlab.com",
-              "gatewayAddress": "fe80::10",
-              "ipAddress": "fe80::8624:8dff:fefb:6dd1"
+              "dnsAddress": "fd6c:10:233:1::201",
+              "domainName": "FXR90C5F1AB",
+              "gatewayAddress": "fe80::c206:c3ff:febe:ee3c",
+              "ipAddress": "fe80::3626:9125:eda5:36d7"
             },
             "Status": "connected",
-            "isEnabled": true,
-            "macAddress": "84:24:8D:FB:6D:D1",
             "accesspoint": {
-              "autoConn": true,
-              "essid": "ZebraWiFi",
-              "ipaddress": "10.233.46.125",
-              "signalstrength": "-45dBm",
-              "status": "connected"
+              "autoConn": false,
+              "essid": "GLaDOS",
+              "status": "connected",
+              "security": {
+                "securityType": "WPA2Personal"
+              }
+            },
+            "isEnabled": true,
+            "macAddress": "48:A4:93:BF:A9:50"
+          },
+          "bnep0": {
+            "Status": "active",
+            "deviceDiscoverableName": "FXR90C5F1AB",
+            "dhcpEndAddress": "192.168.0.10",
+            "dhcpStartAddress": "192.168.0.2",
+            "ipAddress": "192.168.241.171",
+            "isDiscoverable": true,
+            "isEnabled": true,
+            "isPairable": true,
+            "macAddress": "48:A4:93:BF:A9:52",
+            "passKey": "1234",
+            "subnetMask": "255.255.0.0",
+            "usePassKey": true
+          },
+          "wan0": {
+            "Status": "online",
+            "activeSim": "psim",
+            "isEnabled": true,
+            "psim": {
+              "currentDataClass": "LTE",
+              "currentServiceProvider": "Vi India",
+              "enableIPv6": false,
+              "enablePin": false,
+              "enableRoaming": false,
+              "highestAvailableDataClass": "LTE",
+              "internetAccess": true,
+              "packetServiceState": "Attached",
+              "preferredNetworkType": "AUTO",
+              "registerState": "Home",
+              "rsrp": "-103.7dBm",
+              "rsrq": "-5.5dB",
+              "rssi": "-82.7dBm",
+              "signalBar": 1,
+              "simState": "Initialized",
+              "snr": "0.0dB"
             }
+          },
+          "uap0": {
+            "ssid": "FXR90Hotspot",
+            "ssidPassword": "MyP@ssword",
+            "isHidden": false,
+            "securityType": "WPA3Personal",
+            "Status": "active",
+            "isEnabled": true,
+            "macAddress": "48:A4:93:BF:A9:53",
+            "Clients": [
+              {
+                "hostName": "my-laptop",
+                "IP": "192.168.43.2",
+                "MAC": "AA:BB:CC:DD:EE:FF"
+              }
+            ]
           }
         }
       }

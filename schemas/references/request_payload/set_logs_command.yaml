@@ -4,8 +4,10 @@ description: Changes logging level
 properties:
   radioPacketLog:
     type: boolean
+    description: Indicates whether radio packet logging is enabled.
   components:
     type: array
+    description: Log level configuration per reader subcomponent.
     items:
       x-stoplight:
         id: dmfpma3wqs07h
@@ -14,7 +16,7 @@ properties:
         componentName:
           x-stoplight:
             id: r6tsamn5i9kd7
-          description: "Name of subcomponent"
+          description: Name of subcomponent. For radio_control, only the INFO log level is supported. For reader_gateway, supported log levels are INFO, DEBUG, WARNING, and ERROR.
           type: string
           enum:
           - radio_control
@@ -25,9 +27,9 @@ properties:
             id: r2iynmvsj4e39
           description: Logging Level
           enum:
+          - DEBUG
           - INFO
           - WARNING
-          - DEBUG
           - ERROR
       required:
       - componentName

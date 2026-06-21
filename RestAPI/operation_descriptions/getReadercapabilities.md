@@ -11,7 +11,7 @@ Use this endpoint to:
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/readerCapabilities` |
-| Operation ID | `getReadercapabilities` |
+| Operation ID | `getReaderCapabilities` |
 | MQTT Command | `get_readerCapabilities` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |

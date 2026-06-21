@@ -11,29 +11,21 @@
       "command_id": "abcd1324",
       "payload": {
         "1": {
-          "cableLossPerHundredFt": 0,
-          "cableLength": 5
+          "cableLength": 90,
+          "cableLossPerHundredFt": 18
         },
         "2": {
-          "cableLossPerHundredFt": 10,
-          "cableLength": 15
+          "cableLength": 18,
+          "cableLossPerHundredFt": 19
         },
         "3": {
-          "cableLossPerHundredFt": 20,
-          "cableLength": 25
+          "cableLength": 10,
+          "cableLossPerHundredFt": 11
         },
         "4": {
-          "cableLossPerHundredFt": 30,
-          "cableLength": 35
+          "cableLength": 10,
+          "cableLossPerHundredFt": 70
         }
-      }
-    },
-    {
-      "command": "set_cableLossCompensation",
-      "command_id": "abcd1324",
-      "payload": {
-        "cableLength": 0,
-        "cableLossPerHundredFt": 0
       }
     }
   ],
@@ -61,34 +53,26 @@
     "payload"
   ],
   "x-examples": {
-    "example-2": {
-      "command": "set_cableLossCompensation",
-      "command_id": "abcd1324",
-      "payload": {
-        "1": {
-          "cableLossPerHundredFt": 0,
-          "cableLength": 5
-        },
-        "2": {
-          "cableLossPerHundredFt": 10,
-          "cableLength": 15
-        },
-        "3": {
-          "cableLossPerHundredFt": 20,
-          "cableLength": 25
-        },
-        "4": {
-          "cableLossPerHundredFt": 30,
-          "cableLength": 35
-        }
-      }
-    },
     "example-1": {
       "command": "set_cableLossCompensation",
       "command_id": "abcd1324",
       "payload": {
-        "cableLength": 0,
-        "cableLossPerHundredFt": 0
+        "1": {
+          "cableLength": 90,
+          "cableLossPerHundredFt": 18
+        },
+        "2": {
+          "cableLength": 18,
+          "cableLossPerHundredFt": 19
+        },
+        "3": {
+          "cableLength": 10,
+          "cableLossPerHundredFt": 11
+        },
+        "4": {
+          "cableLength": 10,
+          "cableLossPerHundredFt": 70
+        }
       }
     }
   }

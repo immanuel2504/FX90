@@ -27,5 +27,19 @@
     "command",
     "command_id",
     "payload"
-  ]
+  ],
+  "examples": [
+    {
+      "command": "get_network",
+      "command_id": "a12cb345654",
+      "payload": {}
+    }
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "get_network",
+      "command_id": "a12cb345654",
+      "payload": {}
+    }
+  }
 }

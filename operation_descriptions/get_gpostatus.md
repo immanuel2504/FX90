@@ -13,7 +13,7 @@ No additional payload fields are required to retrieve all pin states.
 | Pattern Name | GPO Status Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | set_gpo, get_gpi_status, get_readerCapabilites |
+| Related Commands | set_gpo, get_gpi_status, get_readerCapabilities |
 | Supported Operations | Retrieve current GPO pin states |
 | Supported API Versions | V1.0 |
 

@@ -1,11 +1,11 @@
-The `get_cableLossCompensation` command retrieves the per-read-point cable loss compensation values configured on the reader.
+The `get_cableLossCompensation` command retrieves the cable loss compensation values configured on the reader for read points `1` through `4`.
 
 This command returns:
 
 - Cable length per read point
 - Cable loss per hundred feet per read point
 
-No additional payload fields are required; values are returned keyed by read point (1–8).
+No additional payload fields are required; values are returned using fixed read-point keys `1`, `2`, `3`, and `4`.
 
 ## 2. Command Details
 
