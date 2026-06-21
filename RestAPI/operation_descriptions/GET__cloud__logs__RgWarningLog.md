@@ -1,23 +1,39 @@
-The `GET /cloud/logs/RgWarningLog` REST endpoint is used to retrieve RgWarningLog.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/logs/RgWarningLog` REST endpoint retrieves the Reader Gateway warning log file from the reader.
 
-- Retrieve RgWarningLog.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The log filename
+- The full content of the Reader Gateway warning log
+
+No request body is required.
 
 ## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/logs/RgWarningLog` |
-| Description Key | `GET__cloud__logs__RgWarningLog` |
-| MQTT Command | `get_logs_rgWarningLog` |
+| Operation ID | `GET__cloud__logs__RgWarningLog` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_rg_warn_logs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_logs_rgWarningLog` MQTT command where applicable.
+Use `GET /cloud/logs/RgWarningLog` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Review Reader Gateway warning events that may indicate non-critical but notable operational issues
+- Investigate intermittent connectivity or data delivery problems that did not produce errors
+- Capture warning logs as part of routine reader health monitoring
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
+| `content` | Are there recurring warning patterns? | Repeated warnings often precede errors — early detection prevents escalation to failures. |

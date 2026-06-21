@@ -1,10 +1,20 @@
+## 1. Description
+
 The `set_update_cert` command installs or updates a certificate on the reader by downloading a PFX file from a URL.
 
-Use it to:
+This command allows you to configure:
 
-- Install a new TLS certificate for MQTT or HTTP endpoints
-- Update an existing certificate before expiry
-- Provision client, server, or application certificates
+- The certificate name assigned on the reader through `name`
+- The certificate type through `type`
+- The download source URL through `url`
+- The authentication method for the download server through `authenticationType`
+- The PFX file password through `pfxPassword`
+
+Use this command to:
+
+- Install a new TLS client or server certificate for MQTT or HTTPS endpoints
+- Rotate an existing certificate before expiry
+- Provision application certificates as part of initial reader setup
 
 ## 2. Command Details
 
@@ -13,28 +23,53 @@ Use it to:
 | Pattern Name | Certificate Installation |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [get_certs](get_certs.md), [del_certs](del_certs.md), [refresh-cert](refresh-cert.md) |
-| Supported Operations | Install or update a certificate |
+| Related Commands | [get_certs](get_certs.md), [set_installCACertificate](set_installCACertificate.md), [del_certs](del_certs.md) |
+| Required Request Fields | `command`, `command_id`, `payload` |
+| Required Payload Fields | `name`, `type`, `url`, `authenticationType` |
+| Supported Certificate Types | `client`, `server`, `app` |
+| Supported Authentication Types | `NONE`, `BASIC` |
 | Supported API Versions | V1.0 |
-
 
 ## 3. Before You Begin
 
-Gather these details before sending the command. An invalid URL, wrong certificate type, missing download credentials, or bad PFX password will cause installation to fail.
+Gather all certificate source details before sending this command. An invalid URL, wrong certificate type, missing download credentials, or an incorrect PFX password will cause installation to fail.
 
 | What You Need | Details |
 |---|---|
-| Certificate name | Unique name for the certificate on the reader. |
-| Certificate type | `client`, `server`, or `app`. |
-| Source | `url` where the certificate PFX file can be downloaded. |
-| Download authentication | `NONE` or `BASIC` (with `authenticationOptions.username` / `authenticationOptions.password`). |
-| PFX password | Password for the PFX certificate file, if applicable. |
+| Certificate name | A unique name to assign to this certificate on the reader. If a certificate with this name already exists, it will be replaced. |
+| Certificate type | `client` for mutual TLS authentication, `server` for CA/server trust, or `app` for application-specific certificates. |
+| Source URL | An HTTPS URL where the reader can download the PFX certificate file. The reader must have network connectivity to reach this URL. |
+| Authentication type | `NONE` if the download server requires no credentials, or `BASIC` if username and password authentication is required. |
+| Download credentials | Required only when `authenticationType` is `BASIC`. Provide `authenticationOptions.username` and `authenticationOptions.password`. |
+| PFX password | The password protecting the PFX file. Required if the PFX was exported with password protection. |
 
-## 4. Authentication Types
+## 4. Rules and Constraints
 
-The `authenticationType` field controls authentication for downloading the certificate.
+Violating any of these rules will cause the command to fail or the certificate to be rejected.
 
-| authenticationType | Description | Credentials Required |
-|---|---|---|
-| `NONE` | No download authentication | None |
-| `BASIC` | Username/password authentication | `authenticationOptions.username`, `authenticationOptions.password` |
+### Required Fields
+
+- `name`, `type`, `url`, and `authenticationType` are all required in the payload. Omitting any of these will cause the command to be rejected.
+
+### Certificate Type
+
+- `type` must be one of `client`, `server`, or `app`. An unrecognized type string will be rejected.
+
+### Download URL and Connectivity
+
+- The reader must have network connectivity to reach the provided URL at the time this command is sent.
+- HTTPS is strongly recommended for all certificate download URLs. Using HTTP exposes the certificate file to interception in transit.
+
+### Authentication
+
+- When `authenticationType` is `BASIC`, both `authenticationOptions.username` and `authenticationOptions.password` must be provided. Omitting either field will cause download authentication to fail.
+- When `authenticationType` is `NONE`, the `authenticationOptions` object must be omitted or empty.
+
+### PFX Password
+
+- `pfxPassword` is required when the PFX file was exported with a password. Providing the wrong password will cause certificate import to fail.
+
+### Security Note
+
+- Never hardcode download credentials (`username`, `password`) or the `pfxPassword` in your payload. Supply all sensitive values from a secrets manager or environment variable at runtime.
+- Use HTTPS for the download URL to prevent the PFX file and credentials from being intercepted in transit.

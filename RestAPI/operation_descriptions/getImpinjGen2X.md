@@ -1,29 +1,41 @@
-The `GET /cloud/impinjGen2X` REST endpoint and the `get_impinjGen2X` MQTT command retrieve the Impinj Gen2X feature configuration saved on the reader.
+## 1. Description
 
-This operation can return configuration for:
-- FastID
-- TagProtect
-- TagFocus
-- TagQuieting
+The `GET /cloud/impinjGen2X` REST endpoint retrieves the Impinj Gen2X configuration currently saved on the reader.
 
-## 1. Operation Details
+This endpoint returns:
+
+- Whether FastID, TagFocus, TagProtect, or TagQuieting is configured
+- The parameters for each enabled Gen2X feature
+
+No request body is required. If no Gen2X configuration has been saved, the response body will be an empty object.
+
+## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
-| Pattern Name | Impinj Gen2X Configuration Query |
-| Supported Protocols | REST (HTTP/HTTPS), MQTT |
-| Applies To | FXR90 |
-| Related Operations | `setImpinjGen2X`, `startInventory` |
 | REST Endpoint | `GET /cloud/impinjGen2X` |
-| MQTT Command | `get_impinjGen2X` |
+| Operation ID | `getImpinjGen2X` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_impinjGen2X` |
+| Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 2. When to Use This Endpoint
+## 3. When to Use This Endpoint
 
-Use this endpoint to verify saved Gen2X settings before starting RFID inventory. If no Gen2X configuration has been saved, the response can be an empty object.
+Use `GET /cloud/impinjGen2X` to:
 
-| Field | What to Check |
-|---|---|
-| `fastID.enabled` | Whether FastID is enabled. |
-| `tagProtect` | Tag protection or visibility action settings. |
-| `tagFocus.enabled` | Whether TagFocus is enabled. |
-| `tagQuieting` | Basic or advanced quieting settings. |
+- Check whether FastID, TagProtect, TagFocus, or TagQuieting has been configured
+- Review Gen2X settings before applying them with a start inventory call
+- Verify the effect of a prior `PUT /cloud/impinjGen2X` call
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `fastId` | Is FastID enabled? | FastID embeds the TID in the singulation response, enabling faster tag identification without a separate read. |
+| `tagFocus` | Is TagFocus configured? | TagFocus reduces re-reading of already-singulated tags in dense tag populations. |
+| `tagQuieting` | Is TagQuieting set? | TagQuieting suppresses repeated reads of the same tag EPC within a session. |
+| `tagProtect` | Is TagProtect active? | TagProtect applies Impinj proprietary tag locking features for secure deployments. |

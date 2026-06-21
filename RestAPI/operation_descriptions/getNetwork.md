@@ -1,10 +1,17 @@
-The `GET /cloud/network` REST endpoint is used to retrieves reader network configuration.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/network` REST endpoint retrieves the reader's complete network configuration across all interfaces.
 
-- Retrieves reader network configuration.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The device hostname
+- Ethernet (`eth0`) interface configuration and connection status
+- Wi-Fi station (`mlan0`) interface configuration and access point details
+- Bluetooth PAN (`bnep0`) configuration and status
+- Cellular (`wan0`) configuration and status
+- Wi-Fi hotspot (`uap0`) configuration, connected clients, and status
+
+No request body is required.
 
 ## 2. Endpoint Details
 
@@ -12,12 +19,28 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/network` |
 | Operation ID | `getNetwork` |
-| MQTT Command | `get_network` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_network` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_network` MQTT command where applicable.
+Use `GET /cloud/network` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Confirm the reader's IP addressing before changing network settings
+- Verify which interfaces are connected or enabled
+- Audit network identity and interface status across a fleet
+- Troubleshoot Wi-Fi, Bluetooth, cellular, or hotspot connectivity
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `eth0` | Is Ethernet connected and does it have an IP? | Primary connectivity path; must be up for cloud communication over wired LAN. |
+| `mlan0` | Is Wi-Fi associated and which SSID? | Confirms the correct access point is in use for wireless deployments. |
+| `wan0` | Is cellular connected and has a carrier? | Required for deployments relying on cellular backhaul. |
+| `hostname` | Does the hostname match expected naming? | Used for device identification on the network and in management systems. |

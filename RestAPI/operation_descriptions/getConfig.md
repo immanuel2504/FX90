@@ -1,10 +1,14 @@
-The `GET /cloud/config` REST endpoint is used to retrieves reader configuration.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/config` REST endpoint retrieves the reader's full configuration, including RF and XML settings, GPIO and LED defaults, and reader-gateway endpoint settings.
 
-- Retrieves reader configuration.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The current reader XML configuration
+- GPIO and LED default states
+- Reader-gateway settings including tag data retention, batching, and endpoint configuration
+
+No request body is required.
 
 ## 2. Endpoint Details
 
@@ -12,12 +16,27 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/config` |
 | Operation ID | `getConfig` |
-| MQTT Command | `get_config` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_config` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_config` MQTT command where applicable.
+Use `GET /cloud/config` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Review the active configuration before calling `PUT /cloud/config`
+- Audit GPIO and LED default states across a fleet
+- Inspect tag-data retention, batching, and endpoint settings
+- Confirm which data and management endpoints are configured
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `xmlConfig` | Is the XML configuration as expected? | Defines RF and reader behavior used during inventory operations. |
+| `readerGateway` | Are endpoint URLs and credentials correct? | Determines where tag data is delivered and how the reader authenticates. |
+| `gpiDefaults` | What are the default GPI states? | Ensures GPI-triggered logic starts from the expected initial state. |

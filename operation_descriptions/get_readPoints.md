@@ -1,12 +1,14 @@
+## 1. Description
+
 The `get_readPoints` command retrieves the read points available on the reader.
 
-Use this command to:
+This command returns:
 
-- Identify available antenna/read-point identifiers
-- Verify read-point availability before applying cable loss settings
-- Map physical read points before configuring inventory behavior
+- The list of read-point identifiers available on this reader
 
-## Command Details
+No additional payload fields are required.
+
+## 2. Command Details
 
 | Property | Value |
 |---|---|
@@ -14,9 +16,22 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_cableLossCompensation](get_cableLossCompensation.md), [set_cableLossCompensation](set_cableLossCompensation.md), [set_mode](set_mode.md) |
-| Supported Operations | Retrieve reader read points |
+| Required Request Fields | command, command_id |
+| Supported Operations | Retrieve available reader read points |
+| Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |
 
-## Before You Begin
+## 3. When to Use This Command
 
-No command payload fields are required. Use the returned read-point list when configuring features that refer to antenna or read-point identifiers.
+Use `get_readPoints` to:
+
+- Identify available read-point identifiers before configuring cable loss compensation
+- Map physical read points before configuring inventory behavior in `set_mode`
+- Verify read-point availability before referencing them in antenna configuration
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| Read-point list | How many read points are returned? | Determines how many antenna ports are physically available for use. |
+| Read-point IDs | Do the returned IDs match expected port numbering? | Read-point identifiers must match exactly when used in `set_cableLossCompensation` or `set_mode`. |

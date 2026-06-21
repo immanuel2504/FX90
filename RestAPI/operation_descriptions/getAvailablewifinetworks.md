@@ -1,10 +1,15 @@
-The `GET /cloud/wifiNetworks` REST endpoint is used to retrieves available Wi-Fi networks.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/wifiNetworks` REST endpoint triggers a Wi-Fi scan and returns all visible Wi-Fi networks in the reader's vicinity.
 
-- Retrieves available Wi-Fi networks.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The ESSID (network name) of each visible access point
+- Signal strength of each network as a percentage
+- Supported security protocols and capabilities (WPA2, WPA3, 802.1X)
+- Any existing saved Wi-Fi profiles on the reader, including auto-connect settings
+
+No request body is required.
 
 ## 2. Endpoint Details
 
@@ -12,12 +17,28 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/wifiNetworks` |
 | Operation ID | `getAvailablewifinetworks` |
-| MQTT Command | `get_availableWifiNetworks` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_availableWifiNetworks` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_availableWifiNetworks` MQTT command where applicable.
+Use `GET /cloud/wifiNetworks` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Perform a remote site survey to evaluate Wi-Fi coverage at the reader's location
+- Confirm the target network is broadcasting before pushing a new Wi-Fi configuration
+- Identify the security type required by local access points
+- Check which saved profiles are configured for auto-connect
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `essid` | Is the target network visible? | If the network is not listed, the reader cannot connect regardless of configuration. |
+| `signal` | What is the signal strength percentage? | Low signal causes unstable connectivity and increased retransmissions. |
+| `secProtocol` | What security type is required? | The network configuration must match the access point's security requirements. |
+| `autoConnect` | Is a saved profile set to auto-connect? | Confirms whether the reader will reconnect to this network automatically after a restart. |

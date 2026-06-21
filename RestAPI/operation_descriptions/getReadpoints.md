@@ -1,10 +1,12 @@
-The `GET /cloud/readPoints` REST endpoint is used to gets the read points on the reader.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/readPoints` REST endpoint retrieves the read points available on the reader.
 
-- Gets the read points on the reader.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The list of read-point identifiers available on this reader
+
+No request body is required.
 
 ## 2. Endpoint Details
 
@@ -12,12 +14,25 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/readPoints` |
 | Operation ID | `getReadpoints` |
-| MQTT Command | `get_readPoints` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_readPoints` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_readPoints` MQTT command where applicable.
+Use `GET /cloud/readPoints` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Identify available read-point identifiers before configuring cable loss compensation
+- Map physical read points before configuring inventory mode settings
+- Verify read-point availability before referencing them in antenna configuration
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| Read-point list | How many read points are returned? | Determines how many antenna ports are physically available for use. |
+| Read-point IDs | Do the returned IDs match expected port numbering? | Read-point identifiers must match exactly when used in `PUT /cloud/cableLossCompensation` or `PUT /cloud/mode`. |

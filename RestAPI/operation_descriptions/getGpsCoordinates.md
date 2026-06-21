@@ -1,10 +1,13 @@
-The `GET /cloud/readerLocation` REST endpoint is used to gets the GPS coordinates (lat/long).
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/readerLocation` REST endpoint retrieves the reader's last reported GPS coordinates.
 
-- Gets the GPS coordinates (lat/long).
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- Latitude and longitude values
+- Altitude (where available)
+
+No request body is required. The returned values represent the most recent location data known to the reader.
 
 ## 2. Endpoint Details
 
@@ -12,12 +15,26 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/readerLocation` |
 | Operation ID | `getGpsCoordinates` |
-| MQTT Command | `get_gpsCoordinates` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_gpsCoordinates` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_gpsCoordinates` MQTT command where applicable.
+Use `GET /cloud/readerLocation` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Record reader location for asset tracking or fleet management
+- Confirm GPS availability on a deployed reader
+- Feed location data into site, inventory, or logistics systems
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `latitude` | Is a valid latitude value returned? | A null or zero value may indicate the reader does not have a GPS fix yet. |
+| `longitude` | Is a valid longitude value returned? | Combined with latitude, this identifies the reader's physical position. |
+| `altitude` | Is altitude data present? | Useful in multi-floor or elevated deployments where vertical position matters. |

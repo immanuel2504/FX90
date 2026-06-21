@@ -1,12 +1,14 @@
-The `get_preSelection` command retrieves the current rxSawFilter pre-selection state.
+## 1. Description
 
-Use this command to:
+The `get_preSelection` command retrieves the current rxSawFilter pre-selection state from the reader.
 
-- Check whether rxSawFilter is enabled or disabled
-- Verify RF pre-selection before starting inventory
-- Confirm the effect of a previous `set_preSelection` command
+This command returns:
 
-## Command Details
+- Whether the rxSawFilter (receive SAW filter pre-selection) is enabled or disabled
+
+No additional payload fields are required.
+
+## 2. Command Details
 
 | Property | Value |
 |---|---|
@@ -14,9 +16,21 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [set_preSelection](set_preSelection.md), [start](start.md), [get_status](get_status.md) |
-| Supported Operations | Retrieve rxSawFilter state |
+| Required Request Fields | command, command_id |
+| Supported Operations | Retrieve the rxSawFilter pre-selection state |
+| Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |
 
-## Before You Begin
+## 3. When to Use This Command
 
-No command payload fields are required. Use this command before changing the pre-selection state or before starting inventory in deployments where receiver filtering matters.
+Use `get_preSelection` to:
+
+- Check whether rxSawFilter is enabled or disabled before starting inventory
+- Verify the RF pre-selection state in deployments where receiver filtering matters
+- Confirm the effect of a prior `set_preSelection` call
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `rxSawFilter` | Is the filter enabled or disabled? | Enabling the SAW filter improves receiver selectivity in noisy RF environments but may reduce sensitivity in clean environments. |

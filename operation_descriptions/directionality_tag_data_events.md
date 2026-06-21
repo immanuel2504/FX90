@@ -1,15 +1,20 @@
-The `directionality_tag_data_events` payload carries zone-based tag state and direction information during DIRECTIONALITY operating mode.
+## 1. Description
+
+The `directionality_tag_data_events` event carries zone-based tag state and direction information during DIRECTIONALITY operating mode.
 
 This event includes:
 
-- Tag identity (`tagId`) and zone state (`NEW`, `UPDATE`, `TRANSITION`, `TIMED_OUT`)
-- Current and previous zone numbers, direction, and optional zone/location history
+- Tag identity (`tagId`) and current zone state (`NEW`, `UPDATE`, `TRANSITION`, `TIMED_OUT`)
+- Current and previous zone number and zone name
+- Travel direction on tag timeout (`IN`, `OUT`, `NONE`, `UNKNOWN`, `ERROR`)
+- Optional zone history and location history arrays when enabled in mode settings
 
 Use this event to:
 
-- Track tag movement between zones (entry/exit detection)
-- Determine travel direction when a tag times out
-- Build zone-transition analytics and alerting
+- Detect tag entry and exit at zone boundaries (portals, docks, doorways)
+- Determine the travel direction of a tag as it leaves the read field
+- Build zone-transition analytics, flow monitoring, and alerting
+- Reconstruct tag movement paths using zone history and location history
 
 ## 2. Event Details
 
@@ -18,31 +23,19 @@ Use this event to:
 | Event Type | Directionality Tag Data |
 | Communication Type | Device to Cloud |
 | Applies To | FXR90 |
-| Trigger Condition | Published on tag zone state changes in DIRECTIONALITY mode |
-| Related Events | tagDataEvents, zoneHistory, locationHistory |
+| Trigger Condition | Published inside `tagDataEvents` when a tag's zone state changes during DIRECTIONALITY mode |
+| Related Events | [tagDataEvents](tagDataEvents.md), [zoneHistory](zoneHistory.md), [locationHistory](locationHistory.md) |
 | Supported API Versions | V1.0 |
 
 ## 3. When This Event Is Published
 
-The reader publishes this payload inside the `tagDataEvents` envelope (`type: DIRECTIONALITY`) when a tag's zone state changes. No command is required beyond starting directionality mode.
+The reader publishes this payload inside the `tagDataEvents` envelope (`type: DIRECTIONALITY`) when a tag's zone state changes. No command is required beyond starting directionality mode with `start`.
 
-| `state` | Meaning | Extra Fields |
+| `state` | Condition | Notes |
 |---|---|---|
-| `NEW` | Tag first seen in a zone | `zone`, `zoneName` |
-| `UPDATE` | Tag still in the same zone | `zone`, `zoneName` |
-| `TRANSITION` | Tag moved to a new zone | `zone`, `prevZone`, `prevZoneName` |
-| `TIMED_OUT` | Tag left the read field | `direction`, optional `zoneHistory`, `locationHistory` |
+| `NEW` | Tag first appears in a zone | Includes `zone` and `zoneName`. No previous zone. |
+| `UPDATE` | Tag remains in the same zone and is read again | Includes `zone` and `zoneName`. Confirms continued presence. |
+| `TRANSITION` | Tag moves from one zone to another | Includes `zone`, `zoneName`, `prevZone`, and `prevZoneName`. |
+| `TIMED_OUT` | Tag is no longer detected in the read field | Includes `direction`. Optionally includes `zoneHistory` and `locationHistory` if enabled in mode settings. |
 
-### Key Fields
-
-| Field | Type | Description |
-|---|---|---|
-| `eventNum` | integer | Monotonically increasing message ID. |
-| `tagId` | string | Tag EPC/UII in hex. |
-| `state` | string | Tag state: `NEW`, `UPDATE`, `TRANSITION`, `TIMED_OUT`. |
-| `zone` | integer | Current zone number (1–6). |
-| `zoneName` | string | User-defined zone name. |
-| `prevZone` | number | Previous zone (TRANSITION only, 1–6). |
-| `direction` | string | Travel direction (TIMED_OUT only): `IN`, `OUT`, `NONE`, `UNKNOWN`, `ERROR`. |
-| `zoneHistory` | array | Zones traversed (TIMED_OUT + `report_zone_history` enabled). |
-| `locationHistory` | array | Location estimates (TIMED_OUT + `report_location_history` enabled). |
+> **Note:** `zoneHistory` is included in `TIMED_OUT` events only when `report_zone_history` is enabled in the directionality mode configuration. `locationHistory` is included only when `report_location_history` is enabled. Both are absent otherwise and must not be assumed to be present.

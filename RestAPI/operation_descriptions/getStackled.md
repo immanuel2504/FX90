@@ -1,10 +1,14 @@
-The `GET /cloud/stack-led` REST endpoint is used to retrieves stack LED state.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/stack-led` REST endpoint retrieves the current state of the stack LED on the reader.
 
-- Retrieves stack LED state.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The active stack LED color
+- Whether the LED is currently flashing
+- How much time remains for a timed LED state (if applicable)
+
+No request body is required.
 
 ## 2. Endpoint Details
 
@@ -12,12 +16,27 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/stack-led` |
 | Operation ID | `getStackled` |
-| MQTT Command | `get_stackled` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_stackled` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_stackled` MQTT command where applicable.
+Use `GET /cloud/stack-led` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Check the active stack LED color and brightness
+- Confirm whether the LED is currently in a flashing state
+- See how much time remains for a timed LED state before it reverts
+- Verify the effect of a prior `PUT /cloud/stack-led` call
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `color` | What color is the LED showing? | Color is used to signal reader operational state to operators on the floor. |
+| `flash` | Is the LED flashing? | Flashing indicates a transient or attention state versus a steady operational state. |
+| `remainingTime` | Is a timer active? | A remaining time value indicates the LED will revert automatically after the duration expires. |

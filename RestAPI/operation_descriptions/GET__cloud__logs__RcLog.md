@@ -1,23 +1,39 @@
-The `GET /cloud/logs/RcLog` REST endpoint is used to retrieve RcInfoLog.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/logs/RcLog` REST endpoint retrieves the Radio Control (RC) information log file from the reader.
 
-- Retrieve RcInfoLog.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The log filename
+- The full content of the RC info log
+
+No request body is required.
 
 ## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/logs/RcLog` |
-| Description Key | `GET__cloud__logs__RcLog` |
-| MQTT Command | `get_logs_rcLog` |
+| Operation ID | `GET__cloud__logs__RcLog` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_rc_log` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_logs_rcLog` MQTT command where applicable.
+Use `GET /cloud/logs/RcLog` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Retrieve radio control events and diagnostic messages for troubleshooting inventory issues
+- Capture RC log data before a reader restart wipes in-memory logs
+- Investigate radio connection failures or inventory start/stop events
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
+| `content` | Does the log contain relevant events or error messages? | The log content reveals radio control state changes, errors, and diagnostics during reader operation. |

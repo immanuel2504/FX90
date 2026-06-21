@@ -1,10 +1,12 @@
-The `GET /cloud/app-led` REST endpoint is used to retrieves application LED state.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/app-led` REST endpoint retrieves the current state of the application LED on the reader.
 
-- Retrieves application LED state.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The application LED status (`DEFAULT` or `NOT_DEFAULT`)
+
+No request body is required.
 
 ## 2. Endpoint Details
 
@@ -12,12 +14,24 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/app-led` |
 | Operation ID | `getAppled` |
-| MQTT Command | `get_appled` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_appled` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_appled` MQTT command where applicable.
+Use `GET /cloud/app-led` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Confirm whether the application LED is showing default reader state or has been overridden
+- Verify the effect of a prior `PUT /cloud/app-led` call
+- Audit LED state as part of a device health or provisioning check
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `status` | Is it `DEFAULT` or `NOT_DEFAULT`? | `NOT_DEFAULT` indicates the LED has been overridden by the application; `DEFAULT` means it reflects normal reader status. |

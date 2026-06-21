@@ -1,39 +1,45 @@
-The `GET /cloud/version` REST endpoint and the `get_version` MQTT command retrieve detailed hardware and software component information from the reader's software stack.
+## 1. Description
 
-This operation returns:
+The `GET /cloud/version` REST endpoint retrieves detailed hardware and software component version information from the reader's software stack.
+
+This endpoint returns:
+
 - Reader application, radio firmware, and cloud agent versions
+- Radio control application version
 - Reader model and serial number
 - Available OS upgrade paths and rollback firmware details
 
-This is a stateless operation. The REST endpoint does not require a request body payload, and the MQTT command only requires the standard command envelope without additional payload fields. For MQTT, the reader will echo the supplied `command_id` in the response.
+No request body is required.
 
-## 1. Operation Details
+## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
-| Pattern Name | Version Query |
-| Supported Protocols | REST (HTTP/HTTPS), MQTT |
-| Communication Type | Synchronous (REST), Bidirectional (MQTT) |
-| Applies To | FXR90, FX7500, FX9600, ATR7000 |
-| Related Operations | status, readerCapabilities, os (update), revertback |
-| Required Request Fields | None (REST) / `command`, `command_id` (MQTT) |
-| Supported Response Sections | JSON Body (REST) / `payload` (MQTT) |
+| REST Endpoint | `GET /cloud/version` |
+| Operation ID | `getVersion` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_version` |
+| Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 2. When to Use This Command / Endpoint
+## 3. When to Use This Endpoint
 
-Use `GET /cloud/version` or `get_version` to:
-- Confirm the installed firmware versions (Reader App, Radio Firmware) before or after performing a system update.
-- Verify the exact reader model (e.g., FXR90) when applying model-specific configuration.
-- Capture the serial number for asset tracking, remote fleet management, or support cases.
-- Audit available OS upgrade paths or rollback capabilities across a fleet.
-- Validate API compatibility, as newer firmware versions may introduce new features or schema changes.
+Use `GET /cloud/version` to:
 
-## 3. Key Fields to Check in the Response
+- Confirm installed firmware versions before or after a system update
+- Verify the exact reader model when applying model-specific configuration
+- Capture the serial number for asset tracking or support cases
+- Audit available OS upgrade paths or rollback capabilities across a fleet
+
+Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `readerApplication` | Current reader software version | Determines feature and REST/MQTT API availability. |
-| `radioFirmware` | Firmware running on the radio module | Affects RF behavior, read performance, and compatibility. |
-| `model` | Reader model (FXR90 / FX7500 / FX9600 / ATR7000) | Drives physical capabilities, antenna limits, and model-specific configurations. |
-| `serialNumber` | Unique reader serial number | Identifies the device securely for support and asset records. |
-| `availableOsUpgrades` | Whether the object is empty `{}` or populated | Indicates if an OS upgrade path has been downloaded and is ready to be installed. |
+| `readerApplication` | Current reader software version | Determines which features and API operations are available. |
+| `radioFirmware` | Firmware running on the radio module | Affects RF behavior, read performance, and hardware compatibility. |
+| `model` | Reader model identifier | Drives physical capabilities and model-specific configuration options. |
+| `serialNumber` | Unique reader serial number | Identifies the device for support cases and asset records. |
+| `availableOsUpgrades` | Is the object empty or populated? | A populated object means a downloaded OS upgrade is ready to install. |

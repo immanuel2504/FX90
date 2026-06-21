@@ -1,23 +1,39 @@
-The `GET /cloud/logs/RgErrorLog` REST endpoint is used to retrieve RgErrorLog.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/logs/RgErrorLog` REST endpoint retrieves the Reader Gateway error log file from the reader.
 
-- Retrieve RgErrorLog.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The log filename
+- The full content of the Reader Gateway error log
+
+No request body is required.
 
 ## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/logs/RgErrorLog` |
-| Description Key | `GET__cloud__logs__RgErrorLog` |
-| MQTT Command | `get_logs_rgErrorLog` |
+| Operation ID | `GET__cloud__logs__RgErrorLog` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_rg_error_logs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_logs_rgErrorLog` MQTT command where applicable.
+Use `GET /cloud/logs/RgErrorLog` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Retrieve Reader Gateway error events for troubleshooting connectivity or data delivery failures
+- Investigate errors that occurred during tag data forwarding or cloud endpoint communication
+- Capture error logs before a reader restart clears in-memory data
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
+| `content` | Are there error messages or stack traces? | Error log content reveals the specific failures affecting Reader Gateway operation. |

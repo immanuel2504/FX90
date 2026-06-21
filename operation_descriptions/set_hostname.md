@@ -1,10 +1,16 @@
+## 1. Description
+
 The `set_hostname` command sets the network hostname of the reader.
 
-Use it to:
+This command allows you to configure:
 
-- Assign a recognizable hostname for network identification
-- Standardize naming conventions across a fleet
-- Update hostname after device relocation or re-provisioning
+- The reader's network hostname through `hostname`
+
+Use this command to:
+
+- Assign a recognizable hostname for network identification during provisioning
+- Standardize hostname naming conventions across a fleet
+- Update the hostname after a reader is relocated or re-provisioned
 
 ## 2. Command Details
 
@@ -14,13 +20,35 @@ Use it to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_hostname](get_hostname.md), [set_network](set_network.md), [get_network](get_network.md) |
-| Supported Operations | Set the reader hostname |
+| Required Request Fields | `command`, `command_id`, `payload` |
+| Required Payload Fields | `hostname` |
 | Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 
-Gather these details before sending the command. Duplicate hostnames on the same network can cause resolution conflicts.
+Have the desired hostname ready before sending this command. Duplicate hostnames on the same network can cause resolution conflicts.
 
 | What You Need | Details |
 |---|---|
-| Hostname | Desired hostname string (payload key is `hostname`, lowercase). |
+| Hostname string | The desired hostname (payload key: `hostname`). Must be a valid RFC 1123 hostname — alphanumeric characters and hyphens only; no underscores or spaces. |
+| Network uniqueness | Verify the chosen hostname is not already in use on the network segment to avoid DNS or mDNS conflicts. |
+
+## 4. Rules and Constraints
+
+Violating any of these rules will cause the command to fail or result in an invalid hostname.
+
+### Hostname Format
+
+- `hostname` must be a non-empty string. An empty string will be rejected.
+- Valid hostname characters are alphanumeric (`a-z`, `A-Z`, `0-9`) and hyphens (`-`). Underscores, spaces, and special characters are not valid and will be rejected.
+- The hostname must not begin or end with a hyphen.
+
+### Apply Timing
+
+- The hostname change takes effect immediately after the command is acknowledged.
+- The new hostname is visible in subsequent `get_hostname` and `get_network` responses.
+- A hostname change does not require a reboot.
+
+### Security Note
+
+- No credentials or secrets are required in the `set_hostname` payload. Do not include authentication data in hostname configuration requests.

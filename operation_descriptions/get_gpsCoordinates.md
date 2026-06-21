@@ -1,12 +1,15 @@
+## 1. Description
+
 The `get_gpsCoordinates` command retrieves the reader's last reported GPS coordinates.
 
-Use this command to:
+This command returns:
 
-- Record reader location for asset tracking
-- Confirm GPS/location availability on a deployed reader
-- Feed location data into fleet, site, or inventory systems
+- Latitude and longitude values
+- Altitude (where available)
 
-## Command Details
+No additional payload fields are required. The returned values represent the most recent location data known to the reader.
+
+## 2. Command Details
 
 | Property | Value |
 |---|---|
@@ -14,9 +17,23 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [get_network](get_network.md), [get_status](get_status.md) |
-| Supported Operations | Retrieve GPS coordinates |
+| Required Request Fields | command, command_id |
+| Supported Operations | Retrieve the reader's last known GPS coordinates |
+| Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |
 
-## Before You Begin
+## 3. When to Use This Command
 
-No command payload fields are required. The returned values represent the latest location data known to the reader.
+Use `get_gpsCoordinates` to:
+
+- Record reader location for asset tracking or fleet management
+- Confirm GPS or location availability on a deployed reader
+- Feed location data into site, inventory, or logistics systems
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `latitude` | Is a valid latitude value returned? | A null or zero value may indicate the reader does not have a GPS fix yet. |
+| `longitude` | Is a valid longitude value returned? | Combined with latitude, this identifies the reader's physical position. |
+| `altitude` | Is altitude data present? | Useful in multi-floor or elevated deployments where vertical position matters. |

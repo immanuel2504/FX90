@@ -1,10 +1,12 @@
-The `GET /cloud/timeZone` REST endpoint is used to retrieves the reader timezone.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/timeZone` REST endpoint retrieves the reader's currently configured time zone.
 
-- Retrieves the reader timezone.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The IANA time zone string currently set on the reader
+
+No request body is required.
 
 ## 2. Endpoint Details
 
@@ -12,12 +14,24 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/timeZone` |
 | Operation ID | `getTimezone` |
-| MQTT Command | `get_timeZone` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_timeZone` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_timeZone` MQTT command where applicable.
+Use `GET /cloud/timeZone` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Confirm the reader is using the correct local time zone for timestamp generation
+- Verify the effect of a prior `PUT /cloud/timeZone` call
+- Audit time zone consistency across a fleet of readers
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `timeZone` | Does it match the deployment location's time zone? | Incorrect time zone causes reader timestamps to differ from local real-world time, which can affect log correlation and event timing. |

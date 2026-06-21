@@ -1,10 +1,12 @@
-The `GET /cloud/hostName` REST endpoint is used to retrieves reader hostname.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/hostName` REST endpoint retrieves the reader's current network hostname.
 
-- Retrieves reader hostname.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The hostname string currently assigned to the reader
+
+No request body is required.
 
 ## 2. Endpoint Details
 
@@ -12,12 +14,24 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/hostName` |
 | Operation ID | `getHostName` |
-| MQTT Command | `get_hostName` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_hostname` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_hostName` MQTT command where applicable.
+Use `GET /cloud/hostName` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Verify the hostname assigned to a reader during provisioning
+- Confirm the hostname matches the expected naming convention for the deployment
+- Retrieve the hostname before updating it with `PUT /cloud/hostName`
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `hostname` | Does it match the expected value? | The hostname identifies the reader on the network and in management systems; a mismatch may indicate the wrong reader was configured. |

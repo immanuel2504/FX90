@@ -1,12 +1,15 @@
+## 1. Description
+
 The `get_eSimConfig` command retrieves eSIM identity and profile information from the reader.
 
-Use this command to:
+This command returns:
 
-- Audit cellular/eSIM provisioning
-- Check the reader EID and IMEI values
-- Review installed eSIM profiles before enabling or switching a profile
+- The reader EID (eSIM identifier) and IMEI
+- Installed eSIM profile names, nicknames, and activation states
 
-## Command Details
+No additional payload fields are required to retrieve the eSIM configuration.
+
+## 2. Command Details
 
 | Property | Value |
 |---|---|
@@ -14,9 +17,23 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [set_eSimConfig](set_eSimConfig.md), [get_network](get_network.md), [set_network](set_network.md) |
-| Supported Operations | Retrieve eSIM configuration |
+| Required Request Fields | command, command_id |
+| Supported Operations | Retrieve eSIM identity and installed profile details |
+| Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |
 
-## Before You Begin
+## 3. When to Use This Command
 
-No command payload fields are required. Use this command before `set_eSimConfig` when you need to confirm available profile nicknames.
+Use `get_eSimConfig` to:
+
+- Audit cellular or eSIM provisioning status on the reader
+- Check the EID and IMEI values for SIM registration or support cases
+- Review installed eSIM profiles before enabling or switching a profile with `set_eSimConfig`
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `eid` | Is the EID correct for this SIM profile? | The EID uniquely identifies the eSIM hardware and is required for carrier provisioning. |
+| `imei` | Is the IMEI registered with the carrier? | An unregistered IMEI cannot establish a cellular data connection. |
+| Profile names | Which profiles are installed and which is active? | Only one profile can be active at a time; use this to confirm the correct carrier profile is enabled. |

@@ -1,10 +1,12 @@
-The `GET /cloud/certificates` REST endpoint is used to retrieve installed certificate details.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/certificates` REST endpoint retrieves the list of certificates installed on the reader.
 
-- Retrieve installed certificate details.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- An array of installed certificates, each with name, type, serial number, and validity dates
+
+No request body is required.
 
 ## 2. Endpoint Details
 
@@ -12,12 +14,28 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/certificates` |
 | Operation ID | `getCertificates` |
-| MQTT Command | `get_certificates` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_certs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_certificates` MQTT command where applicable.
+Use `GET /cloud/certificates` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Audit which certificates are installed and their current validity windows
+- Confirm a certificate was successfully installed or removed
+- Retrieve serial numbers for certificate rotation audits
+- Check expiry dates before a scheduled certificate renewal
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `name` | Is the expected certificate present? | Confirms the correct certificate is installed for TLS or authentication. |
+| `type` | What type of certificate is it? | Differentiates device, CA, and client certificates used for different purposes. |
+| `notValidAfter` | When does it expire? | Expired certificates will cause TLS handshake failures and connectivity loss. |
+| `serialNumber` | Does the serial match the expected certificate? | Verifies the exact certificate instance, useful for rotation audits. |

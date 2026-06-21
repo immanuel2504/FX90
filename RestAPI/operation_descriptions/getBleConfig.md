@@ -1,29 +1,44 @@
-The `GET /cloud/ble-config` REST endpoint and the `get_bleConfig` MQTT command retrieve the current BLE scanner configuration from the reader.
+## 1. Description
 
-This operation returns:
+The `GET /cloud/ble-config` REST endpoint retrieves the current Bluetooth Low Energy (BLE) scanner configuration from the reader.
+
+This endpoint returns:
+
 - Whether BLE scanning is enabled
-- Scan interval settings
-- Protocol-specific filters for iBeacon, AltBeacon, Eddystone, and generic BLE advertisements
-- Additional RSSI and service UUID filters
+- Scan interval and window settings
+- RSSI filtering threshold
+- iBeacon, AltBeacon, Eddystone, and generic BLE advertisement filter settings
 
-## 1. Operation Details
+No request body is required.
+
+## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
-| Pattern Name | BLE Configuration Query |
-| Supported Protocols | REST (HTTP/HTTPS), MQTT |
-| Applies To | FXR90 |
-| Related Operations | `setBleConfig`, `startInventory`, `stopInventory` |
 | REST Endpoint | `GET /cloud/ble-config` |
-| MQTT Command | `get_bleConfig` |
+| Operation ID | `getBleConfig` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_bleConfig` |
+| Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 2. When to Use This Endpoint
+## 3. When to Use This Endpoint
 
-Use this endpoint before starting BLE scans to verify that the reader is configured with the expected scan interval and filters.
+Use `GET /cloud/ble-config` to:
 
-| Field | What to Check |
-|---|---|
-| `ble.enable` | Confirms whether BLE scanning is enabled. |
-| `ble.scanIntervalSec` | Confirms how often BLE scan results are collected. |
-| `ble.protocols` | Confirms which beacon protocols and filters are active. |
-| `additionalFilters` | Confirms RSSI and service UUID filters. |
+- Verify BLE scanning is enabled before starting a BLE inventory scan
+- Review scan interval and RSSI filter settings before modifying them
+- Confirm iBeacon, AltBeacon, Eddystone, or generic BLE filter configuration
+- Verify the effect of a prior `PUT /cloud/ble-config` call
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `enabled` | Is BLE scanning enabled? | BLE inventory will not start if scanning is disabled. |
+| `scanInterval` | What is the configured scan interval? | Determines how frequently the reader actively listens for BLE advertisements. |
+| `rssiFilter` | What is the RSSI threshold? | Tags or beacons below this threshold are filtered out of scan results. |
+| Beacon type filters | Which beacon types are included? | Only enabled beacon types will appear in BLE tag data events. |

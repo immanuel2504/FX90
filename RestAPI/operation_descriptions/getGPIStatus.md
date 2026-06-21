@@ -1,10 +1,12 @@
-The `GET /cloud/gpi` REST endpoint is used to get GPI Status.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/gpi` REST endpoint retrieves the current digital input state of all GPI (General Purpose Input) pins on the reader.
 
-- Get GPI Status.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The current HIGH or LOW state of each GPI pin (pins 1–4)
+
+No request body is required.
 
 ## 2. Endpoint Details
 
@@ -12,12 +14,25 @@ Use this endpoint to:
 |---|---|
 | REST Endpoint | `GET /cloud/gpi` |
 | Operation ID | `getGPIStatus` |
-| MQTT Command | `get_gpiStatus` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_gpi_status` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_gpiStatus` MQTT command where applicable.
+Use `GET /cloud/gpi` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Check the current digital state of trigger or sensor inputs connected to GPI pins
+- Verify GPI pin state before applying a GPI-triggered workflow
+- Troubleshoot whether an external trigger signal is being received at the reader
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| Pin 1 state | Is the pin HIGH or LOW? | Confirms whether an external trigger or sensor is actively signaling the reader. |
+| Pin 2–4 states | Are all expected pins reporting the correct state? | Multi-pin triggers require all relevant pins to be in the expected state before initiating action. |

@@ -1,28 +1,41 @@
-The `del_certs` command removes an installed certificate from the reader by name and type.
+## 1. Description
+
+The `del_certs` command removes an installed certificate from the reader. When you run this command, the certificate identified by name and type is deleted from the reader's certificate store.
 
 Use this command to:
 
-- Remove expired or replaced TLS certificates
-- Clean up unused certificate entries
-- Rotate credentials before installing a replacement with `set_update_cert`
+- Remove expired or revoked TLS certificates before installing a replacement
+- Clean up the certificate store after a certificate rotation
+- Delete client or server certificates that are no longer needed for MQTT or HTTPS authentication
 
-## Command Details
+## 2. Command Details
 
 | Property | Value |
 |---|---|
 | Pattern Name | Certificate Deletion |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [get_certs](get_certs.md), [set_update_cert](set_update_cert.md), [refresh-cert](refresh-cert.md) |
+| Related Commands | [get_certs](get_certs.md), [set_update_cert](set_update_cert.md), [refresh-cert](refresh-cert.md), [del_CACertificate](del_CACertificate.md) |
+| Required Request Fields | `command`, `command_id`, `payload` |
+| Required Payload Fields | `name`, `type` |
 | Supported Certificate Types | `client`, `server`, `app` |
 | Supported API Versions | V1.0 |
 
+## 3. Before You Begin
 
-## Before You Begin
-
-Confirm the certificate is no longer in use. Cross-reference the certificate `name` with endpoint configuration and `get_certs`.
+Confirm the certificate is no longer in use before sending this command. Cross-reference the certificate name and type with your active endpoint configuration and the list returned by `get_certs`.
 
 | What You Need | Details |
 |---|---|
-| Certificate name | Exact `name` from `get_certs`. |
-| Certificate type | `client`, `server`, or `app`. |
+| Certificate name | The exact `name` of the certificate to delete, as returned by `get_certs`. The name is case-sensitive. |
+| Certificate type | The type of the certificate: `client`, `server`, or `app`. The type must match the installed certificate. |
+| Active use check | Confirm the certificate is not currently used for an active MQTT TLS or HTTPS endpoint connection. Deleting an in-use certificate will cause TLS handshake failures on the next reconnect. |
+
+## 4. Rules and Constraints
+
+Violating any of these rules will cause the command to fail.
+
+- `name` and `type` are both required in the payload. Omitting either field will cause the command to be rejected.
+- `type` must be one of `client`, `server`, or `app`. An unrecognized type string will be rejected.
+- The certificate identified by `name` and `type` must exist on the reader. Attempting to delete a certificate that is not installed will result in an error.
+- Certificates currently in active use for TLS connections should be replaced with a new certificate (via `set_update_cert`) before deletion to avoid a connectivity gap.

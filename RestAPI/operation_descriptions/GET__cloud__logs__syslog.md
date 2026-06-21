@@ -1,23 +1,39 @@
-The `GET /cloud/logs/syslog` REST endpoint is used to retrieve Syslog.
+## 1. Description
 
-Use this endpoint to:
+The `GET /cloud/logs/syslog` REST endpoint retrieves the system log file from the reader's operating system.
 
-- Retrieve Syslog.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+This endpoint returns:
+
+- The syslog filename
+- The full content of the OS-level system log
+
+No request body is required.
 
 ## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/logs/syslog` |
-| Description Key | `GET__cloud__logs__syslog` |
-| MQTT Command | `get_logs_syslog` |
+| Operation ID | `GET__cloud__logs__syslog` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
+| MQTT Equivalent | `get_logs_syslog` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Required Request Fields | None |
+| Supported Response Sections | JSON response body |
+| Supported API Versions | V1.0 |
 
-## 3. Usage Notes
+## 3. When to Use This Endpoint
 
-This REST endpoint corresponds to the `get_logs_syslog` MQTT command where applicable.
+Use `GET /cloud/logs/syslog` to:
 
-Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+- Retrieve OS-level events for troubleshooting system startup, network changes, or service crashes
+- Investigate unexpected reboots or hardware-related events
+- Capture system logs before a reader restart resets the log buffer
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
+| `content` | Are there kernel, network, or service failure messages? | Syslog captures low-level OS events that application logs may not surface, making it essential for diagnosing platform-level issues. |

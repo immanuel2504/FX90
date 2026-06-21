@@ -1,10 +1,13 @@
+## 1. Description
+
 The `get_mode` command retrieves the reader's current operating mode and the RF settings associated with that mode.
 
 This command returns:
 
-- The operating mode type (SIMPLE, INVENTORY, PORTAL, etc.)
-- Active antennas/beams and transmit power
-- Environment profile and mode-specific settings
+- The operating mode type (e.g., SIMPLE, INVENTORY, PORTAL)
+- Active antennas or beams and their transmit power settings
+- Environment profile in use
+- Mode-specific configuration settings
 
 No additional payload fields are required to retrieve the active mode.
 
@@ -15,15 +18,26 @@ No additional payload fields are required to retrieve the active mode.
 | Pattern Name | Operating Mode Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | set_mode, start, stop, get_config |
+| Related Commands | [set_mode](set_mode.md), [start](start.md), [stop](stop.md), [get_config](get_config.md) |
+| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active operating mode and RF settings |
+| Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command
 
 Use `get_mode` to:
 
-- Confirm the active mode before starting an inventory
-- Verify antenna/beam and transmit power selection
-- Check the environment profile in use
-- Review mode-specific settings before changing them
+- Confirm the active mode before starting an inventory session
+- Verify antenna and transmit power selection before RF operations
+- Check the environment profile currently in use
+- Review mode-specific settings before changing them with `set_mode`
+
+Key fields to check in the response:
+
+| Field | What to Check | Why It Matters |
+|---|---|---|
+| `modeType` | Which mode is active (SIMPLE, INVENTORY, PORTAL)? | Determines which RF behavior and tag reporting logic the reader uses. |
+| `antennas` | Which antenna ports are active? | Confirms the physical coverage area for the current inventory session. |
+| `txPower` | What is the configured transmit power? | Directly affects read range and regulatory compliance. |
+| `environmentProfile` | Which environment profile is set? | Affects reader sensitivity and RF settings for the deployment environment. |
