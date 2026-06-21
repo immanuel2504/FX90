@@ -1468,12 +1468,12 @@ function render(spec) {
    var content = document.getElementById('content');
    var nav = document.getElementById('nav-content');
    var searchInput = document.getElementById('sidebar-search');
-   var html = '';
+   var shellHtml = '';
    var navHtml = '';
 
    if (spec.info && spec.info.description) {
-     html += '<div class="info-description md-content">' + md(spec.info.description, { idPrefix: 'info' }) + '</div>';
-     html += buildStatsBar(spec);
+     shellHtml += '<div class="info-description md-content">' + md(spec.info.description, { idPrefix: 'info' }) + '</div>';
+     shellHtml += buildStatsBar(spec);
      var infoSections = [];
      spec.info.description.replace(/^## (.+)$/gm, function (_, t) { infoSections.push(t); });
      if (infoSections.length) {
@@ -1488,6 +1488,9 @@ function render(spec) {
 
    var tagMap = buildTagMapFromSpec(spec);
    var groups = spec['x-tagGroups'] || [{ name: 'API', tags: Object.keys(tagMap) }];
+
+   // Collect per-tag render tasks while building nav + section skeletons
+   var tagRenderQueue = [];
    groups.forEach(function (group) {
      navHtml += '<div class="nav-group" data-group="' + escHtml(group.name) + '">' +
        '<span class="nav-group-label">' + escHtml(group.name) + '</span>' +
@@ -1504,31 +1507,25 @@ function render(spec) {
          var opId = opIdFromPath(entry.path);
          navHtml += '<a class="nav-op" href="#op-' + opId + '">' + escHtml(entry.op.summary) + '</a>';
        });
-       html += '<div class="tag-section" id="tag-' + tagId + '">';
-       html += '<h2 class="tag-heading">' + escHtml(tagLabel) + '</h2>';
+       // Section shell: heading + description only; operations filled in progressively
+       shellHtml += '<div class="tag-section" id="tag-' + tagId + '">';
+       shellHtml += '<h2 class="tag-heading">' + escHtml(tagLabel) + '</h2>';
        if (tag.description) {
-         html += '<div class="tag-description md-content">' + md(tag.description) + '</div>';
+         shellHtml += '<div class="tag-description md-content">' + md(tag.description) + '</div>';
        }
-       tag.operations.forEach(function (entry) {
-         html += renderOperation(entry.path, entry.method, entry.op);
-       });
-       html += '</div><hr class="tag-divider">';
+       shellHtml += '<div id="tag-ops-' + tagId + '"></div>';
+       shellHtml += '</div><hr class="tag-divider">';
+       tagRenderQueue.push({ tagId: tagId, tag: tag });
      });
      navHtml += '</div>';
    });
 
+   // Paint nav + skeletons immediately — page is interactive before ops render
    nav.innerHTML = navHtml;
-   content.innerHTML = html;
+   content.innerHTML = shellHtml;
    content.classList.remove('is-loading');
 
-   addCollapseToggles(content);
-   highlightVisibleJsonBlocks(content);
-   addCopyButtons(content);
-   wireSchemaToggles(content);
-   wireSchemaToolbars(content);
-   content.querySelectorAll('.operation').forEach(wireOperationInteractions);
-
-   var operationSections = Array.prototype.slice.call(content.querySelectorAll('.operation'));
+   var operationSections = [];
    var tagSections = Array.prototype.slice.call(content.querySelectorAll('.tag-section'));
    var TOPBAR_H = document.getElementById('topbar') ? document.getElementById('topbar').offsetHeight : 52;
 
@@ -1538,12 +1535,45 @@ function render(spec) {
      window.scrollTo({ top: top, behavior: behavior || 'auto' });
    }
 
-   if (location.hash) {
-     var hashTarget = document.getElementById(location.hash.slice(1));
-     if (hashTarget) scrollToTarget(hashTarget, 'auto');
+   // Progressive render: one tag section per animation frame so the browser
+   // can paint between batches instead of blocking on one giant innerHTML.
+   var queueIndex = 0;
+   function renderNextTag() {
+     if (queueIndex >= tagRenderQueue.length) {
+       finalizeRender();
+       return;
+     }
+     var task = tagRenderQueue[queueIndex++];
+     var placeholder = document.getElementById('tag-ops-' + task.tagId);
+     if (placeholder) {
+       var opsHtml = '';
+       task.tag.operations.forEach(function (entry) {
+         opsHtml += renderOperation(entry.path, entry.method, entry.op);
+       });
+       placeholder.innerHTML = opsHtml;
+       wireSchemaToggles(placeholder);
+       wireSchemaToolbars(placeholder);
+       highlightVisibleJsonBlocks(placeholder);
+       addCopyButtons(placeholder);
+       placeholder.querySelectorAll('.operation').forEach(function (opEl) {
+         operationSections.push(opEl);
+         wireOperationInteractions(opEl);
+       });
+     }
+     requestAnimationFrame(renderNextTag);
    }
 
-   bindRenderInteractions();
+   function finalizeRender() {
+     bindRenderInteractions();
+     if (location.hash) {
+       requestAnimationFrame(function () {
+         var hashTarget = document.getElementById(location.hash.slice(1));
+         if (hashTarget) scrollToTarget(hashTarget, 'auto');
+       });
+     }
+   }
+
+   requestAnimationFrame(renderNextTag);
 
    function bindRenderInteractions() {
      document.querySelectorAll('.nav-group').forEach(function (group) {
