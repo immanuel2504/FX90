@@ -18,6 +18,7 @@ No additional payload fields are required to retrieve the active mode.
 | Pattern Name | Operating Mode Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/mode` |
 | Related Commands | [set_mode](set_mode.md), [start](start.md), [stop](stop.md), [get_config](get_config.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active operating mode and RF settings |

@@ -20,10 +20,11 @@ Use this command to:
 | Pattern Name | GPO Control |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/gpo` |
 | Related Commands | [get_gpostatus](get_gpostatus.md), [get_gpi_status](get_gpi_status.md), [get_readerCapabilities](get_readerCapabilities.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `port`, `state` |
-| Supported Port Values | 1–4 (varies by reader model — see `get_readerCapabilities`) |
+| Supported Port Values | 1-4 (varies by reader model - see `get_readerCapabilities`) |
 | Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
@@ -32,7 +33,7 @@ Know the port number and desired output state before sending this command. Setti
 
 | What You Need | Details |
 |---|---|
-| Port number | The GPO port to target (integer, 1–4). Use `get_readerCapabilities` to confirm the maximum number of GPO pins available on this reader model. |
+| Port number | The GPO port to target (integer, 1-4). Use `get_readerCapabilities` to confirm the maximum number of GPO pins available on this reader model. |
 | Output state | `true` to drive the pin HIGH (active), `false` to drive the pin LOW (inactive). |
 | External device wiring | Confirm the wired device is rated for the GPO pin's voltage and current output before asserting a HIGH state. |
 
@@ -42,7 +43,7 @@ Violating any of these rules will cause the command to fail or drive the wrong o
 
 ### Port Selection
 
-- `port` must be a valid integer (1–4). The maximum value depends on the reader model — use `get_readerCapabilities` to confirm `numGPOs`. Specifying a port beyond the model's capacity will cause the command to fail.
+- `port` must be a valid integer (1-4). The maximum value depends on the reader model - use `get_readerCapabilities` to confirm `numGPOs`. Specifying a port beyond the model's capacity will cause the command to fail.
 - Only one GPO pin can be set per `set_gpo` request. To control multiple pins, send one request per pin.
 
 ### State Values

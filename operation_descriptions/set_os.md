@@ -22,6 +22,7 @@ Use this command to:
 | Pattern Name | OS Firmware Update |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/os` |
 | Related Commands | [get_version](get_version.md), [revertback](revertback.md), [get_status](get_status.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `url`, `authenticationType` |
@@ -30,14 +31,14 @@ Use this command to:
 
 ## 3. Before You Begin
 
-Gather all firmware download details before sending this command. A failed OS update can take the reader offline — plan for maintenance downtime and ensure the firmware URL is reachable from the reader's network before proceeding.
+Gather all firmware download details before sending this command. A failed OS update can take the reader offline - plan for maintenance downtime and ensure the firmware URL is reachable from the reader's network before proceeding.
 
 | What You Need | Details |
 |---|---|
 | Firmware URL | The HTTP(S) URL of the firmware directory. The reader fetches a file list from this URL, then downloads the appropriate build. |
 | Authentication type | `NONE` if no download credentials are required, or `BASIC` for username/password HTTP authentication. |
 | Download credentials | Required when `authenticationType` is `BASIC`. Provide `options.username` and `options.password`. |
-| JWT bearer token | Optional — supply a JWT in `headers.Authorization` for token-based authentication, regardless of `authenticationType`. |
+| JWT bearer token | Optional - supply a JWT in `headers.Authorization` for token-based authentication, regardless of `authenticationType`. |
 | Network reachability | The reader must be able to reach the firmware URL on the network. Confirm firewall rules allow HTTP(S) outbound on the port used by the firmware server. |
 | Current firmware version | Use `get_version` to confirm the reader's current build before initiating an update. |
 | Rollback plan | If the update fails, use `revertback` to return to the previous OS version. |

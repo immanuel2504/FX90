@@ -4,7 +4,7 @@ The `GET /cloud/gpi` REST endpoint retrieves the current digital input state of 
 
 This endpoint returns:
 
-- The current HIGH or LOW state of each GPI pin (pins 1–4)
+- The current HIGH or LOW state of each GPI pin (pins 1-4)
 
 No request body is required.
 
@@ -16,6 +16,7 @@ No request body is required.
 | Operation ID | `getGPIStatus` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_gpi_status` |
 | MQTT Equivalent | `get_gpi_status` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |
@@ -35,4 +36,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | Pin 1 state | Is the pin HIGH or LOW? | Confirms whether an external trigger or sensor is actively signaling the reader. |
-| Pin 2–4 states | Are all expected pins reporting the correct state? | Multi-pin triggers require all relevant pins to be in the expected state before initiating action. |
+| Pin 2-4 states | Are all expected pins reporting the correct state? | Multi-pin triggers require all relevant pins to be in the expected state before initiating action. |

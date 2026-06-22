@@ -25,6 +25,7 @@ Use this command to:
 | Pattern Name | Operating Mode Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/mode` |
 | Related Commands | [get_mode](get_mode.md), [start](start.md), [stop](stop.md), [get_readerCapabilities](get_readerCapabilities.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Mode Types | `SIMPLE`, `INVENTORY`, `PORTAL`, `CONVEYOR`, `CUSTOM`, `DIRECTIONALITY` |
@@ -33,14 +34,14 @@ Use this command to:
 
 ## 3. Before You Begin
 
-Decide on your mode configuration before sending this command. Changing mode while inventory is active can disrupt reads — call `stop` first if the reader is currently reading.
+Decide on your mode configuration before sending this command. Changing mode while inventory is active can disrupt reads - call `stop` first if the reader is currently reading.
 
 | What You Need | Details |
 |---|---|
 | Mode type | One of `SIMPLE`, `INVENTORY`, `PORTAL`, `CONVEYOR`, `CUSTOM`, or `DIRECTIONALITY`. |
 | Antenna ports and power | Which antenna ports (or ATR beams) to enable and the transmit power in dBm for each. |
 | Mode-specific settings | Inventory interval for `INVENTORY`; GPI triggers and stop interval for `PORTAL`; zone plan for `DIRECTIONALITY`. Only include the sub-object relevant to the chosen mode type. |
-| Environment profile | Optional — set to match the RF environment at the deployment site. Use `AUTO_DETECT` if unsure. |
+| Environment profile | Optional - set to match the RF environment at the deployment site. Use `AUTO_DETECT` if unsure. |
 | Active inventory | If the reader is currently reading tags, send `stop` before changing the mode to avoid disrupting ongoing inventory. |
 
 ## 4. Rules and Constraints
@@ -60,7 +61,7 @@ Violating any of these rules will cause the command to fail or inventory to beha
 
 ### Apply Timing
 
-- `set_mode` takes effect immediately — the new mode is stored and used the next time inventory is started with `start`.
+- `set_mode` takes effect immediately - the new mode is stored and used the next time inventory is started with `start`.
 - To preview the current mode before sending changes, use `get_mode`.
 
 ### Security Note

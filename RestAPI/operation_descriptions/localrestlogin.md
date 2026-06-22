@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `localrest_login` |
 | REST Endpoint | `GET /cloud/localRestLogin` |
 | Operation ID | `localrestlogin` |
-| MQTT Command | `localrest_login` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

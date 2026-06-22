@@ -19,6 +19,7 @@ Use this command to:
 | Pattern Name | Hostname Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/hostName` |
 | Related Commands | [get_hostname](get_hostname.md), [set_network](set_network.md), [get_network](get_network.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `hostname` |
@@ -30,7 +31,7 @@ Have the desired hostname ready before sending this command. Duplicate hostnames
 
 | What You Need | Details |
 |---|---|
-| Hostname string | The desired hostname (payload key: `hostname`). Must be a valid RFC 1123 hostname — alphanumeric characters and hyphens only; no underscores or spaces. |
+| Hostname string | The desired hostname (payload key: `hostname`). Must be a valid RFC 1123 hostname - alphanumeric characters and hyphens only; no underscores or spaces. |
 | Network uniqueness | Verify the chosen hostname is not already in use on the network segment to avoid DNS or mDNS conflicts. |
 
 ## 4. Rules and Constraints

@@ -20,6 +20,7 @@ No payload fields are required to retrieve the full network configuration.
 | Pattern Name | Network Configuration Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/network` |
 | Related Commands | [set_network](set_network.md), [get_hostname](get_hostname.md), [get_networkInterfaces](get_networkInterfaces.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active network configuration for all interfaces |

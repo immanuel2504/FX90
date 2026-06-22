@@ -16,6 +16,7 @@ No additional payload fields are required. Values are returned using fixed read-
 | Pattern Name | Cable Loss Compensation Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/cableLossCompensation` |
 | Related Commands | [set_cableLossCompensation](set_cableLossCompensation.md), [get_config](get_config.md), [get_readPoints](get_readPoints.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve per-read-point cable loss compensation values |

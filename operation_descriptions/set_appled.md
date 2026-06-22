@@ -23,6 +23,7 @@ Use this command to:
 | Pattern Name | Application LED Control |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/app-led` |
 | Related Commands | [get_appled](get_appled.md), [set_stackled](set_stackled.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Colors | `red`, `amber`, `green`, `blue`, `false` (off) |
@@ -38,7 +39,7 @@ Decide on the LED color, flash behavior, and duration before sending this comman
 | LED color | One of `red`, `amber`, `green`, `blue`, or `"false"` (string) to turn the LED off. |
 | Flash behavior | Whether the LED should blink (`true`) or remain solid (`false`). |
 | Duration | How long in seconds the LED state should persist. Set to `0` for indefinite (until the next `set_appled` command). |
-| Brightness | Optional — one of `low`, `med`, or `high`. If omitted, the reader applies its default brightness. |
+| Brightness | Optional - one of `low`, `med`, or `high`. If omitted, the reader applies its default brightness. |
 
 ## 4. Rules and Constraints
 
@@ -47,7 +48,7 @@ Violating any of these rules will cause the command to fail or produce unexpecte
 ### Color Values
 
 - `color` must be one of the supported string values: `red`, `amber`, `green`, `blue`, or `false`. An unrecognized color value will be rejected.
-- To turn the LED off, set `color` to the string `"false"` — not the boolean `false`.
+- To turn the LED off, set `color` to the string `"false"` - not the boolean `false`.
 
 ### Flash and Duration
 

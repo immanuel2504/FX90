@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `refresh-cert` |
 | REST Endpoint | `PUT /cloud/certificates/{certname}` |
 | Operation ID | `setRefreshcertificate` |
-| MQTT Command | `set_refreshCertificate` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

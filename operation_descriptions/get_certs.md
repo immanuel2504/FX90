@@ -15,6 +15,7 @@ No additional payload fields are required to retrieve all installed certificates
 | Pattern Name | Certificate Inventory Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/certificates` |
 | Related Commands | [set_update_cert](set_update_cert.md), [del_certs](del_certs.md), [refresh-cert](refresh-cert.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the list of installed certificates |

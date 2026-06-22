@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `stop_user_app` |
 | REST Endpoint | `PUT /cloud/apps/{appname}/stop` |
 | Operation ID | `setStopuserapp` |
-| MQTT Command | `stop_user_app` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

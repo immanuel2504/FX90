@@ -21,6 +21,7 @@ Use this command to:
 | Pattern Name | Log Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/logs` |
 | Related Commands | [get_logs](get_logs.md), [get_logs_syslog](get_logs_syslog.md), [get_radio_pkt_logs](get_radio_pkt_logs.md), [get_rg_error_logs](get_rg_error_logs.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Log Levels | `DEBUG`, `INFO`, `WARNING`, `ERROR` |

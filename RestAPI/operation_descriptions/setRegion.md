@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_region` |
 | REST Endpoint | `PUT /cloud/region` |
 | Operation ID | `setRegion` |
-| MQTT Command | `set_region` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

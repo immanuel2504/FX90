@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `del_certs` |
 | REST Endpoint | `DELETE /cloud/certificates/{certname}` |
 | Operation ID | `delCertificate` |
-| MQTT Command | `del_certificate` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

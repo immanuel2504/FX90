@@ -17,8 +17,8 @@ By default, an empty payload starts RFID inventory only. Use the `scanType` fiel
 | Pattern Name | Scan Control - Start |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 Series |
-| MQTT Command | `start` |
 | REST Endpoint | `PUT /cloud/start` |
+| MQTT Command | `start` |
 | Related Commands | `stop`, `set_bleConfig`, `set_impinjGen2X`, `set_mode` |
 | Supported Scan Types | `rfid`, `ble`, or both combined |
 

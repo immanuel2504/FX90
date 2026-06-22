@@ -16,6 +16,7 @@ No request body is required.
 | Operation ID | `getNetworkinterfaces` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_networkInterfaces` |
 | MQTT Equivalent | `get_networkInterfaces` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

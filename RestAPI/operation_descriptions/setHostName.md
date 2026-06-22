@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_hostname` |
 | REST Endpoint | `PUT /cloud/hostName` |
 | Operation ID | `setHostName` |
-| MQTT Command | `set_hostName` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

@@ -21,6 +21,7 @@ Use this command to:
 | Pattern Name | NTP Server Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/ntpServer` |
 | Related Commands | [get_ntpServer](get_ntpServer.md), [set_timeZone](set_timeZone.md), [get_status](get_status.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `server` |
@@ -33,7 +34,7 @@ Confirm that the NTP server is reachable from the reader's network before sendin
 | What You Need | Details |
 |---|---|
 | Primary NTP server | Hostname or IP address of the primary NTP server (payload key: `server`). The reader must be able to reach this address on UDP port 123. |
-| Fallback servers | Optional — provide `server1` and `server2` for resilience. If the primary is unreachable, the reader will attempt fallback servers in order. |
+| Fallback servers | Optional - provide `server1` and `server2` for resilience. If the primary is unreachable, the reader will attempt fallback servers in order. |
 | Network access | NTP uses UDP port 123. Ensure this port is open between the reader and the NTP server on all network paths. |
 
 ## 4. Rules and Constraints

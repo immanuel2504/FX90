@@ -15,6 +15,7 @@ Use this command to:
 | Pattern Name | Certificate Deletion |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `DELETE /cloud/certificates/{certname}` |
 | Related Commands | [get_certs](get_certs.md), [set_update_cert](set_update_cert.md), [refresh-cert](refresh-cert.md), [del_CACertificate](del_CACertificate.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `name`, `type` |

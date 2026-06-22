@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `revertback` |
 | REST Endpoint | `PUT /cloud/revertbackOS` |
 | Operation ID | `setRevertbackos` |
-| MQTT Command | `revertback` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

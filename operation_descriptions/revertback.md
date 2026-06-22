@@ -13,6 +13,7 @@ Use this command to:
 | Pattern Name | Firmware Rollback |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/revertbackOS` |
 | Related Commands | [set_os](set_os.md), [get_version](get_version.md), [reboot](reboot.md) |
 | Supported API Versions | V1.0 |
 

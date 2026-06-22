@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_cableLossCompensation` |
 | REST Endpoint | `PUT /cloud/cableLossCompensation` |
 | Operation ID | `setCablelosscompensation` |
-| MQTT Command | `set_cableLossCompensation` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

@@ -17,6 +17,7 @@ No request body is required.
 | Operation ID | `getSupportedstandardlist` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_SupportedStandardlist` |
 | MQTT Equivalent | `get_supportedStandardList` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

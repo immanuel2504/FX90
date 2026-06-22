@@ -19,6 +19,7 @@ No request body is required.
 | Operation ID | `getAvailablewifinetworks` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_availableWifiNetworks` |
 | MQTT Equivalent | `get_availableWifiNetworks` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

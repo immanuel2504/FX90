@@ -12,6 +12,7 @@ Use this command to:
 | Pattern Name | Local REST Login |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/localRestLogin` |
 | Related Commands | [set_password](set_password.md) |
 | Supported API Versions | V1.0 |
 

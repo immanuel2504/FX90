@@ -16,6 +16,7 @@ No request body is required.
 | Operation ID | `getCertificates` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_certs` |
 | MQTT Equivalent | `get_certs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

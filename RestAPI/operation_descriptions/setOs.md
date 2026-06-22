@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_os` |
 | REST Endpoint | `PUT /cloud/os` |
 | Operation ID | `setOs` |
-| MQTT Command | `set_os` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

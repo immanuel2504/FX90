@@ -13,6 +13,7 @@ Use this command to:
 | Pattern Name | User Application Installation |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/apps/install` |
 | Related Commands | [get_user_apps](get_user_apps.md), [uninstall-user-app](uninstall-user-app.md), [start_user_app](start_user_app.md) |
 | Supported Authentication Types | `NONE`, `BASIC` |
 | Supported API Versions | V1.0 |

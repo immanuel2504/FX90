@@ -19,6 +19,7 @@ No request body is required.
 | Operation ID | `getVersion` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_version` |
 | MQTT Equivalent | `get_version` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

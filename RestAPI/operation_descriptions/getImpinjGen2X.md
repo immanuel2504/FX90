@@ -17,6 +17,7 @@ No request body is required. If no Gen2X configuration has been saved, the respo
 | Operation ID | `getImpinjGen2X` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_impinjGen2X` |
 | MQTT Equivalent | `get_impinjGen2X` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

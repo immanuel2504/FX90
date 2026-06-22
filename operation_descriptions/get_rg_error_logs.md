@@ -16,6 +16,7 @@ No additional payload fields are required to retrieve the error log archive.
 | Pattern Name | Reader-Gateway Error Log Retrieval |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/logs/RgErrorLog` |
 | Related Commands | [get_rg_warn_logs](get_rg_warn_logs.md), [get_rc_log](get_rc_log.md), [get_logs](get_logs.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the reader-gateway error log archive |

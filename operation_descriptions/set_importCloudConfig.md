@@ -24,6 +24,7 @@ Use this command to:
 | Pattern Name | Cloud Endpoint Configuration Import |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/cloudConfig` |
 | Related Commands | [get_config](get_config.md), [set_config](set_config.md), [get_certs](get_certs.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `endpointConfig` |

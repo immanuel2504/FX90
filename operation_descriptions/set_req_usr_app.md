@@ -20,6 +20,7 @@ Use this command to:
 | Pattern Name | User Application Request |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/apps/{appname}/pass-through` |
 | Related Commands | [get_user_apps](get_user_apps.md), [start_user_app](start_user_app.md), [stop_user_app](stop_user_app.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `appname`, `command` (inner) |

@@ -23,6 +23,7 @@ No request body is required.
 | Operation ID | `getStatus` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_status` |
 | MQTT Equivalent | `get_status` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

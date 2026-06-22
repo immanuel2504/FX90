@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_timeZone` |
 | REST Endpoint | `PUT /cloud/timeZone` |
 | Operation ID | `setTimezone` |
-| MQTT Command | `set_timeZone` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

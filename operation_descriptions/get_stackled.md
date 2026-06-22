@@ -17,6 +17,7 @@ No additional payload fields are required to retrieve the stack LED state.
 | Pattern Name | Stack LED Status Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/stack-led` |
 | Related Commands | [set_stackled](set_stackled.md), [get_appled](get_appled.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the current stack LED state |

@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_stackled` |
 | REST Endpoint | `PUT /cloud/stack-led` |
 | Operation ID | `setStackled` |
-| MQTT Command | `set_stackled` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

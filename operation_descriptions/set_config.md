@@ -13,6 +13,7 @@ Use it to:
 | Pattern Name | Reader Configuration Update |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/config` |
 | Related Commands | [get_config](get_config.md), [set_importCloudConfig](set_importCloudConfig.md), [get_status](get_status.md) |
 | Supported Operations | Update reader configuration |
 | Supported API Versions | V1.0 |

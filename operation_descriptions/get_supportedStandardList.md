@@ -17,6 +17,7 @@ No additional payload fields are required to retrieve the supported standard lis
 | Pattern Name | Supported Standard Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/supportedStandardList` |
 | Related Commands | [get_region](get_region.md), [set_region](set_region.md), [get_SupportedRegionList](get_SupportedRegionList.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve supported regulatory standards and their channel details |

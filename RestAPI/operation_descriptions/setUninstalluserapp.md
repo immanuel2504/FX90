@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `uninstall-user-app` |
 | REST Endpoint | `PUT /cloud/apps/{appname}/uninstall` |
 | Operation ID | `setUninstalluserapp` |
-| MQTT Command | `uninstall-user-app` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

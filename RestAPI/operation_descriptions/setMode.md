@@ -15,8 +15,8 @@ Use this endpoint to:
 | Pattern Name | Operating Mode Configuration |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 Series |
-| REST Endpoint | `PUT /cloud/mode` |
 | MQTT Command | `set_mode` |
+| REST Endpoint | `PUT /cloud/mode` |
 | Request Schema | `operatingMode.v1` |
 | Related Endpoints | `GET /cloud/mode`, `PUT /cloud/start`, `PUT /cloud/stop`, `GET /cloud/config` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

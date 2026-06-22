@@ -23,6 +23,7 @@ Use this command to:
 | Pattern Name | Stack LED Control |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/stack-led` |
 | Related Commands | [get_stackled](get_stackled.md), [set_appled](set_appled.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Colors | `red`, `amber`, `green`, `blue`, `false` (off) |
@@ -36,7 +37,7 @@ Decide on the LED color, flash behavior, and duration before sending this comman
 | What You Need | Details |
 |---|---|
 | LED color | One of `red`, `amber`, `green`, `blue`, or `"false"` (string) to turn the LED off. |
-| Brightness | Optional — one of `low`, `med`, or `high`. Defaults to `high` if omitted. |
+| Brightness | Optional - one of `low`, `med`, or `high`. Defaults to `high` if omitted. |
 | Flash behavior | Whether the LED should blink (`true`) or remain solid (`false`). |
 | Duration | How long in seconds the LED state should persist. Set to `0` for indefinite duration. A positive value causes the LED to revert after the specified time. |
 

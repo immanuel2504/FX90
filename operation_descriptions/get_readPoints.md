@@ -15,6 +15,7 @@ No additional payload fields are required.
 | Pattern Name | Read Point Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/readPoints` |
 | Related Commands | [get_cableLossCompensation](get_cableLossCompensation.md), [set_cableLossCompensation](set_cableLossCompensation.md), [set_mode](set_mode.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve available reader read points |

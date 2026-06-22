@@ -15,6 +15,7 @@ No additional payload fields are required to retrieve the interface list.
 | Pattern Name | Network Interface Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/networkInterfaces` |
 | Related Commands | [get_network](get_network.md), [set_network](set_network.md), [get_eSimConfig](get_eSimConfig.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve available network interface names |

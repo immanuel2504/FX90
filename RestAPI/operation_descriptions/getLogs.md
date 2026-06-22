@@ -17,6 +17,7 @@ No request body is required.
 | Operation ID | `getLogs` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_logs` |
 | MQTT Equivalent | `get_logs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

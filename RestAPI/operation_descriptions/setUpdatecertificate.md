@@ -12,9 +12,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_update_cert` |
 | REST Endpoint | `PUT /cloud/certificates` |
 | Operation ID | `setUpdatecertificate` |
-| MQTT Command | `set_updateCertificate` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

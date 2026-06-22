@@ -21,6 +21,7 @@ Use this command to:
 | Pattern Name | Password Change |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/updatePassword` |
 | Related Commands | [localrest_login](localrest_login.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `userName`, `currentPassword`, `newPassword` |
@@ -33,7 +34,7 @@ Confirm the current password and the target username before sending this command
 | What You Need | Details |
 |---|---|
 | Username | The username of the account to update (e.g., `admin`). |
-| Current password | The account's existing password. Required for authentication — the command will fail if this is incorrect. |
+| Current password | The account's existing password. Required for authentication - the command will fail if this is incorrect. |
 | New password | The new password to set. Apply your organization's password policy (minimum length, complexity requirements). |
 
 ## 4. Rules and Constraints

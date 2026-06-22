@@ -22,6 +22,7 @@ No additional payload fields are required to retrieve the full status snapshot.
 | Pattern Name | Reader Status Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/status` |
 | Related Commands | [get_version](get_version.md), [get_readerCapabilities](get_readerCapabilities.md), [get_config](get_config.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve live operational statistics and health |

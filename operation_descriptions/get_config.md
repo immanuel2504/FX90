@@ -17,6 +17,7 @@ No additional payload fields are required to retrieve the full configuration.
 | Pattern Name | Reader Configuration Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/config` |
 | Related Commands | [set_config](set_config.md), [set_importCloudConfig](set_importCloudConfig.md), [get_status](get_status.md), [get_readerCapabilities](get_readerCapabilities.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active reader configuration |

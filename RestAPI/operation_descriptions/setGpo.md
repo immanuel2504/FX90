@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_gpo` |
 | REST Endpoint | `PUT /cloud/gpo` |
 | Operation ID | `setGpo` |
-| MQTT Command | `set_gpo` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

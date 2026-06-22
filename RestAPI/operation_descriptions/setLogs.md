@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_logs` |
 | REST Endpoint | `PUT /cloud/logs` |
 | Operation ID | `setLogs` |
-| MQTT Command | `set_logs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

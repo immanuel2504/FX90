@@ -15,6 +15,7 @@ No additional payload fields are required to retrieve the LED state.
 | Pattern Name | Application LED Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/app-led` |
 | Related Commands | [set_appled](set_appled.md), [get_stackled](get_stackled.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the current application LED state |

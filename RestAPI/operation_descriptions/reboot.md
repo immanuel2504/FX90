@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `reboot` |
 | REST Endpoint | `PUT /cloud/reboot` |
 | Operation ID | `reboot` |
-| MQTT Command | `reboot` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

@@ -17,6 +17,7 @@ No request body is required. The returned values represent the most recent locat
 | Operation ID | `getGpsCoordinates` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_gpsCoordinates` |
 | MQTT Equivalent | `get_gpsCoordinates` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

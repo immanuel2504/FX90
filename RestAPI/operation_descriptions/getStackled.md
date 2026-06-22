@@ -18,6 +18,7 @@ No request body is required.
 | Operation ID | `getStackled` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_stackled` |
 | MQTT Equivalent | `get_stackled` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

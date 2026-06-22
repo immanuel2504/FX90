@@ -13,6 +13,7 @@ Use this command to:
 | Pattern Name | User Application Control — Start |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/apps/{appname}/start` |
 | Related Commands | [stop_user_app](stop_user_app.md), [get_user_apps](get_user_apps.md), [install_user_app](install_user_app.md) |
 | Supported API Versions | V1.0 |
 

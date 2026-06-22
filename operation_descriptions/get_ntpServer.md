@@ -15,6 +15,7 @@ No additional payload fields are required to retrieve the NTP server setting.
 | Pattern Name | NTP Server Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/ntpServer` |
 | Related Commands | [set_ntpServer](set_ntpServer.md), [get_timeZone](get_timeZone.md), [get_status](get_status.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the configured NTP server |

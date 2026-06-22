@@ -19,6 +19,7 @@ Use this command to:
 | Pattern Name | Cable Loss Compensation Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/cableLossCompensation` |
 | Related Commands | [get_cableLossCompensation](get_cableLossCompensation.md), [get_readPoints](get_readPoints.md), [get_readerCapabilities](get_readerCapabilities.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Read Point Keys | `"1"`, `"2"`, `"3"`, `"4"` |

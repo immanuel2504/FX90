@@ -13,6 +13,7 @@ Use this command to:
 | Pattern Name | Certificate Refresh |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/certificates/{certname}` |
 | Related Commands | [get_certs](get_certs.md), [set_update_cert](set_update_cert.md), [del_certs](del_certs.md) |
 | Supported Certificate Types | `client`, `server`, `app` |
 | Supported API Versions | V1.0 |

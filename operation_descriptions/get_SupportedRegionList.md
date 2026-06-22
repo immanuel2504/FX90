@@ -15,6 +15,7 @@ No additional payload fields are required to retrieve the supported region list.
 | Pattern Name | Supported Region Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/supportedRegionList` |
 | Related Commands | [get_region](get_region.md), [set_region](set_region.md), [get_supportedStandardList](get_supportedStandardList.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the list of permitted RF regions for this reader |

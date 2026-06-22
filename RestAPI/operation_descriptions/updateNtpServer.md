@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_ntpServer` |
 | REST Endpoint | `PUT /cloud/ntpServer` |
 | Operation ID | `updateNtpServer` |
-| MQTT Command | `set_ntpServer` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

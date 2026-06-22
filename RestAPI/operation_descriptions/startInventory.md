@@ -18,6 +18,7 @@ By default, an empty request body starts RFID inventory only. Use the `scanType`
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 Series |
 | MQTT Command | `start` |
+| REST Endpoint | `PUT /cloud/start` |
 | Related Endpoints | `PUT /cloud/stop`, `PUT /cloud/ble-config`, `PUT /cloud/impinjGen2X`, `PUT /cloud/mode` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |

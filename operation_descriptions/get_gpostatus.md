@@ -4,7 +4,7 @@ The `get_gpostatus` command retrieves the current state of each general-purpose 
 
 This command returns:
 
-- The HIGH or LOW state of each GPO pin (1–4)
+- The HIGH or LOW state of each GPO pin (1-4)
 
 No additional payload fields are required to retrieve all pin states.
 
@@ -15,6 +15,7 @@ No additional payload fields are required to retrieve all pin states.
 | Pattern Name | GPO Status Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/gpo` |
 | Related Commands | [set_gpo](set_gpo.md), [get_gpi_status](get_gpi_status.md), [get_readerCapabilities](get_readerCapabilities.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current GPO pin states |

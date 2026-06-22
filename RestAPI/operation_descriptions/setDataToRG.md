@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_dataToRG` |
 | REST Endpoint | `PUT /cloud/setdataToRG` |
 | Operation ID | `setDataToRG` |
-| MQTT Command | `set_dataToRG` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

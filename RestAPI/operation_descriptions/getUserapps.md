@@ -16,6 +16,7 @@ No request body is required.
 | Operation ID | `getUserapps` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_user_apps` |
 | MQTT Equivalent | `get_user_apps` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

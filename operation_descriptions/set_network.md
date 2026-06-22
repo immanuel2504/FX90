@@ -4,11 +4,11 @@ The `set_network` command updates reader network configuration for a single inte
 
 This command allows you to configure:
 
-- Ethernet (`eth0`) — DHCP, static IPv4/IPv6 addressing, and 802.1X security
-- Wi-Fi station (`mlan0`) — DHCP, static addressing, access point connection, and WPA2/WPA3/Enterprise security
-- Bluetooth PAN (`bnep0`) — discoverability, pairing, and DHCP address pool
-- Cellular WAN (`wan0`) — SIM selection, APN, network type preference, and IPv6
-- Wi-Fi hotspot (`uap0`) — SSID, password, country code, and security type
+- Ethernet (`eth0`) - DHCP, static IPv4/IPv6 addressing, and 802.1X security
+- Wi-Fi station (`mlan0`) - DHCP, static addressing, access point connection, and WPA2/WPA3/Enterprise security
+- Bluetooth PAN (`bnep0`) - discoverability, pairing, and DHCP address pool
+- Cellular WAN (`wan0`) - SIM selection, APN, network type preference, and IPv6
+- Wi-Fi hotspot (`uap0`) - SSID, password, country code, and security type
 
 Use this command to:
 
@@ -25,6 +25,7 @@ Use this command to:
 | Pattern Name | Network Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/network` |
 | Related Commands | [get_network](get_network.md), [get_networkInterfaces](get_networkInterfaces.md), [set_hostname](set_hostname.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Interface Keys | `eth0`, `mlan0`, `bnep0`, `wan0`, `uap0` |

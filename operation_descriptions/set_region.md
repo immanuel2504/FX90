@@ -20,6 +20,7 @@ Use this command to:
 | Pattern Name | Region Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/region` |
 | Related Commands | [get_region](get_region.md), [get_SupportedRegionList](get_SupportedRegionList.md), [get_supportedStandardList](get_supportedStandardList.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `country`, `standardname` |
@@ -49,7 +50,7 @@ Violating any of these rules will cause the command to fail or result in non-com
 ### Apply Timing
 
 - Region changes are applied immediately. The reader updates its RF parameters, channel list, LBT state, and transmit power limits as soon as the command is acknowledged.
-- If inventory is active when this command is sent, behavior is undefined — stop inventory first.
+- If inventory is active when this command is sent, behavior is undefined - stop inventory first.
 
 ### Security Note
 

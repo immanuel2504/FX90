@@ -16,6 +16,7 @@ No request body is required.
 | Operation ID | `getCablelosscompensation` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_cableLossCompensation` |
 | MQTT Equivalent | `get_cableLossCompensation` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

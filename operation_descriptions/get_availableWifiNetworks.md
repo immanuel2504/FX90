@@ -18,6 +18,7 @@ No additional payload fields are required to initiate the scan.
 | Pattern Name | Wi-Fi Site Survey |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/wifiNetworks` |
 | Related Commands | [get_networkInterfaces](get_networkInterfaces.md), [get_network](get_network.md), [set_network](set_network.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve visible Wi-Fi networks and saved connection profiles |

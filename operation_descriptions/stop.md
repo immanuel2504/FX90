@@ -16,6 +16,7 @@ Use this command to:
 | Pattern Name | RFID/BLE Scan Control - Stop |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/stop` |
 | Related Commands | [start](start.md), [set_bleConfig](set_bleConfig.md), [get_bleConfig](get_bleConfig.md), [get_mode](get_mode.md), [get_status](get_status.md) |
 | Supported Operations | Stop RFID inventory, BLE scan, or both |
 | Supported API Versions | V1.0 |

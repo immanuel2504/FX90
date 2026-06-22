@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_req_usr_app` |
 | REST Endpoint | `PUT /cloud/apps/{appname}/pass-through` |
 | Operation ID | `setReqtouserapp` |
-| MQTT Command | `set_req_usr_app` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

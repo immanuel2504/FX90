@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_eSimConfig` |
 | REST Endpoint | `PUT /cloud/eSimConfig` |
 | Operation ID | `setEsimConfig` |
-| MQTT Command | `set_eSimConfig` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

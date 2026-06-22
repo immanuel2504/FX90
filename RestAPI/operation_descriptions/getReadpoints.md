@@ -16,6 +16,7 @@ No request body is required.
 | Operation ID | `getReadpoints` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_readPoints` |
 | MQTT Equivalent | `get_readPoints` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

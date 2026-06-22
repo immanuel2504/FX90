@@ -20,6 +20,7 @@ Use this command to:
 | Pattern Name | eSIM Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/eSimConfig` |
 | Related Commands | [get_eSimConfig](get_eSimConfig.md), [get_network](get_network.md), [set_network](set_network.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | `enable` |
@@ -32,7 +33,7 @@ Use `get_eSimConfig` first to retrieve the exact profile nickname available on t
 | What You Need | Details |
 |---|---|
 | Operation | The eSIM operation to perform. Currently supported: `enable`. |
-| Profile nickname | The exact nickname of the eSIM profile to enable, as returned by `get_eSimConfig`. The nickname must match exactly — case-sensitive. |
+| Profile nickname | The exact nickname of the eSIM profile to enable, as returned by `get_eSimConfig`. The nickname must match exactly - case-sensitive. |
 | Active SIM setting | After enabling an eSIM profile, confirm the `wan0.activeSim` is set to `esim` in the network configuration (see `set_network`) for the profile to be used for data. |
 
 ## 4. Rules and Constraints

@@ -27,6 +27,7 @@ Use this command to:
 | Pattern Name | BLE Configuration Update |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/ble-config` |
 | Related Commands | [get_bleConfig](get_bleConfig.md), [start](start.md), [stop](stop.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `ble.enable` |

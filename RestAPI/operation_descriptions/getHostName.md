@@ -16,6 +16,7 @@ No request body is required.
 | Operation ID | `getHostName` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_hostname` |
 | MQTT Equivalent | `get_hostname` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

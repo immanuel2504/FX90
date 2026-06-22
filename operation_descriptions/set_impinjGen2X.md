@@ -23,6 +23,7 @@ Use this command to:
 | Pattern Name | Impinj Gen2X Configuration |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/impinjGen2X` |
 | Related Commands | [get_impinjGen2X](get_impinjGen2X.md), [start](start.md), [get_mode](get_mode.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Features | `fastID`, `tagProtect`, `tagFocus`, `tagQuieting` |
@@ -37,7 +38,7 @@ Decide which Gen2X feature to configure. At least one feature object must be inc
 | What You Need | Details |
 |---|---|
 | Feature selection | At least one of `fastID`, `tagProtect`, `tagFocus`, or `tagQuieting` must be present. An empty payload will be rejected. |
-| FastID | Decide whether to enable or disable TID embedding. Optionally specify a TID word selector (`TID[0]`–`TID[3]`). |
+| FastID | Decide whether to enable or disable TID embedding. Optionally specify a TID word selector (`TID[0]`-`TID[3]`). |
 | TagProtect action | Choose one of: `enableTagProtection` (protect a specific tag), `disableTagProtection` (remove protection from a tag), `enableTagVisibility` (allow reading protected tags), `disableTagVisibility` (block reading protected tags). |
 | TagProtect password | An 8-character hex string (32-bit) is required for all TagProtect actions. |
 | TagProtect tag EPC | `tagID` (hex EPC) is required for `enableTagProtection` and `disableTagProtection`. It must be omitted for `enableTagVisibility` and `disableTagVisibility`. |
@@ -67,7 +68,7 @@ Violating any of these rules will cause the command to fail or Gen2X behavior to
 
 ### TagFocus
 
-- `tagFocus.enabled` is required when the `tagFocus` object is included. TagFocus operates on session S1 — ensure the inventory session is configured accordingly.
+- `tagFocus.enabled` is required when the `tagFocus` object is included. TagFocus operates on session S1 - ensure the inventory session is configured accordingly.
 
 ### TagQuieting
 

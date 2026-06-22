@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_network` |
 | REST Endpoint | `PUT /cloud/network` |
 | Operation ID | `updateNetwork` |
-| MQTT Command | `set_network` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

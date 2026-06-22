@@ -19,6 +19,7 @@ No request body is required.
 | Operation ID | `getBleConfig` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_bleConfig` |
 | MQTT Equivalent | `get_bleConfig` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |

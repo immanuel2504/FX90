@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_passthru` |
 | REST Endpoint | `PUT /cloud/pass-through` |
 | Operation ID | `status` |
-| MQTT Command | `set_passthru` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

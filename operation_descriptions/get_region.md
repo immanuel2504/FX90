@@ -20,6 +20,7 @@ No additional payload fields are required to retrieve the active region settings
 | Pattern Name | Region Configuration Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/region` |
 | Related Commands | [set_region](set_region.md), [get_SupportedRegionList](get_SupportedRegionList.md), [get_supportedStandardList](get_supportedStandardList.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active RF region and regulatory settings |
@@ -40,7 +41,7 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `country` | Is the correct country configured? | The reader must match the regulatory region of its deployment location. |
-| `regulatoryStandard` | Which standard is applied (e.g., `CANADA_FCC_15`)? | Determines which transmission rules apply — channels, power limits, and LBT behavior. |
+| `regulatoryStandard` | Which standard is applied (e.g., `CANADA_FCC_15`)? | Determines which transmission rules apply - channels, power limits, and LBT behavior. |
 | `lbtEnabled` | Is Listen Before Talk active? | Required in some regions (e.g., ETSI). Affects when the radio may transmit. |
 | `FrequencyHopping` | Is frequency hopping enabled? | Mandatory in most regions. Confirms the radio is operating compliantly. |
 | `maxTxPowerSupported` | What is the allowed power ceiling? | Use this to validate transmit power settings before starting inventory. |

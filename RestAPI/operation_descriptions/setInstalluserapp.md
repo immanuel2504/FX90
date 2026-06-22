@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `install_user_app` |
 | REST Endpoint | `PUT /cloud/apps/install` |
 | Operation ID | `setInstalluserapp` |
-| MQTT Command | `install_user_app` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

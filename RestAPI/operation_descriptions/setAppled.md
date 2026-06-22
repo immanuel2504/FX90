@@ -10,9 +10,9 @@ Use this endpoint to:
 
 | Property | Value |
 |---|---|
+| MQTT Command | `set_appled` |
 | REST Endpoint | `PUT /cloud/app-led` |
 | Operation ID | `setAppled` |
-| MQTT Command | `set_appled` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

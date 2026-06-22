@@ -23,6 +23,7 @@ Use this command to:
 | Pattern Name | Certificate Installation |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/certificates` |
 | Related Commands | [get_certs](get_certs.md), [set_installCACertificate](set_installCACertificate.md), [del_certs](del_certs.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `name`, `type`, `url`, `authenticationType` |

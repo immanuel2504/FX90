@@ -21,6 +21,7 @@ No request body is required.
 | Operation ID | `getMode` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
+| MQTT Command | `get_mode` |
 | MQTT Equivalent | `get_mode` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Required Request Fields | None |
@@ -40,7 +41,7 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `modeType` | Is the mode type correct for this application? | Controls fundamental read behavior — portal, conveyor, or inventory logic. |
+| `modeType` | Is the mode type correct for this application? | Controls fundamental read behavior - portal, conveyor, or inventory logic. |
 | `antennas` | Are the right ports enabled with expected transmit power? | Misconfigured antennas will result in missed reads or coverage gaps. |
 | `txPower` | Is the power level within regulatory limits? | Transmit power must stay below the regional maximum set in `GET /cloud/region`. |
 | `environmentProfile` | Is the profile matched to the deployment environment? | Profile influences sensitivity and false-read filtering in dense environments. |

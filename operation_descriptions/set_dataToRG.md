@@ -4,7 +4,7 @@ The `set_dataToRG` command triggers the reader gateway layer to process and deli
 
 This command requires:
 
-- An empty payload object — no additional parameters are needed
+- An empty payload object - no additional parameters are needed
 
 Use this command to:
 
@@ -19,6 +19,7 @@ Use this command to:
 | Pattern Name | Reader Gateway Data Trigger |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/setdataToRG` |
 | Related Commands | [set_req_usr_app](set_req_usr_app.md), [get_config](get_config.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | None (empty object `{}`) |

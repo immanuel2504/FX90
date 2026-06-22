@@ -13,6 +13,7 @@ Use this command to:
 | Pattern Name | Reader Restart |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/reboot` |
 | Related Commands | [get_status](get_status.md), [get_version](get_version.md), [set_os](set_os.md) |
 | Supported Operations | Restart the reader |
 | Supported API Versions | V1.0 |

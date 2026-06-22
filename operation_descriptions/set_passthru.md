@@ -20,6 +20,7 @@ Use this command to:
 | Pattern Name | Pass-Through Command |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `PUT /cloud/pass-through` |
 | Related Commands | [get_status](get_status.md), [set_config](set_config.md) |
 | Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `component`, `payload` (inner) |

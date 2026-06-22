@@ -18,6 +18,7 @@ No additional payload fields are required to retrieve the BLE configuration.
 | Pattern Name | BLE Configuration Query |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/ble-config` |
 | Related Commands | [set_bleConfig](set_bleConfig.md), [start](start.md), [stop](stop.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the current BLE scanner configuration |

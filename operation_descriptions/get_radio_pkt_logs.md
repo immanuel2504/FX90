@@ -16,6 +16,7 @@ No additional payload fields are required to retrieve the radio packet log archi
 | Pattern Name | Radio Packet Log Retrieval |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
+| REST Endpoint | `GET /cloud/logs/radioPacketLog` |
 | Related Commands | [del_radio_pkt_logs](del_radio_pkt_logs.md), [get_logs](get_logs.md), [get_logs_syslog](get_logs_syslog.md), [set_logs](set_logs.md) |
 | Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the radio packet log archive |
@@ -35,4 +36,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is a filename returned? | Confirms the archive was generated and ready for download. |
-| `content` | Is the Base64 string non-empty? | An empty value means no packet log data exists — verify logging is enabled with `get_logs`. |
+| `content` | Is the Base64 string non-empty? | An empty value means no packet log data exists - verify logging is enabled with `get_logs`. |
