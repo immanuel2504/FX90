@@ -3843,33 +3843,33 @@ paths:
             application/json:
               schema:
                 type: object
-                properties: null
-                components:
-                  type: array
-                  description: Log level configuration per reader subcomponent.
-                  items:
-                    type: object
-                    properties:
-                      componentName:
-                        type: string
-                        description: Name of subcomponent. For radio_control, only the INFO log level is supported. For reader_gateway, supported log levels are INFO, DEBUG, WARNING, and ERROR.
-                        enum:
-                        - radio_control
-                        - reader_gateway
-                      level:
-                        type: string
-                        description: Logging Level
-                        enum:
-                        - DEBUG
-                        - INFO
-                        - WARNING
-                        - ERROR
-                    required:
-                    - componentName
-                    - level
-                radioPacketLog:
-                  type: boolean
-                  description: Indicates whether radio packet logging is enabled.
+                properties:
+                  components:
+                    type: array
+                    description: Log level configuration per reader subcomponent.
+                    items:
+                      type: object
+                      properties:
+                        componentName:
+                          type: string
+                          description: Name of subcomponent. For radio_control, only the INFO log level is supported. For reader_gateway, supported log levels are INFO, DEBUG, WARNING, and ERROR.
+                          enum:
+                          - radio_control
+                          - reader_gateway
+                        level:
+                          type: string
+                          description: Logging Level
+                          enum:
+                          - DEBUG
+                          - INFO
+                          - WARNING
+                          - ERROR
+                      required:
+                      - componentName
+                      - level
+                  radioPacketLog:
+                    type: boolean
+                    description: Indicates whether radio packet logging is enabled.
               example:
                 components:
                 - componentName: radio_control
