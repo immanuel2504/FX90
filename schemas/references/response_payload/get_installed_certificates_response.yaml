@@ -4,14 +4,12 @@ minItems: 1
 uniqueItems: true
 x-examples:
   example-1:
-  - installTime: 'Mon Jun 21 12:38:03 2021
-
-      '
-    issuerName: FX9600EE5729
+  - installTime: 'Mon Jun 21 12:38:03 2021'
+    issuerName: FXR90C5F1AB
     name: Reader Main Certificates
     publickey: ''
     serial: '410835777'
-    subjectName: FX9600EE5729
+    subjectName: FXR90C5F1AB
     type: server
     validityEnd: 16/06/2041
     validityStart: 21/06/2021
@@ -43,7 +41,7 @@ items:
       type: string
       minLength: 1
       description: Issuer name recorded in the certificate.
-      example: FX9600EE5729
+      example: FXR90C5F1AB
     publickey:
       type: string
       description: Public key content for the certificate.
@@ -56,7 +54,7 @@ items:
       type: string
       minLength: 1
       description: Subject name recorded in the certificate.
-      example: FX9600EE5729
+      example: FXR90C5F1AB
     validityStart:
       type: string
       minLength: 1

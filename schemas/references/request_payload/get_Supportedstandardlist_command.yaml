@@ -8,7 +8,82 @@ properties:
   region:
     type: string
     enum:
+    - Albania
+    - Anguilla
     - Argentina
+    - Australia
+    - Austria
+    - Bahrain
+    - Belarus
+    - Belgium
+    - Bolivia
+    - Bosnia
+    - Brazil
+    - Bulgaria
+    - Cambodia
+    - Canada
+    - Chile
+    - China
+    - Christmas Island
+    - Colombia
+    - Costa Rica
+    - Croatia
+    - Cyprus
+    - Czech Republic
+    - Denmark
+    - El Salvador
+    - Estonia
+    - Falkland Islands(Malvinas)
+    - Finland
+    - France
+    - French Guiana
+    - Georgia
+    - Germany
+    - Ghana
+    - Guadeloupe
+    - Honduras
+    - Hong Kong
+    - Hungary
+    - Iceland
+    - Indonesia
+    - Ireland
+    - Italy
+    - Kazakhstan
+    - Latvia
+    - Liechtenstein
+    - Lithuania
+    - Luxembourg
+    - Macedonia
+    - Malaysia
+    - Malta
+    - Martinique
+    - Mexico
+    - Monaco
+    - Montenegro
+    - Morocco
+    - Netherlands
+    - New Zealand
+    - Norway
+    - Peru
+    - Philippines
+    - Poland
+    - Portugal
+    - Romania
+    - Saudi Arabia
+    - Singapore
+    - Slovakia
+    - Slovenia
+    - South Africa
+    - South Korea
+    - Spain
+    - Sweden
+    - Switzerland
+    - Taiwan
+    - Turkey
+    - UAE
+    - United Kingdom
+    - Venezuela
+    - Vietnam
     example: Argentina
     description: 'provide the region name '
 title: ''

@@ -308,6 +308,18 @@ def synthesize_example_from_schema(schema, field_name=None):
                     merged[merge_key] = merge_val
         return merged if merged else {}
 
+    if schema.get("type") == "array" or "items" in schema:
+        x_examples = schema.get("x-examples")
+        if isinstance(x_examples, dict) and x_examples:
+            first = next(iter(x_examples.values()))
+            if first is not None:
+                return first
+        items = schema.get("items")
+        if isinstance(items, dict):
+            item_val = synthesize_example_from_schema(items)
+            return [item_val] if item_val is not None else []
+        return []
+
     props = schema.get("properties")
     if isinstance(props, dict):
         required = set(schema.get("required") or [])

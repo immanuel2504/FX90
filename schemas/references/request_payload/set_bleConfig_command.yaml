@@ -5,26 +5,35 @@ required:
 properties:
   ble:
     type: object
+    description: BLE scanner configuration.
     required:
     - enable
     properties:
       enable:
         type: boolean
+        description: Enable (`true`) or disable (`false`) the BLE scanner.
         example: true
       scanIntervalSec:
         type: integer
+        description: BLE scan interval, in seconds.
         minimum: 1
         example: 5
       additionalFilters:
         type: object
+        description: Optional filters applied to BLE advertisements before they are
+          forwarded.
         properties:
           rssi:
             type: integer
+            description: Minimum RSSI threshold, in dBm. Advertisements weaker than
+              this value are dropped.
             minimum: -127
             maximum: 0
             example: -70
           serviceUuids16:
             type: array
+            description: List of 16-bit service UUIDs (hex) to match. Only advertisements
+              that include one of these UUIDs are forwarded.
             items:
               type: string
             example:
@@ -32,6 +41,8 @@ properties:
             - FE9B
           serviceUuids128:
             type: array
+            description: List of 128-bit service UUIDs to match. Only advertisements
+              that include one of these UUIDs are forwarded.
             items:
               type: string
             example:
@@ -42,12 +53,16 @@ properties:
         properties:
           iBeacon:
             type: object
+            description: iBeacon protocol scanner configuration.
             properties:
               enabled:
                 type: boolean
+                description: Enable (`true`) or disable (`false`) iBeacon scanning.
                 example: true
               filters:
                 type: array
+                description: List of iBeacon filters. A beacon is forwarded if it
+                  matches any one filter entry.
                 items:
                   type: object
                   properties:
@@ -69,12 +84,16 @@ properties:
                       example: -59
           altBeacon:
             type: object
+            description: AltBeacon protocol scanner configuration.
             properties:
               enabled:
                 type: boolean
+                description: Enable (`true`) or disable (`false`) AltBeacon scanning.
                 example: true
               filters:
                 type: array
+                description: List of AltBeacon filters. A beacon is forwarded if it
+                  matches any one filter entry.
                 items:
                   type: object
                   properties:
@@ -100,9 +119,11 @@ properties:
                       example: -100
           eddystone:
             type: object
+            description: Eddystone protocol scanner configuration.
             properties:
               enabled:
                 type: boolean
+                description: Enable (`true`) or disable (`false`) Eddystone scanning.
                 example: true
               filters:
                 type: array
@@ -148,6 +169,7 @@ properties:
             properties:
               enabled:
                 type: boolean
+                description: Enable (`true`) or disable (`false`) generic BLE scanning.
                 example: true
               filters:
                 type: array

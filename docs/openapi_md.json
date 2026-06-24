@@ -16034,7 +16034,82 @@
                                             "region": {
                                                 "type": "string",
                                                 "enum": [
-                                                    "Argentina"
+                                                    "Albania",
+                                                    "Anguilla",
+                                                    "Argentina",
+                                                    "Australia",
+                                                    "Austria",
+                                                    "Bahrain",
+                                                    "Belarus",
+                                                    "Belgium",
+                                                    "Bolivia",
+                                                    "Bosnia",
+                                                    "Brazil",
+                                                    "Bulgaria",
+                                                    "Cambodia",
+                                                    "Canada",
+                                                    "Chile",
+                                                    "China",
+                                                    "Christmas Island",
+                                                    "Colombia",
+                                                    "Costa Rica",
+                                                    "Croatia",
+                                                    "Cyprus",
+                                                    "Czech Republic",
+                                                    "Denmark",
+                                                    "El Salvador",
+                                                    "Estonia",
+                                                    "Falkland Islands(Malvinas)",
+                                                    "Finland",
+                                                    "France",
+                                                    "French Guiana",
+                                                    "Georgia",
+                                                    "Germany",
+                                                    "Ghana",
+                                                    "Guadeloupe",
+                                                    "Honduras",
+                                                    "Hong Kong",
+                                                    "Hungary",
+                                                    "Iceland",
+                                                    "Indonesia",
+                                                    "Ireland",
+                                                    "Italy",
+                                                    "Kazakhstan",
+                                                    "Latvia",
+                                                    "Liechtenstein",
+                                                    "Lithuania",
+                                                    "Luxembourg",
+                                                    "Macedonia",
+                                                    "Malaysia",
+                                                    "Malta",
+                                                    "Martinique",
+                                                    "Mexico",
+                                                    "Monaco",
+                                                    "Montenegro",
+                                                    "Morocco",
+                                                    "Netherlands",
+                                                    "New Zealand",
+                                                    "Norway",
+                                                    "Peru",
+                                                    "Philippines",
+                                                    "Poland",
+                                                    "Portugal",
+                                                    "Romania",
+                                                    "Saudi Arabia",
+                                                    "Singapore",
+                                                    "Slovakia",
+                                                    "Slovenia",
+                                                    "South Africa",
+                                                    "South Korea",
+                                                    "Spain",
+                                                    "Sweden",
+                                                    "Switzerland",
+                                                    "Taiwan",
+                                                    "Turkey",
+                                                    "UAE",
+                                                    "United Kingdom",
+                                                    "Venezuela",
+                                                    "Vietnam"
                                                 ],
                                                 "example": "Argentina",
                                                 "description": "provide the region name "
@@ -18835,12 +18910,12 @@
                                                     "x-examples": {
                                                         "example-1": [
                                                             {
-                                                                "installTime": "Mon Jun 21 12:38:03 2021\n",
-                                                                "issuerName": "FX9600EE5729",
+                                                                "installTime": "Mon Jun 21 12:38:03 2021",
+                                                                "issuerName": "FXR90C5F1AB",
                                                                 "name": "Reader Main Certificates",
                                                                 "publickey": "",
                                                                 "serial": "410835777",
-                                                                "subjectName": "FX9600EE5729",
+                                                                "subjectName": "FXR90C5F1AB",
                                                                 "type": "server",
                                                                 "validityEnd": "16/06/2041",
                                                                 "validityStart": "21/06/2021"
@@ -18879,7 +18954,7 @@
                                                                 "type": "string",
                                                                 "minLength": 1,
                                                                 "description": "Issuer name recorded in the certificate.",
-                                                                "example": "FX9600EE5729"
+                                                                "example": "FXR90C5F1AB"
                                                             },
                                                             "publickey": {
                                                                 "type": "string",
@@ -18895,7 +18970,7 @@
                                                                 "type": "string",
                                                                 "minLength": 1,
                                                                 "description": "Subject name recorded in the certificate.",
-                                                                "example": "FX9600EE5729"
+                                                                "example": "FXR90C5F1AB"
                                                             },
                                                             "validityStart": {
                                                                 "type": "string",
@@ -18964,7 +19039,19 @@
                                             "command": "get_certificates",
                                             "command_id": "abcd12354",
                                             "response": "success",
-                                            "payload": {}
+                                            "payload": [
+                                                {
+                                                    "installTime": "Mon Jun 21 12:38:03 2021",
+                                                    "issuerName": "FXR90C5F1AB",
+                                                    "name": "Reader Main Certificates",
+                                                    "publickey": "",
+                                                    "serial": "410835777",
+                                                    "subjectName": "FXR90C5F1AB",
+                                                    "type": "server",
+                                                    "validityEnd": "16/06/2041",
+                                                    "validityStart": "21/06/2021"
+                                                }
+                                            ]
                                         }
                                     }
                                 }
@@ -23880,7 +23967,14 @@
                                             "command": "get_userapps",
                                             "command_id": "abcd243324",
                                             "response": "success",
-                                            "payload": {}
+                                            "payload": [
+                                                {
+                                                    "appname": "sample",
+                                                    "autostart": false,
+                                                    "metadata": "Package Name:sample<BR> Package Version: 1.0.0<BR> Status: install user installed<BR> architecture: all",
+                                                    "runningStatus": true
+                                                }
+                                            ]
                                         }
                                     }
                                 }
@@ -24449,30 +24543,37 @@
                                                     "properties": {
                                                         "ble": {
                                                             "type": "object",
+                                                            "description": "BLE scanner configuration.",
                                                             "properties": {
                                                                 "enable": {
                                                                     "type": "boolean",
+                                                                    "description": "Enable (`true`) or disable (`false`) the BLE scanner.",
                                                                     "example": true
                                                                 },
                                                                 "scanIntervalSec": {
                                                                     "type": "integer",
+                                                                    "description": "BLE scan interval, in seconds.",
                                                                     "example": 5
                                                                 },
                                                                 "additionalFilters": {
                                                                     "type": "object",
+                                                                    "description": "Optional filters applied to BLE advertisements before they are forwarded.",
                                                                     "properties": {
                                                                         "rssi": {
                                                                             "type": "integer",
+                                                                            "description": "Minimum RSSI threshold, in dBm. Advertisements weaker than this value are dropped.",
                                                                             "example": -80
                                                                         },
                                                                         "serviceUuids16": {
                                                                             "type": "array",
+                                                                            "description": "List of 16-bit service UUIDs (hex) to match. Only advertisements that include one of these UUIDs are forwarded.",
                                                                             "items": {
                                                                                 "type": "string"
                                                                             }
                                                                         },
                                                                         "serviceUuids128": {
                                                                             "type": "array",
+                                                                            "description": "List of 128-bit service UUIDs to match. Only advertisements that include one of these UUIDs are forwarded.",
                                                                             "items": {
                                                                                 "type": "string"
                                                                             }
@@ -24484,12 +24585,15 @@
                                                                     "properties": {
                                                                         "iBeacon": {
                                                                             "type": "object",
+                                                                            "description": "iBeacon protocol scanner configuration.",
                                                                             "properties": {
                                                                                 "enabled": {
-                                                                                    "type": "boolean"
+                                                                                    "type": "boolean",
+                                                                                    "description": "Enable (`true`) or disable (`false`) iBeacon scanning."
                                                                                 },
                                                                                 "filters": {
                                                                                     "type": "array",
+                                                                                    "description": "List of iBeacon filters. A beacon is forwarded if it matches any one filter entry.",
                                                                                     "items": {
                                                                                         "type": "object",
                                                                                         "properties": {
@@ -24516,12 +24620,15 @@
                                                                         },
                                                                         "altBeacon": {
                                                                             "type": "object",
+                                                                            "description": "AltBeacon protocol scanner configuration.",
                                                                             "properties": {
                                                                                 "enabled": {
-                                                                                    "type": "boolean"
+                                                                                    "type": "boolean",
+                                                                                    "description": "Enable (`true`) or disable (`false`) AltBeacon scanning."
                                                                                 },
                                                                                 "filters": {
                                                                                     "type": "array",
+                                                                                    "description": "List of AltBeacon filters. A beacon is forwarded if it matches any one filter entry.",
                                                                                     "items": {
                                                                                         "type": "object",
                                                                                         "properties": {
@@ -24552,9 +24659,11 @@
                                                                         },
                                                                         "eddystone": {
                                                                             "type": "object",
+                                                                            "description": "Eddystone protocol scanner configuration.",
                                                                             "properties": {
                                                                                 "enabled": {
-                                                                                    "type": "boolean"
+                                                                                    "type": "boolean",
+                                                                                    "description": "Enable (`true`) or disable (`false`) Eddystone scanning."
                                                                                 },
                                                                                 "filters": {
                                                                                     "type": "array",
@@ -24601,7 +24710,8 @@
                                                                             "type": "object",
                                                                             "properties": {
                                                                                 "enabled": {
-                                                                                    "type": "boolean"
+                                                                                    "type": "boolean",
+                                                                                    "description": "Enable (`true`) or disable (`false`) generic BLE scanning."
                                                                                 },
                                                                                 "filters": {
                                                                                     "type": "array",
@@ -24762,30 +24872,36 @@
                                         "properties": {
                                             "ble": {
                                                 "type": "object",
+                                                "description": "BLE scanner configuration.",
                                                 "required": [
                                                     "enable"
                                                 ],
                                                 "properties": {
                                                     "enable": {
                                                         "type": "boolean",
+                                                        "description": "Enable (`true`) or disable (`false`) the BLE scanner.",
                                                         "example": true
                                                     },
                                                     "scanIntervalSec": {
                                                         "type": "integer",
+                                                        "description": "BLE scan interval, in seconds.",
                                                         "minimum": 1,
                                                         "example": 5
                                                     },
                                                     "additionalFilters": {
                                                         "type": "object",
+                                                        "description": "Optional filters applied to BLE advertisements before they are forwarded.",
                                                         "properties": {
                                                             "rssi": {
                                                                 "type": "integer",
+                                                                "description": "Minimum RSSI threshold, in dBm. Advertisements weaker than this value are dropped.",
                                                                 "minimum": -127,
                                                                 "maximum": 0,
                                                                 "example": -70
                                                             },
                                                             "serviceUuids16": {
                                                                 "type": "array",
+                                                                "description": "List of 16-bit service UUIDs (hex) to match. Only advertisements that include one of these UUIDs are forwarded.",
                                                                 "items": {
                                                                     "type": "string"
                                                                 },
@@ -24796,6 +24912,7 @@
                                                             },
                                                             "serviceUuids128": {
                                                                 "type": "array",
+                                                                "description": "List of 128-bit service UUIDs to match. Only advertisements that include one of these UUIDs are forwarded.",
                                                                 "items": {
                                                                     "type": "string"
                                                                 },
@@ -24811,13 +24928,16 @@
                                                         "properties": {
                                                             "iBeacon": {
                                                                 "type": "object",
+                                                                "description": "iBeacon protocol scanner configuration.",
                                                                 "properties": {
                                                                     "enabled": {
                                                                         "type": "boolean",
+                                                                        "description": "Enable (`true`) or disable (`false`) iBeacon scanning.",
                                                                         "example": true
                                                                     },
                                                                     "filters": {
                                                                         "type": "array",
+                                                                        "description": "List of iBeacon filters. A beacon is forwarded if it matches any one filter entry.",
                                                                         "items": {
                                                                             "type": "object",
                                                                             "properties": {
@@ -24848,13 +24968,16 @@
                                                             },
                                                             "altBeacon": {
                                                                 "type": "object",
+                                                                "description": "AltBeacon protocol scanner configuration.",
                                                                 "properties": {
                                                                     "enabled": {
                                                                         "type": "boolean",
+                                                                        "description": "Enable (`true`) or disable (`false`) AltBeacon scanning.",
                                                                         "example": true
                                                                     },
                                                                     "filters": {
                                                                         "type": "array",
+                                                                        "description": "List of AltBeacon filters. A beacon is forwarded if it matches any one filter entry.",
                                                                         "items": {
                                                                             "type": "object",
                                                                             "properties": {
@@ -24890,9 +25013,11 @@
                                                             },
                                                             "eddystone": {
                                                                 "type": "object",
+                                                                "description": "Eddystone protocol scanner configuration.",
                                                                 "properties": {
                                                                     "enabled": {
                                                                         "type": "boolean",
+                                                                        "description": "Enable (`true`) or disable (`false`) Eddystone scanning.",
                                                                         "example": true
                                                                     },
                                                                     "filters": {
@@ -24948,6 +25073,7 @@
                                                                 "properties": {
                                                                     "enabled": {
                                                                         "type": "boolean",
+                                                                        "description": "Enable (`true`) or disable (`false`) generic BLE scanning.",
                                                                         "example": true
                                                                     },
                                                                     "filters": {
