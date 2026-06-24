@@ -105,7 +105,7 @@ After editing markdown or config, rerun `generate_openapi_tags_md.py`.
 
 ## Categories (17)
 
-`login`, `system`, `network`, `control`, `region`, `gpio`, `app-led`, `stack-led`, `logs`, `date-time`, `certificate`, `firmware`, `userapp`, `impinjgen2x`, `ble`, `management-events`, `tag-data-events`
+`login`, `system`, `network`, `control`, `region`, `gpio`, `app-led`, `logs`, `date-time`, `certificate`, `firmware`, `userapp`, `impinjgen2x`, `ble`, `management-events`, `tag-data-events`
 
 ## Validation
 

@@ -17,7 +17,6 @@ No additional payload fields are required to retrieve all pin states.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/gpo` |
 | Related Commands | [set_gpo](set_gpo.md), [get_gpi_status](get_gpi_status.md), [get_readerCapabilities](get_readerCapabilities.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current GPO pin states |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

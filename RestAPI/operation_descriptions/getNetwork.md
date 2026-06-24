@@ -24,7 +24,6 @@ No request body is required.
 | MQTT Command | `get_network` |
 | MQTT Equivalent | `get_network` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Required Request Fields | None |
 | Supported Response Sections | JSON response body |
 | Supported API Versions | V1.0 |
 

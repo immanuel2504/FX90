@@ -20,7 +20,6 @@ No additional payload fields are required to retrieve the full version set.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/version` |
 | Related Commands | [get_status](get_status.md), [get_readerCapabilities](get_readerCapabilities.md), [set_os](set_os.md), [revertback](revertback.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve firmware, model, serial number, and upgrade details |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

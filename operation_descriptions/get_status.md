@@ -24,7 +24,6 @@ No additional payload fields are required to retrieve the full status snapshot.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/status` |
 | Related Commands | [get_version](get_version.md), [get_readerCapabilities](get_readerCapabilities.md), [get_config](get_config.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve live operational statistics and health |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

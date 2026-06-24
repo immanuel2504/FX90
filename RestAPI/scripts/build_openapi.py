@@ -37,7 +37,6 @@ TAG_TO_FOLDER = {
    "Region": "region",
    "Gpio": "gpio",
    "App-led": "led",
-   "Stack-led": "led",
    "Logs": "logs",
    "Date&Time": "datetime",
    "Certificate": "certificates",

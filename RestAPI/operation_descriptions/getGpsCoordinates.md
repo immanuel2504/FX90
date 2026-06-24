@@ -20,7 +20,6 @@ No request body is required. The returned values represent the most recent locat
 | MQTT Command | `get_gpsCoordinates` |
 | MQTT Equivalent | `get_gpsCoordinates` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Required Request Fields | None |
 | Supported Response Sections | JSON response body |
 | Supported API Versions | V1.0 |
 

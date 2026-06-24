@@ -20,7 +20,6 @@ No request body is required.
 | MQTT Command | `get_logs` |
 | MQTT Equivalent | `get_logs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Required Request Fields | None |
 | Supported Response Sections | JSON response body |
 | Supported API Versions | V1.0 |
 

@@ -17,7 +17,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `DELETE /cloud/logs/radioPacketLog` |
 | Related Commands | [get_radio_pkt_logs](get_radio_pkt_logs.md), [set_logs](set_logs.md), [del_syslogs](del_syslogs.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | None (empty payload) |
 | Supported API Versions | V1.0 |
 

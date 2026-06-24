@@ -74,8 +74,6 @@ Regenerate: `python scripts/generate_rest_mqtt_map.py`
 | Region | PUT | `/cloud/region` | `set_region` | setRegion |
 | Firmware | PUT | `/cloud/revertbackOS` | `revertback` | setRevertbackos |
 | userapp | PUT | `/cloud/setdataToRG` | `set_dataToRG` | setDataToRG |
-| Stack-led | GET | `/cloud/stack-led` | `get_stackled` | getStackled |
-| Stack-led | PUT | `/cloud/stack-led` | `set_stackled` | setStackled |
 | Control | PUT | `/cloud/start` | `start` | startInventory |
 | System | GET | `/cloud/status` | `get_status` | getStatus |
 | Control | PUT | `/cloud/stop` | `stop` | stopInventory |

@@ -17,7 +17,6 @@ No additional payload fields are required to retrieve the time zone.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/timeZone` |
 | Related Commands | [set_timeZone](set_timeZone.md), [get_ntpServer](get_ntpServer.md), [get_status](get_status.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the configured time zone |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

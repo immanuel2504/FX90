@@ -18,7 +18,6 @@ tags:
 - name: ImpinjGen2X
 - name: System
 - name: App-led
-- name: Stack-led
 - name: Gpio
 - name: Region
 - name: Logs
@@ -123,8 +122,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -224,168 +221,6 @@ paths:
                 $ref: '#/components/schemas/setAppledResponse'
       security:
       - bearerAuth: []
-  /cloud/stack-led:
-    get:
-      tags:
-      - Stack-led
-      summary: Retrieves stack LED state
-      description: '## 1. Description
-
-
-        The `GET /cloud/stack-led` REST endpoint retrieves the current state of the stack LED on the reader.
-
-
-        This endpoint returns:
-
-
-        - The active stack LED color
-
-        - Whether the LED is currently flashing
-
-        - How much time remains for a timed LED state (if applicable)
-
-
-        No request body is required.
-
-
-        ## 2. Endpoint Details
-
-
-        | Property | Value |
-
-        |---|---|
-
-        | REST Endpoint | `GET /cloud/stack-led` |
-
-        | Operation ID | `getStackled` |
-
-        | Communication Type | Client to Device (HTTP request/response) |
-
-        | Applies To | FXR90 |
-
-        | MQTT Command | `get_stackled` |
-
-        | MQTT Equivalent | `get_stackled` |
-
-        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
-
-        | Supported Response Sections | JSON response body |
-
-        | Supported API Versions | V1.0 |
-
-
-        ## 3. When to Use This Endpoint
-
-
-        Use `GET /cloud/stack-led` to:
-
-
-        - Check the active stack LED color and brightness
-
-        - Confirm whether the LED is currently in a flashing state
-
-        - See how much time remains for a timed LED state before it reverts
-
-        - Verify the effect of a prior `PUT /cloud/stack-led` call
-
-
-        Key fields to check in the response:
-
-
-        | Field | What to Check | Why It Matters |
-
-        |---|---|---|
-
-        | `color` | What color is the LED showing? | Color is used to signal reader operational state to operators on the floor. |
-
-        | `flash` | Is the LED flashing? | Flashing indicates a transient or attention state versus a steady operational state. |
-
-        | `remainingTime` | Is a timer active? | A remaining time value indicates the LED will revert automatically after the duration expires. |'
-      operationId: getStackled
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getStackledResponse'
-      security:
-      - bearerAuth: []
-    put:
-      tags:
-      - Stack-led
-      summary: Updates stack LED state
-      description: 'The `PUT /cloud/stack-led` REST endpoint is used to color:Green, Brightness:Low(Default), Solid.
-
-
-        Use this endpoint to:
-
-
-        - Color:Green, Brightness:Low(Default), Solid.
-
-        - Perform the operation through the REST API using bearer-token authentication.
-
-        - Keep REST behavior aligned with the documented reader workflow.
-
-
-        ## 2. Endpoint Details
-
-
-        | Property | Value |
-
-        |---|---|
-
-        | MQTT Command | `set_stackled` |
-
-        | REST Endpoint | `PUT /cloud/stack-led` |
-
-        | Operation ID | `setStackled` |
-
-        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Content-Type | `application/json` where a request body is required |
-
-
-        ## 3. Usage Notes
-
-
-        This REST endpoint corresponds to the `set_stackled` MQTT command where applicable.
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.'
-      operationId: setStackled
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/setStackledRequest'
-            examples:
-              red_high_alert:
-                summary: Color:Red, Brightness:High, Flashing
-                description: The LED will blink bright red for 30 seconds.
-                value:
-                  color: red
-                  brightness: high
-                  flash: true
-                  seconds: 30
-              green_solid:
-                summary: Color:Green, Brightness:Low(Default), Solid
-                description: The LED will stay solid green indefinitely.
-                value:
-                  color: green
-                  flash: false
-                  seconds: 0
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/setStackledResponse'
-      security:
-      - bearerAuth: []
   /cloud/gpo:
     get:
       tags:
@@ -424,8 +259,6 @@ paths:
         | MQTT Equivalent | `get_gpoStatus` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -567,8 +400,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -655,8 +486,6 @@ paths:
         | MQTT Equivalent | `get_region` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -820,8 +649,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -934,8 +761,6 @@ paths:
         | MQTT Equivalent | `get_supportedStandardList` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -1091,8 +916,6 @@ paths:
         | MQTT Equivalent | `get_mode` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -1382,8 +1205,6 @@ paths:
 
         | MQTT Command | `start` |
 
-        | REST Endpoint | `PUT /cloud/start` |
-
         | Related Endpoints | `PUT /cloud/stop`, `PUT /cloud/ble-config`, `PUT /cloud/impinjGen2X`, `PUT /cloud/mode` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
@@ -1486,13 +1307,7 @@ paths:
 
         - `applyImpinjGen2X` - boolean.
 
-        - `doNotPersistState` - boolean.
-
-
-        ### Inventory State
-
-
-        - Only one inventory session may be active at a time.'
+        - `doNotPersistState` - boolean.'
       operationId: startInventory
       requestBody:
         content:
@@ -1651,8 +1466,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -1713,92 +1526,7 @@ paths:
       tags:
       - System
       summary: Retrieves reader operational statistics
-      description: '## 1. Description
-
-
-        The `GET /cloud/status` REST endpoint retrieves operational statistics and health information from the reader at the moment of the request.
-
-
-        This endpoint returns:
-
-
-        - Uptime and current system time
-
-        - Radio connection and activity state
-
-        - Reader temperature
-
-        - CPU and RAM usage
-
-        - Flash storage usage by partition
-
-        - Antenna port connection states
-
-        - NTP synchronization status
-
-        - Cloud interface connection status
-
-
-        No request body is required.
-
-
-        ## 2. Endpoint Details
-
-
-        | Property | Value |
-
-        |---|---|
-
-        | REST Endpoint | `GET /cloud/status` |
-
-        | Operation ID | `getStatus` |
-
-        | Communication Type | Client to Device (HTTP request/response) |
-
-        | Applies To | FXR90 |
-
-        | MQTT Command | `get_status` |
-
-        | MQTT Equivalent | `get_status` |
-
-        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
-
-        | Supported Response Sections | JSON response body |
-
-        | Supported API Versions | V1.0 |
-
-
-        ## 3. When to Use This Endpoint
-
-
-        Use `GET /cloud/status` to:
-
-
-        - Confirm the reader is powered, healthy, and reachable over REST
-
-        - Verify the radio is connected before starting inventory
-
-        - Monitor reader temperature, CPU, and RAM usage
-
-        - Synchronize against the reader''s current system time
-
-
-        Key fields to check in the response:
-
-
-        | Field | What to Check | Why It Matters |
-
-        |---|---|---|
-
-        | `uptime` | How long has the reader been running? | Long uptimes confirm stability; short uptimes indicate an unexpected restart. |
-
-        | `radioConnection` | Is the value `connected`? | Inventory cannot run if the radio is disconnected. |
-
-        | `temperature` | Is the value within safe operating range? | Excessive temperature can cause throttling or hardware faults. |
-
-        | `antennas` | Are expected ports `connected`? | A `disconnected` antenna port means tags on that port will not be read. |'
+      description: "## 1. Description\n\nThe `GET /cloud/status` REST endpoint retrieves operational statistics and health information from the reader at the moment of the request.\n\nThis endpoint returns:\n\n- Uptime and current system time\n- Radio connection and activity state\n- Reader temperature\n- CPU and RAM usage\n- Flash storage usage by partition\n- Antenna port connection states\n- NTP synchronization status\n- Cloud interface connection status\n- BLE scanner runtime status (scan state, scan start time, and beacon counts by protocol)\n\nThe `ble` section is present only when BLE is supported and its status is available. No request body is required.\n\n## 2. Endpoint Details\n\n| Property | Value |\n|---|---|\n| REST Endpoint | `GET /cloud/status` |\n| Operation ID | `getStatus` |\n| Communication Type | Client to Device (HTTP request/response) |\n| Applies To | FXR90 |\n| MQTT Command | `get_status` |\n| MQTT Equivalent | `get_status` |\n| Authentication | Bearer token (`Authorization: Bearer <token>`) |\n| Supported Response Sections | JSON response body |\n| Supported API Versions | V1.0 |\n\n## 3. When to Use This Endpoint\n\nUse `GET /cloud/status` to:\n\n- Confirm the reader is powered, healthy, and reachable over REST\n- Verify the radio is connected before starting inventory\n- Monitor reader temperature, CPU, and RAM usage\n- Synchronize against the reader's current system time\n- Confirm BLE scanning is active and review beacon counts by protocol\n\nKey fields to check in the response:\n\n| Field | What to Check | Why It Matters |\n|---|---|---|\n| `uptime` | How long has the reader been running? | Long uptimes confirm stability; short uptimes indicate an unexpected restart. |\n| `radioConnection` | Is the value `connected`? | Inventory cannot run if the radio is disconnected. |\n| `temperature` | Is the value within safe operating range? | Excessive temperature can cause throttling or hardware faults. |\n| `antennas` | Are expected ports `connected`? | A `disconnected` antenna port means tags on that port will not be read. |\n| `ble.scanState` | Is the value `running`? | Confirms whether the BLE scanner is currently active (`running`) or `stopped`. |\n| `ble.scanStartTime` | When did the current scan start? | ISO 8601 timestamp marking when BLE scanning last started. |\n| `ble.beaconCounts` | Are advertisements being seen? | Per-protocol counts (`iBeacon`, `altBeacon`, `eddystone`, `generic`, `total`) confirm beacons are being detected in the current scan window. |\n\n## 4. BLE Status Fields\n\nWhen BLE is supported and active, the response includes a `ble` object:\n\n| Field | Type | Description |\n|---|---|---|\n| `ble.scanState` | string | Current BLE scanner state — `running` or `stopped`. |\n| `ble.scanStartTime` | string (date-time) | ISO 8601 timestamp of when the BLE scan was last started. |\n| `ble.beaconCounts.total` | integer | Total BLE advertisements observed in the current scan window. |\n| `ble.beaconCounts.iBeacon` | integer | Number of iBeacon advertisements observed. |\n| `ble.beaconCounts.altBeacon` | integer | Number of AltBeacon advertisements observed. |\n| `ble.beaconCounts.eddystone` | integer | Number of Eddystone advertisements observed. |\n| `ble.beaconCounts.generic` | integer | Number of generic BLE advertisements observed. |\n\nExample `ble` section:\n\n```json\n\"ble\": {\n  \"scanState\": \"running\",\n  \"scanStartTime\": \"2026-05-21T13:46:16.955Z\",\n  \"beaconCounts\": {\n    \"total\": 108,\n    \"iBeacon\": 75,\n    \"altBeacon\": 33,\n    \"eddystone\": 0,\n    \"generic\": 0\n  }\n}\n```"
       operationId: getStatus
       responses:
         '200':
@@ -1913,8 +1641,6 @@ paths:
         | MQTT Equivalent | `get_config` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -2805,8 +2531,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -3036,8 +2760,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -3265,8 +2987,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -3468,8 +3188,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -3622,8 +3340,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -3749,8 +3465,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -3828,8 +3542,6 @@ paths:
         | MQTT Equivalent | `get_rg_warn_logs` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -3909,8 +3621,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -3988,8 +3698,6 @@ paths:
         | MQTT Equivalent | `get_radio_pkt_logs` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -4115,8 +3823,6 @@ paths:
         | MQTT Equivalent | `get_timeZone` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -4249,8 +3955,6 @@ paths:
         | MQTT Equivalent | `get_ntpServer` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -4393,8 +4097,6 @@ paths:
         | MQTT Equivalent | `get_certs` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -4681,8 +4383,6 @@ paths:
         | MQTT Equivalent | `get_network` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -5063,8 +4763,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -5318,8 +5016,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -5406,8 +5102,6 @@ paths:
         | MQTT Equivalent | `get_readPoints` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -5497,8 +5191,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -5579,8 +5271,6 @@ paths:
         | MQTT Equivalent | `get_eSimConfig` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -6103,8 +5793,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -6384,8 +6072,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -6526,8 +6212,6 @@ paths:
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Required Request Fields | None |
-
         | Supported Response Sections | JSON response body |
 
         | Supported API Versions | V1.0 |
@@ -6615,10 +6299,10 @@ paths:
       tags:
       - ImpinjGen2X
       summary: Set Impinj Gen2X configuration
-      description: "The `PUT /cloud/impinjGen2X` REST endpoint configures Impinj Gen2X proprietary RFID features on the FXR90 reader, covering FastID acceleration, TagProtect security, TagFocus singulation control, and TagQuieting (basic and advanced) behavior.\n\n**This endpoint allows you to configure:**\n\n- FastID for combined EPC + TID reads in a single inventory operation\n- TagProtect for password-based tag protection and visibility control\n- TagFocus to suppress already-read tags during dense inventory\n- TagQuieting (basic or advanced) to silence specific tags by EPC or by Gen2 select masks\n\n**Use this endpoint to:**\n\n- Improve inventory performance in dense or high-duplicate tag environments\n- Protect sensitive tags from unauthorized reads or writes\n- Reduce duplicate reporting by silencing already-inventoried tags\n- Apply advanced Gen2 select pre-conditions for state-aware tag quieting\n\n### Endpoint Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Impinj Gen2X Configuration Update |\n| Communication Type | Client to Device (HTTP request/response) |\n| Applies To | FXR90 Series |\n| MQTT Command | `set_impinjGen2X` |\n| REST Endpoint | `PUT /cloud/impinjGen2X` |\n| Related Endpoints | `GET /cloud/impinjGen2X`, `PUT /cloud/start`, `PUT /cloud/stop` |\n| Authentication | Bearer token (`Authorization: Bearer <token>`) |\n| Content-Type | `application/json` |\n| Required Request Fields | At least one of `fastID`, `tagProtect`, `tagFocus`, `tagQuieting` |\n| Success Response | `200 OK` |\n| Error Responses | `422 Unprocessable Entity`, `500 Internal Server Error` |\n| Supported Features | FastID, TagProtect, TagFocus, TagQuieting (basic and advanced) |\n| Supported TagProtect Actions | `enableTagProtection`, `disableTagProtection`, `enableTagVisibility`, `disableTagVisibility` |\n| Supported TagQuieting Basic Actions | `quiet`, `unquiet` |\n| Supported Gen2 Memory Banks | EPC, TID, USER, RESERVED |\n| Supported Select Targets | S0, S1, S2, S3, SL |\n| Supported Tag Quiet Masks | S0A, S0B, S1A, S1B, S2A, S2B, S3A, S3B, SL_ASSERT, SL_DEASSERT |\n| Mutually Exclusive Features | FastID, TagFocus, TagQuieting (only one reader-scoped feature active at a time) |\n\n---\n\n## 2. Before You Begin\n\nDecide which Gen2X feature you need to configure before sending this request. You can send a minimal payload targeting only one feature (for example, only `fastID` or only `tagProtect`), but you cannot combine mutually exclusive reader-scoped features in a single request.\n\n| What You Need | Details |\n|---|---|\n| Authentication | Obtain a valid bearer token and include it in the `Authorization` header of every request. |\n| Network reachability | The reader's HTTPS endpoint must be reachable from your client. Verify connectivity before issuing the request. |\n| Feature decision | Choose exactly one reader-scoped feature (`fastID`, `tagFocus`, or `tagQuieting`) per request. `tagProtect` is tag-scoped and can be configured independently. |\n| TagProtect credentials | For any `tagProtect` action, have the 8-character hex access password ready. For tag-specific actions (`enableTagProtection`, `disableTagProtection`), also have the target EPC (`tagID`). |\n| Tag ID list (Basic Quieting) | For `tagQuieting.basic`, prepare the list of EPCs to quiet or unquiet. A maximum of **31 tag IDs** is supported per request. |\n| Pre-select strategy (Advanced Quieting) | For `tagQuieting.advanced`, decide on the Gen2 select pre-conditions (`preSelect` array), including target session/SL flag, action, and memory mask. |\n| Quiet mask flags | For `tagQuieting.advanced`, know which session flags (`S0A`-`S3B`, `SL_ASSERT`, `SL_DEASSERT`) define the quieted state. |\n| Inventory state | `PUT /cloud/impinjGen2X` should be called **before** starting inventory. Stop any active inventory first by calling `PUT /cloud/stop`. |\n| Activation | The saved configuration is **not active** until you call `PUT /cloud/start` with `applyImpinjGen2X: true` in the request body. |\n\n---\n\n## 3. Choosing a Gen2X Feature\n\nThe Gen2X feature you select\
-        \ determines the reader's behavior during inventory. Choose based on your operational goal.\n\n| Feature | Description | Scope |\n|---|---|---|\n| `fastID` | Returns the EPC and TID together in a single read, eliminating the need for a separate TID read. Best for applications that require chip-level identity (anti-counterfeit, authentication). | Reader-scoped |\n| `tagProtect` | Password-protects individual tags or controls reader visibility of protected tags. Use for securing sensitive items or restricting access. | Tag-scoped |\n| `tagFocus` | Silences already-read tags so the reader focuses only on new tags entering the field. Ideal for portal and conveyor applications. | Reader-scoped |\n| `tagQuieting` (basic) | Silences a specific list of tag EPCs from being reported during inventory. Use when you know exactly which tags to suppress. | Reader-scoped |\n| `tagQuieting` (advanced) | Uses Gen2 select pre-conditions (mask + state-aware action) to silence tags based on memory content or session state. Use for complex filtering in dense environments. | Reader-scoped |\n\n> Mutually exclusive: Only one of `fastID`, `tagFocus`, or `tagQuieting` can be active at a time. `tagProtect` can coexist with any one of them because it operates at the tag level.\n\n---\n\n## 4. Choosing TagProtect Actions\n\nTagProtect operations either lock/unlock individual tags or temporarily allow the reader to see already-protected tags. Each action has specific field requirements.\n\n| Action | What It Does | Required Fields | Key Constraints |\n|---|---|---|---|\n| `enableTagProtection` | Permanently protects a tag; the tag becomes invisible to standard reads until unprotected. | `password`, `tagID` | `password` must be exactly 8 hex characters. Optional `enableShortRange` reduces read range during protection. |\n| `disableTagProtection` | Removes protection from a previously protected tag, restoring normal visibility. | `password`, `tagID` | `password` must match the tag's existing access password exactly. |\n| `enableTagVisibility` | Temporarily allows the reader to read protected tags during this session. Does not change the tag's protection state. | `password` | Reader-scoped; affects all protected tags in field. |\n| `disableTagVisibility` | Restores the default behavior where protected tags are hidden from the reader. | `password` | Reverts the effect of `enableTagVisibility`. |\n\n> Important: `enableTagProtection` and `disableTagProtection` are tag-specific (require `tagID`). `enableTagVisibility` and `disableTagVisibility` are reader-wide visibility toggles.\n\n---\n\n## 5. Choosing TagQuieting Strategy\n\nTagQuieting silences tags from being reported during inventory. Choose between **basic** (EPC-list based) and **advanced** (Gen2 select mask based) depending on your filtering complexity.\n\n### Basic TagQuieting\n\n| Field | What It Controls |\n|---|---|\n| `action: quiet` | Silences the listed tags from being reported in future inventories. |\n| `action: unquiet` | Restores reporting for previously quieted tags. |\n| `tagIDs` | Array of EPCs (hex strings) to quiet or unquiet. Maximum **31 EPCs** per request. |\n\n### Advanced TagQuieting\n\nAdvanced quieting uses Gen2 select pre-conditions to silence tags based on memory content and state, instead of explicit EPC lists.\n\n| Field | What It Controls |\n|---|---|\n| `preSelect[]` | Array of Gen2 select operations applied **before** quieting. Each entry contains `target`, `action`, and `mask`. |\n| `preSelect[].target` | The session flag or SL to act upon (`S0`, `S1`, `S2`, `S3`, `SL`). |\n| `preSelect[].action` | The state-aware action to take on match/mismatch (e.g., `ASSERTSL_NOTHING`, `INVB_INVA`, `DEASSERTSL_NOTHING`, `INVA_INVB`). |\n| `preSelect[].mask` | The memory mask: `bank` (EPC/TID/USER/RESERVED), `pointer` (bit offset), `length` (bits), `value` (hex). |\n| `tagQuietMasks` | Array of session-flag combinations defining the quieted state (`S0A`, `S2B`, `SL_ASSERT`, `SL_DEASSERT`, etc.). |\n| `target` | The target session/flag used for the actual quieting operation.\
-        \ |\n| `stateAwareAction` | The compound state action (e.g., `ASSERTSL_DEASSERTSL`, `DEASSERTSL_ASSERTSL`) applied during quieting. |\n\n> Important: Use `basic` when you have a discrete list of EPCs. Use `advanced` when filtering by memory content, session state, or complex multi-step Gen2 select conditions.\n\n---\n\n## 6. Choosing FastID and TagFocus\n\nThese two reader-scoped features improve inventory performance but cannot be combined.\n\n### `fastID`\n\n| Field | What It Controls |\n|---|---|\n| `enabled: true` | Reader returns EPC + TID together in a single read, reducing total operations. |\n| `enabled: false` | Reverts to standard EPC-only reads. |\n\n**Use FastID when:** Your application needs TID for every tag (e.g., authentication, chip-level traceability) and you want to avoid the extra round-trip of a separate TID read.\n\n### `tagFocus`\n\n| Field | What It Controls |\n|---|---|\n| `enabled: true` | Once a tag is read, it is silenced for the rest of the inventory cycle. The reader focuses only on new tags entering the field. |\n| `enabled: false` | Standard inventory behavior; tags can be reported multiple times. |\n\n**Use TagFocus when:** You operate portals, conveyors, or other scenarios with many duplicate reads of the same tag set and want unique-tag reporting.\n\n---\n\n## 7. Applying the Configuration\n\nCalling this endpoint only **saves** the configuration on the reader; it is not active until inventory is started with the activation flag.\n\n### REST Workflow\n\n```text\nPUT  /cloud/stop                 -> stop any active inventory\nPUT  /cloud/impinjGen2X          -> save the configuration\nGET  /cloud/impinjGen2X          -> verify the saved configuration\nPUT  /cloud/start                -> body: { \"applyImpinjGen2X\": true }\n```\n\n### Request Format\n\nEvery request to this endpoint follows this structure:\n\n```http\nPUT /cloud/impinjGen2X HTTP/1.1\nHost: <reader-address>\nAuthorization: Bearer <token>\nContent-Type: application/json\n\n{\n  // one or more Gen2X feature objects\n}\n```\n\n### Success Response (`200 OK`)\n\n```http\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"message\": \"Configuration saved successfully\"\n}\n```\n\n### Error Responses\n\n| Status Code | Meaning | When It Occurs |\n|---|---|---|\n| `422 Unprocessable Entity` | Validation error | Empty body, mutually exclusive features sent together, invalid enum value, or constraint violation. |\n| `500 Internal Server Error` | Reader-side failure | Internal reader error while persisting the configuration. |\n\n> Persistence: The reader stores the last saved configuration and restores it across reboots and reconnects. The configuration is only applied during inventory when `applyImpinjGen2X: true` is sent in the `PUT /cloud/start` request body.\n\n---\n\n## 8. Rules and Constraints\n\n### Inventory State\n\n- `PUT /cloud/impinjGen2X` cannot modify configuration while an active inventory is running. Stop inventory first by calling `PUT /cloud/stop`.\n- Configuration changes only take effect on the next `PUT /cloud/start` call that includes `applyImpinjGen2X: true` in the request body.\n\n### Request Format\n\n- HTTP method must be `PUT`.\n- `Content-Type` header must be `application/json`.\n- `Authorization` header must contain a valid bearer token.\n- Request body must contain at least one of: `fastID`, `tagProtect`, `tagFocus`, `tagQuieting`. An empty body returns `422 Unprocessable Entity`.\n\n### Mutual Exclusivity\n\n- Only **one** of `fastID`, `tagFocus`, or `tagQuieting` may be active at a time. Sending more than one reader-scoped feature in a single request returns `422 Unprocessable Entity`.\n- `tagProtect` is tag-scoped and may be configured alongside any one reader-scoped feature.\n\n### TagProtect\n\n- `password` must be exactly **8 hex characters (32 bits)** for all TagProtect actions.\n- `tagID` is required for `enableTagProtection` and `disableTagProtection`. It must be a valid EPC hex string.\n- `enableShortRange` is optional and only applies to `enableTagProtection`.\n\n### TagQuieting\
-        \ (Basic)\n\n- `tagIDs` array supports a **maximum of 31 EPCs** per request.\n- Each EPC must be a valid hex string matching the tag's EPC memory bank content.\n- `basic` and `advanced` sub-objects are mutually exclusive within `tagQuieting`.\n\n### TagQuieting (Advanced)\n\n- `preSelect[].mask.value` must be a valid hex string matching `length` (bits).\n- `mask.bank` must be one of `EPC`, `TID`, `USER`, or `RESERVED`.\n- `mask.pointer` is a **bit position** (not a word offset).\n- `tagQuietMasks` values must come from the supported session-flag enum list.\n\n### Response Handling\n\n- A `200 OK` response indicates the configuration was saved successfully on the reader.\n- A `422 Unprocessable Entity` response indicates the request body failed validation. Inspect the response body for the specific error reason.\n- A `500 Internal Server Error` response indicates a reader-side failure. Retry after verifying reader health."
+      description: "The `PUT /cloud/impinjGen2X` REST endpoint configures Impinj Gen2X proprietary RFID features on the FXR90 reader, covering FastID acceleration, TagProtect security, TagFocus singulation control, and TagQuieting (basic and advanced) behavior.\n\n**This endpoint allows you to configure:**\n\n- FastID for combined EPC + TID reads in a single inventory operation\n- TagProtect for password-based tag protection and visibility control\n- TagFocus to suppress already-read tags during dense inventory\n- TagQuieting (basic or advanced) to silence specific tags by EPC or by Gen2 select masks\n\n**Use this endpoint to:**\n\n- Improve inventory performance in dense or high-duplicate tag environments\n- Protect sensitive tags from unauthorized reads or writes\n- Reduce duplicate reporting by silencing already-inventoried tags\n- Apply advanced Gen2 select pre-conditions for state-aware tag quieting\n\n### Endpoint Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Impinj Gen2X Configuration Update |\n| Communication Type | Client to Device (HTTP request/response) |\n| Applies To | FXR90 Series |\n| MQTT Command | `set_impinjGen2X` |\n| REST Endpoint | `PUT /cloud/impinjGen2X` |\n| Related Endpoints | `GET /cloud/impinjGen2X`, `PUT /cloud/start`, `PUT /cloud/stop` |\n| Authentication | Bearer token (`Authorization: Bearer <token>`) |\n| Content-Type | `application/json` |\n| Success Response | `200 OK` |\n| Error Responses | `422 Unprocessable Entity`, `500 Internal Server Error` |\n| Supported Features | FastID, TagProtect, TagFocus, TagQuieting (basic and advanced) |\n| Supported TagProtect Actions | `enableTagProtection`, `disableTagProtection`, `enableTagVisibility`, `disableTagVisibility` |\n| Supported TagQuieting Basic Actions | `quiet`, `unquiet` |\n| Supported Gen2 Memory Banks | EPC, TID, USER, RESERVED |\n| Supported Select Targets | S0, S1, S2, S3, SL |\n| Supported Tag Quiet Masks | S0A, S0B, S1A, S1B, S2A, S2B, S3A, S3B, SL_ASSERT, SL_DEASSERT |\n| Mutually Exclusive Features | FastID, TagFocus, TagQuieting (only one reader-scoped feature active at a time) |\n\n---\n\n## 2. Before You Begin\n\nDecide which Gen2X feature you need to configure before sending this request. You can send a minimal payload targeting only one feature (for example, only `fastID` or only `tagProtect`), but you cannot combine mutually exclusive reader-scoped features in a single request.\n\n| What You Need | Details |\n|---|---|\n| Authentication | Obtain a valid bearer token and include it in the `Authorization` header of every request. |\n| Network reachability | The reader's HTTPS endpoint must be reachable from your client. Verify connectivity before issuing the request. |\n| Feature decision | Choose exactly one reader-scoped feature (`fastID`, `tagFocus`, or `tagQuieting`) per request. `tagProtect` is tag-scoped and can be configured independently. |\n| TagProtect credentials | For any `tagProtect` action, have the 8-character hex access password ready. For tag-specific actions (`enableTagProtection`, `disableTagProtection`), also have the target EPC (`tagID`). |\n| Tag ID list (Basic Quieting) | For `tagQuieting.basic`, prepare the list of EPCs to quiet or unquiet. A maximum of **31 tag IDs** is supported per request. |\n| Pre-select strategy (Advanced Quieting) | For `tagQuieting.advanced`, decide on the Gen2 select pre-conditions (`preSelect` array), including target session/SL flag, action, and memory mask. |\n| Quiet mask flags | For `tagQuieting.advanced`, know which session flags (`S0A`-`S3B`, `SL_ASSERT`, `SL_DEASSERT`) define the quieted state. |\n| Inventory state | `PUT /cloud/impinjGen2X` should be called **before** starting inventory. Stop any active inventory first by calling `PUT /cloud/stop`. |\n| Activation | The saved configuration is **not active** until you call `PUT /cloud/start` with `applyImpinjGen2X: true` in the request body. |\n\n---\n\n## 3. Choosing a Gen2X Feature\n\nThe Gen2X feature you select determines the reader's behavior during inventory. Choose based on your operational goal.\n\n\
+        | Feature | Description | Scope |\n|---|---|---|\n| `fastID` | Returns the EPC and TID together in a single read, eliminating the need for a separate TID read. Best for applications that require chip-level identity (anti-counterfeit, authentication). | Reader-scoped |\n| `tagProtect` | Password-protects individual tags or controls reader visibility of protected tags. Use for securing sensitive items or restricting access. | Tag-scoped |\n| `tagFocus` | Silences already-read tags so the reader focuses only on new tags entering the field. Ideal for portal and conveyor applications. | Reader-scoped |\n| `tagQuieting` (basic) | Silences a specific list of tag EPCs from being reported during inventory. Use when you know exactly which tags to suppress. | Reader-scoped |\n| `tagQuieting` (advanced) | Uses Gen2 select pre-conditions (mask + state-aware action) to silence tags based on memory content or session state. Use for complex filtering in dense environments. | Reader-scoped |\n\n> Mutually exclusive: Only one of `fastID`, `tagFocus`, or `tagQuieting` can be active at a time. `tagProtect` can coexist with any one of them because it operates at the tag level.\n\n---\n\n## 4. Choosing TagProtect Actions\n\nTagProtect operations either lock/unlock individual tags or temporarily allow the reader to see already-protected tags. Each action has specific field requirements.\n\n| Action | What It Does | Required Fields | Key Constraints |\n|---|---|---|---|\n| `enableTagProtection` | Permanently protects a tag; the tag becomes invisible to standard reads until unprotected. | `password`, `tagID` | `password` must be exactly 8 hex characters. Optional `enableShortRange` reduces read range during protection. |\n| `disableTagProtection` | Removes protection from a previously protected tag, restoring normal visibility. | `password`, `tagID` | `password` must match the tag's existing access password exactly. |\n| `enableTagVisibility` | Temporarily allows the reader to read protected tags during this session. Does not change the tag's protection state. | `password` | Reader-scoped; affects all protected tags in field. |\n| `disableTagVisibility` | Restores the default behavior where protected tags are hidden from the reader. | `password` | Reverts the effect of `enableTagVisibility`. |\n\n> Important: `enableTagProtection` and `disableTagProtection` are tag-specific (require `tagID`). `enableTagVisibility` and `disableTagVisibility` are reader-wide visibility toggles.\n\n---\n\n## 5. Choosing TagQuieting Strategy\n\nTagQuieting silences tags from being reported during inventory. Choose between **basic** (EPC-list based) and **advanced** (Gen2 select mask based) depending on your filtering complexity.\n\n### Basic TagQuieting\n\n| Field | What It Controls |\n|---|---|\n| `action: quiet` | Silences the listed tags from being reported in future inventories. |\n| `action: unquiet` | Restores reporting for previously quieted tags. |\n| `tagIDs` | Array of EPCs (hex strings) to quiet or unquiet. Maximum **31 EPCs** per request. |\n\n### Advanced TagQuieting\n\nAdvanced quieting uses Gen2 select pre-conditions to silence tags based on memory content and state, instead of explicit EPC lists.\n\n| Field | What It Controls |\n|---|---|\n| `preSelect[]` | Array of Gen2 select operations applied **before** quieting. Each entry contains `target`, `action`, and `mask`. |\n| `preSelect[].target` | The session flag or SL to act upon (`S0`, `S1`, `S2`, `S3`, `SL`). |\n| `preSelect[].action` | The state-aware action to take on match/mismatch (e.g., `ASSERTSL_NOTHING`, `INVB_INVA`, `DEASSERTSL_NOTHING`, `INVA_INVB`). |\n| `preSelect[].mask` | The memory mask: `bank` (EPC/TID/USER/RESERVED), `pointer` (bit offset), `length` (bits), `value` (hex). |\n| `tagQuietMasks` | Array of session-flag combinations defining the quieted state (`S0A`, `S2B`, `SL_ASSERT`, `SL_DEASSERT`, etc.). |\n| `target` | The target session/flag used for the actual quieting operation. |\n| `stateAwareAction` | The compound state action (e.g., `ASSERTSL_DEASSERTSL`, `DEASSERTSL_ASSERTSL`)\
+        \ applied during quieting. |\n\n> Important: Use `basic` when you have a discrete list of EPCs. Use `advanced` when filtering by memory content, session state, or complex multi-step Gen2 select conditions.\n\n---\n\n## 6. Choosing FastID and TagFocus\n\nThese two reader-scoped features improve inventory performance but cannot be combined.\n\n### `fastID`\n\n| Field | What It Controls |\n|---|---|\n| `enabled: true` | Reader returns EPC + TID together in a single read, reducing total operations. |\n| `enabled: false` | Reverts to standard EPC-only reads. |\n\n**Use FastID when:** Your application needs TID for every tag (e.g., authentication, chip-level traceability) and you want to avoid the extra round-trip of a separate TID read.\n\n### `tagFocus`\n\n| Field | What It Controls |\n|---|---|\n| `enabled: true` | Once a tag is read, it is silenced for the rest of the inventory cycle. The reader focuses only on new tags entering the field. |\n| `enabled: false` | Standard inventory behavior; tags can be reported multiple times. |\n\n**Use TagFocus when:** You operate portals, conveyors, or other scenarios with many duplicate reads of the same tag set and want unique-tag reporting.\n\n---\n\n## 7. Applying the Configuration\n\nCalling this endpoint only **saves** the configuration on the reader; it is not active until inventory is started with the activation flag.\n\n### REST Workflow\n\n```text\nPUT  /cloud/stop                 -> stop any active inventory\nPUT  /cloud/impinjGen2X          -> save the configuration\nGET  /cloud/impinjGen2X          -> verify the saved configuration\nPUT  /cloud/start                -> body: { \"applyImpinjGen2X\": true }\n```\n\n### Request Format\n\nEvery request to this endpoint follows this structure:\n\n```http\nPUT /cloud/impinjGen2X HTTP/1.1\nHost: <reader-address>\nAuthorization: Bearer <token>\nContent-Type: application/json\n\n{\n  // one or more Gen2X feature objects\n}\n```\n\n### Success Response (`200 OK`)\n\n```http\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"message\": \"Configuration saved successfully\"\n}\n```\n\n### Error Responses\n\n| Status Code | Meaning | When It Occurs |\n|---|---|---|\n| `422 Unprocessable Entity` | Validation error | Empty body, mutually exclusive features sent together, invalid enum value, or constraint violation. |\n| `500 Internal Server Error` | Reader-side failure | Internal reader error while persisting the configuration. |\n\n> Persistence: The reader stores the last saved configuration and restores it across reboots and reconnects. The configuration is only applied during inventory when `applyImpinjGen2X: true` is sent in the `PUT /cloud/start` request body.\n\n---\n\n## 8. Rules and Constraints\n\n### Inventory State\n\n- `PUT /cloud/impinjGen2X` cannot modify configuration while an active inventory is running. Stop inventory first by calling `PUT /cloud/stop`.\n- Configuration changes only take effect on the next `PUT /cloud/start` call that includes `applyImpinjGen2X: true` in the request body.\n\n### Request Format\n\n- HTTP method must be `PUT`.\n- `Content-Type` header must be `application/json`.\n- `Authorization` header must contain a valid bearer token.\n- Request body must contain at least one of: `fastID`, `tagProtect`, `tagFocus`, `tagQuieting`. An empty body returns `422 Unprocessable Entity`.\n\n### Mutual Exclusivity\n\n- Only **one** of `fastID`, `tagFocus`, or `tagQuieting` may be active at a time. Sending more than one reader-scoped feature in a single request returns `422 Unprocessable Entity`.\n- `tagProtect` is tag-scoped and may be configured alongside any one reader-scoped feature.\n\n### TagProtect\n\n- `password` must be exactly **8 hex characters (32 bits)** for all TagProtect actions.\n- `tagID` is required for `enableTagProtection` and `disableTagProtection`. It must be a valid EPC hex string.\n- `enableShortRange` is optional and only applies to `enableTagProtection`.\n\n### TagQuieting (Basic)\n\n- `tagIDs` array supports a **maximum of 31 EPCs** per request.\n- Each EPC must be a valid hex\
+        \ string matching the tag's EPC memory bank content.\n- `basic` and `advanced` sub-objects are mutually exclusive within `tagQuieting`.\n\n### TagQuieting (Advanced)\n\n- `preSelect[].mask.value` must be a valid hex string matching `length` (bits).\n- `mask.bank` must be one of `EPC`, `TID`, `USER`, or `RESERVED`.\n- `mask.pointer` is a **bit position** (not a word offset).\n- `tagQuietMasks` values must come from the supported session-flag enum list.\n\n### Response Handling\n\n- A `200 OK` response indicates the configuration was saved successfully on the reader.\n- A `422 Unprocessable Entity` response indicates the request body failed validation. Inspect the response body for the specific error reason.\n- A `500 Internal Server Error` response indicates a reader-side failure. Retry after verifying reader health."
       operationId: setImpinjGen2X
       requestBody:
         required: true
@@ -6932,8 +6616,6 @@ paths:
         | MQTT Equivalent | `get_bleConfig` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-
-        | Required Request Fields | None |
 
         | Supported Response Sections | JSON response body |
 
@@ -11647,57 +11329,6 @@ components:
           description: Duration in seconds for the LED state to remain active.
           example: 60
     setAppledResponse:
-      type: string
-      example: ''
-    getStackledResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: NON_DEFAULT
-        color:
-          type: string
-          example: amber
-        brightness:
-          type: string
-          example: high
-        flash:
-          type: boolean
-          example: true
-        seconds:
-          type: integer
-          example: 0
-        seconds_remaining:
-          type: integer
-          example: 14
-    setStackledRequest:
-      type: object
-      properties:
-        color:
-          type: string
-          description: The color of the LED (red, amber, green, blue, off)
-          enum:
-          - red
-          - amber
-          - green
-          - blue
-          - false
-          example: amber
-        brightness:
-          type: string
-          description: The brightness of the LED (low, med, high). Defaults to low.
-          enum:
-          - low
-          - med
-          - high
-          example: high
-        flash:
-          type: boolean
-          example: true
-        seconds:
-          type: integer
-          example: 60
-    setStackledResponse:
       type: string
       example: ''
     get_gpoResponse:

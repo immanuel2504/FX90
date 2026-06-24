@@ -20,7 +20,6 @@ No request body is required. If no Gen2X configuration has been saved, the respo
 | MQTT Command | `get_impinjGen2X` |
 | MQTT Equivalent | `get_impinjGen2X` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Required Request Fields | None |
 | Supported Response Sections | JSON response body |
 | Supported API Versions | V1.0 |
 

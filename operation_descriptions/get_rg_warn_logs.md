@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the warning log archive.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/logs/RgWarningLog` |
 | Related Commands | [get_rg_error_logs](get_rg_error_logs.md), [get_rc_log](get_rc_log.md), [get_logs](get_logs.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the reader-gateway warning log archive |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

@@ -18,7 +18,6 @@ No additional payload fields are required. The returned values represent the mos
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/readerLocation` |
 | Related Commands | [get_network](get_network.md), [get_status](get_status.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the reader's last known GPS coordinates |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

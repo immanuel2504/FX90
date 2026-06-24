@@ -27,7 +27,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/network` |
 | Related Commands | [get_network](get_network.md), [get_networkInterfaces](get_networkInterfaces.md), [set_hostname](set_hostname.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Interface Keys | `eth0`, `mlan0`, `bnep0`, `wan0`, `uap0` |
 | Supported Wi-Fi Security Types | `WPA2Personal`, `WPA2Enterprise`, `WPA3Personal`, `WPA3Enterprise` |
 | Supported 802.1X Authentication | `TLS`, `TTLS`, `PEAP` |

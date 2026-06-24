@@ -25,7 +25,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/impinjGen2X` |
 | Related Commands | [get_impinjGen2X](get_impinjGen2X.md), [start](start.md), [get_mode](get_mode.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Features | `fastID`, `tagProtect`, `tagFocus`, `tagQuieting` |
 | Supported TagProtect Actions | `enableTagProtection`, `disableTagProtection`, `enableTagVisibility`, `disableTagVisibility` |
 | Supported TagQuieting Modes | `basic` (quiet/unquiet by EPC list), `advanced` (pre-select with mask) |

@@ -18,8 +18,7 @@ By default, an empty payload starts RFID inventory only. Use the `scanType` fiel
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 Series |
 | REST Endpoint | `PUT /cloud/start` |
-| MQTT Command | `start` |
-| Related Commands | `stop`, `set_bleConfig`, `set_impinjGen2X`, `set_mode` |
+| Related Commands | [stop](stop.md), [set_bleConfig](set_bleConfig.md), [set_impinjGen2X](set_impinjGen2X.md), [set_mode](set_mode.md) |
 | Supported Scan Types | `rfid`, `ble`, or both combined |
 
 ---
@@ -77,7 +76,3 @@ The `doNotPersistState` field controls whether the reader resumes scanning autom
 - `scanType` - array of strings. Allowed values: `"rfid"`, `"ble"`.
 - `applyImpinjGen2X` - boolean.
 - `doNotPersistState` - boolean.
-
-### Inventory State
-
-- Only one inventory session may be active at a time.

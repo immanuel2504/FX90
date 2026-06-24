@@ -17,7 +17,6 @@ No additional payload fields are required to retrieve all installed user apps.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/apps` |
 | Related Commands | [install_user_app](install_user_app.md), [uninstall-user-app](uninstall-user-app.md), [start_user_app](start_user_app.md), [stop_user_app](stop_user_app.md), [autostart_user_app](autostart_user_app.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the list of installed user applications |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

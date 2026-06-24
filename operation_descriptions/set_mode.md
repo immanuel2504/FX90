@@ -27,7 +27,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/mode` |
 | Related Commands | [get_mode](get_mode.md), [start](start.md), [stop](stop.md), [get_readerCapabilities](get_readerCapabilities.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Mode Types | `SIMPLE`, `INVENTORY`, `PORTAL`, `CONVEYOR`, `CUSTOM`, `DIRECTIONALITY` |
 | Supported Environment Profiles | `LOW_INTERFERENCE`, `HIGH_INTERFERENCE`, `VERY_HIGH_INTERFERENCE`, `AUTO_DETECT`, `DEMO` |
 | Supported API Versions | V1.0 |
@@ -50,20 +49,9 @@ Violating any of these rules will cause the command to fail or inventory to beha
 
 ### Mode Configuration
 
-- `type` must be one of the supported mode type strings. An unrecognized value will be rejected.
 - `modeSpecificSettings` is only required for modes that define one (e.g., `INVENTORY`, `PORTAL`, `DIRECTIONALITY`). Including a `modeSpecificSettings` sub-object for a mode type that does not use it may be ignored or rejected.
 - For `DIRECTIONALITY` mode, a zone plan or beam configuration must be supplied within `modeSpecificSettings`.
 
 ### Antenna and Power
 
-- Only antenna ports reported by `get_readerCapabilities` can be referenced. Specifying a non-existent port will be rejected.
 - Transmit power values must be within the limits set by the reader's configured region (`get_region`). Values exceeding `maxTxPowerSupported` will be rejected.
-
-### Apply Timing
-
-- `set_mode` takes effect immediately - the new mode is stored and used the next time inventory is started with `start`.
-- To preview the current mode before sending changes, use `get_mode`.
-
-### Security Note
-
-- No credentials or secrets are required in the `set_mode` payload. Do not include authentication data in mode configurations.

@@ -21,7 +21,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/cableLossCompensation` |
 | Related Commands | [get_cableLossCompensation](get_cableLossCompensation.md), [get_readPoints](get_readPoints.md), [get_readerCapabilities](get_readerCapabilities.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Read Point Keys | `"1"`, `"2"`, `"3"`, `"4"` |
 | Supported API Versions | V1.0 |
 
@@ -49,11 +48,3 @@ Violating any of these rules will cause the command to fail or result in incorre
 
 - `cableLength` and `cableLossPerHundredFt` are required within each read point object. Omitting either field for an included read point will cause the command to fail.
 - Values must be positive numbers. Zero or negative values are not valid cable specifications.
-
-### Apply Timing
-
-- Compensation values take effect immediately after the command is acknowledged. The updated values are used in the next inventory session.
-
-### Security Note
-
-- No credentials or secrets are required in the `set_cableLossCompensation` payload. Do not include authentication data in cable loss configuration requests.

@@ -19,7 +19,6 @@ No request body is required.
 | MQTT Command | `get_readPoints` |
 | MQTT Equivalent | `get_readPoints` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Required Request Fields | None |
 | Supported Response Sections | JSON response body |
 | Supported API Versions | V1.0 |
 

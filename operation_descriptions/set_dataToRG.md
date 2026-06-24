@@ -21,7 +21,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/setdataToRG` |
 | Related Commands | [set_req_usr_app](set_req_usr_app.md), [get_config](get_config.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | None (empty object `{}`) |
 | Supported API Versions | V1.0 |
 
@@ -41,11 +40,3 @@ Violating any of these rules will cause the command to be rejected.
 ### Payload Requirements
 
 - The `payload` field must be an empty object (`{}`). No additional properties are accepted. Providing any fields within the payload object will cause the command to be rejected.
-
-### Apply Timing
-
-- The reader gateway data trigger is executed immediately after the command is acknowledged.
-
-### Security Note
-
-- No credentials or secrets are required in the `set_dataToRG` payload. Do not include authentication data in data trigger requests.

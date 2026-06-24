@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the radio packet log archi
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/logs/radioPacketLog` |
 | Related Commands | [del_radio_pkt_logs](del_radio_pkt_logs.md), [get_logs](get_logs.md), [get_logs_syslog](get_logs_syslog.md), [set_logs](set_logs.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the radio packet log archive |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the radio-control log arch
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/logs/RcLog` |
 | Related Commands | [get_rg_error_logs](get_rg_error_logs.md), [get_rg_warn_logs](get_rg_warn_logs.md), [get_logs](get_logs.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the radio-control information log archive |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

@@ -9,7 +9,6 @@ var CATEGORY_LABELS = {
   region: 'Region',
   gpio: 'GPIO',
   'app-led': 'App LED',
-  'stack-led': 'Stack LED',
   logs: 'Logs',
   'date-time': 'Date & Time',
   certificate: 'Certificates',

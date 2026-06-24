@@ -19,7 +19,6 @@ No additional payload fields are required to retrieve the supported standard lis
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/supportedStandardList` |
 | Related Commands | [get_region](get_region.md), [set_region](set_region.md), [get_SupportedRegionList](get_SupportedRegionList.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve supported regulatory standards and their channel details |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

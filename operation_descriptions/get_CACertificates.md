@@ -16,7 +16,6 @@ No additional payload fields are required to retrieve the CA certificate list.
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | Related Commands | [set_installCACertificate](set_installCACertificate.md), [del_CACertificate](del_CACertificate.md), [get_certs](get_certs.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | List installed CA certificates |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

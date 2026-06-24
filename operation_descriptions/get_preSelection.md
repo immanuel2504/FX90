@@ -17,7 +17,6 @@ No additional payload fields are required.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/preSelection` |
 | Related Commands | [set_preSelection](set_preSelection.md), [start](start.md), [get_status](get_status.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the rxSawFilter pre-selection state |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

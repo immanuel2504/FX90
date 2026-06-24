@@ -24,8 +24,7 @@ Use this command to:
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/app-led` |
-| Related Commands | [get_appled](get_appled.md), [set_stackled](set_stackled.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
+| Related Commands | [get_appled](get_appled.md) |
 | Supported Colors | `red`, `amber`, `green`, `blue`, `false` (off) |
 | Supported Brightness Values | `low`, `med`, `high` |
 | Supported API Versions | V1.0 |
@@ -58,12 +57,3 @@ Violating any of these rules will cause the command to fail or produce unexpecte
 ### Brightness
 
 - `brightness` must be one of `low`, `med`, or `high`. An unrecognized string will be rejected.
-
-### Apply Timing
-
-- The LED change takes effect immediately after the command is acknowledged.
-- After the LED state is set by this command, `get_appled` returns `status: NOT_DEFAULT` until the duration expires or the state is reset.
-
-### Security Note
-
-- No credentials or secrets are required in the `set_appled` payload. Do not include authentication data in LED control requests.

@@ -29,7 +29,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/ble-config` |
 | Related Commands | [get_bleConfig](get_bleConfig.md), [start](start.md), [stop](stop.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `ble.enable` |
 | Supported BLE Protocols | iBeacon, AltBeacon, Eddystone (`URL`, `UID`, `EID`, `TLM`), Generic |
 | Supported Address Types | `public`, `random` |

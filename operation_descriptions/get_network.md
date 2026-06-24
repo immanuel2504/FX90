@@ -22,7 +22,6 @@ No payload fields are required to retrieve the full network configuration.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/network` |
 | Related Commands | [set_network](set_network.md), [get_hostname](get_hostname.md), [get_networkInterfaces](get_networkInterfaces.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active network configuration for all interfaces |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

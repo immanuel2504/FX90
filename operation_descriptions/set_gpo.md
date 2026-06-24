@@ -22,7 +22,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/gpo` |
 | Related Commands | [get_gpostatus](get_gpostatus.md), [get_gpi_status](get_gpi_status.md), [get_readerCapabilities](get_readerCapabilities.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `port`, `state` |
 | Supported Port Values | 1-4 (varies by reader model - see `get_readerCapabilities`) |
 | Supported API Versions | V1.0 |
@@ -49,12 +48,3 @@ Violating any of these rules will cause the command to fail or drive the wrong o
 ### State Values
 
 - `state` must be a boolean: `true` for HIGH and `false` for LOW. String values such as `"HIGH"` or `"LOW"` are not valid and will be rejected.
-
-### Apply Timing
-
-- The GPO state change takes effect immediately after the command is acknowledged.
-- The GPO state is not persisted across power cycles. After a reboot, all GPO pins return to their default state.
-
-### Security Note
-
-- No credentials or secrets are required in the `set_gpo` payload. Do not include authentication data in GPO control requests.

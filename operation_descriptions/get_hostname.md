@@ -17,7 +17,6 @@ No additional payload fields are required to retrieve the hostname.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/hostName` |
 | Related Commands | [set_hostname](set_hostname.md), [get_network](get_network.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the configured reader hostname |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

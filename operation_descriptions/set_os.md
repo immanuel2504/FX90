@@ -24,7 +24,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/os` |
 | Related Commands | [get_version](get_version.md), [revertback](revertback.md), [get_status](get_status.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `url`, `authenticationType` |
 | Supported Authentication Types | `NONE`, `BASIC` |
 | Supported API Versions | V1.0 |
@@ -55,23 +54,3 @@ Violating any of these rules will cause the command to fail or the firmware upda
 
 - When `authenticationType` is `BASIC`, `options.username` and `options.password` must both be provided. Omitting either field will cause the download to fail with an HTTP 401 error.
 - When `authenticationType` is `NONE`, the `options` object must be omitted or empty.
-
-### URL Reachability
-
-- The reader must have network connectivity to the firmware URL at the time this command is sent. An unreachable URL will result in a download timeout.
-- HTTPS is strongly recommended for firmware download URLs to prevent tampering with the firmware image in transit.
-
-### Apply Timing
-
-- Firmware updates are applied immediately after the download completes. The reader will reboot as part of the update process.
-- Plan for the reader to be offline during the update and reboot. Inventory and API connectivity will be interrupted.
-- After reboot, use `get_version` to confirm the new firmware version was successfully applied.
-
-### Rollback
-
-- The previous OS version is retained and can be restored using the `revertback` command if the update produces unexpected behavior.
-
-### Security Note
-
-- Never hardcode download credentials (`username`, `password`) or JWT tokens in your payload. Supply all sensitive values from a secrets manager or environment variable at runtime.
-- Use HTTPS for firmware download URLs to prevent the firmware image from being tampered with or replaced in transit.

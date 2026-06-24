@@ -23,7 +23,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/updatePassword` |
 | Related Commands | [localrest_login](localrest_login.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `userName`, `currentPassword`, `newPassword` |
 | Supported API Versions | V1.0 |
 
@@ -45,21 +44,7 @@ Violating any of these rules will cause the command to fail or the password chan
 
 - `userName`, `currentPassword`, and `newPassword` are all required. Omitting any field will cause the command to be rejected.
 
-### Authentication
-
-- `currentPassword` must match the account's existing password exactly. An incorrect current password will cause the command to fail with an authentication error.
-
 ### Password Policy
 
 - The `newPassword` must meet the reader's password complexity requirements. A password that does not meet minimum length or character requirements will be rejected.
 - Do not reuse the current password as the new password.
-
-### Apply Timing
-
-- The password change takes effect immediately after the command is acknowledged.
-- Subsequent REST API login attempts must use the new password.
-
-### Security Note
-
-- Never hardcode `currentPassword` or `newPassword` values in your payload source code or configuration files. Supply all password values from a secrets manager or secure environment variable at runtime.
-- Transmit password change commands only over an encrypted channel (TLS-protected MQTT or HTTPS).

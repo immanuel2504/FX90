@@ -22,7 +22,6 @@ No additional payload fields are required to retrieve the active region settings
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/region` |
 | Related Commands | [set_region](set_region.md), [get_SupportedRegionList](get_SupportedRegionList.md), [get_supportedStandardList](get_supportedStandardList.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve active RF region and regulatory settings |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

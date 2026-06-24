@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the eSIM configuration.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/eSimConfig` |
 | Related Commands | [set_eSimConfig](set_eSimConfig.md), [get_network](get_network.md), [set_network](set_network.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve eSIM identity and installed profile details |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

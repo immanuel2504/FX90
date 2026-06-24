@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the syslog archive.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/logs/syslog` |
 | Related Commands | [del_syslogs](del_syslogs.md), [get_logs](get_logs.md), [get_radio_pkt_logs](get_radio_pkt_logs.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the system log archive |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

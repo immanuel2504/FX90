@@ -18,7 +18,6 @@ No additional payload fields are required to retrieve the log configuration.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/logs` |
 | Related Commands | [set_logs](set_logs.md), [get_logs_syslog](get_logs_syslog.md), [get_radio_pkt_logs](get_radio_pkt_logs.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve current logging configuration |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

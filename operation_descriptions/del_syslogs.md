@@ -17,7 +17,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `DELETE /cloud/logs/syslog` |
 | Related Commands | [get_logs_syslog](get_logs_syslog.md), [get_logs](get_logs.md), [del_radio_pkt_logs](del_radio_pkt_logs.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | None (empty payload) |
 | Supported API Versions | V1.0 |
 

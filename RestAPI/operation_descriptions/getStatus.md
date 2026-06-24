@@ -12,8 +12,9 @@ This endpoint returns:
 - Antenna port connection states
 - NTP synchronization status
 - Cloud interface connection status
+- BLE scanner runtime status (scan state, scan start time, and beacon counts by protocol)
 
-No request body is required.
+The `ble` section is present only when BLE is supported and its status is available. No request body is required.
 
 ## 2. Endpoint Details
 
@@ -26,7 +27,6 @@ No request body is required.
 | MQTT Command | `get_status` |
 | MQTT Equivalent | `get_status` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Required Request Fields | None |
 | Supported Response Sections | JSON response body |
 | Supported API Versions | V1.0 |
 
@@ -38,6 +38,7 @@ Use `GET /cloud/status` to:
 - Verify the radio is connected before starting inventory
 - Monitor reader temperature, CPU, and RAM usage
 - Synchronize against the reader's current system time
+- Confirm BLE scanning is active and review beacon counts by protocol
 
 Key fields to check in the response:
 
@@ -47,3 +48,36 @@ Key fields to check in the response:
 | `radioConnection` | Is the value `connected`? | Inventory cannot run if the radio is disconnected. |
 | `temperature` | Is the value within safe operating range? | Excessive temperature can cause throttling or hardware faults. |
 | `antennas` | Are expected ports `connected`? | A `disconnected` antenna port means tags on that port will not be read. |
+| `ble.scanState` | Is the value `running`? | Confirms whether the BLE scanner is currently active (`running`) or `stopped`. |
+| `ble.scanStartTime` | When did the current scan start? | ISO 8601 timestamp marking when BLE scanning last started. |
+| `ble.beaconCounts` | Are advertisements being seen? | Per-protocol counts (`iBeacon`, `altBeacon`, `eddystone`, `generic`, `total`) confirm beacons are being detected in the current scan window. |
+
+## 4. BLE Status Fields
+
+When BLE is supported and active, the response includes a `ble` object:
+
+| Field | Type | Description |
+|---|---|---|
+| `ble.scanState` | string | Current BLE scanner state — `running` or `stopped`. |
+| `ble.scanStartTime` | string (date-time) | ISO 8601 timestamp of when the BLE scan was last started. |
+| `ble.beaconCounts.total` | integer | Total BLE advertisements observed in the current scan window. |
+| `ble.beaconCounts.iBeacon` | integer | Number of iBeacon advertisements observed. |
+| `ble.beaconCounts.altBeacon` | integer | Number of AltBeacon advertisements observed. |
+| `ble.beaconCounts.eddystone` | integer | Number of Eddystone advertisements observed. |
+| `ble.beaconCounts.generic` | integer | Number of generic BLE advertisements observed. |
+
+Example `ble` section:
+
+```json
+"ble": {
+  "scanState": "running",
+  "scanStartTime": "2026-05-21T13:46:16.955Z",
+  "beaconCounts": {
+    "total": 108,
+    "iBeacon": 75,
+    "altBeacon": 33,
+    "eddystone": 0,
+    "generic": 0
+  }
+}
+```

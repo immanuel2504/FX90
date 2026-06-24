@@ -16,5 +16,3 @@ Use this command to:
 | REST Endpoint | `PUT /cloud/apps/{appname}/stop` |
 | Related Commands | [start_user_app](start_user_app.md), [get_user_apps](get_user_apps.md) |
 | Supported API Versions | V1.0 |
-
-MQTT command key: `set_stopUserapp`.

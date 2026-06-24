@@ -26,7 +26,6 @@ The `PUT /cloud/impinjGen2X` REST endpoint configures Impinj Gen2X proprietary R
 | Related Endpoints | `GET /cloud/impinjGen2X`, `PUT /cloud/start`, `PUT /cloud/stop` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Required Request Fields | At least one of `fastID`, `tagProtect`, `tagFocus`, `tagQuieting` |
 | Success Response | `200 OK` |
 | Error Responses | `422 Unprocessable Entity`, `500 Internal Server Error` |
 | Supported Features | FastID, TagProtect, TagFocus, TagQuieting (basic and advanced) |

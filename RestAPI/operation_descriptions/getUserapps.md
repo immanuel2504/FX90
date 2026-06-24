@@ -19,7 +19,6 @@ No request body is required.
 | MQTT Command | `get_user_apps` |
 | MQTT Equivalent | `get_user_apps` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Required Request Fields | None |
 | Supported Response Sections | JSON response body |
 | Supported API Versions | V1.0 |
 

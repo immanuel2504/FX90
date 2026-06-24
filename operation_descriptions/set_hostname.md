@@ -21,7 +21,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/hostName` |
 | Related Commands | [get_hostname](get_hostname.md), [set_network](set_network.md), [get_network](get_network.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `hostname` |
 | Supported API Versions | V1.0 |
 
@@ -33,23 +32,3 @@ Have the desired hostname ready before sending this command. Duplicate hostnames
 |---|---|
 | Hostname string | The desired hostname (payload key: `hostname`). Must be a valid RFC 1123 hostname - alphanumeric characters and hyphens only; no underscores or spaces. |
 | Network uniqueness | Verify the chosen hostname is not already in use on the network segment to avoid DNS or mDNS conflicts. |
-
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or result in an invalid hostname.
-
-### Hostname Format
-
-- `hostname` must be a non-empty string. An empty string will be rejected.
-- Valid hostname characters are alphanumeric (`a-z`, `A-Z`, `0-9`) and hyphens (`-`). Underscores, spaces, and special characters are not valid and will be rejected.
-- The hostname must not begin or end with a hyphen.
-
-### Apply Timing
-
-- The hostname change takes effect immediately after the command is acknowledged.
-- The new hostname is visible in subsequent `get_hostname` and `get_network` responses.
-- A hostname change does not require a reboot.
-
-### Security Note
-
-- No credentials or secrets are required in the `set_hostname` payload. Do not include authentication data in hostname configuration requests.

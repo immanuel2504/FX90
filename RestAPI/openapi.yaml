@@ -18,7 +18,6 @@ tags:
 - name: ImpinjGen2X
 - name: System
 - name: App-led
-- name: Stack-led
 - name: Gpio
 - name: Region
 - name: Logs
@@ -33,8 +32,6 @@ paths:
     $ref: ./paths/login/localRestLogin.yaml
   /cloud/app-led:
     $ref: ./paths/led/app-led.yaml
-  /cloud/stack-led:
-    $ref: ./paths/led/stack-led.yaml
   /cloud/gpo:
     $ref: ./paths/gpio/gpo.yaml
   /cloud/gpi:
@@ -4750,57 +4747,6 @@ components:
           description: Duration in seconds for the LED state to remain active.
           example: 60
     setAppledResponse:
-      type: string
-      example: ''
-    getStackledResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: NON_DEFAULT
-        color:
-          type: string
-          example: amber
-        brightness:
-          type: string
-          example: high
-        flash:
-          type: boolean
-          example: true
-        seconds:
-          type: integer
-          example: 0
-        seconds_remaining:
-          type: integer
-          example: 14
-    setStackledRequest:
-      type: object
-      properties:
-        color:
-          type: string
-          description: The color of the LED (red, amber, green, blue, off)
-          enum:
-          - red
-          - amber
-          - green
-          - blue
-          - false
-          example: amber
-        brightness:
-          type: string
-          description: The brightness of the LED (low, med, high). Defaults to low.
-          enum:
-          - low
-          - med
-          - high
-          example: high
-        flash:
-          type: boolean
-          example: true
-        seconds:
-          type: integer
-          example: 60
-    setStackledResponse:
       type: string
       example: ''
     get_gpoResponse:

@@ -22,7 +22,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/pass-through` |
 | Related Commands | [get_status](get_status.md), [set_config](set_config.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `component`, `payload` (inner) |
 | Supported Components | `RC` (Radio Control) |
 | Supported API Versions | V1.0 |
@@ -35,28 +34,3 @@ Know the target component and the exact payload string it expects before sending
 |---|---|
 | Component name | The reader component to target. Currently supported: `RC` (Radio Control). |
 | Payload string | The command or query string expected by the target component. The format is component-specific and must be obtained from the component's low-level documentation. |
-
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or produce unexpected component behavior.
-
-### Required Fields
-
-- `component` and `payload` (inner string) are both required. Omitting either will cause the command to be rejected.
-
-### Component Names
-
-- `component` must be a recognized component identifier. Unrecognized component names will be rejected or produce a no-operation response.
-
-### Payload Format
-
-- The inner `payload` field is a raw string passed directly to the target component. The format and valid values are specific to the component and must match what the component expects.
-- Malformed or unrecognized payload strings will produce component-level errors that may not clearly indicate the cause of failure.
-
-### Apply Timing
-
-- The command is forwarded to the component immediately. The response time depends on how quickly the component processes the pass-through request.
-
-### Security Note
-
-- Pass-through commands bypass standard validation. Only send payloads from trusted, well-understood sources. Do not expose the pass-through interface to untrusted input.

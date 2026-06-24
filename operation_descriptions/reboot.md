@@ -25,4 +25,3 @@ Plan for downtime — the reader will disconnect until it finishes booting. In-f
 | What You Need | Details |
 |---|---|
 | Downtime window | Allow 1–3 minutes for reboot and MQTT reconnect. |
-| Active operations | Stop inventory with `stop` if a clean shutdown is preferred. |

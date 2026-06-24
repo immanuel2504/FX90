@@ -19,7 +19,6 @@ No request body is required.
 | Applies To | FXR90 |
 | MQTT Equivalent | `get_rg_error_logs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Required Request Fields | None |
 | Supported Response Sections | JSON response body |
 | Supported API Versions | V1.0 |
 

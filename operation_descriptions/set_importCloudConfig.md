@@ -26,7 +26,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/cloudConfig` |
 | Related Commands | [get_config](get_config.md), [set_config](set_config.md), [get_certs](get_certs.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `endpointConfig` |
 | Supported Connection Types | `mqtt`, `httpPost`, `tcpip-server`, `WEBSOCKET`, `mqtt-AZURE`, `mqtt-AWS` |
 | Supported API Versions | V1.0 |

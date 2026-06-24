@@ -17,7 +17,6 @@ No additional payload fields are required to retrieve all installed certificates
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/certificates` |
 | Related Commands | [set_update_cert](set_update_cert.md), [del_certs](del_certs.md), [refresh-cert](refresh-cert.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the list of installed certificates |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

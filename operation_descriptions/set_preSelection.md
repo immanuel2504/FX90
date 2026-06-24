@@ -21,7 +21,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/preSelection` |
 | Related Commands | [get_preSelection](get_preSelection.md), [start](start.md), [get_status](get_status.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `preSelection` |
 | Supported API Versions | V1.0 |
 
@@ -41,13 +40,3 @@ Violating any of these rules will cause the command to fail.
 ### Payload Requirements
 
 - `preSelection` is required in the payload and must be a boolean (`true` or `false`). Omitting it or supplying a non-boolean value will cause the command to be rejected.
-
-### Apply Timing
-
-- The rxSawFilter change takes effect immediately after the command is acknowledged.
-- The new state is reflected in subsequent `get_preSelection` responses.
-- A reboot is not required.
-
-### Security Note
-
-- No credentials or secrets are required in the `set_preSelection` payload. Do not include authentication data in pre-selection configuration requests.

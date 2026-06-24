@@ -18,7 +18,6 @@ No additional payload fields are required. Values are returned using fixed read-
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/cableLossCompensation` |
 | Related Commands | [set_cableLossCompensation](set_cableLossCompensation.md), [get_config](get_config.md), [get_readPoints](get_readPoints.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve per-read-point cable loss compensation values |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

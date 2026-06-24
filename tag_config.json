@@ -7,7 +7,6 @@
     "Management Commands": [
       "system",
       "app-led",
-      "stack-led",
       "gpio",
       "region",
       "logs",
@@ -28,8 +27,6 @@
   "operation_tags": {
     "get_appled": "app-led",
     "set_appled": "app-led",
-    "get_stackled": "stack-led",
-    "set_stackled": "stack-led",
     "get_gpostatus": "gpio",
     "set_gpo": "gpio",
     "get_gpi_status": "gpio",
@@ -138,10 +135,6 @@
     "app-led": [
       "get_appled",
       "set_appled"
-    ],
-    "stack-led": [
-      "get_stackled",
-      "set_stackled"
     ],
     "gpio": [
       "get_gpostatus",

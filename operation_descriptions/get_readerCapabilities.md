@@ -20,7 +20,6 @@ No additional payload fields are required to retrieve the full capability set.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/readerCapabilities` |
 | Related Commands | [get_version](get_version.md), [get_status](get_status.md), [get_config](get_config.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve static reader hardware and software capabilities |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

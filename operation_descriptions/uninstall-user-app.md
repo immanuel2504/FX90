@@ -17,8 +17,6 @@ Use this command to:
 | Related Commands | [get_user_apps](get_user_apps.md), [install_user_app](install_user_app.md), [stop_user_app](stop_user_app.md) |
 | Supported API Versions | V1.0 |
 
-MQTT command key: `set_uninstallUserapp`.
-
 ## Before You Begin
 
 Stop the app with `stop_user_app` before uninstalling if it is currently running.

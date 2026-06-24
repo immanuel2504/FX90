@@ -20,7 +20,6 @@ No additional payload fields are required to retrieve the BLE configuration.
 | Applies To | FXR90 |
 | REST Endpoint | `GET /cloud/ble-config` |
 | Related Commands | [set_bleConfig](set_bleConfig.md), [start](start.md), [stop](stop.md) |
-| Required Request Fields | command, command_id |
 | Supported Operations | Retrieve the current BLE scanner configuration |
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |

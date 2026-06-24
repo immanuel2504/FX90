@@ -22,7 +22,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/region` |
 | Related Commands | [get_region](get_region.md), [get_SupportedRegionList](get_SupportedRegionList.md), [get_supportedStandardList](get_supportedStandardList.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Required Payload Fields | `country`, `standardname` |
 | Supported API Versions | V1.0 |
 
@@ -46,12 +45,3 @@ Violating any of these rules will cause the command to fail or result in non-com
 - Both `country` and `standardname` are required in the payload. Omitting either field will cause the command to be rejected.
 - The `country` value must exactly match a country name returned by `get_SupportedRegionList`. An unrecognized country string will be rejected.
 - The `standardname` must be a valid standard for the specified country, as returned by `get_supportedStandardList`. Pairing a country with an incompatible standard name will be rejected.
-
-### Apply Timing
-
-- Region changes are applied immediately. The reader updates its RF parameters, channel list, LBT state, and transmit power limits as soon as the command is acknowledged.
-- If inventory is active when this command is sent, behavior is undefined - stop inventory first.
-
-### Security Note
-
-- No credentials or secrets are required in the `set_region` payload. Do not include authentication data in region configurations.

@@ -18,7 +18,6 @@ By default, an empty request body starts RFID inventory only. Use the `scanType`
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 Series |
 | MQTT Command | `start` |
-| REST Endpoint | `PUT /cloud/start` |
 | Related Endpoints | `PUT /cloud/stop`, `PUT /cloud/ble-config`, `PUT /cloud/impinjGen2X`, `PUT /cloud/mode` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
@@ -81,7 +80,3 @@ The `doNotPersistState` field controls whether the reader resumes scanning autom
 - `scanType` - array of strings. Allowed values: `"rfid"`, `"ble"`.
 - `applyImpinjGen2X` - boolean.
 - `doNotPersistState` - boolean.
-
-### Inventory State
-
-- Only one inventory session may be active at a time.

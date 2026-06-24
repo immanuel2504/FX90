@@ -8,7 +8,7 @@
   },
   "Start RFID Inventory or BLE scan": {
     "Default start (RFID only)": "Starts RFID inventory with default settings. Since no scanType is provided, it defaults to RFID-only.",
-    "Start with state persistence disabled": "Starts inventory with doNotPersistState set to false, allowing the reader to persist the state.",
+    "Start with state persistence enabled": "Starts inventory with doNotPersistState set to false, allowing the reader to persist the state.",
     "Start with Impinj Gen2X": "Starts RFID inventory with Impinj Gen2X feature enabled.",
     "Start BLE scan only": "Starts BLE scanning only. Requires prior BLE configuration using set_bleConfig.",
     "Start RFID scan only": "Starts RFID inventory explicitly using scanType = ['rfid'].",
@@ -97,5 +97,20 @@
   },
   "Get Logs": {
     "Retrieve logging configuration": "Returns the logging configuration of the reader, including component log levels and radio packet logging status."
+  },
+  "Set Network Configuration": {
+    "Ethernet DHCP (eth0)": "Configures the eth0 wired interface to obtain its IPv4 address automatically via DHCP.",
+    "Ethernet static IP (eth0)": "Configures the eth0 wired interface with a static IPv4 address, subnet mask, gateway, and DNS.",
+    "Ethernet 802.1X EAP-TLS (eth0)": "Secures the eth0 wired interface with 802.1X port authentication using EAP-TLS and a client certificate.",
+    "Ethernet 802.1X EAP-TTLS (eth0)": "Secures the eth0 wired interface with 802.1X port authentication using EAP-TTLS with MSCHAPv2 username and password.",
+    "Wi-Fi DHCP (mlan0)": "Configures the mlan0 Wi-Fi interface to obtain its IPv4 address automatically via DHCP.",
+    "Wi-Fi static IP (mlan0)": "Configures the mlan0 Wi-Fi interface with a static IPv4 address, subnet mask, gateway, and DNS.",
+    "Wi-Fi WPA2-Personal (mlan0)": "Connects the mlan0 Wi-Fi interface to a WPA2-Personal access point using a pre-shared key.",
+    "Wi-Fi open network (mlan0)": "Connects the mlan0 Wi-Fi interface to an open (unsecured) access point.",
+    "Wi-Fi WPA2-Enterprise EAP-TLS (mlan0)": "Connects the mlan0 Wi-Fi interface to a WPA2-Enterprise access point using EAP-TLS with a client certificate.",
+    "Wi-Fi WPA2-Enterprise EAP-TTLS (mlan0)": "Connects the mlan0 Wi-Fi interface to a WPA2-Enterprise access point using EAP-TTLS with MSCHAPv2 username and password.",
+    "Bluetooth PAN (bnep0)": "Configures the bnep0 Bluetooth PAN interface, including the DHCP address range, discoverability, and pairing options.",
+    "Cellular WAN physical SIM (wan0)": "Configures the wan0 cellular interface using the physical SIM with an APN and automatic preferred network type.",
+    "Wi-Fi hotspot WPA3 (uap0)": "Configures the uap0 software access point (hotspot) with a WPA3-Personal SSID and password."
   }
 }

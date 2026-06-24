@@ -22,7 +22,6 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/eSimConfig` |
 | Related Commands | [get_eSimConfig](get_eSimConfig.md), [get_network](get_network.md), [set_network](set_network.md) |
-| Required Request Fields | `command`, `command_id`, `payload` |
 | Supported Operations | `enable` |
 | Supported API Versions | V1.0 |
 
@@ -48,12 +47,3 @@ Violating any of these rules will cause the command to fail or the cellular inte
 
 - `profileNickName` must exactly match a profile nickname returned by `get_eSimConfig`. An unknown or mismatched nickname will cause the command to fail.
 - The nickname comparison is case-sensitive. Use the exact string from the `get_eSimConfig` response.
-
-### Apply Timing
-
-- The eSIM profile change takes effect after the command is acknowledged. The cellular interface may restart to apply the new profile.
-- Verify the profile is active by calling `get_eSimConfig` after the command completes.
-
-### Security Note
-
-- No credentials or secrets are required in the `set_eSimConfig` payload. Do not include authentication data in eSIM configuration requests.

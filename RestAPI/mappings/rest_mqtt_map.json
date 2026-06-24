@@ -694,26 +694,6 @@
       "mqttTag": "userapp"
     },
     {
-      "restPath": "/cloud/stack-led",
-      "httpMethod": "GET",
-      "operationId": "getStackled",
-      "openApiTag": "Stack-led",
-      "summary": "Retrieves stack LED state",
-      "restMqttLabel": "get_stackled",
-      "mqttCommand": "get_stackled",
-      "mqttTag": "stack-led"
-    },
-    {
-      "restPath": "/cloud/stack-led",
-      "httpMethod": "PUT",
-      "operationId": "setStackled",
-      "openApiTag": "Stack-led",
-      "summary": "Updates stack LED state",
-      "restMqttLabel": "set_stackled",
-      "mqttCommand": "set_stackled",
-      "mqttTag": "stack-led"
-    },
-    {
       "restPath": "/cloud/start",
       "httpMethod": "PUT",
       "operationId": "startInventory",
