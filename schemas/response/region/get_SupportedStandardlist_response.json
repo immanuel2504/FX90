@@ -11,7 +11,8 @@
       "example": "get_supportedStandardList"
     },
     "command_id": {
-      "type": "string"
+      "type": "string",
+      "example": "sdgf"
     },
     "response": {
       "type": "string",
@@ -40,7 +41,7 @@
   "examples": [
     {
       "command": "get_supportedStandardList",
-      "command_id": "gfdd",
+      "command_id": "sdgf",
       "payload": {
         "SupportedStandards": [
           {

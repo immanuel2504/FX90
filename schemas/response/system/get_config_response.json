@@ -8,7 +8,7 @@
   "examples": [
     {
       "command": "get_config",
-      "command_id": "abcd1324",
+      "command_id": "1a234",
       "response": "success",
       "payload": {
         "GPIO-LED": "NOT_CONFIGURED",

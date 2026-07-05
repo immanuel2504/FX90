@@ -37,7 +37,7 @@
     },
     {
       "command": "set_bleConfig",
-      "command_id": "ble-set-002",
+      "command_id": "ble-set-001",
       "payload": {
         "ble": {
           "enable": true,
@@ -47,7 +47,7 @@
     },
     {
       "command": "set_bleConfig",
-      "command_id": "ble-set-003",
+      "command_id": "ble-set-001",
       "payload": {
         "ble": {
           "enable": true,
@@ -60,7 +60,7 @@
     },
     {
       "command": "set_bleConfig",
-      "command_id": "ble-set-004",
+      "command_id": "ble-set-001",
       "payload": {
         "ble": {
           "enable": true,
@@ -137,7 +137,7 @@
     },
     {
       "command": "set_bleConfig",
-      "command_id": "ble-set-005",
+      "command_id": "ble-set-001",
       "payload": {
         "ble": {
           "enable": false

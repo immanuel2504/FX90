@@ -2,26 +2,28 @@
   "title": "Stop RFID Inventory or BLE scan",
   "type": "object",
   "description": "Stop RFID inventory, BLE scanning, or both.",
-
   "properties": {
     "command": {
       "type": "string",
-      "enum": ["stop"],
+      "enum": [
+        "stop"
+      ],
       "description": "Command name. Must be 'stop'."
     },
-
     "command_id": {
       "type": "string",
-      "description": "A unique ID that will be echoed back in the command response by the reader."
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "example": "req-001"
     },
-
     "payload": {
       "$ref": "../../references/request_payload/stop-2.yaml"
     }
   },
-
-  "required": ["command", "command_id", "payload"],
-
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
   "examples": [
     {
       "command": "stop",
@@ -30,23 +32,30 @@
     },
     {
       "command": "stop",
-      "command_id": "req-002",
+      "command_id": "req-001",
       "payload": {
-        "scanType": ["rfid"]
+        "scanType": [
+          "rfid"
+        ]
       }
     },
     {
       "command": "stop",
-      "command_id": "req-003",
+      "command_id": "req-001",
       "payload": {
-        "scanType": ["ble"]
+        "scanType": [
+          "ble"
+        ]
       }
     },
     {
       "command": "stop",
-      "command_id": "req-004",
+      "command_id": "req-001",
       "payload": {
-        "scanType": ["ble", "rfid"]
+        "scanType": [
+          "ble",
+          "rfid"
+        ]
       }
     }
   ]

@@ -32,6 +32,26 @@ I reviewed the `set_mode` command and compared `openAPISpec.yaml` with `Command 
 
 ---
 
+## 4. Complex fields need full schema definitions and examples
+
+Several important `set_mode` fields appear only in the request **examples** (or are missing entirely) and are **not defined as schema properties** in `openAPISpec.yaml`. Because they are complex/nested, please add proper schema definitions **and** worked examples for each:
+
+| Field | Status in `openAPISpec.yaml` | Request |
+|-------|------------------------------|---------|
+| `selects` | Used in examples only; no schema property | Add schema (Gen2 select params) + examples |
+| `accesses` | Not present | Add schema (access operations: read/write/lock/kill) + examples |
+| `tagMetaData` | Defined as `array` of `string` only | Add allowed values + object forms (e.g. `userDefined`, `antennaPortNames`) with examples |
+| `radioStartConditions` | Used in examples only; no schema property | Add schema + examples |
+| `radioStopConditions` | Used in examples only; no schema property | Add schema + examples |
+| `reportFilter` | `duration`/`type` only, no `enum`/description | Add `type` enum + description + examples |
+| `modeSpecificSettings` | Used in examples only; no schema property | Add schema (`oneOf` inventory/portal/directionality) + examples |
+| `antennaStopCondition` | Object only (examples also show array form) | Support both object and array forms + examples |
+| `query` | Object only (examples also show array form) | Support both forms; add `sel`/`session`/`target` enums + examples |
+
+`Command Schemas.json` already defines most of these (via `$ref`s such as `select.v1`, `query.v1`, `inventorysettings.v1`, `antennaStopCondition.v1`) with descriptions and examples — please port them to `openAPISpec.yaml`.
+
+---
+
 ## Note
 
-The MQTT `set_mode` schema in `Command Schemas.json` is the complete reference. This is a request to bring `openAPISpec.yaml` in line with it (enums, `environment`, descriptions).
+The MQTT `set_mode` schema in `Command Schemas.json` is the complete reference. This is a request to bring `openAPISpec.yaml` in line with it (enums, `environment`, the complex fields above, and rich examples).

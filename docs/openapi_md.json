@@ -257,7 +257,7 @@
                                     "payload": {
                                         "type": "object",
                                         "title": "get_mode",
-                                        "description": "command to retrive reader operating mode",
+                                        "description": "command to retrieve reader operating mode",
                                         "properties": {
                                             "verbose": {
                                                 "type": "boolean",
@@ -702,7 +702,7 @@
                                                                 "AUTO_DETECT",
                                                                 "DEMO"
                                                             ],
-                                                            "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  The type of environment in which the reader operates. Along with the regulatory configuration of the reader, the environment parameter will set the default link profile parameters (i.e., Miller mode, BLF, Tari, etc.) and the receiver dynamic range (interference immunity).\n\n  LOW_INTERFERENCE:  The reader is operating in an environment when the likelihood of interference is very low or only occurs for very brief periods of time (defined as a single interrogator environment in the Gen2 and ISO standards).\n\n  HIGH_INTERFERENCE: The reader is operating in the presence of other readers (defined as a multi-interrogator or dense interrogator environment in the Gen2 and ISO standards).\n\n  VERY_HIGH_INTERFERENCE: The reader is operating in an environment where the number of readers is greater than the number of available channels, or when interfering readers are in very close proximity to each other.\n\n  AUTO_DETECT: This will cause the reader to try and assess the environment and adjust accordingly. \n\n  DEMO: Should be used when demonstrating the maximum performance (fastest read rate) of a reader. This assumes no other readers in the environement.\n\n  If absent, the environment is set to HIGH_INTERFERENCE",
+                                                            "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  The type of environment in which the reader operates. Along with the regulatory configuration of the reader, the environment parameter will set the default link profile parameters (i.e., Miller mode, BLF, Tari, etc.) and the receiver dynamic range (interference immunity).\n\n  LOW_INTERFERENCE:  The reader is operating in an environment when the likelihood of interference is very low or only occurs for very brief periods of time (defined as a single interrogator environment in the Gen2 and ISO standards).\n\n  HIGH_INTERFERENCE: The reader is operating in the presence of other readers (defined as a multi-interrogator or dense interrogator environment in the Gen2 and ISO standards).\n\n  VERY_HIGH_INTERFERENCE: The reader is operating in an environment where the number of readers is greater than the number of available channels, or when interfering readers are in very close proximity to each other.\n\n  AUTO_DETECT: This will cause the reader to try and assess the environment and adjust accordingly. \n\n  DEMO: Should be used when demonstrating the maximum performance (fastest read rate) of a reader. This assumes no other readers in the environment.\n\n  If absent, the environment is set to HIGH_INTERFERENCE",
                                                             "default": "HIGH_INTERFERENCE"
                                                         },
                                                         "antennas": {
@@ -1151,7 +1151,7 @@
                                                             "description": "Duration in milliseconds to wait after issuing the final select before issuing a query. If absent, the minimum time will be used. "
                                                         },
                                                         "accesses": {
-                                                            "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesss in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.",
+                                                            "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesses in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.",
                                                             "oneOf": [
                                                                 {
                                                                     "title": "access_cmds",
@@ -2400,7 +2400,7 @@
                                                     "AUTO_DETECT",
                                                     "DEMO"
                                                 ],
-                                                "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  The type of environment in which the reader operates. Along with the regulatory configuration of the reader, the environment parameter will set the default link profile parameters (i.e., Miller mode, BLF, Tari, etc.) and the receiver dynamic range (interference immunity).\n\n  LOW_INTERFERENCE:  The reader is operating in an environment when the likelihood of interference is very low or only occurs for very brief periods of time (defined as a single interrogator environment in the Gen2 and ISO standards).\n\n  HIGH_INTERFERENCE: The reader is operating in the presence of other readers (defined as a multi-interrogator or dense interrogator environment in the Gen2 and ISO standards).\n\n  VERY_HIGH_INTERFERENCE: The reader is operating in an environment where the number of readers is greater than the number of available channels, or when interfering readers are in very close proximity to each other.\n\n  AUTO_DETECT: This will cause the reader to try and assess the environment and adjust accordingly. \n\n  DEMO: Should be used when demonstrating the maximum performance (fastest read rate) of a reader. This assumes no other readers in the environement.\n\n  If absent, the environment is set to HIGH_INTERFERENCE",
+                                                "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  The type of environment in which the reader operates. Along with the regulatory configuration of the reader, the environment parameter will set the default link profile parameters (i.e., Miller mode, BLF, Tari, etc.) and the receiver dynamic range (interference immunity).\n\n  LOW_INTERFERENCE:  The reader is operating in an environment when the likelihood of interference is very low or only occurs for very brief periods of time (defined as a single interrogator environment in the Gen2 and ISO standards).\n\n  HIGH_INTERFERENCE: The reader is operating in the presence of other readers (defined as a multi-interrogator or dense interrogator environment in the Gen2 and ISO standards).\n\n  VERY_HIGH_INTERFERENCE: The reader is operating in an environment where the number of readers is greater than the number of available channels, or when interfering readers are in very close proximity to each other.\n\n  AUTO_DETECT: This will cause the reader to try and assess the environment and adjust accordingly. \n\n  DEMO: Should be used when demonstrating the maximum performance (fastest read rate) of a reader. This assumes no other readers in the environment.\n\n  If absent, the environment is set to HIGH_INTERFERENCE",
                                                 "default": "HIGH_INTERFERENCE"
                                             },
                                             "antennas": {
@@ -2849,7 +2849,7 @@
                                                 "description": "Duration in milliseconds to wait after issuing the final select before issuing a query. If absent, the minimum time will be used. "
                                             },
                                             "accesses": {
-                                                "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesss in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.",
+                                                "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesses in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.",
                                                 "oneOf": [
                                                     {
                                                         "title": "access_cmds",
@@ -3753,7 +3753,8 @@
                                     },
                                     "command_id": {
                                         "type": "string",
-                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                        "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                        "example": "req-001"
                                     },
                                     "payload": {
                                         "title": "Start RFID Inventory or BLE scan",
@@ -3801,7 +3802,7 @@
                                     "description": "Starts inventory with doNotPersistState set to false, allowing the reader to persist the state.",
                                     "value": {
                                         "command": "start",
-                                        "command_id": "req-002",
+                                        "command_id": "req-001",
                                         "payload": {
                                             "doNotPersistState": false
                                         }
@@ -3811,7 +3812,7 @@
                                     "description": "Starts RFID inventory with Impinj Gen2X feature enabled.",
                                     "value": {
                                         "command": "start",
-                                        "command_id": "req-003",
+                                        "command_id": "req-001",
                                         "payload": {
                                             "applyImpinjGen2X": true
                                         }
@@ -3821,7 +3822,7 @@
                                     "description": "Starts BLE scanning only. Requires prior BLE configuration using set_bleConfig.",
                                     "value": {
                                         "command": "start",
-                                        "command_id": "req-004",
+                                        "command_id": "req-001",
                                         "payload": {
                                             "scanType": [
                                                 "ble"
@@ -3833,7 +3834,7 @@
                                     "description": "Starts RFID inventory explicitly using scanType = ['rfid'].",
                                     "value": {
                                         "command": "start",
-                                        "command_id": "req-005",
+                                        "command_id": "req-001",
                                         "payload": {
                                             "scanType": [
                                                 "rfid"
@@ -3845,7 +3846,7 @@
                                     "description": "Starts both BLE scanning and RFID inventory simultaneously.",
                                     "value": {
                                         "command": "start",
-                                        "command_id": "req-006",
+                                        "command_id": "req-001",
                                         "payload": {
                                             "scanType": [
                                                 "ble",
@@ -3876,7 +3877,7 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "example": "abcd1432",
+                                            "example": "req-001",
                                             "description": "A unique ID that will be echoed back in the command response by the reader."
                                         },
                                         "response": {
@@ -3937,7 +3938,7 @@
                                     "example1": {
                                         "value": {
                                             "command": "start",
-                                            "command_id": "abcd1432",
+                                            "command_id": "req-001",
                                             "response": "success",
                                             "payload": {}
                                         }
@@ -3972,7 +3973,8 @@
                                     },
                                     "command_id": {
                                         "type": "string",
-                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                        "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                        "example": "req-001"
                                     },
                                     "payload": {
                                         "title": "Stop RFID Inventory or BLE scan",
@@ -4012,7 +4014,7 @@
                                     "description": "Stops RFID inventory using scanType = ['rfid'].",
                                     "value": {
                                         "command": "stop",
-                                        "command_id": "req-002",
+                                        "command_id": "req-001",
                                         "payload": {
                                             "scanType": [
                                                 "rfid"
@@ -4024,7 +4026,7 @@
                                     "description": "Stops BLE scanning only. RFID inventory continues.",
                                     "value": {
                                         "command": "stop",
-                                        "command_id": "req-003",
+                                        "command_id": "req-001",
                                         "payload": {
                                             "scanType": [
                                                 "ble"
@@ -4036,7 +4038,7 @@
                                     "description": "Stops both BLE scanning and RFID inventory.",
                                     "value": {
                                         "command": "stop",
-                                        "command_id": "req-004",
+                                        "command_id": "req-001",
                                         "payload": {
                                             "scanType": [
                                                 "ble",
@@ -4067,7 +4069,7 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "example": "abcd1324",
+                                            "example": "req-001",
                                             "description": "A unique ID that will be echoed back in the command response by the reader."
                                         },
                                         "response": {
@@ -4126,7 +4128,7 @@
                                     "default": {
                                         "value": {
                                             "command": "stop",
-                                            "command_id": "abcd1324",
+                                            "command_id": "req-001",
                                             "response": "success",
                                             "payload": {}
                                         }
@@ -5240,7 +5242,7 @@
                                     "description": "Enables the FastID feature on the reader.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-fastid-enable-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "fastID": {
                                                 "enabled": true
@@ -5252,7 +5254,7 @@
                                     "description": "Disables the FastID feature on the reader.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-fastid-disable-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "fastID": {
                                                 "enabled": false
@@ -5264,7 +5266,7 @@
                                     "description": "Enables tag protection for the specified tag using the provided password.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-protect-tag-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "tagProtect": {
                                                 "action": "enableTagProtection",
@@ -5279,7 +5281,7 @@
                                     "description": "Disables tag protection for the specified tag.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-unprotect-tag-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "tagProtect": {
                                                 "action": "disableTagProtection",
@@ -5293,7 +5295,7 @@
                                     "description": "Enables tag visibility protection mode using the provided password.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-enable-protect-read-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "tagProtect": {
                                                 "action": "enableTagVisibility",
@@ -5306,7 +5308,7 @@
                                     "description": "Disables tag visibility protection mode.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-disable-protect-read-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "tagProtect": {
                                                 "action": "disableTagVisibility",
@@ -5319,7 +5321,7 @@
                                     "description": "Enables TagFocus mode to improve tag read performance.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-tagfocus-enable-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "tagFocus": {
                                                 "enabled": true
@@ -5331,7 +5333,7 @@
                                     "description": "Disables TagFocus mode.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-tagfocus-disable-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "tagFocus": {
                                                 "enabled": false
@@ -5343,7 +5345,7 @@
                                     "description": "Applies basic quieting to the specified tags to suppress their responses.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-quiet-tags-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "tagQuieting": {
                                                 "basic": {
@@ -5361,7 +5363,7 @@
                                     "description": "Restores the specified tags from quiet state.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-unquiet-tags-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "tagQuieting": {
                                                 "basic": {
@@ -5378,7 +5380,7 @@
                                     "description": "Applies advanced quieting using preSelect and tagQuietMasks conditions.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-advanced-quiet-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "tagQuieting": {
                                                 "advanced": {
@@ -5419,7 +5421,7 @@
                                     "description": "Removes advanced quieting and restores tag communication based on defined conditions.",
                                     "value": {
                                         "command": "set_impinjGen2X",
-                                        "command_id": "gen2x-advanced-unquiet-001",
+                                        "command_id": "gen2x-set-001",
                                         "payload": {
                                             "tagQuieting": {
                                                 "advanced": {
@@ -5569,7 +5571,8 @@
                                     },
                                     "command_id": {
                                         "type": "string",
-                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                        "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                        "example": "a12cb5677"
                                     },
                                     "payload": {
                                         "title": "get_version",
@@ -5620,7 +5623,8 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "description": "A unique ID that will be echoed back in the command response by the reader."
+                                            "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                            "example": "a12cb5677"
                                         },
                                         "response": {
                                             "type": "string",
@@ -5706,7 +5710,7 @@
                                         "description": "Returns reader component version information using the REST version response shape inside the MQTT response payload.",
                                         "value": {
                                             "command": "get_version",
-                                            "command_id": "abcd1324",
+                                            "command_id": "a12cb5677",
                                             "response": "success",
                                             "payload": {
                                                 "availableOsUpgrades": {},
@@ -6168,7 +6172,7 @@
                                         "description": "Returns reader operational statistics using the REST status response shape inside the MQTT response payload.",
                                         "value": {
                                             "command": "get_status",
-                                            "command_id": "abcd1324",
+                                            "command_id": "abcd1234",
                                             "response": "success",
                                             "payload": {
                                                 "antennas": {
@@ -7181,7 +7185,7 @@
                                         "description": "Returns reader configuration using the REST configuration response shape inside the MQTT response payload.",
                                         "value": {
                                             "command": "get_config",
-                                            "command_id": "abcd1324",
+                                            "command_id": "1a234",
                                             "response": "success",
                                             "payload": {
                                                 "GPIO-LED": "NOT_CONFIGURED",
@@ -10704,7 +10708,7 @@
                                     "description": "Configures an MQTT data endpoint with async retention and batching options.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "endpointConfig": {
@@ -10766,7 +10770,7 @@
                                     "description": "Configures an AWS IoT MQTT data endpoint with certificate-based security.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "endpointConfig": {
@@ -10820,7 +10824,7 @@
                                     "description": "Configures an MQTT data endpoint using the Azure-style MQTT example from the REST reference.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "endpointConfig": {
@@ -10882,7 +10886,7 @@
                                     "description": "Clears all configured data event endpoint connections.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "endpointConfig": {
@@ -10900,7 +10904,7 @@
                                     "description": "Configures an HTTP POST data event endpoint.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "endpointConfig": {
@@ -10930,7 +10934,7 @@
                                     "description": "Configures a public MQTT data endpoint for tag data publishing.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "endpointConfig": {
@@ -10983,7 +10987,7 @@
                                     "description": "Configures a TCP/IP server data endpoint.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "endpointConfig": {
@@ -11018,7 +11022,7 @@
                                     "description": "Configures a WebSocket data event endpoint.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "endpointConfig": {
@@ -11055,7 +11059,7 @@
                                     "description": "Updates global batching settings for data events.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "batching": {
@@ -11070,7 +11074,7 @@
                                     "description": "Updates global retention settings for retained data events.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "retention": {
@@ -11086,7 +11090,7 @@
                                     "description": "Updates management event, warning, error, and heartbeat settings.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "READER-GATEWAY": {
                                                 "managementEventConfig": {
@@ -11172,7 +11176,7 @@
                                     "description": "Updates GPIO and LED event-action configuration.",
                                     "value": {
                                         "command": "set_config",
-                                        "command_id": "abcd1324",
+                                        "command_id": "abdc2134",
                                         "payload": {
                                             "GPIO-LED": {
                                                 "GPODefaults": {
@@ -12574,7 +12578,7 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "example": "abdc453254",
+                                            "example": "abcd1324",
                                             "description": "A unique ID that will be echoed back in the command response by the reader.",
                                             "x-stoplight": {
                                                 "id": "547aaopqznyif"
@@ -12650,7 +12654,7 @@
                                         "description": "Returns an empty payload when the cloud endpoint configuration import succeeds.",
                                         "value": {
                                             "command": "set_importCloudConfig",
-                                            "command_id": "abdc453254",
+                                            "command_id": "abcd1324",
                                             "response": "success",
                                             "payload": {}
                                         }
@@ -12741,7 +12745,7 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "example": "abdc453254",
+                                            "example": "abcd21344",
                                             "description": "A unique ID that will be echoed back in the command response by the reader."
                                         },
                                         "response": {
@@ -13709,7 +13713,7 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "example": "abdc453254",
+                                            "example": "abcd1324",
                                             "description": "A unique ID that will be echoed back in the command response by the reader."
                                         },
                                         "response": {
@@ -13864,7 +13868,7 @@
                                     "x-examples": {
                                         "example-1": {
                                             "command": "get_cableLossCompensation",
-                                            "command_id": "abdc453254",
+                                            "command_id": "abcd1324",
                                             "response": "success",
                                             "payload": {
                                                 "1": {
@@ -13891,7 +13895,7 @@
                                     "example1": {
                                         "value": {
                                             "command": "get_cableLossCompensation",
-                                            "command_id": "abdc453254",
+                                            "command_id": "abcd1324",
                                             "response": "success",
                                             "payload": {
                                                 "1": {
@@ -14130,7 +14134,7 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "example": "abdc453254",
+                                            "example": "abcd1324",
                                             "description": "A unique ID that will be echoed back in the command response by the reader."
                                         },
                                         "response": {
@@ -14188,7 +14192,7 @@
                                     "x-examples": {
                                         "example-1": {
                                             "command": "set_cableLossCompensation",
-                                            "command_id": "abdc453254",
+                                            "command_id": "abcd1324",
                                             "response": "success",
                                             "payload": {}
                                         }
@@ -14198,7 +14202,7 @@
                                     "example1": {
                                         "value": {
                                             "command": "set_cableLossCompensation",
-                                            "command_id": "abdc453254",
+                                            "command_id": "abcd1324",
                                             "response": "success",
                                             "payload": {}
                                         }
@@ -15755,7 +15759,8 @@
                                         "enum": [
                                             "gvjh"
                                         ],
-                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                        "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                        "example": "gvjh"
                                     },
                                     "payload": {
                                         "title": "get_SupportedRegionList",
@@ -15796,7 +15801,7 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "example": "1a234",
+                                            "example": "gvjh",
                                             "description": "A unique ID that will be echoed back in the command response by the reader.",
                                             "enum": [
                                                 "1a234"
@@ -15899,7 +15904,7 @@
                                     "x-examples": {
                                         "Example 1": {
                                             "command": "get_SupportedRegionList",
-                                            "command_id": "1a234",
+                                            "command_id": "gvjh",
                                             "response": "success",
                                             "payload": {
                                                 "SupportedRegions": [
@@ -15946,7 +15951,7 @@
                                     "example1": {
                                         "value": {
                                             "command": "get_supportedRegionList",
-                                            "command_id": "1a234",
+                                            "command_id": "gvjh",
                                             "response": "success",
                                             "payload": {
                                                 "SupportedRegions": [
@@ -16022,7 +16027,8 @@
                                         "enum": [
                                             "sdgf"
                                         ],
-                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                        "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                        "example": "sdgf"
                                     },
                                     "payload": {
                                         "description": "Retrieves the standard channel list based on the region name provided",
@@ -16150,7 +16156,8 @@
                                             "example": "get_supportedStandardList"
                                         },
                                         "command_id": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "example": "sdgf"
                                         },
                                         "response": {
                                             "type": "string",
@@ -16252,7 +16259,7 @@
                                     "example1": {
                                         "value": {
                                             "command": "get_supportedStandardList",
-                                            "command_id": "gfdd",
+                                            "command_id": "sdgf",
                                             "payload": {
                                                 "SupportedStandards": [
                                                     {
@@ -17760,7 +17767,7 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "example": "abdc453254",
+                                            "example": "abcd21344",
                                             "description": "A unique ID that will be echoed back in the command response by the reader."
                                         },
                                         "response": {
@@ -18079,7 +18086,7 @@
                                     "default": {
                                         "value": {
                                             "command": "get_timeZone",
-                                            "command_id": "abdc453254",
+                                            "command_id": "abcd21344",
                                             "response": "success",
                                             "payload": {
                                                 "timeZone": "International Date Line West"
@@ -18570,7 +18577,7 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "example": "abdc453254",
+                                            "example": "abcd1324",
                                             "description": "A unique ID that will be echoed back in the command response by the reader."
                                         },
                                         "response": {
@@ -18639,7 +18646,7 @@
                                     "example1": {
                                         "value": {
                                             "command": "get_ntpServer",
-                                            "command_id": "abdc453254",
+                                            "command_id": "abcd1324",
                                             "response": "success",
                                             "payload": {
                                                 "server": "time.google.com"
@@ -18748,7 +18755,7 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "example": "abdc453254",
+                                            "example": "abcd1324",
                                             "description": "A unique ID that will be echoed back in the command response by the reader."
                                         },
                                         "response": {
@@ -18808,7 +18815,7 @@
                                     "example1": {
                                         "value": {
                                             "command": "set_ntpServer",
-                                            "command_id": "abdc453254",
+                                            "command_id": "abcd1324",
                                             "response": "success",
                                             "payload": {}
                                         }
@@ -19411,7 +19418,7 @@
                                                         "id": "enenkx3sb4iw1"
                                                     },
                                                     "type": "object",
-                                                    "description": "Update the certficate on the reader"
+                                                    "description": "Update the certificate on the reader"
                                                 },
                                                 {
                                                     "title": "failure",
@@ -19700,7 +19707,8 @@
                                             "x-stoplight": {
                                                 "id": "0hqhaelyx60nk"
                                             },
-                                            "description": "A unique ID that will be echoed back in the command response by the reader."
+                                            "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                            "example": "a12cb345654"
                                         },
                                         "response": {
                                             "type": "string",
@@ -22594,7 +22602,8 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "description": "A unique ID that will be echoed back in the command response by the reader."
+                                            "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                            "example": "a12cb345654"
                                         },
                                         "response": {
                                             "type": "string",
@@ -22663,7 +22672,7 @@
                                     "example1": {
                                         "value": {
                                             "command": "get_hostname",
-                                            "command_id": "string",
+                                            "command_id": "a12cb345654",
                                             "response": "success",
                                             "payload": {
                                                 "hostName": "FXR90C60C001"
@@ -22763,7 +22772,8 @@
                                         },
                                         "command_id": {
                                             "type": "string",
-                                            "description": "A unique ID that will be echoed back in the command response by the reader."
+                                            "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                            "example": "abcd345"
                                         },
                                         "response": {
                                             "type": "string",
@@ -22819,7 +22829,7 @@
                                     "example1": {
                                         "value": {
                                             "command": "set_hostname",
-                                            "command_id": "string",
+                                            "command_id": "abcd345",
                                             "response": "success",
                                             "payload": {}
                                         }
@@ -22910,7 +22920,7 @@
                                 "example1": {
                                     "value": {
                                         "command": "set_os",
-                                        "command_id": "abcd1234",
+                                        "command_id": "abdc123",
                                         "payload": {
                                             "authenticationType": "NONE",
                                             "url": "http://10.17.231.168:8003/3_20_4",
@@ -24187,7 +24197,7 @@
                                 "example1": {
                                     "value": {
                                         "command": "set_req_usr_app",
-                                        "command_id": "abcd1234",
+                                        "command_id": "abcd13212",
                                         "payload": {
                                             "userapp": "sample",
                                             "command": {
@@ -25141,7 +25151,7 @@
                                     "description": "Enable BLE scanning and set the scan interval.",
                                     "value": {
                                         "command": "set_bleConfig",
-                                        "command_id": "ble-set-002",
+                                        "command_id": "ble-set-001",
                                         "payload": {
                                             "ble": {
                                                 "enable": true,
@@ -25154,7 +25164,7 @@
                                     "description": "Enable BLE scanning with a minimum RSSI filter.",
                                     "value": {
                                         "command": "set_bleConfig",
-                                        "command_id": "ble-set-003",
+                                        "command_id": "ble-set-001",
                                         "payload": {
                                             "ble": {
                                                 "enable": true,
@@ -25170,7 +25180,7 @@
                                     "description": "Enable BLE scanning with protocol-specific filters and service UUID filters.",
                                     "value": {
                                         "command": "set_bleConfig",
-                                        "command_id": "ble-set-004",
+                                        "command_id": "ble-set-001",
                                         "payload": {
                                             "ble": {
                                                 "enable": true,
@@ -25250,7 +25260,7 @@
                                     "description": "Disable BLE scanning.",
                                     "value": {
                                         "command": "set_bleConfig",
-                                        "command_id": "ble-set-005",
+                                        "command_id": "ble-set-001",
                                         "payload": {
                                             "ble": {
                                                 "enable": false

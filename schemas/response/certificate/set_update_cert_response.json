@@ -4,7 +4,7 @@
     "id": "14k24yw1d1spw"
   },
   "type": "object",
-  "description": "Update the certficate on the reader",
+  "description": "Update the certificate on the reader",
   "properties": {
     "command": {
       "type": "string",

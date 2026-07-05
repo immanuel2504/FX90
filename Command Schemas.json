@@ -2800,7 +2800,7 @@
       "get_mode_command": {
         "type": "object",
         "title": "get_mode",
-        "description": "command to retrive reader operating mode",
+        "description": "command to retrieve reader operating mode",
         "examples": [
           {
             "verbose": true
@@ -4033,7 +4033,7 @@
               "AUTO_DETECT",
               "DEMO"
             ],
-            "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  The type of environment in which the reader operates. Along with the regulatory configuration of the reader, the environment parameter will set the default link profile parameters (i.e., Miller mode, BLF, Tari, etc.) and the receiver dynamic range (interference immunity).\n\n  LOW_INTERFERENCE:  The reader is operating in an environment when the likelihood of interference is very low or only occurs for very brief periods of time (defined as a single interrogator environment in the Gen2 and ISO standards).\n\n  HIGH_INTERFERENCE: The reader is operating in the presence of other readers (defined as a multi-interrogator or dense interrogator environment in the Gen2 and ISO standards).\n\n  VERY_HIGH_INTERFERENCE: The reader is operating in an environment where the number of readers is greater than the number of available channels, or when interfering readers are in very close proximity to each other.\n\n  AUTO_DETECT: This will cause the reader to try and assess the environment and adjust accordingly. \n\n  DEMO: Should be used when demonstrating the maximum performance (fastest read rate) of a reader. This assumes no other readers in the environement.\n\n  If absent, the environment is set to HIGH_INTERFERENCE",
+            "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  The type of environment in which the reader operates. Along with the regulatory configuration of the reader, the environment parameter will set the default link profile parameters (i.e., Miller mode, BLF, Tari, etc.) and the receiver dynamic range (interference immunity).\n\n  LOW_INTERFERENCE:  The reader is operating in an environment when the likelihood of interference is very low or only occurs for very brief periods of time (defined as a single interrogator environment in the Gen2 and ISO standards).\n\n  HIGH_INTERFERENCE: The reader is operating in the presence of other readers (defined as a multi-interrogator or dense interrogator environment in the Gen2 and ISO standards).\n\n  VERY_HIGH_INTERFERENCE: The reader is operating in an environment where the number of readers is greater than the number of available channels, or when interfering readers are in very close proximity to each other.\n\n  AUTO_DETECT: This will cause the reader to try and assess the environment and adjust accordingly. \n\n  DEMO: Should be used when demonstrating the maximum performance (fastest read rate) of a reader. This assumes no other readers in the environment.\n\n  If absent, the environment is set to HIGH_INTERFERENCE",
             "default": "HIGH_INTERFERENCE"
           },
           "antennas": {
@@ -4120,7 +4120,7 @@
             "description": "Duration in milliseconds to wait after issuing the final select before issuing a query. If absent, the minimum time will be used. "
           },
           "accesses": {
-            "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesss in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.\n\n **Cross-field constraints:**\n - Cannot be set in INVENTORY mode.\n - Cannot be set at the same time as reportFilter.\n - Cannot be set at the same time as tagMetaData with RESERVED/EPC/TID/USER.",
+            "description": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesses in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.\n\n **Cross-field constraints:**\n - Cannot be set in INVENTORY mode.\n - Cannot be set at the same time as reportFilter.\n - Cannot be set at the same time as tagMetaData with RESERVED/EPC/TID/USER.",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/access_cmds.v1"

@@ -129,7 +129,8 @@
       "x-stoplight": {
         "id": "0hqhaelyx60nk"
       },
-      "description": "A unique ID that will be echoed back in the command response by the reader."
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "example": "a12cb345654"
     },
     "response": {
       "type": "string",

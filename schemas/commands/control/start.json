@@ -2,26 +2,28 @@
   "title": "Start RFID Inventory or BLE scan",
   "type": "object",
   "description": "Start RFID inventory, BLE scanning, or both simultaneously.",
-
   "properties": {
     "command": {
       "type": "string",
-      "enum": ["start"],
+      "enum": [
+        "start"
+      ],
       "description": "Command name. Must be 'start'."
     },
-
     "command_id": {
       "type": "string",
-      "description": "A unique ID that will be echoed back in the command response by the reader."
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "example": "req-001"
     },
-
     "payload": {
       "$ref": "../../references/request_payload/start-2.yaml"
     }
   },
-
-  "required": ["command", "command_id", "payload"],
-
+  "required": [
+    "command",
+    "command_id",
+    "payload"
+  ],
   "examples": [
     {
       "command": "start",
@@ -30,37 +32,44 @@
     },
     {
       "command": "start",
-      "command_id": "req-002",
+      "command_id": "req-001",
       "payload": {
         "doNotPersistState": false
       }
     },
     {
       "command": "start",
-      "command_id": "req-003",
+      "command_id": "req-001",
       "payload": {
         "applyImpinjGen2X": true
       }
     },
     {
       "command": "start",
-      "command_id": "req-004",
+      "command_id": "req-001",
       "payload": {
-        "scanType": ["ble"]
+        "scanType": [
+          "ble"
+        ]
       }
     },
     {
       "command": "start",
-      "command_id": "req-005",
+      "command_id": "req-001",
       "payload": {
-        "scanType": ["rfid"]
+        "scanType": [
+          "rfid"
+        ]
       }
     },
     {
       "command": "start",
-      "command_id": "req-006",
+      "command_id": "req-001",
       "payload": {
-        "scanType": ["ble", "rfid"]
+        "scanType": [
+          "ble",
+          "rfid"
+        ]
       }
     }
   ]

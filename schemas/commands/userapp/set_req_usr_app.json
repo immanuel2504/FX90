@@ -31,7 +31,7 @@
   "examples": [
     {
       "command": "set_req_usr_app",
-      "command_id": "abcd1234",
+      "command_id": "abcd13212",
       "payload": {
         "userapp": "sample",
         "command": {

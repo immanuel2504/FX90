@@ -16,7 +16,7 @@
     },
     "command_id": {
       "type": "string",
-      "example": "abcd1324",
+      "example": "req-001",
       "description": "A unique ID that will be echoed back in the command response by the reader."
     },
     "response": {

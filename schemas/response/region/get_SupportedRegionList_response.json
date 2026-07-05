@@ -8,7 +8,7 @@
   "examples": [
     {
       "command": "get_supportedRegionList",
-      "command_id": "1a234",
+      "command_id": "gvjh",
       "response": "success",
       "payload": {
         "SupportedRegions": [
@@ -60,7 +60,7 @@
     },
     "command_id": {
       "type": "string",
-      "example": "1a234",
+      "example": "gvjh",
       "description": "A unique ID that will be echoed back in the command response by the reader.",
       "enum": [
         "1a234"
@@ -92,7 +92,7 @@
   "x-examples": {
     "Example 1": {
       "command": "get_SupportedRegionList",
-      "command_id": "1a234",
+      "command_id": "gvjh",
       "response": "success",
       "payload": {
         "SupportedRegions": [

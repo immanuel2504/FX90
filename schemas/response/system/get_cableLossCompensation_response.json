@@ -8,7 +8,7 @@
   "examples": [
     {
       "command": "get_cableLossCompensation",
-      "command_id": "abdc453254",
+      "command_id": "abcd1324",
       "response": "success",
       "payload": {
         "1": {
@@ -41,7 +41,7 @@
     },
     "command_id": {
       "type": "string",
-      "example": "abdc453254",
+      "example": "abcd1324",
       "description": "A unique ID that will be echoed back in the command response by the reader."
     },
     "response": {
@@ -70,7 +70,7 @@
   "x-examples": {
     "example-1": {
       "command": "get_cableLossCompensation",
-      "command_id": "abdc453254",
+      "command_id": "abcd1324",
       "response": "success",
       "payload": {
         "1": {

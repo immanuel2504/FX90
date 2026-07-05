@@ -6973,7 +6973,7 @@ components:
           maximum: 65
           description: 'Duration in milliseconds to wait after issuing the final select before issuing a query. If absent, the minimum time will be used. '
         accesses:
-          description: "\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesss in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array."
+          description: "\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n If there is an array of access objects, all of the accesses in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array."
           oneOf:
           - $ref: '#/components/schemas/access_cmds.v1'
           - type: array

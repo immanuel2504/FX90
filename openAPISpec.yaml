@@ -9887,7 +9887,7 @@ components:
 
              If absent, no access will be issued. 
 
-             If there is an array of access objects, all of the accesss in the array will be applied to all antennas.
+             If there is an array of access objects, all of the accesses in the array will be applied to all antennas.
              
              If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.
           oneOf:

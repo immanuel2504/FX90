@@ -31,7 +31,7 @@
   "examples": [
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "endpointConfig": {
@@ -90,7 +90,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "endpointConfig": {
@@ -141,7 +141,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "endpointConfig": {
@@ -200,7 +200,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "endpointConfig": {
@@ -215,7 +215,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "endpointConfig": {
@@ -242,7 +242,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "endpointConfig": {
@@ -292,7 +292,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "endpointConfig": {
@@ -324,7 +324,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "endpointConfig": {
@@ -358,7 +358,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "batching": {
@@ -370,7 +370,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "retention": {
@@ -383,7 +383,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "READER-GATEWAY": {
           "managementEventConfig": {
@@ -466,7 +466,7 @@
     },
     {
       "command": "set_config",
-      "command_id": "abcd1324",
+      "command_id": "abdc2134",
       "payload": {
         "GPIO-LED": {
           "GPODefaults": {

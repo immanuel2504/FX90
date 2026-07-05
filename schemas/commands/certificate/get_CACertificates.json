@@ -18,7 +18,8 @@
       "x-stoplight": {
         "id": "qsyxfky2hgisl"
       },
-      "description": "A unique ID that will be echoed back in the command response by the reader."
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "example": "abcd1234"
     },
     "payload": {
       "$ref": "../../references/request_payload/get_CA_Certificate_command.yaml",
@@ -42,7 +43,7 @@
   "x-examples": {
     "Example 1": {
       "command": "get_CACertificates",
-      "command_id": "abcd1324",
+      "command_id": "abcd1234",
       "payload": {}
     }
   }

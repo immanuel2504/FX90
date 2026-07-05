@@ -1,6 +1,6 @@
 type: object
 title: get_mode
-description: command to retrive reader operating mode
+description: command to retrieve reader operating mode
 examples:
 - verbose: true
 properties:

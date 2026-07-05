@@ -8,7 +8,7 @@
   "examples": [
     {
       "command": "set_hostname",
-      "command_id": "string",
+      "command_id": "abcd345",
       "response": "success",
       "payload": {}
     }
@@ -23,7 +23,8 @@
     },
     "command_id": {
       "type": "string",
-      "description": "A unique ID that will be echoed back in the command response by the reader."
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "example": "abcd345"
     },
     "response": {
       "type": "string",

@@ -8,7 +8,7 @@
   "examples": [
     {
       "command": "get_version",
-      "command_id": "abcd1324",
+      "command_id": "a12cb5677",
       "response": "success",
       "payload": {
         "availableOsUpgrades": {},
@@ -32,7 +32,8 @@
     },
     "command_id": {
       "type": "string",
-      "description": "A unique ID that will be echoed back in the command response by the reader."
+      "description": "A unique ID that will be echoed back in the command response by the reader.",
+      "example": "a12cb5677"
     },
     "response": {
       "type": "string",
