@@ -11,7 +11,6 @@ By default, an empty request stops RFID inventory only. Use `scanType` to explic
 | Applies To | FXR90 |
 | Related Operations | `startInventory`, `getStatus` |
 | REST Endpoint | `PUT /cloud/stop` |
-| MQTT Command | `stop` |
 
 ## 2. Stop Behavior
 

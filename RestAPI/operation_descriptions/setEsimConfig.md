@@ -4,7 +4,6 @@ The `PUT /cloud/eSimConfig` REST endpoint sets the eSIM configuration.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_eSimConfig` |
 | REST Endpoint | `PUT /cloud/eSimConfig` |
 | Operation ID | `setEsimConfig` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

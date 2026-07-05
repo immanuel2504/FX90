@@ -1,8 +1,8 @@
 put:
   tags:
   - userapp
-  summary: Set Data to RG
-  description: MQTT API :-  set_dataToRG <br> Sets data to RG.
+  summary: Trigger reader gateway data delivery
+  description: Triggers the reader gateway to process and deliver buffered tag data. No request body.
   operationId: setDataToRG
   responses:
     '200':

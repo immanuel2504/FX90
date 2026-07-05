@@ -4,7 +4,6 @@ The `PUT /cloud/network` REST endpoint updates network configuration, including 
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_network` |
 | REST Endpoint | `PUT /cloud/network` |
 | Operation ID | `updateNetwork` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

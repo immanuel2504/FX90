@@ -4,7 +4,6 @@ The `PUT /cloud/cableLossCompensation` REST endpoint sets cable loss compensatio
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_cableLossCompensation` |
 | REST Endpoint | `PUT /cloud/cableLossCompensation` |
 | Operation ID | `setCableLossCompensation` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

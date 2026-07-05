@@ -6,7 +6,6 @@ The `DELETE /cloud/logs/radioPacketLog` REST endpoint is used to purge Log.
 |---|---|
 | REST Endpoint | `DELETE /cloud/logs/radioPacketLog` |
 | Operation ID | `delRadioPacketLog` |
-| MQTT Command | `del_logs_radioPacketLog` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

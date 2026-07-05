@@ -82,9 +82,18 @@ OPENING_LINE_FIXES = {
     "updateNetwork.md": "The `PUT /cloud/network` REST endpoint updates network configuration, including Wi-Fi hotspot (uap0) settings.",
 }
 
-INTERNAL_NOTE = "- Keep REST behavior aligned with the documented reader workflow."
-BOILERPLATE_USE_BLOCK = re.compile(r"\nUse this endpoint to:\n\n(?:- .+\n)+", re.MULTILINE)
-PERFORM_BULLET = "- Perform the operation through the REST API using bearer-token authentication.\n"
+INTERNAL_NOTE_RE = re.compile(
+    r"^\s*[-*]?\s*Keep REST behavior aligned with the documented reader workflow\.?\s*$",
+    re.MULTILINE | re.IGNORECASE,
+)
+PERFORM_BULLET_RE = re.compile(
+    r"^\s*[-*]?\s*Perform the operation through the REST API using bearer-token authentication\.?\s*$",
+    re.MULTILINE | re.IGNORECASE,
+)
+BOILERPLATE_USE_BLOCK = re.compile(
+    r"\n\*{0,2}Use this endpoint to:\*{0,2}\n\n(?:- .+\n)+",
+    re.MULTILINE,
+)
 
 
 def load_yaml(path: Path) -> dict:
@@ -142,9 +151,8 @@ def polish_markdown_text(text: str, filename: str) -> str:
     for legacy, canonical in LEGACY_MD_RENAMES.items():
         text = text.replace(legacy, canonical)
 
-    text = text.replace(f"\n{INTERNAL_NOTE}\n", "\n")
-    text = text.replace(f"{INTERNAL_NOTE}\n", "")
-    text = text.replace(PERFORM_BULLET, "")
+    text = INTERNAL_NOTE_RE.sub("", text)
+    text = PERFORM_BULLET_RE.sub("", text)
     text = BOILERPLATE_USE_BLOCK.sub("\n", text)
     text = re.sub(r"\n{3,}", "\n\n", text).strip() + "\n"
     return text

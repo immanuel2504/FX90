@@ -4,7 +4,6 @@ The `PUT /cloud/config` REST endpoint updates reader configuration.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_config` |
 | REST Endpoint | `PUT /cloud/config` |
 | Operation ID | `setConfig` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

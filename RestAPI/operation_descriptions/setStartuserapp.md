@@ -4,7 +4,6 @@ The `PUT /cloud/apps/{appname}/start` REST endpoint is used to start user applic
 
 | Property | Value |
 |---|---|
-| MQTT Command | `start_user_app` |
 | REST Endpoint | `PUT /cloud/apps/{appname}/start` |
 | Operation ID | `setStartUserApp` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

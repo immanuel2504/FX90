@@ -4,7 +4,6 @@ The `PUT /cloud/apps/{appname}/uninstall` REST endpoint is used to uninstall Use
 
 | Property | Value |
 |---|---|
-| MQTT Command | `uninstall-user-app` |
 | REST Endpoint | `PUT /cloud/apps/{appname}/uninstall` |
 | Operation ID | `setUninstallUserApp` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

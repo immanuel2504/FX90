@@ -2,14 +2,6 @@ The `PUT /cloud/start` REST endpoint starts RFID inventory, BLE scanning, or bot
 
 By default, an empty request body starts RFID inventory only. Use the `scanType` field to explicitly start BLE, RFID, or both together. Optional flags allow you to apply a previously saved Impinj Gen2X configuration or control whether the start state persists across reboots.
 
-**Use this endpoint to:**
-
-- Start RFID inventory using the currently configured operating mode
-- Start BLE scanning using the currently configured BLE settings
-- Start RFID and BLE scanning together in a single inventory session
-- Apply a previously saved Impinj Gen2X configuration when starting RFID inventory
-- Control whether the reader automatically resumes scanning after reboot
-
 ### Endpoint Details
 
 | Property | Value |
@@ -17,7 +9,6 @@ By default, an empty request body starts RFID inventory only. Use the `scanType`
 | Pattern Name | Scan Control - Start |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 Series |
-| MQTT Command | `start` |
 | Related Endpoints | `PUT /cloud/stop`, `PUT /cloud/ble-config`, `PUT /cloud/impinjGen2X`, `PUT /cloud/mode` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |

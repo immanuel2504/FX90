@@ -16,11 +16,33 @@ Run:
    python RestAPI/scripts/build_openapi.py
 """
 from __future__ import annotations
+import re
 import shutil
 import sys
 from collections import OrderedDict
 from pathlib import Path
 import yaml
+
+_INTERNAL_NOTE_RE = re.compile(
+    r"^\s*[-*]?\s*Keep REST behavior aligned with the documented reader workflow\.?\s*$",
+    re.MULTILINE | re.IGNORECASE,
+)
+_PERFORM_BULLET_RE = re.compile(
+    r"^\s*[-*]?\s*Perform the operation through the REST API using bearer-token authentication\.?\s*$",
+    re.MULTILINE | re.IGNORECASE,
+)
+_BOILERPLATE_USE_BLOCK = re.compile(
+    r"\n\*{0,2}Use this endpoint to:\*{0,2}\n\n(?:- .+\n)+",
+    re.MULTILINE,
+)
+
+
+def sanitize_operation_description(text: str) -> str:
+    text = _INTERNAL_NOTE_RE.sub("", text)
+    text = _PERFORM_BULLET_RE.sub("", text)
+    text = _BOILERPLATE_USE_BLOCK.sub("\n", text)
+    text = re.sub(r"\n{3,}", "\n\n", text).strip()
+    return f"{text}\n" if text else ""
 
 REST_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -149,7 +171,7 @@ def load_rest_operation_descriptions() -> dict[str, str]:
            continue
        if path.name.startswith("_"):
            continue
-       text = path.read_text(encoding="utf-8-sig").strip()
+       text = sanitize_operation_description(path.read_text(encoding="utf-8-sig").strip())
        if text:
            descriptions[path.stem] = text
    return descriptions

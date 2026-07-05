@@ -7,7 +7,6 @@ The `PUT /cloud/mode` REST endpoint configures the reader's operating mode using
 | Pattern Name | Operating Mode Configuration |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 Series |
-| MQTT Command | `set_mode` |
 | REST Endpoint | `PUT /cloud/mode` |
 | Request Schema | `operatingMode.v1` |
 | Related Endpoints | `GET /cloud/mode`, `PUT /cloud/start`, `PUT /cloud/stop`, `GET /cloud/config` |

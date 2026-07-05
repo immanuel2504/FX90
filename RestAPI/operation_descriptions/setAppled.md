@@ -4,7 +4,6 @@ The `PUT /cloud/app-led` REST endpoint updates application LED state.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_appled` |
 | REST Endpoint | `PUT /cloud/app-led` |
 | Operation ID | `setAppLed` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

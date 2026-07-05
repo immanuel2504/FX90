@@ -17,10 +17,7 @@ No request body is required. Radio packet logging must be enabled via `PUT /clou
 | Operation ID | `getRadioPacketLog` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
-| MQTT Equivalent | `get_radio_pkt_logs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Supported Response Sections | JSON response body |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

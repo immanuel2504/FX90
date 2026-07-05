@@ -4,7 +4,6 @@ The `PUT /cloud/certificates` REST endpoint is used to install or update a certi
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_update_cert` |
 | REST Endpoint | `PUT /cloud/certificates` |
 | Operation ID | `setUpdateCertificate` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

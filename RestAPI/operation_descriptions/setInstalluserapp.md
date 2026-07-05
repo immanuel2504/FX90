@@ -4,7 +4,6 @@ The `PUT /cloud/apps/install` REST endpoint is used to install user application.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `install_user_app` |
 | REST Endpoint | `PUT /cloud/apps/install` |
 | Operation ID | `setInstallUserApp` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

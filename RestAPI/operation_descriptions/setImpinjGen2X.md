@@ -7,13 +7,6 @@ The `PUT /cloud/impinjGen2X` REST endpoint configures Impinj Gen2X proprietary R
 - TagFocus to suppress already-read tags during dense inventory
 - TagQuieting (basic or advanced) to silence specific tags by EPC or by Gen2 select masks
 
-**Use this endpoint to:**
-
-- Improve inventory performance in dense or high-duplicate tag environments
-- Protect sensitive tags from unauthorized reads or writes
-- Reduce duplicate reporting by silencing already-inventoried tags
-- Apply advanced Gen2 select pre-conditions for state-aware tag quieting
-
 ### Endpoint Details
 
 | Property | Value |
@@ -21,7 +14,6 @@ The `PUT /cloud/impinjGen2X` REST endpoint configures Impinj Gen2X proprietary R
 | Pattern Name | Impinj Gen2X Configuration Update |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 Series |
-| MQTT Command | `set_impinjGen2X` |
 | REST Endpoint | `PUT /cloud/impinjGen2X` |
 | Related Endpoints | `GET /cloud/impinjGen2X`, `PUT /cloud/start`, `PUT /cloud/stop` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

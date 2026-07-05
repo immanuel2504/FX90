@@ -4,7 +4,6 @@ The `PUT /cloud/logs` REST endpoint configures log settings.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_logs` |
 | REST Endpoint | `PUT /cloud/logs` |
 | Operation ID | `setLogs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

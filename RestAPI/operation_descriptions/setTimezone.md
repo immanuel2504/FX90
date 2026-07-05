@@ -4,7 +4,6 @@ The `PUT /cloud/timeZone` REST endpoint sets the reader timezone.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_timeZone` |
 | REST Endpoint | `PUT /cloud/timeZone` |
 | Operation ID | `setTimeZone` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

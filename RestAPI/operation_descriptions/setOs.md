@@ -4,7 +4,6 @@ The `PUT /cloud/os` REST endpoint updates OS software on the device.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_os` |
 | REST Endpoint | `PUT /cloud/os` |
 | Operation ID | `setOS` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

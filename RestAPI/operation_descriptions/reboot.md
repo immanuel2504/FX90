@@ -4,7 +4,6 @@ The `PUT /cloud/reboot` REST endpoint restarts the reader.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `reboot` |
 | REST Endpoint | `PUT /cloud/reboot` |
 | Operation ID | `reboot` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

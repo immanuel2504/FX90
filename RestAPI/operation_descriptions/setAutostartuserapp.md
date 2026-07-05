@@ -4,7 +4,6 @@ The `PUT /cloud/apps/{appname}/autostart` REST endpoint is used to autostart use
 
 | Property | Value |
 |---|---|
-| MQTT Command | `autostart_user_app` |
 | REST Endpoint | `PUT /cloud/apps/{appname}/autostart` |
 | Operation ID | `setAutostartUserApp` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

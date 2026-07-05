@@ -4,7 +4,6 @@ The `PUT /cloud/apps/{appname}/pass-through` REST endpoint is used to send Reque
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_req_usr_app` |
 | REST Endpoint | `PUT /cloud/apps/{appname}/pass-through` |
 | Operation ID | `setReqToUserApp` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

@@ -4,7 +4,6 @@ The `DELETE /cloud/certificates/{certname}` REST endpoint is used to delete cert
 
 | Property | Value |
 |---|---|
-| MQTT Command | `del_certs` |
 | REST Endpoint | `DELETE /cloud/certificates/{certname}` |
 | Operation ID | `delCertificate` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

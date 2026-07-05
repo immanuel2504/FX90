@@ -25,7 +25,4 @@ This endpoint requires **HTTP Basic Auth** (admin credentials). All other `/clou
 | Operation ID | `localRestLogin` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
-| MQTT Command | `localrest_login` |
 | Authentication | HTTP Basic Auth (admin reader credentials) |
-| Supported Response Sections | JSON response body (`code`, `message`) |
-| Supported API Versions | V1.0 |

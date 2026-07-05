@@ -4,7 +4,6 @@ The `PUT /cloud/ntpServer` REST endpoint is used to set NTP server.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_ntpServer` |
 | REST Endpoint | `PUT /cloud/ntpServer` |
 | Operation ID | `updateNtpServer` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

@@ -4,7 +4,6 @@ The `PUT /cloud/hostName` REST endpoint sets the reader hostname.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_hostname` |
 | REST Endpoint | `PUT /cloud/hostName` |
 | Operation ID | `setHostName` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

@@ -16,7 +16,6 @@ This operation configures:
 | Applies To | FXR90 |
 | Related Operations | config, certificates |
 | REST Endpoint | `PUT /cloud/cloudConfig` |
-| MQTT Command | `set_importCloudConfig` |
 
 ## 2. Before You Begin
 

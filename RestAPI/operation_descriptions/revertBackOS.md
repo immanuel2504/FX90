@@ -4,7 +4,6 @@ The `PUT /cloud/revertbackOS` REST endpoint is used to revert to previous OS ver
 
 | Property | Value |
 |---|---|
-| MQTT Command | `revertback` |
 | REST Endpoint | `PUT /cloud/revertbackOS` |
 | Operation ID | `revertBackOS` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

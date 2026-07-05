@@ -15,7 +15,6 @@ Use this operation to:
 | Applies To | FXR90 |
 | Related Operations | `getBleConfig`, `startInventory`, `stopInventory` |
 | REST Endpoint | `PUT /cloud/ble-config` |
-| MQTT Command | `set_bleConfig` |
 
 ## 2. Before You Begin
 

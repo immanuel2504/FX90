@@ -4,7 +4,6 @@ The `PUT /cloud/region` REST endpoint is used to update region information.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_region` |
 | REST Endpoint | `PUT /cloud/region` |
 | Operation ID | `setRegion` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

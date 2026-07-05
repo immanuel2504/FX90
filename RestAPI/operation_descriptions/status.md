@@ -4,7 +4,6 @@ The `PUT /cloud/pass-through` REST endpoint is used to pass-through command.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_passthru` |
 | REST Endpoint | `PUT /cloud/pass-through` |
 | Operation ID | `status` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

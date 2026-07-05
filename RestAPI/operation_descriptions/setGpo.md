@@ -4,7 +4,6 @@ The `PUT /cloud/gpo` REST endpoint updates GPO port state.
 
 | Property | Value |
 |---|---|
-| MQTT Command | `set_gpo` |
 | REST Endpoint | `PUT /cloud/gpo` |
 | Operation ID | `setGpo` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

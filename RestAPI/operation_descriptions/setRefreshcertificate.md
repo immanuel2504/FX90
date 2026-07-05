@@ -4,7 +4,6 @@ The `PUT /cloud/certificates/{certname}` REST endpoint is used to refresh certif
 
 | Property | Value |
 |---|---|
-| MQTT Command | `refresh-cert` |
 | REST Endpoint | `PUT /cloud/certificates/{certname}` |
 | Operation ID | `setRefreshCertificate` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
