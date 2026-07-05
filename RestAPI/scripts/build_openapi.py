@@ -16,12 +16,18 @@ Run:
    python RestAPI/scripts/build_openapi.py
 """
 from __future__ import annotations
+import copy
+import hashlib
+import json
 import re
 import shutil
-import sys
 from collections import OrderedDict
 from pathlib import Path
 import yaml
+
+HTTP_METHODS = frozenset(
+   {"get", "put", "post", "delete", "patch", "head", "options", "trace"}
+)
 
 _INTERNAL_NOTE_RE = re.compile(
     r"^\s*[-*]?\s*Keep REST behavior aligned with the documented reader workflow\.?\s*$",
@@ -44,19 +50,401 @@ def sanitize_operation_description(text: str) -> str:
     text = re.sub(r"\n{3,}", "\n\n", text).strip()
     return f"{text}\n" if text else ""
 
+
+# --- Nested schema extraction (Swagger UI layout) ---------------------------------
+
+
+def _segment_to_pascal(segment) -> str:
+    if isinstance(segment, int) or (isinstance(segment, str) and segment.isdigit()):
+        return f"Port{segment}"
+    text = str(segment)
+    if text == "Item":
+        return "Item"
+    parts = [p for p in re.split(r"[-_\s]+", text) if p]
+    return "".join(p[:1].upper() + p[1:] for p in parts)
+
+
+def _make_subschema_name(root_name: str, path: list) -> str:
+    suffix = "".join(_segment_to_pascal(part) for part in path)
+    name = f"{root_name}{suffix}"
+    if len(name) > 120:
+        digest = hashlib.sha1(json.dumps(path, sort_keys=True).encode()).hexdigest()[:8]
+        name = f"{root_name}{suffix[:80]}{digest}"
+    return name
+
+
+def _schema_is_ref(node) -> bool:
+    return isinstance(node, dict) and "$ref" in node
+
+
+def _schema_is_object(node) -> bool:
+    if not isinstance(node, dict) or _schema_is_ref(node):
+        return False
+    if "properties" in node:
+        return True
+    return node.get("type") == "object" and any(
+        key in node for key in ("properties", "additionalProperties")
+    )
+
+
+def _schema_canonical_for_dedup(node) -> str:
+    def strip(obj):
+        if isinstance(obj, dict):
+            if "$ref" in obj:
+                return {"$ref": obj["$ref"]}
+            out = {}
+            for key, value in sorted(obj.items()):
+                if key in {
+                    "description",
+                    "title",
+                    "example",
+                    "examples",
+                    "x-examples",
+                    "default",
+                } or (isinstance(key, str) and key.startswith("x-")):
+                    continue
+                out[key] = strip(value)
+            return out
+        if isinstance(obj, list):
+            return [strip(item) for item in obj]
+        return obj
+
+    return json.dumps(strip(node), sort_keys=True, separators=(",", ":"))
+
+
+def _copy_schema_meta(node: dict) -> OrderedDict:
+    meta = OrderedDict()
+    for key in ("type", "description", "required", "nullable", "title", "enum", "default"):
+        if key in node:
+            meta[key] = copy.deepcopy(node[key])
+    return meta
+
+
+def _visit_nested_schema(node, root_name: str, path: list, registry: dict, hash_index: dict):
+    if not isinstance(node, dict):
+        return node
+    if _schema_is_ref(node):
+        return node
+
+    node = copy.deepcopy(node)
+
+    for composite in ("oneOf", "anyOf", "allOf"):
+        if composite in node and isinstance(node[composite], list):
+            node[composite] = [
+                _visit_nested_schema(branch, root_name, path + [f"{composite}{idx}"], registry, hash_index)
+                if isinstance(branch, dict)
+                else branch
+                for idx, branch in enumerate(node[composite])
+            ]
+
+    if "items" in node and isinstance(node["items"], dict):
+        node["items"] = _visit_nested_schema(
+            node["items"], root_name, path + ["Item"], registry, hash_index
+        )
+
+    if not _schema_is_object(node):
+        return node
+
+    properties = node.get("properties")
+    if isinstance(properties, dict):
+        node["properties"] = OrderedDict(
+            (prop_name, _visit_nested_schema(prop_schema, root_name, path + [prop_name], registry, hash_index))
+            for prop_name, prop_schema in properties.items()
+        )
+
+    if len(path) >= 1:
+        return _register_nested_schema(root_name, path, node, registry, hash_index)
+
+    return node
+
+
+def _register_nested_schema(root_name: str, path: list, node: dict, registry: dict, hash_index: dict):
+    canonical = _schema_canonical_for_dedup(node)
+    if canonical in hash_index:
+        existing = hash_index[canonical]
+        return OrderedDict([("$ref", f"#/components/schemas/{existing}")])
+
+    name = _make_subschema_name(root_name, path)
+    while name in registry:
+        name = f"{name}Ref"
+
+    extracted = _copy_schema_meta(node)
+    if "properties" in node:
+        extracted["properties"] = node["properties"]
+    if "items" in node and "properties" not in extracted:
+        extracted["items"] = node["items"]
+    for composite in ("oneOf", "anyOf", "allOf"):
+        if composite in node:
+            extracted[composite] = node[composite]
+
+    registry[name] = extracted
+    hash_index[canonical] = name
+    return OrderedDict([("$ref", f"#/components/schemas/{name}")])
+
+
+def _flatten_schema(name: str, schema, registry: dict, hash_index: dict):
+    if not isinstance(schema, dict):
+        return schema
+    if _schema_is_ref(schema):
+        return schema
+    return _visit_nested_schema(schema, name, [], registry, hash_index)
+
+
+def extract_nested_schemas(schemas: dict) -> tuple[dict, int]:
+    if not isinstance(schemas, dict):
+        return schemas, 0
+
+    registry = OrderedDict()
+    hash_index: dict[str, str] = {}
+    original_names = list(schemas.keys())
+
+    for name in original_names:
+        schema = schemas[name]
+        if isinstance(schema, dict) and not _schema_is_ref(schema):
+            registry[name] = _flatten_schema(name, schema, registry, hash_index)
+
+    for name in original_names:
+        if name not in registry:
+            registry[name] = schemas[name]
+
+    return registry, len(registry) - len(original_names)
+
+
+# --- OpenAPI 3.0 normalization (Swagger UI compatibility) -------------------------
+
+VENDOR_EXTENSION_PREFIX = "x-"
+SCHEMA_DOC_STRIP_KEYS = frozenset({"example", "examples", "x-examples"})
+
+
+def _is_schema_object(node: dict) -> bool:
+    if "$ref" in node:
+        return True
+    return any(
+        key in node
+        for key in ("type", "properties", "items", "oneOf", "anyOf", "allOf", "enum")
+    )
+
+
+def _fix_tag_metadata_items(obj: dict) -> dict:
+    items = obj.get("items")
+    if not isinstance(items, dict):
+        return obj
+    type_val = items.get("type")
+    if not isinstance(type_val, list):
+        return obj
+    if "enum" not in items or "properties" not in items:
+        return obj
+
+    enum_vals = items.pop("enum")
+    props = items.pop("properties")
+    items.pop("type", None)
+    items.clear()
+    items["oneOf"] = [
+        OrderedDict([("type", "string"), ("enum", enum_vals)]),
+        OrderedDict([("type", "object"), ("properties", props)]),
+    ]
+    return obj
+
+
+def _fix_malformed_selects(obj: dict) -> dict:
+    if "selects" in obj and isinstance(obj["selects"], dict):
+        selects = obj["selects"]
+        if selects.get("type") == "array" and isinstance(selects.get("oneOf"), list):
+            one_of = []
+            for branch in selects["oneOf"]:
+                if isinstance(branch, dict) and "items" in branch and "type" not in branch:
+                    one_of.append(
+                        OrderedDict([("type", "array"), ("items", branch["items"])])
+                    )
+                else:
+                    one_of.append(branch)
+            rebuilt = OrderedDict()
+            if "description" in selects:
+                rebuilt["description"] = selects["description"]
+            rebuilt["oneOf"] = one_of
+            obj["selects"] = rebuilt
+    return obj
+
+
+def normalize_for_oas30(obj):
+    if isinstance(obj, dict):
+        obj = OrderedDict(obj)
+
+        if "examples" in obj and _is_schema_object(obj):
+            obj.pop("examples", None)
+
+        if "example" in obj and _is_schema_object(obj):
+            obj.pop("example", None)
+
+        type_val = obj.get("type")
+        if isinstance(type_val, list):
+            non_null = [t for t in type_val if t != "null"]
+            has_null = "null" in type_val
+            if len(non_null) == 1:
+                obj["type"] = non_null[0]
+                if has_null:
+                    obj["nullable"] = True
+            elif non_null:
+                obj.pop("type", None)
+                obj["oneOf"] = [OrderedDict([("type", t)]) for t in non_null]
+                if has_null:
+                    obj["nullable"] = True
+            else:
+                obj.pop("type", None)
+                obj["nullable"] = True
+
+        enum_val = obj.get("enum")
+        if isinstance(enum_val, list):
+            deduped = []
+            seen = []
+            for item in enum_val:
+                if item not in seen:
+                    seen.append(item)
+                    deduped.append(item)
+            obj["enum"] = deduped
+
+        for bound, limit in (("exclusiveMinimum", "minimum"), ("exclusiveMaximum", "maximum")):
+            val = obj.get(bound)
+            if isinstance(val, bool):
+                continue
+            if isinstance(val, (int, float)):
+                obj.setdefault(limit, val)
+                obj[bound] = True
+
+        obj = _fix_tag_metadata_items(obj)
+        obj = _fix_malformed_selects(obj)
+
+        for key, value in obj.items():
+            obj[key] = normalize_for_oas30(value)
+        return obj
+
+    if isinstance(obj, list):
+        return [normalize_for_oas30(item) for item in obj]
+    return obj
+
+
+def fix_delete_request_bodies(paths: dict, schemas: dict | None = None) -> int:
+    fixed = 0
+    schemas = schemas or {}
+
+    for path_item in paths.values():
+        if not isinstance(path_item, dict):
+            continue
+        for method, operation in path_item.items():
+            if method not in HTTP_METHODS or not isinstance(operation, dict):
+                continue
+            if method != "delete" or "requestBody" not in operation:
+                continue
+
+            body = operation.get("requestBody", {})
+            content = body.get("content", {}) if isinstance(body, dict) else {}
+            json_content = content.get("application/json", {})
+            schema = json_content.get("schema", {}) if isinstance(json_content, dict) else {}
+
+            if isinstance(schema, dict) and "$ref" in schema:
+                ref = schema["$ref"]
+                if ref.startswith("#/components/schemas/"):
+                    ref_name = ref.rsplit("/", 1)[-1]
+                    schema = schemas.get(ref_name, schema)
+
+            props = schema.get("properties", {}) if isinstance(schema, dict) else {}
+            if not isinstance(props, dict) or not props:
+                operation.pop("requestBody", None)
+                fixed += 1
+                continue
+
+            params = list(operation.get("parameters") or [])
+            existing = {(p.get("in"), p.get("name")) for p in params if isinstance(p, dict)}
+            for prop_name, prop_schema in props.items():
+                if ("query", prop_name) in existing or ("path", prop_name) in existing:
+                    continue
+                params.append(
+                    OrderedDict(
+                        [
+                            ("name", prop_name),
+                            ("in", "query"),
+                            ("required", prop_name in (schema.get("required") or [])),
+                            (
+                                "schema",
+                                prop_schema if isinstance(prop_schema, dict) else OrderedDict(),
+                            ),
+                        ]
+                    )
+                )
+            operation["parameters"] = params
+            operation.pop("requestBody", None)
+            fixed += 1
+    return fixed
+
+
+def _strip_schema_doc_noise(obj):
+    if isinstance(obj, dict):
+        obj = OrderedDict(obj)
+        for key in list(obj.keys()):
+            if key in SCHEMA_DOC_STRIP_KEYS or (
+                isinstance(key, str) and key.startswith(VENDOR_EXTENSION_PREFIX)
+            ):
+                obj.pop(key, None)
+        for key, value in obj.items():
+            obj[key] = _strip_schema_doc_noise(value)
+        return obj
+    if isinstance(obj, list):
+        return [_strip_schema_doc_noise(item) for item in obj]
+    return obj
+
+
+def _sanitize_media_content(content) -> None:
+    if not isinstance(content, dict):
+        return
+    for media_obj in content.values():
+        if isinstance(media_obj, dict) and "schema" in media_obj:
+            media_obj["schema"] = _strip_schema_doc_noise(media_obj["schema"])
+
+
+def _sanitize_path_schemas(paths: dict) -> None:
+    for path_item in paths.values():
+        if not isinstance(path_item, dict):
+            continue
+        for method, operation in path_item.items():
+            if method not in HTTP_METHODS or not isinstance(operation, dict):
+                continue
+            body = operation.get("requestBody")
+            if isinstance(body, dict):
+                _sanitize_media_content(body.get("content"))
+            for response in (operation.get("responses") or {}).values():
+                if isinstance(response, dict):
+                    _sanitize_media_content(response.get("content"))
+
+
+def sanitize_for_swagger_ui(doc: dict) -> dict:
+    components = doc.get("components")
+    if isinstance(components, dict):
+        schemas = components.get("schemas")
+        if isinstance(schemas, dict):
+            for name in list(schemas.keys()):
+                schemas[name] = _strip_schema_doc_noise(schemas[name])
+    if isinstance(doc.get("paths"), dict):
+        _sanitize_path_schemas(doc["paths"])
+    return doc
+
+
+def normalize_openapi_document(doc: dict, *, openapi_version: str = "3.0.3") -> dict:
+    doc = normalize_for_oas30(doc)
+    doc = sanitize_for_swagger_ui(doc)
+    doc["openapi"] = openapi_version
+    schemas = doc.get("components", {}).get("schemas", {})
+    if isinstance(doc.get("paths"), dict):
+        fix_delete_request_bodies(doc["paths"], schemas if isinstance(schemas, dict) else None)
+    return doc
+
+
 REST_DIR = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from oas30_normalize import normalize_openapi_document
-from extract_nested_schemas import extract_nested_schemas
-MONOLITH = REST_DIR / "FXR90.yaml"
 ROOT_IN = REST_DIR / "openapi.yaml"
 BUNDLED_OUT = REST_DIR / "FXR90-rest-api.yaml"
 SCHEMAS_DIR = REST_DIR / "schemas"
 PATHS_DIR = REST_DIR / "paths"
 OP_DESCRIPTIONS_DIR = REST_DIR / "operation_descriptions"
-HTTP_METHODS = frozenset(
-   {"get", "put", "post", "delete", "patch", "head", "options", "trace"}
-)
+MONOLITH = REST_DIR / "FXR90.yaml"
 TAG_TO_FOLDER = {
    "Login": "login",
    "System": "system",

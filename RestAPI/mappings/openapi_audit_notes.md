@@ -233,10 +233,11 @@ Then open `RestAPI/swagger.html` in a browser (serves `FXR90-rest-api.yaml`).
 
 ## 8. OpenAPI 3.0 normalization (2026-07-05)
 
-Swagger UI validates against **OpenAPI 3.0**, but the Zebra export used **3.1 / JSON Schema 2020** features. Fixed by:
+Swagger UI validates against **OpenAPI 3.0**, but the Zebra export used **3.1 / JSON Schema 2020** features. Fixed inside `build_openapi.py`:
 
-- `RestAPI/scripts/oas30_normalize.py` — down-converts schema constructs (used by `build_openapi.py`)
-- `build_openapi.py` — emits `openapi: 3.0.3` and normalizes `FXR90-rest-api.yaml`
+- down-converts schema constructs to OpenAPI 3.0
+- flattens nested inline schemas into named `$ref` components
+- emits `openapi: 3.0.3` in `FXR90-rest-api.yaml`
 - `DELETE /cloud/certificates/{certname}` — body moved to query param `type` (OAS 3.0 rule)
 
 Rebuild after schema edits:
@@ -244,6 +245,8 @@ Rebuild after schema edits:
 ```powershell
 python RestAPI/scripts/build_openapi.py
 ```
+
+That single script also normalizes OpenAPI 3.0 constructs and flattens nested schemas for Swagger UI.
 
 Use **`FXR90-rest-api.yaml`** in Swagger UI (`swagger.html`).
 
