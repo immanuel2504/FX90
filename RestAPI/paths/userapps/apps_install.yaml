@@ -3,7 +3,7 @@ put:
   - userapp
   summary: Install user application
   description: MQTT API :-  install_user_app <br> Installs a user application
-  operationId: setInstalluserapp
+  operationId: setInstallUserApp
   requestBody:
     content:
       application/json:

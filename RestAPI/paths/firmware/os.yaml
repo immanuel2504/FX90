@@ -3,7 +3,7 @@ put:
   - Firmware
   summary: Updates OS software on device
   description: MQTT API :-  set_os <br> Updates the OS software on the device
-  operationId: setOs
+  operationId: setOS
   requestBody:
     content:
       application/json:

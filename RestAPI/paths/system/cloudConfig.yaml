@@ -2,8 +2,9 @@ put:
   tags:
   - System
   summary: Import cloud endpoint configuration
-  description: MQTT API :- set_importCloudConfig <br> Imports the cloud endpoint configuration (control/data/management/management event endpoints) into the reader
-  operationId: setImportcloudconfig
+  description: MQTT API :- set_importCloudConfig <br> Imports the cloud endpoint configuration
+    (control/data/management/management event endpoints) into the reader
+  operationId: setImportCloudConfig
   requestBody:
     required: true
     content:

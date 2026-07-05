@@ -17,8 +17,9 @@ put:
   tags:
   - Certificate
   summary: Install certificate
-  description: MQTT API :-  set_updateCertificate <br> Installs a certificate on the device
-  operationId: setUpdatecertificate
+  description: MQTT API :-  set_updateCertificate <br> Installs a certificate on the
+    device
+  operationId: setUpdateCertificate
   requestBody:
     content:
       application/json:

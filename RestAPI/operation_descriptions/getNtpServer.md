@@ -13,7 +13,7 @@ No request body is required.
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/ntpServer` |
-| Operation ID | `GET__cloud__ntpServer` |
+| Operation ID | `getNtpServer` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | MQTT Equivalent | `get_ntpServer` |

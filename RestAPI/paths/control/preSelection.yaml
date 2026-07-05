@@ -3,6 +3,7 @@ get:
   - Control
   summary: Returns whether the rxSawFilter is enabled or disabled
   description: MQTT API :-  get_preSelection <br> Returns whether the rxSawFilter is enabled or disabled
+  operationId: getPreSelection
   responses:
     '200':
       description: OK
@@ -17,6 +18,7 @@ put:
   - Control
   summary: Enables or disables the rxSawFilter
   description: MQTT API :-  set_preSelection <br> Enables or disables the rxSawFilter. Set to true to enable, false to disable
+  operationId: setPreSelection
   requestBody:
     content:
       application/json:

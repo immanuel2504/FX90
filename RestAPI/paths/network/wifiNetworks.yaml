@@ -2,8 +2,9 @@ get:
   tags:
   - Network
   summary: Retrieves available Wi-Fi networks
-  description: MQTT API :-  get_availableWifiNetworks <br> Retrieves a list of available Wi-Fi networks visible to the reader
-  operationId: getAvailablewifinetworks
+  description: MQTT API :-  get_availableWifiNetworks <br> Retrieves a list of available
+    Wi-Fi networks visible to the reader
+  operationId: getAvailableWifiNetworks
   responses:
     '200':
       description: OK

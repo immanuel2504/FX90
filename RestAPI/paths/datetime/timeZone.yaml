@@ -3,7 +3,7 @@ get:
   - Date&Time
   summary: Retrieves the reader timezone
   description: MQTT API :-  get_timeZone <br> Gets the active timezone
-  operationId: getTimezone
+  operationId: getTimeZone
   responses:
     '200':
       description: OK
@@ -18,7 +18,7 @@ put:
   - Date&Time
   summary: Sets the timezone
   description: MQTT API :-  set_timeZone
-  operationId: setTimezone
+  operationId: setTimeZone
   requestBody:
     content:
       application/json:

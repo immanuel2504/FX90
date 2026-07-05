@@ -4,21 +4,114 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FXR90 REST API — Swagger UI</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.32.8/swagger-ui.css" />
   <style>
     body { margin: 0; background: #fafafa; }
-  </style>
+
+    /* Deep nested schemas (e.g. getConfigResponse) misalign in default Swagger UI */
+    .swagger-ui .model-box,
+    .swagger-ui .model-box-control {
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    .swagger-ui table.model tbody tr td:first-of-type {
+      width: auto !important;
+      min-width: 0;
+      padding-right: 1em;
+      vertical-align: top;
+    }
+    .swagger-ui table.model tbody tr td {
+      vertical-align: top;
+    }
+    .swagger-ui .model-toggle {
+      top: 2px;
+    }
+    .swagger-ui .model {
+      word-break: break-word;
+    }
+
+    /* High-contrast markdown / endpoint detail tables in dark mode */
+    @media (prefers-color-scheme: dark) {
+      html, body { background: #1b1b1b; }
+      .swagger-ui .markdown p,
+      .swagger-ui .markdown li,
+      .swagger-ui .markdown td,
+      .swagger-ui .markdown th,
+      .swagger-ui .markdown h1,
+      .swagger-ui .markdown h2,
+      .swagger-ui .markdown h3,
+      .swagger-ui .markdown h4,
+      .swagger-ui .renderedMarkdown p,
+      .swagger-ui .renderedMarkdown li,
+      .swagger-ui .renderedMarkdown td,
+      .swagger-ui .renderedMarkdown th,
+      .swagger-ui .renderedMarkdown h1,
+      .swagger-ui .renderedMarkdown h2,
+      .swagger-ui .renderedMarkdown h3,
+      .swagger-ui .renderedMarkdown h4,
+      .swagger-ui .opblock-description-wrapper p,
+      .swagger-ui .opblock-description-wrapper li,
+      .swagger-ui .opblock-description-wrapper h1,
+      .swagger-ui .opblock-description-wrapper h2,
+      .swagger-ui .opblock-description-wrapper h3,
+      .swagger-ui .opblock-description-wrapper h4,
+      .swagger-ui table thead tr td,
+      .swagger-ui table thead tr th,
+      .swagger-ui .parameters-col_description,
+      .swagger-ui .response-col_description {
+        color: #e8eaed !important;
+      }
+      .swagger-ui .markdown table,
+      .swagger-ui .renderedMarkdown table {
+        border-color: #3d444d;
+      }
+      .swagger-ui .markdown table th,
+      .swagger-ui .markdown table td,
+      .swagger-ui .renderedMarkdown table th,
+      .swagger-ui .renderedMarkdown table td {
+        border-color: #3d444d;
+      }
+    }
+    html[data-theme="dark"] .swagger-ui .markdown p,
+    html[data-theme="dark"] .swagger-ui .markdown li,
+    html[data-theme="dark"] .swagger-ui .markdown td,
+    html[data-theme="dark"] .swagger-ui .markdown th,
+    html[data-theme="dark"] .swagger-ui .markdown h1,
+    html[data-theme="dark"] .swagger-ui .markdown h2,
+    html[data-theme="dark"] .swagger-ui .markdown h3,
+    html[data-theme="dark"] .swagger-ui .markdown h4,
+    html[data-theme="dark"] .swagger-ui .renderedMarkdown p,
+    html[data-theme="dark"] .swagger-ui .renderedMarkdown li,
+    html[data-theme="dark"] .swagger-ui .renderedMarkdown td,
+    html[data-theme="dark"] .swagger-ui .renderedMarkdown th,
+    html[data-theme="dark"] .swagger-ui .renderedMarkdown h1,
+    html[data-theme="dark"] .swagger-ui .renderedMarkdown h2,
+    html[data-theme="dark"] .swagger-ui .renderedMarkdown h3,
+    html[data-theme="dark"] .swagger-ui .renderedMarkdown h4,
+    html[data-theme="dark"] .swagger-ui .opblock-description-wrapper p,
+    html[data-theme="dark"] .swagger-ui .opblock-description-wrapper li,
+    html[data-theme="dark"] .swagger-ui .opblock-description-wrapper h1,
+    html[data-theme="dark"] .swagger-ui .opblock-description-wrapper h2,
+    html[data-theme="dark"] .swagger-ui .opblock-description-wrapper h3,
+    html[data-theme="dark"] .swagger-ui .opblock-description-wrapper h4,
+    html[data-theme="dark"] .swagger-ui table thead tr td,
+    html[data-theme="dark"] .swagger-ui table thead tr th {
+      color: #e8eaed !important;
+    }
 </head>
 <body>
   <div id="swagger-ui"></div>
-  <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-bundle.js" crossorigin></script>
-  <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5/swagger-ui-standalone-preset.js" crossorigin></script>
+  <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.32.8/swagger-ui-bundle.js" crossorigin></script>
+  <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@5.32.8/swagger-ui-standalone-preset.js" crossorigin></script>
   <script>
     window.onload = function () {
       window.ui = SwaggerUIBundle({
-        url: "./FX90-rest-api.yaml",
+        url: "./FXR90-rest-api.yaml",
         dom_id: "#swagger-ui",
         deepLinking: true,
+        defaultModelExpandDepth: 2,
+        defaultModelsExpandDepth: 1,
+        displayRequestDuration: true,
         presets: [
           SwaggerUIBundle.presets.apis,
           SwaggerUIStandalonePreset

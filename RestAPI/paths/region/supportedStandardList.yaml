@@ -2,8 +2,9 @@ get:
   tags:
   - Region
   summary: Retrieves the standard channels of the supported regions
-  description: MQTT API :-  get_supportedStandardList <br> Based on the region name provided, retrieves the standard channel list
-  operationId: getSupportedstandardlist
+  description: MQTT API :-  get_supportedStandardList <br> Based on the region name
+    provided, retrieves the standard channel list
+  operationId: getSupportedStandardList
   parameters:
   - name: region
     in: query
@@ -98,7 +99,7 @@ get:
           example:
             SupportedStandards:
             - StandardName: ARGENTINA
-              channeldata:
+              channelData:
               - '915750'
               - '915250'
               - '903250'

@@ -1,10 +1,4 @@
-The `PUT /cloud/gpo` REST endpoint is used to updates GPO port state.
-
-Use this endpoint to:
-
-- Updates GPO port state.
-- Perform the operation through the REST API using bearer-token authentication.
-- Keep REST behavior aligned with the documented reader workflow.
+The `PUT /cloud/gpo` REST endpoint updates GPO port state.
 
 ## 2. Endpoint Details
 
@@ -15,9 +9,5 @@ Use this endpoint to:
 | Operation ID | `setGpo` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
-
-## 3. Usage Notes
-
-This REST endpoint corresponds to the `set_gpo` MQTT command where applicable.
 
 Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.

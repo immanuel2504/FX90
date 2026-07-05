@@ -2,7 +2,7 @@
 """
 split_openapi.py
 ================
-Split the monolithic ``RestAPI/FX90.yaml`` into modular path files under
+Split the monolithic ``RestAPI/FXR90.yaml`` into modular path files under
 ``RestAPI/paths/`` and regenerate ``RestAPI/openapi.yaml``.
 
 WARNING: This script deletes and recreates ``RestAPI/paths/``. Do not run it
@@ -23,7 +23,7 @@ from pathlib import Path
 import build_openapi as bo
 
 REST_DIR = Path(__file__).resolve().parent.parent
-SOURCE = REST_DIR / "FX90.yaml"
+SOURCE = REST_DIR / "FXR90.yaml"
 PATHS_DIR = REST_DIR / "paths"
 ROOT_OUT = REST_DIR / "openapi.yaml"
 

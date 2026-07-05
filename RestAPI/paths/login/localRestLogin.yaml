@@ -3,7 +3,7 @@ get:
   - Login
   summary: Reader Login
   description: MQTT API :- localrest_login <br> Logs in to the reader
-  operationId: localrestlogin
+  operationId: localRestLogin
   responses:
     '200':
       description: Success

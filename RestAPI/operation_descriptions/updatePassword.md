@@ -1,12 +1,12 @@
-The `PUT /cloud/apps/{appname}/autostart` REST endpoint is used to autostart user application.
+The `PUT /cloud/updatePassword` REST endpoint changes the password on the reader.
 
 ## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
-| MQTT Command | `autostart_user_app` |
-| REST Endpoint | `PUT /cloud/apps/{appname}/autostart` |
-| Operation ID | `setAutostartUserApp` |
+| REST Endpoint | `PUT /cloud/updatePassword` |
+| Operation ID | `updatePassword` |
+| MQTT Command | `set_password` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

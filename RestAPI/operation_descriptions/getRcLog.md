@@ -14,7 +14,7 @@ No request body is required.
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/logs/RcLog` |
-| Operation ID | `GET__cloud__logs__RcLog` |
+| Operation ID | `getRcLog` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | MQTT Equivalent | `get_rc_log` |

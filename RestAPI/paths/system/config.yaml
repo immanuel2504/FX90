@@ -168,8 +168,15 @@ put:
   tags:
   - System
   summary: Updates reader configuration
-  description: 'MQTT API :- set_config <br> Updates reader configuration. Accepts one or more of the following top-level keys: **xml** (string) - raw XML reader config; **GPIO-LED** (object) - GPIO and LED event-action configuration; **READER-GATEWAY** (object) - cloud gateway configuration accepting at least one of: endpointConfig (data endpoint configuration only - control/management endpoints are not configurable here; use /cloud/cloudConfig for that), batching (global batching settings for data events), retention (global retention settings for data events), managementEventConfig (asynchronous management events, heartbeat, warnings, errors configuration).'
-  operationId: setConfigMqtt
+  description: 'MQTT API :- set_config <br> Updates reader configuration. Accepts
+    one or more of the following top-level keys: **xml** (string) - raw XML reader
+    config; **GPIO-LED** (object) - GPIO and LED event-action configuration; **READER-GATEWAY**
+    (object) - cloud gateway configuration accepting at least one of: endpointConfig
+    (data endpoint configuration only - control/management endpoints are not configurable
+    here; use /cloud/cloudConfig for that), batching (global batching settings for
+    data events), retention (global retention settings for data events), managementEventConfig
+    (asynchronous management events, heartbeat, warnings, errors configuration).'
+  operationId: setConfig
   requestBody:
     content:
       application/json:

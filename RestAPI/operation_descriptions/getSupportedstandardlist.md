@@ -14,7 +14,7 @@ No request body is required.
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/supportedStandardList` |
-| Operation ID | `getSupportedstandardlist` |
+| Operation ID | `getSupportedStandardList` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | MQTT Command | `get_SupportedStandardlist` |

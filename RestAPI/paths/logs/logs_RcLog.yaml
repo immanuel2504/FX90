@@ -3,6 +3,7 @@ get:
   - Logs
   summary: Retrieve RcInfoLog
   description: MQTT API :-  get_logs_rcLog <br> Retrieves the rc log (radio-control.log) from the reader.
+  operationId: getRcLog
   responses:
     '200':
       description: OK

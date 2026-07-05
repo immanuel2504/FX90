@@ -14,7 +14,7 @@ No request body is required.
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/eSimConfig` |
-| Operation ID | `GET__cloud__eSimConfig` |
+| Operation ID | `getEsimConfig` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | MQTT Equivalent | `get_eSimConfig` |

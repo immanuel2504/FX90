@@ -14,7 +14,7 @@ No request body is required.
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/logs/syslog` |
-| Operation ID | `GET__cloud__logs__syslog` |
+| Operation ID | `getLogsSyslog` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | MQTT Equivalent | `get_logs_syslog` |

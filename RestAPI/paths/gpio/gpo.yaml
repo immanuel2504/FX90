@@ -3,6 +3,7 @@ get:
   - Gpio
   summary: Retrieves the GPO status
   description: 'MQTT API :-  get_gpoStatus <br> Retrieves the current GPO port states. Maximum number of ports available per device type: FX7500 = 3 GPO pins, FX9600 = 4 GPO pins, ATR7000 = 3 GPO pins.'
+  operationId: getGpoStatus
   responses:
     '200':
       description: OK

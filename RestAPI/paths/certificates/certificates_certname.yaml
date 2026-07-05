@@ -8,8 +8,9 @@ put:
   tags:
   - Certificate
   summary: Refresh certificate
-  description: MQTT API :-  set_refreshCertificate <br> Refreshes the specified certificate on the device
-  operationId: setRefreshcertificate
+  description: MQTT API :-  set_refreshCertificate <br> Refreshes the specified certificate
+    on the device
+  operationId: setRefreshCertificate
   requestBody:
     content:
       application/json:
@@ -29,18 +30,20 @@ delete:
   tags:
   - Certificate
   summary: Delete certificate
-  description: MQTT API :-  del_certificate <br> Delete the specified certificate from the device
+  description: MQTT API :-  del_certificate <br> Delete the specified certificate
+    from the device
   operationId: delCertificate
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: ../../openapi.yaml#/components/schemas/delCertificateRequest
-        examples:
-          del_certificate:
-            value:
-              name: reader
-              type: client
+  parameters:
+  - name: type
+    in: query
+    required: true
+    schema:
+      type: string
+      enum:
+      - client
+      - server
+      - app
+      description: 'Certificate type. Allowed values: client, server, app.'
   responses:
     '200':
       description: OK

@@ -2,8 +2,9 @@ put:
   tags:
   - Firmware
   summary: Revert to previous OS version
-  description: MQTT API :-  revertback <br> Reverts the device to the previously installed OS version
-  operationId: setRevertbackos
+  description: MQTT API :-  revertback <br> Reverts the device to the previously installed
+    OS version
+  operationId: revertBackOS
   requestBody:
     content:
       application/json:

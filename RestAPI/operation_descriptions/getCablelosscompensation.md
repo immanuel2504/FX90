@@ -13,7 +13,7 @@ No request body is required.
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/cableLossCompensation` |
-| Operation ID | `getCablelosscompensation` |
+| Operation ID | `getCableLossCompensation` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | MQTT Command | `get_cableLossCompensation` |

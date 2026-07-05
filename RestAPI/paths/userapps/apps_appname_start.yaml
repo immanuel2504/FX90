@@ -2,8 +2,10 @@ put:
   tags:
   - userapp
   summary: Start user application
-  description: MQTT API :-  start_user_app <br> Starts a user application. For REST, the application is identified by the `{appname}` path parameter. For MQTT, the application is identified by the `appname` payload field.
-  operationId: setStartuserapp
+  description: MQTT API :-  start_user_app <br> Starts a user application. For REST,
+    the application is identified by the `{appname}` path parameter. For MQTT, the
+    application is identified by the `appname` payload field.
+  operationId: setStartUserApp
   requestBody:
     content:
       application/json:

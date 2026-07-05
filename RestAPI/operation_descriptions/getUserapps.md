@@ -13,7 +13,7 @@ No request body is required.
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/apps` |
-| Operation ID | `getUserapps` |
+| Operation ID | `getUserApps` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | MQTT Command | `get_user_apps` |

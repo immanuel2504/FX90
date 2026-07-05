@@ -1,0 +1,37 @@
+# Removed 2026-07-05 — these schemas were unused by any REST endpoint.
+# See RestAPI/mappings/openapi_audit_notes.md
+
+SupportedRegionList
+SupportedRegionStandard_command
+SupportedStandardList_response
+batching
+cpustats.v1
+error.v1
+getCableLossCompensation
+getNTPServer
+getNameAndDescription
+getReaderCapabilities
+getTimeZone
+getmodePayload
+getmodepayload
+gpioLedConfig
+logLevel.v1
+memorystats.v1
+mgmtEventConfig
+networkconfig.v1
+ntpstats.v1
+operatingModes
+os_update.v1
+osversions.v1
+readerConfig
+readerflashmemory.v1
+readernetwork.v1
+readerstats.v1
+readerupgradestatus.v1
+readerversion.v1
+regionconfig.v1
+retention
+setCableLossCompensation
+setNTPServer
+setNameAndDescription
+setTimeZone

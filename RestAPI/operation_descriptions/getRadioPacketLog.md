@@ -14,7 +14,7 @@ No request body is required. Radio packet logging must be enabled via `PUT /clou
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/logs/radioPacketLog` |
-| Operation ID | `GET__cloud__logs__radioPacketLog` |
+| Operation ID | `getRadioPacketLog` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | MQTT Equivalent | `get_radio_pkt_logs` |

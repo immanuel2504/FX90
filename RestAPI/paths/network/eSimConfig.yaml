@@ -3,6 +3,7 @@ get:
   - Network
   summary: Gets the eSIM configuration
   description: MQTT API :- get_eSimConfig <br> Gets the eSIM configuration
+  operationId: getEsimConfig
   responses:
     '200':
       description: OK

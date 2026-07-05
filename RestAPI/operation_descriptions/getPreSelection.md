@@ -13,7 +13,7 @@ No request body is required.
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/preSelection` |
-| Operation ID | `GET__cloud__preSelection` |
+| Operation ID | `getPreSelection` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | MQTT Equivalent | `get_preSelection` |

@@ -2,8 +2,10 @@ put:
   tags:
   - userapp
   summary: Send Request to Userapp
-  description: MQTT API :-  set_req_usr_app <br> Sends a request to a user application. For REST, the application is identified by the `{appname}` path parameter. For MQTT, the target application is identified by the `userapp` payload field.
-  operationId: setReqtouserapp
+  description: MQTT API :-  set_req_usr_app <br> Sends a request to a user application.
+    For REST, the application is identified by the `{appname}` path parameter. For
+    MQTT, the target application is identified by the `userapp` payload field.
+  operationId: setReqToUserApp
   requestBody:
     content:
       application/json:

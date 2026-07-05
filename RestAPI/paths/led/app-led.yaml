@@ -2,8 +2,9 @@ get:
   tags:
   - App-led
   summary: Retrieves application LED state
-  description: MQTT API :-  get_appled <br> Retrieves a value indicating the current state of the application LED
-  operationId: getAppled
+  description: MQTT API :-  get_appled <br> Retrieves a value indicating the current
+    state of the application LED
+  operationId: getAppLed
   responses:
     '200':
       description: OK
@@ -17,8 +18,9 @@ put:
   tags:
   - App-led
   summary: Updates application LED state
-  description: MQTT API :-  set_appled <br> Updates the application LED state on the reader to the state specified
-  operationId: setAppled
+  description: MQTT API :-  set_appled <br> Updates the application LED state on the
+    reader to the state specified
+  operationId: setAppLed
   requestBody:
     content:
       application/json:

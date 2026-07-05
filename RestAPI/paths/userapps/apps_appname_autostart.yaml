@@ -2,8 +2,10 @@ put:
   tags:
   - userapp
   summary: Autostart user application
-  description: MQTT API :-  autostart_user_app <br> Configures autostart for a user application. For REST, the application is identified by the `{appname}` path parameter. For MQTT, the application is identified by the `appname` payload field.
-  operationId: setAutostartuserapp
+  description: MQTT API :-  autostart_user_app <br> Configures autostart for a user
+    application. For REST, the application is identified by the `{appname}` path parameter.
+    For MQTT, the application is identified by the `appname` payload field.
+  operationId: setAutostartUserApp
   requestBody:
     content:
       application/json:

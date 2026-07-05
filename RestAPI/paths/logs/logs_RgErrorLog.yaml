@@ -3,6 +3,7 @@ get:
   - Logs
   summary: Retrieve RgErrorLog
   description: MQTT API :-  get_logs_rgErrorLog <br> Retrieves the RgErrorLog from the reader.
+  operationId: getRgErrorLog
   responses:
     '200':
       description: OK
