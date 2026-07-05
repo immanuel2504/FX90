@@ -178,9 +178,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: setAppLed
       requestBody:
@@ -293,9 +290,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: setGpo
@@ -508,9 +502,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: setRegion
@@ -1763,9 +1754,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: setConfig
       requestBody:
@@ -2102,9 +2090,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: status
@@ -2687,9 +2672,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: setCableLossCompensation
       requestBody:
@@ -2879,9 +2861,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: setPreSelection
       requestBody:
@@ -2922,9 +2901,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: updatePassword
@@ -3048,9 +3024,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: setLogs
       requestBody:
@@ -3168,9 +3141,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: delLogsSyslog
@@ -3491,9 +3461,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: delRadioPacketLog
       security:
@@ -3589,9 +3556,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: setTimeZone
@@ -3697,9 +3661,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: updateNtpServer
@@ -3882,9 +3843,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: setRefreshCertificate
       requestBody:
@@ -3921,9 +3879,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: delCertificate
@@ -4138,9 +4093,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: updateNetwork
@@ -4878,9 +4830,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: setEsimConfig
       requestBody:
@@ -4918,9 +4867,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: setOS
@@ -4963,9 +4909,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: revertBackOS
       requestBody:
@@ -5001,9 +4944,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: setInstallUserApp
@@ -5051,9 +4991,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: setStartUserApp
       requestBody:
@@ -5097,9 +5034,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: setStopUserApp
       requestBody:
@@ -5142,9 +5076,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: setAutostartUserApp
@@ -5335,9 +5266,6 @@ paths:
 
         | Content-Type | `application/json` where a request body is required |
 
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
-
         '
       operationId: setReqToUserApp
       requestBody:
@@ -5386,9 +5314,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: setUninstallUserApp
@@ -5500,9 +5425,6 @@ paths:
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
 
         '
       operationId: setHostName

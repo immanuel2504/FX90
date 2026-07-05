@@ -56,4 +56,3 @@ The `doNotPersistState` field controls whether the reader resumes scanning autom
 > Tip: Use `doNotPersistState: true` for one-time or debugging sessions where automatic resume after reboot is not desired.
 
 ---
-

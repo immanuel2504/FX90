@@ -41,11 +41,16 @@ _BOILERPLATE_USE_BLOCK = re.compile(
     r"\n\*{0,2}Use this endpoint to:\*{0,2}\n\n(?:- .+\n)+",
     re.MULTILINE,
 )
+_SCHEMA_REVIEW_RE = re.compile(
+    r"^\s*Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint\.?\s*$",
+    re.MULTILINE | re.IGNORECASE,
+)
 
 
 def sanitize_operation_description(text: str) -> str:
     text = _INTERNAL_NOTE_RE.sub("", text)
     text = _PERFORM_BULLET_RE.sub("", text)
+    text = _SCHEMA_REVIEW_RE.sub("", text)
     text = _BOILERPLATE_USE_BLOCK.sub("\n", text)
     text = re.sub(r"\n{3,}", "\n\n", text).strip()
     return f"{text}\n" if text else ""

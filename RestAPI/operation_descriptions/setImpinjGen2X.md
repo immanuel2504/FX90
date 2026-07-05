@@ -182,4 +182,3 @@ Content-Type: application/json
 > Persistence: The reader stores the last saved configuration and restores it across reboots and reconnects. The configuration is only applied during inventory when `applyImpinjGen2X: true` is sent in the `PUT /cloud/start` request body.
 
 ---
-
