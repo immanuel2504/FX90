@@ -1,8 +1,9 @@
 get:
   tags:
   - System
-  summary: Retrieves reader operational statistics
-  description: MQTT API :-  get_status <br> Retrieves reader operational statistics. <br> This call must be made no less frequently than every 30 seconds.
+  summary: Get Reader Status
+  description: MQTT API :-  get_status <br> Retrieves reader operational statistics.
+    <br> This call must be made no less frequently than every 30 seconds.
   operationId: getStatus
   responses:
     '200':

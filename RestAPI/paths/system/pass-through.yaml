@@ -1,8 +1,9 @@
 put:
   tags:
   - System
-  summary: Pass-through command
-  description: MQTT API :-  set_passthru <br> Sends a pass-through command to a reader component
+  summary: Pass-Through Command
+  description: MQTT API :-  set_passthru <br> Sends a pass-through command to a reader
+    component
   operationId: status
   requestBody:
     content:

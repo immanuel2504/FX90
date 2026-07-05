@@ -7,7 +7,7 @@ parameters:
 put:
   tags:
   - Certificate
-  summary: Refresh certificate
+  summary: Refresh Certificate
   description: MQTT API :-  set_refreshCertificate <br> Refreshes the specified certificate
     on the device
   operationId: setRefreshCertificate
@@ -29,7 +29,7 @@ put:
 delete:
   tags:
   - Certificate
-  summary: Delete certificate
+  summary: Delete Certificate
   description: MQTT API :-  del_certificate <br> Delete the specified certificate
     from the device
   operationId: delCertificate

@@ -1,8 +1,9 @@
 get:
   tags:
   - System
-  summary: Retrieves reader component version information
-  description: MQTT API :-  get_version <br> Retrieves reader component version information including Boot Loader, OS, Reader Application, and Radio Firmware versions
+  summary: Get Reader Version Information
+  description: MQTT API :-  get_version <br> Retrieves reader component version information
+    including Boot Loader, OS, Reader Application, and Radio Firmware versions
   operationId: getVersion
   responses:
     '200':

@@ -1,7 +1,7 @@
 put:
   tags:
   - Control
-  summary: Stop RFID Inventory or BLE scan
+  summary: Stop Tag Reads
   description: 'MQTT API :- stop
 
 

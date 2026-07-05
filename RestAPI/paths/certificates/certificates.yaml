@@ -1,7 +1,7 @@
 get:
   tags:
   - Certificate
-  summary: Retrieve installed certificate details
+  summary: List Installed Certificate
   description: MQTT API :-  get_certificates <br> Retrieve installed certificate details
   operationId: getCertificates
   responses:
@@ -16,7 +16,7 @@ get:
 put:
   tags:
   - Certificate
-  summary: Install certificate
+  summary: Install Certificate
   description: MQTT API :-  set_updateCertificate <br> Installs a certificate on the
     device
   operationId: setUpdateCertificate

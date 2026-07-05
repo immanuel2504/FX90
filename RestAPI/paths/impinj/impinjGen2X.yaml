@@ -1,8 +1,11 @@
 get:
   tags:
   - ImpinjGen2X
-  summary: Get Impinj Gen2X configuration
-  description: MQTT API :- get_impinjGen2X <br> Retrieves the current Impinj Gen2X feature configuration as last saved via set_impinjGen2X. Returns an empty object if no Gen2X configuration has been set yet. Only feature objects that were previously configured are included in the response.
+  summary: Get Impinj Gen2X Configuration
+  description: MQTT API :- get_impinjGen2X <br> Retrieves the current Impinj Gen2X
+    feature configuration as last saved via set_impinjGen2X. Returns an empty object
+    if no Gen2X configuration has been set yet. Only feature objects that were previously
+    configured are included in the response.
   operationId: getImpinjGen2X
   responses:
     '200':
@@ -57,8 +60,10 @@ get:
 put:
   tags:
   - ImpinjGen2X
-  summary: Set Impinj Gen2X configuration
-  description: MQTT API :- set_impinjGen2X <br> Configures Impinj Gen2X proprietary features (FastID, TagProtect, TagFocus, TagQuieting). At least one feature object must be provided.
+  summary: Set Impinj Gen2X Configuration
+  description: MQTT API :- set_impinjGen2X <br> Configures Impinj Gen2X proprietary
+    features (FastID, TagProtect, TagFocus, TagQuieting). At least one feature object
+    must be provided.
   operationId: setImpinjGen2X
   requestBody:
     required: true

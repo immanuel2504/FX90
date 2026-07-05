@@ -1,7 +1,7 @@
 get:
   tags:
   - Control
-  summary: Retrieves the operating mode
+  summary: Get Operating Mode
   description: MQTT API :-  get_mode <br> Retrieves the current operating mode
   operationId: getMode
   responses:
@@ -50,8 +50,9 @@ get:
 put:
   tags:
   - Control
-  summary: Updates the reader's operating mode
-  description: MQTT API :-  set_mode <br> Changes the reader's operating mode using the same operatingMode.v1 payload shape supported by MQTT.
+  summary: Set Operating Mode
+  description: MQTT API :-  set_mode <br> Changes the reader's operating mode using
+    the same operatingMode.v1 payload shape supported by MQTT.
   operationId: setMode
   requestBody:
     content:

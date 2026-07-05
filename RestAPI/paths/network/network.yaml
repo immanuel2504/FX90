@@ -1,8 +1,9 @@
 get:
   tags:
   - Network
-  summary: Retrieves reader network configuration
-  description: MQTT API :-  get_network <br> Retrieves reader network information including IP address, subnet mask, gateway and DNS
+  summary: Get Reader Network Configuration
+  description: MQTT API :-  get_network <br> Retrieves reader network information
+    including IP address, subnet mask, gateway and DNS
   operationId: getNetwork
   responses:
     '200':
@@ -105,8 +106,10 @@ get:
 put:
   tags:
   - Network
-  summary: Updates reader network configuration
-  description: 'MQTT API :-  set_network <br> Updates the reader network configuration settings. Only one interface key (`eth0`, `mlan0`, `bnep0`, `wan0`, or `uap0`) may be present per request.
+  summary: Set Network Configuration
+  description: 'MQTT API :-  set_network <br> Updates the reader network configuration
+    settings. Only one interface key (`eth0`, `mlan0`, `bnep0`, `wan0`, or `uap0`)
+    may be present per request.
 
     '
   operationId: updateNetwork

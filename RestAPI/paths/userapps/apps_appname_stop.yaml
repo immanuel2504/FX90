@@ -1,7 +1,7 @@
 put:
   tags:
   - userapp
-  summary: Stop user application
+  summary: Stop User App
   description: MQTT API :-  stop_user_app <br> Stops a user application. For REST,
     the application is identified by the `{appname}` path parameter. For MQTT, the
     application is identified by the `appname` payload field.

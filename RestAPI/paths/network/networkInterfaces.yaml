@@ -1,7 +1,7 @@
 get:
   tags:
   - Network
-  summary: Retrieves network interfaces
+  summary: Get Network Interfaces
   description: MQTT API :-  get_networkInterfaces <br> Retrieves the network interface
     configuration of the reader
   operationId: getNetworkInterfaces

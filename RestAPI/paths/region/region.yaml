@@ -1,7 +1,7 @@
 get:
   tags:
   - Region
-  summary: Retrieves reader region information
+  summary: Get Reader Region Configuration
   description: MQTT API :-  get_region <br> Retrieves reader region (country) information
   operationId: getRegion
   responses:
@@ -31,7 +31,7 @@ get:
 put:
   tags:
   - Region
-  summary: Update region information
+  summary: Set Reader Region Configuration
   description: MQTT API :-  set_region <br> Updates the reader region information
   operationId: setRegion
   requestBody:

@@ -1,8 +1,9 @@
 get:
   tags:
   - System
-  summary: Retrieves the Reader Capabilities
-  description: MQTT API :-  get_readerCapabilities <br> Gets the list of supported capabilities on the current reader.
+  summary: Get Reader Capabilities
+  description: MQTT API :-  get_readerCapabilities <br> Gets the list of supported
+    capabilities on the current reader.
   operationId: getReaderCapabilities
   responses:
     '200':

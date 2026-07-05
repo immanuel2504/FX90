@@ -1,7 +1,7 @@
 get:
   tags:
   - Logs
-  summary: Log Configuration
+  summary: Get Log Configuration
   description: MQTT API :-  get_logs <br> Retrieves reader log configuration
   operationId: getLogs
   responses:
@@ -23,7 +23,7 @@ get:
 put:
   tags:
   - Logs
-  summary: Configures the logs
+  summary: Change Log Configuration
   description: MQTT API :-  set_logs <br> Changes logging level
   operationId: setLogs
   requestBody:

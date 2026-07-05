@@ -1,8 +1,9 @@
 get:
   tags:
   - Logs
-  summary: Retrieve radioPacketLog
-  description: MQTT API :-  get_logs_radioPacketLog <br> Retrieves the radioPacketLog from the reader.
+  summary: Pull Radio Packet Logs
+  description: MQTT API :-  get_logs_radioPacketLog <br> Retrieves the radioPacketLog
+    from the reader.
   operationId: getRadioPacketLog
   security:
   - bearerAuth: []
@@ -16,7 +17,7 @@ get:
 delete:
   tags:
   - Logs
-  summary: Purge Log
+  summary: Purge Radio Packet Logs
   description: MQTT API :-  del_logs_radioPacketLog <br> Purges radioPacketLog.
   operationId: delRadioPacketLog
   security:

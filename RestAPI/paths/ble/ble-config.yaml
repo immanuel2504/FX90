@@ -1,7 +1,7 @@
 put:
   tags:
   - Ble
-  summary: Set BLE configuration
+  summary: Set BLE Configuration
   description: 'MQTT API :- set_bleConfig
 
 
@@ -96,7 +96,7 @@ put:
 get:
   tags:
   - Ble
-  summary: Get BLE configuration
+  summary: Get BLE Configuration
   description: MQTT API :- get_bleConfig
   operationId: getBleConfig
   responses:

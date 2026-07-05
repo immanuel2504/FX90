@@ -1,7 +1,7 @@
 get:
   tags:
   - Network
-  summary: Retrieves reader hostname
+  summary: Get Reader Host Name
   description: MQTT API :-  get_hostName <br> Retrieves the hostname of the reader
   operationId: getHostName
   responses:
@@ -16,7 +16,7 @@ get:
 put:
   tags:
   - Network
-  summary: Sets reader hostname
+  summary: Set Reader Host Name
   description: MQTT API :-  set_hostName <br> Sets the hostname of the reader
   operationId: setHostName
   requestBody:

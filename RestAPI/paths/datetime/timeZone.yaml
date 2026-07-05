@@ -1,7 +1,7 @@
 get:
   tags:
   - Date&Time
-  summary: Retrieves the reader timezone
+  summary: Get Reader Time Zone
   description: MQTT API :-  get_timeZone <br> Gets the active timezone
   operationId: getTimeZone
   responses:
@@ -16,7 +16,7 @@ get:
 put:
   tags:
   - Date&Time
-  summary: Sets the timezone
+  summary: Set Reader Time Zone
   description: MQTT API :-  set_timeZone
   operationId: setTimeZone
   requestBody:

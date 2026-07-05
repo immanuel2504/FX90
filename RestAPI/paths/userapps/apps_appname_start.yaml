@@ -1,7 +1,7 @@
 put:
   tags:
   - userapp
-  summary: Start user application
+  summary: Start User App
   description: MQTT API :-  start_user_app <br> Starts a user application. For REST,
     the application is identified by the `{appname}` path parameter. For MQTT, the
     application is identified by the `appname` payload field.

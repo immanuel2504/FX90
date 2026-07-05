@@ -1,7 +1,7 @@
 get:
   tags:
   - Region
-  summary: Retrieves the supported region list based on the reader type
+  summary: Get Supported region List
   description: MQTT API :-  get_SupportedRegionList <br> Gets the list of regions
     supported by the reader based on the reader type
   operationId: getSupportedRegionList

@@ -1,8 +1,9 @@
 get:
   tags:
   - Logs
-  summary: Retrieve RgWarningLog
-  description: MQTT API :-  get_logs_rgWarningLog <br> Retrieves the RgWarningLog from the reader.
+  summary: Pull RG Warning Logs
+  description: MQTT API :-  get_logs_rgWarningLog <br> Retrieves the RgWarningLog
+    from the reader.
   operationId: getRgWarningLog
   responses:
     '200':

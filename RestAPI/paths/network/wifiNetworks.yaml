@@ -1,7 +1,7 @@
 get:
   tags:
   - Network
-  summary: Retrieves available Wi-Fi networks
+  summary: Get Available Wi-Fi Networks
   description: MQTT API :-  get_availableWifiNetworks <br> Retrieves a list of available
     Wi-Fi networks visible to the reader
   operationId: getAvailableWifiNetworks

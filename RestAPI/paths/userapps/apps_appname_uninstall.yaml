@@ -1,7 +1,7 @@
 put:
   tags:
   - userapp
-  summary: Uninstall User Application
+  summary: Uninstall User App
   description: MQTT API :-  uninstall-user-app <br> Uninstalls a user application.
     For REST, the application is identified by the `{appname}` path parameter. For
     MQTT, the application is identified by the `appname` payload field.

@@ -1,7 +1,7 @@
 put:
   tags:
   - System
-  summary: Restarts reader
+  summary: Reboot the Reader
   description: MQTT API :-  reboot <br> Restarts the reader with the device ID provided
   operationId: reboot
   responses:

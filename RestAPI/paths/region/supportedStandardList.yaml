@@ -1,7 +1,7 @@
 get:
   tags:
   - Region
-  summary: Retrieves the standard channels of the supported regions
+  summary: Get the Supported Regions standard list
   description: MQTT API :-  get_supportedStandardList <br> Based on the region name
     provided, retrieves the standard channel list
   operationId: getSupportedStandardList

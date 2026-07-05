@@ -93,7 +93,7 @@ paths:
     get:
       tags:
       - App-led
-      summary: Retrieves application LED state
+      summary: Check LED Status
       description: '## 1. Description
 
 
@@ -161,7 +161,7 @@ paths:
     put:
       tags:
       - App-led
-      summary: Updates application LED state
+      summary: Control LED
       description: 'The `PUT /cloud/app-led` REST endpoint updates application LED state.
 
 
@@ -207,7 +207,7 @@ paths:
     get:
       tags:
       - Gpio
-      summary: Retrieves the GPO status
+      summary: Get GPO Status
       description: '## 1. Description
 
 
@@ -277,7 +277,7 @@ paths:
     put:
       tags:
       - Gpio
-      summary: Updates GPO port state
+      summary: Control GPO
       description: 'The `PUT /cloud/gpo` REST endpoint updates GPO port state.
 
 
@@ -393,7 +393,7 @@ paths:
     get:
       tags:
       - Region
-      summary: Retrieves reader region information
+      summary: Get Reader Region Configuration
       description: '## 1. Description
 
 
@@ -492,7 +492,7 @@ paths:
     put:
       tags:
       - Region
-      summary: Update region information
+      summary: Set Reader Region Configuration
       description: 'The `PUT /cloud/region` REST endpoint is used to update region information.
 
 
@@ -537,7 +537,7 @@ paths:
     get:
       tags:
       - Region
-      summary: Retrieves the supported region list based on the reader type
+      summary: Get Supported region List
       description: '## 1. Description
 
 
@@ -640,7 +640,7 @@ paths:
     get:
       tags:
       - Region
-      summary: Retrieves the standard channels of the supported regions
+      summary: Get the Supported Regions standard list
       description: '## 1. Description
 
 
@@ -855,7 +855,7 @@ paths:
     get:
       tags:
       - Control
-      summary: Retrieves the operating mode
+      summary: Get Operating Mode
       description: '## 1. Description
 
 
@@ -975,7 +975,7 @@ paths:
     put:
       tags:
       - Control
-      summary: Updates the reader's operating mode
+      summary: Set Operating Mode
       description: 'The `PUT /cloud/mode` REST endpoint configures the reader''s operating mode using the same `operatingMode.v1` payload shape supported by the MQTT `set_mode` command.
 
 
@@ -1132,7 +1132,7 @@ paths:
     put:
       tags:
       - Control
-      summary: Start RFID Inventory or BLE scan
+      summary: Start Tag Reads
       description: 'The `PUT /cloud/start` REST endpoint starts RFID inventory, BLE scanning, or both on the FXR90 reader.
 
 
@@ -1294,7 +1294,7 @@ paths:
     put:
       tags:
       - Control
-      summary: Stop RFID Inventory or BLE scan
+      summary: Stop Tag Reads
       description: 'The `PUT /cloud/stop` REST endpoint and the `stop` MQTT command stop RFID inventory, BLE scanning, or both.
 
 
@@ -1372,7 +1372,7 @@ paths:
     get:
       tags:
       - System
-      summary: Retrieves reader component version information
+      summary: Get Reader Version Information
       description: '## 1. Description
 
 
@@ -1466,7 +1466,7 @@ paths:
     get:
       tags:
       - System
-      summary: Retrieves reader operational statistics
+      summary: Get Reader Status
       description: "## 1. Description\n\nThe `GET /cloud/status` REST endpoint retrieves operational statistics and health information from the reader at the moment of the request.\n\nThis endpoint returns:\n\n- Uptime and current system time\n- Radio connection and activity state\n- Reader temperature\n- CPU and RAM usage\n- Flash storage usage by partition\n- Antenna port connection states\n- NTP synchronization status\n- Cloud interface connection status\n- BLE scanner runtime status (scan state, scan start time, and beacon counts by protocol)\n\nThe `ble` section is present only when BLE is supported and its status is available. No request body is required.\n\n## 2. Endpoint Details\n\n| Property | Value |\n|---|---|\n| REST Endpoint | `GET /cloud/status` |\n| Communication Type | Client to Device (HTTP request/response) |\n| Applies To | FXR90 |\n| Authentication | Bearer token (`Authorization: Bearer <token>`) |\n\n## 3. When to Use This Endpoint\n\nUse `GET /cloud/status` to:\n\n- Confirm the reader is powered, healthy, and reachable over REST\n- Verify the radio is connected before starting inventory\n- Monitor reader temperature, CPU, and RAM usage\n- Synchronize against the reader's current system time\n- Confirm BLE scanning is active and review beacon counts by protocol\n\nKey fields to check in the response:\n\n| Field | What to Check | Why It Matters |\n|---|---|---|\n| `uptime` | How long has the reader been running? | Long uptimes confirm stability; short uptimes indicate an unexpected restart. |\n| `radioConnection` | Is the value `connected`? | Inventory cannot run if the radio is disconnected. |\n| `temperature` | Is the value within safe operating range? | Excessive temperature can cause throttling or hardware faults. |\n| `antennas` | Are expected ports `connected`? | A `disconnected` antenna port means tags on that port will not be read. |\n| `ble.scanState` | Is the value `running`? | Confirms whether the BLE scanner is currently active (`running`) or `stopped`. |\n| `ble.scanStartTime` | When did the current scan start? | ISO 8601 timestamp marking when BLE scanning last started. |\n| `ble.beaconCounts` | Are advertisements being seen? | Per-protocol counts (`iBeacon`, `altBeacon`, `eddystone`, `generic`, `total`) confirm beacons are being detected in the current scan window. |\n\n## 4. BLE Status Fields\n\nWhen BLE is supported and active, the response includes a `ble` object:\n\n| Field | Type | Description |\n|---|---|---|\n| `ble.scanState` | string | Current BLE scanner state — `running` or `stopped`. |\n| `ble.scanStartTime` | string (date-time) | ISO 8601 timestamp of when the BLE scan was last started. |\n| `ble.beaconCounts.total` | integer | Total BLE advertisements observed in the current scan window. |\n| `ble.beaconCounts.iBeacon` | integer | Number of iBeacon advertisements observed. |\n| `ble.beaconCounts.altBeacon` | integer | Number of AltBeacon advertisements observed. |\n| `ble.beaconCounts.eddystone` | integer | Number of Eddystone advertisements observed. |\n| `ble.beaconCounts.generic` | integer | Number of generic BLE advertisements observed. |\n\nExample `ble` section:\n\n```json\n\"ble\": {\n  \"scanState\": \"running\",\n  \"scanStartTime\": \"2026-05-21T13:46:16.955Z\",\n  \"beaconCounts\": {\n    \"total\": 108,\n    \"iBeacon\": 75,\n    \"altBeacon\": 33,\n    \"eddystone\": 0,\n    \"generic\": 0\n  }\n}\n```\n"
       operationId: getStatus
       responses:
@@ -1542,7 +1542,7 @@ paths:
     get:
       tags:
       - System
-      summary: Retrieves reader configuration
+      summary: Get Reader Configuration
       description: '## 1. Description
 
 
@@ -1771,7 +1771,7 @@ paths:
     put:
       tags:
       - System
-      summary: Updates reader configuration
+      summary: Set Reader Configuration
       description: 'The `PUT /cloud/config` REST endpoint updates reader configuration.
 
 
@@ -2111,7 +2111,7 @@ paths:
     put:
       tags:
       - System
-      summary: Pass-through command
+      summary: Pass-Through Command
       description: 'The `PUT /cloud/pass-through` REST endpoint is used to pass-through command.
 
 
@@ -2160,7 +2160,7 @@ paths:
     put:
       tags:
       - System
-      summary: Import cloud endpoint configuration
+      summary: Import Cloud Configuration
       description: 'The `PUT /cloud/cloudConfig` REST endpoint and the `set_importCloudConfig` MQTT command import cloud endpoint configuration onto the reader. Use this operation to define how tag data, command responses, and management events are delivered.
 
 
@@ -2385,7 +2385,7 @@ paths:
     get:
       tags:
       - System
-      summary: Retrieves the Reader Capabilities
+      summary: Get Reader Capabilities
       description: '## 1. Description
 
 
@@ -2612,7 +2612,7 @@ paths:
     get:
       tags:
       - System
-      summary: Retrieves the cableLossCompensation
+      summary: Get Cable Loss Compensation
       description: '## 1. Description
 
 
@@ -2695,7 +2695,7 @@ paths:
     put:
       tags:
       - System
-      summary: Sets the cableLossCompensation
+      summary: Set Cable Loss Compensation
       description: 'The `PUT /cloud/cableLossCompensation` REST endpoint sets cable loss compensation.
 
 
@@ -2762,7 +2762,7 @@ paths:
     put:
       tags:
       - System
-      summary: Restarts reader
+      summary: Reboot the Reader
       description: '## 1. Description
 
 
@@ -2819,7 +2819,7 @@ paths:
     get:
       tags:
       - Control
-      summary: Returns whether the rxSawFilter is enabled or disabled
+      summary: Get Pre-Selection
       description: '## 1. Description
 
 
@@ -2887,7 +2887,7 @@ paths:
     put:
       tags:
       - Control
-      summary: Enables or disables the rxSawFilter
+      summary: Set Pre-Selection
       description: 'The `PUT /cloud/preSelection` REST endpoint enables or disables the rxSawFilter.
 
 
@@ -2931,7 +2931,7 @@ paths:
     put:
       tags:
       - System
-      summary: Changes the password on the reader
+      summary: Change Password
       description: 'The `PUT /cloud/updatePassword` REST endpoint changes the password on the reader.
 
 
@@ -2977,7 +2977,7 @@ paths:
     get:
       tags:
       - Logs
-      summary: Log Configuration
+      summary: Get Log Configuration
       description: '## 1. Description
 
 
@@ -3056,7 +3056,7 @@ paths:
     put:
       tags:
       - Logs
-      summary: Configures the logs
+      summary: Change Log Configuration
       description: 'The `PUT /cloud/logs` REST endpoint configures log settings.
 
 
@@ -3105,7 +3105,7 @@ paths:
     get:
       tags:
       - Logs
-      summary: Retrieve Syslog
+      summary: Pull Syslogs
       description: '## 1. Description
 
 
@@ -3177,7 +3177,7 @@ paths:
     delete:
       tags:
       - Logs
-      summary: Purge Log
+      summary: Purge Syslogs
       description: 'The `DELETE /cloud/logs/syslog` REST endpoint is used to purge Log.
 
 
@@ -3208,7 +3208,7 @@ paths:
     get:
       tags:
       - Logs
-      summary: Retrieve RcInfoLog
+      summary: Pull RC Logs
       description: '## 1. Description
 
 
@@ -3281,7 +3281,7 @@ paths:
     get:
       tags:
       - Logs
-      summary: Retrieve RgWarningLog
+      summary: Pull RG Warning Logs
       description: '## 1. Description
 
 
@@ -3354,7 +3354,7 @@ paths:
     get:
       tags:
       - Logs
-      summary: Retrieve RgErrorLog
+      summary: Pull RG Error Logs
       description: '## 1. Description
 
 
@@ -3427,7 +3427,7 @@ paths:
     get:
       tags:
       - Logs
-      summary: Retrieve radioPacketLog
+      summary: Pull Radio Packet Logs
       description: '## 1. Description
 
 
@@ -3499,7 +3499,7 @@ paths:
     delete:
       tags:
       - Logs
-      summary: Purge Log
+      summary: Purge Radio Packet Logs
       description: 'The `DELETE /cloud/logs/radioPacketLog` REST endpoint is used to purge Log.
 
 
@@ -3530,7 +3530,7 @@ paths:
     get:
       tags:
       - Date&Time
-      summary: Retrieves the reader timezone
+      summary: Get Reader Time Zone
       description: '## 1. Description
 
 
@@ -3598,7 +3598,7 @@ paths:
     put:
       tags:
       - Date&Time
-      summary: Sets the timezone
+      summary: Set Reader Time Zone
       description: 'The `PUT /cloud/timeZone` REST endpoint sets the reader timezone.
 
 
@@ -3638,7 +3638,7 @@ paths:
     get:
       tags:
       - Date&Time
-      summary: Retrieve the NTP server
+      summary: Get Reader NTP Server
       description: '## 1. Description
 
 
@@ -3706,7 +3706,7 @@ paths:
     put:
       tags:
       - Date&Time
-      summary: Set NTP server
+      summary: Set Reader NTP Server
       description: 'The `PUT /cloud/ntpServer` REST endpoint is used to set NTP server.
 
 
@@ -3755,7 +3755,7 @@ paths:
     get:
       tags:
       - Certificate
-      summary: Retrieve installed certificate details
+      summary: List Installed Certificate
       description: '## 1. Description
 
 
@@ -3831,7 +3831,7 @@ paths:
     put:
       tags:
       - Certificate
-      summary: Install certificate
+      summary: Install Certificate
       description: 'The `PUT /cloud/certificates` REST endpoint is used to install or update a certificate on the reader by downloading a PFX file from a URL.
 
 
@@ -3890,7 +3890,7 @@ paths:
     put:
       tags:
       - Certificate
-      summary: Refresh certificate
+      summary: Refresh Certificate
       description: 'The `PUT /cloud/certificates/{certname}` REST endpoint is used to refresh certificate.
 
 
@@ -3930,7 +3930,7 @@ paths:
     delete:
       tags:
       - Certificate
-      summary: Delete certificate
+      summary: Delete Certificate
       description: 'The `DELETE /cloud/certificates/{certname}` REST endpoint is used to delete certificate.
 
 
@@ -3972,7 +3972,7 @@ paths:
     get:
       tags:
       - Network
-      summary: Retrieves reader network configuration
+      summary: Get Reader Network Configuration
       description: '## 1. Description
 
 
@@ -4147,7 +4147,7 @@ paths:
     put:
       tags:
       - Network
-      summary: Updates reader network configuration
+      summary: Set Network Configuration
       description: 'The `PUT /cloud/network` REST endpoint updates network configuration, including Wi-Fi hotspot (uap0) settings.
 
 
@@ -4329,7 +4329,7 @@ paths:
     get:
       tags:
       - Network
-      summary: Retrieves available Wi-Fi networks
+      summary: Get Available Wi-Fi Networks
       description: '## 1. Description
 
 
@@ -4580,7 +4580,7 @@ paths:
     get:
       tags:
       - Network
-      summary: Retrieves network interfaces
+      summary: Get Network Interfaces
       description: '## 1. Description
 
 
@@ -4659,7 +4659,7 @@ paths:
     get:
       tags:
       - Network
-      summary: Gets the read points on the reader
+      summary: Get Read Points
       description: '## 1. Description
 
 
@@ -4737,7 +4737,7 @@ paths:
     get:
       tags:
       - Network
-      summary: Gets the GPS coordinates (lat/long)
+      summary: Get GPS Coordinates
       description: '## 1. Description
 
 
@@ -4812,7 +4812,7 @@ paths:
     get:
       tags:
       - Network
-      summary: Gets the eSIM configuration
+      summary: Get eSIM Configuration
       description: '## 1. Description
 
 
@@ -4886,7 +4886,7 @@ paths:
     put:
       tags:
       - Network
-      summary: Sets the eSIM configuration
+      summary: Set eSIM Configuration
       description: 'The `PUT /cloud/eSimConfig` REST endpoint sets the eSIM configuration.
 
 
@@ -4927,7 +4927,7 @@ paths:
     put:
       tags:
       - Firmware
-      summary: Updates OS software on device
+      summary: Update Firmware
       description: 'The `PUT /cloud/os` REST endpoint updates OS software on the device.
 
 
@@ -4971,7 +4971,7 @@ paths:
     put:
       tags:
       - Firmware
-      summary: Revert to previous OS version
+      summary: Revert Back Firmware Update
       description: 'The `PUT /cloud/revertbackOS` REST endpoint is used to revert to previous OS version.
 
 
@@ -5010,7 +5010,7 @@ paths:
     put:
       tags:
       - userapp
-      summary: Install user application
+      summary: Install User App
       description: 'The `PUT /cloud/apps/install` REST endpoint is used to install user application.
 
 
@@ -5059,7 +5059,7 @@ paths:
     put:
       tags:
       - userapp
-      summary: Start user application
+      summary: Start User App
       description: 'The `PUT /cloud/apps/{appname}/start` REST endpoint is used to start user application.
 
 
@@ -5105,7 +5105,7 @@ paths:
     put:
       tags:
       - userapp
-      summary: Stop user application
+      summary: Stop User App
       description: 'The `PUT /cloud/apps/{appname}/stop` REST endpoint is used to stop user application.
 
 
@@ -5151,7 +5151,7 @@ paths:
     put:
       tags:
       - userapp
-      summary: Autostart user application
+      summary: Auto Start User App
       description: 'The `PUT /cloud/apps/{appname}/autostart` REST endpoint is used to autostart user application.
 
 
@@ -5202,7 +5202,7 @@ paths:
     get:
       tags:
       - userapp
-      summary: List user applications
+      summary: List Installed Apps
       description: '## 1. Description
 
 
@@ -5286,7 +5286,7 @@ paths:
     put:
       tags:
       - userapp
-      summary: Trigger reader gateway data delivery
+      summary: Set Data to RG
       description: '## 1. Description
 
 
@@ -5343,7 +5343,7 @@ paths:
     put:
       tags:
       - userapp
-      summary: Send Request to Userapp
+      summary: Send Commands to User App
       description: 'The `PUT /cloud/apps/{appname}/pass-through` REST endpoint is used to send Request to Userapp.
 
 
@@ -5395,7 +5395,7 @@ paths:
     put:
       tags:
       - userapp
-      summary: Uninstall User Application
+      summary: Uninstall User App
       description: 'The `PUT /cloud/apps/{appname}/uninstall` REST endpoint is used to uninstall User Application.
 
 
@@ -5441,7 +5441,7 @@ paths:
     get:
       tags:
       - Network
-      summary: Retrieves reader hostname
+      summary: Get Reader Host Name
       description: '## 1. Description
 
 
@@ -5509,7 +5509,7 @@ paths:
     put:
       tags:
       - Network
-      summary: Sets reader hostname
+      summary: Set Reader Host Name
       description: 'The `PUT /cloud/hostName` REST endpoint sets the reader hostname.
 
 
@@ -5553,7 +5553,7 @@ paths:
     get:
       tags:
       - ImpinjGen2X
-      summary: Get Impinj Gen2X configuration
+      summary: Get Impinj Gen2X Configuration
       description: '## 1. Description
 
 
@@ -5670,7 +5670,7 @@ paths:
     put:
       tags:
       - ImpinjGen2X
-      summary: Set Impinj Gen2X configuration
+      summary: Set Impinj Gen2X Configuration
       description: "The `PUT /cloud/impinjGen2X` REST endpoint configures Impinj Gen2X proprietary RFID features on the FXR90 reader, covering FastID acceleration, TagProtect security, TagFocus singulation control, and TagQuieting (basic and advanced) behavior.\n\n**This endpoint allows you to configure:**\n\n- FastID for combined EPC + TID reads in a single inventory operation\n- TagProtect for password-based tag protection and visibility control\n- TagFocus to suppress already-read tags during dense inventory\n- TagQuieting (basic or advanced) to silence specific tags by EPC or by Gen2 select masks\n\n### Endpoint Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Impinj Gen2X Configuration Update |\n| Communication Type | Client to Device (HTTP request/response) |\n| Applies To | FXR90 Series |\n| REST Endpoint | `PUT /cloud/impinjGen2X` |\n| Related Endpoints | `GET /cloud/impinjGen2X`, `PUT /cloud/start`, `PUT /cloud/stop` |\n| Authentication | Bearer token (`Authorization: Bearer <token>`) |\n| Content-Type | `application/json` |\n| Success Response | `200 OK` |\n| Error Responses | `422 Unprocessable Entity`, `500 Internal Server Error` |\n| Supported Features | FastID, TagProtect, TagFocus, TagQuieting (basic and advanced) |\n| Supported TagProtect Actions | `enableTagProtection`, `disableTagProtection`, `enableTagVisibility`, `disableTagVisibility` |\n| Supported TagQuieting Basic Actions | `quiet`, `unquiet` |\n| Supported Gen2 Memory Banks | EPC, TID, USER, RESERVED |\n| Supported Select Targets | S0, S1, S2, S3, SL |\n| Supported Tag Quiet Masks | S0A, S0B, S1A, S1B, S2A, S2B, S3A, S3B, SL_ASSERT, SL_DEASSERT |\n| Mutually Exclusive Features | FastID, TagFocus, TagQuieting (only one reader-scoped feature active at a time) |\n\n---\n\n## 2. Before You Begin\n\nDecide which Gen2X feature you need to configure before sending this request. You can send a minimal payload targeting only one feature (for example, only `fastID` or only `tagProtect`), but you cannot combine mutually exclusive reader-scoped features in a single request.\n\n| What You Need | Details |\n|---|---|\n| Authentication | Obtain a valid bearer token and include it in the `Authorization` header of every request. |\n| Network reachability | The reader's HTTPS endpoint must be reachable from your client. Verify connectivity before issuing the request. |\n| Feature decision | Choose exactly one reader-scoped feature (`fastID`, `tagFocus`, or `tagQuieting`) per request. `tagProtect` is tag-scoped and can be configured independently. |\n| TagProtect credentials | For any `tagProtect` action, have the 8-character hex access password ready. For tag-specific actions (`enableTagProtection`, `disableTagProtection`), also have the target EPC (`tagID`). |\n| Tag ID list (Basic Quieting) | For `tagQuieting.basic`, prepare the list of EPCs to quiet or unquiet. A maximum of **31 tag IDs** is supported per request. |\n| Pre-select strategy (Advanced Quieting) | For `tagQuieting.advanced`, decide on the Gen2 select pre-conditions (`preSelect` array), including target session/SL flag, action, and memory mask. |\n| Quiet mask flags | For `tagQuieting.advanced`, know which session flags (`S0A`-`S3B`, `SL_ASSERT`, `SL_DEASSERT`) define the quieted state. |\n| Inventory state | `PUT /cloud/impinjGen2X` should be called **before** starting inventory. Stop any active inventory first by calling `PUT /cloud/stop`. |\n| Activation | The saved configuration is **not active** until you call `PUT /cloud/start` with `applyImpinjGen2X: true` in the request body. |\n\n---\n\n## 3. Choosing a Gen2X Feature\n\nThe Gen2X feature you select determines the reader's behavior during inventory. Choose based on your operational goal.\n\n| Feature | Description | Scope |\n|---|---|---|\n| `fastID` | Returns the EPC and TID together in a single read, eliminating the need for a separate TID read. Best for applications that require chip-level identity (anti-counterfeit, authentication). | Reader-scoped |\n| `tagProtect` | Password-protects individual tags or controls reader visibility\
         \ of protected tags. Use for securing sensitive items or restricting access. | Tag-scoped |\n| `tagFocus` | Silences already-read tags so the reader focuses only on new tags entering the field. Ideal for portal and conveyor applications. | Reader-scoped |\n| `tagQuieting` (basic) | Silences a specific list of tag EPCs from being reported during inventory. Use when you know exactly which tags to suppress. | Reader-scoped |\n| `tagQuieting` (advanced) | Uses Gen2 select pre-conditions (mask + state-aware action) to silence tags based on memory content or session state. Use for complex filtering in dense environments. | Reader-scoped |\n\n> Mutually exclusive: Only one of `fastID`, `tagFocus`, or `tagQuieting` can be active at a time. `tagProtect` can coexist with any one of them because it operates at the tag level.\n\n---\n\n## 4. Choosing TagProtect Actions\n\nTagProtect operations either lock/unlock individual tags or temporarily allow the reader to see already-protected tags. Each action has specific field requirements.\n\n| Action | What It Does | Required Fields | Key Constraints |\n|---|---|---|---|\n| `enableTagProtection` | Permanently protects a tag; the tag becomes invisible to standard reads until unprotected. | `password`, `tagID` | `password` must be exactly 8 hex characters. Optional `enableShortRange` reduces read range during protection. |\n| `disableTagProtection` | Removes protection from a previously protected tag, restoring normal visibility. | `password`, `tagID` | `password` must match the tag's existing access password exactly. |\n| `enableTagVisibility` | Temporarily allows the reader to read protected tags during this session. Does not change the tag's protection state. | `password` | Reader-scoped; affects all protected tags in field. |\n| `disableTagVisibility` | Restores the default behavior where protected tags are hidden from the reader. | `password` | Reverts the effect of `enableTagVisibility`. |\n\n> Important: `enableTagProtection` and `disableTagProtection` are tag-specific (require `tagID`). `enableTagVisibility` and `disableTagVisibility` are reader-wide visibility toggles.\n\n---\n\n## 5. Choosing TagQuieting Strategy\n\nTagQuieting silences tags from being reported during inventory. Choose between **basic** (EPC-list based) and **advanced** (Gen2 select mask based) depending on your filtering complexity.\n\n### Basic TagQuieting\n\n| Field | What It Controls |\n|---|---|\n| `action: quiet` | Silences the listed tags from being reported in future inventories. |\n| `action: unquiet` | Restores reporting for previously quieted tags. |\n| `tagIDs` | Array of EPCs (hex strings) to quiet or unquiet. Maximum **31 EPCs** per request. |\n\n### Advanced TagQuieting\n\nAdvanced quieting uses Gen2 select pre-conditions to silence tags based on memory content and state, instead of explicit EPC lists.\n\n| Field | What It Controls |\n|---|---|\n| `preSelect[]` | Array of Gen2 select operations applied **before** quieting. Each entry contains `target`, `action`, and `mask`. |\n| `preSelect[].target` | The session flag or SL to act upon (`S0`, `S1`, `S2`, `S3`, `SL`). |\n| `preSelect[].action` | The state-aware action to take on match/mismatch (e.g., `ASSERTSL_NOTHING`, `INVB_INVA`, `DEASSERTSL_NOTHING`, `INVA_INVB`). |\n| `preSelect[].mask` | The memory mask: `bank` (EPC/TID/USER/RESERVED), `pointer` (bit offset), `length` (bits), `value` (hex). |\n| `tagQuietMasks` | Array of session-flag combinations defining the quieted state (`S0A`, `S2B`, `SL_ASSERT`, `SL_DEASSERT`, etc.). |\n| `target` | The target session/flag used for the actual quieting operation. |\n| `stateAwareAction` | The compound state action (e.g., `ASSERTSL_DEASSERTSL`, `DEASSERTSL_ASSERTSL`) applied during quieting. |\n\n> Important: Use `basic` when you have a discrete list of EPCs. Use `advanced` when filtering by memory content, session state, or complex multi-step Gen2 select conditions.\n\n---\n\n## 6. Choosing FastID and TagFocus\n\nThese two reader-scoped features improve inventory performance but cannot be combined.\n\
         \n### `fastID`\n\n| Field | What It Controls |\n|---|---|\n| `enabled: true` | Reader returns EPC + TID together in a single read, reducing total operations. |\n| `enabled: false` | Reverts to standard EPC-only reads. |\n\n**Use FastID when:** Your application needs TID for every tag (e.g., authentication, chip-level traceability) and you want to avoid the extra round-trip of a separate TID read.\n\n### `tagFocus`\n\n| Field | What It Controls |\n|---|---|\n| `enabled: true` | Once a tag is read, it is silenced for the rest of the inventory cycle. The reader focuses only on new tags entering the field. |\n| `enabled: false` | Standard inventory behavior; tags can be reported multiple times. |\n\n**Use TagFocus when:** You operate portals, conveyors, or other scenarios with many duplicate reads of the same tag set and want unique-tag reporting.\n\n---\n\n## 7. Applying the Configuration\n\nCalling this endpoint only **saves** the configuration on the reader; it is not active until inventory is started with the activation flag.\n\n### REST Workflow\n\n```text\nPUT  /cloud/stop                 -> stop any active inventory\nPUT  /cloud/impinjGen2X          -> save the configuration\nGET  /cloud/impinjGen2X          -> verify the saved configuration\nPUT  /cloud/start                -> body: { \"applyImpinjGen2X\": true }\n```\n\n### Request Format\n\nEvery request to this endpoint follows this structure:\n\n```http\nPUT /cloud/impinjGen2X HTTP/1.1\nHost: <reader-address>\nAuthorization: Bearer <token>\nContent-Type: application/json\n\n{\n  // one or more Gen2X feature objects\n}\n```\n\n### Success Response (`200 OK`)\n\n```http\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"message\": \"Configuration saved successfully\"\n}\n```\n\n### Error Responses\n\n| Status Code | Meaning | When It Occurs |\n|---|---|---|\n| `422 Unprocessable Entity` | Validation error | Empty body, mutually exclusive features sent together, invalid enum value, or constraint violation. |\n| `500 Internal Server Error` | Reader-side failure | Internal reader error while persisting the configuration. |\n\n> Persistence: The reader stores the last saved configuration and restores it across reboots and reconnects. The configuration is only applied during inventory when `applyImpinjGen2X: true` is sent in the `PUT /cloud/start` request body.\n\n---\n\n## 8. Rules and Constraints\n\n### Inventory State\n\n- `PUT /cloud/impinjGen2X` cannot modify configuration while an active inventory is running. Stop inventory first by calling `PUT /cloud/stop`.\n- Configuration changes only take effect on the next `PUT /cloud/start` call that includes `applyImpinjGen2X: true` in the request body.\n\n### Request Format\n\n- HTTP method must be `PUT`.\n- `Content-Type` header must be `application/json`.\n- `Authorization` header must contain a valid bearer token.\n- Request body must contain at least one of: `fastID`, `tagProtect`, `tagFocus`, `tagQuieting`. An empty body returns `422 Unprocessable Entity`.\n\n### Mutual Exclusivity\n\n- Only **one** of `fastID`, `tagFocus`, or `tagQuieting` may be active at a time. Sending more than one reader-scoped feature in a single request returns `422 Unprocessable Entity`.\n- `tagProtect` is tag-scoped and may be configured alongside any one reader-scoped feature.\n\n### TagProtect\n\n- `password` must be exactly **8 hex characters (32 bits)** for all TagProtect actions.\n- `tagID` is required for `enableTagProtection` and `disableTagProtection`. It must be a valid EPC hex string.\n- `enableShortRange` is optional and only applies to `enableTagProtection`.\n\n### TagQuieting (Basic)\n\n- `tagIDs` array supports a **maximum of 31 EPCs** per request.\n- Each EPC must be a valid hex string matching the tag's EPC memory bank content.\n- `basic` and `advanced` sub-objects are mutually exclusive within `tagQuieting`.\n\n### TagQuieting (Advanced)\n\n- `preSelect[].mask.value` must be a valid hex string matching `length` (bits).\n- `mask.bank` must be one of `EPC`, `TID`, `USER`, or `RESERVED`.\n- `mask.pointer` is a **bit\
@@ -5810,7 +5810,7 @@ paths:
     put:
       tags:
       - Ble
-      summary: Set BLE configuration
+      summary: Set BLE Configuration
       description: 'The `PUT /cloud/ble-config` REST endpoint and the `set_bleConfig` MQTT command configure BLE scanning on the reader.
 
 
@@ -5946,7 +5946,7 @@ paths:
     get:
       tags:
       - Ble
-      summary: Get BLE configuration
+      summary: Get BLE Configuration
       description: '## 1. Description
 
 

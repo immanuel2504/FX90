@@ -1,8 +1,9 @@
 get:
   tags:
   - Date&Time
-  summary: Retrieve the NTP server
-  description: MQTT API :-  get_ntpServer <br> Retrieves the configured NTP server on the reader
+  summary: Get Reader NTP Server
+  description: MQTT API :-  get_ntpServer <br> Retrieves the configured NTP server
+    on the reader
   operationId: getNtpServer
   responses:
     '200':
@@ -16,7 +17,7 @@ get:
 put:
   tags:
   - Date&Time
-  summary: Set NTP server
+  summary: Set Reader NTP Server
   description: MQTT API :-  set_ntpServer <br> Configures the NTP server on the reader
   operationId: updateNtpServer
   requestBody:

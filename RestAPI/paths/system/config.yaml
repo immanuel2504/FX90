@@ -1,7 +1,7 @@
 get:
   tags:
   - System
-  summary: Retrieves reader configuration
+  summary: Get Reader Configuration
   description: MQTT API :-  get_config <br> Retrieves reader configuration
   operationId: getConfig
   responses:
@@ -167,7 +167,7 @@ get:
 put:
   tags:
   - System
-  summary: Updates reader configuration
+  summary: Set Reader Configuration
   description: 'MQTT API :- set_config <br> Updates reader configuration. Accepts
     one or more of the following top-level keys: **xml** (string) - raw XML reader
     config; **GPIO-LED** (object) - GPIO and LED event-action configuration; **READER-GATEWAY**

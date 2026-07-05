@@ -1,7 +1,7 @@
 get:
   tags:
   - Logs
-  summary: Retrieve Syslog
+  summary: Pull Syslogs
   description: MQTT API :-  get_logs_syslog <br> Retrieves the syslog from the reader.
   operationId: getLogsSyslog
   responses:
@@ -16,7 +16,7 @@ get:
 delete:
   tags:
   - Logs
-  summary: Purge Log
+  summary: Purge Syslogs
   description: MQTT API :-  del_logs_syslog <br> Purges syslog.
   operationId: delLogsSyslog
   responses:

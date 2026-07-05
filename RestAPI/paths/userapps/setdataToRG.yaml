@@ -1,8 +1,9 @@
 put:
   tags:
   - userapp
-  summary: Trigger reader gateway data delivery
-  description: Triggers the reader gateway to process and deliver buffered tag data. No request body.
+  summary: Set Data to RG
+  description: Triggers the reader gateway to process and deliver buffered tag data.
+    No request body.
   operationId: setDataToRG
   responses:
     '200':

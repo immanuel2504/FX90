@@ -1,8 +1,12 @@
 put:
   tags:
   - Control
-  summary: Start RFID Inventory or BLE scan
-  description: "MQTT API :- start\n\nStart RFID inventory, BLE scanning, or both simultaneously.\nThe optional `scanType` array controls which scan types are activated.\nOmitting the payload (or `scanType`) defaults to RFID-only.\nBLE scanning requires prior BLE configuration via `set_bleConfig`.\n  `scanType` with `\"ble\"` cannot be combined with `applyImpinjGen2X`."
+  summary: Start Tag Reads
+  description: "MQTT API :- start\n\nStart RFID inventory, BLE scanning, or both simultaneously.\n\
+    The optional `scanType` array controls which scan types are activated.\nOmitting\
+    \ the payload (or `scanType`) defaults to RFID-only.\nBLE scanning requires prior\
+    \ BLE configuration via `set_bleConfig`.\n  `scanType` with `\"ble\"` cannot be\
+    \ combined with `applyImpinjGen2X`."
   operationId: startInventory
   requestBody:
     content:

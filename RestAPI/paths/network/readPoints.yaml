@@ -1,7 +1,7 @@
 get:
   tags:
   - Network
-  summary: Gets the read points on the reader
+  summary: Get Read Points
   description: MQTT API :-  get_readPoints <br> Gets the read points on the reader
   operationId: getReadPoints
   responses:

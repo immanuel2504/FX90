@@ -1,7 +1,7 @@
 get:
   tags:
   - Network
-  summary: Gets the GPS coordinates (lat/long)
+  summary: Get GPS Coordinates
   description: MQTT API :-  get_gpsCoordinates <br> Gets the GPS coordinates (lat/long)
   operationId: getGpsCoordinates
   responses:

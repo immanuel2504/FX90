@@ -1,7 +1,7 @@
 get:
   tags:
   - Network
-  summary: Gets the eSIM configuration
+  summary: Get eSIM Configuration
   description: MQTT API :- get_eSimConfig <br> Gets the eSIM configuration
   operationId: getEsimConfig
   responses:
@@ -16,7 +16,7 @@ get:
 put:
   tags:
   - Network
-  summary: Sets the eSIM configuration
+  summary: Set eSIM Configuration
   description: MQTT API :-  set_eSimConfig <br> Sets the eSIM configuration
   operationId: setEsimConfig
   requestBody:
