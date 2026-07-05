@@ -9,14 +9,12 @@ Usage:
 import importlib
 import json
 import os
-import re
 from collections import OrderedDict
 
 import yaml
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
-COMMAND_SCHEMAS_PATH = os.path.join(PROJECT_ROOT, "Command Schemas.json")
 SCHEMAS_DIR = os.path.join(PROJECT_ROOT, "schemas")
 OUTPUT_PATH = os.path.join(PROJECT_ROOT, "docs", "openapi_md.json")
 COMMANDS_DIR = os.path.join(SCHEMAS_DIR, "commands")
@@ -117,78 +115,6 @@ def load_info_description():
         "MQTT-based API for controlling Zebra fixed RFID readers "
         "(FX7500, FX9600, ATR7000)."
     )
-
-
-# Command Schemas tag aliases where schema tree names differ from tag names.
-DISPLAY_NAME_ALIASES = {
-    "get_supportedStandardList": "get_SupportedStandardlist",
-    "get_SupportedStandardList": "get_SupportedStandardlist",
-}
-
-# Commands/events not listed in Command Schemas tags.
-SUMMARY_OVERRIDES = {
-    "get_preSelection": "Get Pre-Selection",
-    "set_preSelection": "Set Pre-Selection",
-    "set_password": "Change Password",
-    "set_passthru": "Pass-Through Command",
-    "get_impinjGen2X": "Get Impinj Gen2X Configuration",
-    "set_impinjGen2X": "Set Impinj Gen2X Configuration",
-    "get_bleConfig": "Get BLE Configuration",
-    "set_bleConfig": "Set BLE Configuration",
-    "get_eSimConfig": "Get eSIM Configuration",
-    "set_eSimConfig": "Set eSIM Configuration",
-    "get_availableWifiNetworks": "Get Available Wi-Fi Networks",
-    "get_networkInterfaces": "Get Network Interfaces",
-    "get_readPoints": "Get Read Points",
-    "get_gpsCoordinates": "Get GPS Coordinates",
-    "set_dataToRG": "Set Data to RG",
-    "set_region": "Set Reader Region Configuration",
-    "async-events": "Async Events",
-    "heartbeat": "Heartbeat",
-    "error": "Error Event",
-    "warning": "Warning Event",
-    "firmwareUpdateProgress": "Firmware Update Progress",
-    "tagDataEvents": "Tag Data Events",
-    "mode_tag_data_events": "Mode Tag Data Events",
-    "directionality_tag_data_events": "Directionality Tag Data Events",
-    "locationHistory": "Location History",
-    "zoneHistory": "Zone History",
-    "userapp_event": "User App Event",
-    "gpi": "GPI Event",
-    "gpo": "GPO Event",
-}
-
-
-def load_command_display_names():
-    if not os.path.isfile(COMMAND_SCHEMAS_PATH):
-        print(f"  WARNING: {COMMAND_SCHEMAS_PATH} not found, using fallback summaries")
-        return {}
-    doc = load_json(COMMAND_SCHEMAS_PATH)
-    display = {}
-    for tag in doc.get("tags", []):
-        name = tag.get("name")
-        label = tag.get("x-displayName")
-        if name and label:
-            display[name] = label
-    print(f"  Loaded {len(display)} display names from Command Schemas.json")
-    return display
-
-
-def fallback_operation_summary(op_name):
-    spaced = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", op_name.replace("-", "_"))
-    return spaced.replace("_", " ").title()
-
-
-def resolve_operation_summary(op_name, display_names):
-    if op_name in SUMMARY_OVERRIDES:
-        return SUMMARY_OVERRIDES[op_name]
-    tag_name = DISPLAY_NAME_ALIASES.get(op_name, op_name)
-    if tag_name in display_names:
-        return display_names[tag_name]
-    for key, label in display_names.items():
-        if key.lower() == tag_name.lower():
-            return label
-    return fallback_operation_summary(op_name)
 
 
 def load_tag_descriptions_from_md():
@@ -862,7 +788,6 @@ def build_openapi():
     op_descriptions = load_operation_descriptions()
     example_data = load_example_descriptions()
     error_codes_map = load_error_codes()
-    display_names = load_command_display_names()
     tag_groups = tag_config.get("tag_groups", {})
     tag_descriptions = load_tag_descriptions_from_md()
     operation_tags = tag_config.get("operation_tags", {})
@@ -943,7 +868,7 @@ def build_openapi():
         description = sanitize_operation_description(description)
         op = OrderedDict()
         op["tags"] = [tag_name]
-        op["summary"] = resolve_operation_summary(op_name, display_names)
+        op["summary"] = op_name.replace("_", " ").title()
         if description:
             op["description"] = description
         if source in ("events", "tag-events"):
