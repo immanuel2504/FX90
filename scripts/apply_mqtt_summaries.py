@@ -9,44 +9,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 COMMAND_SCHEMAS = ROOT / "Command Schemas.json"
+TAG_CONFIG = ROOT / "tag_config.json"
 OPENAPI_MD = ROOT / "docs" / "openapi_md.json"
 
-DISPLAY_NAME_ALIASES = {
-    "get_supportedStandardList": "get_SupportedStandardlist",
-    "get_SupportedStandardList": "get_SupportedStandardlist",
-}
 
-SUMMARY_OVERRIDES = {
-    "get_preSelection": "Get Pre-Selection",
-    "set_preSelection": "Set Pre-Selection",
-    "set_password": "Change Password",
-    "set_passthru": "Pass-Through Command",
-    "get_impinjGen2X": "Get Impinj Gen2X Configuration",
-    "set_impinjGen2X": "Set Impinj Gen2X Configuration",
-    "get_bleConfig": "Get BLE Configuration",
-    "set_bleConfig": "Set BLE Configuration",
-    "get_eSimConfig": "Get eSIM Configuration",
-    "set_eSimConfig": "Set eSIM Configuration",
-    "get_availableWifiNetworks": "Get Available Wi-Fi Networks",
-    "get_networkInterfaces": "Get Network Interfaces",
-    "get_readPoints": "Get Read Points",
-    "get_gpsCoordinates": "Get GPS Coordinates",
-    "set_dataToRG": "Set Data to RG",
-    "set_region": "Set Reader Region Configuration",
-    "async-events": "Async Events",
-    "heartbeat": "Heartbeat",
-    "error": "Error Event",
-    "warning": "Warning Event",
-    "firmwareUpdateProgress": "Firmware Update Progress",
-    "tagDataEvents": "Tag Data Events",
-    "mode_tag_data_events": "Mode Tag Data Events",
-    "directionality_tag_data_events": "Directionality Tag Data Events",
-    "locationHistory": "Location History",
-    "zoneHistory": "Zone History",
-    "userapp_event": "User App Event",
-    "gpi": "GPI Event",
-    "gpo": "GPO Event",
-}
+def load_tag_config() -> dict:
+    return json.loads(TAG_CONFIG.read_text(encoding="utf-8"))
 
 
 def load_display_names() -> dict[str, str]:
@@ -63,10 +31,15 @@ def fallback_summary(op_name: str) -> str:
     return spaced.replace("_", " ").title()
 
 
-def resolve_summary(op_name: str, display_names: dict[str, str]) -> str:
-    if op_name in SUMMARY_OVERRIDES:
-        return SUMMARY_OVERRIDES[op_name]
-    tag_name = DISPLAY_NAME_ALIASES.get(op_name, op_name)
+def resolve_summary(
+    op_name: str,
+    display_names: dict[str, str],
+    overrides: dict[str, str],
+    aliases: dict[str, str],
+) -> str:
+    if op_name in overrides:
+        return overrides[op_name]
+    tag_name = aliases.get(op_name, op_name)
     if tag_name in display_names:
         return display_names[tag_name]
     for key, label in display_names.items():
@@ -80,7 +53,12 @@ def apply_to_openapi_md() -> int:
         raise SystemExit(f"Missing {OPENAPI_MD}")
     if not COMMAND_SCHEMAS.is_file():
         raise SystemExit(f"Missing {COMMAND_SCHEMAS}")
+    if not TAG_CONFIG.is_file():
+        raise SystemExit(f"Missing {TAG_CONFIG}")
 
+    tag_config = load_tag_config()
+    overrides = tag_config.get("display_name_overrides", {})
+    aliases = tag_config.get("display_name_aliases", {})
     display_names = load_display_names()
     doc = json.loads(OPENAPI_MD.read_text(encoding="utf-8"), object_pairs_hook=OrderedDict)
     changed = 0
@@ -90,7 +68,7 @@ def apply_to_openapi_md() -> int:
         operation = methods.get("post")
         if not isinstance(operation, dict):
             continue
-        new_summary = resolve_summary(op_name, display_names)
+        new_summary = resolve_summary(op_name, display_names, overrides, aliases)
         if operation.get("summary") != new_summary:
             operation["summary"] = new_summary
             changed += 1
@@ -104,9 +82,13 @@ def apply_to_openapi_md() -> int:
 
 
 def main() -> None:
+    tag_config = load_tag_config()
+    overrides = tag_config.get("display_name_overrides", {})
+    aliases = tag_config.get("display_name_aliases", {})
     display_names = load_display_names()
     changed = apply_to_openapi_md()
     print(f"Loaded {len(display_names)} display names from Command Schemas.json")
+    print(f"Loaded {len(overrides)} override(s) and {len(aliases)} alias(es) from tag_config.json")
     print(f"Updated {changed} operation summary(ies) in {OPENAPI_MD.relative_to(ROOT)}")
 
 

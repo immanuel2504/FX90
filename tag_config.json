@@ -249,5 +249,39 @@
     "get_CACertificates",
     "del_CACertificate"
   ],
+  "display_name_aliases": {
+    "get_supportedStandardList": "get_SupportedStandardlist"
+  },
+  "display_name_overrides": {
+    "get_preSelection": "Get Pre-Selection",
+    "set_preSelection": "Set Pre-Selection",
+    "set_password": "Change Password",
+    "set_passthru": "Pass-Through Command",
+    "get_impinjGen2X": "Get Impinj Gen2X Configuration",
+    "set_impinjGen2X": "Set Impinj Gen2X Configuration",
+    "get_bleConfig": "Get BLE Configuration",
+    "set_bleConfig": "Set BLE Configuration",
+    "get_eSimConfig": "Get eSIM Configuration",
+    "set_eSimConfig": "Set eSIM Configuration",
+    "get_availableWifiNetworks": "Get Available Wi-Fi Networks",
+    "get_networkInterfaces": "Get Network Interfaces",
+    "get_readPoints": "Get Read Points",
+    "get_gpsCoordinates": "Get GPS Coordinates",
+    "set_dataToRG": "Set Data to RG",
+    "set_region": "Set Reader Region Configuration",
+    "async-events": "Async Events",
+    "heartbeat": "Heartbeat",
+    "error": "Error Event",
+    "warning": "Warning Event",
+    "firmwareUpdateProgress": "Firmware Update Progress",
+    "tagDataEvents": "Tag Data Events",
+    "mode_tag_data_events": "Mode Tag Data Events",
+    "directionality_tag_data_events": "Directionality Tag Data Events",
+    "locationHistory": "Location History",
+    "zoneHistory": "Zone History",
+    "userapp_event": "User App Event",
+    "gpi": "GPI Event",
+    "gpo": "GPO Event"
+  },
   "tag_descriptions": {}
 }
