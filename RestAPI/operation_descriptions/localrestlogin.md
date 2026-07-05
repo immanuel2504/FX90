@@ -22,7 +22,6 @@ This endpoint requires **HTTP Basic Auth** (admin credentials). All other `/clou
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/localRestLogin` |
-| Operation ID | `localRestLogin` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | HTTP Basic Auth (admin reader credentials) |

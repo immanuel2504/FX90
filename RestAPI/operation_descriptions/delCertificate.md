@@ -5,7 +5,6 @@ The `DELETE /cloud/certificates/{certname}` REST endpoint is used to delete cert
 | Property | Value |
 |---|---|
 | REST Endpoint | `DELETE /cloud/certificates/{certname}` |
-| Operation ID | `delCertificate` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

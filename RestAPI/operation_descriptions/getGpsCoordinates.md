@@ -14,7 +14,6 @@ No request body is required. The returned values represent the most recent locat
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/readerLocation` |
-| Operation ID | `getGpsCoordinates` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

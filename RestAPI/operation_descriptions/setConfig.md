@@ -5,7 +5,6 @@ The `PUT /cloud/config` REST endpoint updates reader configuration.
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/config` |
-| Operation ID | `setConfig` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

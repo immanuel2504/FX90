@@ -5,7 +5,6 @@ The `PUT /cloud/certificates` REST endpoint is used to install or update a certi
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/certificates` |
-| Operation ID | `setUpdateCertificate` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

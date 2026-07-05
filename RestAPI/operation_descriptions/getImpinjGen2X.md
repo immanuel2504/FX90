@@ -14,7 +14,6 @@ No request body is required. If no Gen2X configuration has been saved, the respo
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/impinjGen2X` |
-| Operation ID | `getImpinjGen2X` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

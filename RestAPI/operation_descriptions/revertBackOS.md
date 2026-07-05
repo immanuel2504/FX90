@@ -5,7 +5,6 @@ The `PUT /cloud/revertbackOS` REST endpoint is used to revert to previous OS ver
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/revertbackOS` |
-| Operation ID | `revertBackOS` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

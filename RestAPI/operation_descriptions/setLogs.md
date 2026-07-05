@@ -5,7 +5,6 @@ The `PUT /cloud/logs` REST endpoint configures log settings.
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/logs` |
-| Operation ID | `setLogs` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

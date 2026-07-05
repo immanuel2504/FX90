@@ -5,7 +5,6 @@ The `PUT /cloud/cableLossCompensation` REST endpoint sets cable loss compensatio
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/cableLossCompensation` |
-| Operation ID | `setCableLossCompensation` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

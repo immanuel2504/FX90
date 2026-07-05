@@ -5,7 +5,6 @@ The `PUT /cloud/apps/{appname}/stop` REST endpoint is used to stop user applicat
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/apps/{appname}/stop` |
-| Operation ID | `setStopUserApp` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

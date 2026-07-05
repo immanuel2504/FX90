@@ -5,7 +5,6 @@ The `PUT /cloud/updatePassword` REST endpoint changes the password on the reader
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/updatePassword` |
-| Operation ID | `updatePassword` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

@@ -21,7 +21,6 @@ The `ble` section is present only when BLE is supported and its status is availa
 | Property | Value |
 |---|---|
 | REST Endpoint | `GET /cloud/status` |
-| Operation ID | `getStatus` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

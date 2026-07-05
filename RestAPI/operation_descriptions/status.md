@@ -5,7 +5,6 @@ The `PUT /cloud/pass-through` REST endpoint is used to pass-through command.
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/pass-through` |
-| Operation ID | `status` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

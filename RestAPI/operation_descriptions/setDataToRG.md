@@ -23,7 +23,6 @@ Confirm that the reader gateway is configured and active before calling this end
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/setdataToRG` |
-| Operation ID | `setDataToRG` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |

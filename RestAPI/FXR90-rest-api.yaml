@@ -72,8 +72,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/localRestLogin` |
 
-        | Operation ID | `localRestLogin` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -119,8 +117,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/app-led` |
-
-        | Operation ID | `getAppLed` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -177,8 +173,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/app-led` |
-
-        | Operation ID | `setAppLed` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -238,8 +232,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/gpo` |
 
-        | Operation ID | `getGpoStatus` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -298,8 +290,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/gpo` |
 
-        | Operation ID | `setGpo` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -356,8 +346,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/gpi` |
-
-        | Operation ID | `getGpiStatus` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -438,8 +426,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/region` |
 
-        | Operation ID | `getRegion` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -519,8 +505,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/region` |
 
-        | Operation ID | `setRegion` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -577,8 +561,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/supportedRegionList` |
-
-        | Operation ID | `getSupportedRegionList` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -684,8 +666,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/supportedStandardList` |
-
-        | Operation ID | `getSupportedStandardList` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -909,8 +889,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/mode` |
-
-        | Operation ID | `getMode` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -1425,8 +1403,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/version` |
 
-        | Operation ID | `getVersion` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -1491,7 +1467,7 @@ paths:
       tags:
       - System
       summary: Retrieves reader operational statistics
-      description: "## 1. Description\n\nThe `GET /cloud/status` REST endpoint retrieves operational statistics and health information from the reader at the moment of the request.\n\nThis endpoint returns:\n\n- Uptime and current system time\n- Radio connection and activity state\n- Reader temperature\n- CPU and RAM usage\n- Flash storage usage by partition\n- Antenna port connection states\n- NTP synchronization status\n- Cloud interface connection status\n- BLE scanner runtime status (scan state, scan start time, and beacon counts by protocol)\n\nThe `ble` section is present only when BLE is supported and its status is available. No request body is required.\n\n## 2. Endpoint Details\n\n| Property | Value |\n|---|---|\n| REST Endpoint | `GET /cloud/status` |\n| Operation ID | `getStatus` |\n| Communication Type | Client to Device (HTTP request/response) |\n| Applies To | FXR90 |\n| Authentication | Bearer token (`Authorization: Bearer <token>`) |\n\n## 3. When to Use This Endpoint\n\nUse `GET /cloud/status` to:\n\n- Confirm the reader is powered, healthy, and reachable over REST\n- Verify the radio is connected before starting inventory\n- Monitor reader temperature, CPU, and RAM usage\n- Synchronize against the reader's current system time\n- Confirm BLE scanning is active and review beacon counts by protocol\n\nKey fields to check in the response:\n\n| Field | What to Check | Why It Matters |\n|---|---|---|\n| `uptime` | How long has the reader been running? | Long uptimes confirm stability; short uptimes indicate an unexpected restart. |\n| `radioConnection` | Is the value `connected`? | Inventory cannot run if the radio is disconnected. |\n| `temperature` | Is the value within safe operating range? | Excessive temperature can cause throttling or hardware faults. |\n| `antennas` | Are expected ports `connected`? | A `disconnected` antenna port means tags on that port will not be read. |\n| `ble.scanState` | Is the value `running`? | Confirms whether the BLE scanner is currently active (`running`) or `stopped`. |\n| `ble.scanStartTime` | When did the current scan start? | ISO 8601 timestamp marking when BLE scanning last started. |\n| `ble.beaconCounts` | Are advertisements being seen? | Per-protocol counts (`iBeacon`, `altBeacon`, `eddystone`, `generic`, `total`) confirm beacons are being detected in the current scan window. |\n\n## 4. BLE Status Fields\n\nWhen BLE is supported and active, the response includes a `ble` object:\n\n| Field | Type | Description |\n|---|---|---|\n| `ble.scanState` | string | Current BLE scanner state — `running` or `stopped`. |\n| `ble.scanStartTime` | string (date-time) | ISO 8601 timestamp of when the BLE scan was last started. |\n| `ble.beaconCounts.total` | integer | Total BLE advertisements observed in the current scan window. |\n| `ble.beaconCounts.iBeacon` | integer | Number of iBeacon advertisements observed. |\n| `ble.beaconCounts.altBeacon` | integer | Number of AltBeacon advertisements observed. |\n| `ble.beaconCounts.eddystone` | integer | Number of Eddystone advertisements observed. |\n| `ble.beaconCounts.generic` | integer | Number of generic BLE advertisements observed. |\n\nExample `ble` section:\n\n```json\n\"ble\": {\n  \"scanState\": \"running\",\n  \"scanStartTime\": \"2026-05-21T13:46:16.955Z\",\n  \"beaconCounts\": {\n    \"total\": 108,\n    \"iBeacon\": 75,\n    \"altBeacon\": 33,\n    \"eddystone\": 0,\n    \"generic\": 0\n  }\n}\n```\n"
+      description: "## 1. Description\n\nThe `GET /cloud/status` REST endpoint retrieves operational statistics and health information from the reader at the moment of the request.\n\nThis endpoint returns:\n\n- Uptime and current system time\n- Radio connection and activity state\n- Reader temperature\n- CPU and RAM usage\n- Flash storage usage by partition\n- Antenna port connection states\n- NTP synchronization status\n- Cloud interface connection status\n- BLE scanner runtime status (scan state, scan start time, and beacon counts by protocol)\n\nThe `ble` section is present only when BLE is supported and its status is available. No request body is required.\n\n## 2. Endpoint Details\n\n| Property | Value |\n|---|---|\n| REST Endpoint | `GET /cloud/status` |\n| Communication Type | Client to Device (HTTP request/response) |\n| Applies To | FXR90 |\n| Authentication | Bearer token (`Authorization: Bearer <token>`) |\n\n## 3. When to Use This Endpoint\n\nUse `GET /cloud/status` to:\n\n- Confirm the reader is powered, healthy, and reachable over REST\n- Verify the radio is connected before starting inventory\n- Monitor reader temperature, CPU, and RAM usage\n- Synchronize against the reader's current system time\n- Confirm BLE scanning is active and review beacon counts by protocol\n\nKey fields to check in the response:\n\n| Field | What to Check | Why It Matters |\n|---|---|---|\n| `uptime` | How long has the reader been running? | Long uptimes confirm stability; short uptimes indicate an unexpected restart. |\n| `radioConnection` | Is the value `connected`? | Inventory cannot run if the radio is disconnected. |\n| `temperature` | Is the value within safe operating range? | Excessive temperature can cause throttling or hardware faults. |\n| `antennas` | Are expected ports `connected`? | A `disconnected` antenna port means tags on that port will not be read. |\n| `ble.scanState` | Is the value `running`? | Confirms whether the BLE scanner is currently active (`running`) or `stopped`. |\n| `ble.scanStartTime` | When did the current scan start? | ISO 8601 timestamp marking when BLE scanning last started. |\n| `ble.beaconCounts` | Are advertisements being seen? | Per-protocol counts (`iBeacon`, `altBeacon`, `eddystone`, `generic`, `total`) confirm beacons are being detected in the current scan window. |\n\n## 4. BLE Status Fields\n\nWhen BLE is supported and active, the response includes a `ble` object:\n\n| Field | Type | Description |\n|---|---|---|\n| `ble.scanState` | string | Current BLE scanner state — `running` or `stopped`. |\n| `ble.scanStartTime` | string (date-time) | ISO 8601 timestamp of when the BLE scan was last started. |\n| `ble.beaconCounts.total` | integer | Total BLE advertisements observed in the current scan window. |\n| `ble.beaconCounts.iBeacon` | integer | Number of iBeacon advertisements observed. |\n| `ble.beaconCounts.altBeacon` | integer | Number of AltBeacon advertisements observed. |\n| `ble.beaconCounts.eddystone` | integer | Number of Eddystone advertisements observed. |\n| `ble.beaconCounts.generic` | integer | Number of generic BLE advertisements observed. |\n\nExample `ble` section:\n\n```json\n\"ble\": {\n  \"scanState\": \"running\",\n  \"scanStartTime\": \"2026-05-21T13:46:16.955Z\",\n  \"beaconCounts\": {\n    \"total\": 108,\n    \"iBeacon\": 75,\n    \"altBeacon\": 33,\n    \"eddystone\": 0,\n    \"generic\": 0\n  }\n}\n```\n"
       operationId: getStatus
       responses:
         '200':
@@ -1594,8 +1570,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/config` |
-
-        | Operation ID | `getConfig` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -1809,8 +1783,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/config` |
-
-        | Operation ID | `setConfig` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -2152,8 +2124,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/pass-through` |
 
-        | Operation ID | `status` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -2446,8 +2416,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/readerCapabilities` |
 
-        | Operation ID | `getReaderCapabilities` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -2669,8 +2637,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/cableLossCompensation` |
 
-        | Operation ID | `getCableLossCompensation` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -2742,8 +2708,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/cableLossCompensation` |
 
-        | Operation ID | `setCableLossCompensation` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -2799,10 +2763,31 @@ paths:
       tags:
       - System
       summary: Restarts reader
-      description: 'The `PUT /cloud/reboot` REST endpoint restarts the reader.
+      description: '## 1. Description
 
 
-        ## 2. Endpoint Details
+        The `PUT /cloud/reboot` REST endpoint restarts the reader.
+
+
+        All in-progress operations stop and the reader briefly disconnects until boot completes. No request body is required.
+
+
+        ## 2. Before You Begin
+
+
+        Plan for downtime — the reader will disconnect until it finishes booting. In-flight inventory and active connections will be interrupted.
+
+
+        | What You Need | Details |
+
+        |---|---|
+
+        | Downtime window | Allow 1–3 minutes for reboot and reconnect |
+
+        | Authentication | Bearer token in the `Authorization` header |
+
+
+        ## 3. Endpoint Details
 
 
         | Property | Value |
@@ -2811,14 +2796,13 @@ paths:
 
         | REST Endpoint | `PUT /cloud/reboot` |
 
-        | Operation ID | `reboot` |
+        | Communication Type | Client to Device (HTTP request/response) |
+
+        | Applies To | FXR90 |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
-        | Content-Type | `application/json` where a request body is required |
-
-
-        Review the request and response schemas in the REST API reference for required fields, optional fields, enum values, and examples before calling this endpoint.
+        | Request body | None |
 
         '
       operationId: reboot
@@ -2859,8 +2843,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/preSelection` |
-
-        | Operation ID | `getPreSelection` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -2918,8 +2900,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/preSelection` |
 
-        | Operation ID | `setPreSelection` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -2963,8 +2943,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/updatePassword` |
-
-        | Operation ID | `updatePassword` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -3025,8 +3003,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/logs` |
-
-        | Operation ID | `getLogs` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -3093,8 +3069,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/logs` |
 
-        | Operation ID | `setLogs` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -3158,8 +3132,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/logs/syslog` |
 
-        | Operation ID | `getLogsSyslog` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -3218,8 +3190,6 @@ paths:
 
         | REST Endpoint | `DELETE /cloud/logs/syslog` |
 
-        | Operation ID | `delLogsSyslog` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -3264,8 +3234,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/logs/RcLog` |
-
-        | Operation ID | `getRcLog` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -3340,8 +3308,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/logs/RgWarningLog` |
 
-        | Operation ID | `getRgWarningLog` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -3414,8 +3380,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/logs/RgErrorLog` |
-
-        | Operation ID | `getRgErrorLog` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -3490,8 +3454,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/logs/radioPacketLog` |
 
-        | Operation ID | `getRadioPacketLog` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -3550,8 +3512,6 @@ paths:
 
         | REST Endpoint | `DELETE /cloud/logs/radioPacketLog` |
 
-        | Operation ID | `delRadioPacketLog` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -3594,8 +3554,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/timeZone` |
-
-        | Operation ID | `getTimeZone` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -3653,8 +3611,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/timeZone` |
 
-        | Operation ID | `setTimeZone` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -3706,8 +3662,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/ntpServer` |
-
-        | Operation ID | `getNtpServer` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -3764,8 +3718,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/ntpServer` |
-
-        | Operation ID | `updateNtpServer` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -3827,8 +3779,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/certificates` |
-
-        | Operation ID | `getCertificates` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -3894,8 +3844,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/certificates` |
 
-        | Operation ID | `setUpdateCertificate` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -3955,8 +3903,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/certificates/{certname}` |
 
-        | Operation ID | `setRefreshCertificate` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -3996,8 +3942,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `DELETE /cloud/certificates/{certname}` |
-
-        | Operation ID | `delCertificate` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -4062,8 +4006,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/network` |
-
-        | Operation ID | `getNetwork` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -4217,8 +4159,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/network` |
-
-        | Operation ID | `updateNetwork` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -4419,8 +4359,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/wifiNetworks` |
-
-        | Operation ID | `getAvailableWifiNetworks` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -4667,8 +4605,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/networkInterfaces` |
 
-        | Operation ID | `getNetworkInterfaces` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -4747,8 +4683,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/readPoints` |
-
-        | Operation ID | `getReadPoints` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -4830,8 +4764,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/readerLocation` |
 
-        | Operation ID | `getGpsCoordinates` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -4907,8 +4839,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/eSimConfig` |
 
-        | Operation ID | `getEsimConfig` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -4969,8 +4899,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/eSimConfig` |
 
-        | Operation ID | `setEsimConfig` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -5011,8 +4939,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/os` |
-
-        | Operation ID | `setOS` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -5058,8 +4984,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/revertbackOS` |
 
-        | Operation ID | `revertBackOS` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -5098,8 +5022,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/apps/install` |
-
-        | Operation ID | `setInstallUserApp` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -5150,8 +5072,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/apps/{appname}/start` |
 
-        | Operation ID | `setStartUserApp` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -5198,8 +5118,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/apps/{appname}/stop` |
 
-        | Operation ID | `setStopUserApp` |
-
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
         | Content-Type | `application/json` where a request body is required |
@@ -5245,8 +5163,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/apps/{appname}/autostart` |
-
-        | Operation ID | `setAutostartUserApp` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -5310,8 +5226,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/apps` |
-
-        | Operation ID | `getUserApps` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -5406,8 +5320,6 @@ paths:
 
         | REST Endpoint | `PUT /cloud/setdataToRG` |
 
-        | Operation ID | `setDataToRG` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -5443,8 +5355,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/apps/{appname}/pass-through` |
-
-        | Operation ID | `setReqToUserApp` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -5497,8 +5407,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/apps/{appname}/uninstall` |
-
-        | Operation ID | `setUninstallUserApp` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -5558,8 +5466,6 @@ paths:
 
         | REST Endpoint | `GET /cloud/hostName` |
 
-        | Operation ID | `getHostName` |
-
         | Communication Type | Client to Device (HTTP request/response) |
 
         | Applies To | FXR90 |
@@ -5615,8 +5521,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `PUT /cloud/hostName` |
-
-        | Operation ID | `setHostName` |
 
         | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 
@@ -5675,8 +5579,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/impinjGen2X` |
-
-        | Operation ID | `getImpinjGen2X` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 
@@ -6074,8 +5976,6 @@ paths:
         |---|---|
 
         | REST Endpoint | `GET /cloud/ble-config` |
-
-        | Operation ID | `getBleConfig` |
 
         | Communication Type | Client to Device (HTTP request/response) |
 

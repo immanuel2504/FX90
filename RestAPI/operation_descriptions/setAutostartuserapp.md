@@ -5,7 +5,6 @@ The `PUT /cloud/apps/{appname}/autostart` REST endpoint is used to autostart use
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/apps/{appname}/autostart` |
-| Operation ID | `setAutostartUserApp` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

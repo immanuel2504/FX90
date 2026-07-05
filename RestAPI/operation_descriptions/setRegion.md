@@ -5,7 +5,6 @@ The `PUT /cloud/region` REST endpoint is used to update region information.
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/region` |
-| Operation ID | `setRegion` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 

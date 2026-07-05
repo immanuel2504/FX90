@@ -5,7 +5,6 @@ The `PUT /cloud/network` REST endpoint updates network configuration, including 
 | Property | Value |
 |---|---|
 | REST Endpoint | `PUT /cloud/network` |
-| Operation ID | `updateNetwork` |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` where a request body is required |
 
