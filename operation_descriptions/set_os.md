@@ -42,15 +42,3 @@ Gather all firmware download details before sending this command. A failed OS up
 | Current firmware version | Use `get_version` to confirm the reader's current build before initiating an update. |
 | Rollback plan | If the update fails, use `revertback` to return to the previous OS version. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or the firmware update to not complete.
-
-### Required Fields
-
-- `url` and `authenticationType` are required in the payload. Omitting either will cause the command to be rejected.
-
-### Authentication
-
-- When `authenticationType` is `BASIC`, `options.username` and `options.password` must both be provided. Omitting either field will cause the download to fail with an HTTP 401 error.
-- When `authenticationType` is `NONE`, the `options` object must be omitted or empty.

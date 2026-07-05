@@ -35,14 +35,3 @@ Confirm the target user application is installed and running before sending this
 | Command or data | The string or JSON object to pass to the user application via `payload.command`. The expected format is defined by the user application, not by the reader API. |
 | Application state | Use `get_user_apps` to confirm the target application is running (`running: true`) before sending. A stopped application may not be able to process the request. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or the user application to not receive the request.
-
-### Required Fields
-
-- `appname` and `command` (inner payload field) are both required. Omitting either will cause the command to be rejected.
-
-### Application Name
-
-- `appname` must exactly match an installed application name returned by `get_user_apps`. An unrecognized or misspelled name will cause the command to fail.

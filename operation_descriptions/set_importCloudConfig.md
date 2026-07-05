@@ -44,37 +44,3 @@ Gather all endpoint details before sending this command. An incorrect hostname, 
 | Retention and batching | For data event connections: configure `retention.maxNumEvents`, `retention.maxEventRetentionTimeInMin`, and `retention.throttle` as needed. |
 | Local REST | For control channels: set `enableLocalRest: true` to allow local REST API access alongside cloud connectivity. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or the reader to be unable to connect to the configured endpoints.
-
-### Connection Configuration
-
-- Each connection must have a `name` and a `type`. The `name` must be unique within its channel. Duplicate names within the same channel array will be rejected or may overwrite previous entries.
-- `type` must be one of the supported connection type strings. Unrecognized type values will be rejected.
-
-### MQTT Settings
-
-- For `mqtt` connections, `hostName`, `port`, and `protocol` are required. Missing any of these will result in a connection that cannot be established.
-- `publishTopic` and `subscribeTopic` are arrays. For command-response channels, at least one `subscribeTopic` must be provided for the reader to receive commands.
-- `qos` must be `0`, `1`, or `2`. An unrecognized QoS value will be rejected.
-
-### TLS and Certificate References
-
-- If `enableSecurity` is `true`, a valid installed certificate name must be referenced. The named certificate must already be installed on the reader (see `set_update_cert`).
-- Referencing a certificate that does not exist on the reader will cause TLS connection establishment to fail.
-
-### Retention and Batching
-
-- `maxNumEvents` sets the maximum number of events buffered before the oldest are dropped. Set this to a value appropriate for your network reliability and data volume.
-- `throttle` sets the maximum event delivery rate in events per second.
-
-### Apply Timing
-
-- The configuration is applied immediately after the command is acknowledged. Existing connections are replaced with the new configuration.
-- The reader reconnects to all configured endpoints using the new configuration. Expect a brief interruption in data delivery during reconnection.
-
-### Security Note
-
-- Never hardcode MQTT credentials, TLS passwords, or bearer tokens in your payload. Supply all sensitive values from a secrets manager or environment variable at runtime.
-- Use TLS (`enableSecurity: true`) for all MQTT and HTTP connections in production deployments to protect tag data and command traffic in transit.

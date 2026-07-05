@@ -40,20 +40,3 @@ Decide on the LED color, flash behavior, and duration before sending this comman
 | Duration | How long in seconds the LED state should persist. Set to `0` for indefinite (until the next `set_appled` command). |
 | Brightness | Optional - one of `low`, `med`, or `high`. If omitted, the reader applies its default brightness. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or produce unexpected LED behavior.
-
-### Color Values
-
-- `color` must be one of the supported string values: `red`, `amber`, `green`, `blue`, or `false`. An unrecognized color value will be rejected.
-- To turn the LED off, set `color` to the string `"false"` - not the boolean `false`.
-
-### Flash and Duration
-
-- `flash: true` causes the LED to blink at the reader's default blink rate. `flash: false` keeps the LED solid.
-- When `seconds` is greater than `0`, the LED state reverts to the application default after the duration expires. When `seconds` is `0`, the state persists indefinitely until explicitly changed.
-
-### Brightness
-
-- `brightness` must be one of `low`, `med`, or `high`. An unrecognized string will be rejected.

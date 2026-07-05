@@ -31,11 +31,3 @@ Confirm the certificate is no longer in use before sending this command. Cross-r
 | Certificate type | The type of the certificate: `client`, `server`, or `app`. The type must match the installed certificate. |
 | Active use check | Confirm the certificate is not currently used for an active MQTT TLS or HTTPS endpoint connection. Deleting an in-use certificate will cause TLS handshake failures on the next reconnect. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail.
-
-- `name` and `type` are both required in the payload. Omitting either field will cause the command to be rejected.
-- `type` must be one of `client`, `server`, or `app`. An unrecognized type string will be rejected.
-- The certificate identified by `name` and `type` must exist on the reader. Attempting to delete a certificate that is not installed will result in an error.
-- Certificates currently in active use for TLS connections should be replaced with a new certificate (via `set_update_cert`) before deletion to avoid a connectivity gap.

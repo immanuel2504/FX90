@@ -36,12 +36,3 @@ Verify the target country and standard are supported before sending this command
 | Active inventory | Stop inventory with `stop` before changing region. Region changes take effect immediately and affect all RF parameters. |
 | LBT and channel behavior | Some standards mandate LBT always-on or restrict channel usage. Review the standard entry from `get_supportedStandardList` before applying. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or result in non-compliant RF behavior.
-
-### Country and Standard
-
-- Both `country` and `standardname` are required in the payload. Omitting either field will cause the command to be rejected.
-- The `country` value must exactly match a country name returned by `get_SupportedRegionList`. An unrecognized country string will be rejected.
-- The `standardname` must be a valid standard for the specified country, as returned by `get_supportedStandardList`. Pairing a country with an incompatible standard name will be rejected.

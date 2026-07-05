@@ -57,17 +57,3 @@ The `doNotPersistState` field controls whether the reader resumes scanning autom
 
 ---
 
-## 4. Rules and Constraints
-
-### Request Format
-
-- HTTP method must be `PUT`.
-- `Content-Type` header must be `application/json`.
-- `Authorization` header must contain a valid bearer token.
-- Request body may be empty (`{}`) or contain optional fields.
-
-### Field-Level Rules
-
-- `scanType` - array of strings. Allowed values: `"rfid"`, `"ble"`.
-- `applyImpinjGen2X` - boolean.
-- `doNotPersistState` - boolean.

@@ -29,10 +29,3 @@ Archive the syslog files with `get_logs_syslog` before sending this command if y
 | Log retrieval | Confirm you have downloaded the syslog using `get_logs_syslog` before purging. Deletion is permanent and cannot be undone. |
 | Diagnostic baseline | If you plan to run a diagnostic session after purging, ensure all relevant services are in a known state before the purge so the new logs capture only the events of interest. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail.
-
-- The payload must be an empty object (`{}`). Providing additional payload fields will cause the command to be rejected.
-- Deletion is immediate and permanent. Purged syslog data cannot be recovered.
-- The OS continues writing new syslog entries immediately after purge; a clean initial state is only guaranteed at the moment the purge completes.

@@ -29,10 +29,3 @@ Download the log files with `get_radio_pkt_logs` before sending this command if 
 | Log retrieval | Confirm you have downloaded the radio packet logs using `get_radio_pkt_logs` before purging. Deletion is permanent and cannot be undone. |
 | Logging state | If radio packet logging (`radioPacketLog`) is currently enabled, the reader will start writing new log data immediately after purge. Disable logging first (via `set_logs`) if you want to start a clean session with no logging active. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail.
-
-- The payload must be an empty object (`{}`). Providing additional payload fields will cause the command to be rejected.
-- Deletion is immediate and permanent. There is no recovery path once the logs are purged.
-- If `radioPacketLog` is currently enabled, the reader continues logging after purge; new log data begins accumulating immediately.

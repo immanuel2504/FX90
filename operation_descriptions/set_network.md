@@ -46,31 +46,3 @@ Gather all interface-specific settings before sending this command. A wrong stat
 | Hotspot settings | For `uap0`, provide `ssid`, `ssidPassword`, `countryCode`, `securityType`, and `isHidden`. |
 | Interface enablement | Always include `enable: true` or `enable: false` on the interface object to control whether the interface is active after configuration. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or produce incorrect network behavior.
-
-### General
-
-- Only one interface key may be present at the top level of the payload. Including multiple interface keys in a single request is not supported.
-- The interface key must be one recognized by the reader, as returned by `get_networkInterfaces`. Unknown interface names will be rejected.
-
-### Static IP Configuration
-
-- When `IPV4.dhcp` is `false`, all static fields (`ipAddress`, `subnetMask`, `gatewayAddress`, `dnsAddress`) must be provided. Missing any field will result in an incomplete configuration.
-- Providing a static IP that conflicts with another active interface's subnet may result in routing failures.
-
-### Wi-Fi Configuration
-
-- `essid` is required in the `accesspoint` object. Omitting it will cause the command to be rejected.
-- For WPA2 Enterprise with TLS authentication, a certificate named in `certificate` must already be installed on the reader (see `set_update_cert`).
-- For `uap0` (hotspot), `ssid` and `ssidPassword` are required when security is enabled.
-
-### Cellular Configuration
-
-- `activeSim` must be `psim` (physical SIM) or `esim` (embedded SIM). The chosen SIM must be physically present or provisioned on the reader.
-- An incorrect APN value will prevent the cellular interface from establishing a data connection.
-
-### Security Note
-
-- Never hardcode Wi-Fi passwords, WPA2 Enterprise credentials, cellular PINs, or hotspot passwords in your payload. Supply sensitive values from a secrets manager or environment variable at runtime.

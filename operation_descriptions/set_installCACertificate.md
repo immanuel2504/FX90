@@ -35,25 +35,3 @@ Have the CA certificate's PEM content ready before sending this command. Invalid
 | Certificate validity | Confirm the CA certificate is not expired before installing it. An expired CA root will still install but will fail to validate any certificates it issued. |
 | Intended use | Know which MQTT broker or HTTP endpoint TLS certificate is issued by this CA, so you can verify the chain after installation. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or TLS validation to be unavailable.
-
-### Required Fields
-
-- `name` and `content` are both required in the payload. Omitting either will cause the command to be rejected.
-
-### PEM Content
-
-- `content` must be a valid, complete PEM-encoded certificate string. The string must begin with `-----BEGIN CERTIFICATE-----` and end with `-----END CERTIFICATE-----`. Truncated or malformed PEM content will be rejected.
-- Only CA certificates (root or intermediate) should be provided via this command. Device or client certificates must be installed using `set_update_cert` instead.
-
-### Apply Timing
-
-- The CA certificate is available on the reader immediately after the command is acknowledged.
-- TLS connections that rely on this CA for chain validation will be able to establish only after the certificate is installed.
-- A reboot is not required.
-
-### Security Note
-
-- CA certificate PEM content is not a secret, but ensure you are installing the correct, trusted CA. Installing an incorrect or untrusted CA will allow rogue certificates signed by that CA to be validated by the reader.

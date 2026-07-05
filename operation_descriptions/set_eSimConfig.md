@@ -35,15 +35,3 @@ Use `get_eSimConfig` first to retrieve the exact profile nickname available on t
 | Profile nickname | The exact nickname of the eSIM profile to enable, as returned by `get_eSimConfig`. The nickname must match exactly - case-sensitive. |
 | Active SIM setting | After enabling an eSIM profile, confirm the `wan0.activeSim` is set to `esim` in the network configuration (see `set_network`) for the profile to be used for data. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or the cellular interface to remain unchanged.
-
-### Operation
-
-- `operation` must be a supported value (`enable`). An unrecognized operation string will be rejected.
-
-### Profile Nickname
-
-- `profileNickName` must exactly match a profile nickname returned by `get_eSimConfig`. An unknown or mismatched nickname will cause the command to fail.
-- The nickname comparison is case-sensitive. Use the exact string from the `get_eSimConfig` response.

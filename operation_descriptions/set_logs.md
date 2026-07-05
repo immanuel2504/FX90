@@ -38,24 +38,3 @@ Decide which logging areas you need to change before sending this command. Verbo
 | Log level | The verbosity level to apply: `DEBUG` (most verbose), `INFO`, `WARNING`, or `ERROR` (least verbose). |
 | Storage impact | `DEBUG` level generates the most data. Confirm available flash storage before enabling debug logging for extended periods. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or log data to be unavailable.
-
-### Radio Packet Logging
-
-- `radioPacketLog` must be set to `true` before RF-level diagnostic data will be written. Downloading `get_radio_pkt_logs` while this is `false` returns an empty or stale file.
-- Radio packet logging consumes flash storage over time. Disable it (`radioPacketLog: false`) after completing diagnostic collection.
-
-### Component Log Levels
-
-- Component names in `logLevels` must exactly match the supported values (`radio_control`, `reader_gateway`). Unrecognized component names will be ignored or rejected.
-- Log level values must be one of `DEBUG`, `INFO`, `WARNING`, or `ERROR`. Invalid strings will cause the command to be rejected.
-
-### Apply Timing
-
-- Log configuration changes take effect immediately after the command is acknowledged. Previously written log data is not affected.
-
-### Security Note
-
-- No credentials or secrets are required in the `set_logs` payload. Do not include authentication data in log configuration requests.

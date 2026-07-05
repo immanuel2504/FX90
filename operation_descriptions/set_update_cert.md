@@ -43,33 +43,3 @@ Gather all certificate source details before sending this command. An invalid UR
 | Download credentials | Required only when `authenticationType` is `BASIC`. Provide `authenticationOptions.username` and `authenticationOptions.password`. |
 | PFX password | The password protecting the PFX file. Required if the PFX was exported with password protection. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or the certificate to be rejected.
-
-### Required Fields
-
-- `name`, `type`, `url`, and `authenticationType` are all required in the payload. Omitting any of these will cause the command to be rejected.
-
-### Certificate Type
-
-- `type` must be one of `client`, `server`, or `app`. An unrecognized type string will be rejected.
-
-### Download URL and Connectivity
-
-- The reader must have network connectivity to reach the provided URL at the time this command is sent.
-- HTTPS is strongly recommended for all certificate download URLs. Using HTTP exposes the certificate file to interception in transit.
-
-### Authentication
-
-- When `authenticationType` is `BASIC`, both `authenticationOptions.username` and `authenticationOptions.password` must be provided. Omitting either field will cause download authentication to fail.
-- When `authenticationType` is `NONE`, the `authenticationOptions` object must be omitted or empty.
-
-### PFX Password
-
-- `pfxPassword` is required when the PFX file was exported with a password. Providing the wrong password will cause certificate import to fail.
-
-### Security Note
-
-- Never hardcode download credentials (`username`, `password`) or the `pfxPassword` in your payload. Supply all sensitive values from a secrets manager or environment variable at runtime.
-- Use HTTPS for the download URL to prevent the PFX file and credentials from being intercepted in transit.

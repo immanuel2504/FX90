@@ -1,7 +1,6 @@
 # REST ↔ MQTT mapping
 
-Generated from `RestAPI/FXR90.yaml`, `RestAPI/paths/`, and `tag_config.json`.
-Regenerate: `python scripts/generate_rest_mqtt_map.py`
+Reference mapping between REST endpoints and MQTT commands (from `RestAPI/paths/` and `tag_config.json`).
 
 ## Summary
 

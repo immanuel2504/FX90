@@ -33,10 +33,3 @@ Confirm that the reader gateway is configured and active before using this comma
 | Reader gateway state | Confirm the reader gateway is configured with valid endpoint settings (see `get_config`) before triggering data delivery. |
 | Buffered data | This command is only meaningful when tag event data is buffered and awaiting delivery. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to be rejected.
-
-### Payload Requirements
-
-- The `payload` field must be an empty object (`{}`). No additional properties are accepted. Providing any fields within the payload object will cause the command to be rejected.

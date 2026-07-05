@@ -32,9 +32,3 @@ Plan for downtime — the reader will disconnect until it finishes booting. In-f
 |---|---|
 | Downtime window | Allow 1–3 minutes for reboot and MQTT reconnect |
 
-## 4. Rules and Constraints
-
-### Payload Requirements
-
-- The `payload` field must be an empty object (`{}`). No device ID or other fields are required.
-- Provide a unique `command_id` on every request.

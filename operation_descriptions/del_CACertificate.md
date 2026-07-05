@@ -28,10 +28,3 @@ Confirm the CA certificate is safe to remove before sending this command. Deleti
 | CA certificate name | The exact `name` of the CA certificate to delete, as returned by `get_CACertificates`. The name is case-sensitive. |
 | Active use check | Identify all MQTT or HTTPS endpoints whose server or client certificates are issued by this CA. Remove those dependencies or install a replacement CA before deleting. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail.
-
-- `name` is required in the payload. Omitting it will cause the command to be rejected.
-- The CA certificate identified by `name` must exist on the reader. Attempting to delete a CA that is not installed will result in an error.
-- Deleting a CA certificate currently used for TLS chain validation will immediately break TLS connections that rely on it for peer verification. Install a replacement CA before removing the existing one if continuity is required.

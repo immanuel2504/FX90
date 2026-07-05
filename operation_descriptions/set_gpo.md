@@ -36,15 +36,3 @@ Know the port number and desired output state before sending this command. Setti
 | Output state | `true` to drive the pin HIGH (active), `false` to drive the pin LOW (inactive). |
 | External device wiring | Confirm the wired device is rated for the GPO pin's voltage and current output before asserting a HIGH state. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or drive the wrong output.
-
-### Port Selection
-
-- `port` must be a valid integer (1-4). The maximum value depends on the reader model - use `get_readerCapabilities` to confirm `numGPOs`. Specifying a port beyond the model's capacity will cause the command to fail.
-- Only one GPO pin can be set per `set_gpo` request. To control multiple pins, send one request per pin.
-
-### State Values
-
-- `state` must be a boolean: `true` for HIGH and `false` for LOW. String values such as `"HIGH"` or `"LOW"` are not valid and will be rejected.

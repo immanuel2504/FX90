@@ -35,16 +35,3 @@ Measure the physical cable runs for each antenna port before sending this comman
 | Cable loss per hundred feet | The attenuation rating of the cable type in dBm per 100 feet. This value is specified by the cable manufacturer. |
 | Available read points | Use `get_readPoints` to confirm which read point IDs are available on this reader before sending. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or result in incorrect RF compensation.
-
-### Read Point Keys
-
-- Read point keys must be provided as numeric strings (`"1"`, `"2"`, `"3"`, `"4"`). Providing integer keys or other formats will be rejected.
-- Do not include keys for read points that are not physically present on the reader. Use `get_readPoints` to verify available ports.
-
-### Cable Loss Values
-
-- `cableLength` and `cableLossPerHundredFt` are required within each read point object. Omitting either field for an included read point will cause the command to fail.
-- Values must be positive numbers. Zero or negative values are not valid cable specifications.

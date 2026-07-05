@@ -36,24 +36,3 @@ Confirm that the NTP server is reachable from the reader's network before sendin
 | Fallback servers | Optional - provide `server1` and `server2` for resilience. If the primary is unreachable, the reader will attempt fallback servers in order. |
 | Network access | NTP uses UDP port 123. Ensure this port is open between the reader and the NTP server on all network paths. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or time synchronization to be unavailable.
-
-### Required Fields
-
-- `server` is required in the payload. Omitting it will cause the command to be rejected.
-
-### Server Values
-
-- `server`, `server1`, and `server2` must be valid hostnames or IP addresses. Empty strings or malformed addresses will be rejected.
-- The reader will use `server1` and `server2` only if the primary `server` is unreachable. Both are optional.
-
-### Apply Timing
-
-- The NTP server configuration takes effect immediately after the command is acknowledged.
-- The reader attempts synchronization shortly after the command is applied. Verify the sync status using `get_status` (check the `ntp.offset` field).
-
-### Security Note
-
-- No credentials or secrets are required in the `set_ntpServer` payload. Do not include authentication data in NTP configuration requests.

@@ -36,15 +36,3 @@ Confirm the current password and the target username before sending this command
 | Current password | The account's existing password. Required for authentication - the command will fail if this is incorrect. |
 | New password | The new password to set. Apply your organization's password policy (minimum length, complexity requirements). |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or the password change to be rejected.
-
-### Required Fields
-
-- `userName`, `currentPassword`, and `newPassword` are all required. Omitting any field will cause the command to be rejected.
-
-### Password Policy
-
-- The `newPassword` must meet the reader's password complexity requirements. A password that does not meet minimum length or character requirements will be rejected.
-- Do not reuse the current password as the new password.

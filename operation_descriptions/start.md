@@ -63,16 +63,3 @@ The `doNotPersistState` field controls whether the reader resumes scanning autom
 
 ---
 
-## 4. Rules and Constraints
-
-### Command Envelope
-
-- `command` must be exactly `start`.
-- `command_id` must be a unique, non-empty string.
-- `payload` must be present; it may be empty (`{}`).
-
-### Field-Level Rules
-
-- `scanType` - array of strings. Allowed values: `"rfid"`, `"ble"`.
-- `applyImpinjGen2X` - boolean.
-- `doNotPersistState` - boolean.

@@ -33,10 +33,3 @@ Determine the appropriate rxSawFilter state for the deployment environment befor
 | Filter state | `true` to enable rxSawFilter (better selectivity in noisy environments), or `false` to disable it (better sensitivity in clean environments). |
 | Deployment RF environment | Consider enabling the filter when the reader operates near other UHF RFID systems or dense RF infrastructure. Disable it in quiet, isolated RF environments to maximize read range. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail.
-
-### Payload Requirements
-
-- `preSelection` is required in the payload and must be a boolean (`true` or `false`). Omitting it or supplying a non-boolean value will cause the command to be rejected.

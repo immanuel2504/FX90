@@ -43,15 +43,3 @@ Decide on your mode configuration before sending this command. Changing mode whi
 | Environment profile | Optional - set to match the RF environment at the deployment site. Use `AUTO_DETECT` if unsure. |
 | Active inventory | If the reader is currently reading tags, send `stop` before changing the mode to avoid disrupting ongoing inventory. |
 
-## 4. Rules and Constraints
-
-Violating any of these rules will cause the command to fail or inventory to behave unexpectedly.
-
-### Mode Configuration
-
-- `modeSpecificSettings` is only required for modes that define one (e.g., `INVENTORY`, `PORTAL`, `DIRECTIONALITY`). Including a `modeSpecificSettings` sub-object for a mode type that does not use it may be ignored or rejected.
-- For `DIRECTIONALITY` mode, a zone plan or beam configuration must be supplied within `modeSpecificSettings`.
-
-### Antenna and Power
-
-- Transmit power values must be within the limits set by the reader's configured region (`get_region`). Values exceeding `maxTxPowerSupported` will be rejected.
