@@ -18,6 +18,54 @@ var CATEGORY_LABELS = {
   ble: 'Bluetooth LE'
 };
 
+var displayNameConfig = {
+  commandSchemas: {},
+  overrides: {},
+  aliases: {}
+};
+
+function loadDisplayNameConfig(commandSchemas, tagConfig) {
+  var display = {};
+  (commandSchemas.tags || []).forEach(function (tag) {
+    if (tag.name && tag['x-displayName']) display[tag.name] = tag['x-displayName'];
+  });
+  displayNameConfig.commandSchemas = display;
+  displayNameConfig.overrides = tagConfig.display_name_overrides || {};
+  displayNameConfig.aliases = tagConfig.display_name_aliases || {};
+}
+
+function fallbackOperationSummary(opName) {
+  return String(opName || '')
+    .replace(/-/g, '_')
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replace(/_/g, ' ')
+    .replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+}
+
+function resolveOperationSummary(opName, fallback) {
+  if (displayNameConfig.overrides[opName]) return displayNameConfig.overrides[opName];
+  var tagName = displayNameConfig.aliases[opName] || opName;
+  if (displayNameConfig.commandSchemas[tagName]) return displayNameConfig.commandSchemas[tagName];
+  var lower = tagName.toLowerCase();
+  var keys = Object.keys(displayNameConfig.commandSchemas);
+  for (var i = 0; i < keys.length; i++) {
+    if (keys[i].toLowerCase() === lower) return displayNameConfig.commandSchemas[keys[i]];
+  }
+  return fallback || fallbackOperationSummary(opName);
+}
+
+function applyOperationSummaries(spec) {
+  var paths = spec.paths || {};
+  Object.keys(paths).forEach(function (path) {
+    Object.keys(paths[path]).forEach(function (method) {
+      var op = paths[path][method];
+      if (!op || typeof op !== 'object') return;
+      var opName = String(path || '').replace(/^\//, '');
+      op.summary = resolveOperationSummary(opName, op.summary);
+    });
+  });
+}
+
 function formatCategoryLabel(tag) {
   if (!tag) return '';
   if (CATEGORY_LABELS[tag]) return CATEGORY_LABELS[tag];
@@ -2062,15 +2110,27 @@ function wireSearchShortcut() {
 wireBackToTop();
 wireSearchShortcut();
 
-fetch('openapi_md.json?v=' + Date.now())
-   .then(function (r) {
-     if (!r.ok) throw new Error('Failed to load openapi_md.json: ' + r.status);
-     return r.json();
-   })
-   .then(render)
-   .catch(function (err) {
-     document.getElementById('content').innerHTML = '<p class="error-msg">Error loading spec: ' + escHtml(err.message) + '</p>';
-   });
+function fetchJson(url) {
+  return fetch(url + (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + Date.now())
+    .then(function (r) {
+      if (!r.ok) throw new Error('Failed to load ' + url + ': ' + r.status);
+      return r.json();
+    });
+}
+
+Promise.all([
+  fetchJson('openapi_md.json'),
+  fetchJson('../Command%20Schemas.json'),
+  fetchJson('../tag_config.json')
+])
+  .then(function (results) {
+    loadDisplayNameConfig(results[1], results[2]);
+    applyOperationSummaries(results[0]);
+    render(results[0]);
+  })
+  .catch(function (err) {
+    document.getElementById('content').innerHTML = '<p class="error-msg">Error loading spec: ' + escHtml(err.message) + '</p>';
+  });
  
 var BASE_FONT_PX = 15;
 var STEP = 0.05, MIN = 0.5, MAX = 2.0, KEY = 'mqtt-font-scale';
