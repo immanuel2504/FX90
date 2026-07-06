@@ -32,9 +32,9 @@ type:
   type: string
 ```
 
-So `"type": "client"`, `"type": "server"`, or `"type": "abc"` would all be valid. The MQTT `Command Schemas.json` already restricts this to `enum: [client, server, app]` — please copy the same `enum` into `openAPISpec.yaml` (note `app` is a valid third value).
+So `"type": "client"`, `"type": "server"`, or `"type": "abc"` would all be valid. The Zebra IoTC MQTT documentation already restricts this to `enum: [client, server, app]` — please copy the same `enum` into `openAPISpec.yaml` (note `app` is a valid third value).
 
-2. **Required fields** — no fields are marked `required`, so an empty body would be valid according to the schema. `Command Schemas.json` already declares `required: [name, type, url]` — please align `openAPISpec.yaml`.
+2. **Required fields** — no fields are marked `required`, so an empty body would be valid according to the schema. The Zebra IoTC MQTT documentation already declares `required: [name, type, url]` — please align `openAPISpec.yaml`.
 
 Also, please add:
 

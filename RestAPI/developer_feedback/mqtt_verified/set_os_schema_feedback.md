@@ -14,14 +14,14 @@ I reviewed the `set_os` command and found a few documentation gaps. `authenticat
 
 - The schema defines the credentials object as `options` (containing `username`/`password`).
 - The `set_os` example uses `authenticationOptions` instead of `options`.
-- **`Command Schemas.json` confirms the correct field name is `options`** (with `required: [username, password]`). So the schema field name is right and only the **example** is wrong — please fix the example to use `options`.
+- **The Zebra IoTC MQTT documentation confirms the correct field name is `options`** (with `required: [username, password]`). So the schema field name is right and only the **example** is wrong — please fix the example to use `options`.
 
 ---
 
 ## 2. Field descriptions and missing optional fields
 
 - The request fields (`options.username`, `options.password`, `url`) have no descriptions in `openAPISpec.yaml`.
-- `Command Schemas.json` already has descriptions, plus extra fields not in `openAPISpec.yaml`: `verifyPeer`, `verifyHost`, `CACertificateFileLocation`, `CACertificateFileContent`, `headers.Authorization`, and `retry`. If these apply to REST, please add them and align descriptions.
+- The Zebra IoTC MQTT documentation already has descriptions, plus extra fields not in `openAPISpec.yaml`: `verifyPeer`, `verifyHost`, `CACertificateFileLocation`, `CACertificateFileContent`, `headers.Authorization`, and `retry`. If these apply to REST, please add them and align descriptions.
 
 ---
 

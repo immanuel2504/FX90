@@ -32,15 +32,15 @@ But the `set_os` example uses `authenticationOptions` instead:
 }
 ```
 
-So the schema field name (`options`) and the example field name (`authenticationOptions`) do not match. `Command Schemas.json` confirms the correct field name is **`options`** (with `required: [username, password]`), so the schema is right and only the **example** needs fixing to use `options`.
+So the schema field name (`options`) and the example field name (`authenticationOptions`) do not match. The Zebra IoTC MQTT documentation confirms the correct field name is **`options`** (with `required: [username, password]`), so the schema is right and only the **example** needs fixing to use `options`.
 
 `authenticationType` already has an `enum` (`NONE`, `BASIC`) — thank you.
 
 Also, please:
 
 * fix the example to use `options` instead of `authenticationOptions`
-* add descriptions for `options.username`, `options.password`, and `url` (already present in `Command Schemas.json`)
-* consider adding the extra fields from `Command Schemas.json` (`verifyPeer`, `verifyHost`, `CACertificateFileLocation`, `CACertificateFileContent`, `headers`, `retry`) if supported over REST
+* add descriptions for `options.username`, `options.password`, and `url` (already present in the Zebra IoTC MQTT documentation)
+* consider adding the extra fields from the Zebra IoTC MQTT documentation (`verifyPeer`, `verifyHost`, `CACertificateFileLocation`, `CACertificateFileContent`, `headers`, `retry`) if supported over REST
 * add a response schema for the `200` response (currently `description: OK` only, with no body defined)
 
 This will make the OpenAPI specification clearer and avoid confusion for API users.

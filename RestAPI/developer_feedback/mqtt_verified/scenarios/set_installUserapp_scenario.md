@@ -21,7 +21,7 @@ When I call `PUT /cloud/apps/install`, the `openAPISpec.yaml` example request is
 }
 ```
 
-But `Command Schemas.json` (the MQTT source) defines the credentials object as `options`, not `authenticationOptions`:
+But the Zebra IoTC MQTT documentation defines the credentials object as `options`, not `authenticationOptions`:
 
 ```json
 {
@@ -37,6 +37,6 @@ So the two specs disagree on the field name (`authenticationOptions` vs `options
 `authenticationType` already has an `enum` (`NONE`, `BASIC`) — thank you. Two more items:
 
 - None of the fields are marked `required` in `openAPISpec.yaml`, so an empty body `{}` would be valid even though `filename` and `url` are needed. Which fields are required?
-- `Command Schemas.json` also documents extra fields (`verifyPeer`, `verifyHost`, `CACertificateFileLocation`, `CACertificateFileContent`, `headers`, `retry`) that are missing from `openAPISpec.yaml` — should these be added for REST too?
+- The Zebra IoTC MQTT documentation also documents extra fields (`verifyPeer`, `verifyHost`, `CACertificateFileLocation`, `CACertificateFileContent`, `headers`, `retry`) that are missing from `openAPISpec.yaml` — should these be added for REST too?
 
 This will make the OpenAPI specification clearer and avoid confusion for API users.

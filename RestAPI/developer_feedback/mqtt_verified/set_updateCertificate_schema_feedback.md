@@ -13,7 +13,7 @@ I reviewed the `set_updateCertificate` command and found a few documentation gap
 ## 1. `type` has no `enum`
 
 - `type` is `type: string` with example `client`, but there is no `enum`.
-- **`Command Schemas.json` already defines this** as `enum: [client, server, app]` with the description "Certificate type. Allowed values: client, server, app." Please copy the same `enum` (note `app` is a third valid value) into `openAPISpec.yaml`.
+- **The Zebra IoTC MQTT documentation already defines this** as `enum: [client, server, app]` with the description "Certificate type. Allowed values: client, server, app." Please copy the same `enum` (note `app` is a third valid value) into `openAPISpec.yaml`.
 
 ---
 
@@ -27,7 +27,7 @@ I reviewed the `set_updateCertificate` command and found a few documentation gap
 ## 3. No `required` fields declared
 
 - No request fields are marked `required`.
-- **`Command Schemas.json` already declares** `required: [name, type, url]` (with `minLength: 1`). Please align `openAPISpec.yaml` to the same.
+- **The Zebra IoTC MQTT documentation already declares** `required: [name, type, url]` (with `minLength: 1`). Please align `openAPISpec.yaml` to the same.
 
 ---
 
@@ -40,4 +40,4 @@ I reviewed the `set_updateCertificate` command and found a few documentation gap
 
 ## Note
 
-The MQTT `set_updateCertificate` schema in `Command Schemas.json` is complete (enum, required, descriptions). This is really a request to bring `openAPISpec.yaml` in line with it.
+The `set_updateCertificate` MQTT command in the Zebra IoTC documentation is complete (enum, required, descriptions). This is really a request to bring `openAPISpec.yaml` in line with it.
