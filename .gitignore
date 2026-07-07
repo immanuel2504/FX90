@@ -9,3 +9,6 @@ venv/
 Thumbs.db
 .cursor/
 .codex-temp/
+
+# Office temp/lock files
+~$*
