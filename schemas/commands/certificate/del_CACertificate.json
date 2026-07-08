@@ -11,6 +11,10 @@
       "x-stoplight": {
         "id": "4yan4r9nrytt1"
       },
+      "enum": [
+        "del_CACertificate"
+      ],
+      "example": "del_CACertificate",
       "description": "The value for the key command must be del_CACertificate"
     },
     "command_id": {

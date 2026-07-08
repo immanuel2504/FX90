@@ -26,11 +26,12 @@
       "properties": {
         "color": {
           "type": "string",
-          "description": "LED color to apply. Allowed values: red, amber, green, off.",
+          "description": "LED color to apply. Allowed values: red, amber, green, blue, off.",
           "enum": [
             "red",
             "amber",
             "green",
+            "blue",
             "off"
           ]
         },

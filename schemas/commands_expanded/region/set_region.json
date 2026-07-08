@@ -25,11 +25,24 @@
       "properties": {
         "country": {
           "type": "string",
+          "description": "Country name. Valid values can be retrieved from get_SupportedRegionList.",
           "example": "Canada"
         },
         "standardname": {
           "type": "string",
+          "description": "Regulatory standard name for the chosen country. Valid values can be retrieved from get_SupportedStandardList.",
           "example": "CANADA_FCC_15"
+        },
+        "isLBT": {
+          "type": "boolean",
+          "description": "Optional. Enables Listen-Before-Talk when supported by the selected standard."
+        },
+        "channeldata": {
+          "type": "array",
+          "description": "Optional channel frequency list (kHz) to apply when channel selection is supported by the selected standard.",
+          "items": {
+            "type": "number"
+          }
         }
       }
     }

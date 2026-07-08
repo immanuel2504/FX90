@@ -20,7 +20,7 @@ Use this command to:
 | Pattern Name | CA Certificate Installation |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [get_CACertificates](get_CACertificates.md), [del_CACertificate](del_CACertificate.md), [set_update_cert](set_update_cert.md) |
+| Related Commands | [del_CACertificate](del_CACertificate.md), [set_update_cert](set_update_cert.md) |
 | Required Payload Fields | `name`, `content` |
 | Supported API Versions | V1.0 |
 

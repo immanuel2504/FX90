@@ -246,7 +246,6 @@
   "excluded_operations": [
     "localrest_login",
     "set_installCACertificate",
-    "get_CACertificates",
     "del_CACertificate"
   ],
   "display_name_aliases": {

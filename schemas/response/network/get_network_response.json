@@ -121,6 +121,9 @@
       "x-stoplight": {
         "id": "39zra4osdjxd3"
       },
+      "enum": [
+        "get_network"
+      ],
       "description": "The value for the key command must be get_network",
       "example": "get_network"
     },

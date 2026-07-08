@@ -7,6 +7,9 @@
   "properties": {
     "command": {
       "type": "string",
+      "enum": [
+        "get_availableWifiNetworks"
+      ],
       "example": "get_availableWifiNetworks",
       "description": "The type of command being executed or responded to.",
       "x-stoplight": {

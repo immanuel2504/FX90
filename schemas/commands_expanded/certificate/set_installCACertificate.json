@@ -11,6 +11,10 @@
       "x-stoplight": {
         "id": "0c7zf7xokhhsw"
       },
+      "enum": [
+        "set_InstallCACertificate"
+      ],
+      "example": "set_InstallCACertificate",
       "description": "The value for the key command must be set_InstallCACertificate"
     },
     "command_id": {

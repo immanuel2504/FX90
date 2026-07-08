@@ -15,7 +15,7 @@ Use this command to:
 | Pattern Name | CA Certificate Deletion |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
 | Applies To | FXR90 |
-| Related Commands | [get_CACertificates](get_CACertificates.md), [set_installCACertificate](set_installCACertificate.md), [del_certs](del_certs.md) |
+| Related Commands | [set_installCACertificate](set_installCACertificate.md), [del_certs](del_certs.md) |
 | Required Payload Fields | `name` |
 | Supported API Versions | V1.0 |
 
@@ -25,6 +25,6 @@ Confirm the CA certificate is safe to remove before sending this command. Deleti
 
 | What You Need | Details |
 |---|---|
-| CA certificate name | The exact `name` of the CA certificate to delete, as returned by `get_CACertificates`. The name is case-sensitive. |
+| CA certificate name | The exact `name` of the CA certificate to delete, as returned by `get_certs`. The name is case-sensitive. |
 | Active use check | Identify all MQTT or HTTPS endpoints whose server or client certificates are issued by this CA. Remove those dependencies or install a replacement CA before deleting. |
 

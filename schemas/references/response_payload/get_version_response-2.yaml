@@ -14,6 +14,7 @@ properties:
     - FX7500
     - FX9600
     - ATR7000
+    - FXR60
   radioControlApplication:
     type: string
     description: Version of the radio control application running on the reader.

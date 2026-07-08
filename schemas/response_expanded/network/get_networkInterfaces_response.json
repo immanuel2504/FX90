@@ -7,6 +7,9 @@
   "properties": {
     "command": {
       "type": "string",
+      "enum": [
+        "get_networkInterfaces"
+      ],
       "example": "get_networkInterfaces",
       "description": "The type of command being executed or responded to.",
       "x-stoplight": {

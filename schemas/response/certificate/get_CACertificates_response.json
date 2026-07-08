@@ -1,6 +1,0 @@
-{
-  "x-command": "get_CACertificates",
-  "x-category": "Certificate",
-  "x-status": "Missing in Response Schema",
-  "description": "List Installed CA Certificates"
-}
