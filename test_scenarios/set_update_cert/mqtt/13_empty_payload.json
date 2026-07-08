@@ -1,0 +1,5 @@
+{
+  "command": "set_update_cert",
+  "command_id": "test-set_update_cert",
+  "payload": {}
+}

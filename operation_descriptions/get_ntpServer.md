@@ -33,4 +33,4 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `ntpServer` | Is this the correct NTP server address? | An incorrect or unreachable NTP server causes clock drift, making event timestamps unreliable. |
+| `server` | Is this the correct NTP server address? | An incorrect or unreachable NTP server causes clock drift, making event timestamps unreliable. |

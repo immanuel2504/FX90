@@ -1,0 +1,10 @@
+{
+  "command": "set_req_usr_app",
+  "command_id": "test-set_req_usr_app",
+  "payload": {
+    "userapp": 12345,
+    "command": {
+      "message": "hello"
+    }
+  }
+}

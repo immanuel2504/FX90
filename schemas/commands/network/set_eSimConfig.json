@@ -33,11 +33,7 @@
           "description": "Nickname of the eSIM profile to apply the operation to.",
           "example": "gnd1"
         }
-      },
-      "required": [
-        "operation",
-        "profileNickName"
-      ]
+      }
     }
   },
   "required": [

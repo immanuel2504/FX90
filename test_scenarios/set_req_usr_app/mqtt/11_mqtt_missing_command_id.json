@@ -1,0 +1,9 @@
+{
+  "command": "set_req_usr_app",
+  "payload": {
+    "userapp": "sample",
+    "command": {
+      "message": "hello"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "ble": {
+    "enable": true
+  },
+  "definitelyNotARealField": 42
+}

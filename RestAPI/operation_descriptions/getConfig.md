@@ -32,6 +32,6 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `xmlConfig` | Is the XML configuration as expected? | Defines RF and reader behavior used during inventory operations. |
-| `readerGateway` | Are endpoint URLs and credentials correct? | Determines where tag data is delivered and how the reader authenticates. |
-| `gpiDefaults` | What are the default GPI states? | Ensures GPI-triggered logic starts from the expected initial state. |
+| `xml` | Is the XML configuration as expected? | Defines RF and reader behavior used during inventory operations. |
+| `READER-GATEWAY` | Are endpoint URLs and credentials correct? | Determines where tag data is delivered and how the reader authenticates. |
+| `GPIO-LED` | Are the GPO/LED defaults and event actions as expected? | Ensures GPIO-triggered logic starts from the expected initial state. |

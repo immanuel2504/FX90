@@ -1,31 +1,63 @@
 title: Available Wi-Fi Networks Response Payload
 type: object
-description: Contains the list of available Wi-Fi networks visible to the reader.
+description: Available Wi-Fi networks discovered by the reader.
 properties:
   availableWifiNetworks:
     type: array
-    description: Available Wi-Fi networks visible to the reader.
+    description: List of detected Wi-Fi access points.
     items:
       type: object
       properties:
         capabilities:
           type: array
-          description: Wi-Fi capabilities reported by the access point.
+          description: Security capabilities advertised by the access point.
           items:
             type: string
         configuration:
           type: object
-          description: Saved reader configuration for the Wi-Fi network.
+          description: Reader-side connection settings associated with the access point.
           properties:
             autoConnect:
               type: boolean
-              description: Whether the reader is configured to automatically connect
-                to this network.
+              description: Whether the reader is configured to auto-connect to this network.
+            security:
+              type: object
+              description: Optional security metadata for the access point.
+              properties:
+                type:
+                  type: string
+                  description: Security mode name reported for the access point.
+                details:
+                  type: object
+                  description: Optional security details for enterprise authentication.
+                  properties:
+                    auth:
+                      type: string
+                      description: Authentication method.
+                    innerAuth:
+                      type: string
+                      description: Inner authentication method.
+                    username:
+                      type: string
+                      description: Username configured for enterprise authentication.
+                    password:
+                      type: string
+                      description: Password configured for enterprise authentication.
+                    cert:
+                      type: string
+                      description: Certificate configured for enterprise authentication.
+          required:
+          - autoConnect
         essid:
           type: string
-          description: Wi-Fi network name.
+          description: SSID broadcast name of the Wi-Fi network.
         signalStrength:
           type: string
-          description: Wi-Fi signal strength reported by the reader.
+          description: Signal strength reported for the Wi-Fi network.
+      required:
+      - capabilities
+      - configuration
+      - essid
+      - signalStrength
 required:
 - availableWifiNetworks

@@ -4,21 +4,16 @@ description: Sets the reader App LED to the specified color and behavior.
 properties:
   color:
     type: string
-    description: 'LED color to apply. Allowed values: red, amber, green, blue, off.'
+    description: The color of the LED (red, amber, green, blue, off).
     enum:
     - red
     - amber
     - green
     - blue
     - 'off'
-  seconds:
-    type: integer
-    description: Duration in seconds for the LED state to remain active.
-    default: 60
   flash:
     type: boolean
-    description: Whether the LED should flash while the state is active.
-required:
-- color
-- seconds
-- flash
+    description: Whether the LED should blink.
+  seconds:
+    type: number
+    description: Duration in seconds. Use 0 for indefinite.

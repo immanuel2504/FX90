@@ -2,19 +2,6 @@ title: set_ntpServer_command
 x-stoplight:
   id: 7l4j4lf09zlzb
 type: object
-properties:
-  server:
-    type: string
-    description: NTP server host name or IP address.
-    example: time.google.com
-  server1:
-    type: string
-    description: Primary NTP server host name or IP address.
-    example: time1.google.com
-  server2:
-    type: string
-    description: Optional secondary NTP server host name or IP address.
-    example: time2.google.com
 required:
 - server
 examples:
@@ -22,3 +9,26 @@ examples:
   server1: time1.google.com
   server2: time2.google.com
 description: Sets the reader NTP server configuration.
+oneOf:
+- type: object
+  description: Use 'server' as the primary NTP server key (current convention)
+  properties:
+    server:
+      type: string
+      description: Primary NTP server address
+    server2:
+      type: string
+      description: Optional secondary NTP server address
+  required:
+  - server
+- type: object
+  description: Use 'server1' as the primary NTP server key (legacy convention)
+  properties:
+    server1:
+      type: string
+      description: Primary NTP server address
+    server2:
+      type: string
+      description: Optional secondary NTP server address
+  required:
+  - server1

@@ -2,13 +2,13 @@ type: object
 properties:
   availableOsUpgrades:
     type: object
-    description: Key-value map of OS upgrade packages currently available to the reader.
+    description: Placeholder object for available OS upgrades on the reader.
   cloudAgentApplication:
     type: string
-    description: Version of the cloud agent application running on the reader.
+    description: Version of the cloud agent application.
   model:
     type: string
-    description: Hardware model identifier of the reader.
+    description: Reader model identifier returned by the device.
     enum:
     - FXR90
     - FX7500
@@ -17,18 +17,18 @@ properties:
     - FXR60
   radioControlApplication:
     type: string
-    description: Version of the radio control application running on the reader.
+    description: Version of the radio control application.
   radioFirmware:
     type: string
-    description: Firmware version running on the RFID radio module.
+    description: Version of the radio firmware.
   readerApplication:
     type: string
-    description: Version of the main reader application software.
+    description: Version of the main reader application.
   revertBackFirmware:
     type: object
-    description: Firmware rollback information available on the reader.
+    description: Versions available for reverting the reader firmware.
   serialNumber:
     type: string
-    description: Unique serial number assigned to the reader.
+    description: Reader serial number.
 title: Get Version Response Payload
 description: Reader hardware and software version information.

@@ -1,0 +1,11 @@
+{
+  "command": "set_os",
+  "command_id": "test-set_os",
+  "payload": {
+    "authenticationType": "NONE",
+    "options": {
+      "username": "XXXX",
+      "password": "XXXX"
+    }
+  }
+}

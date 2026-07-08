@@ -40,5 +40,5 @@ Key fields to check in the response:
 | `numGPIs` | How many GPI pins are available? | Limits how many external input triggers (sensors, beam breaks) can be wired. |
 | `numGPOs` | How many GPO pins are available? | Limits how many external output devices (lights, gates) can be driven. |
 | `protocols` | Is LLRP listed? | Determines whether the reader can be managed via LLRP-based tools. |
-| `endpointTypes` | Which endpoint types are supported? | Governs which data delivery options can be configured in `set_config`. |
-| `apiVersions` | Which API versions are accepted? | Ensures the management application targets a compatible API version. |
+| `endpointTypesSupported` | Which endpoint types are supported? | Governs which data delivery options can be configured in `set_config`. |
+| `apiSupported.versions` | Which API versions are accepted? | Ensures the management application targets a compatible API version. |

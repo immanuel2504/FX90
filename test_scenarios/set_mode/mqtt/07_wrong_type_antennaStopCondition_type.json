@@ -1,0 +1,20 @@
+{
+  "command": "set_mode",
+  "command_id": "test-set_mode",
+  "payload": {
+    "type": "CUSTOM",
+    "environment": "HIGH_INTERFERENCE",
+    "antennaStopCondition": {
+      "type": 12345,
+      "value": 100
+    },
+    "antennas": [
+      1
+    ],
+    "component": "RC",
+    "delayBetweenAntennaCycles": {
+      "duration": 0,
+      "type": "DISABLED"
+    }
+  }
+}

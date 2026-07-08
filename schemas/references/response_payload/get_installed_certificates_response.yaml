@@ -1,10 +1,10 @@
 type: array
-description: Retrive installed certificates details
+description: Installed certificate details returned by the reader.
 minItems: 1
 uniqueItems: true
 x-examples:
   example-1:
-  - installTime: 'Mon Jun 21 12:38:03 2021'
+  - installTime: Mon Jun 21 12:38:03 2021
     issuerName: FXR90C5F1AB
     name: Reader Main Certificates
     publickey: ''
@@ -18,60 +18,44 @@ items:
   type: object
   description: single certificate details
   properties:
+    installTime:
+      type: string
+      description: Certificate installation timestamp on the reader.
+    issuerName:
+      type: string
+      description: Certificate issuer distinguished name.
     name:
       type: string
-      minLength: 1
-      description: Certificate name on the reader.
-      example: Reader Main Certificates
+      description: Certificate name as stored on the reader.
+    publickey:
+      type: string
+      description: PEM-formatted public key for the certificate.
+    serial:
+      type: string
+      description: Certificate serial number.
+    subjectName:
+      type: string
+      description: Certificate subject distinguished name.
     type:
       type: string
-      minLength: 1
-      description: 'Certificate type. Allowed values: server, client, app.'
-      example: server
+      description: Certificate type.
       enum:
       - server
       - client
       - app
-    installTime:
-      type: string
-      minLength: 1
-      description: Time when the certificate was installed on the reader.
-      example: Mon Jun 21 12:38:03 2021
-    issuerName:
-      type: string
-      minLength: 1
-      description: Issuer name recorded in the certificate.
-      example: FXR90C5F1AB
-    publickey:
-      type: string
-      description: Public key content for the certificate.
-    serial:
-      type: string
-      minLength: 1
-      description: Certificate serial number.
-      example: '410835777'
-    subjectName:
-      type: string
-      minLength: 1
-      description: Subject name recorded in the certificate.
-      example: FXR90C5F1AB
-    validityStart:
-      type: string
-      minLength: 1
-      description: Certificate validity start date.
-      example: 21/06/2021
     validityEnd:
       type: string
-      minLength: 1
-      description: Certificate validity end date.
-      example: 16/06/2041
+      description: Certificate validity end date/time.
+    validityStart:
+      type: string
+      description: Certificate validity start date/time.
   required:
-  - name
-  - type
   - installTime
   - issuerName
+  - name
   - publickey
   - serial
   - subjectName
-  - validityStart
+  - type
   - validityEnd
+  - validityStart

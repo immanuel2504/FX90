@@ -1,0 +1,8 @@
+{
+  "command": "set_eSimConfig_TYPO",
+  "command_id": "test-set_eSimConfig_TYPO",
+  "payload": {
+    "operation": "enable",
+    "profileNickName": "gnd1"
+  }
+}

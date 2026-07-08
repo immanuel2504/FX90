@@ -36,17 +36,6 @@
                   "type": "boolean",
                   "description": "Whether FastID is enabled.",
                   "example": true
-                },
-                "tidSelector": {
-                  "type": "string",
-                  "description": "TID word selector mask, if one was configured.",
-                  "enum": [
-                    "TID[0]",
-                    "TID[1]",
-                    "TID[2]",
-                    "TID[3]"
-                  ],
-                  "example": "TID[0]"
                 }
               },
               "required": [
@@ -108,7 +97,8 @@
               ]
             },
             "tagQuieting": {
-              "$ref": "../../references/shared/impinjTagQuieting.yaml"
+              "$ref": "../../references/shared/impinjTagQuieting.yaml",
+              "description": "Impinj TagQuieting configuration. Exactly one of basic or advanced must be provided."
             }
           },
           "additionalProperties": false
@@ -132,8 +122,7 @@
       "response": "success",
       "payload": {
         "fastID": {
-          "enabled": true,
-          "tidSelector": "TID[0]"
+          "enabled": true
         }
       }
     }

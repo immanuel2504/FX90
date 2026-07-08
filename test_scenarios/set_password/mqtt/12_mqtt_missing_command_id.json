@@ -1,0 +1,8 @@
+{
+  "command": "set_password",
+  "payload": {
+    "currentPassword": "change",
+    "newPassword": "Mypass@123",
+    "userName": "admin"
+  }
+}

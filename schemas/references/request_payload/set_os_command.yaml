@@ -3,37 +3,76 @@ type: object
 description: 'Update the OS software on the device
 
 
-  The HTTP Server should return json array of files available in the folder when query
-  HTTP GET to url provided
+  The HTTP Server should return json array of files available in the folder when query HTTP GET to url provided
 
 
-  HTTP1.1 GET http://10.17.231.77:8080/3.9.17 -> ["response.txt", "response_ext.txt"
-  ...]'
+  HTTP1.1 GET http://10.17.231.77:8080/3.9.17 -> ["response.txt", "response_ext.txt" ...]'
 properties:
   authenticationType:
     type: string
-    description: 'Authentication method used by the file server. Allowed values: NONE,
-      BASIC.'
+    description: Authentication method to use when downloading the OS image.
     enum:
     - NONE
     - BASIC
-    example: NONE
-  url:
-    type: string
-    description: URL of the file server location that hosts the firmware files.
-    example: http://10.17.231.168:8003/3_20_4
   options:
     type: object
-    description: BASIC authentication credentials for the file server.
+    description: Credentials object used when `authenticationType` is `BASIC`.
+    required:
+    - username
+    - password
     properties:
       username:
         type: string
         description: Username for BASIC authentication.
-        example: XXXX
       password:
         type: string
         description: Password for BASIC authentication.
-        example: XXXX
+  url:
+    type: string
+    description: URL to the OS image or update bundle.
+  verifyPeer:
+    type: boolean
+    description: Verify the server TLS peer certificate. Defaults to true when omitted.
+  verifyHost:
+    type: boolean
+    description: Verify the server hostname in the TLS certificate. Defaults to true when omitted.
+  CACertificateFileLocation:
+    type: string
+    description: Path on the device to a CA certificate file to trust for TLS.
+  CACertificateFileContent:
+    type: string
+    description: PEM-encoded CA certificate content; written to a temporary file when provided.
+  publicKeyFileLocation:
+    type: string
+    description: Path to a public key / certificate file to use for client TLS authentication.
+  publicKeyFileContent:
+    type: string
+    description: PEM-encoded public key / certificate content.
+  privateKeyFileLocation:
+    type: string
+    description: Path to a private key file to use for client TLS authentication.
+  privateKeyFileContent:
+    type: string
+    description: PEM-encoded private key content.
+  installedCertificateType:
+    type: string
+    description: Use an installed certificate by specifying its type.
+  installedCertificateName:
+    type: string
+    description: Name of an installed certificate to use.
+  headers:
+    type: object
+    description: Optional HTTP headers to include in the download request (e.g. Authorization).
+    additionalProperties:
+      type: string
+  retry:
+    type: object
+    description: Retry configuration for the download operation.
+    properties:
+      count:
+        type: integer
+      delayInSec:
+        type: integer
 required:
 - url
 - authenticationType

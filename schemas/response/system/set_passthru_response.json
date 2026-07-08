@@ -29,7 +29,8 @@
           "properties": {
             "response": {
               "type": "string",
-              "example": "Success: radioPacketLog: OFF"
+              "example": "Success: radioPacketLog: OFF",
+              "description": "The raw response string returned by the target component."
             }
           }
         },

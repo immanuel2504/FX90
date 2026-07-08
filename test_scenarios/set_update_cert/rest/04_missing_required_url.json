@@ -1,0 +1,10 @@
+{
+  "name": "reader",
+  "type": "client",
+  "authenticationType": "BASIC",
+  "options": {
+    "username": "zebra",
+    "password": "zebra"
+  },
+  "pfxPassword": "abcd12345"
+}

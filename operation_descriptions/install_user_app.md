@@ -19,7 +19,7 @@ Use this command to:
 | Supported API Versions | V1.0 |
 
 
-MQTT command key: `set_installUserapp`.
+MQTT command key: `install_user_app`.
 
 ## Before You Begin
 

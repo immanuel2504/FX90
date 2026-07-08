@@ -20,614 +20,7 @@
       "description": "A unique ID that will be echoed back in the command response by the reader."
     },
     "payload": {
-      "type": "object",
-      "description": "Updates reader network configuration using the REST PUT /cloud/network per-interface request shape. Exactly one interface key must be provided.",
-      "properties": {
-        "eth0": {
-          "type": "object",
-          "description": "Ethernet interface configuration.",
-          "properties": {
-            "IPV4": {
-              "type": "object",
-              "description": "IPv4 settings.Use dhcp:true for DHCP, or supply all static fields when dhcp:false.",
-              "properties": {
-                "dhcp": {
-                  "type": "boolean",
-                  "description": "Enable/disable DHCP for IPv4 on this interface.",
-                  "example": true
-                },
-                "ipAddress": {
-                  "type": "string",
-                  "description": "Static IPv4 address (required if dhcp is false).",
-                  "example": "10.233.46.47"
-                },
-                "gatewayAddress": {
-                  "type": "string",
-                  "description": "IPv4 gateway address (required if dhcp is false).",
-                  "example": "10.233.46.2"
-                },
-                "subnetMask": {
-                  "type": "string",
-                  "description": "IPv4 subnet mask (required if dhcp is false).",
-                  "example": "255.255.255.0"
-                },
-                "dnsAddress": {
-                  "type": "string",
-                  "description": "IPv4 DNS address (required if dhcp is false).",
-                  "example": "10.233.1.200"
-                },
-                "domainName": {
-                  "type": "string",
-                  "description": "IPv4 domain name (required if dhcp is false).",
-                  "example": "zlab.com"
-                }
-              }
-            },
-            "IPV6": {
-              "type": "object",
-              "description": "IPv6 settings. Use dhcp:true for DHCP, or supply all static fields when dhcp:false.",
-              "properties": {
-                "dhcp": {
-                  "type": "boolean",
-                  "description": "Enable/disable DHCP for IPv6 on this interface."
-                },
-                "ipAddress": {
-                  "type": "string",
-                  "description": "Static IPv6 address (required if dhcp is false)."
-                },
-                "gatewayAddress": {
-                  "type": "string",
-                  "description": "IPv6 gateway address (required if dhcp is false)."
-                },
-                "prefix": {
-                  "type": "string",
-                  "description": "IPv6 prefix (required if dhcp is false)."
-                },
-                "dnsAddress": {
-                  "type": "string",
-                  "description": "IPv6 DNS address (required if dhcp is false)."
-                },
-                "domainName": {
-                  "type": "string",
-                  "description": "IPv6 domain name (required if dhcp is false)."
-                }
-              }
-            },
-            "security": {
-              "type": "object",
-              "description": "Ethernet security settings. Set `enabled: true` to enable security. When enabled, include the appropriate security object: `802_1xEAP` for 802.1X authentication.\n",
-              "properties": {
-                "enable": {
-                  "type": "boolean",
-                  "example": false,
-                  "description": "Enable/disable security on this interface."
-                },
-                "802_1xEAP": {
-                  "type": "object",
-                  "description": "802.1X EAP security configuration (when enabled and securityType is 802_1xEAP).",
-                  "properties": {
-                    "authentication": {
-                      "type": "string",
-                      "description": "EAP authentication method: TLS, TTLS, or PEAP.",
-                      "enum": [
-                        "TLS",
-                        "TTLS",
-                        "PEAP"
-                      ],
-                      "example": "TLS"
-                    },
-                    "innerAuthentication": {
-                      "type": "string",
-                      "description": "Inner authentication method (for TTLS/PEAP): TLS or MSCHAPv2.",
-                      "enum": [
-                        "TLS",
-                        "MSCHAPv2"
-                      ],
-                      "example": "MSCHAPv2"
-                    },
-                    "username": {
-                      "type": "string",
-                      "description": "Username (for TTLS/PEAP with MSCHAPv2)."
-                    },
-                    "password": {
-                      "type": "string",
-                      "description": "Password (for TTLS/PEAP with MSCHAPv2)."
-                    },
-                    "certificate": {
-                      "type": "string",
-                      "description": "Client certificate name (for TLS-based methods)."
-                    }
-                  }
-                }
-              }
-            },
-            "enable": {
-              "type": "boolean",
-              "description": "Enable/disable the ethernet interface.",
-              "example": true
-            }
-          }
-        },
-        "mlan0": {
-          "type": "object",
-          "description": "WiFi station interface configuration.",
-          "properties": {
-            "IPV4": {
-              "type": "object",
-              "description": "IPv4 settings. Use dhcp:true for DHCP, or supply all static fields when dhcp:false.",
-              "properties": {
-                "dhcp": {
-                  "type": "boolean",
-                  "description": "Enable/disable DHCP for IPv4 on this interface."
-                },
-                "ipAddress": {
-                  "type": "string",
-                  "description": "Static IPv4 address (required if dhcp is false)."
-                },
-                "gatewayAddress": {
-                  "type": "string",
-                  "description": "IPv4 gateway address (required if dhcp is false)."
-                },
-                "subnetMask": {
-                  "type": "string",
-                  "description": "IPv4 subnet mask (required if dhcp is false)."
-                },
-                "dnsAddress": {
-                  "type": "string",
-                  "description": "IPv4 DNS address (required if dhcp is false)."
-                },
-                "domainName": {
-                  "type": "string",
-                  "description": "IPv4 domain name (required if dhcp is false)."
-                }
-              }
-            },
-            "IPV6": {
-              "type": "object",
-              "properties": {
-                "dhcp": {
-                  "type": "boolean",
-                  "description": "Enable/disable DHCP for IPv6 on this interface."
-                },
-                "ipAddress": {
-                  "type": "string",
-                  "description": "Static IPv6 address (required if dhcp is false)."
-                },
-                "gatewayAddress": {
-                  "type": "string",
-                  "description": "IPv6 gateway address (required if dhcp is false)."
-                },
-                "prefix": {
-                  "type": "string",
-                  "description": "IPv6 prefix (required if dhcp is false)."
-                },
-                "dnsAddress": {
-                  "type": "string",
-                  "description": "IPv6 DNS address (required if dhcp is false)."
-                },
-                "domainName": {
-                  "type": "string",
-                  "description": "IPv6 domain name (required if dhcp is false)."
-                }
-              }
-            },
-            "accesspoint": {
-              "type": "object",
-              "required": [
-                "essid",
-                "connect"
-              ],
-              "properties": {
-                "essid": {
-                  "type": "string",
-                  "description": "SSID of the WiFi network to connect to.",
-                  "example": "MyWiFiNetwork"
-                },
-                "connect": {
-                  "type": "boolean",
-                  "description": "Whether to immediately connect to this access point.",
-                  "example": true
-                },
-                "autoConn": {
-                  "type": "boolean",
-                  "description": "Whether to automatically reconnect on subsequent boots.",
-                  "example": true
-                },
-                "security": {
-                  "type": "object",
-                  "description": "WiFi security settings. Set `enable: true` to enable security. Include exactly ONE of the following: `WPA2Personal` or `WPA2Enterprise`. Do NOT include both in the same request.\n",
-                  "properties": {
-                    "enable": {
-                      "type": "boolean",
-                      "example": true,
-                      "description": "Enable/disable security on this access point."
-                    },
-                    "WPA2Personal": {
-                      "type": "object",
-                      "description": "WPA2 Personal (PSK) security options.",
-                      "properties": {
-                        "password": {
-                          "type": "string",
-                          "description": "Pre-shared key / passphrase.",
-                          "example": "MyP@ssword"
-                        }
-                      }
-                    },
-                    "WPA2Enterprise": {
-                      "type": "object",
-                      "description": "WPA2 Enterprise (802.1X EAP) security options.",
-                      "properties": {
-                        "authentication": {
-                          "type": "string",
-                          "description": "EAP authentication method: TLS, TTLS, or PEAP.",
-                          "enum": [
-                            "TLS",
-                            "TTLS",
-                            "PEAP"
-                          ],
-                          "example": "TLS"
-                        },
-                        "innerAuthentication": {
-                          "type": "string",
-                          "description": "Inner authentication method (for TTLS/PEAP): TLS or MSCHAPv2.",
-                          "enum": [
-                            "TLS",
-                            "MSCHAPv2"
-                          ],
-                          "example": "MSCHAPv2"
-                        },
-                        "username": {
-                          "type": "string",
-                          "description": "Username (for TTLS/PEAP with MSCHAPv2)."
-                        },
-                        "password": {
-                          "type": "string",
-                          "description": "Password (for TTLS/PEAP with MSCHAPv2)."
-                        },
-                        "certificate": {
-                          "type": "string",
-                          "description": "Client certificate name (for TLS-based methods). Certificate validity is verified via certificate manager."
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "enable": {
-              "type": "boolean",
-              "description": "Enable/disable the WiFi station interface.",
-              "example": true
-            }
-          }
-        },
-        "bnep0": {
-          "type": "object",
-          "description": "Bluetooth PAN interface configuration.",
-          "required": [
-            "dhcpStartAddress",
-            "dhcpEndAddress",
-            "discoverable",
-            "pairable",
-            "passKey",
-            "usePassKey",
-            "enable"
-          ],
-          "properties": {
-            "dhcpStartAddress": {
-              "type": "string",
-              "description": "Start of the DHCP address range served to connected Bluetooth clients.",
-              "example": "192.168.0.2"
-            },
-            "dhcpEndAddress": {
-              "type": "string",
-              "description": "End of the DHCP address range served to connected Bluetooth clients.",
-              "example": "192.168.0.10"
-            },
-            "discoverable": {
-              "type": "boolean",
-              "description": "Enable/disable Bluetooth discoverable mode.",
-              "example": true
-            },
-            "pairable": {
-              "type": "boolean",
-              "description": "Enable/disable Bluetooth pairable mode (accepting new pairing requests).",
-              "example": true
-            },
-            "passKey": {
-              "type": "string",
-              "description": "Bluetooth pairing passkey.",
-              "example": "1234"
-            },
-            "usePassKey": {
-              "type": "boolean",
-              "description": "Enable/disable the use of a Bluetooth pairing passkey.",
-              "example": false
-            },
-            "enable": {
-              "type": "boolean",
-              "description": "Enable/disable the Bluetooth interface.",
-              "example": true
-            }
-          }
-        },
-        "wan0": {
-          "type": "object",
-          "description": "WAN / cellular interface configuration.",
-          "required": [
-            "activeSim",
-            "enable"
-          ],
-          "properties": {
-            "activeSim": {
-              "type": "string",
-              "description": "Active SIM slot to configure.",
-              "enum": [
-                "psim",
-                "esim"
-              ],
-              "example": "psim"
-            },
-            "psim": {
-              "type": "object",
-              "description": "Physical SIM settings. Required when `activeSim` is `psim`.",
-              "properties": {
-                "apn": {
-                  "type": "string",
-                  "description": "Access Point Name.",
-                  "example": "internet"
-                },
-                "preferredNetworkType": {
-                  "type": "string",
-                  "description": "Preferred cellular network type.",
-                  "example": "AUTO"
-                },
-                "enableIPv6": {
-                  "type": "boolean",
-                  "description": "Enable/disable IPv6.",
-                  "example": true
-                }
-              }
-            },
-            "esim": {
-              "type": "object",
-              "description": "Embedded SIM settings. Required when `activeSim` is `esim`.",
-              "properties": {
-                "apn": {
-                  "type": "string",
-                  "description": "Access Point Name."
-                },
-                "preferredNetworkType": {
-                  "type": "string",
-                  "description": "Preferred cellular network type."
-                },
-                "enableIPv6": {
-                  "type": "boolean",
-                  "description": "Enable/disable IPv6."
-                }
-              }
-            },
-            "enable": {
-              "type": "boolean",
-              "example": true
-            }
-          }
-        },
-        "uap0": {
-          "type": "object",
-          "description": "WiFi Hotspot (Access Point) interface configuration.",
-          "required": [
-            "ssid",
-            "ssidPassword",
-            "isHidden",
-            "securityType",
-            "enable"
-          ],
-          "properties": {
-            "ssid": {
-              "type": "string",
-              "description": "Hotspot SSID name.",
-              "example": "FXR90Hotspot"
-            },
-            "ssidPassword": {
-              "type": "string",
-              "description": "Hotspot password.",
-              "example": "MyP@ssword"
-            },
-            "isHidden": {
-              "type": "boolean",
-              "description": "Set to true to hide the SSID from broadcast.",
-              "example": false
-            },
-            "securityType": {
-              "type": "string",
-              "description": "Security protocol for the hotspot.",
-              "enum": [
-                "WPA2Personal",
-                "WPA3Personal"
-              ],
-              "example": "WPA3Personal"
-            },
-            "countryCode": {
-              "type": "string",
-              "description": "Two-letter ISO 3166-1 country code for regulatory compliance.",
-              "example": "US"
-            },
-            "enable": {
-              "type": "boolean",
-              "example": true
-            }
-          }
-        }
-      },
-      "title": "set_network",
-      "examples": [
-        {
-          "eth0": {
-            "IPV4": {
-              "dhcp": true
-            },
-            "enable": true
-          }
-        },
-        {
-          "eth0": {
-            "IPV4": {
-              "dhcp": false,
-              "dnsAddress": "10.233.1.200",
-              "domainName": "zlab.com",
-              "gatewayAddress": "10.233.46.2",
-              "ipAddress": "10.233.46.47",
-              "subnetMask": "255.255.255.0"
-            },
-            "enable": true
-          }
-        },
-        {
-          "eth0": {
-            "security": {
-              "enable": true,
-              "802_1xEAP": {
-                "authentication": "TLS",
-                "certificate": "my-client-cert"
-              }
-            },
-            "enable": true
-          }
-        },
-        {
-          "eth0": {
-            "security": {
-              "enable": true,
-              "802_1xEAP": {
-                "authentication": "TTLS",
-                "innerAuthentication": "MSCHAPv2",
-                "username": "john.doe",
-                "password": "secret"
-              }
-            },
-            "enable": true
-          }
-        },
-        {
-          "mlan0": {
-            "IPV4": {
-              "dhcp": true
-            },
-            "enable": true
-          }
-        },
-        {
-          "mlan0": {
-            "IPV4": {
-              "dhcp": false,
-              "dnsAddress": "10.233.1.200",
-              "domainName": "zlab.com",
-              "gatewayAddress": "10.233.46.2",
-              "ipAddress": "10.233.46.47",
-              "subnetMask": "255.255.255.0"
-            },
-            "enable": true
-          }
-        },
-        {
-          "mlan0": {
-            "accesspoint": {
-              "autoConn": true,
-              "connect": true,
-              "essid": "Redmi Note 12 5G",
-              "security": {
-                "enable": true,
-                "WPA2Personal": {
-                  "password": "12345678"
-                }
-              }
-            },
-            "enable": true
-          }
-        },
-        {
-          "mlan0": {
-            "accesspoint": {
-              "essid": "OpenNetwork",
-              "connect": true,
-              "autoConn": true,
-              "security": {
-                "enable": false
-              }
-            },
-            "enable": true
-          }
-        },
-        {
-          "mlan0": {
-            "accesspoint": {
-              "essid": "CorpNetwork",
-              "connect": true,
-              "autoConn": true,
-              "security": {
-                "enable": true,
-                "WPA2Enterprise": {
-                  "authentication": "TLS",
-                  "certificate": "my-client-cert"
-                }
-              }
-            },
-            "enable": true
-          }
-        },
-        {
-          "mlan0": {
-            "accesspoint": {
-              "essid": "CorpNetwork",
-              "connect": true,
-              "autoConn": true,
-              "security": {
-                "enable": true,
-                "WPA2Enterprise": {
-                  "authentication": "TTLS",
-                  "innerAuthentication": "MSCHAPv2",
-                  "username": "john.doe",
-                  "password": "secret"
-                }
-              }
-            },
-            "enable": true
-          }
-        },
-        {
-          "bnep0": {
-            "dhcpEndAddress": "192.168.0.10",
-            "dhcpStartAddress": "192.168.0.2",
-            "discoverable": true,
-            "pairable": true,
-            "passKey": "1233",
-            "usePassKey": false,
-            "enable": true
-          }
-        },
-        {
-          "wan0": {
-            "enable": true,
-            "activeSim": "psim",
-            "psim": {
-              "apn": "internet",
-              "preferredNetworkType": "AUTO",
-              "enableIPv6": true
-            }
-          }
-        },
-        {
-          "uap0": {
-            "ssid": "FXR90Hotspot",
-            "ssidPassword": "MyP@ssword",
-            "countryCode": "US",
-            "securityType": "WPA3Personal",
-            "isHidden": false,
-            "enable": true
-          }
-        }
-      ]
+      "$ref": "../../references/request_payload/set_network_command.yaml"
     }
   },
   "required": [
@@ -671,7 +64,6 @@
       "payload": {
         "eth0": {
           "security": {
-            "enable": true,
             "802_1xEAP": {
               "authentication": "TLS",
               "certificate": "my-client-cert"
@@ -687,7 +79,6 @@
       "payload": {
         "eth0": {
           "security": {
-            "enable": true,
             "802_1xEAP": {
               "authentication": "TTLS",
               "innerAuthentication": "MSCHAPv2",
@@ -706,8 +97,7 @@
         "mlan0": {
           "IPV4": {
             "dhcp": true
-          },
-          "enable": true
+          }
         }
       }
     },
@@ -723,8 +113,7 @@
             "gatewayAddress": "10.233.46.2",
             "ipAddress": "10.233.46.47",
             "subnetMask": "255.255.255.0"
-          },
-          "enable": true
+          }
         }
       }
     },
@@ -738,13 +127,12 @@
             "connect": true,
             "essid": "Redmi Note 12 5G",
             "security": {
-              "enable": true,
               "WPA2Personal": {
                 "password": "12345678"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },
@@ -757,11 +145,8 @@
             "essid": "OpenNetwork",
             "connect": true,
             "autoConn": true,
-            "security": {
-              "enable": false
-            }
-          },
-          "enable": true
+            "enable": true
+          }
         }
       }
     },
@@ -775,14 +160,13 @@
             "connect": true,
             "autoConn": true,
             "security": {
-              "enable": true,
               "WPA2Enterprise": {
                 "authentication": "TLS",
                 "certificate": "my-client-cert"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },
@@ -796,16 +180,15 @@
             "connect": true,
             "autoConn": true,
             "security": {
-              "enable": true,
               "WPA2Enterprise": {
                 "authentication": "TTLS",
                 "innerAuthentication": "MSCHAPv2",
                 "username": "john.doe",
                 "password": "secret"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },
@@ -890,7 +273,6 @@
       "payload": {
         "eth0": {
           "security": {
-            "enable": true,
             "802_1xEAP": {
               "authentication": "TLS",
               "certificate": "my-client-cert"
@@ -906,7 +288,6 @@
       "payload": {
         "eth0": {
           "security": {
-            "enable": true,
             "802_1xEAP": {
               "authentication": "TTLS",
               "innerAuthentication": "MSCHAPv2",
@@ -925,8 +306,7 @@
         "mlan0": {
           "IPV4": {
             "dhcp": true
-          },
-          "enable": true
+          }
         }
       }
     },
@@ -942,8 +322,7 @@
             "gatewayAddress": "10.233.46.2",
             "ipAddress": "10.233.46.47",
             "subnetMask": "255.255.255.0"
-          },
-          "enable": true
+          }
         }
       }
     },
@@ -957,13 +336,12 @@
             "connect": true,
             "essid": "Redmi Note 12 5G",
             "security": {
-              "enable": true,
               "WPA2Personal": {
                 "password": "12345678"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },
@@ -976,11 +354,8 @@
             "essid": "OpenNetwork",
             "connect": true,
             "autoConn": true,
-            "security": {
-              "enable": false
-            }
-          },
-          "enable": true
+            "enable": true
+          }
         }
       }
     },
@@ -994,14 +369,13 @@
             "connect": true,
             "autoConn": true,
             "security": {
-              "enable": true,
               "WPA2Enterprise": {
                 "authentication": "TLS",
                 "certificate": "my-client-cert"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },
@@ -1015,16 +389,15 @@
             "connect": true,
             "autoConn": true,
             "security": {
-              "enable": true,
               "WPA2Enterprise": {
                 "authentication": "TTLS",
                 "innerAuthentication": "MSCHAPv2",
                 "username": "john.doe",
                 "password": "secret"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },

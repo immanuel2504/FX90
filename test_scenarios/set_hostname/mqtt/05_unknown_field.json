@@ -1,0 +1,8 @@
+{
+  "command": "set_hostname",
+  "command_id": "test-set_hostname",
+  "payload": {
+    "hostname": "FX75006A0B8C",
+    "definitelyNotARealField": 42
+  }
+}

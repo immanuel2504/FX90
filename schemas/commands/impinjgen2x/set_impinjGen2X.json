@@ -29,17 +29,6 @@
               "type": "boolean",
               "description": "Enable or disable the FastID feature.",
               "example": true
-            },
-            "tidSelector": {
-              "type": "string",
-              "description": "Optional TID word selector mask. When provided, only the specified TID word is embedded in the inventory response.",
-              "enum": [
-                "TID[0]",
-                "TID[1]",
-                "TID[2]",
-                "TID[3]"
-              ],
-              "example": "TID[0]"
             }
           },
           "required": [

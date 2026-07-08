@@ -37,7 +37,7 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `modeType` | Which mode is active (SIMPLE, INVENTORY, PORTAL)? | Determines which RF behavior and tag reporting logic the reader uses. |
+| `type` | Which mode is active (SIMPLE, INVENTORY, PORTAL)? | Determines which RF behavior and tag reporting logic the reader uses. |
 | `antennas` | Which antenna ports are active? | Confirms the physical coverage area for the current inventory session. |
 | `txPower` | What is the configured transmit power? | Directly affects read range and regulatory compliance. |
-| `environmentProfile` | Which environment profile is set? | Affects reader sensitivity and RF settings for the deployment environment. |
+| `environment` | Which environment profile is set? | Affects reader sensitivity and RF settings for the deployment environment. |

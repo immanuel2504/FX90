@@ -1,0 +1,7 @@
+{
+  "command": "set_hostname_TYPO",
+  "command_id": "test-set_hostname_TYPO",
+  "payload": {
+    "hostname": "FX75006A0B8C"
+  }
+}

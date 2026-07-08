@@ -1,0 +1,5 @@
+{
+  "command": "set_mode",
+  "command_id": "test-set_mode",
+  "payload": {}
+}

@@ -31,5 +31,5 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | Standard names | Is the required standard listed? | Only listed standards can be applied when configuring the reader's RF region. |
-| `lbtConfigurable` | Can LBT be toggled for this standard? | Some standards mandate LBT always-on; knowing this prevents invalid configuration attempts. |
+| `isLBTConfigurable` | Can LBT be toggled for this standard? | Some standards mandate LBT always-on; knowing this prevents invalid configuration attempts. |
 | `channelData` | What channels are available for this standard? | Determines valid frequency channels for inventory operations under this standard. |

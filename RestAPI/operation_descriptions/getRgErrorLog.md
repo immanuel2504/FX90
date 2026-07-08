@@ -31,4 +31,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
-| `content` | Are there error messages or stack traces? | Error log content reveals the specific failures affecting Reader Gateway operation. |
+| `binary` | Are there error messages or stack traces? | Error log content reveals the specific failures affecting Reader Gateway operation. |

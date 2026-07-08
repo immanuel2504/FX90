@@ -1,0 +1,11 @@
+{
+  "command": "set_os",
+  "command_id": "test-set_os",
+  "payload": {
+    "url": "http://10.17.231.168:8003/3_20_4",
+    "options": {
+      "username": "XXXX",
+      "password": "XXXX"
+    }
+  }
+}

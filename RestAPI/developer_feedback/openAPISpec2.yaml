@@ -841,6 +841,7 @@ paths:
                   example: HIGH_INTERFERENCE
                 antennaStopCondition:
                   type: object
+                  description: Stop condition applied to antenna inventory cycles.
                   properties:
                     type:
                       type: string
@@ -872,6 +873,7 @@ paths:
                   example: RC
                 delayBetweenAntennaCycles:
                   type: object
+                  description: Delay configuration between consecutive antenna cycles.
                   properties:
                     duration:
                       type: number
@@ -885,6 +887,9 @@ paths:
                         - NO_TAGS
                         - NO_UNIQUE_TAGS
                       example: DISABLED
+                  required:
+                    - type
+                    - duration
                 linkProfile:
                   type: number
                   description: Link profile identifier.
@@ -895,6 +900,7 @@ paths:
                   example: status
                 query:
                   type: object
+                  description: EPC Gen2 query parameters used during inventory.
                   properties:
                     sel:
                       type: string
@@ -927,6 +933,7 @@ paths:
                       example: A
                 inventoryProtocol:
                   type: object
+                  description: Inventory protocol settings for tag interrogation.
                   properties:
                     mode:
                       type: string
@@ -936,8 +943,11 @@ paths:
                         - GEN2
                         - HYBRID
                       example: GEN2X
+                  required:
+                    - mode
                 reportFilter:
                   type: object
+                  description: Controls how frequently and at what scope tag reports are emitted.
                   properties:
                     duration:
                       type: number
@@ -950,6 +960,9 @@ paths:
                         - RADIO_WIDE
                         - PER_ANTENNA
                       example: PER_ANTENNA
+                  required:
+                    - duration
+                    - type
                 tagMetaData:
                   type: array
                   description: Tag metadata fields included in reports.
@@ -1307,16 +1320,21 @@ paths:
                         enum: [connected, disconnected]
                   cpu:
                     type: object
+                    description: CPU utilization statistics reported by the reader.
                     properties:
                       system:
                         type: number
+                        description: Percentage of CPU time spent in kernel/system mode.
                       user:
                         type: number
+                        description: Percentage of CPU time spent in user mode.
                   flash:
                     type: object
+                    description: Flash storage utilization by partition.
                     properties:
                       platform:
                         type: object
+                        description: Usage metrics for the platform partition.
                         properties:
                           free:
                             type: number
@@ -1326,6 +1344,7 @@ paths:
                             type: number
                       readerConfig:
                         type: object
+                        description: Usage metrics for the reader configuration partition.
                         properties:
                           free:
                             type: number
@@ -1335,6 +1354,7 @@ paths:
                             type: number
                       readerData:
                         type: object
+                        description: Usage metrics for the reader data partition.
                         properties:
                           free:
                             type: number
@@ -1344,6 +1364,7 @@ paths:
                             type: number
                       rootFileSystem:
                         type: object
+                        description: Usage metrics for the root filesystem partition.
                         properties:
                           free:
                             type: number
@@ -1353,27 +1374,36 @@ paths:
                             type: number
                   interfaceConnectionStatus:
                     type: object
+                    description: Connectivity status for configured cloud/network interfaces.
                     properties:
                       data:
                         type: array
+                        description: Per-interface connection status entries.
                         items:
                           type: object
                           properties:
                             connectionError:
                               type: string
+                              description: Last connection error message, if any.
                             connectionStatus:
                               type: string
+                              description: Current connection state for the interface.
                             description:
                               type: string
+                              description: Human-readable interface description.
                             interface:
                               type: string
+                              description: Interface name.
                   ntp:
                     type: object
+                    description: NTP synchronization status information.
                     properties:
                       offset:
                         type: number
+                        description: Current NTP clock offset.
                       reach:
                         type: number
+                        description: NTP reachability register value.
                   powerNegotiation:
                     type: string
                     description: Power negotiation mode reported by the reader.
@@ -1394,13 +1424,17 @@ paths:
                       - disconnected
                   ram:
                     type: object
+                    description: RAM utilization statistics.
                     properties:
                       free:
                         type: number
+                        description: Free RAM amount.
                       total:
                         type: number
+                        description: Total RAM amount.
                       used:
                         type: number
+                        description: Used RAM amount.
                   systemTime:
                     type: string
                   temperature:
@@ -1409,6 +1443,7 @@ paths:
                     type: string
                   impinjGen2X:
                     type: object
+                    description: Active Impinj Gen2X runtime status.
                     properties:
                       active:
                         type: boolean
@@ -4868,157 +4903,83 @@ paths:
     put:
       tags:
         - System
-      getCableLossCompensation:
-        title: getCableLossCompensation
-        x-stoplight:
-          id: 6n86zcbx1i877
-        examples:
-          - '1':
-              cableLossPerHundredFt: 0
-              cableLength: 5
-            '2':
-              cableLossPerHundredFt: 10
-              cableLength: 15
-            '3':
-              cableLossPerHundredFt: 20
-              cableLength: 25
-            '4':
-              cableLossPerHundredFt: 30
-              cableLength: 35
-        description: Gets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet
-        type: object
-        minProperties: 1
-        maxProperties: 8
-        additionalProperties: false
-        patternProperties:
-          '^[1-8]$':
-            type: object
-            minProperties: 2
-            additionalProperties: false
-            description: Returns cable loss compensation per read point labeled 1,2,3... up to the maximum supported read points.
-            required:
-              - cableLength
-              - cableLossPerHundredFt
-            properties:
-              cableLength:
-                type: number
-                example: 1
-                minimum: 0
-                description: Cable length for the read point, in feet.
-              cableLossPerHundredFt:
-                type: number
-                minimum: 0
-                example: 1
-                description: Cable loss per hundred feet for the read point, in dB.
-      setCableLossCompensation:
-        title: setCableLossCompensation
-        x-stoplight:
-          id: 44eoao4stdvu3
-        examples:
-          - '1':
-              cableLossPerHundredFt: 0
-              cableLength: 5
-            '2':
-              cableLossPerHundredFt: 10
-              cableLength: 15
-            '3':
-              cableLossPerHundredFt: 20
-              cableLength: 25
-            '4':
-              cableLossPerHundredFt: 30
-              cableLength: 35
-          - cableLength: 0
-            cableLossPerHundredFt: 0
-        description: Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet
-        oneOf:
-          - description: Adjust cable loss compensation for all available read points
-            title: All
-            type: object
-            required:
-              - cableLength
-              - cableLossPerHundredFt
-            properties:
-              cableLength:
-                type: number
-                description: Cable length applied to all read points, in feet.
-                minimum: 0
-              cableLossPerHundredFt:
-                type: number
-                description: Cable loss applied to all read points per 100 feet, in dB.
-                minimum: 0
-          - description: Adjust cable loss compensation for each read point. Can have as many keys as number of allowed read points on device.
-            title: Each
-            type: object
-            maxProperties: 8
-            minProperties: 1
-            additionalProperties: false
-            patternProperties:
-              '^[1-8]$':
-                type: object
-                description: Adjust cable loss compensation per read point labeled 1,2,3... up to the maximum supported read points.
-                maxProperties: 2
-                required:
-                  - cableLength
-                  - cableLossPerHundredFt
-                properties:
-                  cableLength:
-                    type: number
-                    description: Cable length for the read point, in feet.
-                    example: 1
-                    minimum: 0
-                  cableLossPerHundredFt:
-                    type: number
-                    minimum: 0
-                    example: 1
-                    description: Cable loss per hundred feet for the read point, in dB.
-        type: object
+      summary: Updates the local REST login password
+      description: MQTT API :-  set_password <br> Updates the reader login password
+      operationId: updatePassword
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - userName
+                - currentPassword
+                - newPassword
               properties:
+                userName:
+                  type: string
+                  description: Reader login username.
+                  example: admin
+                currentPassword:
+                  type: string
+                  description: Current password for the specified user.
+                  example: oldPassword123
+                newPassword:
+                  type: string
+                  description: New password to set for the specified user.
+                  example: newPassword123
+            examples:
+              set_password:
+                value:
+                  userName: admin
+                  currentPassword: oldPassword123
+                  newPassword: newPassword123
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Returns an empty string on success.
+                example: ""
+      security:
+        - bearerAuth: []
+  /cloud/logs:
+    get:
+      tags:
+        - Logs
+      summary: Retrieves reader log configuration
+      description: MQTT API :-  get_logs <br> Retrieves current log levels and radio packet log setting
+      operationId: getLogs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/logLevel.v1'
+              example:
+                radioPacketLog: true
                 components:
-                  type: array
-                  description: Per-component logging configuration to apply.
-                  items:
-                    type: object
-                    properties:
-                      componentName:
-                        type: string
-                        description: 'Component identifier. Supported canonical names: radio_control, cloud_agent, reader_gateway. Supported aliases: RC for radio_control, RG for reader_gateway.'
-                        enum:
-                          - radio_control
-                          - RC
-                          - cloud_agent
-                          - reader_gateway
-                          - RG
-                        example: radio_control
-                      level:
-                        type: string
-                        description: 'Log level to set. Cloud agent/reader gateway supports OFF, FATAL, ERROR, WARNING, INFO, DEBUG, TRACE, EXTRA.'
-                        enum:
-                          - 'OFF'
-                          - FATAL
-                          - ERROR
-                          - WARNING
-                          - INFO
-                          - DEBUG
-                          - TRACE
-                          - EXTRA
-                        example: DEBUG
-                    required:
-                      - componentName
-                      - level
-                  example:
-                    - componentName: radio_control
-                      level: DEBUG
-                    - componentName: cloud_agent
-                      level: DEBUG
-                radioPacketLog:
-                  type: boolean
-                  description: Whether to enable the radio packet log.
-                  example: true
+                  - componentName: radio_control
+                    level: INFO
+                  - componentName: reader_gateway
+                    level: DEBUG
+      security:
+        - bearerAuth: []
+    put:
+      tags:
+        - Logs
+      summary: Updates reader log configuration
+      description: MQTT API :-  set_logs <br> Updates log levels and radio packet log setting
+      operationId: setLogs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/logLevel.v1'
             examples:
               set_logs:
                 value:
@@ -5379,7 +5340,8 @@ paths:
               type: object
               required:
                 - url
-                - authenticationType
+                - type
+                - name
               properties:
                 authenticationType:
                   type: string
@@ -7829,17 +7791,6 @@ paths:
                       type: boolean
                       description: Enable or disable the FastID feature.
                       example: true
-                    tidSelector:
-                      type: string
-                      description: >-
-                        Optional TID word selector mask. When provided, only the specified TID
-                        word is embedded in the inventory response.
-                      enum:
-                        - 'TID[0]'
-                        - 'TID[1]'
-                        - 'TID[2]'
-                        - 'TID[3]'
-                      example: 'TID[0]'
                   required:
                     - enabled
                 tagProtect:

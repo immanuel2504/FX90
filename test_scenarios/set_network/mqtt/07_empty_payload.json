@@ -1,0 +1,5 @@
+{
+  "command": "set_network",
+  "command_id": "test-set_network",
+  "payload": {}
+}

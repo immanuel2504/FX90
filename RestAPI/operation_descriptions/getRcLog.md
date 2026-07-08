@@ -31,4 +31,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
-| `content` | Does the log contain relevant events or error messages? | The log content reveals radio control state changes, errors, and diagnostics during reader operation. |
+| `binary` | Does the log contain relevant events or error messages? | The log content reveals radio control state changes, errors, and diagnostics during reader operation. |

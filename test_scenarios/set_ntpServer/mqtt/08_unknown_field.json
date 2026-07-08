@@ -1,0 +1,10 @@
+{
+  "command": "set_ntpServer",
+  "command_id": "test-set_ntpServer",
+  "payload": {
+    "server": "time.google.com",
+    "server1": "time1.google.com",
+    "server2": "time2.google.com",
+    "definitelyNotARealField": 42
+  }
+}

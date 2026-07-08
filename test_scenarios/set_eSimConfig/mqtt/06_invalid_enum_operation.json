@@ -1,0 +1,8 @@
+{
+  "command": "set_eSimConfig",
+  "command_id": "test-set_eSimConfig",
+  "payload": {
+    "operation": "NOT_A_VALID_VALUE",
+    "profileNickName": "gnd1"
+  }
+}

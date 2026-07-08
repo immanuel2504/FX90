@@ -1,0 +1,15 @@
+{
+  "command": "set_config",
+  "command_id": "test-set_config",
+  "payload": {
+    "READER-GATEWAY": {
+      "endpointConfig": {
+        "data": {
+          "event": {
+            "connections": []
+          }
+        }
+      }
+    }
+  }
+}

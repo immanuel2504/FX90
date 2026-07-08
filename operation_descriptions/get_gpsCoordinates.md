@@ -36,4 +36,4 @@ Key fields to check in the response:
 |---|---|---|
 | `latitude` | Is a valid latitude value returned? | A null or zero value may indicate the reader does not have a GPS fix yet. |
 | `longitude` | Is a valid longitude value returned? | Combined with latitude, this identifies the reader's physical position. |
-| `altitude` | Is altitude data present? | Useful in multi-floor or elevated deployments where vertical position matters. |
+| `satellitesUsed` | How many satellites produced the fix? | A low satellite count indicates a weak fix and less reliable coordinates. |

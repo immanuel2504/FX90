@@ -1,0 +1,13 @@
+{
+  "command": "set_logs_TYPO",
+  "command_id": "test-set_logs_TYPO",
+  "payload": {
+    "radioPacketLog": true,
+    "components": [
+      {
+        "componentName": "radio_control",
+        "level": "OFF"
+      }
+    ]
+  }
+}

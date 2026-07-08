@@ -148,7 +148,7 @@
   "examples": [
     {
       "command": "get_supportedStandardList",
-      "command_id": "gfdd",
+      "command_id": "sdgf",
       "payload": {
         "SupportedStandards": [
           {

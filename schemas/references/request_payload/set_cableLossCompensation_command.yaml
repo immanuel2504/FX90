@@ -1,8 +1,8 @@
 title: set_cableLossCompensation_command
 description: Sets the Reader Cable Loss Compensation. Includes Cable Length and Cable Loss per Hundred Feet. (Not applicable to ATR7000 readers)
 oneOf:
-- title: All
-  description: Adjust cable loss compensation for all available read points.
+- description: Adjust cable loss compensation for all available read points.
+  title: All
   type: object
   required:
   - cableLength
@@ -12,14 +12,12 @@ oneOf:
       type: number
       description: Cable length applied to all read points, in feet.
       minimum: 0
-      example: 90
     cableLossPerHundredFt:
       type: number
       description: Cable loss applied to all read points per 100 feet, in dB.
       minimum: 0
-      example: 18
-- title: Each
-  description: Adjust cable loss compensation per read point using numeric read-point keys.
+- description: Adjust cable loss compensation per read point using numeric read-point keys.
+  title: Each
   type: object
   minProperties: 1
   maxProperties: 8
@@ -36,12 +34,10 @@ oneOf:
           type: number
           description: Length of the cable connected to this antenna port, in feet.
           minimum: 0
-          example: 90
         cableLossPerHundredFt:
           type: number
           description: Cable signal loss for this antenna port per 100 feet, in dB.
           minimum: 0
-          example: 18
 examples:
 - '1':
     cableLength: 90
@@ -57,3 +53,4 @@ examples:
     cableLossPerHundredFt: 70
 - cableLength: 90
   cableLossPerHundredFt: 18
+type: object

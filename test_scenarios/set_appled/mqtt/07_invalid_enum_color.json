@@ -1,0 +1,9 @@
+{
+  "command": "set_appled",
+  "command_id": "test-set_appled",
+  "payload": {
+    "color": "NOT_A_VALID_VALUE",
+    "flash": true,
+    "seconds": 1
+  }
+}

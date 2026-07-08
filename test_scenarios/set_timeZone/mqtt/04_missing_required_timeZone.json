@@ -1,0 +1,5 @@
+{
+  "command": "set_timeZone",
+  "command_id": "test-set_timeZone",
+  "payload": {}
+}

@@ -20,7 +20,243 @@
       "description": "A unique ID that will be echoed back in the command response by the reader."
     },
     "payload": {
-      "$ref": "../../references/shared/operatingMode.v1.yaml"
+      "type": "object",
+      "description": "Operating mode configuration payload.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Operating mode type.",
+          "enum": [
+            "SIMPLE",
+            "INVENTORY",
+            "PORTAL",
+            "CONVEYOR",
+            "CUSTOM"
+          ],
+          "example": "CUSTOM"
+        },
+        "environment": {
+          "type": "string",
+          "description": "Reader RF environment profile.",
+          "enum": [
+            "LOW_INTERFERENCE",
+            "HIGH_INTERFERENCE",
+            "VERY_HIGH_INTERFERENCE",
+            "AUTO_DETECT",
+            "DEMO"
+          ],
+          "example": "HIGH_INTERFERENCE"
+        },
+        "antennaStopCondition": {
+          "type": "object",
+          "description": "Stop condition applied to antenna inventory cycles.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Type of stop condition.",
+              "enum": [
+                "DURATION",
+                "INVENTORY_COUNT",
+                "GPI",
+                "SINGLE_INVENTORY_LIMITED_DURATION"
+              ],
+              "example": "DURATION"
+            },
+            "value": {
+              "type": "number",
+              "description": "Value for the selected stop condition type.",
+              "example": 100
+            }
+          },
+          "required": [
+            "type",
+            "value"
+          ]
+        },
+        "antennas": {
+          "type": "array",
+          "description": "Antenna ports to be used for inventory.",
+          "items": {
+            "type": "number",
+            "example": 1
+          },
+          "example": [
+            1
+          ]
+        },
+        "component": {
+          "type": "string",
+          "description": "Legacy wrapper field retained for backward compatibility.",
+          "example": "RC"
+        },
+        "delayBetweenAntennaCycles": {
+          "type": "object",
+          "description": "Delay configuration between consecutive antenna cycles.",
+          "properties": {
+            "duration": {
+              "type": "number",
+              "description": "Delay in milliseconds.",
+              "example": 0
+            },
+            "type": {
+              "type": "string",
+              "description": "Condition under which delay is applied.",
+              "enum": [
+                "DISABLED",
+                "NO_TAGS",
+                "NO_UNIQUE_TAGS"
+              ],
+              "example": "DISABLED"
+            }
+          },
+          "required": [
+            "type",
+            "duration"
+          ]
+        },
+        "linkProfile": {
+          "type": "number",
+          "description": "Link profile identifier.",
+          "example": 3
+        },
+        "payload": {
+          "type": "string",
+          "description": "Legacy wrapper field retained for backward compatibility.",
+          "example": "status"
+        },
+        "query": {
+          "type": "object",
+          "description": "EPC Gen2 query parameters used during inventory.",
+          "properties": {
+            "sel": {
+              "type": "string",
+              "description": "Sel field (EPC Gen2).",
+              "enum": [
+                "ALL",
+                "SL",
+                "NOT_SL"
+              ],
+              "example": "ALL"
+            },
+            "session": {
+              "type": "string",
+              "description": "Session field (EPC Gen2).",
+              "enum": [
+                "S0",
+                "S1",
+                "S2",
+                "S3"
+              ],
+              "example": "S1"
+            },
+            "tagPopulation": {
+              "type": "number",
+              "description": "Expected number of tags.",
+              "example": 256
+            },
+            "target": {
+              "type": "string",
+              "description": "Target field (EPC Gen2).",
+              "enum": [
+                "A",
+                "B",
+                "AB"
+              ],
+              "example": "A"
+            }
+          }
+        },
+        "inventoryProtocol": {
+          "type": "object",
+          "description": "Inventory protocol settings for tag interrogation.",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "Inventory protocol mode.",
+              "enum": [
+                "GEN2X",
+                "GEN2",
+                "HYBRID"
+              ],
+              "example": "GEN2X"
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "reportFilter": {
+          "type": "object",
+          "description": "Controls how frequently and at what scope tag reports are emitted.",
+          "properties": {
+            "duration": {
+              "type": "number",
+              "description": "Report filter duration in seconds.",
+              "example": 0
+            },
+            "type": {
+              "type": "string",
+              "description": "Report filter scope.",
+              "enum": [
+                "RADIO_WIDE",
+                "PER_ANTENNA"
+              ],
+              "example": "PER_ANTENNA"
+            }
+          },
+          "required": [
+            "duration",
+            "type"
+          ]
+        },
+        "tagMetaData": {
+          "type": "array",
+          "description": "Tag metadata fields included in reports.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "RSSI",
+              "PHASE",
+              "SEEN_COUNT",
+              "ANTENNA",
+              "CHANNEL",
+              "PC",
+              "XPC",
+              "CRC",
+              "EPC",
+              "TID",
+              "USER",
+              "MAC",
+              "HOSTNAME"
+            ],
+            "example": "RSSI"
+          },
+          "example": [
+            "RSSI",
+            "PHASE",
+            "SEEN_COUNT",
+            "ANTENNA",
+            "CHANNEL",
+            "PC",
+            "XPC",
+            "CRC"
+          ]
+        },
+        "transmitPower": {
+          "type": "array",
+          "description": "Desired transmit power values in dBm.",
+          "items": {
+            "type": "number",
+            "example": 17
+          },
+          "example": [
+            17
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
     }
   }
 }

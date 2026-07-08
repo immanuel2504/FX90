@@ -1,19 +1,39 @@
 type: object
 properties:
   GPIO-LED:
+    description: GPIO and LED trigger mapping configuration. Returns "NOT_CONFIGURED" when no GPIO-LED configuration has been applied.
+    oneOf:
+    - type: string
+      description: Returned as "NOT_CONFIGURED" when GPIO-LED config has not been set.
+  xml:
     type: string
+    description: RFID reader operational XML profile (the "Cloud Connect" RFID profile). Only returned on supported reader models (e.g. STARFISH/FX series).
   READER-GATEWAY:
     type: object
     properties:
       batching:
-        type: array
-        items:
-          type: object
+        description: Global batching configuration for data events. Returned as an array (one entry per data endpoint connection) or a single object applied to all connections.
+        oneOf:
+        - type: object
+          description: Single batching config applied to all data endpoints.
           properties:
             maxPayloadSizePerReport:
               type: number
+              description: Maximum payload size per batch report in bytes (0 - 256000). -1 to disable.
             reportingInterval:
               type: number
+              description: Batch reporting interval in milliseconds (0 - 86400000). -1 to disable.
+        - type: array
+          description: Per-endpoint batching config (one entry per data endpoint connection).
+          items:
+            type: object
+            properties:
+              maxPayloadSizePerReport:
+                type: number
+                description: Maximum payload size per batch report in bytes (0 - 256000). -1 to disable.
+              reportingInterval:
+                type: number
+                description: Batch reporting interval in milliseconds (0 - 86400000). -1 to disable.
       endpointConfig:
         type: object
         properties:
@@ -23,17 +43,21 @@ properties:
               commandResponse:
                 type: object
                 properties:
-                  enableLocalRest:
-                    type: boolean
                   connections:
                     type: array
+                    description: List of control plane cloud connections.
                     items:
                       type: object
                       properties:
                         description:
                           type: string
+                          description: Human-readable description of this connection.
                         name:
                           type: string
+                          description: Unique name identifier for this connection.
+                        type:
+                          type: string
+                          description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
                         options:
                           type: object
                           properties:
@@ -42,31 +66,45 @@ properties:
                               properties:
                                 cleanSession:
                                   type: boolean
+                                  description: If true, broker discards previous session state on connect (MQTT clean session flag).
                                 clientId:
                                   type: string
+                                  description: MQTT client identifier used when connecting to the broker.
                                 debug:
                                   type: boolean
+                                  description: Enable verbose MQTT debug logging.
                                 keepAlive:
                                   type: number
+                                  description: MQTT keep-alive interval in seconds. The reader sends a PINGREQ if no message is sent within this interval.
                                 qos:
                                   type: number
+                                  description: MQTT Quality of Service level (0 = at most once, 1 = at least once).
                                 reconnectDelay:
                                   type: number
+                                  description: Initial delay in seconds before attempting to reconnect after disconnect.
                                 reconnectDelayMax:
                                   type: number
+                                  description: Maximum delay in seconds between reconnect attempts (exponential backoff cap).
+                              description: Additional MQTT connection parameters.
                             enableSecurity:
                               type: boolean
+                              description: When true, TLS/SSL is used for the connection.
                             endpoint:
                               type: object
                               properties:
                                 hostName:
                                   type: string
+                                  description: Hostname or IP address of the MQTT broker or cloud endpoint.
                                 port:
                                   type: number
+                                  description: TCP port number of the MQTT broker or cloud endpoint.
                                 protocol:
                                   type: string
+                                  description: 'Transport protocol. Common values: tcp, ssl, ws (WebSocket), wss (WebSocket Secure).'
+                              description: Remote broker or server endpoint details.
                             publishTopic:
                               type: array
+                              description: MQTT topic(s) the reader publishes responses to.
                               items:
                                 type: string
                             security:
@@ -74,28 +112,40 @@ properties:
                               properties:
                                 CACertificateFileLocation:
                                   type: string
+                                  description: Absolute path to the CA (Certificate Authority) certificate file on the reader.
                                 installedCertificateName:
                                   type: string
+                                  description: Name of a pre-installed certificate stored on the reader.
                                 installedCertificateType:
                                   type: string
+                                  description: Type of the pre-installed certificate (e.g. "server", "client").
                                 keyAlgorithm:
                                   type: string
+                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                 keyFormat:
                                   type: string
+                                  description: Key file format (e.g. PEM).
                                 privateKeyFileLocation:
                                   type: string
+                                  description: Absolute path to the private key file on the reader.
                                 publicKeyFileLocation:
                                   type: string
+                                  description: Absolute path to the public key or client certificate file on the reader.
                                 verifyHostName:
                                   type: boolean
+                                  description: When true, the broker's hostname is verified against its TLS certificate CN/SAN.
                                 verifyPeer:
                                   type: boolean
+                                  description: When true, the server's TLS certificate is validated against the CA certificate.
+                              description: TLS/SSL certificate and key configuration.
                             subscribeTopic:
                               type: array
+                              description: MQTT topic(s) the reader subscribes to for incoming commands.
                               items:
                                 type: string
-                        type:
-                          type: string
+                          description: Connection-specific options.
+                description: Control plane command and response MQTT connection configuration.
+            description: Control plane endpoint configuration (command/response channel).
           data:
             type: object
             properties:
@@ -104,13 +154,17 @@ properties:
                 properties:
                   maxPayloadSizePerReport:
                     type: number
+                    description: Maximum payload size per batch report in bytes (0 - 256000). -1 to disable.
                   reportingInterval:
                     type: number
+                    description: Batch reporting interval in milliseconds (0 - 86400000). -1 to disable.
+                description: Global batching settings applied across all data endpoint connections.
               event:
                 type: object
                 properties:
                   connections:
                     type: array
+                    description: List of data plane cloud connections for publishing tag read events.
                     items:
                       type: object
                       properties:
@@ -122,21 +176,47 @@ properties:
                               properties:
                                 maxPayloadSizePerReport:
                                   type: number
+                                  description: Maximum payload size per batch report in bytes (0 - 256000). -1 to disable.
                                 reportingInterval:
                                   type: number
+                                  description: Batch reporting interval in milliseconds (0 - 86400000). -1 to disable.
+                              description: Per-connection batching configuration overriding global batching for this connection.
                             retention:
                               type: object
                               properties:
                                 maxEventRetentionTimeInMin:
                                   type: number
+                                  description: Maximum time in minutes to retain events when offline (0 - 10080). 0 or -1 retains events indefinitely until maxNumEvents is reached.
                                 maxNumEvents:
                                   type: number
+                                  description: Maximum number of events to buffer when offline (0 - 150000).
                                 throttle:
                                   type: number
+                                  description: Rate limit in events/sec for replaying retained events after reconnect (0 - 1000). 0 means no throttling.
+                              description: Per-connection event retention configuration when the connection is offline.
+                            dataAck:
+                              type: object
+                              description: Data acknowledgement configuration. When enabled, the reader waits for an ACK from the cloud before marking events as delivered.
+                              properties:
+                                enable:
+                                  type: boolean
+                                  description: Enable data acknowledgement for this connection.
+                                responseTopic:
+                                  type: string
+                                  description: MQTT topic on which the cloud sends acknowledgement messages back to the reader.
+                                correlationFieldName:
+                                  type: string
+                                  description: Name of the field in the event payload used to correlate ACK responses. Defaults to "correlationId".
+                          description: Per-connection data delivery options (batching, retention, data acknowledgement).
                         description:
                           type: string
+                          description: Human-readable description of this connection.
                         name:
                           type: string
+                          description: Unique name identifier for this connection. Must be unique across all data connections.
+                        type:
+                          type: string
+                          description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
                         options:
                           type: object
                           properties:
@@ -145,31 +225,45 @@ properties:
                               properties:
                                 cleanSession:
                                   type: boolean
+                                  description: If true, broker discards previous session state on connect (MQTT clean session flag).
                                 clientId:
                                   type: string
+                                  description: MQTT client identifier used when connecting to the broker.
                                 debug:
                                   type: boolean
+                                  description: Enable verbose MQTT debug logging.
                                 keepAlive:
                                   type: number
+                                  description: MQTT keep-alive interval in seconds. The reader sends a PINGREQ if no message is sent within this interval.
                                 qos:
                                   type: number
+                                  description: MQTT Quality of Service level (0 = at most once, 1 = at least once).
                                 reconnectDelay:
                                   type: number
+                                  description: Initial delay in seconds before attempting to reconnect after disconnect.
                                 reconnectDelayMax:
                                   type: number
+                                  description: Maximum delay in seconds between reconnect attempts (exponential backoff cap).
+                              description: Additional MQTT connection parameters.
                             enableSecurity:
                               type: boolean
+                              description: When true, TLS/SSL is used for the connection.
                             endpoint:
                               type: object
                               properties:
                                 hostName:
                                   type: string
+                                  description: Hostname or IP address of the MQTT broker or cloud endpoint.
                                 port:
                                   type: number
+                                  description: TCP port number of the MQTT broker or cloud endpoint.
                                 protocol:
                                   type: string
+                                  description: 'Transport protocol. Common values: tcp, ssl, ws (WebSocket), wss (WebSocket Secure).'
+                              description: Remote broker or server endpoint details.
                             publishTopic:
                               type: array
+                              description: MQTT topic(s) the reader publishes tag read events to.
                               items:
                                 type: string
                             security:
@@ -177,37 +271,53 @@ properties:
                               properties:
                                 CACertificateFileLocation:
                                   type: string
+                                  description: Absolute path to the CA certificate file on the reader.
                                 installedCertificateName:
                                   type: string
+                                  description: Name of a pre-installed certificate stored on the reader.
                                 installedCertificateType:
                                   type: string
+                                  description: Type of the pre-installed certificate (e.g. "server", "client").
                                 keyAlgorithm:
                                   type: string
+                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                 keyFormat:
                                   type: string
+                                  description: Key file format (e.g. PEM).
                                 privateKeyFileLocation:
                                   type: string
+                                  description: Absolute path to the private key file on the reader.
                                 publicKeyFileLocation:
                                   type: string
+                                  description: Absolute path to the public key or client certificate file on the reader.
                                 verifyHostName:
                                   type: boolean
+                                  description: When true, the broker's hostname is verified against its TLS certificate CN/SAN.
                                 verifyPeer:
                                   type: boolean
+                                  description: When true, the server's TLS certificate is validated against the CA certificate.
+                              description: TLS/SSL certificate and key configuration.
                             subscribeTopic:
                               type: array
+                              description: MQTT topic(s) the reader subscribes to (typically unused for data connections).
                               items:
                                 type: string
-                        type:
-                          type: string
+                          description: Connection-specific options.
+                description: Data event endpoint (publishes tag read events to cloud connections).
               retention:
                 type: object
                 properties:
                   maxEventRetentionTimeInMin:
                     type: number
+                    description: Maximum time in minutes to retain events when offline (0 - 10080). 0 or -1 retains events indefinitely until maxNumEvents is reached.
                   maxNumEvents:
                     type: number
+                    description: Maximum number of events to buffer when offline (0 - 150000).
                   throttle:
                     type: number
+                    description: Rate limit in events/sec for replaying retained events after reconnect (0 - 1000).
+                description: Global event retention settings applied across all data endpoint connections when offline.
+            description: Data plane endpoint configuration (tag read event publishing channel).
           management:
             type: object
             properties:
@@ -216,15 +326,22 @@ properties:
                 properties:
                   enableLocalRest:
                     type: boolean
+                    description: When true, local REST API is enabled for the management plane.
                   connections:
                     type: array
+                    description: List of management plane cloud connections for command/response.
                     items:
                       type: object
                       properties:
                         description:
                           type: string
+                          description: Human-readable description of this connection.
                         name:
                           type: string
+                          description: Unique name identifier for this connection.
+                        type:
+                          type: string
+                          description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
                         options:
                           type: object
                           properties:
@@ -233,31 +350,45 @@ properties:
                               properties:
                                 cleanSession:
                                   type: boolean
+                                  description: If true, broker discards previous session state on connect (MQTT clean session flag).
                                 clientId:
                                   type: string
+                                  description: MQTT client identifier used when connecting to the broker.
                                 debug:
                                   type: boolean
+                                  description: Enable verbose MQTT debug logging.
                                 keepAlive:
                                   type: number
+                                  description: MQTT keep-alive interval in seconds. The reader sends a PINGREQ if no message is sent within this interval.
                                 qos:
                                   type: number
+                                  description: MQTT Quality of Service level (0 = at most once, 1 = at least once).
                                 reconnectDelay:
                                   type: number
+                                  description: Initial delay in seconds before attempting to reconnect after disconnect.
                                 reconnectDelayMax:
                                   type: number
+                                  description: Maximum delay in seconds between reconnect attempts (exponential backoff cap).
+                              description: Additional MQTT connection parameters.
                             enableSecurity:
                               type: boolean
+                              description: When true, TLS/SSL is used for the connection.
                             endpoint:
                               type: object
                               properties:
                                 hostName:
                                   type: string
+                                  description: Hostname or IP address of the MQTT broker or cloud endpoint.
                                 port:
                                   type: number
+                                  description: TCP port number of the MQTT broker or cloud endpoint.
                                 protocol:
                                   type: string
+                                  description: 'Transport protocol. Common values: tcp, ssl, ws (WebSocket), wss (WebSocket Secure).'
+                              description: Remote broker or server endpoint details.
                             publishTopic:
                               type: array
+                              description: MQTT topic(s) the reader publishes management responses to.
                               items:
                                 type: string
                             security:
@@ -265,33 +396,45 @@ properties:
                               properties:
                                 CACertificateFileLocation:
                                   type: string
+                                  description: Absolute path to the CA certificate file on the reader.
                                 installedCertificateName:
                                   type: string
+                                  description: Name of a pre-installed certificate stored on the reader.
                                 installedCertificateType:
                                   type: string
+                                  description: Type of the pre-installed certificate (e.g. "server", "client").
                                 keyAlgorithm:
                                   type: string
+                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                 keyFormat:
                                   type: string
+                                  description: Key file format (e.g. PEM).
                                 privateKeyFileLocation:
                                   type: string
+                                  description: Absolute path to the private key file on the reader.
                                 publicKeyFileLocation:
                                   type: string
+                                  description: Absolute path to the public key or client certificate file on the reader.
                                 verifyHostName:
                                   type: boolean
+                                  description: When true, the broker's hostname is verified against its TLS certificate CN/SAN.
                                 verifyPeer:
                                   type: boolean
+                                  description: When true, the server's TLS certificate is validated against the CA certificate.
+                              description: TLS/SSL certificate and key configuration.
                             subscribeTopic:
                               type: array
+                              description: MQTT topic(s) the reader subscribes to for incoming management commands.
                               items:
                                 type: string
-                        type:
-                          type: string
+                          description: Connection-specific options.
+                description: Management plane command and response MQTT connection configuration.
               event:
                 type: object
                 properties:
                   connections:
                     type: array
+                    description: List of management event cloud connections.
                     items:
                       type: object
                       properties:
@@ -303,14 +446,37 @@ properties:
                               properties:
                                 maxEventRetentionTimeInMin:
                                   type: number
+                                  description: Maximum time in minutes to retain management events when offline (0 - 10080). 0 or -1 retains events indefinitely until maxNumEvents is reached.
                                 maxNumEvents:
                                   type: number
+                                  description: Maximum number of management events to buffer when offline (0 - 150000).
                                 throttle:
                                   type: number
+                                  description: Rate limit in events/sec for replaying retained management events after reconnect (0 - 1000).
+                              description: Per-connection event retention configuration when the connection is offline.
+                            dataAck:
+                              type: object
+                              description: Data acknowledgement configuration for management events. When enabled, the reader waits for an ACK before marking management events as delivered.
+                              properties:
+                                enable:
+                                  type: boolean
+                                  description: Enable data acknowledgement for this management event connection.
+                                responseTopic:
+                                  type: string
+                                  description: MQTT topic on which the cloud sends acknowledgement messages back to the reader.
+                                correlationFieldName:
+                                  type: string
+                                  description: Name of the field in the event payload used to correlate ACK responses. Defaults to "correlationId".
+                          description: Per-connection delivery options for management events.
                         description:
                           type: string
+                          description: Human-readable description of this connection.
                         name:
                           type: string
+                          description: Unique name identifier for this management event connection.
+                        type:
+                          type: string
+                          description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
                         options:
                           type: object
                           properties:
@@ -319,31 +485,45 @@ properties:
                               properties:
                                 cleanSession:
                                   type: boolean
+                                  description: If true, broker discards previous session state on connect (MQTT clean session flag).
                                 clientId:
                                   type: string
+                                  description: MQTT client identifier used when connecting to the broker.
                                 debug:
                                   type: boolean
+                                  description: Enable verbose MQTT debug logging.
                                 keepAlive:
                                   type: number
+                                  description: MQTT keep-alive interval in seconds. The reader sends a PINGREQ if no message is sent within this interval.
                                 qos:
                                   type: number
+                                  description: MQTT Quality of Service level (0 = at most once, 1 = at least once).
                                 reconnectDelay:
                                   type: number
+                                  description: Initial delay in seconds before attempting to reconnect after disconnect.
                                 reconnectDelayMax:
                                   type: number
+                                  description: Maximum delay in seconds between reconnect attempts (exponential backoff cap).
+                              description: Additional MQTT connection parameters.
                             enableSecurity:
                               type: boolean
+                              description: When true, TLS/SSL is used for the connection.
                             endpoint:
                               type: object
                               properties:
                                 hostName:
                                   type: string
+                                  description: Hostname or IP address of the MQTT broker or cloud endpoint.
                                 port:
                                   type: number
+                                  description: TCP port number of the MQTT broker or cloud endpoint.
                                 protocol:
                                   type: string
+                                  description: 'Transport protocol. Common values: tcp, ssl, ws (WebSocket), wss (WebSocket Secure).'
+                              description: Remote broker or server endpoint details.
                             publishTopic:
                               type: array
+                              description: MQTT topic(s) the reader publishes management events to.
                               items:
                                 type: string
                             security:
@@ -351,28 +531,41 @@ properties:
                               properties:
                                 CACertificateFileLocation:
                                   type: string
+                                  description: Absolute path to the CA certificate file on the reader.
                                 installedCertificateName:
                                   type: string
+                                  description: Name of a pre-installed certificate stored on the reader.
                                 installedCertificateType:
                                   type: string
+                                  description: Type of the pre-installed certificate (e.g. "server", "client").
                                 keyAlgorithm:
                                   type: string
+                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                 keyFormat:
                                   type: string
+                                  description: Key file format (e.g. PEM).
                                 privateKeyFileLocation:
                                   type: string
+                                  description: Absolute path to the private key file on the reader.
                                 publicKeyFileLocation:
                                   type: string
+                                  description: Absolute path to the public key or client certificate file on the reader.
                                 verifyHostName:
                                   type: boolean
+                                  description: When true, the broker's hostname is verified against its TLS certificate CN/SAN.
                                 verifyPeer:
                                   type: boolean
+                                  description: When true, the server's TLS certificate is validated against the CA certificate.
+                              description: TLS/SSL certificate and key configuration.
                             subscribeTopic:
                               type: array
+                              description: MQTT topic(s) the reader subscribes to (typically unused for management event connections).
                               items:
                                 type: string
-                        type:
-                          type: string
+                          description: Connection-specific options.
+                description: Management async event endpoint (publishes heartbeat, errors, and warnings to the cloud).
+            description: Management plane endpoint configuration (async management events and command/response channel).
+        description: Cloud connectivity endpoint configuration for control, data, and management planes.
       managementEventConfig:
         type: object
         properties:
@@ -381,48 +574,69 @@ properties:
             properties:
               antenna:
                 type: boolean
+                description: Enable antenna error reporting (e.g. antenna disconnected).
               cpu:
                 type: object
                 properties:
                   reportIntervalInSec:
                     type: number
+                    description: Minimum interval in seconds between CPU error reports.
                   threshold:
                     type: number
+                    description: CPU usage percentage (0-100) above which an error is reported.
+                description: CPU error threshold reporting configuration.
               database:
                 type: boolean
+                description: Enable database error reporting.
               flash:
                 type: object
                 properties:
                   reportIntervalInSec:
                     type: number
+                    description: Minimum interval in seconds between flash error reports.
                   threshold:
                     type: number
+                    description: Flash usage percentage (0-100) above which an error is reported.
+                description: Flash storage error threshold reporting configuration.
               ntp:
                 type: boolean
+                description: Enable NTP synchronization error reporting.
               radio:
                 type: boolean
+                description: Enable radio (RFID engine) error reporting.
               radio_control:
                 type: boolean
+                description: Enable radio control module error reporting.
               ram:
                 type: object
                 properties:
                   reportIntervalInSec:
                     type: number
+                    description: Minimum interval in seconds between RAM error reports.
                   threshold:
                     type: number
+                    description: RAM usage percentage (0-100) above which an error is reported.
+                description: RAM error threshold reporting configuration.
               reader_gateway:
                 type: boolean
+                description: Enable reader gateway (cloud agent) error reporting.
               userApp:
                 type: object
                 properties:
                   reportIntervalInSec:
                     type: number
+                    description: Minimum interval in seconds between user app error reports.
                   threshold:
                     type: number
+                    description: Resource usage percentage (0-100) above which a user app error is reported.
+                description: User application error threshold reporting configuration.
+            description: Error event reporting configuration per subsystem.
           gpiEvents:
             type: boolean
+            description: Enable publishing of GPI (General Purpose Input) state change events to the management channel.
           gpoEvents:
             type: boolean
+            description: Enable publishing of GPO (General Purpose Output) state change events to the management channel.
           heartbeat:
             type: object
             properties:
@@ -431,27 +645,36 @@ properties:
                 properties:
                   radio_control:
                     type: array
+                    description: 'Radio control telemetry fields to include in the heartbeat. Example values: ANTENNAS, RADIO_ACTIVITY, RADIO_CONNECTION, CPU, RAM, UPTIME, NUM_ERRORS, NUM_WARNINGS, NUM_TAG_READS, NUM_TAG_READS_PER_ANTENNA, NUM_DATA_MESSAGES_TXED, NUM_RADIO_PACKETS_RXED.'
                     items:
                       type: string
                   reader_gateway:
                     type: array
+                    description: 'Reader gateway (cloud agent) telemetry fields to include in the heartbeat. Example values: NUM_DATA_MESSAGES_RXED, NUM_MANAGEMENT_EVENTS_TXED, NUM_DATA_MESSAGES_TXED, NUM_DATA_MESSAGES_RETAINED, NUM_DATA_MESSAGES_DROPPED, CPU, RAM, UPTIME, NUM_ERRORS, NUM_WARNINGS, INTERFACE_CONNECTION_STATUS, NOLOCKQ_DEPTH.'
                     items:
                       type: string
                   system:
                     type: array
+                    description: 'System-level telemetry fields to include in the heartbeat. Example values: CPU, FLASH, NTP, RAM, SYSTEMTIME, TEMPERATURE, UPTIME, GPO, GPI, POWER_NEGOTIATION, POWER_SOURCE, MAC_ADDRESS, HOSTNAME.'
                     items:
                       type: string
                   userDefined:
                     type: object
                     properties: {}
+                    description: User-defined key-value pairs to include in every heartbeat event. Arbitrary JSON object; use to attach static metadata such as site name, location, or asset tag.
                   userapps:
                     type: array
+                    description: 'User application telemetry fields to include in the heartbeat. Example values: STATUS, CPU, RAM, UPTIME, NUM_DATA_MESSAGES_RXED, NUM_DATA_MESSAGES_TXED, INCOMING_DATA_BUFFER_PERCENTAGE_REMAINING, OUTGOING_DATA_BUFFER_PERCENTAGE_REMAINING.'
                     items:
                       type: string
+                description: Selects which telemetry fields to include in each heartbeat event, grouped by subsystem.
               interval:
                 type: number
+                description: Heartbeat publish interval in seconds. Set to 0 to disable heartbeat.
+            description: Heartbeat event configuration. The reader publishes periodic status heartbeats to the management channel.
           userappEvents:
             type: boolean
+            description: Enable publishing of user application lifecycle events (start, stop, crash) to the management channel.
           warnings:
             type: object
             properties:
@@ -460,56 +683,97 @@ properties:
                 properties:
                   reportIntervalInSec:
                     type: number
+                    description: Minimum interval in seconds between CPU warning reports.
                   threshold:
                     type: number
+                    description: CPU usage percentage (0-100) above which a warning is reported.
+                description: CPU warning threshold reporting configuration.
               database:
                 type: boolean
+                description: Enable database warning reporting.
               flash:
                 type: object
                 properties:
                   reportIntervalInSec:
                     type: number
+                    description: Minimum interval in seconds between flash warning reports.
                   threshold:
                     type: number
+                    description: Flash usage percentage (0-100) above which a warning is reported.
+                description: Flash storage warning threshold reporting configuration.
               ntp:
                 type: boolean
+                description: Enable NTP synchronization warning reporting.
               radio_api:
                 type: boolean
+                description: Enable radio API warning reporting.
               radio_control:
                 type: boolean
+                description: Enable radio control module warning reporting.
               ram:
                 type: object
                 properties:
                   reportIntervalInSec:
                     type: number
+                    description: Minimum interval in seconds between RAM warning reports.
                   threshold:
                     type: number
+                    description: RAM usage percentage (0-100) above which a warning is reported.
+                description: RAM warning threshold reporting configuration.
               reader_gateway:
                 type: boolean
+                description: Enable reader gateway (cloud agent) warning reporting.
               temperature:
                 type: object
                 properties:
                   ambient:
                     type: number
+                    description: Ambient temperature threshold in degrees Celsius above which a warning is reported.
                   pa:
                     type: number
+                    description: Power amplifier temperature threshold in degrees Celsius above which a warning is reported.
+                description: Temperature warning thresholds. A warning is reported when either threshold is exceeded.
               userApp:
                 type: object
                 properties:
                   reportIntervalInSec:
                     type: number
+                    description: Minimum interval in seconds between user app warning reports.
                   threshold:
                     type: number
+                    description: Resource usage percentage (0-100) above which a user app warning is reported.
+                description: User application warning threshold reporting configuration.
+            description: Warning event reporting configuration per subsystem.
+        description: Asynchronous management event configuration, including heartbeat, error reporting, warning reporting, GPI events, and user app events.
       retention:
-        type: array
-        items:
-          type: object
+        description: Global retention configuration for data events on connection loss. Returned as an array (one entry per data endpoint connection) or a single object applied to all connections.
+        oneOf:
+        - type: object
+          description: Single retention config applied to all data endpoints.
           properties:
             maxEventRetentionTimeInMin:
               type: number
+              description: Maximum time in minutes to retain events when offline (0 - 10080). 0 or -1 retains events indefinitely until maxNumEvents is reached.
             maxNumEvents:
               type: number
+              description: Maximum number of events to buffer when offline (0 - 150000).
             throttle:
               type: number
+              description: Rate limit in events/sec for replaying retained events after reconnect (0 - 1000).
+        - type: array
+          description: Per-endpoint retention config (one entry per data endpoint connection).
+          items:
+            type: object
+            properties:
+              maxEventRetentionTimeInMin:
+                type: number
+                description: Maximum time in minutes to retain events when offline (0 - 10080). 0 or -1 retains events indefinitely until maxNumEvents is reached.
+              maxNumEvents:
+                type: number
+                description: Maximum number of events to buffer when offline (0 - 150000).
+              throttle:
+                type: number
+                description: Rate limit in events/sec for replaying retained events after reconnect (0 - 1000).
+    description: Reader Gateway cloud connectivity configuration, including endpoint connections, batching, retention, and management event settings.
 title: Reader Configuration
 description: Reader configuration returned by get_config.

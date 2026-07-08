@@ -1,0 +1,11 @@
+{
+  "command": "set_os",
+  "payload": {
+    "authenticationType": "NONE",
+    "url": "http://10.17.231.168:8003/3_20_4",
+    "options": {
+      "username": "XXXX",
+      "password": "XXXX"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "command": "set_gpo",
+  "command_id": "test-set_gpo",
+  "payload": {
+    "port": 5,
+    "state": false
+  }
+}

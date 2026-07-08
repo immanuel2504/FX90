@@ -1,0 +1,5 @@
+{
+  "command": "set_passthru",
+  "command_id": "test-set_passthru",
+  "payload": {}
+}

@@ -25,8 +25,8 @@ x-examples:
     value: 60
 properties:
   duration:
-    type: integer
-    description: "Duration (in seconds) to wait to report a tag again once it has already been reported\nIt should be noted that the way the filter works is that as long as the tag is being read by the reader, it will not report unless the time since the previous report of this tag on this antenna meets the type and duration. \nDuration is a uint32 value and the max value is bound by the data type. "
+    type: number
+    description: "Report filter duration in seconds."
     format: int32
     minimum: 0
   type:
@@ -34,7 +34,7 @@ properties:
     enum:
     - RADIO_WIDE
     - PER_ANTENNA
-    description: "Configures the timeout (in seconds) by antenna or for entire radio \n"
+    description: "Report filter scope."
   addl_keys:
     $ref: addl_keys.v1.yaml
     x-stoplight:

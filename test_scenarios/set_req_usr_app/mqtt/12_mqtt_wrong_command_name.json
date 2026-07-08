@@ -1,0 +1,10 @@
+{
+  "command": "set_req_usr_app_TYPO",
+  "command_id": "test-set_req_usr_app_TYPO",
+  "payload": {
+    "userapp": "sample",
+    "command": {
+      "message": "hello"
+    }
+  }
+}

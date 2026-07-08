@@ -25,12 +25,12 @@
       "properties": {
         "country": {
           "type": "string",
-          "description": "Country name. Valid values can be retrieved from get_SupportedRegionList.",
+          "description": "Country name. Valid values can be retrieved from GET /cloud/supportedRegionList.",
           "example": "Canada"
         },
         "standardname": {
           "type": "string",
-          "description": "Regulatory standard name for the chosen country. Valid values can be retrieved from get_SupportedStandardList.",
+          "description": "Regulatory standard name for the chosen country. Valid values can be retrieved from GET /cloud/supportedStandardList?region=<country>.",
           "example": "CANADA_FCC_15"
         },
         "isLBT": {

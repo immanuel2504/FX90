@@ -1,0 +1,9 @@
+{
+  "command": "set_passthru",
+  "command_id": "test-set_passthru",
+  "payload": {
+    "component": "RC",
+    "payload": "mode",
+    "definitelyNotARealField": 42
+  }
+}

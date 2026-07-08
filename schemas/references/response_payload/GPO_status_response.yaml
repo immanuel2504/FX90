@@ -1,35 +1,30 @@
 description: Retrieves the current GPO port states.
 type: object
+properties:
+  '1':
+    type: string
+    enum:
+    - HIGH
+    - LOW
+  '2':
+    type: string
+    enum:
+    - HIGH
+    - LOW
+  '3':
+    type: string
+    enum:
+    - HIGH
+    - LOW
+  '4':
+    type: string
+    enum:
+    - HIGH
+    - LOW
+title: success
 x-examples:
   example-1:
     '1': LOW
     '2': HIGH
     '3': LOW
     '4': HIGH
-properties:
-  '1':
-    type: string
-    minLength: 1
-    enum: &id001
-    - HIGH
-    - LOW
-    description: 'State of GPO port 1. Allowed values: HIGH, LOW.'
-  '2':
-    type: string
-    minLength: 1
-    enum: *id001
-    description: 'State of GPO port 2. Allowed values: HIGH, LOW.'
-  '3':
-    type: string
-    minLength: 1
-    enum: *id001
-    description: 'State of GPO port 3. Allowed values: HIGH, LOW.'
-  '4':
-    type: string
-    minLength: 1
-    enum: *id001
-    description: 'State of GPO port 4. Allowed values: HIGH, LOW.'
-required:
-- '1'
-- '2'
-title: success

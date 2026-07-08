@@ -1,0 +1,6 @@
+{
+  "server": "time.google.com",
+  "server1": "time1.google.com",
+  "server2": "time2.google.com",
+  "definitelyNotARealField": 42
+}

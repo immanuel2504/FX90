@@ -4,32 +4,63 @@ description: Install userapp debian package
 properties:
   authenticationType:
     type: string
-    description: 'Authentication method used by the file server. Allowed values: NONE,
-      BASIC.'
+    description: Authentication method to use when downloading the app.
     enum:
     - NONE
     - BASIC
-    example: BASIC
-  filename:
-    type: string
-    description: User application package filename on the file server.
-    example: mylogger_1.0.1.deb
-  url:
-    type: string
-    description: URL of the file server location that hosts the package files.
-    example: sftp://10.117.229.15/home/labuser/EV1/
-  authenticationOptions:
+  options:
     type: object
-    description: BASIC authentication credentials for the file server.
+    description: Credentials object used when `authenticationType` is `BASIC`.
+    required:
+    - username
+    - password
     properties:
       username:
         type: string
-        description: Username for BASIC authentication.
-        example: labuser
       password:
         type: string
-        description: Password for BASIC authentication.
-        example: L@bu$3rs
+  filename:
+    type: string
+    description: The file name of the application package to install on the device.
+  url:
+    type: string
+    description: The URL where the application package is hosted.
+  verifyPeer:
+    type: boolean
+    description: Verify the server TLS peer certificate. Defaults to true when omitted.
+  verifyHost:
+    type: boolean
+    description: Verify the server hostname in the TLS certificate. Defaults to true when omitted.
+  CACertificateFileLocation:
+    type: string
+    description: Path on the device to a CA certificate file to trust for TLS.
+  CACertificateFileContent:
+    type: string
+    description: PEM-encoded CA certificate content.
+  publicKeyFileLocation:
+    type: string
+  publicKeyFileContent:
+    type: string
+  privateKeyFileLocation:
+    type: string
+  privateKeyFileContent:
+    type: string
+  installedCertificateType:
+    type: string
+  installedCertificateName:
+    type: string
+  headers:
+    type: object
+    description: Optional HTTP headers to include in the download request.
+    additionalProperties:
+      type: string
+  retry:
+    type: object
+    properties:
+      count:
+        type: integer
+      delayInSec:
+        type: integer
 required:
 - url
 - filename
@@ -38,6 +69,6 @@ examples:
 - authenticationType: BASIC
   filename: mylogger_1.0.1.deb
   url: sftp://10.117.229.15/home/labuser/EV1/
-  authenticationOptions:
+  options:
     username: labuser
     password: L@bu$3rs

@@ -1,39 +1,39 @@
 description: Retrieves the current GPI port states.
 type: object
+properties:
+  '1':
+    type: string
+    description: GPI port 1 state reported by the reader.
+    enum:
+    - HIGH
+    - LOW
+  '2':
+    type: string
+    description: GPI port 2 state reported by the reader.
+    enum:
+    - HIGH
+    - LOW
+  '3':
+    type: string
+    description: GPI port 3 state reported by the reader.
+    enum:
+    - HIGH
+    - LOW
+  '4':
+    type: string
+    description: GPI port 4 state reported by the reader.
+    enum:
+    - HIGH
+    - LOW
+required:
+- '1'
+- '2'
+- '3'
+- '4'
+title: success
 x-examples:
   example-1:
     '1': HIGH
     '2': HIGH
     '3': HIGH
     '4': HIGH
-properties:
-  '1':
-    type: string
-    minLength: 1
-    enum: &id001
-    - HIGH
-    - LOW
-    example: HIGH
-    description: 'State of GPI port 1. Allowed values: HIGH, LOW.'
-  '2':
-    type: string
-    minLength: 1
-    enum: *id001
-    example: HIGH
-    description: 'State of GPI port 2. Allowed values: HIGH, LOW.'
-  '3':
-    type: string
-    minLength: 1
-    enum: *id001
-    example: HIGH
-    description: 'State of GPI port 3. Allowed values: HIGH, LOW.'
-  '4':
-    type: string
-    minLength: 1
-    enum: *id001
-    example: LOW
-    description: 'State of GPI port 4. Allowed values: HIGH, LOW.'
-required:
-- '1'
-- '2'
-title: success

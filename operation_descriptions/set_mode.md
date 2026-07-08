@@ -6,14 +6,14 @@ This command allows you to configure:
 
 - The operating mode type through `type`
 - Antenna port selection and transmit power through `antennas`
-- The RF environment profile through `environmentProfile`
-- Mode-specific behavior through `modeSpecificSettings`
+- The RF environment profile through `environment`
+- Inventory stop behavior through `antennaStopCondition`
 - Gen2 query, select, and access settings
 - Report filtering, RSSI filtering, and metadata options
 
 Use this command to:
 
-- Switch between SIMPLE, INVENTORY, PORTAL, CONVEYOR, CUSTOM, or DIRECTIONALITY modes
+- Switch between SIMPLE, INVENTORY, PORTAL, CONVEYOR, or CUSTOM modes
 - Tune antenna ports and transmit power for the deployment environment
 - Configure portal triggers, inventory intervals, or directionality zone plans
 - Apply tag filtering and reporting behavior before starting inventory
@@ -27,7 +27,7 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/mode` |
 | Related Commands | [get_mode](get_mode.md), [start](start.md), [stop](stop.md), [get_readerCapabilities](get_readerCapabilities.md) |
-| Supported Mode Types | `SIMPLE`, `INVENTORY`, `PORTAL`, `CONVEYOR`, `CUSTOM`, `DIRECTIONALITY` |
+| Supported Mode Types | `SIMPLE`, `INVENTORY`, `PORTAL`, `CONVEYOR`, `CUSTOM` |
 | Supported Environment Profiles | `LOW_INTERFERENCE`, `HIGH_INTERFERENCE`, `VERY_HIGH_INTERFERENCE`, `AUTO_DETECT`, `DEMO` |
 | Supported API Versions | V1.0 |
 
@@ -37,9 +37,9 @@ Decide on your mode configuration before sending this command. Changing mode whi
 
 | What You Need | Details |
 |---|---|
-| Mode type | One of `SIMPLE`, `INVENTORY`, `PORTAL`, `CONVEYOR`, `CUSTOM`, or `DIRECTIONALITY`. |
+| Mode type | One of `SIMPLE`, `INVENTORY`, `PORTAL`, `CONVEYOR`, or `CUSTOM`. |
 | Antenna ports and power | Which antenna ports (or ATR beams) to enable and the transmit power in dBm for each. |
-| Mode-specific settings | Inventory interval for `INVENTORY`; GPI triggers and stop interval for `PORTAL`; zone plan for `DIRECTIONALITY`. Only include the sub-object relevant to the chosen mode type. |
+| Mode-specific settings | Inventory interval for `INVENTORY`; GPI triggers and stop interval for `PORTAL`. Only include the sub-object relevant to the chosen mode type. |
 | Environment profile | Optional - set to match the RF environment at the deployment site. Use `AUTO_DETECT` if unsure. |
 | Active inventory | If the reader is currently reading tags, send `stop` before changing the mode to avoid disrupting ongoing inventory. |
 

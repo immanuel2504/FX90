@@ -21,10 +21,15 @@
       "properties": {
         "component": {
           "type": "string",
+          "description": "Target reader component to send the pass-through command to.",
+          "enum": [
+            "RC"
+          ],
           "example": "RC"
         },
         "payload": {
           "type": "string",
+          "description": "Pass-through payload. Valid values include: mode, status.",
           "example": "mode"
         }
       }

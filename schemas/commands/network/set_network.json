@@ -64,7 +64,6 @@
       "payload": {
         "eth0": {
           "security": {
-            "enable": true,
             "802_1xEAP": {
               "authentication": "TLS",
               "certificate": "my-client-cert"
@@ -80,7 +79,6 @@
       "payload": {
         "eth0": {
           "security": {
-            "enable": true,
             "802_1xEAP": {
               "authentication": "TTLS",
               "innerAuthentication": "MSCHAPv2",
@@ -99,8 +97,7 @@
         "mlan0": {
           "IPV4": {
             "dhcp": true
-          },
-          "enable": true
+          }
         }
       }
     },
@@ -116,8 +113,7 @@
             "gatewayAddress": "10.233.46.2",
             "ipAddress": "10.233.46.47",
             "subnetMask": "255.255.255.0"
-          },
-          "enable": true
+          }
         }
       }
     },
@@ -131,13 +127,12 @@
             "connect": true,
             "essid": "Redmi Note 12 5G",
             "security": {
-              "enable": true,
               "WPA2Personal": {
                 "password": "12345678"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },
@@ -150,11 +145,8 @@
             "essid": "OpenNetwork",
             "connect": true,
             "autoConn": true,
-            "security": {
-              "enable": false
-            }
-          },
-          "enable": true
+            "enable": true
+          }
         }
       }
     },
@@ -168,14 +160,13 @@
             "connect": true,
             "autoConn": true,
             "security": {
-              "enable": true,
               "WPA2Enterprise": {
                 "authentication": "TLS",
                 "certificate": "my-client-cert"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },
@@ -189,16 +180,15 @@
             "connect": true,
             "autoConn": true,
             "security": {
-              "enable": true,
               "WPA2Enterprise": {
                 "authentication": "TTLS",
                 "innerAuthentication": "MSCHAPv2",
                 "username": "john.doe",
                 "password": "secret"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },
@@ -283,7 +273,6 @@
       "payload": {
         "eth0": {
           "security": {
-            "enable": true,
             "802_1xEAP": {
               "authentication": "TLS",
               "certificate": "my-client-cert"
@@ -299,7 +288,6 @@
       "payload": {
         "eth0": {
           "security": {
-            "enable": true,
             "802_1xEAP": {
               "authentication": "TTLS",
               "innerAuthentication": "MSCHAPv2",
@@ -318,8 +306,7 @@
         "mlan0": {
           "IPV4": {
             "dhcp": true
-          },
-          "enable": true
+          }
         }
       }
     },
@@ -335,8 +322,7 @@
             "gatewayAddress": "10.233.46.2",
             "ipAddress": "10.233.46.47",
             "subnetMask": "255.255.255.0"
-          },
-          "enable": true
+          }
         }
       }
     },
@@ -350,13 +336,12 @@
             "connect": true,
             "essid": "Redmi Note 12 5G",
             "security": {
-              "enable": true,
               "WPA2Personal": {
                 "password": "12345678"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },
@@ -369,11 +354,8 @@
             "essid": "OpenNetwork",
             "connect": true,
             "autoConn": true,
-            "security": {
-              "enable": false
-            }
-          },
-          "enable": true
+            "enable": true
+          }
         }
       }
     },
@@ -387,14 +369,13 @@
             "connect": true,
             "autoConn": true,
             "security": {
-              "enable": true,
               "WPA2Enterprise": {
                 "authentication": "TLS",
                 "certificate": "my-client-cert"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },
@@ -408,16 +389,15 @@
             "connect": true,
             "autoConn": true,
             "security": {
-              "enable": true,
               "WPA2Enterprise": {
                 "authentication": "TTLS",
                 "innerAuthentication": "MSCHAPv2",
                 "username": "john.doe",
                 "password": "secret"
               }
-            }
-          },
-          "enable": true
+            },
+            "enable": true
+          }
         }
       }
     },

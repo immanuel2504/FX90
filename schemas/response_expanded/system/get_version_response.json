@@ -8,7 +8,7 @@
   "examples": [
     {
       "command": "get_version",
-      "command_id": "abcd1324",
+      "command_id": "a12cb5677",
       "response": "success",
       "payload": {
         "availableOsUpgrades": {},

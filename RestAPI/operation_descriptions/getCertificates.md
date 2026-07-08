@@ -32,5 +32,5 @@ Key fields to check in the response:
 |---|---|---|
 | `name` | Is the expected certificate present? | Confirms the correct certificate is installed for TLS or authentication. |
 | `type` | What type of certificate is it? | Differentiates device, CA, and client certificates used for different purposes. |
-| `notValidAfter` | When does it expire? | Expired certificates will cause TLS handshake failures and connectivity loss. |
+| `validityEnd` | When does it expire? | Expired certificates will cause TLS handshake failures and connectivity loss. |
 | `serialNumber` | Does the serial match the expected certificate? | Verifies the exact certificate instance, useful for rotation audits. |

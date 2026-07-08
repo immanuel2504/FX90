@@ -1,0 +1,8 @@
+{
+  "command": "set_passthru_TYPO",
+  "command_id": "test-set_passthru_TYPO",
+  "payload": {
+    "component": "RC",
+    "payload": "mode"
+  }
+}

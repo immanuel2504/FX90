@@ -2,24 +2,18 @@ description: Send request to userapp
 type: object
 title: set_reqToUserapp
 properties:
-  userapp:
-    type: string
-    minLength: 1
-    description: User application name. For REST, the application is identified by
-      the appname path parameter; for MQTT, the application is identified by the userapp
-      payload field.
-    example: sample
   command:
     type: object
-    description: Command object to send to the user application.
+    description: Command payload forwarded as-is to the user application. Structure is application-defined.
     properties:
       message:
         type: string
-        description: Message value to send to the user application.
-        example: hello
+        description: Message to send to the user application.
+  userapp:
+    type: string
+    description: User application name. For REST, the application is identified by the appname path parameter; for MQTT, the application is identified by the userapp payload field.
 required:
 - userapp
-- command
 examples:
 - userapp: sample
   command:

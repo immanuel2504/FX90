@@ -1,55 +1,45 @@
 title: success
 type: object
-description: Retrieves the supported regulatory standards and channel settings for
-  a region.
+description: Retrieves the supported regulatory standards and channel settings for a region.
 properties:
   SupportedStandards:
     type: array
-    description: Supported regulatory standards and channel settings for the requested
-      region.
     items:
       type: object
-      examples:
-      - &id001
-        StandardName: ARGENTINA
-        channeldata:
-        - '915750'
-        - '915250'
-        - '903250'
-        isChannelSelectable: false
-        isHoppingConfigurable: false
-        isLBTConfigurable: false
       properties:
         StandardName:
           type: string
-          description: Regulatory standard name supported for the requested region.
-          example: ARGENTINA
+          description: Regulatory standard identifier for the region.
         channeldata:
           type: array
-          description: Channel list supported by the regulatory standard.
+          description: List of center frequencies (in kHz) for the standard's channels.
           items:
             type: string
-          example:
-          - '915750'
-          - '915250'
-          - '903250'
         isChannelSelectable:
-          type: boolean
-          description: Whether channels can be selected for this regulatory standard.
-          example: false
-          default: false
+          type: string
+          description: Whether individual channels can be selected. String-encoded boolean.
+          enum:
+          - 'true'
+          - 'false'
         isHoppingConfigurable:
-          type: boolean
-          description: Whether frequency hopping can be configured for this regulatory
-            standard.
-          example: false
-          default: false
+          type: string
+          description: Whether frequency hopping is configurable. String-encoded boolean.
+          enum:
+          - 'true'
+          - 'false'
         isLBTConfigurable:
-          type: boolean
-          description: Whether Listen Before Talk (LBT) can be configured for this
-            regulatory standard.
-          example: false
-          default: false
+          type: string
+          description: Whether Listen-Before-Talk (LBT) is configurable. String-encoded boolean.
+          enum:
+          - 'true'
+          - 'false'
 examples:
 - SupportedStandards:
-  - *id001
+  - StandardName: ARGENTINA
+    channeldata:
+    - '915750'
+    - '915250'
+    - '903250'
+    isChannelSelectable: false
+    isHoppingConfigurable: false
+    isLBTConfigurable: false

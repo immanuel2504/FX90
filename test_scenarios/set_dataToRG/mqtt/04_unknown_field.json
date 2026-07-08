@@ -1,0 +1,7 @@
+{
+  "command": "set_dataToRG",
+  "command_id": "test-set_dataToRG",
+  "payload": {
+    "definitelyNotARealField": 42
+  }
+}

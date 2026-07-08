@@ -5,200 +5,141 @@ required:
 properties:
   ble:
     type: object
-    description: BLE scanner configuration.
     required:
     - enable
     properties:
       enable:
         type: boolean
-        description: Enable (`true`) or disable (`false`) the BLE scanner.
-        example: true
       scanIntervalSec:
         type: integer
-        description: BLE scan interval, in seconds.
         minimum: 1
-        example: 5
       additionalFilters:
         type: object
-        description: Optional filters applied to BLE advertisements before they are
-          forwarded.
         properties:
           rssi:
             type: integer
-            description: Minimum RSSI threshold, in dBm. Advertisements weaker than
-              this value are dropped.
             minimum: -127
             maximum: 0
-            example: -70
           serviceUuids16:
             type: array
-            description: List of 16-bit service UUIDs (hex) to match. Only advertisements
-              that include one of these UUIDs are forwarded.
             items:
               type: string
-            example:
-            - FEAA
-            - FE9B
           serviceUuids128:
             type: array
-            description: List of 128-bit service UUIDs to match. Only advertisements
-              that include one of these UUIDs are forwarded.
             items:
               type: string
-            example:
-            - FDA50693-A4E2-4FB1-AFCF-C6EB07647825
       protocols:
         type: object
         description: Protocol-specific BLE scanner configurations.
         properties:
           iBeacon:
             type: object
-            description: iBeacon protocol scanner configuration.
             properties:
               enabled:
                 type: boolean
-                description: Enable (`true`) or disable (`false`) iBeacon scanning.
-                example: true
               filters:
                 type: array
-                description: List of iBeacon filters. A beacon is forwarded if it
-                  matches any one filter entry.
                 items:
                   type: object
                   properties:
                     uuid:
                       type: string
                       description: Proximity UUID
-                      example: FDA50693-A4E2-4FB1-AFCF-C6EB07647825
                     major:
                       type: integer
                       description: Major value
-                      example: 10001
                     minor:
                       type: integer
                       description: Minor value
-                      example: 20002
                     txPower:
                       type: integer
                       description: TX power / calibrated RSSI at 1m
-                      example: -59
           altBeacon:
             type: object
-            description: AltBeacon protocol scanner configuration.
             properties:
               enabled:
                 type: boolean
-                description: Enable (`true`) or disable (`false`) AltBeacon scanning.
-                example: true
               filters:
                 type: array
-                description: List of AltBeacon filters. A beacon is forwarded if it
-                  matches any one filter entry.
                 items:
                   type: object
                   properties:
                     mfgId:
                       type: string
                       description: Manufacturer ID (hex string)
-                      example: 0118
                     beaconId:
                       type: string
                       description: Beacon ID (UUID string)
-                      example: 2F234454-CF6D-4A0F-ADF2-F4911BA9FFA7
                     major:
                       type: integer
                       description: Major value
-                      example: 4
                     minor:
                       type: integer
                       description: Minor value
-                      example: 4
                     refRssi:
                       type: integer
                       description: Reference RSSI (TX power at 1m)
-                      example: -100
           eddystone:
             type: object
-            description: Eddystone protocol scanner configuration.
             properties:
               enabled:
                 type: boolean
-                description: Enable (`true`) or disable (`false`) Eddystone scanning.
-                example: true
               filters:
                 type: array
-                description: Filter by Eddystone frame fields. Use `frameType` to
-                  target a specific frame type (URL, UID, EID). All other fields are
-                  optional and frame-type-specific.
+                description: Filter by Eddystone frame fields. Use `frameType` to target a specific frame type (URL, UID, EID). All other fields are optional and frame-type-specific.
                 items:
                   type: object
                   properties:
                     frameType:
                       type: string
+                      description: Eddystone frame type
                       enum:
                       - URL
                       - UID
                       - EID
                       - TLM
-                      description: Eddystone frame type
-                      example: URL
                     txPower:
                       type: integer
                       description: TX power at 0m (calibrated RSSI)
-                      example: -59
                     url:
                       type: string
                       description: Advertised URL (Eddystone-URL only)
-                      example: https://www.zebra.com
                     namespace:
                       type: string
                       description: 10-byte namespace (Eddystone-UID only, hex string)
-                      example: 0102030405060708090A
                     instance:
                       type: string
                       description: 6-byte instance ID (Eddystone-UID only, hex string)
-                      example: '000000000001'
                     ephemeralId:
                       type: string
                       description: 8-byte ephemeral ID (Eddystone-EID only, hex string)
-                      example: 0102030405060708
           generic:
             type: object
-            description: Configuration for GENERIC_BLE beacons. Filters match on device-level
-              advertisement fields.
+            description: Configuration for GENERIC_BLE beacons. Filters match on device-level advertisement fields.
             properties:
               enabled:
                 type: boolean
-                description: Enable (`true`) or disable (`false`) generic BLE scanning.
-                example: true
               filters:
                 type: array
+                description: List of filter objects for GENERIC_BLE beacons. A beacon is forwarded if it matches any one filter entry.
                 items:
                   type: object
                   properties:
                     address:
                       type: string
                       description: Bluetooth device address to match (e.g. "7E:41:25:1E:D5:16").
-                      example: 7E:41:25:1E:D5:16
                     addressType:
                       type: string
+                      description: Bluetooth address type to match.
                       enum:
                       - public
                       - random
-                      description: Bluetooth address type to match.
-                      example: random
                     name:
                       type: string
-                      description: Device name to match against the "Name" field in
-                        the BLE advertisement.
-                      example: BLEPeripheralApp
+                      description: Device name to match against the "Name" field in the BLE advertisement.
                     alias:
                       type: string
-                      description: Device alias to match against the "Alias" field
-                        in the BLE advertisement.
-                      example: BLEPeripheralApp
-                description: List of filter objects for GENERIC_BLE beacons. A beacon
-                  is forwarded if it matches any one filter entry.
+                      description: Device alias to match against the "Alias" field in the BLE advertisement.
 examples:
 - ble:
     enable: true

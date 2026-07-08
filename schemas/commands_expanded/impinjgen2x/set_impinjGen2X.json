@@ -29,17 +29,6 @@
               "type": "boolean",
               "description": "Enable or disable the FastID feature.",
               "example": true
-            },
-            "tidSelector": {
-              "type": "string",
-              "description": "Optional TID word selector mask. When provided, only the specified TID word is embedded in the inventory response.",
-              "enum": [
-                "TID[0]",
-                "TID[1]",
-                "TID[2]",
-                "TID[3]"
-              ],
-              "example": "TID[0]"
             }
           },
           "required": [
@@ -139,214 +128,7 @@
           ]
         },
         "tagQuieting": {
-          "type": "object",
-          "description": "Impinj TagQuieting configuration. Exactly one of basic or advanced must be provided.",
-          "oneOf": [
-            {
-              "required": [
-                "basic"
-              ]
-            },
-            {
-              "required": [
-                "advanced"
-              ]
-            }
-          ],
-          "properties": {
-            "basic": {
-              "type": "object",
-              "description": "Basic TagQuieting configuration for quieting or unquieting specific tags identified by EPC.",
-              "properties": {
-                "action": {
-                  "type": "string",
-                  "description": "quiet silences the specified tags for the current inventory round; unquiet restores previously quieted tags.",
-                  "enum": [
-                    "quiet",
-                    "unquiet"
-                  ],
-                  "example": "quiet"
-                },
-                "tagIDs": {
-                  "type": "array",
-                  "description": "Non-empty list of hexadecimal EPC strings identifying the tags to quiet or unquiet.",
-                  "minItems": 1,
-                  "items": {
-                    "type": "string",
-                    "pattern": "^[0-9A-Fa-f]+$",
-                    "example": "e2801191a5030069073b426d"
-                  }
-                }
-              },
-              "required": [
-                "action",
-                "tagIDs"
-              ]
-            },
-            "advanced": {
-              "type": "object",
-              "description": "Advanced TagQuieting configuration using Impinj Gen2X proprietary features.",
-              "properties": {
-                "preSelect": {
-                  "type": "array",
-                  "description": "Optional array of SELECT operations to position tags into specific session states before applying state-aware SELECT. Maximum 31 items allowed.",
-                  "maxItems": 31,
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "target": {
-                        "type": "string",
-                        "description": "Session or flag to target.",
-                        "enum": [
-                          "S0",
-                          "S1",
-                          "S2",
-                          "S3",
-                          "SL"
-                        ],
-                        "example": "S2"
-                      },
-                      "action": {
-                        "type": "string",
-                        "description": "Action to perform on the target session or flag.",
-                        "enum": [
-                          "ASSERTSL_NOTHING",
-                          "DEASSERTSL_NOTHING",
-                          "ASSERTSL_ASSERTSL",
-                          "ASSERTSL_DEASSERTSL",
-                          "DEASSERTSL_ASSERTSL",
-                          "DEASSERTSL_DEASSERTSL",
-                          "NEGSL_NOTHING",
-                          "NOTHING_ASSERTSL",
-                          "NOTHING_DEASSERTSL",
-                          "NOTHING_NEGSL",
-                          "INVA_NOTHING",
-                          "INVB_NOTHING",
-                          "INVA_INVB",
-                          "INVB_INVA",
-                          "INVA_INVA",
-                          "INVB_INVB",
-                          "NOTHING_INVA",
-                          "NOTHING_INVB"
-                        ],
-                        "example": "INVB_INVA"
-                      },
-                      "mask": {
-                        "type": "object",
-                        "description": "Memory mask for tag selection.",
-                        "properties": {
-                          "bank": {
-                            "type": "string",
-                            "description": "Memory bank to match against.",
-                            "enum": [
-                              "EPC",
-                              "TID",
-                              "USER",
-                              "RESERVED"
-                            ],
-                            "example": "EPC"
-                          },
-                          "pointer": {
-                            "type": "integer",
-                            "description": "Bit offset in memory bank.",
-                            "minimum": 0,
-                            "maximum": 65535,
-                            "example": 32
-                          },
-                          "length": {
-                            "type": "integer",
-                            "description": "Number of bits to match.",
-                            "minimum": 1,
-                            "maximum": 255,
-                            "example": 96
-                          },
-                          "value": {
-                            "type": "string",
-                            "description": "Hex string value to match (even length, valid hex characters).",
-                            "pattern": "^[0-9A-Fa-f]+$",
-                            "example": "A55E551ABE1C0DE869C7A459"
-                          }
-                        },
-                        "required": [
-                          "bank",
-                          "pointer",
-                          "length",
-                          "value"
-                        ]
-                      }
-                    },
-                    "required": [
-                      "target",
-                      "action",
-                      "mask"
-                    ]
-                  }
-                },
-                "tagQuietMasks": {
-                  "type": "array",
-                  "description": "Session-state combinations to check in TID memory. Minimum 1, maximum 3 items. No duplicate session prefixes allowed (e.g., S0A and S0B together).",
-                  "minItems": 1,
-                  "maxItems": 3,
-                  "uniqueItems": true,
-                  "items": {
-                    "type": "string",
-                    "enum": [
-                      "S0A",
-                      "S0B",
-                      "S2A",
-                      "S2B",
-                      "S3A",
-                      "S3B",
-                      "SL_ASSERT",
-                      "SL_DEASSERT"
-                    ],
-                    "example": "S0A"
-                  }
-                },
-                "target": {
-                  "type": "string",
-                  "description": "Which flag to manipulate based on state check.",
-                  "enum": [
-                    "SL",
-                    "S0",
-                    "S1",
-                    "S2",
-                    "S3"
-                  ],
-                  "example": "SL"
-                },
-                "stateAwareAction": {
-                  "type": "string",
-                  "description": "Action to perform on target flag when tags match the tagQuietMasks pattern.",
-                  "enum": [
-                    "ASSERTSL",
-                    "DEASSERTSL",
-                    "ASSERTSL_DEASSERTSL",
-                    "DEASSERTSL_ASSERTSL",
-                    "NEGSL",
-                    "NOT_DEASSERTSL",
-                    "NOT_ASSERTSL",
-                    "NOT_NEGSL",
-                    "INV_A",
-                    "INV_B",
-                    "INV_A_NOT_INV_B",
-                    "INV_B_NOT_INV_A",
-                    "INV_A2BB2A",
-                    "NOT_INV_B",
-                    "NOT_INV_A",
-                    "NOT_INV_A2BB2A"
-                  ],
-                  "example": "ASSERTSL"
-                }
-              },
-              "required": [
-                "tagQuietMasks",
-                "target",
-                "stateAwareAction"
-              ]
-            }
-          },
-          "additionalProperties": false
+          "$ref": "../../references/shared/impinjTagQuieting.yaml"
         }
       }
     }
@@ -359,7 +141,7 @@
   "examples": [
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-fastid-enable-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "fastID": {
           "enabled": true
@@ -368,7 +150,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-fastid-disable-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "fastID": {
           "enabled": false
@@ -377,7 +159,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-protect-tag-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "tagProtect": {
           "action": "enableTagProtection",
@@ -389,7 +171,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-unprotect-tag-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "tagProtect": {
           "action": "disableTagProtection",
@@ -400,7 +182,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-enable-protect-read-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "tagProtect": {
           "action": "enableTagVisibility",
@@ -410,7 +192,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-disable-protect-read-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "tagProtect": {
           "action": "disableTagVisibility",
@@ -420,7 +202,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-tagfocus-enable-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "tagFocus": {
           "enabled": true
@@ -429,7 +211,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-tagfocus-disable-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "tagFocus": {
           "enabled": false
@@ -438,7 +220,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-quiet-tags-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "tagQuieting": {
           "basic": {
@@ -453,7 +235,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-unquiet-tags-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "tagQuieting": {
           "basic": {
@@ -467,7 +249,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-advanced-quiet-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "tagQuieting": {
           "advanced": {
@@ -505,7 +287,7 @@
     },
     {
       "command": "set_impinjGen2X",
-      "command_id": "gen2x-advanced-unquiet-001",
+      "command_id": "gen2x-set-001",
       "payload": {
         "tagQuieting": {
           "advanced": {

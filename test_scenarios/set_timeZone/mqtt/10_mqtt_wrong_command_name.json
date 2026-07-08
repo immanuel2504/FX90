@@ -1,0 +1,7 @@
+{
+  "command": "set_timeZone_TYPO",
+  "command_id": "test-set_timeZone_TYPO",
+  "payload": {
+    "timeZone": "International Date Line West"
+  }
+}

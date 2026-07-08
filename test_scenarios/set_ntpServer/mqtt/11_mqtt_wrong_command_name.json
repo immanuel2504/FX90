@@ -1,0 +1,9 @@
+{
+  "command": "set_ntpServer_TYPO",
+  "command_id": "test-set_ntpServer_TYPO",
+  "payload": {
+    "server": "time.google.com",
+    "server1": "time1.google.com",
+    "server2": "time2.google.com"
+  }
+}

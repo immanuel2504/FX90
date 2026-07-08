@@ -1,8 +1,6 @@
-title: set_timeZone_command
-x-stoplight:
-  id: foqedy670hb3w
+title: setTimeZone
 type: object
-description: Sets Reader Time Zone
+description: Set Reader Time Zone
 properties:
   timeZone:
     description: Allowed time zones on the reader
@@ -57,6 +55,8 @@ properties:
     - Reykjavik
     - Casablanca
     - Coordinated Universal Time
+    - UTC
+    - Universal
     - Belgrade
     - Bratislava
     - Budapest
@@ -197,6 +197,8 @@ properties:
     - (GMT) Monrovia, Reykjavik
     - (GMT) Casablanca
     - (UTC) Coordinated Universal Time
+    - UTC
+    - Universal
     - (GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague
     - (GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb
     - (GMT+01:00) Brussels, Copenhagen, Madrid, Paris
@@ -259,5 +261,7 @@ properties:
     - (GMT+13:00) Nuku'alofa
 required:
 - timeZone
+x-stoplight:
+  id: foqedy670hb3w
 examples:
 - timeZone: International Date Line West

@@ -1,20 +1,19 @@
 title: set_refreshCertificate
 type: object
 description: Refresh installed certificate
-examples:
-- name: string
-  type: string
 properties:
   name:
     type: string
-    description: Certificate name. For REST, the certificate is identified by the
-      certname path parameter; for MQTT, the certificate is identified by the name
-      payload field.
+    description: Certificate name. For REST, the certificate is identified by the certname path parameter; for MQTT, the certificate is identified by the name payload field.
   type:
     type: string
-    description: 'Certificate type. Allowed values: client, server, app.'
-    example: server
+    description: 'Certificate type. Valid values: server, client, app.'
     enum:
-    - client
     - server
+    - client
     - app
+required:
+- type
+examples:
+- name: Server
+  type: server

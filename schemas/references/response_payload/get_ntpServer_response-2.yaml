@@ -1,13 +1,11 @@
 title: success
-x-stoplight:
-  id: ysgs03eiytd9j
 type: object
 properties:
   server:
     type: string
-    description: NTP server host name or IP address.
-required:
-- server
+    description: Configured primary NTP server address.
+description: Gets the reader NTP server configuration.
+x-stoplight:
+  id: ysgs03eiytd9j
 examples:
 - server: time.google.com
-description: Gets the reader NTP server configuration.

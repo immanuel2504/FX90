@@ -8,4 +8,3 @@ properties:
     default: rgErrorLog.tar.gz
   binary:
     type: string
-    description: base64 encoded .tar.gz file content

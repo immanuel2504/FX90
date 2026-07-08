@@ -1,0 +1,13 @@
+{
+  "command": "set_config",
+  "command_id": "test-set_config",
+  "payload": {
+    "READER-GATEWAY": {
+      "retention": {
+        "maxEventRetentionTimeInMin": 1440,
+        "maxNumEvents": 150000,
+        "throttle": 500
+      }
+    }
+  }
+}

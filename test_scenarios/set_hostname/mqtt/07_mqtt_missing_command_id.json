@@ -1,0 +1,6 @@
+{
+  "command": "set_hostname",
+  "payload": {
+    "hostname": "FX75006A0B8C"
+  }
+}

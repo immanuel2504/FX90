@@ -38,6 +38,6 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `essid` | Is the target network visible? | If the network is not listed, the reader cannot connect to it regardless of configuration. |
-| `signal` | What is the signal strength percentage? | Low signal causes unstable connectivity and increased retransmissions. |
-| `secProtocol` | What security type is required (WPA2, WPA3, 802.1X)? | The network configuration in `set_network` must match the access point's security requirements. |
+| `signalStrength` | What is the signal strength percentage? | Low signal causes unstable connectivity and increased retransmissions. |
+| `security.type` | What security type is required (WPA2, WPA3, 802.1X)? | The network configuration in `set_network` must match the access point's security requirements. |
 | `autoConnect` | Is a saved profile configured for auto-connect? | Confirms whether the reader will reconnect to this network automatically after a restart. |

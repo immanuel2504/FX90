@@ -29,4 +29,4 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `ntpServer` | Does it point to the correct NTP server? | An unreachable or wrong NTP server leads to clock drift, which affects log timestamps and time-based trigger logic. |
+| `server` | Does it point to the correct NTP server? | An unreachable or wrong NTP server leads to clock drift, which affects log timestamps and time-based trigger logic. |

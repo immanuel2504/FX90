@@ -37,7 +37,7 @@
               "type": "string",
               "enum": [
                 "DEFAULT",
-                "NOT_DEFAULT"
+                "NON_DEFAULT"
               ],
               "example": "DEFAULT",
               "default": "DEFAULT",

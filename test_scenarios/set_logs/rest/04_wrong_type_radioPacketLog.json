@@ -1,0 +1,9 @@
+{
+  "radioPacketLog": "yes",
+  "components": [
+    {
+      "componentName": "radio_control",
+      "level": "OFF"
+    }
+  ]
+}

@@ -1,20 +1,20 @@
-title: set_refreshCertificate
+title: del_certificate
 type: object
+description: Delete the specified certificate from the device.
 properties:
   name:
     type: string
-    description: Certificate name. For REST, the certificate is identified by the
-      certname path parameter; for MQTT, the certificate is identified by the name
-      payload field.
+    description: Certificate name. For REST, the certificate is identified by the certname path parameter; for MQTT, the certificate is identified by the name payload field.
   type:
     type: string
-    example: client
+    description: 'Certificate type. Valid values: server, client, app.'
     enum:
-    - client
     - server
+    - client
     - app
-    description: 'Certificate type. Allowed values: client, server, app.'
 required:
 - name
 - type
-description: Refresh installed certificate
+examples:
+- name: reader
+  type: client

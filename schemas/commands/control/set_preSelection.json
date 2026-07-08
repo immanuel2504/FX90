@@ -21,13 +21,10 @@
       "properties": {
         "preSelection": {
           "type": "boolean",
-          "description": "Set to true to enable rxSawFilter, or false to disable it.",
+          "description": "Set to true to enable the rxSawFilter, false to disable.",
           "example": false
         }
-      },
-      "required": [
-        "preSelection"
-      ]
+      }
     }
   },
   "required": [

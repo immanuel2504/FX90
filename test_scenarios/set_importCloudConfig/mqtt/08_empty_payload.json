@@ -1,0 +1,5 @@
+{
+  "command": "set_importCloudConfig",
+  "command_id": "test-set_importCloudConfig",
+  "payload": {}
+}

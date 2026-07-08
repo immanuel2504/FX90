@@ -1,69 +1,95 @@
 description: Install or update a certificate on the reader by downloading a PFX file from a URL.
 type: object
+title: set_updateCertificate
+properties:
+  authenticationType:
+    type: string
+    enum:
+    - NONE
+    - BASIC
+    description: Authentication method for fetching the certificate file.
+  options:
+    type: object
+    description: Credentials object used when `authenticationType` is `BASIC`.
+    required:
+    - username
+    - password
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+  name:
+    type: string
+    description: Logical name for the certificate to be installed on the device.
+  pfxPassword:
+    type: string
+    description: Password for the PFX file, if applicable.
+  type:
+    type: string
+    description: 'Certificate type. Valid values: server, client, app.'
+    enum:
+    - server
+    - client
+    - app
+  url:
+    type: string
+    description: URL to download the certificate file from.
+  verifyPeer:
+    type: boolean
+    description: Verify the server TLS peer certificate.
+  verifyHost:
+    type: boolean
+    description: Verify the server hostname in the TLS certificate.
+  CACertificateFileLocation:
+    type: string
+    description: Path to a CA certificate file on the device.
+  CACertificateFileContent:
+    type: string
+    description: PEM-encoded CA certificate content.
+  publicKeyFileLocation:
+    type: string
+  publicKeyFileContent:
+    type: string
+  privateKeyFileLocation:
+    type: string
+  privateKeyFileContent:
+    type: string
+  installedCertificateType:
+    type: string
+  installedCertificateName:
+    type: string
+  headers:
+    type: object
+    additionalProperties:
+      type: string
+  retry:
+    type: object
+    properties:
+      count:
+        type: integer
+      delayInSec:
+        type: integer
+required:
+- url
+- type
+- name
 x-examples:
   example-1:
     name: reader
     type: client
     url: https://10.117.229.15/reader.pfx
     authenticationType: BASIC
-    authenticationOptions:
+    options:
       username: zebra
       password: zebra
     pfxPassword: abcd12345
-title: set_updateCertificate
 examples:
 - name: reader
   type: client
   url: https://10.117.229.15/reader.pfx
   authenticationType: BASIC
-  authenticationOptions:
+  options:
     username: zebra
     password: zebra
   pfxPassword: abcd12345
-properties:
-  name:
-    type: string
-    minLength: 1
-    description: Certificate name on the reader.
-    example: reader
-  type:
-    type: string
-    minLength: 1
-    description: 'Certificate type. Allowed values: client, server, app.'
-    enum:
-    - client
-    - server
-    - app
-    example: client
-  url:
-    type: string
-    minLength: 1
-    description: URL where the certificate PFX file can be downloaded.
-    example: https://10.117.229.15/reader.pfx
-  authenticationType:
-    type: string
-    description: 'Authentication method used when downloading the certificate. Allowed values: NONE, BASIC.'
-    enum:
-    - NONE
-    - BASIC
-    example: BASIC
-  authenticationOptions:
-    type: object
-    description: BASIC authentication credentials used when authenticationType is BASIC.
-    properties:
-      username:
-        type: string
-        description: Username for BASIC authentication.
-        example: zebra
-      password:
-        type: string
-        description: Password for BASIC authentication.
-        example: zebra
-  pfxPassword:
-    type: string
-    description: Password for the PFX certificate file.
-    example: abcd12345
-required:
-- name
-- type
-- url

@@ -99,9 +99,11 @@ def _schema_canonical_for_dedup(node) -> str:
                 return {"$ref": obj["$ref"]}
             out = {}
             for key, value in sorted(obj.items()):
+                # Keep description/title in the dedup hash: schemas that differ
+                # in documentation must stay separate components, otherwise the
+                # first-registered wording silently overwrites the others
+                # (e.g. flash/ram error+warning blocks all inheriting the CPU text).
                 if key in {
-                    "description",
-                    "title",
                     "example",
                     "examples",
                     "x-examples",

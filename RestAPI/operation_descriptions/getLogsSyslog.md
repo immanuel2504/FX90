@@ -31,4 +31,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
-| `content` | Are there kernel, network, or service failure messages? | Syslog captures low-level OS events that application logs may not surface, making it essential for diagnosing platform-level issues. |
+| `binary` | Are there kernel, network, or service failure messages? | Syslog captures low-level OS events that application logs may not surface, making it essential for diagnosing platform-level issues. |

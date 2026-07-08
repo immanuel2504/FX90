@@ -363,7 +363,7 @@
         "x-examples": {
           "Example 1": {
             "command": "get_version",
-            "command_id": "string",
+            "command_id": "a12cb5677",
             "response": "success",
             "payload": {
               "readerApplication": "2.7.19.0",
@@ -729,7 +729,7 @@
         "x-examples": {
           "Example 1": {
             "command": "get_SupportedRegionList",
-            "command_id": "1a234",
+            "command_id": "gvjh",
             "response": "success",
             "payload": {
               "SupportedRegions": [
@@ -789,7 +789,7 @@
         "x-examples": {
           "example-1": {
             "command": "get_cableLossCompensation",
-            "command_id": "abdc453254",
+            "command_id": "abcd1324",
             "response": "success",
             "payload": {
               "1": {
@@ -817,7 +817,7 @@
         "x-examples": {
           "example-1": {
             "command": "set_cableLossCompensation",
-            "command_id": "abdc453254",
+            "command_id": "abcd1324",
             "response": "success",
             "payload": {}
           }
@@ -1082,7 +1082,7 @@
         "x-examples": {
           "Example 1": {
             "command": "set_importCloudConfig",
-            "command_id": "abdc453254",
+            "command_id": "abcd1324",
             "response": "success",
             "payload": {}
           }
@@ -1220,7 +1220,7 @@
         "examples": [
           {
             "command": "get_version",
-            "command_id": "string",
+            "command_id": "a12cb5677",
             "response": "success",
             "payload": {
               "readerApplication": "2.7.19.0",
@@ -3244,7 +3244,7 @@
             "type": "string",
             "enum": [
               "DEFAULT",
-              "NOT_DEFAULT"
+              "NON_DEFAULT"
             ],
             "example": "DEFAULT",
             "default": "DEFAULT"
@@ -3648,7 +3648,7 @@
           },
           "command_id": {
             "type": "string",
-            "example": "abcd1432",
+            "example": "req-001",
             "description": "A unique ID that will be echoed back in the command response by the reader."
           },
           "response": {
@@ -3698,7 +3698,7 @@
           },
           "command_id": {
             "type": "string",
-            "example": "abcd1324",
+            "example": "req-001",
             "description": "A unique ID that will be echoed back in the command response by the reader."
           },
           "response": {
@@ -13622,7 +13622,7 @@
         "examples": [
           {
             "command": "get_supportedStandardList",
-            "command_id": "gfdd",
+            "command_id": "sdgf",
             "payload": {
               "SupportedStandards": [
                 {
@@ -13697,7 +13697,7 @@
           },
           "command_id": {
             "type": "string",
-            "example": "gfdd",
+            "example": "sdgf",
             "enum": [
               "fdag"
             ],
@@ -14103,7 +14103,7 @@
           },
           "command_id": {
             "type": "string",
-            "example": "abdc453254",
+            "example": "abcd21344",
             "description": "A unique ID that will be echoed back in the command response by the reader."
           },
           "response": {
@@ -14151,7 +14151,7 @@
         "examples": [
           {
             "command": "set_ntpServer",
-            "command_id": "abdc453254",
+            "command_id": "abcd1324",
             "response": "success",
             "payload": {}
           }
@@ -14167,7 +14167,7 @@
           },
           "command_id": {
             "type": "string",
-            "example": "abdc453254",
+            "example": "abcd1324",
             "description": "A unique ID that will be echoed back in the command response by the reader."
           },
           "response": {
@@ -14226,7 +14226,7 @@
         "examples": [
           {
             "command": "get_ntpServer",
-            "command_id": "abdc453254",
+            "command_id": "abcd1324",
             "response": "success",
             "payload": {
               "server": "time.google.com"
@@ -14244,7 +14244,7 @@
           },
           "command_id": {
             "type": "string",
-            "example": "abdc453254",
+            "example": "abcd1324",
             "description": "A unique ID that will be echoed back in the command response by the reader."
           },
           "response": {
@@ -14336,7 +14336,7 @@
         "examples": [
           {
             "command": "get_cableLossCompensation",
-            "command_id": "abdc453254",
+            "command_id": "abcd1324",
             "response": "success",
             "payload": {
               "1": {
@@ -14369,7 +14369,7 @@
           },
           "command_id": {
             "type": "string",
-            "example": "abdc453254",
+            "example": "abcd1324",
             "description": "A unique ID that will be echoed back in the command response by the reader."
           },
           "response": {
@@ -14398,7 +14398,7 @@
         "x-examples": {
           "example-1": {
             "command": "get_cableLossCompensation",
-            "command_id": "abdc453254",
+            "command_id": "abcd1324",
             "response": "success",
             "payload": {
               "1": {
@@ -14439,7 +14439,7 @@
         "examples": [
           {
             "command": "set_cableLossCompensation",
-            "command_id": "abdc453254",
+            "command_id": "abcd1324",
             "response": "success",
             "payload": {}
           }
@@ -14455,7 +14455,7 @@
           },
           "command_id": {
             "type": "string",
-            "example": "abdc453254",
+            "example": "abcd1324",
             "description": "A unique ID that will be echoed back in the command response by the reader."
           },
           "response": {
@@ -15328,7 +15328,7 @@
           },
           "command_id": {
             "type": "string",
-            "example": "abdc453254",
+            "example": "abcd21344",
             "description": "A unique ID that will be echoed back in the command response by the reader."
           },
           "response": {
@@ -15744,7 +15744,7 @@
         "examples": [
           {
             "command": "get_hostname",
-            "command_id": "string",
+            "command_id": "a12cb345654",
             "response": "success",
             "payload": {
               "hostname": "FX75006A0B8C"
@@ -15802,7 +15802,7 @@
         "examples": [
           {
             "command": "set_hostname",
-            "command_id": "string",
+            "command_id": "abcd345",
             "response": "success",
             "payload": {}
           }
@@ -15867,7 +15867,7 @@
         "examples": [
           {
             "command": "set_importCloudConfig",
-            "command_id": "abdc453254",
+            "command_id": "abcd1324",
             "response": "success",
             "payload": {}
           }
@@ -15885,7 +15885,7 @@
           },
           "command_id": {
             "type": "string",
-            "example": "abdc453254",
+            "example": "abcd1324",
             "description": "A unique ID that will be echoed back in the command response by the reader.",
             "x-stoplight": {
               "id": "547aaopqznyif"

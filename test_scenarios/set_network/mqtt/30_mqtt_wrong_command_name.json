@@ -1,0 +1,12 @@
+{
+  "command": "set_network_TYPO",
+  "command_id": "test-set_network_TYPO",
+  "payload": {
+    "eth0": {
+      "IPV4": {
+        "dhcp": true
+      },
+      "enable": true
+    }
+  }
+}

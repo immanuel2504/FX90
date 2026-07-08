@@ -2,11 +2,7 @@ title: success
 type: object
 description: Retrieves reader radio packet log
 properties:
-  filename:
-    type: string
-    example: radioPktLog.tar.gz
-    default: radioPktLog.tar.gz
   binary:
     type: string
-    description: base64 encoded .tar.gz file content
-    format: byte
+  filename:
+    type: string

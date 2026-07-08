@@ -1,0 +1,8 @@
+{
+  "command": "set_installCACertificate",
+  "command_id": "test-set_installCACertificate",
+  "payload": {
+    "name": "cacert",
+    "content": 12345
+  }
+}

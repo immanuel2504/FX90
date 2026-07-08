@@ -36,4 +36,4 @@ Key fields to check in the response:
 | `numGPIs` | How many GPI pins are available? | Sets the upper limit for GPI-based trigger inputs. |
 | `numGPOs` | How many GPO pins are available? | Sets the upper limit for GPO-driven outputs in workflows. |
 | `protocols` | Which RFID protocols are supported? | Determines which tag types can be read - e.g., GS1 Gen2, ISO 18000-63. |
-| `apiVersions` | Which API versions are supported? | Ensures compatibility between management software and the reader firmware. |
+| `apiSupported.versions` | Which API versions are supported? | Ensures compatibility between management software and the reader firmware. |

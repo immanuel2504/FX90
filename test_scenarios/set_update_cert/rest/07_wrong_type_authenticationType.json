@@ -1,0 +1,11 @@
+{
+  "name": "reader",
+  "type": "client",
+  "url": "https://10.117.229.15/reader.pfx",
+  "authenticationType": 12345,
+  "options": {
+    "username": "zebra",
+    "password": "zebra"
+  },
+  "pfxPassword": "abcd12345"
+}

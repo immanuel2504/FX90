@@ -10,20 +10,10 @@ properties:
     - DISABLED
     - NO_TAGS
     - NO_UNIQUE_TAGS
-    description: 'Condition under which to delay between antenna cycles.
-
-
-      **Constraint:** NO_UNIQUE_TAGS cannot be used on FX7500.'
+    description: 'Condition under which delay is applied.'
   duration:
-    type: integer
-    description: 'Delay between antenna cycles in milliseconds to wait. Will only wait if the type (no tags or no unique tags) is met.
-
-
-      **Constraints:**
-
-      - If type is DISABLED, duration must be 0.
-
-      - If type is not DISABLED, duration must be greater than 0.'
+    type: number
+    description: 'Delay in milliseconds.'
 required:
 - type
 - duration

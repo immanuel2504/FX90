@@ -1,36 +1,37 @@
-title: set_logs
+title: logLevel
 type: object
-description: Changes logging level
+description: Reader logging configuration.
 properties:
   radioPacketLog:
     type: boolean
-    description: Indicates whether radio packet logging is enabled.
+    description: Enables or disables the radio packet log.
   components:
     type: array
-    description: Log level configuration per reader subcomponent.
+    description: Logging configuration for individual reader or cloud-agent components.
     items:
-      x-stoplight:
-        id: dmfpma3wqs07h
       type: object
       properties:
         componentName:
-          x-stoplight:
-            id: r6tsamn5i9kd7
-          description: Name of subcomponent. For radio_control, only the INFO log level is supported. For reader_gateway, supported log levels are INFO, DEBUG, WARNING, and ERROR.
           type: string
+          description: Component identifier. Supported canonical names are radio_control and cloud_agent. Supported aliases are RC for radio_control and RG for reader_gateway.
           enum:
           - radio_control
+          - RC
+          - cloud_agent
           - reader_gateway
+          - RG
         level:
           type: string
-          x-stoplight:
-            id: r2iynmvsj4e39
-          description: Logging Level
+          description: Log level to apply to the selected component.
           enum:
+          - 'OFF'
+          - FATAL
+          - ERROR
+          - WARNING
           - DEBUG
           - INFO
-          - WARNING
-          - ERROR
+          - TRACE
+          - EXTRA
       required:
       - componentName
       - level

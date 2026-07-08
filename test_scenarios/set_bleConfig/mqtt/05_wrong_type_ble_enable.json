@@ -1,0 +1,9 @@
+{
+  "command": "set_bleConfig",
+  "command_id": "test-set_bleConfig",
+  "payload": {
+    "ble": {
+      "enable": "yes"
+    }
+  }
+}

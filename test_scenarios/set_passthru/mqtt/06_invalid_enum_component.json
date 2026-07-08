@@ -1,0 +1,8 @@
+{
+  "command": "set_passthru",
+  "command_id": "test-set_passthru",
+  "payload": {
+    "component": "NOT_A_VALID_VALUE",
+    "payload": "mode"
+  }
+}

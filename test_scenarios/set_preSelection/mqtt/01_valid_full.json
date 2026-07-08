@@ -1,0 +1,7 @@
+{
+  "command": "set_preSelection",
+  "command_id": "test-set_preSelection",
+  "payload": {
+    "preSelection": false
+  }
+}

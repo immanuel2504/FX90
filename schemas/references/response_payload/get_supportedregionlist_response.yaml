@@ -4,45 +4,12 @@ description: Retrieves the region list supported by the reader based on the read
 properties:
   SupportedRegions:
     type: array
-    description: It contains SupportedRegions array with list of countries supported
-      by the reader
-    example:
-    - Argentina
-    - Australia
-    - Bangladesh
-    - Brazil
-    - Cambodia
-    - Canada
-    - China
-    - Colombia
-    - Costa
-    - Rica
-    - European
-    - Union
-    - Ghana
-    - Hong Kong
-    - India
-    - Indonesia
-    - Jordan
-    - Korea
-    - Laos
-    - Malaysia
-    - Mexico
-    - Morocco
-    - New Zealand
-    - Peru
-    - Philippines
-    - Russia
-    - Saudi Arabia
-    - Singapore
-    - South Africa
-    - Taiwan
-    - UAE
-    - Ukraine
-    - Venezuela
-    - Vietnam
+    description: List of country/region names supported by the reader.
     items:
       type: string
+      description: Supported country/region name.
+required:
+- SupportedRegions
 examples:
 - SupportedRegions:
   - Argentina

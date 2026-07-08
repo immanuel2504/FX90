@@ -5,7 +5,7 @@ The `set_logs` command configures logging behavior on the reader, including per-
 This command allows you to configure:
 
 - Whether radio packet logging is enabled through `radioPacketLog`
-- The log level for each reader software component through `logLevels`
+- The log level for each reader software component through `components`
 
 Use this command to:
 

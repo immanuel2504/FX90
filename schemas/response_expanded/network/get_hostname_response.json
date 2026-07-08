@@ -8,7 +8,7 @@
   "examples": [
     {
       "command": "get_hostname",
-      "command_id": "string",
+      "command_id": "a12cb345654",
       "response": "success",
       "payload": {
         "hostName": "FXR90C60C001"

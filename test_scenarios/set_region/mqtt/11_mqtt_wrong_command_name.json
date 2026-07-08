@@ -1,0 +1,8 @@
+{
+  "command": "set_region_TYPO",
+  "command_id": "test-set_region_TYPO",
+  "payload": {
+    "country": "Canada",
+    "standardname": "CANADA_FCC_15"
+  }
+}

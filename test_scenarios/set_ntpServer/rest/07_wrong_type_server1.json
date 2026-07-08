@@ -1,0 +1,5 @@
+{
+  "server": "time.google.com",
+  "server1": 12345,
+  "server2": "time2.google.com"
+}

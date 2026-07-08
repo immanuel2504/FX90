@@ -1,0 +1,9 @@
+{
+  "command": "set_appled_TYPO",
+  "command_id": "test-set_appled_TYPO",
+  "payload": {
+    "color": "red",
+    "flash": true,
+    "seconds": 1
+  }
+}

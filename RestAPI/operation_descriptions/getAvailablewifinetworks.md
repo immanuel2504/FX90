@@ -35,5 +35,5 @@ Key fields to check in the response:
 |---|---|---|
 | `essid` | Is the target network visible? | If the network is not listed, the reader cannot connect regardless of configuration. |
 | `signal` | What is the signal strength percentage? | Low signal causes unstable connectivity and increased retransmissions. |
-| `secProtocol` | What security type is required? | The network configuration must match the access point's security requirements. |
+| `security.type` | What security type is required? | The network configuration must match the access point's security requirements. |
 | `autoConnect` | Is a saved profile set to auto-connect? | Confirms whether the reader will reconnect to this network automatically after a restart. |

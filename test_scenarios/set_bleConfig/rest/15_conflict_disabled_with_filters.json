@@ -1,0 +1,8 @@
+{
+  "ble": {
+    "enable": false,
+    "additionalFilters": {
+      "rssi": -60
+    }
+  }
+}

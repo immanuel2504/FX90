@@ -30,4 +30,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `cableLength` | Does the configured length match the physical cable run? | An incorrect cable length will produce inaccurate loss compensation and reduce read range. |
-| `cableLoss` (per read point) | Is the attenuation value consistent with the cable spec? | Mismatched values result in too little or too much transmit power after compensation is applied. |
+| `cableLossPerHundredFt` (per read point) | Is the attenuation value consistent with the cable spec? | Mismatched values result in too little or too much transmit power after compensation is applied. |

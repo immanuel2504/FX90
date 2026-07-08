@@ -90,7 +90,6 @@ properties:
         title: GPO-LED Action
         type: array
         description: Array of GPO or LED actions. Actions will be performed sequentially.
-        x-internal: true
         items:
           anyOf:
           - title: GPO Action
@@ -107,7 +106,6 @@ properties:
                 description: Action type
               pin:
                 type: number
-                example: 1
                 description: GPO pin number
                 enum:
                 - 1
@@ -147,7 +145,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -174,7 +171,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -208,7 +204,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -219,7 +214,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - pin
@@ -278,7 +272,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -305,7 +298,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -339,7 +331,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -350,7 +341,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - led
@@ -359,7 +349,6 @@ properties:
         title: GPO-LED Action
         type: array
         description: Array of GPO or LED actions. Actions will be performed sequentially.
-        x-internal: true
         items:
           anyOf:
           - title: GPO Action
@@ -376,7 +365,6 @@ properties:
                 description: Action type
               pin:
                 type: number
-                example: 1
                 description: GPO pin number
                 enum:
                 - 1
@@ -416,7 +404,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -443,7 +430,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -477,7 +463,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -488,7 +473,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - pin
@@ -547,7 +531,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -574,7 +557,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -608,7 +590,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -619,7 +600,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - led
@@ -628,7 +608,6 @@ properties:
         title: GPO-LED Action
         type: array
         description: Array of GPO or LED actions. Actions will be performed sequentially.
-        x-internal: true
         items:
           anyOf:
           - title: GPO Action
@@ -645,7 +624,6 @@ properties:
                 description: Action type
               pin:
                 type: number
-                example: 1
                 description: GPO pin number
                 enum:
                 - 1
@@ -685,7 +663,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -712,7 +689,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -746,7 +722,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -757,7 +732,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - pin
@@ -816,7 +790,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -843,7 +816,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -877,7 +849,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -888,7 +859,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - led
@@ -897,7 +867,6 @@ properties:
         title: GPO-LED Action
         type: array
         description: Array of GPO or LED actions. Actions will be performed sequentially.
-        x-internal: true
         items:
           anyOf:
           - title: GPO Action
@@ -914,7 +883,6 @@ properties:
                 description: Action type
               pin:
                 type: number
-                example: 1
                 description: GPO pin number
                 enum:
                 - 1
@@ -954,7 +922,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -981,7 +948,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1015,7 +981,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1026,7 +991,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - pin
@@ -1085,7 +1049,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1112,7 +1075,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1146,7 +1108,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1157,7 +1118,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - led
@@ -1166,7 +1126,6 @@ properties:
         title: GPO-LED Action
         type: array
         description: Array of GPO or LED actions. Actions will be performed sequentially.
-        x-internal: true
         items:
           anyOf:
           - title: GPO Action
@@ -1183,7 +1142,6 @@ properties:
                 description: Action type
               pin:
                 type: number
-                example: 1
                 description: GPO pin number
                 enum:
                 - 1
@@ -1223,7 +1181,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1250,7 +1207,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1284,7 +1240,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1295,7 +1250,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - pin
@@ -1354,7 +1308,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1381,7 +1334,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1415,7 +1367,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1426,7 +1377,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - led
@@ -1435,7 +1385,6 @@ properties:
         title: GPO-LED Action
         type: array
         description: Array of GPO or LED actions. Actions will be performed sequentially.
-        x-internal: true
         items:
           anyOf:
           - title: GPO Action
@@ -1452,7 +1401,6 @@ properties:
                 description: Action type
               pin:
                 type: number
-                example: 1
                 description: GPO pin number
                 enum:
                 - 1
@@ -1492,7 +1440,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1519,7 +1466,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1553,7 +1499,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1564,7 +1509,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - pin
@@ -1623,7 +1567,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1650,7 +1593,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1684,7 +1626,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1695,7 +1636,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - led
@@ -1704,7 +1644,6 @@ properties:
         title: GPO-LED Action
         type: array
         description: Array of GPO or LED actions. Actions will be performed sequentially.
-        x-internal: true
         items:
           anyOf:
           - title: GPO Action
@@ -1721,7 +1660,6 @@ properties:
                 description: Action type
               pin:
                 type: number
-                example: 1
                 description: GPO pin number
                 enum:
                 - 1
@@ -1761,7 +1699,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1788,7 +1725,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1822,7 +1758,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1833,7 +1768,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - pin
@@ -1892,7 +1826,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -1919,7 +1852,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -1953,7 +1885,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -1964,7 +1895,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - led
@@ -1973,7 +1903,6 @@ properties:
         title: GPO-LED Action
         type: array
         description: Array of GPO or LED actions. Actions will be performed sequentially.
-        x-internal: true
         items:
           anyOf:
           - title: GPO Action
@@ -1990,7 +1919,6 @@ properties:
                 description: Action type
               pin:
                 type: number
-                example: 1
                 description: GPO pin number
                 enum:
                 - 1
@@ -2030,7 +1958,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -2057,7 +1984,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -2091,7 +2017,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -2102,7 +2027,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - pin
@@ -2161,7 +2085,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -2188,7 +2111,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -2222,7 +2144,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -2233,7 +2154,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - led
@@ -2242,7 +2162,6 @@ properties:
         title: GPO-LED Action
         type: array
         description: Array of GPO or LED actions. Actions will be performed sequentially.
-        x-internal: true
         items:
           anyOf:
           - title: GPO Action
@@ -2259,7 +2178,6 @@ properties:
                 description: Action type
               pin:
                 type: number
-                example: 1
                 description: GPO pin number
                 enum:
                 - 1
@@ -2299,7 +2217,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -2326,7 +2243,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -2360,7 +2276,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -2371,7 +2286,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - pin
@@ -2430,7 +2344,6 @@ properties:
                 - 'ON'
                 - 'OFF'
                 - DURATION
-                x-internal: true
               conditions:
                 oneOf:
                 - type: array
@@ -2457,7 +2370,6 @@ properties:
                     - ~IS_CLOUD_CONNECTED
                     - IS_RADIO_ONGOING
                     - ~IS_RADIO_ONGOING
-                  x-internal: true
                 - type: object
                   properties:
                     operator:
@@ -2491,7 +2403,6 @@ properties:
                         - ~IS_CLOUD_CONNECTED
                         - IS_RADIO_ONGOING
                         - ~IS_RADIO_ONGOING
-                      x-internal: true
                 title: Action Conditions
                 description: 'Predefined conditions to trigger GPO or LED actions
 
@@ -2502,7 +2413,6 @@ properties:
                   operator "and": Action is performed only when all the conditions provided is true.
 
                   operator "or": Action is performed only when one of the conditions provided is true.'
-                x-internal: true
             required:
             - type
             - led
@@ -2513,7 +2423,7 @@ properties:
     properties:
       endpointConfig:
         type: object
-        description: Endpoint connections configuration. Only the data endpoint is configurable via this API.
+        description: Endpoint connections configuration. Only the data endpoint (endpointConfig.data) is configurable via this API. Use PUT /cloud/cloudConfig (set_importCloudConfig) to configure control and management plane endpoints.
         properties:
           data:
             type: object
@@ -2523,6 +2433,7 @@ properties:
                 properties:
                   connections:
                     type: array
+                    description: List of data plane cloud connections for publishing tag read events. Send an empty array ([]) to clear all data connections. Connection names must be unique; duplicate names are rejected.
                     items:
                       type: object
                       properties:
@@ -2534,24 +2445,62 @@ properties:
                               - object
                               - 'null'
                               example: null
+                              description: Per-connection batching configuration. Set to null to use global batching settings. When provided as an object, overrides global batching for this connection only.
+                              oneOf:
+                              - type: 'null'
+                                description: Use global batching settings for this connection.
+                              - type: object
+                                description: Per-connection batching overriding global settings.
+                                properties:
+                                  maxPayloadSizePerReport:
+                                    type: integer
+                                    description: Maximum payload size per batch report in bytes (0 - 256000). -1 to disable.
+                                    minimum: 0
+                                    maximum: 256000
+                                  reportingInterval:
+                                    type: integer
+                                    description: Batch reporting interval in milliseconds (0 - 86400000). -1 to disable.
+                                    minimum: 0
+                                    maximum: 86400000
                             retention:
                               type: object
                               properties:
                                 maxEventRetentionTimeInMin:
-                                  type: number
-                                  example: 500
+                                  type: integer
+                                  description: Maximum time in minutes to retain events when offline (0 - 10080). 0 or -1 retains events indefinitely until maxNumEvents is reached.
+                                  minimum: 0
+                                  maximum: 10080
                                 maxNumEvents:
-                                  type: number
-                                  example: 150000
+                                  type: integer
+                                  description: Maximum number of events to buffer when offline (0 - 150000).
+                                  minimum: 0
+                                  maximum: 150000
                                 throttle:
-                                  type: number
-                                  example: 500
+                                  type: integer
+                                  description: Rate limit in events/sec for replaying retained events after reconnect (0 - 1000). 0 means no throttling.
+                                  minimum: 0
+                                  maximum: 1000
+                              description: Per-connection event retention configuration when the connection is offline.
+                            dataAck:
+                              type: object
+                              description: Data acknowledgement configuration. When enabled, the reader waits for an ACK from the cloud before marking events as delivered. Supported on MQTT-based connections only.
+                              properties:
+                                enable:
+                                  type: boolean
+                                  description: Enable data acknowledgement for this connection.
+                                responseTopic:
+                                  type: string
+                                  description: MQTT topic on which the cloud sends acknowledgement messages back to the reader.
+                                correlationFieldName:
+                                  type: string
+                                  description: Name of the field in the event payload used to correlate ACK responses. Defaults to "correlationId".
+                          description: Per-connection data delivery options (batching, retention, data acknowledgement).
                         description:
                           type: string
-                          example: MQTT_TEST
+                          description: Human-readable description of this connection.
                         name:
                           type: string
-                          example: MQTT_TEST
+                          description: Unique name identifier for this connection. Must be unique across all data endpoint connections; duplicate names are rejected.
                         options:
                           type: object
                           properties:
@@ -2560,113 +2509,101 @@ properties:
                               properties:
                                 cleanSession:
                                   type: boolean
-                                  example: true
+                                  description: If true, broker discards previous session state on connect (MQTT clean session flag).
                                 clientId:
                                   type: string
-                                  example: EV1
+                                  description: MQTT client identifier used when connecting to the broker.
                                 debug:
                                   type: boolean
-                                  example: false
+                                  description: Enable verbose MQTT debug logging.
                                 keepAlive:
                                   type: number
-                                  example: 60
+                                  description: MQTT keep-alive interval in seconds. The reader sends a PINGREQ if no message is sent within this interval.
                                 qos:
                                   type: number
-                                  example: 0
+                                  description: MQTT Quality of Service level (0 = at most once, 1 = at least once).
                                 reconnectDelay:
                                   type: number
-                                  example: 1
+                                  description: Initial delay in seconds before attempting to reconnect after disconnect.
                                 reconnectDelayMax:
                                   type: number
-                                  example: 5
+                                  description: Maximum delay in seconds between reconnect attempts (exponential backoff cap).
+                              description: Additional MQTT connection parameters (applicable to MQTT-based connections).
                             enableSecurity:
                               type: boolean
-                              example: false
+                              description: When true, TLS/SSL is used for the connection.
                             endpoint:
                               type: object
                               properties:
                                 hostName:
                                   type: string
-                                  example: 10.117.229.9
+                                  description: Hostname or IP address of the MQTT broker or cloud endpoint.
                                 port:
                                   type: number
-                                  example: 1883
+                                  description: TCP port number of the MQTT broker or cloud endpoint.
                                 protocol:
                                   type: string
-                                  example: tcp
+                                  description: 'Transport protocol. Common values: tcp, ssl, ws (WebSocket), wss (WebSocket Secure).'
+                              description: Remote broker or server endpoint details (applicable to MQTT-based connections).
+                            URL:
+                              type: string
+                              description: HTTP POST endpoint URL. Required for httpPost connection type. Tag read events are POSTed as JSON to this URL.
+                            tcpipport:
+                              type: string
+                              description: TCP port on which the reader listens as a TCP server. Required for tcpip-server connection type. Clients connect to this port to receive tag read events.
                             publishTopic:
                               type: array
+                              description: MQTT topic(s) the reader publishes tag read events to.
                               items:
                                 type: string
                                 example: tagevents_r2c_longrun
-                              example:
-                              - tagevents_r2c_longrun
                             security:
                               type: object
                               properties:
                                 CACertificateFileLocation:
                                   type: string
-                                  example: /home/root/broker.emqx.io-ca.crt
+                                  description: Absolute path to the CA certificate file on the reader.
                                 installedCertificateName:
                                   type: string
-                                  example: Server
+                                  description: Name of a pre-installed certificate stored on the reader.
                                 installedCertificateType:
                                   type: string
-                                  example: server
+                                  description: Type of the pre-installed certificate (e.g. "server", "client").
                                 keyAlgorithm:
                                   type: string
-                                  example: RS256
+                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                 keyFormat:
                                   type: string
-                                  example: PEM
+                                  description: Key file format (e.g. PEM).
+                                privateKeyFileLocation:
+                                  type: string
+                                  description: Absolute path to the private key file on the reader.
+                                publicKeyFileLocation:
+                                  type: string
+                                  description: Absolute path to the public key or client certificate file on the reader.
                                 verifyHostName:
                                   type: boolean
-                                  example: false
+                                  description: When true, the broker's hostname is verified against its TLS certificate CN/SAN.
                                 verifyPeer:
                                   type: boolean
-                                  example: false
+                                  description: When true, the server's TLS certificate is validated against the CA certificate.
+                                authenticationType:
+                                  type: string
+                                  description: 'HTTP authentication type for httpPost connections. Supported values: NONE, BASIC, BEARER.'
+                                verifyHost:
+                                  type: boolean
+                                  description: For httpPost connections, when true, the server hostname is verified against its TLS certificate. Equivalent to verifyHostName for MQTT.
+                              description: TLS/SSL certificate and key configuration.
                             subscribeTopic:
                               type: array
+                              description: MQTT topic(s) the reader subscribes to (typically unused for data connections).
                               items: {}
-                              example: []
+                          description: Connection-specific options. Content varies by connection type.
                         type:
                           type: string
-                          example: mqtt
-                    example:
-                    - additionalOptions:
-                        batching: null
-                        retention:
-                          maxEventRetentionTimeInMin: 500
-                          maxNumEvents: 150000
-                          throttle: 500
-                      description: MQTT_TEST
-                      name: MQTT_TEST
-                      options:
-                        additional:
-                          cleanSession: true
-                          clientId: EV1
-                          debug: false
-                          keepAlive: 60
-                          qos: 0
-                          reconnectDelay: 1
-                          reconnectDelayMax: 5
-                        enableSecurity: false
-                        endpoint:
-                          hostName: 10.117.229.9
-                          port: 1883
-                          protocol: tcp
-                        publishTopic:
-                        - tagevents_r2c_longrun
-                        security:
-                          CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
-                          installedCertificateName: Server
-                          installedCertificateType: server
-                          keyAlgorithm: RS256
-                          keyFormat: PEM
-                          verifyHostName: false
-                          verifyPeer: false
-                        subscribeTopic: []
-                      type: mqtt
+                          description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation. Only one WEBSOCKET, tcpip-server, or keyboard-emulation connection is allowed at a time.'
+                description: Data event endpoint. Defines the cloud connections that receive tag read events.
+            description: Data plane endpoint configuration (tag read event publishing channel).
       batching:
         description: Global batching configuration applied across all data endpoints. Can be a single object (applied to all endpoints) or an array of objects (one per endpoint, array length must match number of data endpoint connections).
         oneOf:
@@ -2678,13 +2615,11 @@ properties:
               description: Maximum payload size in bytes (0 - 256000). -1 to disable.
               minimum: 0
               maximum: 256000
-              example: 65536
             reportingInterval:
               type: integer
               description: Report interval in milliseconds (0 - 86400000). -1 to disable.
               minimum: 0
               maximum: 86400000
-              example: 1000
         - type: array
           description: Per-endpoint batching config (one entry per data endpoint connection)
           items:
@@ -2694,12 +2629,10 @@ properties:
                 type: integer
                 minimum: 0
                 maximum: 256000
-                example: 65536
               reportingInterval:
                 type: integer
                 minimum: 0
                 maximum: 86400000
-                example: 1000
       retention:
         description: Global retention configuration for data events on connection loss. Can be a single object (applied to all endpoints) or an array of objects (one per endpoint, array length must match number of data endpoint connections).
         oneOf:
@@ -2711,19 +2644,16 @@ properties:
               description: Maximum event retention time in minutes (0 - 10080). 0 or -1 retains forever.
               minimum: 0
               maximum: 10080
-              example: 1440
             maxNumEvents:
               type: integer
               description: Maximum number of events to retain (0 - 150000).
               minimum: 0
               maximum: 150000
-              example: 150000
             throttle:
               type: integer
               description: Rate in events/sec to replay retained events on reconnect (0 - 1000).
               minimum: 0
               maximum: 1000
-              example: 500
         - type: array
           description: Per-endpoint retention config (one entry per data endpoint connection)
           items:
@@ -2733,102 +2663,17 @@ properties:
                 type: integer
                 minimum: 0
                 maximum: 10080
-                example: 1440
               maxNumEvents:
                 type: integer
                 minimum: 0
                 maximum: 150000
-                example: 150000
               throttle:
                 type: integer
                 minimum: 0
                 maximum: 1000
-                example: 500
       managementEventConfig:
         description: Asynchronous management events configuration
         type: object
-        x-examples:
-          example-1:
-            errors:
-              cpu:
-                threshold: 90
-                reportIntervalInSec: 1800
-              flash:
-                threshold: 90
-                reportIntervalInSec: 1800
-              ram:
-                threshold: 90
-                reportIntervalInSec: 1800
-              reader_gateway: true
-              antenna: false
-              database: true
-              radio: true
-              radio_control: true
-            warnings:
-              cpu:
-                threshold: 80
-                reportIntervalInSec: 1800
-              flash:
-                threshold: 80
-                reportIntervalInSec: 1800
-              ram:
-                threshold: 80
-                reportIntervalInSec: 1800
-              ntp:
-                threshold: 0
-                reportIntervalInSec: 1800
-              database: true
-              radio_api: true
-              radio_control: true
-              temperature:
-                ambient: 75
-                pa: 105
-            gpiEvents: true
-            userappEvents: true
-            heartbeat:
-              fields:
-                radio_control:
-                - ANTENNAS
-                - RADIO_ACTIVITY
-                - RADIO_CONNECTION
-                - CPU
-                - RAM
-                - UPTIME
-                - NUM_ERRORS
-                - NUM_WARNINGS
-                - NUM_TAG_READS
-                - NUM_TAG_READS_PER_ANTENNA
-                - NUM_DATA_MESSAGES_TXED
-                - NUM_RADIO_PACKETS_RXED
-                reader_gateway:
-                - NUM_DATA_MESSAGES_RXED
-                - NUM_DATA_MESSAGES_TXED
-                - NUM_DATA_MESSAGES_RETAINED
-                - NUM_DATA_MESSAGES_DROPPED
-                - NUM_MANAGEMENT_EVENTS_TXED
-                - CPU
-                - RAM
-                - UPTIME
-                - NUM_ERRORS
-                - NUM_WARNINGS
-                system:
-                - CPU
-                - FLASH
-                - NTP
-                - RAM
-                - SYSTEMTIME
-                - TEMPERATURE
-                - UPTIME
-                userapps:
-                - STATUS
-                - CPU
-                - RAM
-                - UPTIME
-                - NUM_DATA_MESSAGES_RXED
-                - NUM_DATA_MESSAGES_TXED
-                - INCOMING_DATA_BUFFER_PERCENTAGE_REMAINING
-                - OUTGOING_DATA_BUFFER_PERCENTAGE_REMAINING
-              interval: 60
         title: Management Events Configuration
         properties:
           errors:
@@ -2843,13 +2688,11 @@ properties:
                     type: number
                     description: Error CPU usage limit
                     default: 90
-                    example: 90
                     minimum: 1
                     maximum: 99
                   reportIntervalInSec:
                     type: number
                     default: 1800
-                    example: 1800
                     minimum: 1
                     description: Error Report Interval in seconds.
                 required:
@@ -2862,14 +2705,12 @@ properties:
                     type: number
                     description: Error FLASH usage limit
                     default: 90
-                    example: 90
                     minimum: 1
                     maximum: 99
                   reportIntervalInSec:
                     type: number
                     description: Error Report Interval in seconds.
                     default: 1800
-                    example: 1800
                     minimum: 1
                 required:
                 - threshold
@@ -2881,7 +2722,6 @@ properties:
                     type: number
                     description: Error RAM usage limit
                     default: 90
-                    example: 90
                     minimum: 1
                     maximum: 99
                   reportIntervalInSec:
@@ -2889,7 +2729,6 @@ properties:
                     description: Error Report Interval in seconds.
                     default: 1800
                     minimum: 1
-                    example: 1800
                 required:
                 - threshold
               reader_gateway:
@@ -2924,13 +2763,11 @@ properties:
                     type: number
                     description: Warning CPU usage limit
                     default: 80
-                    example: 80
                     minimum: 1
                     maximum: 99
                   reportIntervalInSec:
                     type: number
                     default: 1800
-                    example: 1800
                     minimum: 1
                     description: Warning Report Interval in seconds.
                 required:
@@ -2943,14 +2780,12 @@ properties:
                     type: number
                     description: Warning FLASH usage limit
                     default: 80
-                    example: 90
                     minimum: 1
                     maximum: 99
                   reportIntervalInSec:
                     type: number
                     description: Warning Report Interval in seconds.
                     default: 1800
-                    example: 1800
                     minimum: 1
                 required:
                 - threshold
@@ -2962,7 +2797,6 @@ properties:
                     type: number
                     description: Warning RAM usage limit
                     default: 90
-                    example: 90
                     minimum: 1
                     maximum: 99
                   reportIntervalInSec:
@@ -2970,7 +2804,6 @@ properties:
                     description: Warning Report Interval in seconds.
                     default: 1800
                     minimum: 1
-                    example: 1800
                 required:
                 - threshold
               ntp:

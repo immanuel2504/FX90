@@ -1,0 +1,8 @@
+{
+  "eth0": {
+    "IPV4": {
+      "dhcp": true
+    },
+    "enable": "yes"
+  }
+}

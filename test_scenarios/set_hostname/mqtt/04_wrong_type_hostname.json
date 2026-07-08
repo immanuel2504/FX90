@@ -1,0 +1,7 @@
+{
+  "command": "set_hostname",
+  "command_id": "test-set_hostname",
+  "payload": {
+    "hostname": 12345
+  }
+}

@@ -2,7 +2,6 @@ type: object
 properties:
   hostName:
     type: string
-    example: FXR90C5F1AB
   networkInterface:
     type: object
     description: Map of network interface names to their configuration and status.
@@ -16,52 +15,58 @@ properties:
             properties:
               dhcp:
                 type: boolean
+                description: Whether DHCP is enabled for IPv4 on this interface.
               ipAddress:
                 type: string
+                description: IPv4 address assigned to this interface.
               gatewayAddress:
                 type: string
+                description: IPv4 gateway address for this interface.
               subnetMask:
                 type: string
+                description: Subnet mask for the assigned IPv4 address.
               dnsAddress:
                 type: string
+                description: IPv4 DNS server address for this interface.
               domainName:
                 type: string
+                description: Domain name associated with this interface.
           IPV6:
             type: object
             properties:
               dhcp:
                 type: boolean
+                description: Whether DHCP is enabled for IPv6 on this interface.
               ipAddress:
                 type: string
+                description: IPv6 address assigned to this interface.
               gatewayAddress:
                 type: string
+                description: IPv6 gateway address for this interface.
               prefix:
                 type: string
+                description: IPv6 prefix for the assigned address.
               dnsAddress:
                 type: string
+                description: IPv6 DNS server address for this interface.
               domainName:
                 type: string
+                description: Domain name associated with this interface.
           security:
             type: object
             description: Ethernet security configuration.
             properties:
-              enabled:
-                type: boolean
-                description: Whether security is enabled.
               securityType:
                 type: string
                 description: Security protocol in use.
                 enum:
                 - 802_1xEAP
-                example: 802_1xEAP
               authentication:
                 type: string
                 description: EAP authentication method (TLS, TTLS, PEAP).
-                example: TLS
               innerAuthentication:
                 type: string
                 description: Inner EAP authentication method (for TTLS/PEAP with TLS or MSCHAPv2).
-                example: MSCHAPv2
               username:
                 type: string
                 description: Username for TTLS/PEAP with MSCHAPv2.
@@ -71,17 +76,15 @@ properties:
               certificate:
                 type: string
                 description: Client certificate name used for TLS-based authentication.
-              certificateValidity:
-                type: boolean
-                description: Whether the certificate is valid.
           Status:
             type: string
-            example: connected
+            description: Connection status.
           isEnabled:
             type: boolean
+            description: Whether the interface is enabled.
           macAddress:
             type: string
-            example: C8:1C:FE:C5:F1:AB
+            description: MAC address of the interface.
       mlan0:
         type: object
         description: WiFi station interface.
@@ -91,31 +94,43 @@ properties:
             properties:
               dhcp:
                 type: boolean
+                description: Whether DHCP is enabled for IPv4 on this interface.
               ipAddress:
                 type: string
+                description: IPv4 address assigned to this interface.
               gatewayAddress:
                 type: string
+                description: IPv4 gateway address for this interface.
               subnetMask:
                 type: string
+                description: Subnet mask for the assigned IPv4 address.
               dnsAddress:
                 type: string
+                description: IPv4 DNS server address for this interface.
               domainName:
                 type: string
+                description: Domain name associated with this interface.
           IPV6:
             type: object
             properties:
               dhcp:
                 type: boolean
+                description: Whether DHCP is enabled for IPv6 on this interface.
               ipAddress:
                 type: string
+                description: IPv6 address assigned to this interface.
               gatewayAddress:
                 type: string
+                description: IPv6 gateway address for this interface.
               prefix:
                 type: string
+                description: IPv6 prefix for the assigned address.
               dnsAddress:
                 type: string
+                description: IPv6 DNS server address for this interface.
               domainName:
                 type: string
+                description: Domain name associated with this interface.
           accesspoint:
             type: object
             description: Connected WiFi access point details.
@@ -129,22 +144,18 @@ properties:
               status:
                 type: string
                 description: Connection status.
-                example: connected
               security:
                 type: object
                 description: WiFi security configuration (present only when security is enabled).
                 properties:
-                  enabled:
-                    type: boolean
-                    description: Whether security is enabled.
                   securityType:
                     type: string
                     description: Security protocol in use.
                     enum:
-                    - open
                     - WPA2Personal
                     - WPA2Enterprise
-                    example: WPA2Personal
+                    - WPA3Personal
+                    - WPA3Enterprise
                   WPA2Personal:
                     type: object
                     description: WPA2 Personal (PSK) configuration.
@@ -152,18 +163,23 @@ properties:
                       password:
                         type: string
                         description: Pre-shared key / passphrase.
+                  WPA3Personal:
+                    type: object
+                    description: WPA3 Personal (SAE) configuration.
+                    properties:
+                      password:
+                        type: string
+                        description: Pre-shared key / passphrase.
                   WPA2Enterprise:
                     type: object
-                    description: WPA2 Enterprise (802.1X EAP) configuration.
+                    description: WPA2 Enterprise configuration.
                     properties:
                       authentication:
                         type: string
                         description: EAP authentication method (TLS, TTLS, PEAP).
-                        example: TLS
                       innerAuthentication:
                         type: string
-                        description: Inner EAP authentication method (for TTLS/PEAP).
-                        example: MSCHAPv2
+                        description: Inner EAP authentication method (for TTLS/PEAP with TLS or MSCHAPv2).
                       username:
                         type: string
                         description: Username for TTLS/PEAP with MSCHAPv2.
@@ -173,17 +189,34 @@ properties:
                       certificate:
                         type: string
                         description: Client certificate name for TLS-based methods.
-                      certificateValidity:
-                        type: boolean
-                        description: Whether the certificate is valid.
+                  WPA3Enterprise:
+                    type: object
+                    description: WPA3 Enterprise configuration.
+                    properties:
+                      authentication:
+                        type: string
+                        description: EAP authentication method (TLS, TTLS, PEAP).
+                      innerAuthentication:
+                        type: string
+                        description: Inner EAP authentication method (for TTLS/PEAP with TLS or MSCHAPv2).
+                      username:
+                        type: string
+                        description: Username for TTLS/PEAP with MSCHAPv2.
+                      password:
+                        type: string
+                        description: Password for TTLS/PEAP with MSCHAPv2.
+                      certificate:
+                        type: string
+                        description: Client certificate name for TLS-based methods.
           Status:
             type: string
-            example: connected
+            description: Connection status of the WiFi station interface.
           isEnabled:
             type: boolean
+            description: Whether the WiFi station interface is enabled.
           macAddress:
             type: string
-            example: 48:A4:93:BF:A9:50
+            description: MAC address of the WiFi interface.
       bnep0:
         type: object
         description: Bluetooth PAN interface.
@@ -243,7 +276,6 @@ properties:
                 description: Access Point Name.
               preferredNetworkType:
                 type: string
-                example: AUTO
               enableIPv6:
                 type: boolean
               enablePin:
@@ -252,37 +284,28 @@ properties:
                 type: boolean
               currentDataClass:
                 type: string
-                example: LTE
               highestAvailableDataClass:
                 type: string
-                example: LTE
               currentServiceProvider:
                 type: string
               registerState:
                 type: string
-                example: Home
               packetServiceState:
                 type: string
-                example: Attached
               internetAccess:
                 type: boolean
               simState:
                 type: string
-                example: Initialized
               signalBar:
                 type: number
               rssi:
                 type: string
-                example: -82.7dBm
               rsrp:
                 type: string
-                example: -103.7dBm
               rsrq:
                 type: string
-                example: -5.5dB
               snr:
                 type: string
-                example: 0.0dB
           esim:
             type: object
             description: Embedded SIM configuration and status (same structure as psim).
@@ -323,7 +346,6 @@ properties:
                 type: string
           Status:
             type: string
-            example: online
           isEnabled:
             type: boolean
           macAddress:
@@ -335,7 +357,6 @@ properties:
           ssid:
             type: string
             description: Hotspot SSID name.
-            example: FXR90Hotspot
           ssidPassword:
             type: string
             description: Hotspot password.
@@ -362,7 +383,6 @@ properties:
                   type: string
           Status:
             type: string
-            example: active
           isEnabled:
             type: boolean
           macAddress:

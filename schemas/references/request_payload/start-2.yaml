@@ -1,17 +1,20 @@
 title: Start RFID Inventory or BLE scan
 type: object
+description: 'Start RFID inventory, BLE scanning, or both simultaneously.
 
-description: |
-  Start RFID inventory, BLE scanning, or both simultaneously.
 
   The optional `scanType` array controls which scan types are activated.
 
+
   Omitting the payload (or `scanType`) defaults to RFID-only.
+
 
   BLE scanning requires prior BLE configuration via `set_bleConfig`.
 
+
   `scanType` with "ble" cannot be combined with `applyImpinjGen2X`.
 
+  '
 properties:
   scanType:
     type: array
@@ -19,25 +22,24 @@ properties:
     items:
       type: string
       enum:
-        - rfid
-        - ble
-
+      - ble
+      - rfid
+    minItems: 1
+    uniqueItems: true
   doNotPersistState:
     type: boolean
     description: Controls whether the started inventory state is persisted across reboot. If `true`, the state is not persisted and auto-start is not enabled after reboot. If `false`, the state is persisted across reboot, enabling auto-start.
-
   applyImpinjGen2X:
     type: boolean
     description: 'When true, applies the previously configured Impinj Gen2X features (FastID, TagProtect, TagFocus, TagQuieting) on start. Cannot be used with `scanType: ["ble"]`.'
-
 examples:
-  - {}
-  - doNotPersistState: false
-  - applyImpinjGen2X: true
-  - scanType:
-      - ble
-  - scanType:
-      - rfid
-  - scanType:
-      - ble
-      - rfid
+- {}
+- doNotPersistState: false
+- applyImpinjGen2X: true
+- scanType:
+  - ble
+- scanType:
+  - rfid
+- scanType:
+  - ble
+  - rfid

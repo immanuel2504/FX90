@@ -1,0 +1,5 @@
+{
+  "command": "set_gpo",
+  "command_id": "test-set_gpo",
+  "payload": {}
+}

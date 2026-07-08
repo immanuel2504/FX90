@@ -1,0 +1,12 @@
+{
+  "command": "set_os_TYPO",
+  "command_id": "test-set_os_TYPO",
+  "payload": {
+    "authenticationType": "NONE",
+    "url": "http://10.17.231.168:8003/3_20_4",
+    "options": {
+      "username": "XXXX",
+      "password": "XXXX"
+    }
+  }
+}

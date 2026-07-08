@@ -5,51 +5,63 @@ properties:
     properties:
       1:
         type: string
-        description: Connection state for antenna port 1.
+        description: Antenna 1 connection state.
         enum:
         - connected
         - disconnected
       2:
         type: string
-        description: Connection state for antenna port 2.
+        description: Antenna 2 connection state.
         enum:
         - connected
         - disconnected
       3:
         type: string
-        description: Connection state for antenna port 3.
+        description: Antenna 3 connection state.
         enum:
         - connected
         - disconnected
       4:
         type: string
-        description: Connection state for antenna port 4.
+        description: Antenna 4 connection state.
         enum:
         - connected
         - disconnected
       5:
         type: string
-        description: Connection state for antenna port 5.
+        description: Antenna 5 connection state.
         enum:
         - connected
         - disconnected
       6:
         type: string
-        description: Connection state for antenna port 6.
+        description: Antenna 6 connection state.
         enum:
         - connected
         - disconnected
-    description: Antenna connection status keyed by antenna port.
+      7:
+        type: string
+        description: Antenna 7 connection state.
+        enum:
+        - connected
+        - disconnected
+      8:
+        type: string
+        description: Antenna 8 connection state.
+        enum:
+        - connected
+        - disconnected
+    description: Per-antenna connection status reported by the reader.
   cpu:
     type: object
     properties:
       system:
         type: number
-        description: CPU utilization percentage consumed by system processes.
+        description: Percentage of CPU time spent in kernel/system mode.
       user:
         type: number
-        description: CPU utilization percentage consumed by user processes.
-    description: Current CPU utilization percentages.
+        description: Percentage of CPU time spent in user mode.
+    description: CPU utilization statistics reported by the reader.
   flash:
     type: object
     properties:
@@ -58,101 +70,89 @@ properties:
         properties:
           free:
             type: number
-            description: Free flash space in the platform partition.
           total:
             type: number
-            description: Total flash space in the platform partition.
           used:
             type: number
-            description: Used flash space in the platform partition.
-        description: Flash usage for the platform partition.
+        description: Usage metrics for the platform partition.
       readerConfig:
         type: object
         properties:
           free:
             type: number
-            description: Free flash space in the reader configuration partition.
           total:
             type: number
-            description: Total flash space in the reader configuration partition.
           used:
             type: number
-            description: Used flash space in the reader configuration partition.
-        description: Flash usage for the reader configuration partition.
+        description: Usage metrics for the reader configuration partition.
       readerData:
         type: object
         properties:
           free:
             type: number
-            description: Free flash space in the reader data partition.
           total:
             type: number
-            description: Total flash space in the reader data partition.
           used:
             type: number
-            description: Used flash space in the reader data partition.
-        description: Flash usage for the reader data partition.
+        description: Usage metrics for the reader data partition.
       rootFileSystem:
         type: object
         properties:
           free:
             type: number
-            description: Free flash space in the root file system partition.
           total:
             type: number
-            description: Total flash space in the root file system partition.
           used:
             type: number
-            description: Used flash space in the root file system partition.
-        description: Flash usage for the root file system partition.
-    description: Flash storage usage statistics by partition.
+        description: Usage metrics for the root filesystem partition.
+    description: Flash storage utilization by partition.
   interfaceConnectionStatus:
     type: object
     properties:
       data:
         type: array
+        description: Per-interface connection status entries.
         items:
           type: object
           properties:
             connectionError:
               type: string
-              description: Most recent connection error message, or an empty string when no error is present.
+              description: Last connection error message, if any.
             connectionStatus:
               type: string
-              description: Current connection state of the endpoint.
+              description: Current connection state for the interface.
             description:
               type: string
-              description: Configured description of the endpoint connection.
+              description: Human-readable interface description.
             interface:
               type: string
-              description: Configured endpoint interface name.
-        description: Connection status entries for data event endpoints.
-    description: Cloud interface connection status grouped by endpoint class.
+              description: Interface name.
+    description: Connectivity status for configured cloud/network interfaces.
   ntp:
     type: object
     properties:
       offset:
         type: number
-        description: Current NTP clock offset reported by the reader.
+        description: Current NTP clock offset.
       reach:
         type: number
-        description: NTP reachability value reported by the reader.
-    description: NTP synchronization status for the reader clock.
+        description: NTP reachability register value.
+    description: NTP synchronization status information.
   powerNegotiation:
     type: string
-    description: Power level negotiated with the reader power source.
+    description: Power negotiation mode reported by the reader.
   powerSource:
     type: string
-    description: Detected power source for the reader.
+    description: Current power source for the reader.
   radioActivity:
     type: string
-    description: Current RFID radio activity state.
+    description: Current radio activity state.
     enum:
     - active
     - inactive
   radioConnection:
     type: string
-    description: Current connection state of the RFID radio.
+    description: Current radio connection state.
     enum:
     - connected
     - disconnected
@@ -161,45 +161,42 @@ properties:
     properties:
       free:
         type: number
-        description: Free RAM percentage or amount reported by the reader.
+        description: Free RAM amount.
       total:
         type: number
-        description: Total RAM percentage or amount reported by the reader.
+        description: Total RAM amount.
       used:
         type: number
-        description: Used RAM percentage or amount reported by the reader.
-    description: RAM usage statistics.
+        description: Used RAM amount.
+    description: RAM utilization statistics.
   systemTime:
     type: string
-    description: Current reader system time.
   temperature:
     type: number
-    description: Current reader internal temperature in degrees Celsius.
   uptime:
     type: string
-    description: Elapsed time since the reader last started.
   impinjGen2X:
     type: object
     properties:
       active:
         type: boolean
-        description: Whether an Impinj Gen2X feature is currently active.
+        description: Indicates whether an Impinj Gen2X feature is currently active
       feature:
         type: string
-        description: Name of the active Impinj Gen2X feature.
+        description: The name of the active Impinj Gen2X feature
         enum:
         - fastId
         - tagFocus
         - tagProtect
         - tagQuieting
-    description: Runtime status of active Impinj Gen2X features.
+    description: Active Impinj Gen2X runtime status.
   ble:
     type: object
     description: BLE scanner runtime status. Present only when BLE is supported and status is available.
     properties:
       scanState:
         type: string
-        description: Current BLE scanner state.
+        description: Current state of the BLE scanner.
         enum:
         - running
         - stopped
@@ -207,25 +204,24 @@ properties:
         type: string
         format: date-time
         description: ISO 8601 timestamp when the BLE scan was last started.
-        example: '2026-05-21T13:46:16.955Z'
       beaconCounts:
         type: object
-        description: BLE advertisement counts by beacon format.
+        description: Counts of BLE beacons detected since the last scan start.
         properties:
           total:
             type: integer
-            description: Total number of BLE advertisements observed in the current scan window.
+            description: Total number of beacons detected.
           iBeacon:
             type: integer
-            description: Number of iBeacon advertisements observed in the current scan window.
+            description: Number of iBeacon advertisements detected.
           altBeacon:
             type: integer
-            description: Number of AltBeacon advertisements observed in the current scan window.
+            description: Number of AltBeacon advertisements detected.
           eddystone:
             type: integer
-            description: Number of Eddystone advertisements observed in the current scan window.
+            description: Number of Eddystone advertisements detected.
           generic:
             type: integer
-            description: Number of generic BLE advertisements observed in the current scan window.
+            description: Number of generic (unclassified) BLE advertisements detected.
 title: Get Status Response Payload
 description: Reader operational status and runtime statistics.

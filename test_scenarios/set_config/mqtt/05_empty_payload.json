@@ -1,0 +1,5 @@
+{
+  "command": "set_config",
+  "command_id": "test-set_config",
+  "payload": {}
+}

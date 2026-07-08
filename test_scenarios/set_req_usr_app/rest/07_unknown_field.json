@@ -1,0 +1,7 @@
+{
+  "userapp": "sample",
+  "command": {
+    "message": "hello"
+  },
+  "definitelyNotARealField": 42
+}

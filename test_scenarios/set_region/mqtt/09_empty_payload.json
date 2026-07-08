@@ -1,0 +1,5 @@
+{
+  "command": "set_region",
+  "command_id": "test-set_region",
+  "payload": {}
+}

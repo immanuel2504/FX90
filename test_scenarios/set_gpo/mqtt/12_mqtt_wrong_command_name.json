@@ -1,0 +1,8 @@
+{
+  "command": "set_gpo_TYPO",
+  "command_id": "test-set_gpo_TYPO",
+  "payload": {
+    "port": 1,
+    "state": false
+  }
+}

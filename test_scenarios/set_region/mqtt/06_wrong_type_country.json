@@ -1,0 +1,8 @@
+{
+  "command": "set_region",
+  "command_id": "test-set_region",
+  "payload": {
+    "country": 12345,
+    "standardname": "CANADA_FCC_15"
+  }
+}

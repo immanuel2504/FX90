@@ -36,5 +36,5 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | Standard names | Is the target regulatory standard listed? | Confirms that the required standard is available before configuring the region. |
-| `lbtConfigurable` | Can LBT be enabled or disabled for this standard? | Some standards mandate LBT; knowing configurability prevents invalid region settings. |
+| `isLBTConfigurable` | Can LBT be enabled or disabled for this standard? | Some standards mandate LBT; knowing configurability prevents invalid region settings. |
 | `channelData` | Which channels are available for each standard? | Determines the frequency plan the reader will use for that standard. |

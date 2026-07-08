@@ -1,0 +1,9 @@
+{
+  "eth0": {
+    "IPV4": {
+      "dhcp": true
+    },
+    "enable": true
+  },
+  "definitelyNotARealField": 42
+}

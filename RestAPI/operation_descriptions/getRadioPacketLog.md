@@ -31,4 +31,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
-| `content` | Does the log contain RF packet data? | An empty file means radio packet logging was not enabled when the events occurred. |
+| `binary` | Does the log contain RF packet data? | An empty file means radio packet logging was not enabled when the events occurred. |

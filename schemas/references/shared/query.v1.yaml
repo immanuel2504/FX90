@@ -2,19 +2,19 @@ title: query
 type: object
 properties:
   tagPopulation:
-    type: integer
+    type: number
     minimum: 0
-    description: 'Expected number of tags '
+    description: 'Expected number of tags.'
   sel:
     type: string
     enum:
     - ALL
     - SL
     - NOT_SL
-    description: Sel field (see EPC Gen2 Spec)
+    description: Sel field (EPC Gen2).
   session:
     type: string
-    description: Session Field (see EPC Gen2 Spec)
+    description: Session field (EPC Gen2).
     enum:
     - S0
     - S1
@@ -22,7 +22,7 @@ properties:
     - S3
   target:
     type: string
-    description: Target Field (see EPC Gen2 Spec)
+    description: Target field (EPC Gen2).
     enum:
     - A
     - B

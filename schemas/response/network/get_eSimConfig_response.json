@@ -41,20 +41,24 @@
                 "type": "object",
                 "properties": {
                   "enabled": {
-                    "type": "string",
-                    "example": "true"
+                    "type": "boolean",
+                    "example": "true",
+                    "description": "Whether this profile is currently active."
                   },
                   "iccid": {
                     "type": "string",
-                    "example": "8944500411193057192F"
+                    "example": "8944500411193057192F",
+                    "description": "Integrated Circuit Card Identifier for the profile."
                   },
                   "profileNickName": {
                     "type": "string",
-                    "example": "gnd1"
+                    "example": "gnd1",
+                    "description": "Human-readable nickname assigned to this eSIM profile."
                   },
                   "provider": {
                     "type": "string",
-                    "example": "Global1"
+                    "example": "Global1",
+                    "description": "Name of the mobile network provider."
                   }
                 }
               }

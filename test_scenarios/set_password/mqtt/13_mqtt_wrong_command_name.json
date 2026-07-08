@@ -1,0 +1,9 @@
+{
+  "command": "set_password_TYPO",
+  "command_id": "test-set_password_TYPO",
+  "payload": {
+    "currentPassword": "change",
+    "newPassword": "Mypass@123",
+    "userName": "admin"
+  }
+}

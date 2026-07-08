@@ -36,10 +36,7 @@
               ],
               "example": "disabled"
             }
-          },
-          "required": [
-            "preSelection"
-          ]
+          }
         },
         {
           "$ref": "../../references/response_payload/errors.yaml"

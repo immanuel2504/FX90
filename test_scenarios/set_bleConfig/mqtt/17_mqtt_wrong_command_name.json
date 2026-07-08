@@ -1,0 +1,9 @@
+{
+  "command": "set_bleConfig_TYPO",
+  "command_id": "test-set_bleConfig_TYPO",
+  "payload": {
+    "ble": {
+      "enable": true
+    }
+  }
+}

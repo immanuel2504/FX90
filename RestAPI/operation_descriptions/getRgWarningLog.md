@@ -31,4 +31,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
-| `content` | Are there recurring warning patterns? | Repeated warnings often precede errors — early detection prevents escalation to failures. |
+| `binary` | Are there recurring warning patterns? | Repeated warnings often precede errors — early detection prevents escalation to failures. |

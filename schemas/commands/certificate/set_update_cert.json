@@ -37,7 +37,7 @@
         "type": "client",
         "url": "https://10.117.229.15/reader.pfx",
         "authenticationType": "BASIC",
-        "authenticationOptions": {
+        "options": {
           "username": "zebra",
           "password": "zebra"
         },
@@ -54,7 +54,7 @@
         "type": "client",
         "url": "https://10.117.229.15/reader.pfx",
         "authenticationType": "BASIC",
-        "authenticationOptions": {
+        "options": {
           "username": "zebra",
           "password": "zebra"
         },

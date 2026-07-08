@@ -1,0 +1,10 @@
+{
+  "command": "set_impinjGen2X",
+  "command_id": "test-set_impinjGen2X",
+  "payload": {
+    "fastID": {
+      "enabled": true
+    },
+    "definitelyNotARealField": 42
+  }
+}

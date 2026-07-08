@@ -1,0 +1,12 @@
+{
+  "command": "set_logs",
+  "payload": {
+    "radioPacketLog": true,
+    "components": [
+      {
+        "componentName": "radio_control",
+        "level": "OFF"
+      }
+    ]
+  }
+}

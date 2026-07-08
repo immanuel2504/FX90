@@ -1,0 +1,10 @@
+{
+  "radioPacketLog": true,
+  "components": [
+    {
+      "componentName": "radio_control",
+      "level": "OFF"
+    }
+  ],
+  "definitelyNotARealField": 42
+}

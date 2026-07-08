@@ -1,0 +1,15 @@
+{
+  "environment": "HIGH_INTERFERENCE",
+  "antennaStopCondition": {
+    "type": "DURATION",
+    "value": 100
+  },
+  "antennas": [
+    1
+  ],
+  "component": "RC",
+  "delayBetweenAntennaCycles": {
+    "duration": 0,
+    "type": "DISABLED"
+  }
+}

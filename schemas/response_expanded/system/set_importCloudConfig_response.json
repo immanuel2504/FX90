@@ -8,7 +8,7 @@
   "examples": [
     {
       "command": "set_importCloudConfig",
-      "command_id": "abdc453254",
+      "command_id": "abcd1324",
       "response": "success",
       "payload": {}
     }
@@ -26,7 +26,7 @@
     },
     "command_id": {
       "type": "string",
-      "example": "abdc453254",
+      "example": "abcd1324",
       "description": "A unique ID that will be echoed back in the command response by the reader.",
       "x-stoplight": {
         "id": "547aaopqznyif"

@@ -3,36 +3,22 @@ type: object
 properties:
   ble:
     type: object
-    description: BLE scanner configuration.
     properties:
       enable:
         type: boolean
-        description: Enable (`true`) or disable (`false`) the BLE scanner.
-        example: true
       scanIntervalSec:
         type: integer
-        description: BLE scan interval, in seconds.
-        example: 5
       additionalFilters:
         type: object
-        description: Optional filters applied to BLE advertisements before they are
-          forwarded.
         properties:
           rssi:
             type: integer
-            description: Minimum RSSI threshold, in dBm. Advertisements weaker than
-              this value are dropped.
-            example: -80
           serviceUuids16:
             type: array
-            description: List of 16-bit service UUIDs (hex) to match. Only advertisements
-              that include one of these UUIDs are forwarded.
             items:
               type: string
           serviceUuids128:
             type: array
-            description: List of 128-bit service UUIDs to match. Only advertisements
-              that include one of these UUIDs are forwarded.
             items:
               type: string
       protocols:
@@ -40,15 +26,11 @@ properties:
         properties:
           iBeacon:
             type: object
-            description: iBeacon protocol scanner configuration.
             properties:
               enabled:
                 type: boolean
-                description: Enable (`true`) or disable (`false`) iBeacon scanning.
               filters:
                 type: array
-                description: List of iBeacon filters. A beacon is forwarded if it
-                  matches any one filter entry.
                 items:
                   type: object
                   properties:
@@ -66,15 +48,11 @@ properties:
                       description: TX power / calibrated RSSI at 1m
           altBeacon:
             type: object
-            description: AltBeacon protocol scanner configuration.
             properties:
               enabled:
                 type: boolean
-                description: Enable (`true`) or disable (`false`) AltBeacon scanning.
               filters:
                 type: array
-                description: List of AltBeacon filters. A beacon is forwarded if it
-                  matches any one filter entry.
                 items:
                   type: object
                   properties:
@@ -95,24 +73,23 @@ properties:
                       description: Reference RSSI (TX power at 1m)
           eddystone:
             type: object
-            description: Eddystone protocol scanner configuration.
             properties:
               enabled:
                 type: boolean
-                description: Enable (`true`) or disable (`false`) Eddystone scanning.
               filters:
                 type: array
+                description: Filter by Eddystone frame fields. Use `frameType` to target a specific frame type (URL, UID, EID).
                 items:
                   type: object
                   properties:
                     frameType:
                       type: string
+                      description: Eddystone frame type
                       enum:
                       - URL
                       - UID
                       - EID
                       - TLM
-                      description: Eddystone frame type
                     txPower:
                       type: integer
                       description: TX power at 0m
@@ -128,16 +105,14 @@ properties:
                     ephemeralId:
                       type: string
                       description: 8-byte ephemeral ID hex string (Eddystone-EID only)
-                description: Filter by Eddystone frame fields. Use `frameType` to
-                  target a specific frame type (URL, UID, EID).
           generic:
             type: object
             properties:
               enabled:
                 type: boolean
-                description: Enable (`true`) or disable (`false`) generic BLE scanning.
               filters:
                 type: array
+                description: List of filter objects for GENERIC_BLE beacons.
                 items:
                   type: object
                   properties:
@@ -146,19 +121,15 @@ properties:
                       description: Bluetooth device address to match.
                     addressType:
                       type: string
+                      description: Bluetooth address type to match.
                       enum:
                       - public
                       - random
-                      description: Bluetooth address type to match.
                     name:
                       type: string
                       description: Device name to match.
                     alias:
                       type: string
                       description: Device alias to match.
-                description: List of filter objects for GENERIC_BLE beacons.
-            description: Configuration for GENERIC_BLE beacons. Filters match on device-level
-              advertisement fields.
+            description: Configuration for GENERIC_BLE beacons. Filters match on device-level advertisement fields.
         description: Protocol-specific BLE scanner configurations.
-required:
-- ble

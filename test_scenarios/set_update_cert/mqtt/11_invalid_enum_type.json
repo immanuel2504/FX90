@@ -1,0 +1,15 @@
+{
+  "command": "set_update_cert",
+  "command_id": "test-set_update_cert",
+  "payload": {
+    "name": "reader",
+    "type": "NOT_A_VALID_VALUE",
+    "url": "https://10.117.229.15/reader.pfx",
+    "authenticationType": "BASIC",
+    "options": {
+      "username": "zebra",
+      "password": "zebra"
+    },
+    "pfxPassword": "abcd12345"
+  }
+}

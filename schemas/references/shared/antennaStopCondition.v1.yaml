@@ -8,12 +8,12 @@ properties:
     - INVENTORY_COUNT
     - GPI
     - SINGLE_INVENTORY_LIMITED_DURATION
-    description: Type of Stop Condition
+    description: Type of stop condition.
   value:
     oneOf:
     - type: number
     - $ref: gpi.v1.yaml
-    description: Value dependent on type
+    description: Value for the selected stop condition type.
 required:
 - type
 - value

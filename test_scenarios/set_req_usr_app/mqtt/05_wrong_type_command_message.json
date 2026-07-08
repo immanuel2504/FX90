@@ -1,0 +1,10 @@
+{
+  "command": "set_req_usr_app",
+  "command_id": "test-set_req_usr_app",
+  "payload": {
+    "userapp": "sample",
+    "command": {
+      "message": 12345
+    }
+  }
+}

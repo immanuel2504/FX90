@@ -21,9 +21,7 @@
           ],
           "endpointConfig": {
             "control": {
-              "commandResponse": {
-                "enableLocalRest": true
-              }
+              "commandResponse": {}
             },
             "data": {
               "batching": {
