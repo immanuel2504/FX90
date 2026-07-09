@@ -101,4 +101,4 @@ equipment, pre-test state to capture, risk level and recovery steps. **Read it f
 ## Recording results
 
 Per scenario: `folder/file - PASS / FAIL - actual response - notes`.
-Firmware behaviour that differs from the expectation goes into `FXR90_fix_backlog.xlsx` as a new row.
+Firmware behaviour that differs from the expectation goes into `analysis_reports/FXR90_fix_backlog.xlsx` as a new row.

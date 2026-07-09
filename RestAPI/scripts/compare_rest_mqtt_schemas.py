@@ -22,7 +22,7 @@ CMD_EXPANDED = ROOT / "schemas" / "commands_expanded"
 RESP_EXPANDED = ROOT / "schemas" / "response_expanded"
 CMD_SPLIT = ROOT / "schemas" / "commands"
 RESP_SPLIT = ROOT / "schemas" / "response"
-OUTPUT = ROOT / "RestAPI" / "rest_vs_mqtt_field_report.xlsx"
+OUTPUT = ROOT / "analysis_reports" / "rest_vs_mqtt_field_report.xlsx"
 
 # When True, compare against the split + references source of truth (what the
 # doc build uses) instead of the stale *_expanded copies.
@@ -1048,6 +1048,7 @@ def write_report(
         ws_notes.append([note.get("endpoint", ""), note.get("operationId", ""), note.get("mqtt_command", ""), note.get("note", "")])
     autosize_columns(ws_notes)
 
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     wb.save(OUTPUT)
 
 
