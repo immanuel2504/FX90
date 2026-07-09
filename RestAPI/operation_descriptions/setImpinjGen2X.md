@@ -28,8 +28,6 @@ The `PUT /cloud/impinjGen2X` REST endpoint configures Impinj Gen2X proprietary R
 | Supported Tag Quiet Masks | S0A, S0B, S1A, S1B, S2A, S2B, S3A, S3B, SL_ASSERT, SL_DEASSERT |
 | Mutually Exclusive Features | FastID, TagFocus, TagQuieting (only one reader-scoped feature active at a time) |
 
----
-
 ## 2. Before You Begin
 
 Decide which Gen2X feature you need to configure before sending this request. You can send a minimal payload targeting only one feature (for example, only `fastID` or only `tagProtect`), but you cannot combine mutually exclusive reader-scoped features in a single request.
@@ -46,8 +44,6 @@ Decide which Gen2X feature you need to configure before sending this request. Yo
 | Inventory state | `PUT /cloud/impinjGen2X` should be called **before** starting inventory. Stop any active inventory first by calling `PUT /cloud/stop`. |
 | Activation | The saved configuration is **not active** until you call `PUT /cloud/start` with `applyImpinjGen2X: true` in the request body. |
 
----
-
 ## 3. Choosing a Gen2X Feature
 
 The Gen2X feature you select determines the reader's behavior during inventory. Choose based on your operational goal.
@@ -62,8 +58,6 @@ The Gen2X feature you select determines the reader's behavior during inventory. 
 
 > Mutually exclusive: Only one of `fastID`, `tagFocus`, or `tagQuieting` can be active at a time. `tagProtect` can coexist with any one of them because it operates at the tag level.
 
----
-
 ## 4. Choosing TagProtect Actions
 
 TagProtect operations either lock/unlock individual tags or temporarily allow the reader to see already-protected tags. Each action has specific field requirements.
@@ -76,8 +70,6 @@ TagProtect operations either lock/unlock individual tags or temporarily allow th
 | `disableTagVisibility` | Restores the default behavior where protected tags are hidden from the reader. | `password` | Reverts the effect of `enableTagVisibility`. |
 
 > Important: `enableTagProtection` and `disableTagProtection` are tag-specific (require `tagID`). `enableTagVisibility` and `disableTagVisibility` are reader-wide visibility toggles.
-
----
 
 ## 5. Choosing TagQuieting Strategy
 
@@ -107,8 +99,6 @@ Advanced quieting uses Gen2 select pre-conditions to silence tags based on memor
 
 > Important: Use `basic` when you have a discrete list of EPCs. Use `advanced` when filtering by memory content, session state, or complex multi-step Gen2 select conditions.
 
----
-
 ## 6. Choosing FastID and TagFocus
 
 These two reader-scoped features improve inventory performance but cannot be combined.
@@ -130,8 +120,6 @@ These two reader-scoped features improve inventory performance but cannot be com
 | `enabled: false` | Standard inventory behavior; tags can be reported multiple times. |
 
 **Use TagFocus when:** You operate portals, conveyors, or other scenarios with many duplicate reads of the same tag set and want unique-tag reporting.
-
----
 
 ## 7. Applying the Configuration
 
@@ -181,4 +169,3 @@ Content-Type: application/json
 
 > Persistence: The reader stores the last saved configuration and restores it across reboots and reconnects. The configuration is only applied during inventory when `applyImpinjGen2X: true` is sent in the `PUT /cloud/start` request body.
 
----
