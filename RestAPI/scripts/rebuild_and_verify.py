@@ -4,7 +4,7 @@
 Runs, in order:
   1. MQTT docs  -> docs/openapi_md.json  (from schemas/)
   2. REST docs  -> RestAPI/FXR90-rest-api.yaml  (from openAPISpec2.yaml)
-  3. Field report -> analysis_reports/rest_vs_mqtt_field_report.xlsx
+  3. Field report -> project_resources/analysis_reports/rest_vs_mqtt_field_report.xlsx
 
 Usage:
     python RestAPI/scripts/rebuild_and_verify.py
@@ -25,7 +25,7 @@ REST_BUILD = ROOT / "RestAPI" / "scripts" / "build_fxr90_rest_api.py"
 COMPARE = ROOT / "RestAPI" / "scripts" / "compare_rest_mqtt_schemas.py"
 MQTT_OUT = ROOT / "docs" / "openapi_md.json"
 REST_OUT = ROOT / "RestAPI" / "FXR90-rest-api.yaml"
-REPORT_OUT = ROOT / "analysis_reports" / "rest_vs_mqtt_field_report.xlsx"
+REPORT_OUT = ROOT / "project_resources" / "analysis_reports" / "rest_vs_mqtt_field_report.xlsx"
 
 
 def run_step(label: str, cmd: list[str]) -> int:
