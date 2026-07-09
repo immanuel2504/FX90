@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FXR90 Edge Maintenance Chatbot</title>
+  <style>
+    :root {
+      --ink: #18212f;
+      --muted: #586575;
+      --line: #d9e1ea;
+      --paper: #ffffff;
+      --soft: #f6f8fb;
+      --blue: #2457a4;
+      --teal: #147b72;
+      --amber: #b46a00;
+      --red: #b4292d;
+      --green: #2f7d32;
+      --violet: #5b4aa0;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #e8edf3;
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+      padding: 18mm 17mm 16mm;
+      page-break-after: always;
+    }
+
+    .page:last-child { page-break-after: auto; }
+
+    .cover {
+      padding: 0;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(24, 33, 47, 0.96), rgba(91, 74, 160, 0.86)),
+        linear-gradient(90deg, #18212f, #5b4aa0);
+    }
+
+    .cover-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.2;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.22) 1px, transparent 1px);
+      background-size: 18mm 18mm;
+    }
+
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      height: 297mm;
+      padding: 28mm 22mm 20mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      color: #ece7ff;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    h1 {
+      margin: 16mm 0 7mm;
+      font-size: 42px;
+      line-height: 1.04;
+      letter-spacing: 0;
+      max-width: 160mm;
+    }
+
+    .cover-subtitle {
+      max-width: 145mm;
+      font-size: 18px;
+      line-height: 1.45;
+      color: #f0edff;
+    }
+
+    .cover-badges {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 13mm;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.24);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .cover-panel {
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.28);
+      padding-top: 9mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10mm;
+    }
+
+    .cover-panel strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .cover-panel span {
+      display: block;
+      color: #ddd7ff;
+      font-size: 12px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding-bottom: 7mm;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .doc-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    .page-num {
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    h2 {
+      margin: 0 0 5mm;
+      font-size: 26px;
+      line-height: 1.16;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+
+    h3 {
+      margin: 0 0 3mm;
+      font-size: 15px;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    p {
+      margin: 0 0 4mm;
+      color: var(--muted);
+    }
+
+    .lead {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #344255;
+      max-width: 165mm;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: 3mm;
+      color: var(--violet);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5mm;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4mm;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5mm;
+      background: #fff;
+      break-inside: avoid;
+    }
+
+    .card.soft { background: var(--soft); }
+
+    .metric {
+      border-left: 4px solid var(--violet);
+      background: #f7f5ff;
+    }
+
+    .metric.teal {
+      border-color: var(--teal);
+      background: #f1fbf9;
+    }
+
+    .metric.blue {
+      border-color: var(--blue);
+      background: #f4f8fd;
+    }
+
+    .metric.amber {
+      border-color: var(--amber);
+      background: #fff8ed;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 21px;
+      line-height: 1.05;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4mm;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #f0eef9;
+      color: #312b5f;
+      font-size: 11px;
+      font-weight: 650;
+      border: 1px solid #ded8f5;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 17px;
+      color: var(--muted);
+    }
+
+    li { margin: 0 0 2mm; }
+
+    .plain-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .plain-list li {
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .plain-list li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--violet);
+      position: absolute;
+      left: 0;
+      top: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      color: #2d3948;
+      break-inside: avoid;
+    }
+
+    th {
+      background: #edf2f7;
+      color: #263240;
+      text-align: left;
+      font-size: 11px;
+      padding: 8px;
+      border: 1px solid #d6dee8;
+      vertical-align: top;
+    }
+
+    td {
+      padding: 8px;
+      border: 1px solid #d6dee8;
+      vertical-align: top;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 11px;
+      color: #18325c;
+      background: #eef4fb;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    .formula {
+      border-radius: 6px;
+      padding: 5mm;
+      background: #152033;
+      color: #f4f8ff;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      break-inside: avoid;
+    }
+
+    .formula span { color: #d0c7ff; }
+
+    .callout {
+      border-left: 4px solid var(--violet);
+      padding: 4mm 5mm;
+      background: #f7f5ff;
+      border-radius: 0 6px 6px 0;
+      break-inside: avoid;
+    }
+
+    .callout.warning {
+      border-left-color: var(--amber);
+      background: #fff8ed;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4mm;
+      margin-top: 3mm;
+    }
+
+    .step {
+      position: relative;
+      padding: 5mm 4mm;
+      border-radius: 6px;
+      background: #f6f9fc;
+      border: 1px solid #dae3ee;
+      min-height: 35mm;
+    }
+
+    .step-num {
+      display: inline-flex;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: var(--violet);
+      color: white;
+      font-weight: 800;
+      font-size: 11px;
+      margin-bottom: 3mm;
+    }
+
+    .arch {
+      display: grid;
+      grid-template-columns: 1fr 10mm 1fr 10mm 1fr;
+      gap: 0;
+      align-items: stretch;
+      margin: 6mm 0;
+    }
+
+    .arch-box {
+      border-radius: 6px;
+      border: 1px solid #d6dee8;
+      background: #f7fafc;
+      padding: 5mm;
+      min-height: 38mm;
+    }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--violet);
+      font-weight: 900;
+      font-size: 22px;
+    }
+
+    .chat-window {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      break-inside: avoid;
+    }
+
+    .chat-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #18212f;
+      color: white;
+      padding: 4mm 5mm;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 750;
+      background: #e8fff9;
+      color: #0d5f55;
+    }
+
+    .chat-body {
+      padding: 5mm;
+      display: grid;
+      gap: 4mm;
+    }
+
+    .message {
+      max-width: 86%;
+      padding: 4mm;
+      border-radius: 8px;
+      border: 1px solid #d8e0ea;
+      background: #f7fafc;
+      color: #344255;
+      font-size: 12.5px;
+    }
+
+    .message.user {
+      margin-left: auto;
+      background: #f0eef9;
+      border-color: #ded8f5;
+      color: #2b2558;
+    }
+
+    .message.bot {
+      margin-right: auto;
+      background: #f1fbf9;
+      border-color: #d5ebe7;
+    }
+
+    .small {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .footer-note {
+      position: absolute;
+      left: 17mm;
+      right: 17mm;
+      bottom: 8mm;
+      border-top: 1px solid var(--line);
+      padding-top: 3mm;
+      color: #7a8796;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div class="cover-grid"></div>
+    <div class="cover-inner">
+      <div>
+        <div class="eyebrow">AI Project Showcase | Edge AI | No Cloud</div>
+        <h1>FXR90 Edge Maintenance Chatbot</h1>
+        <div class="cover-subtitle">
+          A no-cloud maintenance assistant that runs on the reader as a user application, answers local diagnostic questions, and explains reader, antenna, and cable health using on-device telemetry.
+        </div>
+        <div class="cover-badges">
+          <span class="badge">On-Device App</span>
+          <span class="badge">No Cloud</span>
+          <span class="badge">Local Telemetry</span>
+          <span class="badge">Maintenance Assistant</span>
+        </div>
+      </div>
+      <div class="cover-panel">
+        <div>
+          <strong>DEB App</strong>
+          <span>Installable FXR90 user application</span>
+        </div>
+        <div>
+          <strong>Offline</strong>
+          <span>Rules, local retrieval, and telemetry context</span>
+        </div>
+        <div>
+          <strong>Private</strong>
+          <span>Reader data stays on the device or local network</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">FXR90 Edge Maintenance Chatbot</div>
+      <div class="page-num">01 / Executive Summary</div>
+    </div>
+
+    <span class="section-kicker">Project Summary</span>
+    <h2>Yes, a no-cloud chatbot is possible on the device</h2>
+    <p class="lead">
+      The FXR90 API supports custom user applications, so a local maintenance chatbot can be packaged as a reader app and run without sending telemetry to the cloud. The practical first version should be a rule-based and retrieval-based chatbot that explains reader health, antenna degradation, cable risk, errors, warnings, and recommended actions from local data.
+    </p>
+
+    <div class="grid-4" style="margin-top: 8mm;">
+      <div class="card metric">
+        <strong>Local</strong>
+        <span>Runs as an installed user app on the reader.</span>
+      </div>
+      <div class="card metric teal">
+        <strong>Explainable</strong>
+        <span>Uses known rules, scores, evidence, and SOP content.</span>
+      </div>
+      <div class="card metric blue">
+        <strong>Useful</strong>
+        <span>Answers real maintenance questions using live device data.</span>
+      </div>
+      <div class="card metric amber">
+        <strong>Lightweight</strong>
+        <span>Avoids heavy cloud LLM dependency for MVP.</span>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>What The Chatbot Can Answer</h3>
+        <ul class="plain-list">
+          <li>Why is Antenna 3 high risk?</li>
+          <li>Which antenna should I inspect first?</li>
+          <li>Is the issue cable loss, antenna misalignment, or disconnect?</li>
+          <li>What changed in the last 24 hours?</li>
+          <li>What action should the technician take now?</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>What It Should Not Try First</h3>
+        <ul class="plain-list">
+          <li>A full ChatGPT-style model running entirely on the reader.</li>
+          <li>Large language models that require high RAM, GPU, or cloud calls.</li>
+          <li>Open-ended internet knowledge that cannot be verified locally.</li>
+          <li>Unapproved automatic configuration changes without operator review.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 8mm;">
+      <h3>Recommended MVP</h3>
+      <p>
+        Build an <strong>Edge Maintenance Chatbot v1</strong> using local rules, local retrieval, and the antenna/reader health scoring engine. It can feel conversational while staying small, explainable, private, and reliable on the reader.
+      </p>
+    </div>
+
+    <div class="footer-note">Source capabilities reviewed from docs/openapi_md.json: install_user_app, start_user_app, stop_user_app, autostart_user_app, get_user_apps, set_req_usr_app, userapp_event, and heartbeat userapps telemetry.</div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Device Capability</div>
+      <div class="page-num">02 / FXR90 App Foundation</div>
+    </div>
+
+    <span class="section-kicker">User App Support</span>
+    <h2>The reader already has the hooks needed for an edge chatbot</h2>
+    <p class="lead">
+      The API does not require the chatbot to live in the cloud. A custom app can be installed, started, monitored, sent requests, and emit responses through the reader's management event path.
+    </p>
+
+    <table style="margin-top: 6mm;">
+      <thead>
+        <tr>
+          <th style="width: 36mm;">API Capability</th>
+          <th style="width: 60mm;">Relevant Command/Event</th>
+          <th>How It Helps The Chatbot</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Install App</strong></td>
+          <td><code>install_user_app</code></td>
+          <td>Deploy the chatbot as a Zebra-approved <code>.deb</code> package from an HTTP(S) file server.</td>
+        </tr>
+        <tr>
+          <td><strong>Run App</strong></td>
+          <td><code>start_user_app</code><br><code>stop_user_app</code></td>
+          <td>Start, restart, or stop the chatbot during deployment and maintenance.</td>
+        </tr>
+        <tr>
+          <td><strong>Boot Behavior</strong></td>
+          <td><code>autostart_user_app</code></td>
+          <td>Make the chatbot automatically start when the reader boots.</td>
+        </tr>
+        <tr>
+          <td><strong>App Inventory</strong></td>
+          <td><code>get_user_apps</code></td>
+          <td>Confirm the chatbot is installed, running, and configured for autostart.</td>
+        </tr>
+        <tr>
+          <td><strong>Ask Question</strong></td>
+          <td><code>set_req_usr_app</code></td>
+          <td>Send a structured prompt or command to the chatbot app running on the reader.</td>
+        </tr>
+        <tr>
+          <td><strong>Return Answer</strong></td>
+          <td><code>userapp_event</code></td>
+          <td>Emit the answer, evidence, and recommended action as a custom user-app event.</td>
+        </tr>
+        <tr>
+          <td><strong>Monitor App</strong></td>
+          <td><code>heartbeat.userapps[]</code></td>
+          <td>Track chatbot CPU, RAM, uptime, running status, and buffer health.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning" style="margin-top: 7mm;">
+      <h3>Important Constraint</h3>
+      <p>
+        The API proves that custom user apps are supported. It does not guarantee enough hardware resources for a large local LLM. The safe design is to start with rules and local retrieval, then test whether a tiny quantized model is practical on the actual device.
+      </p>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Architecture</div>
+      <div class="page-num">03 / No-Cloud Design</div>
+    </div>
+
+    <span class="section-kicker">System Design</span>
+    <h2>Keep the assistant, data, and reasoning on the edge</h2>
+    <p class="lead">
+      The chatbot should use local telemetry and a compact knowledge base. It can expose a local HTTP page, accept <code>set_req_usr_app</code> requests, or both. No cloud request is needed for normal operation.
+    </p>
+
+    <div class="arch">
+      <div class="arch-box">
+        <h3>1. Local Data</h3>
+        <p>Heartbeat, status snapshots, tag reads, antenna scores, warnings, errors, and local SOP documents.</p>
+        <div class="pill-row">
+          <span class="pill">heartbeat</span>
+          <span class="pill">tag events</span>
+          <span class="pill">scores</span>
+          <span class="pill">SOPs</span>
+        </div>
+      </div>
+      <div class="arrow">-></div>
+      <div class="arch-box">
+        <h3>2. Chatbot App</h3>
+        <p>Intent parser, retrieval engine, scoring tools, answer templates, local database, and safety guardrails.</p>
+        <div class="pill-row">
+          <span class="pill">rules</span>
+          <span class="pill">retrieval</span>
+          <span class="pill">SQLite</span>
+          <span class="pill">guardrails</span>
+        </div>
+      </div>
+      <div class="arrow">-></div>
+      <div class="arch-box">
+        <h3>3. Local Answer</h3>
+        <p>Returns explanation, evidence, risk level, and recommended maintenance action without cloud transfer.</p>
+        <div class="pill-row">
+          <span class="pill">local UI</span>
+          <span class="pill">userapp_event</span>
+          <span class="pill">JSON</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="formula">
+        <div><span>Question Flow</span></div>
+        <div>1. Receive question</div>
+        <div>2. Detect intent and entities</div>
+        <div>3. Pull local telemetry and score evidence</div>
+        <div>4. Retrieve matching maintenance SOP</div>
+        <div>5. Generate structured answer</div>
+        <div>6. Emit answer locally</div>
+      </div>
+      <div class="card soft">
+        <h3>Example Interfaces</h3>
+        <ul>
+          <li><strong>Reader command path:</strong> send prompt through <code>set_req_usr_app</code> and return via <code>userapp_event</code>.</li>
+          <li><strong>Local web page:</strong> small technician UI hosted by the app on the reader LAN interface.</li>
+          <li><strong>Local API:</strong> REST endpoint for a nearby HMI, handheld, or maintenance tablet.</li>
+          <li><strong>Optional local gateway:</strong> use a site server for larger LLMs while still avoiding cloud.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">AI Approach</div>
+      <div class="page-num">04 / Model Options</div>
+    </div>
+
+    <span class="section-kicker">Implementation Choice</span>
+    <h2>Use the right level of AI for the reader hardware</h2>
+    <p class="lead">
+      There are three realistic designs. The best first version is the smallest and most reliable: rules plus retrieval. A tiny local model or local LAN-based model can be added later after hardware testing.
+    </p>
+
+    <table style="margin-top: 6mm;">
+      <thead>
+        <tr>
+          <th style="width: 34mm;">Option</th>
+          <th style="width: 45mm;">Where It Runs</th>
+          <th>Pros</th>
+          <th>Risks</th>
+          <th style="width: 28mm;">Recommendation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Rules + Retrieval</strong></td>
+          <td>On FXR90 user app</td>
+          <td>Small, explainable, fast, private, easy to package.</td>
+          <td>Less flexible for broad open-ended questions.</td>
+          <td><strong>MVP choice</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Tiny Local LLM</strong></td>
+          <td>On FXR90 if resources allow</td>
+          <td>More natural language flexibility while staying offline.</td>
+          <td>RAM, CPU, storage, latency, heat, and package size constraints.</td>
+          <td>Lab test only</td>
+        </tr>
+        <tr>
+          <td><strong>Local Edge Gateway LLM</strong></td>
+          <td>Industrial PC or local server on same LAN</td>
+          <td>Much stronger model without cloud data transfer.</td>
+          <td>Requires another device and local network dependency.</td>
+          <td>Best for v2</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid-3" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Rule Engine</h3>
+        <ul>
+          <li>Maps known intents to local tools.</li>
+          <li>Uses thresholds and scoring evidence.</li>
+          <li>Produces consistent technician answers.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Retrieval Layer</h3>
+        <ul>
+          <li>Looks up local SOPs and troubleshooting notes.</li>
+          <li>Returns relevant steps for antenna, cable, network, and thermal issues.</li>
+          <li>Works fully offline.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Answer Builder</h3>
+        <ul>
+          <li>Combines intent, telemetry, and SOP content.</li>
+          <li>Always includes evidence and recommended action.</li>
+          <li>Avoids unsupported claims.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 8mm;">
+      <h3>Design Principle</h3>
+      <p>
+        Treat the chatbot as a maintenance decision assistant, not a generic internet chatbot. Its job is to explain local reader state and guide safe field action.
+      </p>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Operator Experience</div>
+      <div class="page-num">05 / Sample Chat</div>
+    </div>
+
+    <span class="section-kicker">User Experience</span>
+    <h2>Technicians ask simple questions and get evidence-based answers</h2>
+    <p class="lead">
+      The chatbot should be direct, operational, and auditable. Every answer should explain the signal behind the recommendation.
+    </p>
+
+    <div class="chat-window" style="margin-top: 7mm;">
+      <div class="chat-top">
+        <div>
+          <strong>FXR90 Edge Maintenance Assistant</strong>
+          <div class="small" style="color:#cbd5e1;">Reader: FXR90-01 | Mode: Offline | Data source: Local telemetry</div>
+        </div>
+        <div class="status">No Cloud</div>
+      </div>
+      <div class="chat-body">
+        <div class="message user">
+          Why is Antenna 3 high risk?
+        </div>
+        <div class="message bot">
+          Antenna 3 is high risk because read volume is down 42% from the 14-day baseline and median RSSI is 6.8 dB weaker. The antenna is still connected, and mode/transmit power did not change. Likely cause: cable loss, loose connector, or antenna misalignment. Recommended action: inspect cable path, tighten connectors, check antenna angle, then run a validation scan.
+        </div>
+        <div class="message user">
+          Is this a reader issue or only antenna issue?
+        </div>
+        <div class="message bot">
+          Current evidence points to an antenna-path issue. Other antennas are within baseline, reader CPU/RAM are normal, radio connection is active, and there are no current reader temperature warnings.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Supported Question Types</h3>
+        <ul>
+          <li>Current reader health and risk.</li>
+          <li>Antenna degradation explanation.</li>
+          <li>Cable compensation and read-point checks.</li>
+          <li>Warnings and errors summary.</li>
+          <li>Recommended technician action.</li>
+          <li>Recent changes in the last hour, shift, or day.</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>Answer Format</h3>
+        <ul>
+          <li><strong>Short answer:</strong> direct diagnosis.</li>
+          <li><strong>Evidence:</strong> readings, trend, event, or score.</li>
+          <li><strong>Likely cause:</strong> ranked issue type.</li>
+          <li><strong>Action:</strong> safe next step.</li>
+          <li><strong>Confidence:</strong> based on signal completeness.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Implementation Plan</div>
+      <div class="page-num">06 / Build Roadmap</div>
+    </div>
+
+    <span class="section-kicker">Delivery Plan</span>
+    <h2>Build an on-device assistant in controlled phases</h2>
+    <p class="lead">
+      The first release should be small: local telemetry cache, health scoring, intent matching, troubleshooting retrieval, and structured answers. The system can later add a tiny offline model or local gateway integration.
+    </p>
+
+    <div class="timeline" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Package</h3>
+        <p>Create a minimal Linux service and package it as an installable <code>.deb</code>.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Collect</h3>
+        <p>Cache heartbeat, status, antenna scores, tag-read summaries, warnings, and errors locally.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Answer</h3>
+        <p>Implement intents, evidence lookup, SOP retrieval, and answer templates.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Expose</h3>
+        <p>Support <code>set_req_usr_app</code>, <code>userapp_event</code>, and optional local web UI.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <h3>Harden</h3>
+        <p>Add resource limits, logs, auth, app monitoring, and safe fallback behavior.</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>MVP Scope</h3>
+        <ul>
+          <li>Installable chatbot user app.</li>
+          <li>Local SQLite telemetry cache.</li>
+          <li>Intent matching for reader, antenna, cable, warning, and action questions.</li>
+          <li>Integration with antenna/cable degradation scoring.</li>
+          <li>Local troubleshooting knowledge base.</li>
+          <li>Responses through user app events or local web UI.</li>
+          <li>Heartbeat monitoring for app CPU/RAM/status.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Future Enhancements</h3>
+        <ul>
+          <li>Tiny local model after hardware benchmark.</li>
+          <li>Local LAN LLM gateway for richer answers without cloud.</li>
+          <li>Voice input from a local maintenance tablet.</li>
+          <li>Automatic service-ticket draft on local network.</li>
+          <li>Technician feedback loop for answer quality.</li>
+          <li>Expanded knowledge base for all FXR90 operations.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table style="margin-top: 7mm;">
+      <thead>
+        <tr>
+          <th style="width: 34mm;">Phase</th>
+          <th>Deliverable</th>
+          <th style="width: 43mm;">Success Metric</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Week 1-2</strong></td>
+          <td>Skeleton user app, service startup, app install/start/autostart validation.</td>
+          <td>App runs reliably after reboot.</td>
+        </tr>
+        <tr>
+          <td><strong>Week 3-4</strong></td>
+          <td>Local telemetry cache, antenna/reader health lookup, first answer templates.</td>
+          <td>Answers top 10 maintenance questions.</td>
+        </tr>
+        <tr>
+          <td><strong>Week 5-6</strong></td>
+          <td>Local UI or request/event integration, SOP retrieval, technician-ready responses.</td>
+          <td>Technician can diagnose pilot issues without cloud.</td>
+        </tr>
+        <tr>
+          <td><strong>After MVP</strong></td>
+          <td>Resource hardening, auth, feedback capture, local gateway or tiny model evaluation.</td>
+          <td>Stable resource usage and useful answer quality.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Risks and Controls</div>
+      <div class="page-num">07 / Safety</div>
+    </div>
+
+    <span class="section-kicker">Operational Safety</span>
+    <h2>Keep the chatbot helpful without risking reader stability</h2>
+    <p class="lead">
+      Because the chatbot runs on the reader, it must be resource-aware. It should never interfere with RFID inventory, reader gateway delivery, or critical device operations.
+    </p>
+
+    <table style="margin-top: 6mm;">
+      <thead>
+        <tr>
+          <th style="width: 34mm;">Risk</th>
+          <th>Impact</th>
+          <th>Control</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>High CPU/RAM</strong></td>
+          <td>Could affect reader performance or user app stability.</td>
+          <td>Use lightweight rules first, set process limits, monitor <code>heartbeat.userapps[]</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>Large Model Size</strong></td>
+          <td>Consumes storage and may slow startup.</td>
+          <td>Avoid heavy LLM in MVP; test tiny models only in lab.</td>
+        </tr>
+        <tr>
+          <td><strong>Bad Advice</strong></td>
+          <td>Technician may inspect wrong component or change wrong setting.</td>
+          <td>Use evidence-based templates, show confidence, avoid unsupported automatic changes.</td>
+        </tr>
+        <tr>
+          <td><strong>Security</strong></td>
+          <td>Unauthorized users may query device details.</td>
+          <td>Require local auth, restrict network binding, log access, and avoid exposing secrets.</td>
+        </tr>
+        <tr>
+          <td><strong>Data Retention</strong></td>
+          <td>Local storage can grow over time.</td>
+          <td>Rotate SQLite data, keep summaries, and enforce storage limits.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Resource KPIs</h3>
+        <ul>
+          <li>Chatbot CPU and RAM usage.</li>
+          <li>Startup time after reboot.</li>
+          <li>Average answer latency.</li>
+          <li>Local database size.</li>
+          <li>App uptime and crash count.</li>
+          <li>Reader inventory performance impact.</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>Answer Quality KPIs</h3>
+        <ul>
+          <li>Top-question answer coverage.</li>
+          <li>Technician usefulness rating.</li>
+          <li>Correct root-cause suggestion rate.</li>
+          <li>False or unsupported answer count.</li>
+          <li>Time saved per maintenance incident.</li>
+          <li>Cloud data transfer: zero for MVP.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Value and Conclusion</div>
+      <div class="page-num">08 / Showcase Close</div>
+    </div>
+
+    <span class="section-kicker">Business Value</span>
+    <h2>A private, practical AI assistant for field maintenance</h2>
+    <p class="lead">
+      This project gives the company an edge-AI story that is realistic: it keeps data local, uses the FXR90 user-app framework, and delivers immediate operational value by explaining device health and maintenance actions directly at the reader.
+    </p>
+
+    <div class="grid-3" style="margin-top: 8mm;">
+      <div class="card metric">
+        <strong>No Cloud Dependency</strong>
+        <span>Maintenance answers remain available even without cloud connectivity.</span>
+      </div>
+      <div class="card metric teal">
+        <strong>Faster Troubleshooting</strong>
+        <span>Technicians get the likely cause and next action at the edge.</span>
+      </div>
+      <div class="card metric blue">
+        <strong>Privacy Friendly</strong>
+        <span>Reader telemetry and operational details stay local.</span>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Best First Use Case</h3>
+        <p>
+          Pair the chatbot with the Antenna and Cable Degradation Predictor. This gives the assistant a clear job: explain weak antennas, cable risk, RF quality trends, and field-service steps from local evidence.
+        </p>
+      </div>
+      <div class="card soft">
+        <h3>Stakeholder Pitch</h3>
+        <p>
+          We can deploy a no-cloud maintenance chatbot directly on the FXR90 as a user app. It will answer technician questions using local telemetry, explain AI health scores, and recommend safe maintenance actions without sending reader data outside the device or local network.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 8mm;">
+      <h3>Recommended Next Step</h3>
+      <p>
+        Build a proof of concept that answers 10 predefined maintenance questions from local antenna/cable health data. Package it as a user app, run it on one test reader, and measure CPU, RAM, latency, answer quality, and operational impact.
+      </p>
+    </div>
+
+    <table style="margin-top: 7mm;">
+      <thead>
+        <tr>
+          <th>Decision Point</th>
+          <th>Recommendation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>First assistant style</td>
+          <td>Rules plus local retrieval, not a heavy on-device LLM.</td>
+        </tr>
+        <tr>
+          <td>First interface</td>
+          <td>Support <code>set_req_usr_app</code>/<code>userapp_event</code> plus optional local web UI.</td>
+        </tr>
+        <tr>
+          <td>First knowledge domain</td>
+          <td>Antenna/cable degradation and reader health troubleshooting.</td>
+        </tr>
+        <tr>
+          <td>Expansion</td>
+          <td>Evaluate a local LAN-based LLM gateway if richer natural-language behavior is required.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer-note">Prepared as a project concept based on the FXR90 MQTT API documentation in this workspace.</div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,1358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FXR90 Antenna and Cable Degradation Predictor</title>
+  <style>
+    :root {
+      --ink: #18212f;
+      --muted: #586575;
+      --line: #d9e1ea;
+      --paper: #ffffff;
+      --soft: #f6f8fb;
+      --blue: #2457a4;
+      --teal: #147b72;
+      --amber: #b46a00;
+      --red: #b4292d;
+      --green: #2f7d32;
+      --violet: #5b4aa0;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #e8edf3;
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+      padding: 18mm 17mm 16mm;
+      page-break-after: always;
+    }
+
+    .page:last-child { page-break-after: auto; }
+
+    .cover {
+      padding: 0;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(18, 33, 47, 0.96), rgba(20, 123, 114, 0.86)),
+        linear-gradient(90deg, #17212f, #147b72);
+    }
+
+    .cover-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.2;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.22) 1px, transparent 1px);
+      background-size: 18mm 18mm;
+    }
+
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      height: 297mm;
+      padding: 28mm 22mm 20mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      color: #c8fff5;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    h1 {
+      margin: 16mm 0 7mm;
+      font-size: 42px;
+      line-height: 1.04;
+      letter-spacing: 0;
+      max-width: 160mm;
+    }
+
+    .cover-subtitle {
+      max-width: 145mm;
+      font-size: 18px;
+      line-height: 1.45;
+      color: #e9fffb;
+    }
+
+    .cover-badges {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 13mm;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.24);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .cover-panel {
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.28);
+      padding-top: 9mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10mm;
+    }
+
+    .cover-panel strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .cover-panel span {
+      display: block;
+      color: #d7f8f2;
+      font-size: 12px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding-bottom: 7mm;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .doc-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    .page-num {
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    h2 {
+      margin: 0 0 5mm;
+      font-size: 26px;
+      line-height: 1.16;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+
+    h3 {
+      margin: 0 0 3mm;
+      font-size: 15px;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    p {
+      margin: 0 0 4mm;
+      color: var(--muted);
+    }
+
+    .lead {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #344255;
+      max-width: 165mm;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: 3mm;
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5mm;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4mm;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5mm;
+      background: #fff;
+      break-inside: avoid;
+    }
+
+    .card.soft { background: var(--soft); }
+
+    .metric {
+      border-left: 4px solid var(--teal);
+      background: #f1fbf9;
+    }
+
+    .metric.blue {
+      border-color: var(--blue);
+      background: #f4f8fd;
+    }
+
+    .metric.amber {
+      border-color: var(--amber);
+      background: #fff8ed;
+    }
+
+    .metric.red {
+      border-color: var(--red);
+      background: #fff5f5;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 21px;
+      line-height: 1.05;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4mm;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eef4f4;
+      color: #233b42;
+      font-size: 11px;
+      font-weight: 650;
+      border: 1px solid #d9e7e7;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 17px;
+      color: var(--muted);
+    }
+
+    li { margin: 0 0 2mm; }
+
+    .plain-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .plain-list li {
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .plain-list li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--teal);
+      position: absolute;
+      left: 0;
+      top: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      color: #2d3948;
+      break-inside: avoid;
+    }
+
+    th {
+      background: #edf2f7;
+      color: #263240;
+      text-align: left;
+      font-size: 11px;
+      padding: 8px;
+      border: 1px solid #d6dee8;
+      vertical-align: top;
+    }
+
+    td {
+      padding: 8px;
+      border: 1px solid #d6dee8;
+      vertical-align: top;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 11px;
+      color: #18325c;
+      background: #eef4fb;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    .formula {
+      border-radius: 6px;
+      padding: 5mm;
+      background: #152033;
+      color: #f4f8ff;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      break-inside: avoid;
+    }
+
+    .formula span { color: #9dd8d1; }
+
+    .callout {
+      border-left: 4px solid var(--teal);
+      padding: 4mm 5mm;
+      background: #f1fbf9;
+      border-radius: 0 6px 6px 0;
+      break-inside: avoid;
+    }
+
+    .callout.warning {
+      border-left-color: var(--amber);
+      background: #fff8ed;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4mm;
+      margin-top: 3mm;
+    }
+
+    .step {
+      position: relative;
+      padding: 5mm 4mm;
+      border-radius: 6px;
+      background: #f6f9fc;
+      border: 1px solid #dae3ee;
+      min-height: 35mm;
+    }
+
+    .step-num {
+      display: inline-flex;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: var(--teal);
+      color: white;
+      font-weight: 800;
+      font-size: 11px;
+      margin-bottom: 3mm;
+    }
+
+    .risk-bars {
+      display: grid;
+      gap: 3mm;
+      margin-top: 4mm;
+    }
+
+    .risk-row {
+      display: grid;
+      grid-template-columns: 39mm 1fr 17mm;
+      gap: 3mm;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: #e2e8f0;
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: var(--teal);
+    }
+
+    .bar.blue > span { background: var(--blue); }
+    .bar.amber > span { background: var(--amber); }
+    .bar.red > span { background: var(--red); }
+    .bar.violet > span { background: var(--violet); }
+
+    .arch {
+      display: grid;
+      grid-template-columns: 1fr 10mm 1fr 10mm 1fr;
+      gap: 0;
+      align-items: stretch;
+      margin: 6mm 0;
+    }
+
+    .arch-box {
+      border-radius: 6px;
+      border: 1px solid #d6dee8;
+      background: #f7fafc;
+      padding: 5mm;
+      min-height: 38mm;
+    }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal);
+      font-weight: 900;
+      font-size: 22px;
+    }
+
+    .dashboard {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      break-inside: avoid;
+    }
+
+    .dashboard-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #18212f;
+      color: white;
+      padding: 4mm 5mm;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 750;
+      background: #fff0dd;
+      color: #7a4300;
+    }
+
+    .dashboard-body {
+      padding: 5mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+    }
+
+    .antenna-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3mm;
+    }
+
+    .antenna {
+      border-radius: 6px;
+      border: 1px solid #d6dee8;
+      background: #f7fafc;
+      padding: 3mm;
+      min-height: 23mm;
+    }
+
+    .antenna strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 2mm;
+    }
+
+    .antenna .quality {
+      height: 7px;
+      background: #dbe4ee;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .antenna .quality span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: var(--green);
+    }
+
+    .antenna.risk .quality span { background: var(--amber); }
+    .antenna.bad .quality span { background: var(--red); }
+
+    .mini-chart {
+      height: 38mm;
+      border-left: 1px solid #cbd5e1;
+      border-bottom: 1px solid #cbd5e1;
+      position: relative;
+      margin-top: 4mm;
+      background: linear-gradient(#eef2f7 1px, transparent 1px);
+      background-size: 100% 9.5mm;
+    }
+
+    .spark {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+    }
+
+    .spark svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .legend {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3mm;
+    }
+
+    .legend span::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-right: 4px;
+      border-radius: 2px;
+      vertical-align: middle;
+      background: var(--teal);
+    }
+
+    .legend span:nth-child(2)::before { background: var(--amber); }
+    .legend span:nth-child(3)::before { background: var(--red); }
+
+    .small {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .footer-note {
+      position: absolute;
+      left: 17mm;
+      right: 17mm;
+      bottom: 8mm;
+      border-top: 1px solid var(--line);
+      padding-top: 3mm;
+      color: #7a8796;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div class="cover-grid"></div>
+    <div class="cover-inner">
+      <div>
+        <div class="eyebrow">AI Project Showcase | Predictive Maintenance</div>
+        <h1>FXR90 Antenna and Cable Degradation Predictor</h1>
+        <div class="cover-subtitle">
+          A practical AI system that predicts antenna disconnects, cable degradation, RF path loss, and antenna misalignment using FXR90 reader telemetry and tag-read quality signals.
+        </div>
+        <div class="cover-badges">
+          <span class="badge">Antenna Health</span>
+          <span class="badge">Cable Loss</span>
+          <span class="badge">RSSI Trends</span>
+          <span class="badge">Read Quality</span>
+        </div>
+      </div>
+      <div class="cover-panel">
+        <div>
+          <strong>Per Port</strong>
+          <span>Health scoring for each antenna/read point</span>
+        </div>
+        <div>
+          <strong>Early</strong>
+          <span>Detect gradual RF quality degradation</span>
+        </div>
+        <div>
+          <strong>Actionable</strong>
+          <span>Recommend cable, antenna, and placement checks</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">FXR90 Antenna and Cable Degradation Predictor</div>
+      <div class="page-num">01 / Executive Summary</div>
+    </div>
+
+    <span class="section-kicker">Project Summary</span>
+    <h2>Predict RF path degradation before tag reads fail</h2>
+    <p class="lead">
+      Antennas and RF cables are exposed to vibration, movement, dust, physical damage, connector looseness, moisture, and installation drift. A reader may still be online while one antenna path slowly becomes weak. This project detects that early by comparing per-antenna read volume, RSSI, phase, channel behavior, connection state, and cable compensation settings over time.
+    </p>
+
+    <div class="grid-4" style="margin-top: 8mm;">
+      <div class="card metric">
+        <strong>Read Drop</strong>
+        <span>Detect falling tag reads per antenna compared with baseline.</span>
+      </div>
+      <div class="card metric blue">
+        <strong>RF Quality</strong>
+        <span>Track RSSI, phase consistency, channel spread, and read count.</span>
+      </div>
+      <div class="card metric amber">
+        <strong>Cable Risk</strong>
+        <span>Use cable length and loss compensation as context.</span>
+      </div>
+      <div class="card metric red">
+        <strong>Disconnect</strong>
+        <span>Identify hard disconnects and intermittent antenna state changes.</span>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Business Problem</h3>
+        <ul class="plain-list">
+          <li>One weak antenna can reduce RFID coverage while the reader still appears healthy.</li>
+          <li>Loose connectors and cable wear often show gradual RF decline before total failure.</li>
+          <li>Manual inspection is slow when many dock doors, portals, or read zones exist.</li>
+          <li>Operations need per-antenna alerts with clear field-service action.</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>AI Outcome</h3>
+        <ul class="plain-list">
+          <li>Health score for each antenna/read point.</li>
+          <li>Predicted issue type: disconnect, cable loss, misalignment, obstruction, or configuration mismatch.</li>
+          <li>Confidence and trend explanation.</li>
+          <li>Recommended inspection or corrective action.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 8mm;">
+      <h3>Showcase Statement</h3>
+      <p>
+        The project turns normal FXR90 tag-read telemetry into an AI maintenance assistant that finds weak antennas and degrading RF cables before inventory accuracy or portal performance drops.
+      </p>
+    </div>
+
+    <div class="footer-note">Source signals reviewed from docs/openapi_md.json: heartbeat, get_status, get_mode, mode_tag_data_events, get_readPoints, get_cableLossCompensation, error, and warning.</div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Available FXR90 Signals</div>
+      <div class="page-num">02 / Data Foundation</div>
+    </div>
+
+    <span class="section-kicker">API Signals</span>
+    <h2>The API exposes direct and indirect antenna-health indicators</h2>
+    <p class="lead">
+      The model combines explicit connection status with RF performance signals. Direct state tells us whether an antenna is connected. Trend signals tell us whether a connected antenna is quietly becoming worse.
+    </p>
+
+    <table style="margin-top: 6mm;">
+      <thead>
+        <tr>
+          <th style="width: 31mm;">Signal Group</th>
+          <th style="width: 66mm;">Useful Fields</th>
+          <th>Maintenance Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Antenna State</strong></td>
+          <td><code>radio_control.antennas</code><br><code>get_status.antennas</code></td>
+          <td>Detect connected, disconnected, unknown, and intermittent state changes per antenna port.</td>
+        </tr>
+        <tr>
+          <td><strong>Read Volume</strong></td>
+          <td><code>radio_control.numTagReads</code><br><code>numTagReadsPerAntenna</code><br><code>mode_tag_data_events.reads</code></td>
+          <td>Find per-antenna read drops compared with historical baseline, neighboring antennas, or expected traffic.</td>
+        </tr>
+        <tr>
+          <td><strong>RF Strength</strong></td>
+          <td><code>mode_tag_data_events.peakRssi</code><br><code>antenna</code><br><code>idHex</code></td>
+          <td>Detect signal attenuation, poor antenna aim, damaged cable, connector loss, or blocked read zone.</td>
+        </tr>
+        <tr>
+          <td><strong>RF Behavior</strong></td>
+          <td><code>phase</code><br><code>channel</code><br><code>eventNum</code></td>
+          <td>Measure stability and consistency of tag reads. Sudden variance changes can indicate environmental or antenna-path problems.</td>
+        </tr>
+        <tr>
+          <td><strong>RF Configuration</strong></td>
+          <td><code>get_mode.antennas</code><br><code>transmitPower</code><br><code>environment</code><br><code>tagMetaData</code></td>
+          <td>Separate true degradation from changed mode, reduced power, disabled antenna, or changed RF environment profile.</td>
+        </tr>
+        <tr>
+          <td><strong>Cable Context</strong></td>
+          <td><code>get_cableLossCompensation</code><br><code>cableLength</code><br><code>cableLossPerHundredFt</code></td>
+          <td>Use expected cable attenuation as a baseline and detect mismatches between configured compensation and observed RF quality.</td>
+        </tr>
+        <tr>
+          <td><strong>Diagnostics</strong></td>
+          <td><code>warning.message</code><br><code>error.message</code><br><code>numWarnings</code><br><code>numErrors</code></td>
+          <td>Use reader diagnostics to support root cause, especially antenna disconnects and radio faults.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning" style="margin-top: 7mm;">
+      <h3>Important Measurement Note</h3>
+      <p>
+        RSSI and read counts are affected by tag population, product mix, antenna placement, reader mode, transmit power, and environment. The model should compare each antenna against its own historical baseline and current operating configuration, not a single global threshold.
+      </p>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Failure Modes</div>
+      <div class="page-num">03 / What We Predict</div>
+    </div>
+
+    <span class="section-kicker">Prediction Targets</span>
+    <h2>Classify the most likely antenna or cable problem</h2>
+    <p class="lead">
+      The system should not only say “bad antenna.” It should estimate the most likely issue type so the technician knows where to start.
+    </p>
+
+    <div class="grid-2" style="margin-top: 7mm;">
+      <div class="card">
+        <h3>Predicted Failure Classes</h3>
+        <ul>
+          <li><strong>Hard disconnect:</strong> antenna status changes to disconnected or unknown.</li>
+          <li><strong>Intermittent cable/connector:</strong> connection flips or RF strength drops in bursts.</li>
+          <li><strong>Gradual cable loss:</strong> RSSI and read rate decline slowly over days or weeks.</li>
+          <li><strong>Antenna misalignment:</strong> read zone becomes weaker but connection remains stable.</li>
+          <li><strong>Obstruction/environment change:</strong> one zone degrades after layout or material change.</li>
+          <li><strong>Configuration mismatch:</strong> read drop caused by changed mode, disabled port, or transmit power.</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>Example Alert</h3>
+        <p><strong>Antenna 3 degradation risk is High.</strong></p>
+        <p>
+          Read volume dropped 42% versus the 14-day baseline, median RSSI is 6.8 dB weaker, and transmit power/configuration did not change. The most likely cause is cable loss, loose connector, or antenna misalignment.
+        </p>
+        <p><strong>Action:</strong> inspect Antenna 3 cable path, tighten connectors, check antenna mounting angle, then rerun validation scan.</p>
+      </div>
+    </div>
+
+    <table style="margin-top: 8mm;">
+      <thead>
+        <tr>
+          <th>Symptom Pattern</th>
+          <th>Likely Root Cause</th>
+          <th>Evidence Used</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Antenna state reports disconnected.</td>
+          <td>Physical disconnect, failed cable, failed antenna, failed port.</td>
+          <td><code>radio_control.antennas</code>, <code>get_status.antennas</code>, error/warning messages.</td>
+        </tr>
+        <tr>
+          <td>RSSI declines while read volume declines.</td>
+          <td>Cable degradation, connector looseness, antenna damage, antenna moved away.</td>
+          <td><code>peakRssi</code>, <code>reads</code>, <code>numTagReadsPerAntenna</code>.</td>
+        </tr>
+        <tr>
+          <td>Read volume drops but RSSI remains normal.</td>
+          <td>Traffic/tag population change, obstruction, workflow change, zone usage change.</td>
+          <td>Reads by antenna, expected operating schedule, neighboring antenna comparison.</td>
+        </tr>
+        <tr>
+          <td>RSSI is weak after known cable setting change.</td>
+          <td>Incorrect cable loss compensation or cable metadata mismatch.</td>
+          <td><code>get_cableLossCompensation</code>, <code>set_cableLossCompensation</code> audit, RSSI baseline.</td>
+        </tr>
+        <tr>
+          <td>All antennas degrade together.</td>
+          <td>Reader config, RF environment, reader power, tag population, or site-wide interference.</td>
+          <td><code>get_mode</code>, transmit power, environment profile, radio state, warnings.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout" style="margin-top: 8mm;">
+      <h3>Best MVP Target</h3>
+      <p>
+        Start with per-antenna degradation detection for connected antennas: read-rate drop, RSSI drop, and no matching configuration change. This gives high operational value and avoids overcomplicating the first release.
+      </p>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Prediction Design</div>
+      <div class="page-num">04 / Health Score</div>
+    </div>
+
+    <span class="section-kicker">AI Logic</span>
+    <h2>Score each antenna using trend, quality, and configuration context</h2>
+    <p class="lead">
+      A useful model needs to avoid false alarms caused by normal traffic changes. The score should blend antenna connection status, read-volume trend, RF signal trend, variance, and configuration checks.
+    </p>
+
+    <div class="grid-2" style="margin-top: 7mm;">
+      <div>
+        <h3>Score Components</h3>
+        <div class="risk-bars">
+          <div class="risk-row">
+            <span>Connection state</span>
+            <div class="bar red"><span style="width: 90%;"></span></div>
+            <strong>30%</strong>
+          </div>
+          <div class="risk-row">
+            <span>Read-rate drop</span>
+            <div class="bar amber"><span style="width: 75%;"></span></div>
+            <strong>25%</strong>
+          </div>
+          <div class="risk-row">
+            <span>RSSI degradation</span>
+            <div class="bar"><span style="width: 68%;"></span></div>
+            <strong>25%</strong>
+          </div>
+          <div class="risk-row">
+            <span>RF variance</span>
+            <div class="bar violet"><span style="width: 48%;"></span></div>
+            <strong>10%</strong>
+          </div>
+          <div class="risk-row">
+            <span>Config mismatch</span>
+            <div class="bar blue"><span style="width: 42%;"></span></div>
+            <strong>10%</strong>
+          </div>
+        </div>
+      </div>
+      <div class="formula">
+        <div><span>AntennaDegradationScore</span> =</div>
+        <div>  0.30 * connection_risk</div>
+        <div>+ 0.25 * read_rate_drop_risk</div>
+        <div>+ 0.25 * rssi_drop_risk</div>
+        <div>+ 0.10 * rf_variance_risk</div>
+        <div>+ 0.10 * config_mismatch_risk</div>
+        <br>
+        <div><span>Risk Level</span>:</div>
+        <div>0-39 Low | 40-64 Medium</div>
+        <div>65-84 High | 85-100 Critical</div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Baseline Features</h3>
+        <ul>
+          <li>Median RSSI per antenna per hour.</li>
+          <li>Tag reads per antenna per operating window.</li>
+          <li>Unique tag count per antenna.</li>
+          <li>RSSI percentiles and trend slope.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Comparison Features</h3>
+        <ul>
+          <li>Antenna vs its own 7/14/30 day baseline.</li>
+          <li>Antenna vs neighboring antennas.</li>
+          <li>Current RF config vs previous config.</li>
+          <li>Expected zone activity vs actual activity.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Diagnostic Features</h3>
+        <ul>
+          <li>Connection flips per day.</li>
+          <li>Warning and error message counts.</li>
+          <li>Radio connection health.</li>
+          <li>Cable length and loss metadata.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table style="margin-top: 7mm;">
+      <thead>
+        <tr>
+          <th>Model Stage</th>
+          <th>Recommended Method</th>
+          <th>Reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>MVP</strong></td>
+          <td>Rules plus per-antenna baseline anomaly detection.</td>
+          <td>Works without labeled failure history and is easy to explain to operations.</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 2</strong></td>
+          <td>Isolation Forest, robust z-score, or EWMA trend detection.</td>
+          <td>Good for discovering unusual drops and slow degradation in time-series telemetry.</td>
+        </tr>
+        <tr>
+          <td><strong>Phase 3</strong></td>
+          <td>Supervised classifier using service records and confirmed root causes.</td>
+          <td>Improves root-cause classification after maintenance feedback is collected.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">System Architecture</div>
+      <div class="page-num">05 / How It Works</div>
+    </div>
+
+    <span class="section-kicker">Architecture</span>
+    <h2>From tag-read events to antenna maintenance actions</h2>
+    <p class="lead">
+      The system listens to tag data and management events, normalizes them by reader and antenna, creates per-port feature windows, and publishes health scores with maintenance recommendations.
+    </p>
+
+    <div class="arch">
+      <div class="arch-box">
+        <h3>1. FXR90 Signals</h3>
+        <p>Tag data, heartbeat, status, mode, cable compensation, warning, and error events.</p>
+        <div class="pill-row">
+          <span class="pill">mode_tag_data_events</span>
+          <span class="pill">heartbeat</span>
+          <span class="pill">get_mode</span>
+          <span class="pill">get_cableLossCompensation</span>
+        </div>
+      </div>
+      <div class="arrow">-></div>
+      <div class="arch-box">
+        <h3>2. Feature Pipeline</h3>
+        <p>Aggregate by reader, antenna, site, mode, and time window.</p>
+        <div class="pill-row">
+          <span class="pill">5 min</span>
+          <span class="pill">1 hour</span>
+          <span class="pill">1 day</span>
+          <span class="pill">14 day baseline</span>
+        </div>
+      </div>
+      <div class="arrow">-></div>
+      <div class="arch-box">
+        <h3>3. Risk Engine</h3>
+        <p>Calculate degradation score, root-cause probability, and recommended action.</p>
+        <div class="pill-row">
+          <span class="pill">Health Score</span>
+          <span class="pill">Root Cause</span>
+          <span class="pill">Alert</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Collect</h3>
+        <p>Capture tag events with <code>antenna</code>, <code>peakRssi</code>, <code>reads</code>, <code>phase</code>, and <code>channel</code>.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Context</h3>
+        <p>Join with mode, transmit power, antenna enablement, and cable compensation settings.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Score</h3>
+        <p>Compare against historical baseline and neighboring antennas to find true degradation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Act</h3>
+        <p>Generate field-service instruction, track resolution, and update the model with outcomes.</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Data Tables</h3>
+        <ul>
+          <li><strong>raw_tag_events:</strong> reader, antenna, tag ID, RSSI, phase, channel, reads, timestamp.</li>
+          <li><strong>antenna_features:</strong> rolling metrics per antenna and time window.</li>
+          <li><strong>reader_config_snapshots:</strong> mode, active antennas, transmit power, environment.</li>
+          <li><strong>cable_profiles:</strong> cable length and loss compensation by read point.</li>
+          <li><strong>maintenance_actions:</strong> inspection results and root-cause labels.</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>Model Output</h3>
+        <ul>
+          <li><strong>reader_id:</strong> FXR90-01</li>
+          <li><strong>antenna:</strong> 3</li>
+          <li><strong>health_score:</strong> 41 / 100</li>
+          <li><strong>risk_level:</strong> High</li>
+          <li><strong>likely_issue:</strong> cable/connector degradation</li>
+          <li><strong>evidence:</strong> RSSI drop and read-rate drop with no config change</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Operator Experience</div>
+      <div class="page-num">06 / Dashboard and Alerts</div>
+    </div>
+
+    <span class="section-kicker">User Experience</span>
+    <h2>Show per-antenna health in a way technicians can act on</h2>
+    <p class="lead">
+      The dashboard should make it easy to identify which antenna is weak, why the model thinks so, and what to inspect first.
+    </p>
+
+    <div class="dashboard" style="margin-top: 7mm;">
+      <div class="dashboard-top">
+        <div>
+          <strong>Reader FXR90-01 | Portal A</strong>
+          <div class="small" style="color:#cbd5e1;">Mode: INVENTORY | Active antennas: 1-4 | Last event: 18 seconds ago</div>
+        </div>
+        <div class="status">Antenna 3 High Risk</div>
+      </div>
+      <div class="dashboard-body">
+        <div>
+          <h3>Antenna Health</h3>
+          <div class="antenna-grid">
+            <div class="antenna">
+              <strong>A1</strong>
+              <div class="quality"><span style="width: 92%;"></span></div>
+              <p class="small">Healthy</p>
+            </div>
+            <div class="antenna">
+              <strong>A2</strong>
+              <div class="quality"><span style="width: 84%;"></span></div>
+              <p class="small">Healthy</p>
+            </div>
+            <div class="antenna bad">
+              <strong>A3</strong>
+              <div class="quality"><span style="width: 39%;"></span></div>
+              <p class="small">High Risk</p>
+            </div>
+            <div class="antenna risk">
+              <strong>A4</strong>
+              <div class="quality"><span style="width: 63%;"></span></div>
+              <p class="small">Watch</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>Antenna 3 RF Trend</h3>
+          <div class="mini-chart">
+            <div class="spark">
+              <svg viewBox="0 0 360 150" preserveAspectRatio="none" aria-hidden="true">
+                <polyline points="0,48 30,52 60,56 90,60 120,65 150,72 180,80 210,89 240,98 270,109 300,118 330,126 360,134" fill="none" stroke="#147b72" stroke-width="4"/>
+                <polyline points="0,45 30,46 60,48 90,49 120,51 150,52 180,54 210,55 240,56 270,58 300,59 330,61 360,62" fill="none" stroke="#b46a00" stroke-width="4"/>
+              </svg>
+            </div>
+          </div>
+          <div class="legend">
+            <span>A3 median RSSI</span>
+            <span>Expected baseline</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Sample Alert</h3>
+        <p><strong>Antenna 3 cable degradation suspected.</strong></p>
+        <p>
+          Median RSSI is 6.8 dB lower than the 14-day baseline, read volume is down 42%, and the antenna is still reported as connected. Mode, transmit power, and active antenna configuration are unchanged.
+        </p>
+        <p><strong>Action:</strong> inspect cable run and connectors, check antenna mounting angle, verify cable loss compensation, and perform validation scan.</p>
+      </div>
+      <div class="card soft">
+        <h3>Dashboard Widgets</h3>
+        <ul>
+          <li>Reader map with per-antenna health color.</li>
+          <li>RSSI trend by antenna.</li>
+          <li>Read-count trend by antenna.</li>
+          <li>Connection state history.</li>
+          <li>Cable compensation values by port.</li>
+          <li>Evidence list and recommended action.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table style="margin-top: 7mm;">
+      <thead>
+        <tr>
+          <th>Risk Level</th>
+          <th>Meaning</th>
+          <th>Recommended Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Low</strong></td>
+          <td>Antenna quality is within normal baseline.</td>
+          <td>Continue monitoring.</td>
+        </tr>
+        <tr>
+          <td><strong>Medium</strong></td>
+          <td>Early RF drop or read imbalance detected.</td>
+          <td>Review during next routine inspection.</td>
+        </tr>
+        <tr>
+          <td><strong>High</strong></td>
+          <td>Sustained RSSI/read drop or intermittent connection pattern.</td>
+          <td>Inspect antenna and cable within the same shift.</td>
+        </tr>
+        <tr>
+          <td><strong>Critical</strong></td>
+          <td>Antenna disconnected or near-total read failure.</td>
+          <td>Immediate inspection and service task.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Implementation Plan</div>
+      <div class="page-num">07 / MVP Roadmap</div>
+    </div>
+
+    <span class="section-kicker">Delivery Plan</span>
+    <h2>Start with explainable detection, then improve with maintenance feedback</h2>
+    <p class="lead">
+      The first release should focus on connected antennas that show abnormal RF quality decline. After technicians confirm root causes, those outcomes become labels for better ML classification.
+    </p>
+
+    <div class="timeline" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Configure</h3>
+        <p>Ensure tag metadata includes antenna, RSSI, reads, and phase/channel where possible.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Ingest</h3>
+        <p>Collect tag events, heartbeat antenna status, mode, and cable loss configuration.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Baseline</h3>
+        <p>Create normal profiles per reader, antenna, site, mode, and time window.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Alert</h3>
+        <p>Generate risk, evidence, likely issue, and maintenance action.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <h3>Learn</h3>
+        <p>Use inspection outcomes to tune thresholds and train root-cause models.</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>MVP Scope</h3>
+        <ul>
+          <li>Per-antenna health score.</li>
+          <li>Disconnected/unknown antenna alerts.</li>
+          <li>Read-rate drop detection by antenna.</li>
+          <li>RSSI degradation detection by antenna.</li>
+          <li>Configuration-change guardrail using mode and transmit power.</li>
+          <li>Cable loss compensation visibility by read point.</li>
+          <li>Dashboard with recommended technician action.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Future Enhancements</h3>
+        <ul>
+          <li>Root-cause classifier for cable, connector, antenna, obstruction, and configuration issues.</li>
+          <li>Automated validation scan workflow after maintenance.</li>
+          <li>Site map view with antenna coverage zones.</li>
+          <li>Service ticket integration.</li>
+          <li>Automatic cable compensation recommendation for engineer approval.</li>
+          <li>Combined reader health plus antenna health scoring.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table style="margin-top: 7mm;">
+      <thead>
+        <tr>
+          <th style="width: 34mm;">Phase</th>
+          <th>Deliverable</th>
+          <th style="width: 44mm;">Success Metric</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Week 1-2</strong></td>
+          <td>Tag-event ingestion, antenna status ingestion, mode snapshot, cable profile table.</td>
+          <td>95%+ events mapped to reader and antenna.</td>
+        </tr>
+        <tr>
+          <td><strong>Week 3-4</strong></td>
+          <td>Baseline features and first antenna degradation score.</td>
+          <td>Detect known weak/disconnected antennas in pilot data.</td>
+        </tr>
+        <tr>
+          <td><strong>Week 5-6</strong></td>
+          <td>Dashboard, alert feed, inspection workflow, and technician feedback capture.</td>
+          <td>Each alert includes evidence and action.</td>
+        </tr>
+        <tr>
+          <td><strong>After MVP</strong></td>
+          <td>Anomaly tuning, root-cause classifier, and maintenance-system integration.</td>
+          <td>Reduced missed reads and faster antenna issue resolution.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Value and Conclusion</div>
+      <div class="page-num">08 / Showcase Close</div>
+    </div>
+
+    <span class="section-kicker">Business Value</span>
+    <h2>Why this project is worth building</h2>
+    <p class="lead">
+      Antenna and cable issues directly affect RFID read accuracy. This project catches weak read paths before they become operational misses, and it gives technicians precise evidence instead of asking them to inspect the whole site.
+    </p>
+
+    <div class="grid-3" style="margin-top: 8mm;">
+      <div class="card metric">
+        <strong>Higher Read Accuracy</strong>
+        <span>Prevent blind spots and weak zones from growing unnoticed.</span>
+      </div>
+      <div class="card metric blue">
+        <strong>Faster Maintenance</strong>
+        <span>Tell technicians exactly which antenna or cable path to inspect.</span>
+      </div>
+      <div class="card metric amber">
+        <strong>Lower Downtime</strong>
+        <span>Fix degradation before read operations or portal workflows fail.</span>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>KPIs to Track</h3>
+        <ul>
+          <li>Missed read rate by portal or zone.</li>
+          <li>Number of antenna/cable incidents detected early.</li>
+          <li>Mean time to identify weak antenna path.</li>
+          <li>Mean time to repair antenna/cable issues.</li>
+          <li>False positive and false negative alert rate.</li>
+          <li>Post-maintenance RSSI/read-rate recovery.</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>Stakeholder Pitch</h3>
+        <p>
+          We can use FXR90 antenna status and tag-read telemetry to detect weak antennas and cable degradation before inventory accuracy suffers. The MVP is explainable, practical, and directly tied to operational reliability.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 8mm;">
+      <h3>Recommended Next Step</h3>
+      <p>
+        Pilot on 3-5 readers with known antenna layouts. Capture at least two weeks of tag events and heartbeat status, build the per-antenna baseline, and validate alerts with field inspection results.
+      </p>
+    </div>
+
+    <table style="margin-top: 7mm;">
+      <thead>
+        <tr>
+          <th>Decision Point</th>
+          <th>Recommendation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>First prediction target</td>
+          <td>Connected antenna with sustained read-rate and RSSI decline.</td>
+        </tr>
+        <tr>
+          <td>First dashboard</td>
+          <td>Reader list, antenna grid, degradation score, RSSI trend, read trend, evidence, and action.</td>
+        </tr>
+        <tr>
+          <td>First model</td>
+          <td>Rules plus baseline anomaly detection by reader, antenna, mode, and time window.</td>
+        </tr>
+        <tr>
+          <td>Expansion</td>
+          <td>Add root-cause classification, service ticket integration, and validation scans.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer-note">Prepared as a project concept based on the FXR90 MQTT API documentation in this workspace.</div>
+  </section>
+</body>
+</html>
