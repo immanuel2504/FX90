@@ -1,0 +1,1300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FXR90 Reader Thermal and Hardware Stress Predictor</title>
+  <style>
+    :root {
+      --ink: #18212f;
+      --muted: #566273;
+      --line: #d9e0e8;
+      --paper: #ffffff;
+      --soft: #f5f7fa;
+      --blue: #2357a4;
+      --teal: #147d73;
+      --amber: #b46a00;
+      --red: #b4292d;
+      --green: #2f7d32;
+      --slate: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #e8edf3;
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+      padding: 18mm 17mm 16mm;
+      page-break-after: always;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    .cover {
+      padding: 0;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(24, 33, 47, 0.96), rgba(35, 87, 164, 0.86)),
+        linear-gradient(90deg, #18212f, #2357a4);
+    }
+
+    .cover-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.22) 1px, transparent 1px);
+      background-size: 18mm 18mm;
+    }
+
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      height: 297mm;
+      padding: 28mm 22mm 20mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      color: #cce7ff;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    h1 {
+      margin: 16mm 0 7mm;
+      font-size: 42px;
+      line-height: 1.04;
+      letter-spacing: 0;
+      max-width: 160mm;
+    }
+
+    .cover-subtitle {
+      max-width: 145mm;
+      font-size: 18px;
+      line-height: 1.45;
+      color: #e6f1ff;
+    }
+
+    .cover-badges {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 13mm;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.22);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .cover-panel {
+      width: 100%;
+      border-top: 1px solid rgba(255,255,255,0.28);
+      padding-top: 9mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10mm;
+    }
+
+    .cover-panel strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .cover-panel span {
+      display: block;
+      color: #d5e5f7;
+      font-size: 12px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      padding-bottom: 7mm;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 8mm;
+    }
+
+    .doc-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    .page-num {
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    h2 {
+      margin: 0 0 5mm;
+      font-size: 26px;
+      line-height: 1.16;
+      letter-spacing: 0;
+      color: var(--ink);
+    }
+
+    h3 {
+      margin: 0 0 3mm;
+      font-size: 15px;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    p {
+      margin: 0 0 4mm;
+      color: var(--muted);
+    }
+
+    .lead {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #344255;
+      max-width: 165mm;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      margin-bottom: 3mm;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5mm;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4mm;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5mm;
+      background: #fff;
+      break-inside: avoid;
+    }
+
+    .card.soft {
+      background: var(--soft);
+    }
+
+    .metric {
+      border-left: 4px solid var(--blue);
+      background: #f6f9fd;
+    }
+
+    .metric.teal {
+      border-color: var(--teal);
+      background: #f1fbf9;
+    }
+
+    .metric.amber {
+      border-color: var(--amber);
+      background: #fff8ed;
+    }
+
+    .metric.red {
+      border-color: var(--red);
+      background: #fff5f5;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4mm;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eef3f8;
+      color: #2b3a4a;
+      font-size: 11px;
+      font-weight: 650;
+      border: 1px solid #dbe4ee;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 17px;
+      color: var(--muted);
+    }
+
+    li {
+      margin: 0 0 2mm;
+    }
+
+    .plain-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .plain-list li {
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .plain-list li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--teal);
+      position: absolute;
+      left: 0;
+      top: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      color: #2d3948;
+      break-inside: avoid;
+    }
+
+    th {
+      background: #edf2f7;
+      color: #263240;
+      text-align: left;
+      font-size: 11px;
+      padding: 8px;
+      border: 1px solid #d6dee8;
+      vertical-align: top;
+    }
+
+    td {
+      padding: 8px;
+      border: 1px solid #d6dee8;
+      vertical-align: top;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 11px;
+      color: #18325c;
+      background: #eef4fb;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    .formula {
+      border-radius: 6px;
+      padding: 5mm;
+      background: #152033;
+      color: #f4f8ff;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      break-inside: avoid;
+    }
+
+    .formula span {
+      color: #9dd8d1;
+    }
+
+    .callout {
+      border-left: 4px solid var(--teal);
+      padding: 4mm 5mm;
+      background: #f1fbf9;
+      border-radius: 0 6px 6px 0;
+      break-inside: avoid;
+    }
+
+    .callout.warning {
+      border-left-color: var(--amber);
+      background: #fff8ed;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4mm;
+      margin-top: 3mm;
+    }
+
+    .step {
+      position: relative;
+      padding: 5mm 4mm;
+      border-radius: 6px;
+      background: #f6f9fc;
+      border: 1px solid #dae3ee;
+      min-height: 34mm;
+    }
+
+    .step-num {
+      display: inline-flex;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: var(--blue);
+      color: white;
+      font-weight: 800;
+      font-size: 11px;
+      margin-bottom: 3mm;
+    }
+
+    .risk-bars {
+      display: grid;
+      gap: 3mm;
+      margin-top: 4mm;
+    }
+
+    .risk-row {
+      display: grid;
+      grid-template-columns: 32mm 1fr 16mm;
+      gap: 3mm;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: #e2e8f0;
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+    }
+
+    .bar.green > span {
+      background: var(--green);
+    }
+
+    .bar.amber > span {
+      background: var(--amber);
+    }
+
+    .bar.red > span {
+      background: var(--red);
+    }
+
+    .arch {
+      display: grid;
+      grid-template-columns: 1fr 10mm 1fr 10mm 1fr;
+      gap: 0;
+      align-items: stretch;
+      margin: 6mm 0;
+    }
+
+    .arch-box {
+      border-radius: 6px;
+      border: 1px solid #d6dee8;
+      background: #f7fafc;
+      padding: 5mm;
+      min-height: 36mm;
+    }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-weight: 900;
+      font-size: 22px;
+    }
+
+    .dashboard {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      break-inside: avoid;
+    }
+
+    .dashboard-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #18212f;
+      color: white;
+      padding: 4mm 5mm;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 750;
+      background: #fff0dd;
+      color: #7a4300;
+    }
+
+    .dashboard-body {
+      padding: 5mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+    }
+
+    .gauge {
+      width: 70mm;
+      height: 36mm;
+      border-radius: 70mm 70mm 0 0;
+      background:
+        conic-gradient(from 270deg at 50% 100%, var(--green) 0deg 55deg, var(--amber) 55deg 110deg, var(--red) 110deg 180deg, transparent 180deg 360deg);
+      position: relative;
+      overflow: hidden;
+      margin: 2mm auto 0;
+    }
+
+    .gauge::after {
+      content: "";
+      position: absolute;
+      left: 11mm;
+      right: 11mm;
+      bottom: 0;
+      height: 25mm;
+      border-radius: 60mm 60mm 0 0;
+      background: #fff;
+    }
+
+    .needle {
+      position: absolute;
+      width: 2px;
+      height: 28mm;
+      background: #111827;
+      left: calc(50% - 1px);
+      bottom: 0;
+      transform-origin: bottom center;
+      transform: rotate(40deg);
+      z-index: 2;
+      border-radius: 2px;
+    }
+
+    .gauge-value {
+      text-align: center;
+      font-size: 26px;
+      font-weight: 850;
+      color: var(--ink);
+      margin-top: -2mm;
+    }
+
+    .mini-chart {
+      height: 38mm;
+      border-left: 1px solid #cbd5e1;
+      border-bottom: 1px solid #cbd5e1;
+      position: relative;
+      margin-top: 4mm;
+      background:
+        linear-gradient(#eef2f7 1px, transparent 1px);
+      background-size: 100% 9.5mm;
+    }
+
+    .spark {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+    }
+
+    .spark svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .legend {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3mm;
+    }
+
+    .legend span::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-right: 4px;
+      border-radius: 2px;
+      vertical-align: middle;
+      background: var(--blue);
+    }
+
+    .legend span:nth-child(2)::before {
+      background: var(--amber);
+    }
+
+    .legend span:nth-child(3)::before {
+      background: var(--red);
+    }
+
+    .small {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .footer-note {
+      position: absolute;
+      left: 17mm;
+      right: 17mm;
+      bottom: 8mm;
+      border-top: 1px solid var(--line);
+      padding-top: 3mm;
+      color: #7a8796;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div class="cover-grid"></div>
+    <div class="cover-inner">
+      <div>
+        <div class="eyebrow">AI Project Showcase | Predictive Maintenance</div>
+        <h1>FXR90 Reader Thermal and Hardware Stress Predictor</h1>
+        <div class="cover-subtitle">
+          A practical AI system that predicts overheating, hardware stress, and reader instability using the Zebra FXR90 MQTT API signals already available in the platform.
+        </div>
+        <div class="cover-badges">
+          <span class="badge">Reader Health</span>
+          <span class="badge">Thermal Risk</span>
+          <span class="badge">CPU and RAM Stress</span>
+          <span class="badge">Early Warning Alerts</span>
+        </div>
+      </div>
+      <div class="cover-panel">
+        <div>
+          <strong>0-100</strong>
+          <span>Continuous reader stress score</span>
+        </div>
+        <div>
+          <strong>1-6 hr</strong>
+          <span>Prediction window for risk alerts</span>
+        </div>
+        <div>
+          <strong>MQTT</strong>
+          <span>Built from FXR90 heartbeat and status events</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">FXR90 Reader Thermal and Hardware Stress Predictor</div>
+      <div class="page-num">01 / Executive Summary</div>
+    </div>
+
+    <span class="section-kicker">Project Summary</span>
+    <h2>Predict reader failure before operations are affected</h2>
+    <p class="lead">
+      Fixed RFID readers often run continuously in warehouses, portals, docks, plants, and retail environments. Over time, heat, CPU load, memory pressure, storage pressure, radio instability, and power issues can reduce reliability. This project creates a predictive maintenance layer that watches every FXR90 reader and identifies risk before it becomes downtime.
+    </p>
+
+    <div class="grid-4" style="margin-top: 8mm;">
+      <div class="card metric">
+        <strong>Thermal</strong>
+        <span>Detect rising ambient and PA temperature patterns.</span>
+      </div>
+      <div class="card metric teal">
+        <strong>Compute</strong>
+        <span>Track CPU, RAM, app load, and uptime stress.</span>
+      </div>
+      <div class="card metric amber">
+        <strong>Storage</strong>
+        <span>Predict flash and log saturation before failure.</span>
+      </div>
+      <div class="card metric red">
+        <strong>Stability</strong>
+        <span>Connect warnings, errors, radio state, and power health.</span>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Business Problem</h3>
+        <ul class="plain-list">
+          <li>Readers can fail silently until tag reads drop or stop.</li>
+          <li>Overheating can cause unstable radio performance and reboots.</li>
+          <li>High CPU, RAM, or full flash can impact data delivery.</li>
+          <li>Maintenance teams need early signals, not only after-failure logs.</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>Proposed AI Outcome</h3>
+        <ul class="plain-list">
+          <li>Reader stress score for each device.</li>
+          <li>Low, Medium, High, Critical risk labels.</li>
+          <li>Predicted reason: heat, CPU/RAM, storage, radio, power, or app stress.</li>
+          <li>Recommended action for operations and maintenance teams.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 8mm;">
+      <h3>Showcase Statement</h3>
+      <p>
+        The project converts raw FXR90 operational telemetry into an AI-powered reader health monitor that predicts overheating and hardware stress, helping teams prevent RFID downtime and reduce reactive maintenance.
+      </p>
+    </div>
+
+    <div class="footer-note">Source signals reviewed from docs/openapi_md.json: get_status, heartbeat, error, warning, logs, firmware, network, and management events.</div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Available FXR90 Signals</div>
+      <div class="page-num">02 / Data Foundation</div>
+    </div>
+
+    <span class="section-kicker">API Signals</span>
+    <h2>The FXR90 API already exposes the maintenance signals we need</h2>
+    <p class="lead">
+      The predictive model can start without adding external sensors. The reader emits heartbeat events and supports status queries containing temperature, CPU, memory, flash, radio, interface, power, and application health details.
+    </p>
+
+    <table style="margin-top: 6mm;">
+      <thead>
+        <tr>
+          <th style="width: 30mm;">Signal Group</th>
+          <th style="width: 62mm;">Useful Fields</th>
+          <th>Maintenance Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Temperature</strong></td>
+          <td><code>system.temperature.ambient</code><br><code>system.temperature.pa</code><br><code>get_status.temperature</code></td>
+          <td>Detect overheating, poor ventilation, high RF duty cycle, hot install location, or thermal stress trends.</td>
+        </tr>
+        <tr>
+          <td><strong>Compute</strong></td>
+          <td><code>system.cpu.system</code><br><code>system.cpu.user</code><br><code>radio_control.cpu</code><br><code>reader_gateway.cpu</code></td>
+          <td>Find load spikes, overloaded reader gateway, expensive user apps, or processing bottlenecks.</td>
+        </tr>
+        <tr>
+          <td><strong>Memory</strong></td>
+          <td><code>system.ram.used</code><br><code>system.ram.free</code><br><code>radio_control.ram</code><br><code>reader_gateway.ram</code></td>
+          <td>Catch memory leaks, increasing pressure, and app behavior that may lead to instability.</td>
+        </tr>
+        <tr>
+          <td><strong>Flash</strong></td>
+          <td><code>system.flash.platform</code><br><code>system.flash.readerData</code><br><code>system.flash.rootFileSystem</code></td>
+          <td>Predict log/database/data partition saturation that can block normal operation.</td>
+        </tr>
+        <tr>
+          <td><strong>Radio Health</strong></td>
+          <td><code>radio_control.radioActivity</code><br><code>radio_control.radioConnection</code><br><code>radio_control.numTagReads</code></td>
+          <td>Detect disconnected radio, inactive radio during expected run windows, or abnormal read drop.</td>
+        </tr>
+        <tr>
+          <td><strong>Warnings and Errors</strong></td>
+          <td><code>numErrors</code><br><code>numWarnings</code><br><code>error.message</code><br><code>warning.message</code></td>
+          <td>Convert diagnostic messages into risk signals and maintenance reasons.</td>
+        </tr>
+        <tr>
+          <td><strong>Power</strong></td>
+          <td><code>system.powerSource</code><br><code>system.powerNegotiation</code></td>
+          <td>Identify PoE or power negotiation failures that can cause hardware instability.</td>
+        </tr>
+        <tr>
+          <td><strong>User Apps</strong></td>
+          <td><code>userapps[].status</code><br><code>userapps[].cpu</code><br><code>userapps[].ram</code><br><code>incomingDataBufferPercentageRemaining</code></td>
+          <td>Predict application overload, buffer exhaustion, or custom edge-app failure.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning" style="margin-top: 7mm;">
+      <h3>Important Scope</h3>
+      <p>
+        This project predicts the health of the RFID reader system itself. Predictive maintenance for external machines such as motors, pumps, or conveyors would require additional machine sensor data such as vibration, current, temperature, PLC faults, and runtime.
+      </p>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Prediction Design</div>
+      <div class="page-num">03 / Stress Score</div>
+    </div>
+
+    <span class="section-kicker">AI Logic</span>
+    <h2>Convert telemetry into a continuous hardware stress score</h2>
+    <p class="lead">
+      The MVP should use a hybrid approach: business rules for immediate value, baseline anomaly detection for each reader, and later supervised ML when enough historical failures and maintenance actions are available.
+    </p>
+
+    <div class="grid-2" style="margin-top: 7mm;">
+      <div>
+        <h3>Risk Components</h3>
+        <div class="risk-bars">
+          <div class="risk-row">
+            <span>Temperature</span>
+            <div class="bar red"><span style="width: 88%;"></span></div>
+            <strong>35%</strong>
+          </div>
+          <div class="risk-row">
+            <span>CPU/RAM</span>
+            <div class="bar amber"><span style="width: 68%;"></span></div>
+            <strong>25%</strong>
+          </div>
+          <div class="risk-row">
+            <span>Flash</span>
+            <div class="bar amber"><span style="width: 52%;"></span></div>
+            <strong>15%</strong>
+          </div>
+          <div class="risk-row">
+            <span>Error Rate</span>
+            <div class="bar red"><span style="width: 70%;"></span></div>
+            <strong>15%</strong>
+          </div>
+          <div class="risk-row">
+            <span>Power/Radio</span>
+            <div class="bar green"><span style="width: 45%;"></span></div>
+            <strong>10%</strong>
+          </div>
+        </div>
+      </div>
+      <div class="formula">
+        <div><span>ReaderStressScore</span> =</div>
+        <div>  0.35 * temperature_risk</div>
+        <div>+ 0.25 * compute_memory_risk</div>
+        <div>+ 0.15 * flash_storage_risk</div>
+        <div>+ 0.15 * warning_error_risk</div>
+        <div>+ 0.10 * power_radio_risk</div>
+        <br>
+        <div><span>Risk Level</span>:</div>
+        <div>0-39 Low | 40-64 Medium</div>
+        <div>65-84 High | 85-100 Critical</div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Rule Layer</h3>
+        <ul>
+          <li>Immediate alerts for disconnected radio, power negotiation failure, very high temperature, or flash nearly full.</li>
+          <li>Useful from day one, even before training data exists.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Baseline Layer</h3>
+        <ul>
+          <li>Build a normal profile per reader by hour, location, and workload.</li>
+          <li>Detect abnormal temperature rise or CPU usage compared with that reader's own history.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ML Layer</h3>
+        <ul>
+          <li>Train on historical warnings, errors, reboots, service tickets, and maintenance outcomes.</li>
+          <li>Predict risk in the next 1 hour, 6 hours, and 24 hours.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table style="margin-top: 7mm;">
+      <thead>
+        <tr>
+          <th>Example Indicator</th>
+          <th>Detection Logic</th>
+          <th>Suggested Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PA temperature rising quickly</td>
+          <td>Temperature slope above reader baseline for 15-30 minutes.</td>
+          <td>Check ventilation, reduce RF duty cycle, inspect installation location.</td>
+        </tr>
+        <tr>
+          <td>High CPU and warning growth</td>
+          <td>CPU above threshold plus increasing <code>numWarnings</code>.</td>
+          <td>Inspect reader gateway workload, user apps, and data batching.</td>
+        </tr>
+        <tr>
+          <td>Memory pressure</td>
+          <td>RAM used trending upward with no return to baseline.</td>
+          <td>Check for long-running app issue or schedule controlled restart.</td>
+        </tr>
+        <tr>
+          <td>Flash saturation</td>
+          <td>Reader data or root filesystem used percentage approaches high-risk threshold.</td>
+          <td>Clear logs, reduce logging level, retrieve and rotate diagnostic archives.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">System Architecture</div>
+      <div class="page-num">04 / How It Works</div>
+    </div>
+
+    <span class="section-kicker">Architecture</span>
+    <h2>From MQTT events to predictive maintenance actions</h2>
+    <p class="lead">
+      The system listens to FXR90 health events, stores time-series telemetry, computes stress features, runs the risk model, and publishes clear maintenance recommendations.
+    </p>
+
+    <div class="arch">
+      <div class="arch-box">
+        <h3>1. FXR90 Readers</h3>
+        <p>Emit heartbeat, warning, error, user app, radio, and management events over MQTT.</p>
+        <div class="pill-row">
+          <span class="pill">heartbeat</span>
+          <span class="pill">get_status</span>
+          <span class="pill">error</span>
+          <span class="pill">warning</span>
+        </div>
+      </div>
+      <div class="arrow">-></div>
+      <div class="arch-box">
+        <h3>2. Telemetry Pipeline</h3>
+        <p>Normalize JSON payloads, enrich with reader ID/site, and write raw and feature tables.</p>
+        <div class="pill-row">
+          <span class="pill">MQTT Consumer</span>
+          <span class="pill">Time Series DB</span>
+          <span class="pill">Feature Jobs</span>
+        </div>
+      </div>
+      <div class="arrow">-></div>
+      <div class="arch-box">
+        <h3>3. AI Risk Engine</h3>
+        <p>Calculates score, detects anomalies, predicts risk windows, and generates actions.</p>
+        <div class="pill-row">
+          <span class="pill">Rules</span>
+          <span class="pill">Anomaly Detection</span>
+          <span class="pill">ML Model</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Collect</h3>
+        <p>Subscribe to heartbeat and management-event topics. Poll <code>get_status</code> if a snapshot is needed.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Feature</h3>
+        <p>Build rolling metrics: 5 min, 15 min, 1 hour, 24 hour averages, slopes, max values, and event deltas.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Predict</h3>
+        <p>Score each reader and identify the most likely reason for stress or future instability.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Act</h3>
+        <p>Alert operations, open a service task, show dashboard risk, and track whether the action resolved the issue.</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Feature Examples</h3>
+        <ul>
+          <li>PA temperature max in last 15 minutes.</li>
+          <li>Ambient temperature slope over last 1 hour.</li>
+          <li>CPU sustained above baseline duration.</li>
+          <li>RAM usage trend and free-memory minimum.</li>
+          <li>Warnings per hour and errors per hour.</li>
+          <li>Flash used percentage by partition.</li>
+          <li>Radio disconnect count and heartbeat gap count.</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>Model Output</h3>
+        <ul>
+          <li><strong>reader_id:</strong> FXR90-01</li>
+          <li><strong>stress_score:</strong> 78</li>
+          <li><strong>risk_level:</strong> High</li>
+          <li><strong>predicted_window:</strong> next 1-6 hours</li>
+          <li><strong>main_reason:</strong> thermal rise plus CPU pressure</li>
+          <li><strong>action:</strong> check ventilation and reduce RF duty cycle</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Operator Experience</div>
+      <div class="page-num">05 / Dashboard and Alerts</div>
+    </div>
+
+    <span class="section-kicker">User Experience</span>
+    <h2>Make the output simple enough for operations teams</h2>
+    <p class="lead">
+      The value is not only the model. The value is giving the maintenance team a clear reason, confidence level, and next action before RFID operations are affected.
+    </p>
+
+    <div class="dashboard" style="margin-top: 7mm;">
+      <div class="dashboard-top">
+        <div>
+          <strong>Reader FXR90-01</strong>
+          <div class="small" style="color:#cbd5e1;">Dock Door 12 | Last heartbeat: 42 seconds ago</div>
+        </div>
+        <div class="status">High Risk</div>
+      </div>
+      <div class="dashboard-body">
+        <div>
+          <h3>Reader Stress Score</h3>
+          <div class="gauge">
+            <div class="needle"></div>
+          </div>
+          <div class="gauge-value">78 / 100</div>
+          <p class="small" style="text-align:center;">Predicted instability window: next 1-6 hours</p>
+        </div>
+        <div>
+          <h3>Thermal Trend</h3>
+          <div class="mini-chart">
+            <div class="spark">
+              <svg viewBox="0 0 360 150" preserveAspectRatio="none" aria-hidden="true">
+                <polyline points="0,118 30,116 60,111 90,106 120,102 150,91 180,83 210,72 240,64 270,51 300,43 330,34 360,28" fill="none" stroke="#2357a4" stroke-width="4"/>
+                <polyline points="0,128 30,126 60,124 90,119 120,113 150,106 180,101 210,92 240,82 270,75 300,65 330,55 360,47" fill="none" stroke="#b46a00" stroke-width="4"/>
+              </svg>
+            </div>
+          </div>
+          <div class="legend">
+            <span>PA temperature</span>
+            <span>Ambient temperature</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>Sample Alert</h3>
+        <p>
+          <strong>Reader FXR90-01 has high hardware stress risk.</strong>
+        </p>
+        <p>
+          PA temperature is rising faster than its normal baseline, CPU has remained elevated, and warning count has increased in the last hour.
+        </p>
+        <p>
+          <strong>Recommended action:</strong> check ventilation around the reader, inspect power source, reduce RF duty cycle if possible, and monitor for the next 30 minutes.
+        </p>
+      </div>
+      <div class="card soft">
+        <h3>Dashboard Widgets</h3>
+        <ul>
+          <li>Reader stress score by site and reader.</li>
+          <li>Temperature timeline and baseline comparison.</li>
+          <li>CPU, RAM, and flash pressure panels.</li>
+          <li>Error and warning trend with message categories.</li>
+          <li>Radio connection and power negotiation status.</li>
+          <li>Maintenance recommendation and action status.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table style="margin-top: 7mm;">
+      <thead>
+        <tr>
+          <th>Risk Level</th>
+          <th>Meaning</th>
+          <th>Action SLA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Low</strong></td>
+          <td>Reader is within normal baseline with no sustained stress indicators.</td>
+          <td>Continue monitoring.</td>
+        </tr>
+        <tr>
+          <td><strong>Medium</strong></td>
+          <td>Early anomaly detected, such as temperature or CPU moving above normal range.</td>
+          <td>Review during same shift.</td>
+        </tr>
+        <tr>
+          <td><strong>High</strong></td>
+          <td>Multiple stress signals are sustained or rising together.</td>
+          <td>Inspect within 1 hour.</td>
+        </tr>
+        <tr>
+          <td><strong>Critical</strong></td>
+          <td>Immediate risk such as severe temperature, radio disconnect, power failure, or repeated errors.</td>
+          <td>Immediate action.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Implementation Plan</div>
+      <div class="page-num">06 / MVP Roadmap</div>
+    </div>
+
+    <span class="section-kicker">Delivery Plan</span>
+    <h2>Build a valuable MVP first, then improve with learning data</h2>
+    <p class="lead">
+      The first release can be built with deterministic thresholds plus reader-specific baselines. This gives stakeholders a working demo quickly while collecting the history required for stronger ML.
+    </p>
+
+    <div class="timeline" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Ingest</h3>
+        <p>Collect heartbeat, status, warning, and error data from FXR90 MQTT topics.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Store</h3>
+        <p>Create raw telemetry and feature tables with reader ID, site, and timestamp.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Score</h3>
+        <p>Implement stress score and rule alerts for heat, compute, storage, radio, and power.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Visualize</h3>
+        <p>Build dashboard and alert feed with clear recommended actions.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <h3>Learn</h3>
+        <p>Connect maintenance outcomes and train predictive models after enough history exists.</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>MVP Scope</h3>
+        <ul>
+          <li>Reader health dashboard.</li>
+          <li>Stress score with Low, Medium, High, Critical labels.</li>
+          <li>Thermal risk detection from ambient and PA temperature.</li>
+          <li>CPU/RAM pressure detection.</li>
+          <li>Flash usage detection.</li>
+          <li>Warning/error trend alerts.</li>
+          <li>Basic recommended action text.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Future Enhancements</h3>
+        <ul>
+          <li>Supervised model using service tickets and failure history.</li>
+          <li>Reader comparison by site, environment, and workload.</li>
+          <li>Automatic ticket creation in ITSM or maintenance system.</li>
+          <li>Root-cause classification from warning/error message text.</li>
+          <li>Integration with antenna degradation prediction.</li>
+          <li>Self-tuning thresholds by reader type and install location.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table style="margin-top: 7mm;">
+      <thead>
+        <tr>
+          <th style="width: 34mm;">Phase</th>
+          <th>Deliverable</th>
+          <th style="width: 42mm;">Success Metric</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Week 1-2</strong></td>
+          <td>Telemetry ingestion, schema mapping, and historical storage.</td>
+          <td>95%+ heartbeat capture rate.</td>
+        </tr>
+        <tr>
+          <td><strong>Week 3-4</strong></td>
+          <td>Stress scoring engine, initial rules, and alert generation.</td>
+          <td>All high-risk rules validated on sample data.</td>
+        </tr>
+        <tr>
+          <td><strong>Week 5-6</strong></td>
+          <td>Dashboard, alert review workflow, and maintenance action tracking.</td>
+          <td>Operators can explain and act on each alert.</td>
+        </tr>
+        <tr>
+          <td><strong>After MVP</strong></td>
+          <td>Anomaly detection, failure prediction model, and root-cause text classification.</td>
+          <td>Reduced reader downtime and fewer surprise failures.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="page">
+    <div class="header">
+      <div class="doc-title">Value and Conclusion</div>
+      <div class="page-num">07 / Showcase Close</div>
+    </div>
+
+    <span class="section-kicker">Business Value</span>
+    <h2>Why this is a strong AI project for the company</h2>
+    <p class="lead">
+      This project is practical, data-ready, and directly tied to operations. It uses existing FXR90 API data to prevent downtime, improve maintenance planning, and give teams a concrete AI use case that can be demonstrated quickly.
+    </p>
+
+    <div class="grid-3" style="margin-top: 8mm;">
+      <div class="card metric teal">
+        <strong>Less Downtime</strong>
+        <span>Catch stress before readers fail or reboot unexpectedly.</span>
+      </div>
+      <div class="card metric">
+        <strong>Faster RCA</strong>
+        <span>Explain whether risk is thermal, compute, storage, radio, power, or app-related.</span>
+      </div>
+      <div class="card metric amber">
+        <strong>Smarter Work</strong>
+        <span>Prioritize maintenance by risk instead of checking every reader equally.</span>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top: 8mm;">
+      <div class="card">
+        <h3>KPIs to Track</h3>
+        <ul>
+          <li>Reader downtime hours per month.</li>
+          <li>Number of surprise reader failures.</li>
+          <li>Mean time to detect hardware stress.</li>
+          <li>Mean time to resolve reader incidents.</li>
+          <li>False positive and false negative alert rate.</li>
+          <li>Percentage of alerts with completed maintenance action.</li>
+        </ul>
+      </div>
+      <div class="card soft">
+        <h3>Stakeholder Pitch</h3>
+        <p>
+          We can use the FXR90's own heartbeat and diagnostic events to predict overheating and hardware stress before RFID operations degrade. The MVP can start with explainable scoring and anomaly detection, then evolve into a trained failure prediction model as maintenance history grows.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top: 8mm;">
+      <h3>Recommended Next Step</h3>
+      <p>
+        Build a small proof of concept using 3-5 readers. Collect heartbeat and status telemetry for at least two weeks, implement the stress score, validate alert quality with operations, and then expand to all production readers.
+      </p>
+    </div>
+
+    <table style="margin-top: 7mm;">
+      <thead>
+        <tr>
+          <th>Decision Point</th>
+          <th>Recommendation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>First AI model</td>
+          <td>Start with rules plus anomaly detection; use supervised ML after collecting labeled failures.</td>
+        </tr>
+        <tr>
+          <td>First production alert</td>
+          <td>Thermal and compute stress alert with recommended action.</td>
+        </tr>
+        <tr>
+          <td>First dashboard</td>
+          <td>Reader list, stress score, top reason, trend chart, and action status.</td>
+        </tr>
+        <tr>
+          <td>Expansion</td>
+          <td>Add antenna degradation, network instability, and user app failure prediction.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer-note">Prepared as a showcase concept based on the FXR90 MQTT API documentation in this workspace.</div>
+  </section>
+</body>
+</html>
