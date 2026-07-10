@@ -30,5 +30,5 @@ Have the desired hostname ready before sending this command. Duplicate hostnames
 
 | What You Need | Details |
 |---|---|
-| Hostname string | The desired hostname (payload key: `hostname`). Must be a valid RFC 1123 hostname - alphanumeric characters and hyphens only; no underscores or spaces. |
+| Hostname string | The desired hostname (payload key: `hostname`). Must be a valid RFC 1123 hostname - lowercase alphanumeric characters and hyphens only; no underscores or spaces. |
 | Network uniqueness | Verify the chosen hostname is not already in use on the network segment to avoid DNS or mDNS conflicts. |

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Align MQTT split schemas to REST openAPISpec2.yaml field-for-field.
+"""Align MQTT split schemas to REST RestDeveloperfile.yaml field-for-field.
 
 Updates the payload schemas referenced by schemas/commands and schemas/response
 (including schemas/references/* targets). For each mapped REST operation:

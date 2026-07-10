@@ -1,50 +1,61 @@
-The `PUT /cloud/impinjGen2X` REST endpoint configures Impinj Gen2X proprietary RFID features on the FXR90 reader, covering FastID acceleration, TagProtect security, TagFocus singulation control, and TagQuieting (basic and advanced) behavior.
+## 1. Description
 
-**This endpoint allows you to configure:**
+The `PUT /cloud/impinjGen2X` REST endpoint configures Impinj Gen2X proprietary RFID features on the reader.
 
-- FastID for combined EPC + TID reads in a single inventory operation
-- TagProtect for password-based tag protection and visibility control
-- TagFocus to suppress already-read tags during dense inventory
-- TagQuieting (basic or advanced) to silence specific tags by EPC or by Gen2 select masks
+This endpoint allows you to configure:
 
-### Endpoint Details
+- FastID tag TID embedding through `fastID`
+- Tag protection and visibility control through `tagProtect`
+- TagFocus session suppression through `tagFocus`
+- Tag quieting (basic or advanced) through `tagQuieting`
+
+Use this endpoint to:
+
+- Enable FastID to embed the TID in every inventory response without a separate read
+- Protect specific tags with a 32-bit password to prevent unauthorized reads
+- Enable TagFocus to improve read rates in dense tag environments by suppressing already-inventoried tags
+- Quiet specific tags (by EPC) to exclude them from inventory responses
+
+## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
-| Pattern Name | Impinj Gen2X Configuration Update |
-| Communication Type | Client to Device (HTTP request/response) |
-| Applies To | FXR90 Series |
+| Pattern Name | Impinj Gen2X Configuration |
 | REST Endpoint | `PUT /cloud/impinjGen2X` |
-| Related Endpoints | `GET /cloud/impinjGen2X`, `PUT /cloud/start`, `PUT /cloud/stop` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
+| Related Endpoints | [getImpinjGen2X](getImpinjGen2X.md), [startInventory](startInventory.md), [stopInventory](stopInventory.md), [getMode](getMode.md) |
 | Success Response | `200 OK` |
 | Error Responses | `422 Unprocessable Entity`, `500 Internal Server Error` |
-| Supported Features | FastID, TagProtect, TagFocus, TagQuieting (basic and advanced) |
+| Supported Features | `fastID`, `tagProtect`, `tagFocus`, `tagQuieting` |
 | Supported TagProtect Actions | `enableTagProtection`, `disableTagProtection`, `enableTagVisibility`, `disableTagVisibility` |
+| Supported TagQuieting Modes | `basic` (quiet/unquiet by EPC list), `advanced` (pre-select with mask) |
 | Supported TagQuieting Basic Actions | `quiet`, `unquiet` |
 | Supported Gen2 Memory Banks | EPC, TID, USER, RESERVED |
 | Supported Select Targets | S0, S1, S2, S3, SL |
 | Supported Tag Quiet Masks | S0A, S0B, S1A, S1B, S2A, S2B, S3A, S3B, SL_ASSERT, SL_DEASSERT |
-| Mutually Exclusive Features | FastID, TagFocus, TagQuieting (only one reader-scoped feature active at a time) |
+| Mutually Exclusive Features | `fastID`, `tagFocus`, `tagQuieting` (only one reader-scoped feature active at a time) |
+| Supported API Versions | V1.0 |
 
-## 2. Before You Begin
+## 3. Before You Begin
 
-Decide which Gen2X feature you need to configure before sending this request. You can send a minimal payload targeting only one feature (for example, only `fastID` or only `tagProtect`), but you cannot combine mutually exclusive reader-scoped features in a single request.
+Decide which Gen2X feature to configure before sending this request. At least one feature object must be included in the request body, but mutually exclusive reader-scoped features cannot be combined in a single request. To apply the saved Gen2X configuration during inventory, send `PUT /cloud/start` with `applyImpinjGen2X: true`.
 
 | What You Need | Details |
 |---|---|
-| Authentication | Obtain a valid bearer token and include it in the `Authorization` header of every request. |
-| Network reachability | The reader's HTTPS endpoint must be reachable from your client. Verify connectivity before issuing the request. |
-| Feature decision | Choose exactly one reader-scoped feature (`fastID`, `tagFocus`, or `tagQuieting`) per request. `tagProtect` is tag-scoped and can be configured independently. |
-| TagProtect credentials | For any `tagProtect` action, have the 8-character hex access password ready. For tag-specific actions (`enableTagProtection`, `disableTagProtection`), also have the target EPC (`tagID`). |
-| Tag ID list (Basic Quieting) | For `tagQuieting.basic`, prepare the list of EPCs to quiet or unquiet. A maximum of **31 tag IDs** is supported per request. |
-| Pre-select strategy (Advanced Quieting) | For `tagQuieting.advanced`, decide on the Gen2 select pre-conditions (`preSelect` array), including target session/SL flag, action, and memory mask. |
-| Quiet mask flags | For `tagQuieting.advanced`, know which session flags (`S0A`-`S3B`, `SL_ASSERT`, `SL_DEASSERT`) define the quieted state. |
-| Inventory state | `PUT /cloud/impinjGen2X` should be called **before** starting inventory. Stop any active inventory first by calling `PUT /cloud/stop`. |
-| Activation | The saved configuration is **not active** until you call `PUT /cloud/start` with `applyImpinjGen2X: true` in the request body. |
+| Feature selection | At least one of `fastID`, `tagProtect`, `tagFocus`, or `tagQuieting` must be present - an empty request body will be rejected. Choose only one reader-scoped feature (`fastID`, `tagFocus`, or `tagQuieting`) per request; `tagProtect` is tag-scoped and can be configured independently. |
+| FastID | Decide whether to enable or disable TID embedding. Optionally specify a TID word selector (`TID[0]`-`TID[3]`). |
+| TagProtect action | Choose one of: `enableTagProtection` (protect a specific tag), `disableTagProtection` (remove protection from a tag), `enableTagVisibility` (allow reading protected tags), `disableTagVisibility` (block reading protected tags). |
+| TagProtect password | An 8-character hex string (32-bit) is required for all TagProtect actions. |
+| TagProtect tag EPC | `tagID` (hex EPC) is required for `enableTagProtection` and `disableTagProtection`. It must be omitted for `enableTagVisibility` and `disableTagVisibility`. |
+| TagFocus | Whether to enable or disable the feature. TagFocus targets session S1. |
+| TagQuieting | For basic: provide `action` (`quiet`/`unquiet`) and the `tagIDs` EPC array (maximum 31 tag IDs per request). For advanced: provide the `preSelect` array, `tagQuietMasks`, `target`, and `stateAwareAction`. |
+| Inventory state | Configure Gen2X before starting inventory. Stop any active inventory first with `PUT /cloud/stop`. |
+| Activation | Gen2X settings are saved but not applied until `PUT /cloud/start` is sent with `applyImpinjGen2X: true`. |
 
-## 3. Choosing a Gen2X Feature
+## 4. Choosing a Gen2X Feature
 
 The Gen2X feature you select determines the reader's behavior during inventory. Choose based on your operational goal.
 
@@ -58,7 +69,7 @@ The Gen2X feature you select determines the reader's behavior during inventory. 
 
 > Mutually exclusive: Only one of `fastID`, `tagFocus`, or `tagQuieting` can be active at a time. `tagProtect` can coexist with any one of them because it operates at the tag level.
 
-## 4. Choosing TagProtect Actions
+## 5. Choosing TagProtect Actions
 
 TagProtect operations either lock/unlock individual tags or temporarily allow the reader to see already-protected tags. Each action has specific field requirements.
 
@@ -71,7 +82,7 @@ TagProtect operations either lock/unlock individual tags or temporarily allow th
 
 > Important: `enableTagProtection` and `disableTagProtection` are tag-specific (require `tagID`). `enableTagVisibility` and `disableTagVisibility` are reader-wide visibility toggles.
 
-## 5. Choosing TagQuieting Strategy
+## 6. Choosing TagQuieting Strategy
 
 TagQuieting silences tags from being reported during inventory. Choose between **basic** (EPC-list based) and **advanced** (Gen2 select mask based) depending on your filtering complexity.
 
@@ -99,7 +110,7 @@ Advanced quieting uses Gen2 select pre-conditions to silence tags based on memor
 
 > Important: Use `basic` when you have a discrete list of EPCs. Use `advanced` when filtering by memory content, session state, or complex multi-step Gen2 select conditions.
 
-## 6. Choosing FastID and TagFocus
+## 7. Choosing FastID and TagFocus
 
 These two reader-scoped features improve inventory performance but cannot be combined.
 
@@ -121,7 +132,7 @@ These two reader-scoped features improve inventory performance but cannot be com
 
 **Use TagFocus when:** You operate portals, conveyors, or other scenarios with many duplicate reads of the same tag set and want unique-tag reporting.
 
-## 7. Applying the Configuration
+## 8. Applying the Configuration
 
 Calling this endpoint only **saves** the configuration on the reader; it is not active until inventory is started with the activation flag.
 
@@ -168,4 +179,3 @@ Content-Type: application/json
 | `500 Internal Server Error` | Reader-side failure | Internal reader error while persisting the configuration. |
 
 > Persistence: The reader stores the last saved configuration and restores it across reboots and reconnects. The configuration is only applied during inventory when `applyImpinjGen2X: true` is sent in the `PUT /cloud/start` request body.
-

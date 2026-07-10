@@ -27,6 +27,7 @@ No additional payload fields are required to retrieve the syslog archive.
 Use `get_logs_syslog` to:
 
 - Collect system logs for support escalation or diagnostics
+- Investigate OS-level events such as system startup, network changes, or unexpected reboots
 - Capture a log snapshot before rebooting or applying an OS update
 - Archive syslog content before purging with `del_syslogs`
 
@@ -35,4 +36,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is a filename returned? | Confirms the archive was generated and identifies the log file for record keeping. |
-| `content` | Is the Base64 string non-empty? | An empty value indicates no syslog data was available on the reader. |
+| `binary` | Is the Base64 string non-empty? | An empty value indicates no syslog data was available on the reader. |

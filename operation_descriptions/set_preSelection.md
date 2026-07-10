@@ -21,7 +21,7 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/preSelection` |
 | Related Commands | [get_preSelection](get_preSelection.md), [start](start.md), [get_status](get_status.md) |
-| Required Payload Fields | `preSelection` |
+| Payload Fields | `preSelection` |
 | Supported API Versions | V1.0 |
 
 ## 3. Before You Begin

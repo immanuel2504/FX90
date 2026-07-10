@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Implementation Guide — FXR90 Reader Overheating &amp; Hardware Stress Predictor</title>
+  <style>
+    :root {
+      --ink: #18212f;
+      --muted: #566273;
+      --line: #d9e0e8;
+      --paper: #ffffff;
+      --soft: #f5f7fa;
+      --blue: #2357a4;
+      --teal: #147d73;
+      --amber: #b46a00;
+      --red: #b4292d;
+      --green: #2f7d32;
+      --slate: #334155;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #e8edf3;
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    @page { size: A4; margin: 0; }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+      padding: 16mm 16mm 14mm;
+      page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; }
+
+    .cover {
+      padding: 0;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(24, 33, 47, 0.96), rgba(35, 87, 164, 0.86)),
+        linear-gradient(90deg, #18212f, #2357a4);
+    }
+    .cover-grid {
+      position: absolute; inset: 0; opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.22) 1px, transparent 1px);
+      background-size: 18mm 18mm;
+    }
+    .cover-inner {
+      position: relative; z-index: 1; height: 297mm;
+      padding: 28mm 22mm 20mm;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .eyebrow {
+      color: #cce7ff; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; font-size: 12px;
+    }
+    h1 { margin: 14mm 0 7mm; font-size: 40px; line-height: 1.06; max-width: 165mm; }
+    .cover-subtitle { max-width: 150mm; font-size: 17px; line-height: 1.5; color: #e6f1ff; }
+    .cover-badges { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 12mm; }
+    .badge {
+      border: 1px solid rgba(255,255,255,0.5); border-radius: 999px;
+      padding: 5px 12px; font-size: 12px; color: #f2f8ff;
+    }
+    .cover-foot { font-size: 12px; color: #cfe0f5; }
+
+    h2 {
+      margin: 0 0 3mm; font-size: 23px; color: var(--blue);
+      border-bottom: 2px solid var(--line); padding-bottom: 2.5mm;
+    }
+    h3 { margin: 6mm 0 2mm; font-size: 15.5px; color: var(--slate); }
+    p { margin: 0 0 3mm; }
+    .lede { color: var(--muted); font-size: 14px; margin-bottom: 5mm; }
+
+    table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 12.5px; }
+    th {
+      text-align: left; background: var(--soft); color: var(--slate);
+      border: 1px solid var(--line); padding: 5px 8px; font-size: 12px;
+    }
+    td { border: 1px solid var(--line); padding: 5px 8px; vertical-align: top; }
+
+    code, pre {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 11.5px;
+    }
+    code.inline {
+      background: var(--soft); border: 1px solid var(--line);
+      border-radius: 3px; padding: 0 4px;
+    }
+    pre {
+      background: #0f1722; color: #dce7f5; border-radius: 6px;
+      padding: 9px 11px; overflow-x: auto; line-height: 1.5;
+      margin: 2mm 0 4mm; white-space: pre;
+    }
+    pre .c { color: #7fa3c8; }
+
+    .callout {
+      border-left: 4px solid var(--blue); background: var(--soft);
+      padding: 7px 11px; border-radius: 0 6px 6px 0; margin: 3mm 0 4mm;
+    }
+    .callout.warn { border-left-color: var(--amber); }
+    .callout.good { border-left-color: var(--green); }
+    .callout .t { font-weight: 700; color: var(--slate); }
+
+    .steps { counter-reset: step; margin: 3mm 0 4mm; padding: 0; list-style: none; }
+    .steps li {
+      counter-increment: step; position: relative;
+      padding: 0 0 3.5mm 12mm; margin: 0;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute; left: 0; top: 0;
+      width: 8mm; height: 8mm; border-radius: 50%;
+      background: var(--blue); color: #fff; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; font-size: 12px;
+    }
+
+    .flow {
+      display: flex; align-items: stretch; gap: 6px; margin: 3mm 0 5mm; flex-wrap: wrap;
+    }
+    .flow .node {
+      flex: 1 1 0; min-width: 28mm; background: var(--soft);
+      border: 1px solid var(--line); border-radius: 6px; padding: 7px 8px;
+      font-size: 11.5px; text-align: center;
+    }
+    .flow .node b { display: block; color: var(--blue); font-size: 12px; margin-bottom: 2px; }
+    .flow .arrow { align-self: center; color: var(--muted); font-weight: 700; }
+
+    .risk { display: flex; gap: 6px; margin: 2mm 0 4mm; }
+    .risk div {
+      flex: 1; text-align: center; color: #fff; border-radius: 6px;
+      padding: 6px 4px; font-size: 12px; font-weight: 600;
+    }
+    .rl { background: var(--green); } .rm { background: var(--amber); }
+    .rh { background: #c65102; } .rc { background: var(--red); }
+
+    .phase-tag {
+      display: inline-block; background: var(--blue); color: #fff;
+      border-radius: 4px; padding: 2px 9px; font-size: 11.5px;
+      font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      margin-bottom: 2mm;
+    }
+    .phase-tag.later { background: var(--muted); }
+
+    .qa { margin: 0 0 3.5mm; }
+    .qa .q { font-weight: 700; color: var(--slate); margin-bottom: 1mm; }
+    .qa .a { margin: 0; }
+
+    .pagefoot {
+      position: absolute; bottom: 8mm; left: 16mm; right: 16mm;
+      display: flex; justify-content: space-between;
+      font-size: 10.5px; color: var(--muted);
+      border-top: 1px solid var(--line); padding-top: 2mm;
+    }
+    ul.tight { margin: 1mm 0 3mm; padding-left: 6mm; }
+    ul.tight li { margin-bottom: 1.2mm; }
+  </style>
+</head>
+<body>
+
+  <!-- ============ COVER ============ -->
+  <section class="page cover">
+    <div class="cover-grid"></div>
+    <div class="cover-inner">
+      <div>
+        <div class="eyebrow">FXR90 · AI Project 01 · Implementation Guide</div>
+        <h1>Reader Overheating &amp; Hardware Stress Predictor — How to Build It</h1>
+        <p class="cover-subtitle">
+          A step-by-step guide written for someone starting from zero.
+          What the project is, how to explain it to anyone in 60 seconds,
+          and exactly what to build — phase by phase, with copy-paste code.
+        </p>
+        <div class="cover-badges">
+          <span class="badge">No new hardware needed</span>
+          <span class="badge">Uses existing FXR90 MQTT data</span>
+          <span class="badge">5 phases · ship value from Phase 2</span>
+          <span class="badge">Python + MQTT + SQLite</span>
+        </div>
+      </div>
+      <div class="cover-foot">
+        Companion to <em>FXR90_Reader_Overheating_Hardware_Stress_Predictor.pdf</em> (the concept deck) ·
+        July 2026
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 1: EXPLAIN IT ============ -->
+  <section class="page">
+    <h2>1 · Explain the project in 60 seconds</h2>
+    <p class="lede">Memorise this page and you can present the project to anyone — manager, customer, or engineer.</p>
+
+    <h3>The elevator pitch (say this)</h3>
+    <div class="callout good">
+      <p>"An FXR90 RFID reader already reports its own vital signs every few seconds —
+      temperature, CPU load, memory, storage, radio and power status — over MQTT.
+      Today nobody looks at that data until a reader fails.
+      <b>This project listens to those vital signs continuously, turns them into a single
+      0–100 health score per reader, and raises an alert with a recommended action
+      before the reader overheats or crashes</b> — instead of a technician discovering
+      a dead reader after tags stopped being read."</p>
+    </div>
+
+    <h3>The analogy (use this when someone looks confused)</h3>
+    <p>
+      It is a <b>fitness watch for the reader</b>. A fitness watch doesn't add new organs to
+      your body — it just reads the pulse, temperature and activity you already produce, tracks
+      what is <em>normal for you</em>, and warns you when something drifts. We do exactly that
+      for each RFID reader: no new sensors, no new hardware — we simply pay attention to the
+      health data the reader already broadcasts.
+    </p>
+
+    <h3>The problem → solution in one line each</h3>
+    <table>
+      <tr><th style="width:18mm">Today</th>
+        <td>Readers run hot in warehouses; failures are discovered <b>after</b> reads stop — lost inventory data, emergency call-outs, unplanned downtime.</td></tr>
+      <tr><th>With this</th>
+        <td>A dashboard shows every reader's health score; a rising score triggers an alert like <em>"Reader dock-door-3: temperature trending up 40 minutes, CPU pinned — check ventilation / schedule reboot tonight."</em></td></tr>
+    </table>
+
+    <h3>What it is NOT (say this too — it builds trust)</h3>
+    <ul class="tight">
+      <li>It does <b>not</b> predict failures of external machines (motors, conveyors) — only the reader's own health.</li>
+      <li>It needs <b>no firmware changes and no extra sensors</b> — only a program that subscribes to data the reader already sends.</li>
+      <li>Machine learning is a <b>later</b> phase. The first shipped version is smart rules + per-reader baselines, which already delivers most of the value.</li>
+    </ul>
+
+    <div class="callout">
+      <span class="t">One honest framing that wins the room:</span>
+      "Phase 1–4 is a <b>real-time health monitor</b> — high confidence, ships in weeks.
+      Prediction (ML) comes later, once we have collected enough history. We monitor now, predict later."
+    </div>
+
+    <div class="pagefoot"><span>FXR90 Reader Overheating — Implementation Guide</span><span>Page 1</span></div>
+  </section>
+
+  <!-- ============ PAGE 2: GLOSSARY ============ -->
+  <section class="page">
+    <h2>2 · The words you will need</h2>
+    <p class="lede">Plain-language definitions. If you understand this page, you understand the whole project.</p>
+
+    <table>
+      <tr><th style="width:38mm">Term</th><th>Plain meaning</th></tr>
+      <tr><td><b>FXR90</b></td><td>Zebra's fixed RFID reader — a box mounted on a wall/dock door that reads RFID tags. It runs a small Linux computer inside, which is why it has CPU, RAM and temperature like a laptop.</td></tr>
+      <tr><td><b>MQTT</b></td><td>A lightweight messaging protocol used by IoT devices. Think of it as a group chat: the reader <em>publishes</em> messages to a named channel (a "topic"), and any program that <em>subscribes</em> to that topic receives them instantly.</td></tr>
+      <tr><td><b>Telemetry / heartbeat</b></td><td>The health report the reader publishes on a schedule (e.g. every 30–60 s): temperature, CPU, RAM, flash storage, radio and power status. "Heartbeat" = the regular ping proving the reader is alive.</td></tr>
+      <tr><td><b>get_status</b></td><td>The API command that returns the same health snapshot on demand — useful for testing before the heartbeat is configured.</td></tr>
+      <tr><td><b>Threshold rule</b></td><td>A simple IF-statement: <code class="inline">IF temperature &gt; 70 °C THEN alert</code>. Easy to build, catches obvious problems, but knows nothing about what is "normal" for a specific reader.</td></tr>
+      <tr><td><b>Baseline</b></td><td>What is normal <em>for this particular reader</em> — e.g. "dock-door-3 normally sits at 48–55 °C on weekday afternoons." Learned automatically from 1–2 weeks of its own history.</td></tr>
+      <tr><td><b>Anomaly detection</b></td><td>Flagging behaviour that is unusual <em>compared to that reader's own baseline</em>, even if no fixed threshold is crossed. E.g. a reader that normally runs at 50 °C suddenly sitting at 63 °C — still below the 70 °C limit, but abnormal <em>for it</em>.</td></tr>
+      <tr><td><b>Stress score</b></td><td>Our single 0–100 number combining all signals, so a non-expert can rank readers by health without reading six graphs.</td></tr>
+      <tr><td><b>Labelled data</b></td><td>Historical records where we know the outcome ("this reader actually failed on March 3rd"). Machine learning that <em>predicts</em> failures needs this; most sites don't have it yet — which is exactly why ML is Phase 5, not Phase 1.</td></tr>
+      <tr><td><b>Broker</b></td><td>The MQTT "post office" (e.g. Mosquitto) that relays messages between the readers and our program. Free, open-source, runs on any PC/server.</td></tr>
+    </table>
+
+    <h3>The whole system in one picture</h3>
+    <div class="flow">
+      <div class="node"><b>FXR90 readers</b>publish health data every 30–60 s</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>MQTT broker</b>relays messages (Mosquitto)</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>Collector</b>Python script stores rows in a database</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>Scoring engine</b>rules + baseline → stress score</div>
+      <div class="arrow">→</div>
+      <div class="node"><b>Dashboard &amp; alerts</b>traffic-light view, email/Teams alert</div>
+    </div>
+
+    <div class="callout">
+      <span class="t">That's the entire architecture.</span>
+      Five boxes. Everything in this guide is just building those boxes left to right.
+    </div>
+
+    <div class="pagefoot"><span>FXR90 Reader Overheating — Implementation Guide</span><span>Page 2</span></div>
+  </section>
+
+  <!-- ============ PAGE 3: THE DATA ============ -->
+  <section class="page">
+    <h2>3 · The data you already have (verified in the API)</h2>
+    <p class="lede">Every field below exists today in the FXR90 <code class="inline">get_status</code> response and the periodic heartbeat event. This was verified against the project's API schemas — nothing here is hypothetical.</p>
+
+    <table>
+      <tr><th style="width:44mm">Field</th><th style="width:22mm">Type</th><th>What it tells you (maintenance meaning)</th></tr>
+      <tr><td><code class="inline">temperature</code></td><td>number (°C)</td><td><b>The headline signal.</b> Sustained rise = blocked ventilation, failing environment cooling, or hardware stress. Trend matters more than the absolute value.</td></tr>
+      <tr><td><code class="inline">cpu.system</code> / <code class="inline">cpu.user</code></td><td>number (%)</td><td>Processor load. Pinned CPU for long periods = runaway app or overload → generates heat and slows tag processing.</td></tr>
+      <tr><td><code class="inline">ram.used / free / total</code></td><td>number</td><td>Memory pressure. Steady growth over days = memory leak → eventual crash/reboot.</td></tr>
+      <tr><td><code class="inline">flash.platform.free / total</code></td><td>number</td><td>Storage. A full flash partition can block logging and updates — a silent killer.</td></tr>
+      <tr><td><code class="inline">radioActivity</code></td><td>enum (on/off)</td><td>Whether the RFID radio is actively reading. Cross-reference: high temp while radio idle is more alarming than while at full blast.</td></tr>
+      <tr><td><code class="inline">radioConnection</code></td><td>enum</td><td>Radio subsystem connectivity — <em>disconnected</em> is an immediate red flag.</td></tr>
+      <tr><td><code class="inline">powerSource</code> / <code class="inline">powerNegotiation</code></td><td>enum</td><td>How the reader is powered (PoE/DC) and whether power negotiation succeeded. Failed negotiation = underpowered reader = flaky behaviour.</td></tr>
+      <tr><td><code class="inline">uptime</code></td><td>string</td><td>Time since last boot. A reader that quietly reboots itself every night is telling you something — uptime resets reveal it.</td></tr>
+    </table>
+
+    <div class="callout warn">
+      <span class="t">Known data-quality gaps (from this project's schema audit — fix or tolerate):</span>
+      <ul class="tight" style="margin-bottom:0">
+        <li><code class="inline">temperature</code>, <code class="inline">flash.platform.*</code> and <code class="inline">uptime</code> have <b>no description and no min/max bounds</b> in the schema — validate real values in Phase 1 before trusting them.</li>
+        <li>The heartbeat interval is configurable (<code class="inline">managementEventConfig</code>) — <b>measure the actual cadence first</b>; every trend window below assumes ~1 sample/minute.</li>
+        <li><code class="inline">uptime</code> arrives as a string — parse it to seconds in the collector, not later.</li>
+      </ul>
+    </div>
+
+    <h3>What a raw heartbeat payload looks like (simplified)</h3>
+    <pre>{
+  "temperature": 52.4,
+  "cpu":   { "system": 12.1, "user": 23.4 },
+  "ram":   { "total": 1024000, "used": 611200, "free": 412800 },
+  "flash": { "platform": { "total": 4096000, "free": 1930000 } },
+  "radioActivity":   "on",
+  "radioConnection": "connected",
+  "powerSource":     "poe+",
+  "powerNegotiation": "success",
+  "uptime": "12 days, 04:31:22"
+}</pre>
+    <p>One of these per reader per minute ≈ <b>1,440 rows/reader/day</b>. Fifty readers for a year is still only ~26 M small rows — SQLite or Postgres handles this without any big-data tooling.</p>
+
+    <div class="pagefoot"><span>FXR90 Reader Overheating — Implementation Guide</span><span>Page 3</span></div>
+  </section>
+
+  <!-- ============ PAGE 4: STRESS SCORE ============ -->
+  <section class="page">
+    <h2>4 · The stress score, explained simply</h2>
+    <p class="lede">One number per reader so a non-expert can act. It is a weighted average of five sub-scores, each 0–100.</p>
+
+    <pre>StressScore = 0.35 × temperature_score
+            + 0.25 × compute_memory_score
+            + 0.15 × flash_score
+            + 0.15 × warning_error_score
+            + 0.10 × power_radio_score</pre>
+
+    <table>
+      <tr><th style="width:40mm">Sub-score</th><th style="width:14mm">Weight</th><th>How to compute it (Phase 2 version)</th></tr>
+      <tr><td>Temperature</td><td>0.35</td><td>0 at ≤45 °C, 100 at ≥75 °C, linear in between; <b>add +20</b> if the 30-min trend is rising ≥0.2 °C/min.</td></tr>
+      <tr><td>Compute + memory</td><td>0.25</td><td>Average of CPU% (system+user) and RAM-used%; add +20 if RAM usage has grown monotonically for 24 h (leak signature).</td></tr>
+      <tr><td>Flash</td><td>0.15</td><td>Flash-used%: 0 below 70 %, then ramp to 100 at 95 % full.</td></tr>
+      <tr><td>Warnings / errors</td><td>0.15</td><td>Count of error/warning conditions in the window (failed responses, restarts detected via uptime reset): 0 = none, 100 = ≥3.</td></tr>
+      <tr><td>Power + radio</td><td>0.10</td><td>0 if all nominal; 100 if <code class="inline">powerNegotiation</code> failed or <code class="inline">radioConnection</code> disconnected; 50 for degraded states.</td></tr>
+    </table>
+
+    <h3>Risk bands (what the user sees)</h3>
+    <div class="risk">
+      <div class="rl">0–39 · LOW<br>Healthy — no action</div>
+      <div class="rm">40–64 · MEDIUM<br>Watch — check at next round</div>
+      <div class="rh">65–84 · HIGH<br>Act today — inspect / plan reboot</div>
+      <div class="rc">85–100 · CRITICAL<br>Act now — imminent failure risk</div>
+    </div>
+
+    <div class="callout warn">
+      <span class="t">Be honest about the weights.</span>
+      0.35 / 0.25 / 0.15 / 0.15 / 0.10 are <b>sensible starting guesses, not calibrated truth</b>.
+      Say exactly that when presenting ("initial weights — we tune them against real incidents in Phase 4").
+      Anyone who asks "where do the numbers come from?" gets a straight answer, and you keep credibility.
+    </div>
+
+    <h3>Every alert must carry three things</h3>
+    <ol class="steps">
+      <li><b>The score and what drove it</b> — "Score 78 (HIGH): temperature 68 °C and rising, CPU 91 % for 45 min."</li>
+      <li><b>A likely reason</b> — "Pattern matches blocked ventilation or runaway application."</li>
+      <li><b>A recommended action</b> — "Inspect airflow at dock-door-3; if clear, schedule reboot in tonight's window."</li>
+    </ol>
+    <p>A score without a reason and an action is just a scary number — the action line is what makes this a <em>maintenance tool</em> rather than a graph.</p>
+
+    <div class="pagefoot"><span>FXR90 Reader Overheating — Implementation Guide</span><span>Page 4</span></div>
+  </section>
+
+  <!-- ============ PAGE 5: PHASE 1 ============ -->
+  <section class="page">
+    <span class="phase-tag">Phase 1 · Week 1–2</span>
+    <h2>Collect &amp; store the data</h2>
+    <p class="lede">Goal: health data from every reader flowing into one database table, reliably, for at least a week. No intelligence yet — plumbing first.</p>
+
+    <ol class="steps">
+      <li><b>Stand up an MQTT broker.</b> Install Mosquitto on any always-on machine: <code class="inline">apt install mosquitto</code> (or the Windows installer). Default port 1883.</li>
+      <li><b>Point the readers at it.</b> In each FXR90's cloud/MQTT endpoint configuration, set the broker address and enable the <b>management events / heartbeat</b> interval (start with 60 s). Verify with <code class="inline">mosquitto_sub -h &lt;broker&gt; -t '#' -v</code> — you should see JSON heartbeats scroll past.</li>
+      <li><b>Confirm the real cadence.</b> Watch for 10 minutes; note actual seconds between heartbeats per reader. All trend logic later depends on this number.</li>
+      <li><b>Run the collector below.</b> It subscribes and writes every heartbeat to SQLite.</li>
+      <li><b>Let it run for 7–14 days.</b> This history becomes each reader's baseline in Phase 3.</li>
+    </ol>
+
+    <h3>collector.py — complete, copy-paste</h3>
+    <pre>import json, sqlite3, time
+import paho.mqtt.client as mqtt        <span class="c"># pip install paho-mqtt</span>
+
+DB = sqlite3.connect("reader_health.db", check_same_thread=False)
+DB.execute("""CREATE TABLE IF NOT EXISTS health(
+    ts REAL, reader TEXT, temp REAL, cpu REAL, ram_pct REAL,
+    flash_pct REAL, radio_conn TEXT, power_neg TEXT, uptime_s INTEGER)""")
+
+def uptime_to_seconds(s):              <span class="c"># "12 days, 04:31:22" -&gt; seconds</span>
+    days, _, hms = s.partition(" days, ")
+    h, m, sec = (hms or days).split(":")
+    d = int(days) if hms else 0
+    return d*86400 + int(h)*3600 + int(m)*60 + int(sec)
+
+def on_message(client, userdata, msg):
+    try:
+        p = json.loads(msg.payload)
+        reader = msg.topic.split("/")[0]          <span class="c"># adapt to your topic scheme</span>
+        ram   = p["ram"];  flash = p["flash"]["platform"]
+        DB.execute("INSERT INTO health VALUES(?,?,?,?,?,?,?,?,?)", (
+            time.time(), reader, p["temperature"],
+            p["cpu"]["system"] + p["cpu"]["user"],
+            100 * p["ram"]["used"] / ram["total"],
+            100 * (1 - flash["free"] / flash["total"]),
+            p.get("radioConnection"), p.get("powerNegotiation"),
+            uptime_to_seconds(p.get("uptime", "0:0:0"))))
+        DB.commit()
+    except (KeyError, ValueError) as e:
+        print("skipped malformed payload:", e)     <span class="c"># never crash the collector</span>
+
+c = mqtt.Client()
+c.on_message = on_message
+c.connect("BROKER_IP", 1883)
+c.subscribe("#")                       <span class="c"># narrow to your heartbeat topic once known</span>
+c.loop_forever()</pre>
+
+    <div class="callout good">
+      <span class="t">Definition of done for Phase 1:</span>
+      <code class="inline">SELECT reader, COUNT(*) FROM health GROUP BY reader</code> shows a steadily
+      growing row count for <b>every</b> reader, and a day-long gap-check finds no missing hours.
+    </div>
+
+    <div class="pagefoot"><span>FXR90 Reader Overheating — Implementation Guide</span><span>Page 5</span></div>
+  </section>
+
+  <!-- ============ PAGE 6: PHASE 2 ============ -->
+  <section class="page">
+    <span class="phase-tag">Phase 2 · Week 3</span>
+    <h2>Rules engine — first real value</h2>
+    <p class="lede">Goal: obvious problems raise an alert within one heartbeat. This alone catches a large share of real incidents — ship it and start building trust.</p>
+
+    <h3>Starter rule set</h3>
+    <table>
+      <tr><th style="width:52mm">Rule</th><th style="width:24mm">Severity</th><th>Why / recommended action text</th></tr>
+      <tr><td>temperature &gt; 70 °C</td><td>CRITICAL</td><td>Near hardware limit — "Inspect ventilation now; consider controlled shutdown."</td></tr>
+      <tr><td>temperature rising ≥ 0.2 °C/min for 30 min</td><td>HIGH</td><td>The <em>predictive</em> rule — catches trouble before the limit. "Check airflow / ambient temperature at the site."</td></tr>
+      <tr><td>CPU &gt; 90 % for 15 min</td><td>HIGH</td><td>Runaway process. "Identify busy app; schedule reboot if persists."</td></tr>
+      <tr><td>RAM used &gt; 90 %</td><td>HIGH</td><td>Crash risk. "Reboot in next maintenance window."</td></tr>
+      <tr><td>Flash &gt; 90 % full</td><td>MEDIUM</td><td>"Purge logs / old packages before updates fail."</td></tr>
+      <tr><td>powerNegotiation = failure</td><td>CRITICAL</td><td>Underpowered reader. "Check PoE switch port budget / injector."</td></tr>
+      <tr><td>radioConnection = disconnected</td><td>CRITICAL</td><td>Not reading tags at all. "Power-cycle radio; escalate if repeats."</td></tr>
+      <tr><td>uptime decreased vs previous sample</td><td>MEDIUM</td><td>Silent reboot detected. "Review logs — was it planned?"</td></tr>
+      <tr><td>No heartbeat for 3 × interval</td><td>CRITICAL</td><td>Reader offline or network down. "Ping reader; dispatch if unreachable."</td></tr>
+    </table>
+
+    <h3>rules.py — the shape of it</h3>
+    <pre>def check(reader, rows):               <span class="c"># rows = last 30 min from SQLite, newest last</span>
+    alerts, cur = [], rows[-1]
+    if cur.temp > 70:
+        alerts.append(("CRITICAL", f"temperature {cur.temp:.1f} C > 70",
+                       "Inspect ventilation now; consider controlled shutdown"))
+    slope = (rows[-1].temp - rows[0].temp) / max((rows[-1].ts - rows[0].ts)/60, 1)
+    if slope >= 0.2:
+        alerts.append(("HIGH", f"temperature rising {slope:.2f} C/min over 30 min",
+                       "Check airflow / ambient temperature at the site"))
+    if len(rows) >= 2 and cur.uptime_s < rows[-2].uptime_s:
+        alerts.append(("MEDIUM", "reader rebooted (uptime reset)",
+                       "Review logs - was this planned?"))
+    <span class="c"># ... one if-block per rule in the table above</span>
+    return alerts</pre>
+
+    <p>Run it on a 60-second timer over the last 30 minutes of rows per reader. Deliver alerts however your team already communicates — email, Teams webhook, or just a log file at first.</p>
+
+    <div class="callout warn">
+      <span class="t">Alert-fatigue rule (non-negotiable):</span>
+      one alert per reader per condition per 4 hours, max. The fastest way to kill this project is
+      50 duplicate e-mails on day one — people will mute it and never unmute it. Deduplicate from the very first version.
+    </div>
+
+    <div class="pagefoot"><span>FXR90 Reader Overheating — Implementation Guide</span><span>Page 6</span></div>
+  </section>
+
+  <!-- ============ PAGE 7: PHASE 3 ============ -->
+  <section class="page">
+    <span class="phase-tag">Phase 3 · Week 4–5</span>
+    <h2>Per-reader baselines — the differentiator</h2>
+    <p class="lede">Goal: catch problems that fixed thresholds miss, because "abnormal" depends on the reader. This is the layer competitors typically don't have — and it needs <b>no failure history</b>.</p>
+
+    <h3>The idea in one example</h3>
+    <p>
+      Dock-door-3 has run at 48–55 °C every weekday afternoon for two weeks. Today it reads 63 °C.
+      No fixed rule fires (63 &lt; 70), but for <em>this reader</em> that is far outside normal —
+      something changed: a blocked vent, a new heat source nearby, a stuck fan. Baselines catch it a day
+      or two before the 70 °C rule would.
+    </p>
+
+    <h3>The method — rolling mean and z-score (no ML library needed)</h3>
+    <ol class="steps">
+      <li>For each reader × each metric, compute mean (μ) and standard deviation (σ) over the last 14 days, <b>per hour-of-day</b> (readers are warmer at 2 pm than 2 am — compare like with like).</li>
+      <li>For each new sample compute <b>z = (value − μ) / σ</b> — "how many standard deviations from this reader's own normal?"</li>
+      <li>Flag <b>z ≥ 3 sustained for 15+ minutes</b> as an anomaly (sustained, so a single noisy sample never alerts).</li>
+      <li>Feed anomalies into the same alert pipeline, tagged "unusual for this reader" — with the baseline shown: <em>"normally 48–55 °C at this hour, now 63 °C."</em></li>
+    </ol>
+
+    <pre>SELECT AVG(temp), <span class="c">-- plus stdev; SQLite: use extension or compute in Python/pandas</span>
+       CAST(strftime('%H', ts, 'unixepoch') AS INT) AS hour
+FROM health
+WHERE reader = ? AND ts > strftime('%s','now') - 14*86400
+GROUP BY hour;</pre>
+
+    <div class="callout">
+      <span class="t">Why this beats jumping straight to ML:</span>
+      it is explainable ("3σ above its own 2-week average" survives any meeting),
+      needs zero labelled failures, works per-reader from day 15, and produces exactly the
+      anomaly history you will later need to train real ML. It <em>is</em> the on-ramp to Phase 5.
+    </div>
+
+    <h3>Also update the stress score</h3>
+    <p>Phase 2's temperature sub-score used fixed bands. Now blend in the baseline:
+       <code class="inline">temp_score = max(fixed_band_score, min(100, z × 25))</code> —
+       so a reader can go HIGH on abnormality alone, even below the fixed limits.</p>
+
+    <div class="pagefoot"><span>FXR90 Reader Overheating — Implementation Guide</span><span>Page 7</span></div>
+  </section>
+
+  <!-- ============ PAGE 8: PHASE 4 + 5 ============ -->
+  <section class="page">
+    <span class="phase-tag">Phase 4 · Week 6–7</span>
+    <h2>Dashboard, alert quality &amp; the feedback loop</h2>
+    <ol class="steps">
+      <li><b>Fleet view:</b> one row per reader — name, current stress score as a coloured chip (green/amber/orange/red), top driver ("temp trend"), last-seen time. Sort by score descending; the sick readers float to the top.</li>
+      <li><b>Reader detail:</b> 7-day charts of temperature, CPU, RAM, flash with the baseline band drawn behind the line — anomalies become visually obvious.</li>
+      <li><b>Alert log with outcome buttons:</b> every alert gets <em>Confirmed real / False alarm / Duplicate</em> buttons. <b>This is the most important feature on the page</b> — it builds the labelled dataset Phase 5 needs and measures whether people trust the system.</li>
+      <li><b>Weekly precision review:</b> % of alerts marked "confirmed real". Target ≥ 70 %. Below that, raise thresholds — a quiet, right system beats a loud, ignored one.</li>
+    </ol>
+    <p>Tooling: Grafana (fastest, point it at the DB), or a small Flask/React page if you want the outcome buttons integrated. Start with Grafana + a separate outcomes form if speed matters.</p>
+
+    <span class="phase-tag later">Phase 5 · Month 3+ · only when ready</span>
+    <h2 style="margin-top:2mm">Machine learning — the honest version</h2>
+    <p class="lede">Do <b>not</b> start here. ML that predicts "failure in 1–6 h" needs labelled history that does not exist on day one.</p>
+    <ul class="tight">
+      <li><b>Gate to enter Phase 5:</b> ≥ 3 months of telemetry <em>and</em> ≥ 20–30 confirmed incidents from the Phase 4 outcome buttons. Fewer than that → stay on rules + baselines (they are already delivering value).</li>
+      <li><b>First model:</b> gradient-boosted classifier (XGBoost / LightGBM) on windowed features (means, slopes, z-scores over 30/60/180 min) predicting "incident within next 6 h". Boring and effective.</li>
+      <li><b>Evaluate on precision at fixed alert budget</b> (e.g. "at most 2 alerts/day fleet-wide, how many real incidents caught?") — never accuracy, incidents are rare so accuracy lies.</li>
+      <li>Keep the rules engine running underneath forever — ML augments the safety net, it never replaces it.</li>
+    </ul>
+
+    <h3>Timeline at a glance</h3>
+    <table>
+      <tr><th style="width:26mm">When</th><th>Milestone</th></tr>
+      <tr><td>Week 1–2</td><td>Broker + collector running; real heartbeat cadence measured; data accumulating.</td></tr>
+      <tr><td>Week 3</td><td><b>First shipped value:</b> rules engine + deduplicated alerts.</td></tr>
+      <tr><td>Week 4–5</td><td>Per-reader baselines + z-score anomalies; stress score v2.</td></tr>
+      <tr><td>Week 6–7</td><td>Dashboard, outcome buttons, weekly precision review.</td></tr>
+      <tr><td>Month 3+</td><td>ML phase — only if the incident-label gate is met.</td></tr>
+    </table>
+
+    <div class="pagefoot"><span>FXR90 Reader Overheating — Implementation Guide</span><span>Page 8</span></div>
+  </section>
+
+  <!-- ============ PAGE 9: PRESENTING + FAQ ============ -->
+  <section class="page">
+    <h2>5 · Presenting it: script, demo, and the questions you will get</h2>
+
+    <h3>A 5-minute presentation plan</h3>
+    <ol class="steps">
+      <li><b>Problem (30 s):</b> "Readers fail silently; we find out when tag reads stop. Each surprise failure costs downtime and an emergency visit."</li>
+      <li><b>Insight (30 s):</b> "The reader already reports its vital signs every minute — nobody is listening." Show the raw JSON payload from page 3.</li>
+      <li><b>Solution (1 min):</b> The five-box diagram from page 2. "Listen → store → score → alert with a recommended action."</li>
+      <li><b>Demo (2 min):</b> Fleet view sorted by score; click the worst reader; show temperature trending up with its baseline band; show the alert text with the action.</li>
+      <li><b>Plan &amp; ask (1 min):</b> The week-by-week table. "Working alerts in three weeks, no new hardware, ML later once we have history. I need N readers and a VM for the broker."</li>
+    </ol>
+
+    <h3>Questions you will get — and honest answers</h3>
+    <div class="qa"><p class="q">"Is this just thresholds? We could do that in any monitoring tool."</p>
+      <p class="a">Thresholds are only layer 1. Layer 2 learns each reader's personal normal and flags drift long before any fixed limit — that per-device baseline is what generic tools don't give you out of the box.</p></div>
+    <div class="qa"><p class="q">"Where does the data come from? Do we need to install anything on readers?"</p>
+      <p class="a">No. The FXR90 already publishes health heartbeats over MQTT — we only configure the interval and subscribe. Zero firmware changes.</p></div>
+    <div class="qa"><p class="q">"Can it predict failures of our conveyor / motors too?"</p>
+      <p class="a">No — and it doesn't claim to. It monitors the reader's own health. External machinery needs its own sensors; that would be a different project.</p></div>
+    <div class="qa"><p class="q">"How accurate is the prediction?"</p>
+      <p class="a">Honest answer: phases 1–4 are detection and early-warning — high confidence. True hours-ahead prediction is Phase 5 and needs months of history plus confirmed incidents; we build the dataset for it from day one via the alert-outcome buttons.</p></div>
+    <div class="qa"><p class="q">"What if it cries wolf?"</p>
+      <p class="a">Alert budget + dedup from day one, and a weekly precision review with a ≥70 % target. If precision drops, thresholds go up. The system earns attention; it doesn't demand it.</p></div>
+    <div class="qa"><p class="q">"What does it cost?"</p>
+      <p class="a">Software is all open-source (Mosquitto, Python, SQLite/Postgres, Grafana). Cost is one small VM and the build time in the timeline table.</p></div>
+
+    <div class="callout good">
+      <span class="t">Success criteria to commit to (write these down before you start):</span>
+      <ul class="tight" style="margin-bottom:0">
+        <li>≥ 95 % heartbeat capture rate per reader per day (Phase 1)</li>
+        <li>First true incident caught before user impact (Phase 2–3)</li>
+        <li>Alert precision ≥ 70 % at the weekly review (Phase 4)</li>
+        <li>≥ 20 labelled incidents collected before any ML work starts (gate to Phase 5)</li>
+      </ul>
+    </div>
+
+    <div class="pagefoot"><span>FXR90 Reader Overheating — Implementation Guide</span><span>Page 9</span></div>
+  </section>
+
+  <!-- ============ PAGE 10: PITFALLS / CHECKLIST ============ -->
+  <section class="page">
+    <h2>6 · Pitfalls, and your first-day checklist</h2>
+
+    <h3>The five ways this project fails (avoid them)</h3>
+    <table>
+      <tr><th style="width:46mm">Pitfall</th><th>Prevention</th></tr>
+      <tr><td>Alert spam on week one</td><td>Dedup window + per-reader alert budget before the first alert is ever sent (page 6).</td></tr>
+      <tr><td>Trend logic built on assumed cadence</td><td>Measure the real heartbeat interval in Phase 1 step 3; recheck after any config change.</td></tr>
+      <tr><td>Trusting unvalidated fields</td><td><code class="inline">temperature</code>/<code class="inline">flash</code>/<code class="inline">uptime</code> have schema gaps — eyeball a week of real values before wiring rules to them.</td></tr>
+      <tr><td>Starting with ML</td><td>Hold the Phase-5 gate: ≥3 months data, ≥20 confirmed incidents. Rules + baselines first.</td></tr>
+      <tr><td>No feedback loop</td><td>Outcome buttons from the first dashboard version — without labels you can never improve or prove value.</td></tr>
+    </table>
+
+    <h3>Day-one checklist</h3>
+    <ol class="steps">
+      <li>Pick 2–3 pilot readers (include the one with the worst reputation — early wins live there).</li>
+      <li>Install Mosquitto on a VM/PC that stays on; open port 1883 on the local network.</li>
+      <li>Configure MQTT endpoint + heartbeat (60 s) on the pilot readers; confirm with <code class="inline">mosquitto_sub</code>.</li>
+      <li>Run <code class="inline">collector.py</code>; check row counts after one hour, then after one day.</li>
+      <li>Create the shared alert channel (email group / Teams webhook) — empty for now.</li>
+      <li>Book the Phase-2 review for two weeks out: show live data, agree the rule thresholds with whoever knows the site.</li>
+    </ol>
+
+    <h3>What you need (complete list)</h3>
+    <table>
+      <tr><th style="width:36mm">Item</th><th>Notes</th></tr>
+      <tr><td>FXR90 readers (2–3 pilot)</td><td>Network-reachable; admin credentials to set MQTT/heartbeat config.</td></tr>
+      <tr><td>One small VM / PC</td><td>Always-on; runs broker + collector + scoring + Grafana. 2 CPU / 4 GB is plenty for a pilot.</td></tr>
+      <tr><td>Software (all free)</td><td>Mosquitto, Python 3 + paho-mqtt, SQLite (Postgres later), Grafana.</td></tr>
+      <tr><td>People</td><td>One developer (this guide), plus a site/maintenance contact to sanity-check thresholds and confirm alert outcomes.</td></tr>
+      <tr><td>Reference docs</td><td>The concept deck (same folder), the FXR90 API schemas in this repo, and <code class="inline">project_resources/test_scenarios/</code> for ready-made config payloads.</td></tr>
+    </table>
+
+    <div class="callout">
+      <span class="t">Final framing to remember:</span>
+      this project succeeds by being <b>boring and trustworthy</b> — a monitor people believe,
+      then a predictor people rely on. Monitor now, predict later.
+    </div>
+
+    <div class="pagefoot"><span>FXR90 Reader Overheating — Implementation Guide</span><span>Page 10</span></div>
+  </section>
+
+</body>
+</html>

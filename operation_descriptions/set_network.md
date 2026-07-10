@@ -43,6 +43,6 @@ Gather all interface-specific settings before sending this command. A wrong stat
 | Wi-Fi access point | For `mlan0`, include the `accesspoint` object with `essid`, `connect`, `autoConn`, and the `security` sub-object. |
 | Wi-Fi security | For WPA2 Personal, provide the `password`. For WPA2 Enterprise, provide `authentication` type and either a certificate name (TLS) or credentials (TTLS/PEAP). |
 | Cellular settings | For `wan0`, set `activeSim` (`psim` or `esim`) and supply the `apn` and `preferredNetworkType` for the chosen SIM. |
-| Hotspot settings | For `uap0`, provide `ssid`, `ssidPassword`, `countryCode`, `securityType`, and `isHidden`. |
+| Hotspot settings | For `uap0`, provide `ssid`, `ssidPassword`, `countryCode`, `securityType` (`WPA2Personal` or `WPA3Personal` only), and `isHidden`. |
 | Interface enablement | Always include `enable: true` or `enable: false` on the interface object to control whether the interface is active after configuration. |
 

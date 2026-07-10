@@ -17,16 +17,20 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Network Configuration Query |
 | REST Endpoint | `GET /cloud/network` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [updateNetwork](updateNetwork.md), [getHostName](getHostName.md), [getNetworkInterfaces](getNetworkInterfaces.md) |
+| Supported Operations | Retrieve active network configuration for all interfaces |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
 Use `GET /cloud/network` to:
 
-- Confirm the reader's IP addressing before changing network settings
+- Confirm the reader's IP addressing before changing it
 - Verify which interfaces are connected or enabled
 - Audit network identity and interface status across a fleet
 - Troubleshoot Wi-Fi, Bluetooth, cellular, or hotspot connectivity
@@ -35,7 +39,8 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `eth0` | Is Ethernet connected and does it have an IP? | Primary connectivity path; must be up for cloud communication over wired LAN. |
+| `eth0` | Is the Ethernet interface connected and does it have an IP? | Primary connectivity path; must be up for cloud communication over wired LAN. |
 | `mlan0` | Is Wi-Fi associated and which SSID? | Confirms the correct access point is in use for wireless deployments. |
-| `wan0` | Is cellular connected and has a carrier? | Required for deployments relying on cellular backhaul. |
-| `hostname` | Does the hostname match expected naming? | Used for device identification on the network and in management systems. |
+| `wan0` | Is cellular connected and does it have a carrier? | Required for deployments relying on cellular backhaul. |
+| `uap0` | Is the hotspot enabled and are clients connected? | Used to confirm hotspot provisioning mode is active. |
+| `hostName` | Does the hostname match expected naming? | Used for device identification on the local network and in management systems. |

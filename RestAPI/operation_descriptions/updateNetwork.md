@@ -1,9 +1,49 @@
-The `PUT /cloud/network` REST endpoint updates network configuration, including Wi-Fi hotspot (uap0) settings.
+## 1. Description
+
+The `PUT /cloud/network` REST endpoint updates reader network configuration for a single interface per request.
+
+This endpoint allows you to configure:
+
+- Ethernet (`eth0`) - DHCP, static IPv4/IPv6 addressing, and 802.1X security
+- Wi-Fi station (`mlan0`) - DHCP, static addressing, access point connection, and WPA2/WPA3/Enterprise security
+- Bluetooth PAN (`bnep0`) - discoverability, pairing, and DHCP address pool
+- Cellular WAN (`wan0`) - SIM selection, APN, network type preference, and IPv6
+- Wi-Fi hotspot (`uap0`) - SSID, password, country code, and security type
+
+Use this endpoint to:
+
+- Connect the reader to a new Wi-Fi access point
+- Switch from DHCP to static IP addressing on Ethernet
+- Enable or disable a network interface
+- Configure cellular APN and SIM settings
+- Provision a Wi-Fi hotspot on the reader
 
 ## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
+| Pattern Name | Network Configuration |
 | REST Endpoint | `PUT /cloud/network` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Content-Type | `application/json` |
+| Related Endpoints | [getNetwork](getNetwork.md), [getNetworkInterfaces](getNetworkInterfaces.md), [setHostName](setHostName.md) |
+| Supported Interface Keys | `eth0`, `mlan0`, `bnep0`, `wan0`, `uap0` |
+| Supported Wi-Fi Security Types | `WPA2Personal`, `WPA2Enterprise`, `WPA3Personal`, `WPA3Enterprise` |
+| Supported 802.1X Authentication | `TLS`, `TTLS`, `PEAP` |
+| Supported API Versions | V1.0 |
+
+## 3. Before You Begin
+
+Gather all interface-specific settings before sending this request. A wrong static IP, gateway, Wi-Fi credential, or cellular setting can disconnect the reader from your network.
+
+| What You Need | Details |
+|---|---|
+| Interface key | Include exactly one top-level interface key: `eth0`, `mlan0`, `bnep0`, `wan0`, or `uap0`. Only one interface can be configured per request. |
+| IP addressing | Use `IPV4.dhcp: true` for dynamic addressing, or supply `ipAddress`, `subnetMask`, `gatewayAddress`, and `dnsAddress` for static. |
+| Wi-Fi access point | For `mlan0`, include the `accesspoint` object with `essid`, `connect`, `autoConn`, and the `security` sub-object. |
+| Wi-Fi security | For WPA2 Personal, provide the `password`. For WPA2 Enterprise, provide `authentication` type and either a certificate name (TLS) or credentials (TTLS/PEAP). |
+| Cellular settings | For `wan0`, set `activeSim` (`psim` or `esim`) and supply the `apn` and `preferredNetworkType` for the chosen SIM. |
+| Hotspot settings | For `uap0`, provide `ssid`, `ssidPassword`, `countryCode`, `securityType` (`WPA2Personal` or `WPA3Personal` only), and `isHidden`. |
+| Interface enablement | Always include `enable: true` or `enable: false` on the interface object to control whether the interface is active after configuration. |

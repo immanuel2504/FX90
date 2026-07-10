@@ -15,6 +15,7 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/apps/{appname}/autostart` |
 | Related Commands | [get_user_apps](get_user_apps.md), [start_user_app](start_user_app.md), [install_user_app](install_user_app.md) |
+| Required Payload Fields | `appname`, `autostart` |
 | Supported API Versions | V1.0 |
 
 MQTT command key: `autostart_user_app`.

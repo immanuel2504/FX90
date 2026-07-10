@@ -1,10 +1,10 @@
 ## 1. Description
 
-The `get_networkInterfaces` command retrieves the network interfaces available on the reader.
+The `get_networkInterfaces` command retrieves the list of network interfaces available on the reader.
 
 This command returns:
 
-- The list of network interface names available on this reader (e.g., `eth0`, `mlan0`, `wan0`, `bnep0`, `uap0`)
+- The list of available network interface names, returned in `availableNetworkInterfaces` (e.g., `eth0`, `mlan0`, `wan0`, `bnep0`, `uap0`)
 
 No additional payload fields are required to retrieve the interface list.
 
@@ -33,5 +33,5 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| Interface list | Are all expected interfaces present (`eth0`, `mlan0`, `wan0`)? | Only interfaces returned here can be configured in `set_network`. |
+| `availableNetworkInterfaces` | Are all expected interfaces present (`eth0`, `mlan0`, `wan0`)? | Only interfaces returned here can be configured in `set_network`. |
 | `wan0` presence | Is the cellular interface listed? | Confirms whether the reader hardware supports cellular connectivity. |

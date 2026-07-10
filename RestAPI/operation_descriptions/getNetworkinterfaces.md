@@ -4,7 +4,7 @@ The `GET /cloud/networkInterfaces` REST endpoint retrieves the list of network i
 
 This endpoint returns:
 
-- The list of network interface names available on this reader (e.g., `eth0`, `mlan0`, `wan0`, `bnep0`, `uap0`)
+- The list of available network interface names, returned in `availableNetworkInterfaces` (e.g., `eth0`, `mlan0`, `wan0`, `bnep0`, `uap0`)
 
 No request body is required.
 
@@ -12,10 +12,14 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Network Interface Query |
 | REST Endpoint | `GET /cloud/networkInterfaces` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [getNetwork](getNetwork.md), [updateNetwork](updateNetwork.md), [getEsimConfig](getEsimConfig.md) |
+| Supported Operations | Retrieve available network interface names |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
@@ -29,5 +33,5 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| Interface list | Are all expected interfaces present? | Only interfaces listed here can be configured in `PUT /cloud/network`. |
+| `availableNetworkInterfaces` | Are all expected interfaces present (`eth0`, `mlan0`, `wan0`)? | Only interfaces returned here can be configured in `PUT /cloud/network`. |
 | `wan0` presence | Is the cellular interface listed? | Confirms whether the reader hardware supports cellular connectivity. |

@@ -33,14 +33,14 @@ Use `get_network` to:
 - Confirm the reader's IP addressing before changing it
 - Verify which interfaces are connected or enabled
 - Audit network identity and interface status across a fleet
-- Review Wi-Fi, Bluetooth, cellular, and hotspot state during connectivity troubleshooting
+- Troubleshoot Wi-Fi, Bluetooth, cellular, or hotspot connectivity
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `eth0` | Is the Ethernet interface connected and has an IP? | Primary connectivity path; must be up for cloud communication over wired LAN. |
+| `eth0` | Is the Ethernet interface connected and does it have an IP? | Primary connectivity path; must be up for cloud communication over wired LAN. |
 | `mlan0` | Is Wi-Fi associated and which SSID? | Confirms the correct access point is in use for wireless deployments. |
-| `wan0` | Is cellular connected and have a carrier? | Required for deployments relying on cellular backhaul. |
+| `wan0` | Is cellular connected and does it have a carrier? | Required for deployments relying on cellular backhaul. |
 | `uap0` | Is the hotspot enabled and are clients connected? | Used to confirm hotspot provisioning mode is active. |
-| `hostname` | Does the hostname match expected naming? | Used for device identification on the local network and in management systems. |
+| `hostName` | Does the hostname match expected naming? | Used for device identification on the local network and in management systems. |

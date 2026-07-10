@@ -4,7 +4,7 @@ The `GET /cloud/apps` REST endpoint retrieves the list of user applications inst
 
 This endpoint returns:
 
-- An array of installed user apps, each with name, autostart flag, running status, and metadata
+- An array of installed user apps, each with `appname`, `autostart`, `runningStatus`, and `metadata`
 
 No request body is required.
 
@@ -12,10 +12,14 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | User Application Inventory Query |
 | REST Endpoint | `GET /cloud/apps` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [setInstallUserApp](setInstallUserApp.md), [setUninstallUserApp](setUninstallUserApp.md), [setStartUserApp](setStartUserApp.md), [setStopUserApp](setStopUserApp.md), [setAutostartUserApp](setAutostartUserApp.md) |
+| Supported Operations | Retrieve the list of installed user applications |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
@@ -30,6 +34,6 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `name` | Is the expected app present? | Confirms successful installation before attempting to start or configure the app. |
-| `running` | Is the app currently running? | Required before sending a stop request; also confirms a successful start. |
+| `appname` | Is the expected app present? | Confirms successful installation before attempting to start or configure the app. |
+| `runningStatus` | Is the app currently running? | Required before sending a stop request; also confirms a successful start. |
 | `autostart` | Is autostart enabled? | Determines whether the app will resume automatically after a reboot. |

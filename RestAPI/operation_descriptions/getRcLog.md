@@ -1,11 +1,11 @@
 ## 1. Description
 
-The `GET /cloud/logs/RcLog` REST endpoint retrieves the Radio Control (RC) information log file from the reader.
+The `GET /cloud/logs/RcLog` REST endpoint retrieves the Radio Control (RC) information log from the reader as a downloadable archive.
 
 This endpoint returns:
 
-- The log filename
-- The full content of the RC info log
+- The archive filename
+- The Base64-encoded `.tar.gz` radio-control log content
 
 No request body is required.
 
@@ -13,10 +13,14 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Radio-Control Log Retrieval |
 | REST Endpoint | `GET /cloud/logs/RcLog` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [getRgErrorLog](getRgErrorLog.md), [getRgWarningLog](getRgWarningLog.md), [getLogs](getLogs.md) |
+| Supported Operations | Retrieve the radio-control information log archive |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
@@ -30,5 +34,5 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
-| `binary` | Does the log contain relevant events or error messages? | The log content reveals radio control state changes, errors, and diagnostics during reader operation. |
+| `filename` | Is a filename returned (for example, `rcLog.tar.gz`)? | Confirms the archive was successfully generated on the reader. |
+| `binary` | Is the Base64 string non-empty? | The Base64-encoded `.tar.gz` content holds radio control state changes, errors, and diagnostics; an empty value means no data was recorded. |

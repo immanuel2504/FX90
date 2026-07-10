@@ -1,9 +1,31 @@
-The `PUT /cloud/revertbackOS` REST endpoint is used to revert to previous OS version.
+## 1. Description
+
+The `PUT /cloud/revertbackOS` REST endpoint reverts the reader firmware to the previous OS version on the secondary partition.
+
+Use this endpoint to:
+
+- Roll back after a failed or unwanted `PUT /cloud/os` upgrade
+- Restore the last known-good firmware
+- Recover from compatibility issues with a new OS build
 
 ## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
+| Pattern Name | Firmware Rollback |
 | REST Endpoint | `PUT /cloud/revertbackOS` |
+| Communication Type | Client to Device (HTTP request/response) |
+| Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Content-Type | `application/json` where a request body is required |
+| Request Body | None |
+| Related Endpoints | [setOS](setOS.md), [getVersion](getVersion.md), [reboot](reboot.md) |
+| Supported API Versions | V1.0 |
+
+## 3. Before You Begin
+
+Plan for downtime — the reader reboots to the secondary partition to activate the previous firmware.
+
+| What You Need | Details |
+|---|---|
+| Current firmware version | Use `GET /cloud/version` to confirm the current and previous OS builds before rolling back. |
+| Downtime window | The reader reboots to the secondary partition; allow time for the reboot and reconnect. |

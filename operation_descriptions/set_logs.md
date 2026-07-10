@@ -23,8 +23,8 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/logs` |
 | Related Commands | [get_logs](get_logs.md), [get_logs_syslog](get_logs_syslog.md), [get_radio_pkt_logs](get_radio_pkt_logs.md), [get_rg_error_logs](get_rg_error_logs.md) |
-| Supported Log Levels | `DEBUG`, `INFO`, `WARNING`, `ERROR` |
-| Supported Components | `radio_control`, `reader_gateway` |
+| Supported Log Levels | `OFF`, `FATAL`, `ERROR`, `WARNING`, `INFO`, `DEBUG`, `TRACE`, `EXTRA` |
+| Supported Components | `radio_control` (alias `RC`), `cloud_agent`, `reader_gateway` (alias `RG`) |
 | Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
@@ -34,7 +34,7 @@ Decide which logging areas you need to change before sending this command. Verbo
 | What You Need | Details |
 |---|---|
 | Radio packet log | Whether to enable or disable `radioPacketLog` (boolean). Enabling this is required before `get_radio_pkt_logs` will return useful data. |
-| Component name | The component whose level to change: `radio_control` or `reader_gateway`. |
-| Log level | The verbosity level to apply: `DEBUG` (most verbose), `INFO`, `WARNING`, or `ERROR` (least verbose). |
-| Storage impact | `DEBUG` level generates the most data. Confirm available flash storage before enabling debug logging for extended periods. |
+| Component name | The component whose level to change: `radio_control` (alias `RC`), `cloud_agent`, or `reader_gateway` (alias `RG`). |
+| Log level | The verbosity level to apply, one of `OFF`, `FATAL`, `ERROR`, `WARNING`, `INFO`, `DEBUG`, `TRACE`, or `EXTRA`. `OFF` disables logging for the component. |
+| Storage impact | Verbose levels such as `DEBUG`, `TRACE`, and `EXTRA` generate the most data. Confirm available flash storage before enabling verbose logging for extended periods. |
 

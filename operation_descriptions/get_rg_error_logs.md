@@ -26,7 +26,7 @@ No additional payload fields are required to retrieve the error log archive.
 
 Use `get_rg_error_logs` to:
 
-- Investigate reader-gateway errors affecting tag data delivery
+- Investigate reader-gateway errors affecting tag data delivery or cloud endpoint communication
 - Collect error logs for a support escalation
 - Correlate gateway errors with `error` management events
 
@@ -35,4 +35,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is a filename returned? | Confirms the archive was generated and is ready for download. |
-| `content` | Is the Base64 string non-empty? | An empty value means no errors have been logged since the last purge. |
+| `binary` | Is the Base64 string non-empty? | An empty value means no errors have been logged since the last purge. |

@@ -4,7 +4,7 @@ The `get_timeZone` command retrieves the time zone currently configured on the r
 
 This command returns:
 
-- The configured time zone value (IANA time zone identifier)
+- The configured time zone value (a reader-supported time zone name in `(GMT±hh:mm) Region` format)
 
 No additional payload fields are required to retrieve the time zone.
 
@@ -33,4 +33,4 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `timeZone` | Is this the correct IANA time zone for the deployment location? | An incorrect time zone causes local event timestamps to be offset from actual local time. |
+| `timeZone` | Is this the correct time zone for the deployment location? | An incorrect time zone causes local event timestamps to be offset from actual local time. |

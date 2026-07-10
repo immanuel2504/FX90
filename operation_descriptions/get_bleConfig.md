@@ -37,7 +37,7 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `enabled` | Is BLE scanning enabled? | BLE inventory will not start if scanning is disabled. |
-| `scanIntervalSec` | What is the configured scan interval? | Determines how frequently the reader actively listens for BLE advertisements. |
-| `additionalFilters.rssi` | What is the RSSI threshold? | Tags or beacons below the RSSI threshold will be filtered out of the scan results. |
+| `ble.enable` | Is BLE scanning enabled? | BLE inventory will not start if scanning is disabled. |
+| `ble.scanIntervalSec` | What is the configured scan interval? | Determines how frequently the reader actively listens for BLE advertisements. |
+| `ble.additionalFilters.rssi` | What is the RSSI threshold? | Tags or beacons below the RSSI threshold will be filtered out of the scan results. |
 | Beacon type filters | Which beacon types are included in the scan? | Only beacon types that are enabled will appear in BLE tag data events. |

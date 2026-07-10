@@ -28,6 +28,7 @@ Use `get_SupportedRegionList` to:
 - Determine valid values before calling `set_region`
 - Confirm that the target deployment region is supported by this hardware
 - Build a region picker in a provisioning or configuration UI
+- Audit region support across different reader hardware variants in the same fleet
 
 Key fields to check in the response:
 

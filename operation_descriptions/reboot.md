@@ -23,6 +23,7 @@ Use this command to:
 | REST Endpoint | `PUT /cloud/reboot` |
 | Related Commands | [get_status](get_status.md), [get_version](get_version.md), [set_os](set_os.md) |
 | Required Payload Fields | None (empty object `{}`) |
+| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

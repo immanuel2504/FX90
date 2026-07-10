@@ -29,5 +29,7 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| Pin 1 state | Is the pin HIGH or LOW? | Confirms whether an actuator or signal connected to GPO pin 1 is currently active. |
-| Pin 2–4 states | Are all expected pins in the correct state? | Multi-pin output workflows require all relevant pins to be in the expected state. |
+| `1` | Is GPO pin 1 HIGH or LOW? | Confirms whether the device driven by port 1 (e.g., a light or gate) is active. |
+| `2` | Is GPO pin 2 HIGH or LOW? | Confirms whether the device driven by port 2 is active. |
+| `3` | Is GPO pin 3 HIGH or LOW? | Confirms whether the device driven by port 3 is active. |
+| `4` | Is GPO pin 4 HIGH or LOW? | Confirms whether the device driven by port 4 is active. |

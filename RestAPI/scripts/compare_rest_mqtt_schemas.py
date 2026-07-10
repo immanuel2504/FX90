@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare REST (openAPISpec2.yaml) field schemas against MQTT expanded schemas."""
+"""Compare REST (RestDeveloperfile.yaml) field schemas against MQTT expanded schemas."""
 
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
 ROOT = Path(__file__).resolve().parents[2]
-REST_SPEC = ROOT / "openAPISpec2.yaml"
+REST_SPEC = ROOT / "RestDeveloperfile.yaml"
 MAP_JSON = ROOT / "RestAPI" / "mappings" / "rest_mqtt_map.json"
 CMD_EXPANDED = ROOT / "schemas" / "commands_expanded"
 RESP_EXPANDED = ROOT / "schemas" / "response_expanded"
@@ -780,7 +780,7 @@ def write_report(
     desc_match = sum(1 for r in alignment_rows if (r["rest_description"] or r["mqtt_description"]) and r["description_match"] == "yes")
 
     summary_rows = [
-        ("REST operations in openAPISpec2", len(ops)),
+        ("REST operations in RestDeveloperfile", len(ops)),
         ("Operations with MQTT command label", matched),
         ("Operations with field issues", len(endpoint_issues)),
         ("Operations missing MQTT schema", len(no_mqtt)),

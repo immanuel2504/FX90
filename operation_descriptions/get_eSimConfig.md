@@ -5,7 +5,7 @@ The `get_eSimConfig` command retrieves eSIM identity and profile information fro
 This command returns:
 
 - The reader EID (eSIM identifier) and IMEI
-- Installed eSIM profile names, nicknames, and activation states
+- Installed eSIM profiles, including nickname (`profileNickName`), provider, ICCID (`iccid`), and activation state (`enabled`)
 
 No additional payload fields are required to retrieve the eSIM configuration.
 
@@ -36,4 +36,4 @@ Key fields to check in the response:
 |---|---|---|
 | `eid` | Is the EID correct for this SIM profile? | The EID uniquely identifies the eSIM hardware and is required for carrier provisioning. |
 | `imei` | Is the IMEI registered with the carrier? | An unregistered IMEI cannot establish a cellular data connection. |
-| Profile names | Which profiles are installed and which is active? | Only one profile can be active at a time; use this to confirm the correct carrier profile is enabled. |
+| `profiles` | Which profiles are installed and which is active? | Only one profile can be active at a time; use this to confirm the correct carrier profile is enabled. |

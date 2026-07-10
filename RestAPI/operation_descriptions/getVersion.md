@@ -15,18 +15,22 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Version Query |
 | REST Endpoint | `GET /cloud/version` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [getStatus](getStatus.md), [getReadercapabilities](getReadercapabilities.md), [setOS](setOS.md), [setRevertbackos](setRevertbackos.md) |
+| Supported Operations | Retrieve firmware, model, serial number, and upgrade details |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
 Use `GET /cloud/version` to:
 
-- Confirm installed firmware versions before or after a system update
+- Confirm the installed firmware versions before or after a system update
 - Verify the exact reader model when applying model-specific configuration
-- Capture the serial number for asset tracking or support cases
+- Capture the serial number for asset tracking, remote fleet management, or support cases
 - Audit available OS upgrade paths or rollback capabilities across a fleet
 
 Key fields to check in the response:
@@ -35,6 +39,7 @@ Key fields to check in the response:
 |---|---|---|
 | `readerApplication` | Current reader software version | Determines which features and API operations are available. |
 | `radioFirmware` | Firmware running on the radio module | Affects RF behavior, read performance, and hardware compatibility. |
-| `model` | Reader model identifier | Drives physical capabilities and model-specific configuration options. |
+| `cloudAgentApplication` | Cloud agent version | Governs device-to-cloud messaging behavior and cloud connectivity. |
+| `model` | Reader model identifier | Drives physical capabilities, antenna limits, and model-specific settings. |
 | `serialNumber` | Unique reader serial number | Identifies the device for support cases and asset records. |
 | `availableOsUpgrades` | Is the object empty or populated? | A populated object means a downloaded OS upgrade is ready to install. |

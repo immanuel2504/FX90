@@ -15,6 +15,7 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/apps/{appname}/start` |
 | Related Commands | [stop_user_app](stop_user_app.md), [get_user_apps](get_user_apps.md), [install_user_app](install_user_app.md) |
+| Required Payload Fields | `appname` |
 | Supported API Versions | V1.0 |
 
 MQTT command key: `start_user_app`.

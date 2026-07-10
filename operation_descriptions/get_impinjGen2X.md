@@ -34,7 +34,7 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `fastId` | Is FastID enabled? | FastID embeds the TID in the singulation response, enabling faster tag identification without a separate read. |
+| `fastID` | Is FastID enabled? | FastID embeds the TID in the singulation response, enabling faster tag identification without a separate read. |
 | `tagFocus` | Is TagFocus configured? | TagFocus reduces re-reading of already-singulated tags in dense tag populations. |
 | `tagQuieting` | Is TagQuieting set? | TagQuieting suppresses repeated reads of the same tag EPC within a session. |
 | `tagProtect` | Is TagProtect active? | TagProtect applies Impinj proprietary tag locking features for secure deployments. |

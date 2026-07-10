@@ -2,10 +2,10 @@
 
 The `get_readerCapabilities` command retrieves the static hardware and software capabilities of the reader.
 
-This command returns:
+This command returns (all fields nested under a top-level `capabilities` object):
 
 - GPIO capacity (number of GPIs and GPOs available)
-- Supported RFID protocols (e.g., LLRP)
+- Whether LLRP is supported
 - Supported endpoint types for data and management
 - API versions accepted by the reader
 
@@ -32,13 +32,14 @@ Use `get_readerCapabilities` to:
 - Confirm whether LLRP is supported on this reader model
 - Determine which endpoint types can be configured for data and management
 - Verify which API versions the reader accepts before sending commands
+- Audit hardware capabilities across a mixed fleet
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `numGPIs` | How many GPI pins are available? | Limits how many external input triggers (sensors, beam breaks) can be wired. |
-| `numGPOs` | How many GPO pins are available? | Limits how many external output devices (lights, gates) can be driven. |
-| `protocols` | Is LLRP listed? | Determines whether the reader can be managed via LLRP-based tools. |
-| `endpointTypesSupported` | Which endpoint types are supported? | Governs which data delivery options can be configured in `set_config`. |
-| `apiSupported.versions` | Which API versions are accepted? | Ensures the management application targets a compatible API version. |
+| `capabilities.numGPIs` | How many GPI pins are available? | Limits how many external input triggers (sensors, beam breaks) can be wired. |
+| `capabilities.numGPOs` | How many GPO pins are available? | Limits how many external output devices (lights, gates) can be driven. |
+| `capabilities.llrpSupported` | Is LLRP supported? | Determines whether the reader can be managed via LLRP-based tools. |
+| `capabilities.endpointTypesSupported` | Which endpoint types are supported? | Governs which data delivery options can be configured in `set_config`. |
+| `capabilities.apiSupported.versions` | Which API versions are accepted? | Ensures the management application targets a compatible API version. |

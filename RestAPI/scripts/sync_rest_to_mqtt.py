@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sync REST (openAPISpec2.yaml) descriptions + required flags into MQTT schemas.
+"""Sync REST (RestDeveloperfile.yaml) descriptions + required flags into MQTT schemas.
 
 Non-destructive: only updates ``description`` and object ``required`` lists on
 fields that already exist in MQTT, matched by field path. Never deletes, renames,

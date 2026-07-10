@@ -6,6 +6,7 @@ This command returns:
 
 - Supported regulatory standard names
 - LBT and frequency hopping configurability per standard
+- Whether individual channels are selectable per standard
 - Enabled channel data per standard
 
 No additional payload fields are required to retrieve the supported standard list.
@@ -30,11 +31,13 @@ Use `get_supportedStandardList` to:
 - Discover which regulatory standards are available for a given region
 - Determine whether LBT or channel hopping is configurable per standard
 - Inspect channel availability before tuning RF settings
+- Populate standard selection options in provisioning tools
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| Standard names | Is the target regulatory standard listed? | Confirms that the required standard is available before configuring the region. |
-| `isLBTConfigurable` | Can LBT be enabled or disabled for this standard? | Some standards mandate LBT; knowing configurability prevents invalid region settings. |
-| `channelData` | Which channels are available for each standard? | Determines the frequency plan the reader will use for that standard. |
+| `StandardName` | Is the target regulatory standard listed? | Confirms that the required standard is available before configuring the region. |
+| `isLBTConfigurable` | Can LBT be enabled or disabled for this standard? (string-encoded `"true"`/`"false"`) | Some standards mandate LBT; knowing configurability prevents invalid region settings. |
+| `isChannelSelectable` | Can individual channels be selected for this standard? | Determines whether `channeldata` can be supplied when setting the region. |
+| `channeldata` | Which channels are available for each standard? | Determines the frequency plan the reader will use for that standard. |

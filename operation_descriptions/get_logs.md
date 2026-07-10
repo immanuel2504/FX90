@@ -29,10 +29,11 @@ Use `get_logs` to:
 - Review active log levels before changing them with `set_logs`
 - Confirm whether radio packet logging is enabled before collecting packet logs
 - Audit per-component verbosity during troubleshooting or before a support handoff
+- Verify the effect of a prior `set_logs` call
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `radioPacketLog` | Is radio packet logging enabled? | Must be enabled before `get_radio_pkt_logs` will return meaningful data. |
-| Component log levels | Are levels set to DEBUG or higher? | Higher verbosity produces more diagnostic data but increases log size and I/O. |
+| `components` | Are levels set to the appropriate verbosity? | Higher verbosity produces more diagnostic data but increases log size and I/O. |
