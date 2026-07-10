@@ -1,13 +1,13 @@
 ## 1. Description
 
-The `get_cableLossCompensation` command retrieves the cable loss compensation values configured on the reader for read points 1 through 4.
+The `get_cableLossCompensation` command retrieves the cable loss compensation values configured on the reader for each configured read point.
 
 This command returns:
 
 - Cable length per read point
 - Cable loss per hundred feet per read point
 
-No additional payload fields are required. Values are returned using fixed read-point keys `1`, `2`, `3`, and `4`.
+No additional payload fields are required. Values are returned using read-point keys `1` through `8` (only configured read points are included).
 
 ## 2. Command Details
 
@@ -29,12 +29,12 @@ Use `get_cableLossCompensation` to:
 - Review compensation values before adjusting transmit power settings
 - Verify cabling assumptions per antenna or read point
 - Audit RF link budgets across all read points
-- Confirm settings after replacing antenna cabling
+- Confirm settings after replacing antenna cabling or after a prior `set_cableLossCompensation` call
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `1.cableLength` | What cable length is configured for read point 1? | Cable length feeds into the loss calculation that adjusts effective transmit power. |
-| `1.cableLoss` | What loss per 100 ft is configured for read point 1? | Higher cable loss requires the reader to transmit at a higher power to compensate. |
+| `1.cableLossPerHundredFt` | What loss per 100 ft is configured for read point 1? | Higher cable loss requires the reader to transmit at a higher power to compensate. |
 | Per-port consistency | Are all active read points configured? | Unconfigured ports default to zero compensation, which may underpower long cable runs. |

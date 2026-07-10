@@ -27,12 +27,13 @@ No additional payload fields are required to retrieve the radio-control log arch
 Use `get_rc_log` to:
 
 - Investigate radio-control behavior and RF issues
-- Collect radio-control logs for a support escalation
+- Capture radio-control events such as inventory start/stop and radio connection failures
 - Correlate radio events with inventory anomalies
+- Collect radio-control logs for a support escalation
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is a filename returned? | Confirms the archive was successfully generated on the reader. |
-| `content` | Is the Base64 string non-empty? | An empty value indicates the radio-control log has no recorded data. |
+| `binary` | Is the Base64 string non-empty? | An empty value indicates the radio-control log has no recorded data. |

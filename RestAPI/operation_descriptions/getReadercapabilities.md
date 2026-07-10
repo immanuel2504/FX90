@@ -1,13 +1,13 @@
 ## 1. Description
 
-The `GET /cloud/readerCapabilities` REST endpoint retrieves the hardware and protocol capabilities of the reader.
+The `GET /cloud/readerCapabilities` REST endpoint retrieves the static hardware and software capabilities of the reader.
 
-This endpoint returns:
+This endpoint returns (all fields nested under a top-level `capabilities` object):
 
-- The number of GPI and GPO pins available
-- Supported RFID protocols
-- Supported endpoint types for tag data delivery
-- Supported API versions
+- GPIO capacity (number of GPIs and GPOs available)
+- Whether LLRP is supported
+- Supported endpoint types for data and management
+- API versions accepted by the reader
 
 No request body is required.
 
@@ -15,25 +15,31 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Reader Capability Query |
 | REST Endpoint | `GET /cloud/readerCapabilities` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [getVersion](getVersion.md), [getStatus](getStatus.md), [getConfig](getConfig.md) |
+| Supported Operations | Retrieve static reader hardware and software capabilities |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
 Use `GET /cloud/readerCapabilities` to:
 
-- Determine how many GPI and GPO pins are available before designing a trigger-based workflow
-- Confirm which RFID protocols the reader supports before configuring inventory
-- Verify API version support before using newer API features
+- Discover how many GPI and GPO pins are available before wiring logic
+- Confirm whether LLRP is supported on this reader model
+- Determine which endpoint types can be configured for data and management
+- Verify which API versions the reader accepts before sending requests
 - Audit hardware capabilities across a mixed fleet
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `numGPIs` | How many GPI pins are available? | Sets the upper limit for GPI-based trigger inputs. |
-| `numGPOs` | How many GPO pins are available? | Sets the upper limit for GPO-driven outputs in workflows. |
-| `protocols` | Which RFID protocols are supported? | Determines which tag types can be read - e.g., GS1 Gen2, ISO 18000-63. |
-| `apiSupported.versions` | Which API versions are supported? | Ensures compatibility between management software and the reader firmware. |
+| `capabilities.numGPIs` | How many GPI pins are available? | Limits how many external input triggers (sensors, beam breaks) can be wired. |
+| `capabilities.numGPOs` | How many GPO pins are available? | Limits how many external output devices (lights, gates) can be driven. |
+| `capabilities.llrpSupported` | Is LLRP supported? | Determines whether the reader can be managed via LLRP-based tools. |
+| `capabilities.endpointTypesSupported` | Which endpoint types are supported? | Governs which data delivery options can be configured in `PUT /cloud/config`. |
+| `capabilities.apiSupported.versions` | Which API versions are accepted? | Ensures the management application targets a compatible API version. |

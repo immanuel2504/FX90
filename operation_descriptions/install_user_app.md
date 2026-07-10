@@ -1,4 +1,4 @@
-The `install_user_app` command installs a user application (`.deb` package) on the reader from an HTTP(S) file server.
+The `install_user_app` command installs a user application (`.deb` package) on the reader by downloading it from a file server (HTTP, HTTPS, or SFTP).
 
 Use this command to:
 
@@ -15,6 +15,7 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/apps/install` |
 | Related Commands | [get_user_apps](get_user_apps.md), [uninstall-user-app](uninstall-user-app.md), [start_user_app](start_user_app.md) |
+| Required Payload Fields | `url`, `filename`, `authenticationType` |
 | Supported Authentication Types | `NONE`, `BASIC` |
 | Supported API Versions | V1.0 |
 

@@ -6,6 +6,8 @@ This command allows you to configure:
 
 - The deployment country through `country`
 - The regulatory standard to apply through `standardname`
+- Optionally, the Listen Before Talk (LBT) state through `isLBT`, when the selected standard supports it
+- Optionally, a specific channel frequency list (kHz) through `channeldata`, when the selected standard supports channel selection
 
 Use this command to:
 
@@ -33,6 +35,8 @@ Verify the target country and standard are supported before sending this command
 |---|---|
 | Country name | Use `get_SupportedRegionList` to retrieve the exact country name string accepted by the reader. |
 | Standard name | Use `get_supportedStandardList` to retrieve valid standard names for the target country. |
+| LBT override (optional) | Provide `isLBT` (boolean) to set Listen Before Talk when the selected standard supports it. |
+| Channel selection (optional) | Provide `channeldata` (list of center frequencies in kHz) when the selected standard supports channel selection. |
 | Active inventory | Stop inventory with `stop` before changing region. Region changes take effect immediately and affect all RF parameters. |
 | LBT and channel behavior | Some standards mandate LBT always-on or restrict channel usage. Review the standard entry from `get_supportedStandardList` before applying. |
 

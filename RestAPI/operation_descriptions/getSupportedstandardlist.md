@@ -1,11 +1,13 @@
 ## 1. Description
 
-The `GET /cloud/supportedStandardList` REST endpoint retrieves the list of regulatory standards and their associated channel data supported by this reader.
+The `GET /cloud/supportedStandardList` REST endpoint retrieves the list of RF regulatory standards supported by the reader and the channel details for each.
 
 This endpoint returns:
 
-- The list of regulatory standard names supported for each region
-- Channel data for each standard, including whether LBT is configurable
+- Supported regulatory standard names
+- LBT and frequency hopping configurability per standard
+- Whether individual channels are selectable per standard
+- Enabled channel data per standard
 
 No request body is required.
 
@@ -13,23 +15,29 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Supported Standard Query |
 | REST Endpoint | `GET /cloud/supportedStandardList` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [getRegion](getRegion.md), [setRegion](setRegion.md), [getSupportedRegionList](getSupportedRegionList.md) |
+| Supported Operations | Retrieve supported regulatory standards and their channel details |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
 Use `GET /cloud/supportedStandardList` to:
 
-- Determine which regulatory standards are available before configuring a region
-- Check whether LBT is configurable for a given standard
+- Discover which regulatory standards are available for a given region
+- Determine whether LBT or channel hopping is configurable per standard
+- Inspect channel availability before tuning RF settings
 - Populate standard selection options in provisioning tools
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| Standard names | Is the required standard listed? | Only listed standards can be applied when configuring the reader's RF region. |
-| `isLBTConfigurable` | Can LBT be toggled for this standard? | Some standards mandate LBT always-on; knowing this prevents invalid configuration attempts. |
-| `channelData` | What channels are available for this standard? | Determines valid frequency channels for inventory operations under this standard. |
+| `StandardName` | Is the target regulatory standard listed? | Confirms that the required standard is available before configuring the region. |
+| `isLBTConfigurable` | Can LBT be enabled or disabled for this standard? (string-encoded `"true"`/`"false"`) | Some standards mandate LBT always-on; knowing configurability prevents invalid region settings. |
+| `isChannelSelectable` | Can individual channels be selected for this standard? | Determines whether `channeldata` can be supplied when setting the region. |
+| `channeldata` | Which channels are available for each standard? | Determines the frequency plan the reader will use for that standard. |

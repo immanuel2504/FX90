@@ -27,7 +27,7 @@ No additional payload fields are required to retrieve the radio packet log archi
 Use `get_radio_pkt_logs` to:
 
 - Collect low-level radio packet traces for RF diagnostics
-- Capture evidence when investigating read-performance issues
+- Capture evidence when investigating read-performance issues or tag read anomalies
 - Archive packet logs before purging with `del_radio_pkt_logs`
 
 Key fields to check in the response:
@@ -35,4 +35,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is a filename returned? | Confirms the archive was generated and ready for download. |
-| `content` | Is the Base64 string non-empty? | An empty value means no packet log data exists - verify logging is enabled with `get_logs`. |
+| `binary` | Is the Base64 string non-empty? | An empty value means no packet log data exists - verify logging is enabled with `get_logs`. |

@@ -12,17 +12,21 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Read Point Query |
 | REST Endpoint | `GET /cloud/readPoints` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [getCablelosscompensation](getCablelosscompensation.md), [setCableLossCompensation](setCableLossCompensation.md), [setMode](setMode.md) |
+| Supported Operations | Retrieve available reader read points |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
 Use `GET /cloud/readPoints` to:
 
 - Identify available read-point identifiers before configuring cable loss compensation
-- Map physical read points before configuring inventory mode settings
+- Map physical read points before configuring inventory behavior in `PUT /cloud/mode`
 - Verify read-point availability before referencing them in antenna configuration
 
 Key fields to check in the response:

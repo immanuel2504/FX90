@@ -15,4 +15,5 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/apps/{appname}/stop` |
 | Related Commands | [start_user_app](start_user_app.md), [get_user_apps](get_user_apps.md) |
+| Required Payload Fields | `appname` |
 | Supported API Versions | V1.0 |

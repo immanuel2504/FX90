@@ -1,8 +1,10 @@
-The `start` MQTT command starts RFID inventory, BLE scanning, or both on the FXR90 reader.
+## 1. Description
+
+The `start` command starts RFID inventory, BLE scanning, or both on the reader.
 
 By default, an empty payload starts RFID inventory only. Use the `scanType` field to explicitly start BLE, RFID, or both together. Optional flags allow you to apply a previously saved Impinj Gen2X configuration or control whether the start state persists across reboots.
 
-**Use this command to:**
+Use this command to:
 
 - Start RFID inventory using the currently configured operating mode
 - Start BLE scanning using the currently configured BLE settings
@@ -10,18 +12,19 @@ By default, an empty payload starts RFID inventory only. Use the `scanType` fiel
 - Apply a previously saved Impinj Gen2X configuration when starting RFID inventory
 - Control whether the reader automatically resumes scanning after reboot
 
-### Command Details
+## 2. Command Details
 
 | Property | Value |
 |---|---|
 | Pattern Name | Scan Control - Start |
 | Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |
-| Applies To | FXR90 Series |
+| Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/start` |
 | Related Commands | [stop](stop.md), [set_bleConfig](set_bleConfig.md), [set_impinjGen2X](set_impinjGen2X.md), [set_mode](set_mode.md) |
 | Supported Scan Types | `rfid`, `ble`, or both combined |
+| Supported API Versions | V1.0 |
 
-## 2. Before You Begin
+## 3. Before You Begin
 
 Make sure the relevant scanners are configured before publishing this command.
 
@@ -30,9 +33,9 @@ Make sure the relevant scanners are configured before publishing this command.
 | MQTT connectivity | The reader must be connected to the MQTT broker and subscribed to its command topic. |
 | RFID configuration | Operating mode must be configured via `set_mode` (or default) before starting RFID inventory. |
 | BLE configuration | If starting BLE, the BLE scanner must be configured via `set_bleConfig` with `ble.enable: true`. |
-| Gen2X configuration | If using `applyImpinjGen2X: true`, the Gen2X configuration must be saved via `set_impinjGen2X` beforehand. |
+| Gen2X configuration | If using `applyImpinjGen2X: true`, the Gen2X configuration must be saved via `set_impinjGen2X` beforehand. `applyImpinjGen2X` cannot be combined with a BLE-only scan (`scanType: ["ble"]`). |
 
-## 3. What Happens After Start
+## 4. What Happens After Start
 
 Once the `start` command succeeds, the reader transitions from **Idle** to **Running**. Two important behaviors govern the running session.
 
@@ -56,4 +59,3 @@ The `doNotPersistState` field controls whether the reader resumes scanning autom
 | `true` | The running state is **not saved**. The reader stays Idle until `start` is published again. |
 
 > Tip: Use `doNotPersistState: true` for one-time or debugging sessions where automatic resume after reboot is not desired.
-

@@ -31,6 +31,6 @@ Have the exact time zone string ready before sending this command. An unrecogniz
 
 | What You Need | Details |
 |---|---|
-| Time zone string | A supported IANA time zone name (e.g., `"International Date Line West"`, `"Pacific Time (US & Canada)"`). Use `get_timeZone` to verify the currently configured value and determine valid string formats. |
+| Time zone string | A reader-supported time zone name (e.g., `"International Date Line West"`, `"Pacific Time (US & Canada)"`). Use `get_timeZone` to check the currently configured value. |
 | Site location | Confirm the physical deployment location of the reader to select the correct time zone. |
 

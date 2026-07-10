@@ -4,7 +4,7 @@ The `get_hostname` command retrieves the reader's currently configured network h
 
 This command returns:
 
-- The reader hostname string
+- The hostname string currently assigned to the reader
 
 No additional payload fields are required to retrieve the hostname.
 
@@ -25,12 +25,13 @@ No additional payload fields are required to retrieve the hostname.
 
 Use `get_hostname` to:
 
-- Confirm the reader's network hostname before changing it
+- Verify the hostname assigned to a reader during provisioning
+- Confirm the hostname matches the expected naming convention for the deployment
+- Retrieve the current hostname before changing it with `set_hostname`
 - Verify the result of a prior `set_hostname` call
-- Audit hostname consistency across a fleet of readers
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `hostname` | Does it match the expected naming convention? | The hostname is used for device identification on the local network and in management systems. |
+| `hostName` | Does it match the expected naming convention? | The hostname identifies the reader on the local network and in management systems; a mismatch may indicate the wrong reader was configured. |

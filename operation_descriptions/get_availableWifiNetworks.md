@@ -28,10 +28,10 @@ No additional payload fields are required to initiate the scan.
 
 Use `get_availableWifiNetworks` to:
 
-- Perform a remote site survey to evaluate Wi-Fi coverage in the reader's physical location
+- Perform a remote site survey to evaluate Wi-Fi coverage at the reader's location
 - Troubleshoot wireless connectivity by verifying the target network is broadcasting with adequate signal strength
-- Identify the security protocols required by local access points before pushing a new network configuration
-- Audit which networks have saved profiles configured to `autoConnect`
+- Identify the security protocols required by local access points before pushing a new Wi-Fi configuration
+- Audit which saved profiles are configured to auto-connect
 
 Key fields to check in the response:
 
@@ -39,5 +39,5 @@ Key fields to check in the response:
 |---|---|---|
 | `essid` | Is the target network visible? | If the network is not listed, the reader cannot connect to it regardless of configuration. |
 | `signalStrength` | What is the signal strength percentage? | Low signal causes unstable connectivity and increased retransmissions. |
-| `security.type` | What security type is required (WPA2, WPA3, 802.1X)? | The network configuration in `set_network` must match the access point's security requirements. |
-| `autoConnect` | Is a saved profile configured for auto-connect? | Confirms whether the reader will reconnect to this network automatically after a restart. |
+| `configuration.security.type` | What security type is required (WPA2, WPA3, 802.1X)? | The network configuration in `set_network` must match the access point's security requirements. |
+| `configuration.autoConnect` | Is a saved profile configured for auto-connect? | Confirms whether the reader will reconnect to this network automatically after a restart. |

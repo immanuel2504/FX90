@@ -4,7 +4,7 @@ The `get_user_apps` command retrieves the list of user applications installed on
 
 This command returns:
 
-- An array of installed user apps, each with name, autostart flag, running status, and metadata
+- An array of installed user apps, each with `appname`, `autostart`, `runningStatus`, and `metadata`
 
 No additional payload fields are required to retrieve all installed user apps.
 
@@ -34,6 +34,6 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `name` | Is the expected app present in the list? | Confirms successful installation before attempting to start or configure the app. |
-| `running` | Is the app currently running? | Required before sending `stop_user_app`; also confirms a successful `start_user_app`. |
+| `appname` | Is the expected app present in the list? | Confirms successful installation before attempting to start or configure the app. |
+| `runningStatus` | Is the app currently running? | Required before sending `stop_user_app`; also confirms a successful `start_user_app`. |
 | `autostart` | Is autostart enabled? | Determines whether the app will resume automatically after a reboot. |

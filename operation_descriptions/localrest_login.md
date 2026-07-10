@@ -17,3 +17,9 @@ Use this command to:
 | Supported API Versions | V1.0 |
 
 ## Before You Begin
+
+Have valid admin reader credentials available before authenticating. On success, the response contains `code` (`0` = success) and `message` (the session bearer token used for subsequent local REST calls).
+
+| What You Need | Details |
+|---|---|
+| Admin credentials | A valid reader admin username and password to authenticate the local REST session. |

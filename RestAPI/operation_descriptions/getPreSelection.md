@@ -12,17 +12,21 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | rxSawFilter Status Query |
 | REST Endpoint | `GET /cloud/preSelection` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [setPreSelection](setPreSelection.md), [startInventory](startInventory.md), [getStatus](getStatus.md) |
+| Supported Operations | Retrieve the rxSawFilter pre-selection state |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
 Use `GET /cloud/preSelection` to:
 
 - Check whether rxSawFilter is enabled or disabled before starting inventory
-- Verify RF pre-selection state in deployments where receiver filtering is important
+- Verify the RF pre-selection state in deployments where receiver filtering matters
 - Confirm the effect of a prior `PUT /cloud/preSelection` call
 
 Key fields to check in the response:

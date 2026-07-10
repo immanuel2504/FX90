@@ -29,5 +29,7 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| Pin 1 state | Is the pin HIGH or LOW? | Confirms whether an external trigger or sensor is actively signaling the reader. |
-| Pin 2-4 states | Are all expected pins reporting the correct state? | Multi-pin triggers require all relevant pins to be in the expected state before initiating action. |
+| `1` | Is GPI pin 1 HIGH or LOW? | Confirms whether the wired sensor or trigger on port 1 is currently active. |
+| `2` | Is GPI pin 2 HIGH or LOW? | Confirms whether the wired sensor or trigger on port 2 is currently active. |
+| `3` | Is GPI pin 3 HIGH or LOW? | Confirms whether the wired sensor or trigger on port 3 is currently active. |
+| `4` | Is GPI pin 4 HIGH or LOW? | Confirms whether the wired sensor or trigger on port 4 is currently active. |

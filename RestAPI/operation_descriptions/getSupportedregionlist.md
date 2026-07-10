@@ -1,10 +1,10 @@
 ## 1. Description
 
-The `GET /cloud/supportedRegionList` REST endpoint retrieves the list of RF regulatory regions supported by this reader.
+The `GET /cloud/supportedRegionList` REST endpoint retrieves the list of RF regions this reader is permitted to operate in.
 
 This endpoint returns:
 
-- The list of supported region codes for this reader model
+- The set of supported country or region names that can be applied via `PUT /cloud/region`
 
 No request body is required.
 
@@ -12,21 +12,26 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Supported Region Query |
 | REST Endpoint | `GET /cloud/supportedRegionList` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [getRegion](getRegion.md), [setRegion](setRegion.md), [getSupportedstandardlist](getSupportedstandardlist.md) |
+| Supported Operations | Retrieve the list of permitted RF regions for this reader |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
 Use `GET /cloud/supportedRegionList` to:
 
-- Validate that the target deployment region is supported before calling `PUT /cloud/region`
-- Populate a region selection UI with only region codes valid for this reader model
+- Determine valid values before calling `PUT /cloud/region`
+- Confirm that the target deployment region is supported by this hardware
+- Build a region picker in a provisioning or configuration UI
 - Audit region support across different reader hardware variants in the same fleet
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| Region list | Is the deployment region in the list? | Attempting to configure an unsupported region will result in an error or non-compliant behavior. |
+| Region list | Is the target deployment region present? | Attempting to set an unsupported region via `PUT /cloud/region` will result in an error. |

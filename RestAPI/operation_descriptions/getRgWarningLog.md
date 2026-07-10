@@ -1,11 +1,11 @@
 ## 1. Description
 
-The `GET /cloud/logs/RgWarningLog` REST endpoint retrieves the Reader Gateway warning log file from the reader.
+The `GET /cloud/logs/RgWarningLog` REST endpoint retrieves the Reader Gateway warning log from the reader as a downloadable archive.
 
 This endpoint returns:
 
-- The log filename
-- The full content of the Reader Gateway warning log
+- The archive filename
+- The Base64-encoded `.tar.gz` reader-gateway warning log content
 
 No request body is required.
 
@@ -13,10 +13,14 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Reader-Gateway Warning Log Retrieval |
 | REST Endpoint | `GET /cloud/logs/RgWarningLog` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [getRgErrorLog](getRgErrorLog.md), [getRcLog](getRcLog.md), [getLogs](getLogs.md) |
+| Supported Operations | Retrieve the reader-gateway warning log archive |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
@@ -30,5 +34,5 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
-| `binary` | Are there recurring warning patterns? | Repeated warnings often precede errors — early detection prevents escalation to failures. |
+| `filename` | Is a filename returned (for example, `rgWarningLog.tar.gz`)? | Confirms the archive was generated and is ready for download. |
+| `binary` | Is the Base64 string non-empty? | Repeated warnings often precede errors; an empty value means no warnings have been logged since the last purge. |

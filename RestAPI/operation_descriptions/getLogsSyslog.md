@@ -1,11 +1,11 @@
 ## 1. Description
 
-The `GET /cloud/logs/syslog` REST endpoint retrieves the system log file from the reader's operating system.
+The `GET /cloud/logs/syslog` REST endpoint retrieves the reader's operating-system system log as a downloadable archive.
 
 This endpoint returns:
 
-- The syslog filename
-- The full content of the OS-level system log
+- The archive filename
+- The Base64-encoded `.tar.gz` syslog content
 
 No request body is required.
 
@@ -13,10 +13,14 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Syslog Retrieval |
 | REST Endpoint | `GET /cloud/logs/syslog` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [delLogsSyslog](delLogsSyslog.md), [getLogs](getLogs.md), [getRadioPacketLog](getRadioPacketLog.md) |
+| Supported Operations | Retrieve the system log archive |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
@@ -30,5 +34,5 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
-| `binary` | Are there kernel, network, or service failure messages? | Syslog captures low-level OS events that application logs may not surface, making it essential for diagnosing platform-level issues. |
+| `filename` | Is a filename returned? | Confirms the archive was generated and identifies the log file for record keeping. |
+| `binary` | Is the Base64 string non-empty? | Syslog captures low-level OS events that application logs may not surface; an empty value indicates no syslog data was available. |

@@ -5,7 +5,8 @@ The `get_gpsCoordinates` command retrieves the reader's last reported GPS coordi
 This command returns:
 
 - Latitude and longitude values
-- Altitude (where available)
+- The number of satellites used for the last fix
+- The time the location was last reported (`lastReportedTime`)
 
 No additional payload fields are required. The returned values represent the most recent location data known to the reader.
 
@@ -37,3 +38,4 @@ Key fields to check in the response:
 | `latitude` | Is a valid latitude value returned? | A null or zero value may indicate the reader does not have a GPS fix yet. |
 | `longitude` | Is a valid longitude value returned? | Combined with latitude, this identifies the reader's physical position. |
 | `satellitesUsed` | How many satellites produced the fix? | A low satellite count indicates a weak fix and less reliable coordinates. |
+| `lastReportedTime` | When was the location last reported? | Indicates how recent the coordinates are; a stale timestamp means the position may be outdated. |

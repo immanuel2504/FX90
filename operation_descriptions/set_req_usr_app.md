@@ -4,7 +4,7 @@ The `set_req_usr_app` command sends a custom request or data payload to a user a
 
 This command allows you to configure:
 
-- The target user application through `appname`
+- The target user application through `userapp`
 - The command or data payload to deliver through `command`
 
 Use this command to:
@@ -22,7 +22,7 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/apps/{appname}/pass-through` |
 | Related Commands | [get_user_apps](get_user_apps.md), [start_user_app](start_user_app.md), [stop_user_app](stop_user_app.md) |
-| Required Payload Fields | `appname`, `command` (inner) |
+| Required Payload Fields | `userapp`, `command` |
 | Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
@@ -31,7 +31,7 @@ Confirm the target user application is installed and running before sending this
 
 | What You Need | Details |
 |---|---|
-| Application name | The exact `appname` value from `get_user_apps`. The name is case-sensitive and must match exactly. |
-| Command or data | The string or JSON object to pass to the user application via `payload.command`. The expected format is defined by the user application, not by the reader API. |
-| Application state | Use `get_user_apps` to confirm the target application is running (`running: true`) before sending. A stopped application may not be able to process the request. |
+| Application name | The exact application name, supplied as `userapp` (from `get_user_apps`). The name is case-sensitive and must match exactly. |
+| Command or data | The `command` object to pass to the user application (for example, `command.message`). The expected structure is defined by the user application, not by the reader API. |
+| Application state | Use `get_user_apps` to confirm the target application is running (`runningStatus: true`) before sending. A stopped application may not be able to process the request. |
 

@@ -35,6 +35,6 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `name` | Does the certificate name match what was installed? | Confirms the correct certificate is present for TLS or authentication. |
-| `type` | What type of certificate is it? | Differentiates between device, CA, and client certificates used for different purposes. |
+| `type` | What type of certificate is it (`server`, `client`, or `app`)? | Differentiates between server, client, and app certificates used for different purposes. |
 | `validityEnd` | When does it expire? | Expired certificates will cause TLS handshake failures and connectivity loss. |
-| `serialNumber` | Does the serial match the expected certificate? | Verifies the exact certificate instance installed, useful for rotation audits. |
+| `serial` | Does the serial match the expected certificate? | Verifies the exact certificate instance installed, useful for rotation audits. |

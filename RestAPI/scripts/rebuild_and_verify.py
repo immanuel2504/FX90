@@ -3,7 +3,7 @@
 
 Runs, in order:
   1. MQTT docs  -> docs/openapi_md.json  (from schemas/)
-  2. REST docs  -> RestAPI/FXR90-rest-api.yaml  (from openAPISpec2.yaml)
+  2. REST docs  -> RestAPI/FXR90-rest-api.yaml  (from RestDeveloperfile.yaml)
   3. Field report -> project_resources/analysis_reports/rest_vs_mqtt_field_report.xlsx
 
 Usage:

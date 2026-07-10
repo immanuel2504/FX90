@@ -1,6 +1,8 @@
+## 1. Description
+
 The `set_config` command updates the reader's full configuration, including RF/XML settings, GPIO and LED defaults, and reader-gateway endpoint configuration.
 
-Use it to:
+Use this command to:
 
 - Push a complete or partial reader XML configuration
 - Configure GPIO/LED default states and event-triggered actions
@@ -17,7 +19,6 @@ Use it to:
 | Related Commands | [get_config](get_config.md), [set_importCloudConfig](set_importCloudConfig.md), [get_status](get_status.md) |
 | Supported Operations | Update reader configuration |
 | Supported API Versions | V1.0 |
-
 
 ## 3. Before You Begin
 

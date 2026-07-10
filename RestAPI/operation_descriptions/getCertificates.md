@@ -12,10 +12,14 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Certificate Inventory Query |
 | REST Endpoint | `GET /cloud/certificates` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [setUpdatecertificate](setUpdatecertificate.md), [delCertificate](delCertificate.md), [setRefreshCertificate](setRefreshCertificate.md) |
+| Supported Operations | Retrieve the list of installed certificates |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
@@ -31,6 +35,6 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `name` | Is the expected certificate present? | Confirms the correct certificate is installed for TLS or authentication. |
-| `type` | What type of certificate is it? | Differentiates device, CA, and client certificates used for different purposes. |
+| `type` | What type of certificate is it (`server`, `client`, or `app`)? | Differentiates server, client, and app certificates used for different purposes. |
 | `validityEnd` | When does it expire? | Expired certificates will cause TLS handshake failures and connectivity loss. |
-| `serialNumber` | Does the serial match the expected certificate? | Verifies the exact certificate instance, useful for rotation audits. |
+| `serial` | Does the serial match the expected certificate? | Verifies the exact certificate instance, useful for rotation audits. |

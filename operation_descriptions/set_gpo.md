@@ -5,7 +5,7 @@ The `set_gpo` command sets the output state of a single General Purpose Output (
 This command allows you to configure:
 
 - The target GPO port number through `port`
-- The desired output state (HIGH or LOW) through `state`
+- The desired output state through `state` (boolean: `true` = HIGH, `false` = LOW)
 
 Use this command to:
 

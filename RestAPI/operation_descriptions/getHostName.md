@@ -1,6 +1,6 @@
 ## 1. Description
 
-The `GET /cloud/hostName` REST endpoint retrieves the reader's current network hostname.
+The `GET /cloud/hostName` REST endpoint retrieves the reader's currently configured network hostname.
 
 This endpoint returns:
 
@@ -12,10 +12,14 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Hostname Query |
 | REST Endpoint | `GET /cloud/hostName` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [setHostName](setHostName.md), [getNetwork](getNetwork.md) |
+| Supported Operations | Retrieve the configured reader hostname |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
@@ -23,10 +27,11 @@ Use `GET /cloud/hostName` to:
 
 - Verify the hostname assigned to a reader during provisioning
 - Confirm the hostname matches the expected naming convention for the deployment
-- Retrieve the hostname before updating it with `PUT /cloud/hostName`
+- Retrieve the current hostname before changing it with `PUT /cloud/hostName`
+- Verify the result of a prior `PUT /cloud/hostName` call
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `hostname` | Does it match the expected value? | The hostname identifies the reader on the network and in management systems; a mismatch may indicate the wrong reader was configured. |
+| `hostName` | Does it match the expected naming convention? | The hostname identifies the reader on the local network and in management systems; a mismatch may indicate the wrong reader was configured. |

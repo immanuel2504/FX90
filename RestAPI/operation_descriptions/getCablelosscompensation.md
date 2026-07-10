@@ -1,33 +1,40 @@
 ## 1. Description
 
-The `GET /cloud/cableLossCompensation` REST endpoint retrieves the cable loss compensation values currently configured for each read point on the reader.
+The `GET /cloud/cableLossCompensation` REST endpoint retrieves the cable loss compensation values configured on the reader for each configured read point.
 
 This endpoint returns:
 
-- The cable length and the attenuation value (in dBm) configured per read point
+- Cable length per read point
+- Cable loss per hundred feet per read point
 
-No request body is required.
+No request body is required. Values are returned using read-point keys `1` through `8` (only configured read points are included).
 
 ## 2. Endpoint Details
 
 | Property | Value |
 |---|---|
+| Pattern Name | Cable Loss Compensation Query |
 | REST Endpoint | `GET /cloud/cableLossCompensation` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [setCableLossCompensation](setCableLossCompensation.md), [getConfig](getConfig.md), [getReadPoints](getReadPoints.md) |
+| Supported Operations | Retrieve per-read-point cable loss compensation values |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
 Use `GET /cloud/cableLossCompensation` to:
 
-- Review cable loss settings before tuning transmit power for a deployment
-- Confirm compensation values match physical cable lengths at each antenna port
-- Verify the effect of a prior `PUT /cloud/cableLossCompensation` call
+- Review compensation values before adjusting transmit power settings
+- Verify cabling assumptions per antenna or read point
+- Audit RF link budgets across all read points
+- Confirm settings after replacing antenna cabling or after a prior `PUT /cloud/cableLossCompensation` call
 
 Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `cableLength` | Does the configured length match the physical cable run? | An incorrect cable length will produce inaccurate loss compensation and reduce read range. |
-| `cableLossPerHundredFt` (per read point) | Is the attenuation value consistent with the cable spec? | Mismatched values result in too little or too much transmit power after compensation is applied. |
+| `1.cableLength` | What cable length is configured for read point 1? | Cable length feeds into the loss calculation that adjusts effective transmit power. |
+| `1.cableLossPerHundredFt` | What loss per 100 ft is configured for read point 1? | Higher cable loss requires the reader to transmit at a higher power to compensate. |
+| Per-port consistency | Are all active read points configured? | Unconfigured ports default to zero compensation, which may underpower long cable runs. |

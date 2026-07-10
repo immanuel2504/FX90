@@ -1,11 +1,11 @@
 ## 1. Description
 
-The `GET /cloud/logs/RgErrorLog` REST endpoint retrieves the Reader Gateway error log file from the reader.
+The `GET /cloud/logs/RgErrorLog` REST endpoint retrieves the Reader Gateway error log from the reader as a downloadable archive.
 
 This endpoint returns:
 
-- The log filename
-- The full content of the Reader Gateway error log
+- The archive filename
+- The Base64-encoded `.tar.gz` reader-gateway error log content
 
 No request body is required.
 
@@ -13,10 +13,14 @@ No request body is required.
 
 | Property | Value |
 |---|---|
+| Pattern Name | Reader-Gateway Error Log Retrieval |
 | REST Endpoint | `GET /cloud/logs/RgErrorLog` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [getRgWarningLog](getRgWarningLog.md), [getRcLog](getRcLog.md), [getLogs](getLogs.md) |
+| Supported Operations | Retrieve the reader-gateway error log archive |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
@@ -30,5 +34,5 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
-| `binary` | Are there error messages or stack traces? | Error log content reveals the specific failures affecting Reader Gateway operation. |
+| `filename` | Is a filename returned (for example, `rgErrorLog.tar.gz`)? | Confirms the archive was generated and is ready for download. |
+| `binary` | Is the Base64 string non-empty? | The Base64-encoded `.tar.gz` content reveals the specific failures affecting Reader Gateway operation; an empty value means no errors have been logged since the last purge. |

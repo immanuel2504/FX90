@@ -5,7 +5,7 @@ The `get_config` command retrieves the reader's full configuration, including RF
 This command returns:
 
 - The current reader XML configuration
-- GPIO and LED default states
+- GPIO and LED trigger configuration (`GPIO-LED`), including GPO and LED defaults; returned as `NOT_CONFIGURED` when unset
 - Reader-gateway settings including tag data retention, batching, and endpoint configuration
 
 No additional payload fields are required to retrieve the full configuration.
@@ -38,5 +38,5 @@ Key fields to check in the response:
 |---|---|---|
 | `xml` | Is the XML configuration as expected? | Defines the RF and reader behavior used during inventory operations. |
 | `READER-GATEWAY` | Are endpoint URLs and credentials correct? | Determines where tag data is delivered and how the reader authenticates. |
-| `GPODefaults` | What are the default GPO states? | Ensures GPO-triggered logic starts from the expected initial state. |
-| `LEDDefaults` | What are the LED default states? | Confirms expected LED behavior on startup and after a reboot. |
+| `GPIO-LED.GPODefaults` | What are the default GPO states? | Ensures GPO-triggered logic starts from the expected initial state. |
+| `GPIO-LED.LEDDefaults` | What are the LED default states? | Confirms expected LED behavior on startup and after a reboot. |

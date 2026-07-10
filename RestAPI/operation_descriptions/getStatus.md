@@ -12,6 +12,8 @@ This endpoint returns:
 - Antenna port connection states
 - NTP synchronization status
 - Cloud interface connection status
+- Power source and power-negotiation state
+- Active Impinj Gen2X feature status (when a Gen2X feature is running)
 - BLE scanner runtime status (scan state, scan start time, and beacon counts by protocol)
 
 The `ble` section is present only when BLE is supported and its status is available. No request body is required.
@@ -20,19 +22,24 @@ The `ble` section is present only when BLE is supported and its status is availa
 
 | Property | Value |
 |---|---|
+| Pattern Name | Reader Status Query |
 | REST Endpoint | `GET /cloud/status` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [getVersion](getVersion.md), [getReadercapabilities](getReadercapabilities.md), [getConfig](getConfig.md) |
+| Supported Operations | Retrieve live operational statistics and health |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
 Use `GET /cloud/status` to:
 
-- Confirm the reader is powered, healthy, and reachable over REST
+- Confirm the reader is powered, healthy, and reachable
 - Verify the radio is connected before starting inventory
-- Monitor reader temperature, CPU, and RAM usage
+- Monitor reader temperature for thermal issues
 - Synchronize against the reader's current system time
+- Check CPU, RAM, and flash usage during high-load scenarios
 - Confirm BLE scanning is active and review beacon counts by protocol
 
 Key fields to check in the response:
@@ -41,8 +48,10 @@ Key fields to check in the response:
 |---|---|---|
 | `uptime` | How long has the reader been running? | Long uptimes confirm stability; short uptimes indicate an unexpected restart. |
 | `radioConnection` | Is the value `connected`? | Inventory cannot run if the radio is disconnected. |
+| `radioActivity` | Is it `active` or `inactive`? | Confirms whether an inventory session is currently in progress. |
 | `temperature` | Is the value within safe operating range? | Excessive temperature can cause throttling or hardware faults. |
 | `antennas` | Are expected ports `connected`? | A `disconnected` antenna port means tags on that port will not be read. |
+| `ntp.offset` | Is the offset near zero? | A large NTP offset means event timestamps may be inaccurate. |
 | `ble.scanState` | Is the value `running`? | Confirms whether the BLE scanner is currently active (`running`) or `stopped`. |
 | `ble.scanStartTime` | When did the current scan start? | ISO 8601 timestamp marking when BLE scanning last started. |
 | `ble.beaconCounts` | Are advertisements being seen? | Per-protocol counts (`iBeacon`, `altBeacon`, `eddystone`, `generic`, `total`) confirm beacons are being detected in the current scan window. |

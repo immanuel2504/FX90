@@ -35,4 +35,4 @@ Key fields to check in the response:
 | Field | What to Check | Why It Matters |
 |---|---|---|
 | `filename` | Is a filename returned? | Confirms the archive was generated and is ready for download. |
-| `content` | Is the Base64 string non-empty? | An empty value means no warnings have been logged since the last purge. |
+| `binary` | Is the Base64 string non-empty? | An empty value means no warnings have been logged since the last purge. |

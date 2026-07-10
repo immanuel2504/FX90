@@ -33,4 +33,4 @@ Know the target component and the exact payload string it expects before sending
 | What You Need | Details |
 |---|---|
 | Component name | The reader component to target. Currently supported: `RC` (Radio Control). |
-| Payload string | The command or query string expected by the target component. The format is component-specific and must be obtained from the component's low-level documentation. |
+| Payload string | The command or query string expected by the target component (for the `RC` component, common values include `mode` and `status`). The format is component-specific and must be obtained from the component's low-level documentation. |

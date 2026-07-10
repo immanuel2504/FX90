@@ -1,11 +1,11 @@
 ## 1. Description
 
-The `GET /cloud/logs/radioPacketLog` REST endpoint retrieves the radio packet log file from the reader.
+The `GET /cloud/logs/radioPacketLog` REST endpoint retrieves the radio packet log from the reader as a downloadable archive.
 
 This endpoint returns:
 
-- The log filename
-- The full content of the radio packet log
+- The archive filename
+- The Base64-encoded `.tar.gz` radio packet log content
 
 No request body is required. Radio packet logging must be enabled via `PUT /cloud/logs` before this endpoint will return meaningful data.
 
@@ -13,10 +13,14 @@ No request body is required. Radio packet logging must be enabled via `PUT /clou
 
 | Property | Value |
 |---|---|
+| Pattern Name | Radio Packet Log Retrieval |
 | REST Endpoint | `GET /cloud/logs/radioPacketLog` |
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Related Endpoints | [delRadioPacketLog](delRadioPacketLog.md), [getLogs](getLogs.md), [getLogsSyslog](getLogsSyslog.md), [setLogs](setLogs.md) |
+| Supported Operations | Retrieve the radio packet log archive |
+| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 
@@ -30,5 +34,5 @@ Key fields to check in the response:
 
 | Field | What to Check | Why It Matters |
 |---|---|---|
-| `filename` | Is the expected log file returned? | Confirms the correct log type was retrieved. |
-| `binary` | Does the log contain RF packet data? | An empty file means radio packet logging was not enabled when the events occurred. |
+| `filename` | Is a filename returned? | Confirms the archive was generated and ready for download. |
+| `binary` | Is the Base64 string non-empty? | The Base64-encoded `.tar.gz` content holds the RF packet data; an empty value means radio packet logging was not enabled when the events occurred. |
