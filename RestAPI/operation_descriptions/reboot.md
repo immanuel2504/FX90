@@ -21,9 +21,7 @@ Use this endpoint to:
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [getStatus](getStatus.md), [getVersion](getVersion.md), [setOS](setOS.md) |
 | Request Body | None |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

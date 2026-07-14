@@ -27,9 +27,7 @@ The `ble` section is present only when BLE is supported and its status is availa
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [getVersion](getVersion.md), [getReadercapabilities](getReadercapabilities.md), [getConfig](getConfig.md) |
 | Supported Operations | Retrieve live operational statistics and health |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

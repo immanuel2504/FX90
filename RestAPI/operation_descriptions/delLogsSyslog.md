@@ -18,8 +18,6 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Request Body | None |
-| Related Endpoints | [getLogsSyslog](getLogsSyslog.md), [getLogs](getLogs.md), [delRadioPacketLog](delRadioPacketLog.md) |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

@@ -22,9 +22,7 @@ No request body is required.
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [updateNetwork](updateNetwork.md), [getHostName](getHostName.md), [getNetworkInterfaces](getNetworkInterfaces.md) |
 | Supported Operations | Retrieve active network configuration for all interfaces |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

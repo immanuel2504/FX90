@@ -24,7 +24,6 @@ Use this endpoint to:
 | Content-Type | `application/json` |
 | Path Parameter | `appname` (the target application) |
 | Required Request Fields | `command` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

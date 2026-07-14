@@ -25,9 +25,7 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getAppled](getAppled.md) |
 | Supported Colors | `red`, `amber`, `green`, `blue`, `off` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

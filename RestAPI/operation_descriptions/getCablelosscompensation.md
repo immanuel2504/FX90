@@ -18,9 +18,7 @@ No request body is required. Values are returned using read-point keys `1` throu
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [setCableLossCompensation](setCableLossCompensation.md), [getConfig](getConfig.md), [getReadPoints](getReadPoints.md) |
 | Supported Operations | Retrieve per-read-point cable loss compensation values |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

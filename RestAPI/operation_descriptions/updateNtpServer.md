@@ -24,9 +24,7 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getNtpServer](getNtpServer.md), [setTimeZone](setTimeZone.md), [getStatus](getStatus.md) |
 | Required Request Fields | `server` (or `server1` for the legacy convention) |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

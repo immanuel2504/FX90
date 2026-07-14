@@ -26,7 +26,6 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getImpinjGen2X](getImpinjGen2X.md), [startInventory](startInventory.md), [stopInventory](stopInventory.md), [getMode](getMode.md) |
 | Success Response | `200 OK` |
 | Error Responses | `422 Unprocessable Entity`, `500 Internal Server Error` |
 | Supported Features | `fastID`, `tagProtect`, `tagFocus`, `tagQuieting` |
@@ -37,7 +36,6 @@ Use this endpoint to:
 | Supported Select Targets | S0, S1, S2, S3, SL |
 | Supported Tag Quiet Masks | S0A, S0B, S1A, S1B, S2A, S2B, S3A, S3B, SL_ASSERT, SL_DEASSERT |
 | Mutually Exclusive Features | `fastID`, `tagFocus`, `tagQuieting` (only one reader-scoped feature active at a time) |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

@@ -24,10 +24,8 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getUserApps](getUserApps.md), [setUninstallUserApp](setUninstallUserApp.md), [setStartUserApp](setStartUserApp.md) |
 | Required Request Fields | `url`, `filename`, `authenticationType` |
 | Supported Authentication Types | `NONE`, `BASIC` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

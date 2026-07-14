@@ -21,9 +21,7 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [startInventory](startInventory.md), [setBleConfig](setBleConfig.md), [getBleConfig](getBleConfig.md), [getMode](getMode.md), [getStatus](getStatus.md) |
 | Supported Operations | Stop RFID inventory, BLE scan, or both |
-| Supported API Versions | V1.0 |
 
 ## 3. Stop Behavior
 

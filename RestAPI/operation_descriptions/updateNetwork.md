@@ -28,11 +28,9 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getNetwork](getNetwork.md), [getNetworkInterfaces](getNetworkInterfaces.md), [setHostName](setHostName.md) |
 | Supported Interface Keys | `eth0`, `mlan0`, `bnep0`, `wan0`, `uap0` |
 | Supported Wi-Fi Security Types | `WPA2Personal`, `WPA2Enterprise`, `WPA3Personal`, `WPA3Enterprise` |
 | Supported 802.1X Authentication | `TLS`, `TTLS`, `PEAP` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

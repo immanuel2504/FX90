@@ -25,10 +25,8 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getVersion](getVersion.md), [setRevertbackos](setRevertbackos.md), [getStatus](getStatus.md) |
 | Required Request Fields | `url`, `authenticationType` |
 | Supported Authentication Types | `NONE`, `BASIC` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

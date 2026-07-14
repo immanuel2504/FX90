@@ -1,0 +1,28 @@
+{
+  // The Red Hat YAML extension reports a false error on our OpenAPI 3.1 specs:
+  //
+  //   Schema 'openapi:v3_1_2020' is not valid:
+  //   /definitions/schema/anyOf/0/properties/multipleOf/exclusiveMinimum : must be number
+  //
+  // That path points INSIDE the OpenAPI 3.1 meta-schema contributed by the 42Crunch
+  // extension, not inside our files - neither `multipleOf` nor `exclusiveMinimum`
+  // appears anywhere in our specs. The cause is a JSON Schema draft mismatch:
+  // `exclusiveMinimum` is a boolean in draft-04 but a number in draft 2020-12, which is
+  // what OpenAPI 3.1 uses. The extension loads the 2020-12 meta-schema and validates it
+  // with a draft-04 engine, so it chokes on its own schema before ever reading ours.
+  //
+  // Turning schema validation off here silences the false positive. It does NOT leave the
+  // specs unchecked - correctness is enforced by:
+  //     python project_resources/scripts/build_good_spec.py --dry-run
+  // which validates against OpenAPI 3.1 with openapi-spec-validator and additionally
+  // checks for broken $refs and orphaned components.
+  //
+  // Remove this once the 42Crunch / Red Hat YAML extensions ship a working 3.1 meta-schema.
+  "yaml.validate": false,
+
+  // Keep syntax highlighting and formatting for the specs.
+  "files.associations": {
+    "*.yaml": "yaml",
+    "*.yml": "yaml"
+  }
+}

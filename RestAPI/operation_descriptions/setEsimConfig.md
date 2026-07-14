@@ -23,9 +23,7 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getEsimConfig](getEsimConfig.md), [getNetwork](getNetwork.md), [updateNetwork](updateNetwork.md) |
 | Supported Operations | `enable`, `disable` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

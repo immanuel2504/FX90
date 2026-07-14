@@ -18,9 +18,7 @@ No request body is required. Radio packet logging must be enabled via `PUT /clou
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [delRadioPacketLog](delRadioPacketLog.md), [getLogs](getLogs.md), [getLogsSyslog](getLogsSyslog.md), [setLogs](setLogs.md) |
 | Supported Operations | Retrieve the radio packet log archive |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

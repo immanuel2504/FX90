@@ -18,9 +18,7 @@ No request body is required.
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [delLogsSyslog](delLogsSyslog.md), [getLogs](getLogs.md), [getRadioPacketLog](getRadioPacketLog.md) |
 | Supported Operations | Retrieve the system log archive |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

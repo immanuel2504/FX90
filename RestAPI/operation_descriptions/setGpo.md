@@ -23,10 +23,8 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getGpoStatus](getGpoStatus.md), [getGpiStatus](getGpiStatus.md), [getReadercapabilities](getReadercapabilities.md) |
 | Required Request Fields | `port`, `state` |
 | Supported Port Values | 1-4 (varies by reader model - see `GET /cloud/readerCapabilities`) |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

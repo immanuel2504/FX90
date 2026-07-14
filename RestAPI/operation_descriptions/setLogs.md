@@ -24,10 +24,8 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getLogs](getLogs.md), [getLogsSyslog](getLogsSyslog.md), [getRadioPacketLog](getRadioPacketLog.md), [getRgErrorLog](getRgErrorLog.md) |
 | Supported Log Levels | `OFF`, `FATAL`, `ERROR`, `WARNING`, `INFO`, `DEBUG`, `TRACE`, `EXTRA` |
 | Supported Components | `radio_control` (alias `RC`), `cloud_agent`, `reader_gateway` (alias `RG`) |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 
