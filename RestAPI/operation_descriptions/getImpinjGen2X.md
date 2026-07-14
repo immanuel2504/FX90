@@ -18,9 +18,7 @@ No request body is required. If no Gen2X configuration has been saved, the respo
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [setImpinjGen2X](setImpinjGen2X.md), [startInventory](startInventory.md), [getMode](getMode.md) |
 | Supported Operations | Retrieve saved Impinj Gen2X configuration |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

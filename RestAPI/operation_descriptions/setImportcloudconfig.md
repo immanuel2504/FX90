@@ -27,10 +27,8 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getConfig](getConfig.md), [setConfigMqtt](setConfigMqtt.md), [getCertificates](getCertificates.md) |
 | Required Request Fields | `endpointConfig` |
 | Supported Connection Types | `mqtt`, `mqtt-GCP`, `mqtt-AWS`, `mqtt-Azure`, `httpPost`, `WEBSOCKET`, `tcpip-server`, `keyboard-emulation` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

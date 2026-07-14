@@ -20,9 +20,7 @@ No request body is required.
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [getStatus](getStatus.md), [getReadercapabilities](getReadercapabilities.md), [setOS](setOS.md), [setRevertbackos](setRevertbackos.md) |
 | Supported Operations | Retrieve firmware, model, serial number, and upgrade details |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

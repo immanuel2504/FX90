@@ -29,10 +29,8 @@ Use this endpoint to:
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
 | Request Schema | `operatingMode.v1` |
-| Related Endpoints | [getMode](getMode.md), [startInventory](startInventory.md), [stopInventory](stopInventory.md), [getReadercapabilities](getReadercapabilities.md) |
 | Supported Mode Types | `SIMPLE`, `INVENTORY`, `PORTAL`, `CONVEYOR`, `CUSTOM` |
 | Supported Environment Profiles | `LOW_INTERFERENCE`, `HIGH_INTERFERENCE`, `VERY_HIGH_INTERFERENCE`, `AUTO_DETECT`, `DEMO` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

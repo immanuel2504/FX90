@@ -18,9 +18,7 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getConfig](getConfig.md), [setImportCloudConfig](setImportCloudConfig.md), [getStatus](getStatus.md) |
 | Supported Operations | Update reader configuration |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

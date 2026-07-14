@@ -17,9 +17,7 @@ No request body is required.
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [getNetwork](getNetwork.md), [updateNetwork](updateNetwork.md), [getEsimConfig](getEsimConfig.md) |
 | Supported Operations | Retrieve available network interface names |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

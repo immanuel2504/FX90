@@ -19,8 +19,6 @@ Use this endpoint to:
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Path Parameter | `appname` (the installed application to start) |
 | Request Body | None (the app name is supplied as the `{appname}` path parameter) |
-| Related Endpoints | [setStopUserApp](setStopUserApp.md), [getUserApps](getUserApps.md), [setInstallUserApp](setInstallUserApp.md) |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

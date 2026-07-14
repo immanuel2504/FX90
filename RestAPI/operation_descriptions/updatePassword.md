@@ -24,9 +24,7 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [localRestLogin](localRestLogin.md) |
 | Required Request Fields | `userName`, `currentPassword`, `newPassword` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

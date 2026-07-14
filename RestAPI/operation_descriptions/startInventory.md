@@ -22,9 +22,7 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [stopInventory](stopInventory.md), [setBleConfig](setBleConfig.md), [setImpinjGen2X](setImpinjGen2X.md), [setMode](setMode.md) |
 | Supported Scan Types | `rfid`, `ble`, or both combined |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

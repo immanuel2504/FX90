@@ -17,9 +17,7 @@ No request body is required.
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [setHostName](setHostName.md), [getNetwork](getNetwork.md) |
 | Supported Operations | Retrieve the configured reader hostname |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

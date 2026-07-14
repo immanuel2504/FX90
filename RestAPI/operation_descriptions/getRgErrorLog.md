@@ -18,9 +18,7 @@ No request body is required.
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [getRgWarningLog](getRgWarningLog.md), [getRcLog](getRcLog.md), [getLogs](getLogs.md) |
 | Supported Operations | Retrieve the reader-gateway error log archive |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

@@ -24,8 +24,6 @@ Use this endpoint to:
 | Content-Type | `application/json` |
 | Path Parameter | `appname` (the application to configure) |
 | Required Request Fields | `autostart` |
-| Related Endpoints | [getUserApps](getUserApps.md), [setStartUserApp](setStartUserApp.md), [setInstallUserApp](setInstallUserApp.md) |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

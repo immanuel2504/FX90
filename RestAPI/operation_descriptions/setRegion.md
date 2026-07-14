@@ -25,9 +25,7 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getRegion](getRegion.md), [getSupportedRegionList](getSupportedRegionList.md), [getSupportedstandardlist](getSupportedstandardlist.md) |
 | Required Request Fields | `country`, `standardname` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

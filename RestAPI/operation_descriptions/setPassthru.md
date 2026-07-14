@@ -23,10 +23,8 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getStatus](getStatus.md), [setConfigMqtt](setConfigMqtt.md) |
 | Required Request Fields | `component`, `payload` (inner) |
 | Supported Components | `RC` (Radio Control) |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

@@ -18,9 +18,7 @@ No request body is required.
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [setEsimConfig](setEsimConfig.md), [getNetwork](getNetwork.md), [updateNetwork](updateNetwork.md) |
 | Supported Operations | Retrieve eSIM identity and installed profile details |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

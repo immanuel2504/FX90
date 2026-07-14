@@ -22,9 +22,7 @@ No request body is required.
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
-| Related Endpoints | [setMode](setMode.md), [startInventory](startInventory.md), [stopInventory](stopInventory.md), [getConfig](getConfig.md) |
 | Supported Operations | Retrieve active operating mode and RF settings |
-| Supported API Versions | V1.0 |
 
 ## 3. When to Use This Endpoint
 

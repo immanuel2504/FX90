@@ -22,9 +22,7 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getCablelosscompensation](getCablelosscompensation.md), [getReadPoints](getReadPoints.md), [getReadercapabilities](getReadercapabilities.md) |
 | Supported Read Point Keys | `"1"` through `"8"` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

@@ -18,11 +18,9 @@ Use this endpoint to:
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
-| Related Endpoints | [getCertificates](getCertificates.md), [setUpdatecertificate](setUpdatecertificate.md), [delCertificate](delCertificate.md) |
 | Path Parameter | `certname` (the installed certificate name to refresh) |
 | Required Request Fields | `type` |
 | Supported Certificate Types | `client`, `server`, `app` |
-| Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
 

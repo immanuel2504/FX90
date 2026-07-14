@@ -1,0 +1,671 @@
+{
+ "merged": [
+  [
+   "RetentionConfig",
+   5,
+   [
+    "components/GetConfigResponse"
+   ]
+  ],
+  [
+   "RetentionConfigConstrained",
+   3,
+   [
+    "components/ConnectionAdditionalOptions",
+    "components/SetConfigMqttRequest"
+   ]
+  ],
+  [
+   "DataAckConfig",
+   3,
+   [
+    "components/ConnectionAdditionalOptions",
+    "components/GetConfigResponse"
+   ]
+  ],
+  [
+   "Gen2QueryParams",
+   2,
+   [
+    "components/GetModeResponse",
+    "components/SetModeRequest"
+   ]
+  ],
+  [
+   "FlashPartitionUsage",
+   5,
+   [
+    "components/GetStatusResponse"
+   ]
+  ],
+  [
+   "ConnectionOptions",
+   6,
+   [
+    "components/GetConfigResponse",
+    "components/SetImportcloudconfigRequest"
+   ]
+  ],
+  [
+   "ConnectionOptionsRequest",
+   2,
+   [
+    "components/SetImportcloudconfigRequest"
+   ]
+  ],
+  [
+   "MqttAdditionalOptions",
+   9,
+   [
+    "components/GetConfigResponse",
+    "components/SetConfigMqttRequest",
+    "components/SetImportcloudconfigRequest"
+   ]
+  ],
+  [
+   "MqttEndpoint",
+   9,
+   [
+    "components/GetConfigResponse",
+    "components/SetConfigMqttRequest",
+    "components/SetImportcloudconfigRequest"
+   ]
+  ],
+  [
+   "TlsSecurity",
+   8,
+   [
+    "components/GetConfigResponse",
+    "components/SetImportcloudconfigRequest"
+   ]
+  ],
+  [
+   "Ipv4InterfaceConfig",
+   4,
+   [
+    "components/GetNetworkResponse",
+    "components/UpdateNetworkRequest"
+   ]
+  ],
+  [
+   "Ipv6InterfaceConfig",
+   4,
+   [
+    "components/GetNetworkResponse",
+    "components/UpdateNetworkRequest"
+   ]
+  ],
+  [
+   "SimStatus",
+   2,
+   [
+    "components/GetNetworkResponse"
+   ]
+  ],
+  [
+   "SimConfig",
+   2,
+   [
+    "components/UpdateNetworkRequest"
+   ]
+  ],
+  [
+   "BleProtocolConfig",
+   2,
+   [
+    "components/GetBleConfigResponse",
+    "components/SetBleConfigRequest"
+   ]
+  ],
+  [
+   "IBeaconFilter",
+   2,
+   [
+    "components/GetBleConfigResponse",
+    "components/SetBleConfigRequest"
+   ]
+  ],
+  [
+   "AltBeaconFilter",
+   2,
+   [
+    "components/GetBleConfigResponse",
+    "components/SetBleConfigRequest"
+   ]
+  ],
+  [
+   "EddystoneFilter",
+   2,
+   [
+    "components/GetBleConfigResponse",
+    "components/SetBleConfigRequest"
+   ]
+  ],
+  [
+   "GenericBleFilter",
+   2,
+   [
+    "components/GetBleConfigResponse",
+    "components/SetBleConfigRequest"
+   ]
+  ]
+ ],
+ "changes": [
+  {
+   "component": "RetentionConfig",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Per-connection event retention configuration when the connection is offline.\"",
+   "kept_count": 2,
+   "dropped": "\"Global event retention settings applied across all data endpoint connections when offline.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "RetentionConfig",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Per-connection event retention configuration when the connection is offline.\"",
+   "kept_count": 2,
+   "dropped": "\"Single retention config applied to all data endpoints.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "RetentionConfig",
+   "prop": "maxEventRetentionTimeInMin",
+   "field": "description",
+   "kept": "\"Maximum time in minutes to retain events when offline (0 - 10080). 0 or -1 retains events indefinitely until maxNumEvents is reached.\"",
+   "kept_count": 4,
+   "dropped": "\"Maximum time in minutes to retain management events when offline (0 - 10080). 0 or -1 retains events indefinitely until maxNumEvents is reached.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "RetentionConfig",
+   "prop": "maxNumEvents",
+   "field": "description",
+   "kept": "\"Maximum number of events to buffer when offline (0 - 150000).\"",
+   "kept_count": 4,
+   "dropped": "\"Maximum number of management events to buffer when offline (0 - 150000).\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "RetentionConfig",
+   "prop": "throttle",
+   "field": "description",
+   "kept": "\"Rate limit in events/sec for replaying retained events after reconnect (0 - 1000).\"",
+   "kept_count": 3,
+   "dropped": "\"Rate limit in events/sec for replaying retained events after reconnect (0 - 1000). 0 means no throttling.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "RetentionConfig",
+   "prop": "throttle",
+   "field": "description",
+   "kept": "\"Rate limit in events/sec for replaying retained events after reconnect (0 - 1000).\"",
+   "kept_count": 3,
+   "dropped": "\"Rate limit in events/sec for replaying retained management events after reconnect (0 - 1000).\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "RetentionConfigConstrained",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Per-connection event retention configuration when the connection is offline.\"",
+   "kept_count": 1,
+   "dropped": "\"Single retention config applied to all data endpoints\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "RetentionConfigConstrained",
+   "prop": "maxEventRetentionTimeInMin",
+   "field": "description",
+   "kept": "\"Maximum time in minutes to retain events when offline (0 - 10080). 0 or -1 retains events indefinitely until maxNumEvents is reached.\"",
+   "kept_count": 1,
+   "dropped": "\"Maximum event retention time in minutes (0 - 10080). 0 or -1 retains forever.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "RetentionConfigConstrained",
+   "prop": "maxEventRetentionTimeInMin",
+   "field": "example",
+   "kept": "1440",
+   "kept_count": 2,
+   "dropped": "500",
+   "dropped_count": 1
+  },
+  {
+   "component": "RetentionConfigConstrained",
+   "prop": "maxNumEvents",
+   "field": "description",
+   "kept": "\"Maximum number of events to buffer when offline (0 - 150000).\"",
+   "kept_count": 1,
+   "dropped": "\"Maximum number of events to retain (0 - 150000).\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "RetentionConfigConstrained",
+   "prop": "throttle",
+   "field": "description",
+   "kept": "\"Rate limit in events/sec for replaying retained events after reconnect (0 - 1000). 0 means no throttling.\"",
+   "kept_count": 1,
+   "dropped": "\"Rate in events/sec to replay retained events on reconnect (0 - 1000).\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "DataAckConfig",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Data acknowledgement configuration. When enabled, the reader waits for an ACK from the cloud before marking events as delivered. Supported on MQTT-based connections only.\"",
+   "kept_count": 1,
+   "dropped": "\"Data acknowledgement configuration. When enabled, the reader waits for an ACK from the cloud before marking events as delivered.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "DataAckConfig",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Data acknowledgement configuration. When enabled, the reader waits for an ACK from the cloud before marking events as delivered. Supported on MQTT-based connections only.\"",
+   "kept_count": 1,
+   "dropped": "\"Data acknowledgement configuration for management events. When enabled, the reader waits for an ACK before marking management events as delivered.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "DataAckConfig",
+   "prop": "enable",
+   "field": "description",
+   "kept": "\"Enable data acknowledgement for this connection.\"",
+   "kept_count": 2,
+   "dropped": "\"Enable data acknowledgement for this management event connection.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "FlashPartitionUsage",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Usage metrics for the platform partition.\"",
+   "kept_count": 1,
+   "dropped": "\"Usage metrics for the reader configuration partition.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "FlashPartitionUsage",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Usage metrics for the platform partition.\"",
+   "kept_count": 1,
+   "dropped": "\"Usage metrics for the reader data partition.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "FlashPartitionUsage",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Usage metrics for the platform partition.\"",
+   "kept_count": 1,
+   "dropped": "\"Usage metrics for the root filesystem partition.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "FlashPartitionUsage",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Usage metrics for the platform partition.\"",
+   "kept_count": 1,
+   "dropped": "\"RAM utilization statistics.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptions",
+   "prop": "publishTopic",
+   "field": "description",
+   "kept": "\"MQTT topic(s) the reader publishes management responses to.\"",
+   "kept_count": 2,
+   "dropped": "\"MQTT topic(s) the reader publishes responses to.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptions",
+   "prop": "publishTopic",
+   "field": "description",
+   "kept": "\"MQTT topic(s) the reader publishes management responses to.\"",
+   "kept_count": 2,
+   "dropped": "\"MQTT topic(s) the reader publishes tag read events to.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptions",
+   "prop": "publishTopic",
+   "field": "description",
+   "kept": "\"MQTT topic(s) the reader publishes management responses to.\"",
+   "kept_count": 2,
+   "dropped": "\"MQTT topic(s) the reader publishes management events to.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptions",
+   "prop": "publishTopic",
+   "field": "description",
+   "kept": "\"MQTT topic(s) the reader publishes management responses to.\"",
+   "kept_count": 2,
+   "dropped": "\"MQTT topic(s) the reader publishes control responses to.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptions",
+   "prop": "subscribeTopic",
+   "field": "description",
+   "kept": "\"MQTT topic(s) the reader subscribes to for incoming management commands.\"",
+   "kept_count": 2,
+   "dropped": "\"MQTT topic(s) the reader subscribes to for incoming commands.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptions",
+   "prop": "subscribeTopic",
+   "field": "description",
+   "kept": "\"MQTT topic(s) the reader subscribes to for incoming management commands.\"",
+   "kept_count": 2,
+   "dropped": "\"MQTT topic(s) the reader subscribes to (typically unused for data connections).\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptions",
+   "prop": "subscribeTopic",
+   "field": "description",
+   "kept": "\"MQTT topic(s) the reader subscribes to for incoming management commands.\"",
+   "kept_count": 2,
+   "dropped": "\"MQTT topic(s) the reader subscribes to (typically unused for management event connections).\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptions",
+   "prop": "subscribeTopic",
+   "field": "description",
+   "kept": "\"MQTT topic(s) the reader subscribes to for incoming management commands.\"",
+   "kept_count": 2,
+   "dropped": "\"MQTT topic(s) the reader subscribes to for incoming control commands.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptionsRequest",
+   "prop": "publishTopic",
+   "field": "description",
+   "kept": "\"MQTT topic(s) the reader publishes tag read events to.\"",
+   "kept_count": 1,
+   "dropped": "\"MQTT topic(s) the reader publishes management events to.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptionsRequest",
+   "prop": "publishTopic",
+   "field": "example",
+   "kept": "[\"FX9600FCC017/tevents\"]",
+   "kept_count": 1,
+   "dropped": "[\"FX9600FCC017/mevents\"]",
+   "dropped_count": 1
+  },
+  {
+   "component": "ConnectionOptionsRequest",
+   "prop": "subscribeTopic",
+   "field": "description",
+   "kept": "\"MQTT topic(s) the reader subscribes to (typically unused for data connections).\"",
+   "kept_count": 1,
+   "dropped": "\"MQTT topic(s) the reader subscribes to (typically unused for management event connections).\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "MqttAdditionalOptions",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Additional MQTT connection parameters.\"",
+   "kept_count": 8,
+   "dropped": "\"Additional MQTT connection parameters (applicable to MQTT-based connections).\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "MqttAdditionalOptions",
+   "prop": "clientId",
+   "field": "example",
+   "kept": "\"FX9600FCC017\"",
+   "kept_count": 4,
+   "dropped": "\"EV1\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "MqttEndpoint",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Remote broker or server endpoint details.\"",
+   "kept_count": 8,
+   "dropped": "\"Remote broker or server endpoint details (applicable to MQTT-based connections).\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "MqttEndpoint",
+   "prop": "hostName",
+   "field": "example",
+   "kept": "\"broker.emqx.io\"",
+   "kept_count": 4,
+   "dropped": "\"10.117.229.9\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "TlsSecurity",
+   "prop": "CACertificateFileLocation",
+   "field": "description",
+   "kept": "\"Absolute path to the CA certificate file on the reader.\"",
+   "kept_count": 7,
+   "dropped": "\"Absolute path to the CA (Certificate Authority) certificate file on the reader.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "Ipv4InterfaceConfig",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"IPv4 settings.Use dhcp:true for DHCP, or supply all static fields when dhcp:false.\"",
+   "kept_count": 1,
+   "dropped": "\"IPv4 settings. Use dhcp:true for DHCP, or supply all static fields when dhcp:false.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "Ipv4InterfaceConfig",
+   "prop": "dhcp",
+   "field": "description",
+   "kept": "\"Whether DHCP is enabled for IPv4 on this interface.\"",
+   "kept_count": 2,
+   "dropped": "\"Enable/disable DHCP for IPv4 on this interface.\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv4InterfaceConfig",
+   "prop": "ipAddress",
+   "field": "description",
+   "kept": "\"IPv4 address assigned to this interface.\"",
+   "kept_count": 2,
+   "dropped": "\"Static IPv4 address (required if dhcp is false).\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv4InterfaceConfig",
+   "prop": "gatewayAddress",
+   "field": "description",
+   "kept": "\"IPv4 gateway address for this interface.\"",
+   "kept_count": 2,
+   "dropped": "\"IPv4 gateway address (required if dhcp is false).\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv4InterfaceConfig",
+   "prop": "subnetMask",
+   "field": "description",
+   "kept": "\"Subnet mask for the assigned IPv4 address.\"",
+   "kept_count": 2,
+   "dropped": "\"IPv4 subnet mask (required if dhcp is false).\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv4InterfaceConfig",
+   "prop": "dnsAddress",
+   "field": "description",
+   "kept": "\"IPv4 DNS server address for this interface.\"",
+   "kept_count": 2,
+   "dropped": "\"IPv4 DNS address (required if dhcp is false).\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv4InterfaceConfig",
+   "prop": "domainName",
+   "field": "description",
+   "kept": "\"Domain name associated with this interface.\"",
+   "kept_count": 2,
+   "dropped": "\"IPv4 domain name (required if dhcp is false).\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv6InterfaceConfig",
+   "prop": "dhcp",
+   "field": "description",
+   "kept": "\"Whether DHCP is enabled for IPv6 on this interface.\"",
+   "kept_count": 2,
+   "dropped": "\"Enable/disable DHCP for IPv6 on this interface.\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv6InterfaceConfig",
+   "prop": "ipAddress",
+   "field": "description",
+   "kept": "\"IPv6 address assigned to this interface.\"",
+   "kept_count": 2,
+   "dropped": "\"Static IPv6 address (required if dhcp is false).\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv6InterfaceConfig",
+   "prop": "gatewayAddress",
+   "field": "description",
+   "kept": "\"IPv6 gateway address for this interface.\"",
+   "kept_count": 2,
+   "dropped": "\"IPv6 gateway address (required if dhcp is false).\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv6InterfaceConfig",
+   "prop": "prefix",
+   "field": "description",
+   "kept": "\"IPv6 prefix for the assigned address.\"",
+   "kept_count": 2,
+   "dropped": "\"IPv6 prefix (required if dhcp is false).\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv6InterfaceConfig",
+   "prop": "dnsAddress",
+   "field": "description",
+   "kept": "\"IPv6 DNS server address for this interface.\"",
+   "kept_count": 2,
+   "dropped": "\"IPv6 DNS address (required if dhcp is false).\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "Ipv6InterfaceConfig",
+   "prop": "domainName",
+   "field": "description",
+   "kept": "\"Domain name associated with this interface.\"",
+   "kept_count": 2,
+   "dropped": "\"IPv6 domain name (required if dhcp is false).\"",
+   "dropped_count": 2
+  },
+  {
+   "component": "SimStatus",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Physical SIM configuration and status.\"",
+   "kept_count": 1,
+   "dropped": "\"Embedded SIM configuration and status (same structure as psim).\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "SimConfig",
+   "prop": "<description on the block itself>",
+   "field": "description",
+   "kept": "\"Physical SIM settings. Required when `activeSim` is `psim`.\"",
+   "kept_count": 1,
+   "dropped": "\"Embedded SIM settings. Required when `activeSim` is `esim`.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "EddystoneFilter",
+   "prop": "txPower",
+   "field": "description",
+   "kept": "\"TX power at 0m (calibrated RSSI)\"",
+   "kept_count": 1,
+   "dropped": "\"TX power at 0m\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "EddystoneFilter",
+   "prop": "namespace",
+   "field": "description",
+   "kept": "\"10-byte namespace (Eddystone-UID only, hex string)\"",
+   "kept_count": 1,
+   "dropped": "\"10-byte namespace hex string (Eddystone-UID only)\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "EddystoneFilter",
+   "prop": "instance",
+   "field": "description",
+   "kept": "\"6-byte instance ID (Eddystone-UID only, hex string)\"",
+   "kept_count": 1,
+   "dropped": "\"6-byte instance ID hex string (Eddystone-UID only)\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "EddystoneFilter",
+   "prop": "ephemeralId",
+   "field": "description",
+   "kept": "\"8-byte ephemeral ID (Eddystone-EID only, hex string)\"",
+   "kept_count": 1,
+   "dropped": "\"8-byte ephemeral ID hex string (Eddystone-EID only)\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "GenericBleFilter",
+   "prop": "address",
+   "field": "description",
+   "kept": "\"Bluetooth device address to match (e.g. \\\"7E:41:25:1E:D5:16\\\").\"",
+   "kept_count": 1,
+   "dropped": "\"Bluetooth device address to match.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "GenericBleFilter",
+   "prop": "name",
+   "field": "description",
+   "kept": "\"Device name to match against the \\\"Name\\\" field in the BLE advertisement.\"",
+   "kept_count": 1,
+   "dropped": "\"Device name to match.\"",
+   "dropped_count": 1
+  },
+  {
+   "component": "GenericBleFilter",
+   "prop": "alias",
+   "field": "description",
+   "kept": "\"Device alias to match against the \\\"Alias\\\" field in the BLE advertisement.\"",
+   "kept_count": 1,
+   "dropped": "\"Device alias to match.\"",
+   "dropped_count": 1
+  }
+ ],
+ "skipped": [
+  [
+   "authentication,certificate,innerAuthentication,password,username",
+   5,
+   "RULE 5 - 2 semantically different variants; NEVER merged"
+  ],
+  [
+   "rssi,serviceUuids128,serviceUuids16",
+   2,
+   "RULE 5 - 2 semantically different variants; NEVER merged"
+  ]
+ ]
+}
