@@ -5,9 +5,6 @@ properties:
     oneOf:
     - type: string
       description: Returned as "NOT_CONFIGURED" when GPIO-LED config has not been set.
-  xml:
-    type: string
-    description: RFID reader operational XML profile (the "Cloud Connect" RFID profile). Only returned on supported reader models (e.g. STARFISH/FX series).
   READER-GATEWAY:
     type: object
     properties:

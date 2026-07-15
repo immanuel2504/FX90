@@ -26,6 +26,7 @@ items:
   - RESERVED
   - MAC
   - HOSTNAME
+  - READER_LOCATION
   properties:
     userDefined:
       type: string

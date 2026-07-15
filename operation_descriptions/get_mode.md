@@ -11,9 +11,20 @@ This command returns:
 - Gen2 query, select, and access settings
 - Report filtering, RSSI filtering, metadata fields, and radio start/stop conditions
 
-No additional payload fields are required to retrieve the active mode.
+An optional `verbose` flag controls how much of the configuration is returned.
 
-## 2. Command Details
+## 2. The `verbose` Flag
+
+The payload optionally accepts a single boolean field, `verbose`, that controls the level of detail in the response:
+
+| `verbose` | Response |
+|---|---|
+| `false` (or payload omitted) | Returns **only the settings explicitly configured** for the current mode. Default values are omitted. |
+| `true` | Returns the **entire mode configuration**, including every default value. |
+
+An empty payload behaves the same as `verbose: false`. Use `verbose: true` when you need to see every effective setting, including the ones the reader is applying by default.
+
+## 3. Command Details
 
 | Property | Value |
 |---|---|
@@ -26,7 +37,7 @@ No additional payload fields are required to retrieve the active mode.
 | Supported Response Sections | payload, response |
 | Supported API Versions | V1.0 |
 
-## 3. When to Use This Command
+## 4. When to Use This Command
 
 Use `get_mode` to:
 

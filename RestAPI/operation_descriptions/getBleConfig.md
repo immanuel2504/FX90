@@ -19,6 +19,7 @@ No request body is required.
 | Communication Type | Client to Device (HTTP request/response) |
 | Applies To | FXR90 |
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+| Firmware Requirement | BLE requires reader build **4.0.11** or later. On earlier builds this endpoint is not available. |
 
 ## 3. When to Use This Endpoint
 

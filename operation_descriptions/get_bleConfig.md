@@ -22,6 +22,7 @@ No additional payload fields are required to retrieve the BLE configuration.
 | Related Commands | [set_bleConfig](set_bleConfig.md), [start](start.md), [stop](stop.md) |
 | Supported Operations | Retrieve the current BLE scanner configuration |
 | Supported Response Sections | payload, response |
+| Firmware Requirement | BLE requires reader build **4.0.11** or later. On earlier builds this command is not available. |
 | Supported API Versions | V1.0 |
 
 ## 3. When to Use This Command

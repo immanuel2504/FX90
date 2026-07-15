@@ -6,4 +6,4 @@ examples:
 properties:
   verbose:
     type: boolean
-    description: if verbose is true it retrieves the entire reader configuration and if verbose is false then it retrieves only whatever operations configured
+    description: "Controls how much of the operating-mode configuration is returned. When true, the reader returns the entire mode configuration, including every default value. When false or omitted, the reader returns only the settings that have been explicitly configured for the current mode; default values are omitted."

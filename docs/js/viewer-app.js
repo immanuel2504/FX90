@@ -1087,11 +1087,14 @@ function buildJsonViewerWrap(rawText) {
   var interactive = buildJsonInteractive(parsed);
   wireJsonInteractive(interactive);
 
+  // Resolve the live node at click time: selecting a different example replaces
+  // the interactive node (see setJsonViewerData), so a captured `interactive`
+  // reference goes stale and the buttons would act on a detached node.
   expandBtn.addEventListener('click', function () {
-    expandAllJson(interactive);
+    expandAllJson(wrapper.querySelector('.json-interactive'));
   });
   collapseBtn.addEventListener('click', function () {
-    collapseTopLevelJson(interactive);
+    collapseTopLevelJson(wrapper.querySelector('.json-interactive'));
   });
   copyBtn.addEventListener('click', function () {
     navigator.clipboard.writeText(getJsonViewerRaw(wrapper));

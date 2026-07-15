@@ -1,11 +1,13 @@
 ## 1. Description
 
-The `set_password` command changes the password for a reader user account.
+The `set_password` command allows you to edit the `admin` and `rfidadm` password.
+
+Only the password is changed. `userName` selects **which** of the two accounts to update — it does not rename an account, and it cannot create one.
 
 This command allows you to configure:
 
-- The username of the account to update through `userName`
-- The current password for authentication through `currentPassword`
+- Which account to change through `userName` (`admin` or `rfidadm`)
+- That account's existing password through `currentPassword`
 - The new password to set through `newPassword`
 
 Use this command to:
@@ -28,11 +30,11 @@ Use this command to:
 
 ## 3. Before You Begin
 
-Confirm the current password and the target username before sending this command. Using the wrong current password will cause the command to fail.
+Confirm the current password and the target account before sending this command. Using the wrong current password will cause the command to fail.
 
 | What You Need | Details |
 |---|---|
-| Username | The username of the account to update (e.g., `admin`). |
+| Account | Which account to change, supplied in `userName`: `admin` or `rfidadm`. This selects the account only — the account itself is not renamed. |
 | Current password | The account's existing password. Required for authentication - the command will fail if this is incorrect. |
 | New password | The new password to set. Apply your organization's password policy (minimum length, complexity requirements). |
 

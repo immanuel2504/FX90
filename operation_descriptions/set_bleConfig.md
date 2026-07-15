@@ -34,6 +34,7 @@ Use this command to:
 | Supported Address Types | `public`, `random` |
 | RSSI Filter Range | `-127` to `0` dBm |
 | Scan Interval Minimum | 1 second |
+| Firmware Requirement | BLE requires reader build **4.0.11** or later. On earlier builds this command is not available. |
 | Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
