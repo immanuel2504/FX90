@@ -28,6 +28,7 @@ Use this endpoint to:
 | Content-Type | `application/json` |
 | Required Request Fields | `name`, `type`, `url` |
 | Supported Certificate Types | `client`, `server`, `app` |
+| Supported Transfer Protocols | `HTTPS`, `FTPS`, `SFTP` |
 | Supported Authentication Types | `NONE`, `BASIC` |
 
 ## 3. Before You Begin
@@ -38,7 +39,7 @@ Gather all certificate source details before sending this request. An invalid UR
 |---|---|
 | Certificate name | A unique name to assign to this certificate on the reader. If a certificate with this name already exists, it will be replaced. |
 | Certificate type | `client` for mutual TLS authentication, `server` for CA/server trust, or `app` for application-specific certificates. |
-| Source URL | An HTTPS URL where the reader can download the PFX certificate file. The reader must have network connectivity to reach this URL. |
+| Source URL | An `HTTPS`, `FTPS`, or `SFTP` URL where the reader can download the PFX certificate file. The reader must have network connectivity to reach this URL. |
 | Authentication type | `NONE` if the download server requires no credentials, or `BASIC` if username and password authentication is required. |
 | Download credentials | Required only when `authenticationType` is `BASIC`. Provide `options.username` and `options.password`. |
 | PFX password | The password protecting the PFX file (`pfxPassword`). Required if the PFX was exported with password protection. |
