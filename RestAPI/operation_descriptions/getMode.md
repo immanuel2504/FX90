@@ -11,9 +11,20 @@ This endpoint returns:
 - Gen2 query, select, and access settings
 - Report filtering, RSSI filtering, metadata fields, and radio start/stop conditions
 
-No request body is required.
+An optional `verbose` flag controls how much of the configuration is returned.
 
-## 2. Endpoint Details
+## 2. The `verbose` Flag
+
+The request body optionally accepts a single boolean field, `verbose`, that controls the level of detail in the response:
+
+| `verbose` | Response |
+|---|---|
+| `false` (or body omitted) | Returns **only the settings explicitly configured** for the current mode. Default values are omitted. |
+| `true` | Returns the **entire mode configuration**, including every default value. |
+
+An empty body (`{}`) behaves the same as `verbose: false`. Use `verbose: true` when you need to see every effective setting, including the ones the reader is applying by default.
+
+## 3. Endpoint Details
 
 | Property | Value |
 |---|---|
@@ -24,7 +35,7 @@ No request body is required.
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Supported Operations | Retrieve active operating mode and RF settings |
 
-## 3. When to Use This Endpoint
+## 4. When to Use This Endpoint
 
 Use `GET /cloud/mode` to:
 

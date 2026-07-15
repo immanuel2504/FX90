@@ -32,6 +32,7 @@ Use this endpoint to:
 | Content-Type | `application/json` |
 | Required Request Fields | `ble.enable` |
 | Supported BLE Protocols | iBeacon, AltBeacon, Eddystone (`URL`, `UID`, `EID`, `TLM`), Generic |
+| Firmware Requirement | BLE requires reader build **4.0.11** or later. On earlier builds this endpoint is not available. |
 | Supported Address Types | `public`, `random` |
 | RSSI Filter Range | `-127` to `0` dBm |
 | Scan Interval Minimum | 1 second |

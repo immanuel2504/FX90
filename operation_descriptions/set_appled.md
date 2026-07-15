@@ -24,7 +24,7 @@ Use this command to:
 | Applies To | FXR90 |
 | REST Endpoint | `PUT /cloud/app-led` |
 | Related Commands | [get_appled](get_appled.md) |
-| Supported Colors | `red`, `amber`, `green`, `blue`, `off` |
+| Supported Colors | `red`, `amber`, `green`, `off` |
 | Supported API Versions | V1.0 |
 
 ## 3. Before You Begin
@@ -33,7 +33,7 @@ Decide on the LED color, flash behavior, and duration before sending this comman
 
 | What You Need | Details |
 |---|---|
-| LED color | One of `red`, `amber`, `green`, `blue`, or `off` to turn the LED off. |
+| LED color | One of `red`, `amber`, `green`, or `off` to turn the LED off. `blue` is **not** an application LED colour — it belongs to the stack light only. |
 | Flash behavior | Whether the LED should blink (`true`) or remain solid (`false`). |
 | Duration | How long in seconds the LED state should persist. Set to `0` for indefinite (until the next `set_appled` command). |
 

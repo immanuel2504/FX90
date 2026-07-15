@@ -81,8 +81,8 @@ paths:
               properties:
                 color:
                   type: string
-                  description: 'The color of the LED (red, amber, green, blue, off).'
-                  enum: [red, amber, green, blue, "off"]
+                  description: 'The color of the LED (red, amber, green, off).'
+                  enum: [red, amber, green, "off"]
                   example: amber
                 flash:
                   type: boolean
@@ -621,150 +621,37 @@ paths:
       summary: Retrieves the operating mode
       description: MQTT API :-  get_mode <br> Retrieves the current operating mode
       operationId: getMode
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                verbose:
+                  type: boolean
+                  description: "Controls how much of the operating-mode configuration is returned. When `true`, the reader returns the entire mode configuration, including every default value. When `false` or omitted, the reader returns only the settings that have been explicitly configured for the current mode; default values are omitted."
+                  example: true
+            examples:
+              default_configured_only:
+                summary: Configured values only (default)
+                value: {}
+              verbose_full:
+                summary: Entire configuration including defaults
+                value:
+                  verbose: true
       responses:
         '200':
           description: 'OK'
           content:
             application/json:
               schema:
-                type: object
-                description: Current reader operating mode configuration.
-                properties:
-                  type:
-                    type: string
-                    description: Operating mode type.
-                    enum:
-                      - SIMPLE
-                      - INVENTORY
-                      - PORTAL
-                      - CONVEYOR
-                      - CUSTOM
-                  environment:
-                    type: string
-                    description: Reader RF environment profile.
-                    enum:
-                      - LOW_INTERFERENCE
-                      - HIGH_INTERFERENCE
-                      - VERY_HIGH_INTERFERENCE
-                      - AUTO_DETECT
-                      - DEMO
-                  antennaStopCondition:
-                    type: array
-                    description: Per-antenna or shared antenna stop conditions.
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                          description: Type of stop condition.
-                          enum:
-                            - DURATION
-                            - INVENTORY_COUNT
-                            - GPI
-                            - SINGLE_INVENTORY_LIMITED_DURATION
-                        value:
-                          type: number
-                          description: Value for the selected stop condition type.
-                      required:
-                        - type
-                        - value
-                  antennas:
-                    type: array
-                    description: Antenna ports to be used for inventory.
-                    items:
-                      type: number
-                  delayBetweenAntennaCycles:
-                    type: object
-                    properties:
-                      duration:
-                        type: number
-                        description: Delay in milliseconds.
-                      type:
-                        type: string
-                        description: Condition under which delay is applied.
-                        enum:
-                          - DISABLED
-                          - NO_TAGS
-                          - NO_UNIQUE_TAGS
-                  query:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        tagPopulation:
-                          type: number
-                          description: Expected number of tags.
-                        sel:
-                          type: string
-                          description: Sel field (EPC Gen2).
-                          enum:
-                            - ALL
-                            - SL
-                            - NOT_SL
-                        session:
-                          type: string
-                          description: Session field (EPC Gen2).
-                          enum:
-                            - S0
-                            - S1
-                            - S2
-                            - S3
-                        target:
-                          type: string
-                          description: Target field (EPC Gen2).
-                          enum:
-                            - A
-                            - B
-                            - AB
-                  inventoryProtocol:
-                    type: object
-                    properties:
-                      mode:
-                        type: string
-                        description: Inventory protocol mode.
-                        enum:
-                          - GEN2X
-                          - GEN2
-                          - HYBRID
-                  reportFilter:
-                    type: object
-                    properties:
-                      duration:
-                        type: number
-                        description: Report filter duration in seconds.
-                      type:
-                        type: string
-                        description: Report filter scope.
-                        enum:
-                          - RADIO_WIDE
-                          - PER_ANTENNA
-                  tagMetaData:
-                    type: array
-                    description: Tag metadata fields included in reports.
-                    items:
-                      type: string
-                      enum:
-                        - RSSI
-                        - PHASE
-                        - SEEN_COUNT
-                        - ANTENNA
-                        - CHANNEL
-                        - PC
-                        - XPC
-                        - CRC
-                        - EPC
-                        - TID
-                        - USER
-                        - MAC
-                        - HOSTNAME
-                  transmitPower:
-                    type: array
-                    description: Desired transmit power values in dBm.
-                    items:
-                      type: number
-                required:
-                  - type
+                $ref: '#/components/schemas/operatingMode.v1'
               example:
+                modeSpecificSettings:
+                  interval:
+                    unit: seconds
+                    value: 1
                 antennaStopCondition:
                   - type: DURATION
                     value: 100
@@ -784,10 +671,21 @@ paths:
                   - tagPopulation: 256
                   - tagPopulation: 256
                 inventoryProtocol:
-                  mode: GEN2X
+                  mode: GEN2
                 reportFilter:
                   duration: 0
                   type: PER_ANTENNA
+                filter:
+                  value: '3008.*'
+                  match: regex
+                  operation: include
+                selects:
+                  - target: S1
+                    action: INVB_NOTHING
+                    membank: TID
+                    pointer: 6
+                    length: 24
+                    mask: '800600'
                 tagMetaData:
                   - ANTENNA
                   - RSSI
@@ -797,10 +695,15 @@ paths:
                   - CRC
                   - SEEN_COUNT
                   - PHASE
+                  - gpsCoordinates:
+                      latitude: 12.9703
+                      longitude: 77.7101
                 transmitPower:
                   - 20
                   - 20
                   - 20
+                rssiFilter:
+                  threshold: -72
                 type: CUSTOM
                 environment: HIGH_INTERFERENCE
       security:
@@ -816,192 +719,23 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              description: Operating mode configuration payload.
-              properties:
-                type:
-                  type: string
-                  description: Operating mode type.
-                  enum:
-                    - SIMPLE
-                    - INVENTORY
-                    - PORTAL
-                    - CONVEYOR
-                    - CUSTOM
-                  example: CUSTOM
-                environment:
-                  type: string
-                  description: Reader RF environment profile.
-                  enum:
-                    - LOW_INTERFERENCE
-                    - HIGH_INTERFERENCE
-                    - VERY_HIGH_INTERFERENCE
-                    - AUTO_DETECT
-                    - DEMO
-                  example: HIGH_INTERFERENCE
-                antennaStopCondition:
-                  type: object
-                  description: Stop condition applied to antenna inventory cycles.
+              allOf:
+                - $ref: '#/components/schemas/operatingMode.v1'
+                - type: object
+                  description: Additional legacy fields accepted by set_mode.
                   properties:
-                    type:
+                    component:
                       type: string
-                      description: Type of stop condition.
-                      enum:
-                        - DURATION
-                        - INVENTORY_COUNT
-                        - GPI
-                        - SINGLE_INVENTORY_LIMITED_DURATION
-                      example: DURATION
-                    value:
+                      description: Legacy wrapper field retained for backward compatibility.
+                      example: RC
+                    linkProfile:
                       type: number
-                      description: Value for the selected stop condition type.
-                      example: 100
-                  required:
-                    - type
-                    - value
-                antennas:
-                  type: array
-                  description: Antenna ports to be used for inventory.
-                  items:
-                    type: number
-                    example: 1
-                  example:
-                    - 1
-                component:
-                  type: string
-                  description: Legacy wrapper field retained for backward compatibility.
-                  example: RC
-                delayBetweenAntennaCycles:
-                  type: object
-                  description: Delay configuration between consecutive antenna cycles.
-                  properties:
-                    duration:
-                      type: number
-                      description: Delay in milliseconds.
-                      example: 0
-                    type:
+                      description: Link profile identifier.
+                      example: 3
+                    payload:
                       type: string
-                      description: Condition under which delay is applied.
-                      enum:
-                        - DISABLED
-                        - NO_TAGS
-                        - NO_UNIQUE_TAGS
-                      example: DISABLED
-                  required:
-                    - type
-                    - duration
-                linkProfile:
-                  type: number
-                  description: Link profile identifier.
-                  example: 3
-                payload:
-                  type: string
-                  description: Legacy wrapper field retained for backward compatibility.
-                  example: status
-                query:
-                  type: object
-                  description: EPC Gen2 query parameters used during inventory.
-                  properties:
-                    sel:
-                      type: string
-                      description: Sel field (EPC Gen2).
-                      enum:
-                        - ALL
-                        - SL
-                        - NOT_SL
-                      example: ALL
-                    session:
-                      type: string
-                      description: Session field (EPC Gen2).
-                      enum:
-                        - S0
-                        - S1
-                        - S2
-                        - S3
-                      example: S1
-                    tagPopulation:
-                      type: number
-                      description: Expected number of tags.
-                      example: 256
-                    target:
-                      type: string
-                      description: Target field (EPC Gen2).
-                      enum:
-                        - A
-                        - B
-                        - AB
-                      example: A
-                inventoryProtocol:
-                  type: object
-                  description: Inventory protocol settings for tag interrogation.
-                  properties:
-                    mode:
-                      type: string
-                      description: Inventory protocol mode.
-                      enum:
-                        - GEN2X
-                        - GEN2
-                        - HYBRID
-                      example: GEN2X
-                  required:
-                    - mode
-                reportFilter:
-                  type: object
-                  description: Controls how frequently and at what scope tag reports are emitted.
-                  properties:
-                    duration:
-                      type: number
-                      description: Report filter duration in seconds.
-                      example: 0
-                    type:
-                      type: string
-                      description: Report filter scope.
-                      enum:
-                        - RADIO_WIDE
-                        - PER_ANTENNA
-                      example: PER_ANTENNA
-                  required:
-                    - duration
-                    - type
-                tagMetaData:
-                  type: array
-                  description: Tag metadata fields included in reports.
-                  items:
-                    type: string
-                    enum:
-                      - RSSI
-                      - PHASE
-                      - SEEN_COUNT
-                      - ANTENNA
-                      - CHANNEL
-                      - PC
-                      - XPC
-                      - CRC
-                      - EPC
-                      - TID
-                      - USER
-                      - MAC
-                      - HOSTNAME
-                    example: RSSI
-                  example:
-                    - RSSI
-                    - PHASE
-                    - SEEN_COUNT
-                    - ANTENNA
-                    - CHANNEL
-                    - PC
-                    - XPC
-                    - CRC
-                transmitPower:
-                  type: array
-                  description: Desired transmit power values in dBm.
-                  items:
-                    type: number
-                    example: 17
-                  example:
-                    - 17
-              required:
-                - type
+                      description: Legacy wrapper field retained for backward compatibility.
+                      example: status
             examples:
               set_mode:
                 value:
@@ -1020,7 +754,7 @@ paths:
                     tagPopulation: 2000
                     target: AB
                   inventoryProtocol:
-                    mode: GEN2X
+                    mode: GEN2
                   radioStopConditions:
                     duration: 60
                   transmitPower: 31.5
@@ -1044,7 +778,7 @@ paths:
                     tagPopulation: 256
                     target: A
                   inventoryProtocol:
-                    mode: GEN2X
+                    mode: GEN2
                   reportFilter:
                     duration: 0
                     type: PER_ANTENNA
@@ -1074,7 +808,7 @@ paths:
                     session: S1
                     target: A
                   inventoryProtocol:
-                    mode: GEN2X
+                    mode: GEN2
                   modeSpecificSettings:
                     interval:
                       unit: seconds
@@ -1135,7 +869,7 @@ paths:
                   example: ["ble", "rfid"]
                 doNotPersistState:
                   type: boolean
-                  description: "Controls whether the started inventory state is persisted across reboot. If `true`, the state is not persisted and auto-start is not enabled after reboot. If `false`, the state is persisted across reboot, enabling auto-start."
+                  description: "Applies to RFID inventory only — it has no effect on BLE scanning. Controls whether the started RFID inventory state is persisted across reboot. If `true`, the state is not persisted and auto-start is not enabled after reboot. If `false`, the state is persisted across reboot, enabling auto-start."
                   example: false
                 applyImpinjGen2X:
                   type: boolean
@@ -1225,9 +959,6 @@ paths:
               schema:
                 type: object
                 properties:
-                  availableOsUpgrades:
-                    type: object
-                    description: Placeholder object for available OS upgrades on the reader.
                   cloudAgentApplication:
                     type: string
                     description: Version of the cloud agent application.
@@ -1236,10 +967,6 @@ paths:
                     description: Reader model identifier returned by the device.
                     enum:
                       - FXR90
-                      - FX7500
-                      - FX9600
-                      - ATR7000
-                      - FXR60
                   radioControlApplication:
                     type: string
                     description: Version of the radio control application.
@@ -1249,20 +976,15 @@ paths:
                   readerApplication:
                     type: string
                     description: Version of the main reader application.
-                  revertBackFirmware:
-                    type: object
-                    description: Versions available for reverting the reader firmware.
                   serialNumber:
                     type: string
                     description: Reader serial number.
               example:
-                availableOsUpgrades: {}
                 cloudAgentApplication: 0.6.2.25
                 model: FXR90
                 radioControlApplication: 0.2.58.6
                 radioFirmware: 2.1.57.0
                 readerApplication: 2.0.7-5
-                revertBackFirmware: {}
                 serialNumber: 233575230D0028
 
       security:
@@ -1409,7 +1131,11 @@ paths:
                     description: Power negotiation mode reported by the reader.
                   powerSource:
                     type: string
-                    description: Current power source for the reader.
+                    description: "Current power source for the reader. On the FXR90, `DC` indicates the reader is powered by the external DC power brick (Power Brick)."
+                    enum:
+                      - DC
+                      - POE
+                      - POE+
                   radioActivity:
                     type: string
                     description: Current radio activity state.
@@ -1528,7 +1254,7 @@ paths:
                   offset: 0
                   reach: 0
                 powerNegotiation: POE+
-                powerSource: PWR_BRICK
+                powerSource: DC
                 radioActivity: inactive
                 radioConnection: connected
                 ram:
@@ -1577,11 +1303,6 @@ paths:
                       - type: string
                         description: Returned as "NOT_CONFIGURED" when GPIO-LED config has not been set.
                         example: NOT_CONFIGURED
-                  xml:
-                    type: string
-                    description: >-
-                      RFID reader operational XML profile (the "Cloud Connect" RFID profile).
-                      Only returned on supported reader models (e.g. STARFISH/FX series).
                   READER-GATEWAY:
                     type: object
                     description: >-
@@ -2600,7 +2321,6 @@ paths:
       summary: Updates reader configuration
       description: >-
         MQTT API :- set_config <br> Updates reader configuration. Accepts one or more of the following top-level keys:
-        **xml** (string) - raw XML reader config;
         **GPIO-LED** (object) - GPIO and LED event-action configuration;
         **READER-GATEWAY** (object) - cloud gateway configuration accepting at least one of:
         endpointConfig (data endpoint configuration only - control/management endpoints are not configurable here; use /cloud/cloudConfig for that),
@@ -2613,11 +2333,8 @@ paths:
           application/json:
             schema:
               type: object
-              description: At least one of xml, GPIO-LED, or READER-GATEWAY must be provided.
+              description: At least one of GPIO-LED or READER-GATEWAY must be provided.
               properties:
-                xml:
-                  type: string
-                  description: Raw XML reader configuration string.
                 GPIO-LED:
                   $ref: '#/components/schemas/GPIOLEDConfig.v1'
                 READER-GATEWAY:
@@ -3211,8 +2928,7 @@ paths:
                               name: WEBSOCKET_TEST
                               options:
                                 security:
-                                  verifyHost: true
-                                  verifyPeer: true
+                                  verifyPeer: false
                               type: WEBSOCKET
               set_config_global_batching:
                 value:
@@ -4920,21 +4636,29 @@ paths:
                 userName:
                   type: string
                   description: Reader login username.
+                  enum:
+                    - admin
+                    - rfidadm
                   example: admin
                 currentPassword:
                   type: string
                   description: Current password for the specified user.
-                  example: oldPassword123
+                  example: oldPassword@123
                 newPassword:
                   type: string
                   description: New password to set for the specified user.
-                  example: newPassword123
+                  example: newPassword@123
             examples:
               set_password:
                 value:
                   userName: admin
-                  currentPassword: oldPassword123
-                  newPassword: newPassword123
+                  currentPassword: oldPassword@123
+                  newPassword: newPassword@123
+              set_password_rfidadm:
+                value:
+                  userName: rfidadm
+                  currentPassword: oldPassword@123
+                  newPassword: newPassword@123
       responses:
         '200':
           description: OK
@@ -5484,8 +5208,8 @@ paths:
               properties:
                 type:
                   type: string
-                  description: 'Certificate type. Valid values: server, client, app.'
-                  enum: [server, client, app]
+                  description: 'Certificate type. Valid values: client, app.'
+                  enum: [client, app]
                   example: client
             examples:
               del_certificate:
@@ -5932,97 +5656,120 @@ paths:
                             type: boolean
                           macAddress:
                             type: string
-              example:
-                hostName: FXR90C5F1AB
-                networkInterface:
-                  eth0:
-                    IPV4:
-                      dhcp: true
-                      dnsAddress: 10.233.1.200
-                      domainName: zlab.com
-                      gatewayAddress: 10.233.45.2
-                      ipAddress: 10.233.45.235
-                      subnetMask: 255.255.255.0
-                    IPV6:
-                      dhcp: true
-                      dnsAddress: fd6c:10:233:1::201
-                      domainName: zlab.com
-                      gatewayAddress: fe80::f6ee:31ff:fe0c:5a1f
-                      ipAddress: fd6c:10:233:45:eab:f51f:957e:f729
-                      prefix: 64
-                    Status: connected
-                    isEnabled: true
-                    macAddress: C8:1C:FE:C5:F1:AB
-                  mlan0:
-                    IPV4:
-                      dhcp: true
-                      dnsAddress: 1.1.1.1
-                      domainName: FXR90C5F1AB
-                      gatewayAddress: 192.168.0.1
-                      ipAddress: 192.168.0.201
-                      subnetMask: 255.255.255.0
-                    IPV6:
-                      dhcp: true
-                      dnsAddress: fd6c:10:233:1::201
-                      domainName: FXR90C5F1AB
-                      gatewayAddress: fe80::c206:c3ff:febe:ee3c
-                      ipAddress: fe80::3626:9125:eda5:36d7
-                      prefix: 64
-                    Status: connected
-                    accesspoint:
-                      autoConn: false
-                      essid: GLaDOS
-                      status: connected
-                      security:
-                        securityType: WPA2Personal
-                    isEnabled: true
-                    macAddress: 48:A4:93:BF:A9:50
-                  bnep0:
-                    Status: active
-                    deviceDiscoverableName: FXR90C5F1AB
-                    dhcpEndAddress: 192.168.0.10
-                    dhcpStartAddress: 192.168.0.2
-                    ipAddress: 192.168.241.171
-                    isDiscoverable: true
-                    isEnabled: true
-                    isPairable: true
-                    macAddress: 48:A4:93:BF:A9:52
-                    passKey: '1234'
-                    subnetMask: 255.255.0.0
-                    usePassKey: true
-                  wan0:
-                    Status: online
-                    activeSim: psim
-                    isEnabled: true
-                    psim:
-                      currentDataClass: LTE
-                      currentServiceProvider: Vi India
-                      enableIPv6: false
-                      enablePin: false
-                      enableRoaming: false
-                      highestAvailableDataClass: LTE
-                      internetAccess: true
-                      packetServiceState: Attached
-                      preferredNetworkType: AUTO
-                      registerState: Home
-                      rsrp: '-103.7dBm'
-                      rsrq: '-5.5dB'
-                      rssi: '-82.7dBm'
-                      signalBar: 1
-                      simState: Initialized
-                      snr: 0.0dB
-                  uap0:
-                    ssid: FXR90Hotspot
-                    ssidPassword: 'MyP@ssword'
-                    isHidden: false
-                    securityType: WPA3Personal
-                    Status: active
-                    isEnabled: true
-                    macAddress: 48:A4:93:BF:A9:53
-                    Clients:
-                      - hostName: my-laptop
-                        IP: 192.168.43.2
-                        MAC: AA:BB:CC:DD:EE:FF
+              examples:
+                Ethernet:
+                  summary: eth0 Interface
+                  value:
+                    hostName: FXR90C5F1AB
+                    networkInterface:
+                      eth0:
+                        IPV4:
+                          dhcp: true
+                          dnsAddress: 10.233.1.200
+                          domainName: zlab.com
+                          gatewayAddress: 10.233.45.2
+                          ipAddress: 10.233.45.235
+                          subnetMask: 255.255.255.0
+                        IPV6:
+                          dhcp: true
+                          dnsAddress: fd6c:10:233:1::201
+                          domainName: zlab.com
+                          gatewayAddress: fe80::f6ee:31ff:fe0c:5a1f
+                          ipAddress: fd6c:10:233:45:eab:f51f:957e:f729
+                          prefix: 64
+                        Status: connected
+                        isEnabled: true
+                        macAddress: C8:1C:FE:C5:F1:AB
+                WiFi:
+                  summary: mlan0 Interface
+                  value:
+                    hostName: FXR90C5F1AB
+                    networkInterface:
+                      mlan0:
+                        IPV4:
+                          dhcp: true
+                          dnsAddress: 1.1.1.1
+                          domainName: FXR90C5F1AB
+                          gatewayAddress: 192.168.0.1
+                          ipAddress: 192.168.0.201
+                          subnetMask: 255.255.255.0
+                        IPV6:
+                          dhcp: true
+                          dnsAddress: fd6c:10:233:1::201
+                          domainName: FXR90C5F1AB
+                          gatewayAddress: fe80::c206:c3ff:febe:ee3c
+                          ipAddress: fe80::3626:9125:eda5:36d7
+                          prefix: 64
+                        Status: connected
+                        accesspoint:
+                          autoConn: false
+                          essid: GLaDOS
+                          status: connected
+                          security:
+                            securityType: WPA2Personal
+                        isEnabled: true
+                        macAddress: 48:A4:93:BF:A9:50
+                Bluetooth:
+                  summary: bnep0 Interface
+                  value:
+                    hostName: FXR90C5F1AB
+                    networkInterface:
+                      bnep0:
+                        Status: active
+                        deviceDiscoverableName: FXR90C5F1AB
+                        dhcpEndAddress: 192.168.0.10
+                        dhcpStartAddress: 192.168.0.2
+                        ipAddress: 192.168.241.171
+                        isDiscoverable: true
+                        isEnabled: true
+                        isPairable: true
+                        macAddress: 48:A4:93:BF:A9:52
+                        passKey: '1234'
+                        subnetMask: 255.255.0.0
+                        usePassKey: true
+                WAN:
+                  summary: wan0 Interface
+                  value:
+                    hostName: FXR90C5F1AB
+                    networkInterface:
+                      wan0:
+                        Status: online
+                        activeSim: psim
+                        isEnabled: true
+                        psim:
+                          currentDataClass: LTE
+                          currentServiceProvider: Vi India
+                          enableIPv6: false
+                          enablePin: false
+                          enableRoaming: false
+                          highestAvailableDataClass: LTE
+                          internetAccess: true
+                          packetServiceState: Attached
+                          preferredNetworkType: AUTO
+                          registerState: Home
+                          rsrp: '-103.7dBm'
+                          rsrq: '-5.5dB'
+                          rssi: '-82.7dBm'
+                          signalBar: 1
+                          simState: Initialized
+                          snr: 0.0dB
+                Hotspot:
+                  summary: uap0 Interface
+                  value:
+                    hostName: FXR90C5F1AB
+                    networkInterface:
+                      uap0:
+                        ssid: FXR90Hotspot
+                        ssidPassword: 'MyP@ssword'
+                        isHidden: false
+                        securityType: WPA3Personal
+                        Status: active
+                        isEnabled: true
+                        macAddress: 48:A4:93:BF:A9:53
+                        Clients:
+                          - hostName: my-laptop
+                            IP: 192.168.43.2
+                            MAC: AA:BB:CC:DD:EE:FF
       security:
         - bearerAuth: []
     put:
@@ -9202,250 +8949,6 @@ components:
             port: 0
             signal: HIGH
           stopInterval: 0
-    directionality.v1:
-      type: object
-      title: directionalitySettings
-      description: directionality mode settings
-      examples:
-        - advancedConfig:
-            background_processing_interval_seconds: 0.5
-            debug_level: INFO
-            hysteresis_feet: 2
-            ma_duration_seconds: 3
-            report_new: true
-            report_update_duration_seconds: -1
-            tag_timeout_seconds: 3
-            report_transition: true
-            report_timed_out: true
-            report_direction:
-              - IN
-            report_zone_history: false
-            report_raw: false
-            user_defined: string
-          basicConfig:
-            beamConfig:
-              density:
-                type: DEFAULT
-                polarization: LHCP
-              beams:
-                - azimuth: 0
-                  elevation: 0
-                  polarization: LHCP
-            innerZoneWidth: 10
-            orientation: 0
-            readerHeight: 15
-            tagHeight: 5
-            zoneExtension: 0
-            zoneNames:
-              - out,in,right,left
-            zonePlan: 4
-      x-internal: false
-      properties:
-        advancedConfig:
-          type: object
-          description: |-
-            Advanced Directionality Configuration
-
-            NOTE: directionality operating mode is applicable for only ATR7000 reader and Type of operating mode - must be DIRECTIONALITY
-          properties:
-            background_processing_interval_seconds:
-              type: number
-              example: 0.5
-              description: Interval between processing incoming raw messages (in seconds)
-              default: 0.5
-            debug_level:
-              type: string
-              example: INFO
-              description: Set the debug logging level
-              default: INFO
-              enum:
-                - ERROR
-                - WARNING
-                - INFO
-                - DEBUG
-            hysteresis_feet:
-              type: number
-              example: 2
-              description: Set the distance (in feet) a tag must travel into a zone to be able to move back into previous zone
-              default: 2
-              minimum: 0
-              maximum: 50
-            ma_duration_seconds:
-              type: number
-              example: 3
-              description: Moving Average Window Duration (in seconds). Must be less than tag_timeout_seconds
-              default: 3
-              minimum: 0
-              maximum: 86400
-            report_new:
-              type: boolean
-              description: Report (or do not report) "NEW" events
-              default: true
-            report_update_duration_seconds:
-              type: number
-              example: -1
-              description: Duration to report tag updates even if no transition (value in seconds) (-1 is never report)
-              default: -1
-              minimum: -1
-              maximum: 86400
-            tag_timeout_seconds:
-              type: number
-              example: 3
-              description: Duration until a tag is deemed "gone" (in seconds)
-              default: 3
-              minimum: 0
-              maximum: 86400
-            report_transition:
-              type: boolean
-              description: Report (or do not report) "TRANSITION" events
-              default: true
-            report_timed_out:
-              type: boolean
-              description: Report (or do not report) "TIMED_OUT" events
-            report_direction:
-              type: array
-              description: Direction events to report in "TIMED_OUT" event. If "TIMED_OUT" event is enabled only report "TIMED_OUT" if one of the direction events in this list.
-              items:
-                type: string
-                enum:
-                  - IN
-                  - OUT
-                  - NONE
-                  - UNKNOWN
-                  - ERROR
-            report_zone_history:
-              type: boolean
-              description: Report (or do not report) zone history in "TIMED_OUT" event
-              default: false
-            report_raw:
-              type: boolean
-              description: Report (or do not report) raw bearing/location messages
-              default: false
-            user_defined:
-              type:
-                - string
-                - object
-              description: user defined value (string or object) that will be included in each directionality event
-        basicConfig:
-          type: object
-          description: |-
-            Basic Directionality Configuration
-
-            NOTE: directionality operating mode is applicable for only ATR7000 reader and Type of operating mode - must be DIRECTIONALITY
-          properties:
-            beamConfig:
-              oneOf:
-                - properties:
-                    density:
-                      type: object
-                      description: Type of density of Beams
-                      properties:
-                        type:
-                          type: string
-                          example: DEFAULT
-                          enum:
-                            - DENSE
-                            - DEFAULT
-                            - SPARSE
-                          default: DEFAULT
-                          description: Type of density of Beams
-                        polarization:
-                          type: string
-                          description: Polarization of beams
-                          default: LHCP
-                          enum:
-                            - TOTAL
-                            - THETA
-                            - PHI
-                            - LHCP
-                            - RHCP
-                      required:
-                        - type
-                    beams:
-                      type: array
-                      description: Array of beams to use
-                      items:
-                        type: object
-                        properties:
-                          azimuth:
-                            type: integer
-                            description: Azimuth of beam (in degrees)
-                            minimum: 0
-                            exclusiveMaximum: 360
-                            multipleOf: 5
-                          elevation:
-                            type: integer
-                            description: Elevation of beam (in degrees)
-                            minimum: 0
-                            maximum: 70
-                            multipleOf: 5
-                          polarization:
-                            type: string
-                            description: Polarization of beam
-                            default: LHCP
-                            enum:
-                              - TOTAL
-                              - THETA
-                              - PHI
-                              - RHCP
-                              - LHCP
-                        required:
-                          - azimuth
-                          - elevation
-              type: object
-            innerZoneWidth:
-              type: number
-              example: 10
-              description: The width of the main zones (in feet)
-              default: 10
-            orientation:
-              type: number
-              example: 0
-              description: Orientation of tag (in degrees)
-              default: 0
-              minimum: 0
-              exclusiveMaximum: 360
-            readerHeight:
-              type: number
-              example: 15
-              description: Height of reader (in feet)
-              default: 15
-              minimum: 10
-              maximum: 20
-            tagHeight:
-              type: number
-              example: 5
-              description: Height of tag (in feet)
-              default: 3
-              minimum: 0
-              maximum: 20
-            zoneExtension:
-              type: number
-              example: 0
-              description: The extension of the main zone into one another (in feet)
-              default: 0
-            zoneNames:
-              type: array
-              description: User defined names to zones. Array must have the same number of zones as specified in the zone plan
-              items:
-                type: string
-                enum:
-                  - in
-                  - out
-                  - right
-                  - left
-                example: out,in,right,left
-            zonePlan:
-              type: integer
-              example: 4
-              description: 4 or 6 zone zone plan
-              default: 4
-              enum:
-                - 4
-                - 6
-      required:
-        - advancedConfig
-        - basicConfig
     tagidfilter.v1:
       title: tagIdFilter
       type: object
@@ -9453,6 +8956,8 @@ components:
         Represents filter on the tag id.
 
         If absent, no filter is used.
+
+        Cross-field constraint: When match is set to prefix, query cannot be configured at the same time.
       properties:
         value:
           type: string
@@ -10041,7 +9546,7 @@ components:
 
           “HOSTNAME” will report the hostname of the reader reporting the tag.
 
-        The array may also contain an object or objects. The object must contain a single name value pair with the name being set to “userDefined” or “antennaNames”
+        The array may also contain an object or objects. The object must contain a single name value pair with the name being set to “userDefined”, “antennaNames”, or “gpsCoordinates”.
 
 
         If absent,
@@ -10069,6 +9574,7 @@ components:
           - USER
           - MAC
           - HOSTNAME
+          - READER_LOCATION
         properties:
           userDefined:
             type: string
@@ -10080,6 +9586,20 @@ components:
               Length of array must match the number of antenna ports on the device
             items:
               type: string
+          gpsCoordinates:
+            type: object
+            description: GPS coordinates metadata reported with each tag event when location metadata is enabled.
+            properties:
+              latitude:
+                type: number
+                nullable: true
+                description: Latitude in decimal degrees.
+              longitude:
+                type: number
+                nullable: true
+                description: Longitude in decimal degrees.
+          readerLocation:
+            $ref: '#/components/schemas/readerLocationMode.v1'
     radioStartConditions.v1:
       title: radioStartConditions
       type: object
@@ -10165,6 +9685,20 @@ components:
             - PER_ANTENNA
           description: |
             Configures the timeout (in seconds) by antenna or for entire radio 
+        addl_keys:
+          type: array
+          description: |-
+            Filters tag reports based on additional configured keys.
+
+            Supported value: TID.
+
+            Cross-field constraints:
+            - addl_keys can only contain TID when tagMetaData also contains TID, PC and CRC.
+            - When type is PER_ANTENNA and addl_keys contains TID, tagMetaData must also include ANTENNA.
+          items:
+            type: string
+            enum:
+              - TID
       required:
         - duration
         - type
@@ -10185,10 +9719,51 @@ components:
           format: int32
           minimum: -128
           maximum: -20
+    inventoryProtocol.v1:
+      title: inventoryProtocol
+      type: object
+      description: Inventory protocol settings for tag interrogation.
+      properties:
+        mode:
+          type: string
+          description: Inventory protocol mode.
+          enum:
+            - GEN2X
+            - GEN2
+            - HYBRID
+      required:
+        - mode
+    readerLocationMode.v1:
+      title: readerLocation
+      type: object
+      description: Reader location metadata reported with mode configuration.
+      properties:
+        latitude:
+          type: number
+          description: Latitude in decimal degrees.
+        longitude:
+          type: number
+          description: Longitude in decimal degrees.
+        altitude:
+          type: number
+          description: Altitude in meters.
+        userDefined:
+          type: string
+          description: User-defined location label.
     operatingMode.v1:
       title: operatingMode
       type: object
-      description: Represents the reader operating mode.
+      description: |-
+        Represents the reader operating mode.
+
+        Cross-field constraints:
+        - accesses is not allowed in INVENTORY mode.
+        - query and filter with prefix cannot be configured at the same time.
+        - radioStartConditions and radioStopConditions are not allowed in PORTAL mode.
+        - reportFilter and accesses cannot both be set.
+        - accesses cannot be set with tagMetaData containing RESERVED, EPC, TID, or USER.
+        - reportFilter cannot be set with tagMetaData containing RESERVED, EPC, TID, or USER unless reportFilter.addl_keys is configured.
+        - transmitPower array length, antennaStopCondition array length, and query array length must match the size of antennas.
       example:
         type: INVENTORY
         antennas:
@@ -10242,14 +9817,13 @@ components:
             - PORTAL
             - CONVEYOR
             - CUSTOM
-            - DIRECTIONALITY
           description: 'The type of mode of operation '
           default: SIMPLE
         modeSpecificSettings:
+          description: One of inventorySettings or portalSettings, depending on the selected mode type.
           oneOf:
             - $ref: '#/components/schemas/inventorysettings.v1'
             - $ref: '#/components/schemas/portalsettings.v1'
-            - $ref: '#/components/schemas/directionality.v1'
         environment:
           type: string
           enum:
@@ -10286,13 +9860,15 @@ components:
 
 
 
-             An array of integers representing the antenna ports to use to read tags. For ATR, the integers represent beam numbers. 
+             An array of integers representing the antenna ports to use to read tags.
 
-             If absent, all antennas ports are used; for the ATR, a set of 38 beams are used.
+             If absent, all antenna ports are used.
           items:
             type: integer
         filter:
           $ref: '#/components/schemas/tagidfilter.v1'
+        inventoryProtocol:
+          $ref: '#/components/schemas/inventoryProtocol.v1'
         transmitPower:
           oneOf:
             - type: number
@@ -10311,7 +9887,9 @@ components:
 
              Desired Transmit Power (in dbm).
 
-             If absent, the value is set to 27 dbm; for the ATR, the value is set to 36 dbm EIRP.
+             If absent, the value is set to 27 dbm.
+
+             Cross-field constraint: when provided as an array, the array length must match the size of antennas.
         antennaStopCondition:
           oneOf:
             - $ref: '#/components/schemas/antennaStopCondition.v1'
@@ -10348,6 +9926,8 @@ components:
              Gen2 query parameters. See Gen2 spec for details.
 
              If absent, "sel" is set to ALL, session is set to 1, target is set to A, and tag population set to 1.
+
+             Cross-field constraints: cannot be configured at the same time as filter with prefix; when provided as an array, the array length must match the size of antennas.
         selects:
           description: |2-
 
@@ -10386,6 +9966,11 @@ components:
 
              If absent, no access will be issued. 
 
+             Cross-field constraints:
+             - Cannot be set in INVENTORY mode.
+             - Cannot be set at the same time as reportFilter.
+             - Cannot be set at the same time as tagMetaData containing RESERVED/EPC/TID/USER.
+
              If there is an array of access objects, all of the accesss in the array will be applied to all antennas.
              
              If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.
@@ -10399,10 +9984,25 @@ components:
         tagMetaData:
           $ref: '#/components/schemas/tagMetaData.v1'
         radioStartConditions:
+          description: |
+            Controls when, after a start command is issued, the radio starts trying to inventory tags.
+            This is distinct from antennaStopCondition.
+            Cross-field constraint: cannot be set in PORTAL mode.
           $ref: '#/components/schemas/radioStartConditions.v1'
         radioStopConditions:
+          description: |
+            Controls when an ongoing radio operation completes.
+            This is distinct from antennaStopCondition.
+            Cross-field constraint: cannot be set in PORTAL mode.
           $ref: '#/components/schemas/radioStopConditions.v1'
         reportFilter:
+          description: |-
+            Controls when and how often a tag is reported.
+
+            Cross-field constraints:
+            - Cannot be set while in INVENTORY mode.
+            - Cannot be set at the same time as accesses.
+            - Cannot be set at the same time as tagMetaData containing RESERVED/EPC/TID/USER unless addl_keys is configured.
           $ref: '#/components/schemas/tagReportFilter.v1'
         rssiFilter:
           $ref: '#/components/schemas/rssiFilter.v1'

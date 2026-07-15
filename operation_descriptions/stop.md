@@ -21,6 +21,7 @@ Use this command to:
 | REST Endpoint | `PUT /cloud/stop` |
 | Related Commands | [start](start.md), [set_bleConfig](set_bleConfig.md), [get_bleConfig](get_bleConfig.md), [get_mode](get_mode.md), [get_status](get_status.md) |
 | Supported Operations | Stop RFID inventory, BLE scan, or both |
+| Firmware Requirement | BLE requires reader build **4.0.11** or later. On earlier builds the `scanType` field is not available. |
 | Supported API Versions | V1.0 |
 
 ## 3. Stop Behavior
@@ -31,6 +32,9 @@ Use this command to:
 | `{ "scanType": ["rfid"] }` | Stops RFID inventory explicitly. BLE scanning continues if active. |
 | `{ "scanType": ["ble"] }` | Stops BLE scanning only. RFID inventory continues if active. |
 | `{ "scanType": ["ble", "rfid"] }` | Stops both BLE scanning and RFID inventory. |
+
+
+> Firmware requirement: BLE scanning — and with it the `scanType` field — is available from reader build **4.0.11** onward. On builds older than 4.0.11, `scanType` is not supported: publish an empty payload `{}`, which stops RFID inventory. Check the installed build with the `get_version` command (`readerApplication`).
 
 ## 4. Before You Begin
 

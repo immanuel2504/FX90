@@ -143,7 +143,11 @@ properties:
     description: Power negotiation mode reported by the reader.
   powerSource:
     type: string
-    description: Current power source for the reader.
+    description: Current power source for the reader. On the FXR90, `DC` indicates the reader is powered by the external DC power brick (Power Brick).
+    enum:
+    - DC
+    - POE
+    - POE+
   radioActivity:
     type: string
     description: Current radio activity state.

@@ -23,6 +23,7 @@ Use this endpoint to:
 | Authentication | Bearer token (`Authorization: Bearer <token>`) |
 | Content-Type | `application/json` |
 | Supported Scan Types | `rfid`, `ble`, or both combined |
+| Firmware Requirement | BLE requires reader build **4.0.11** or later. On earlier builds the `scanType` field is not available. |
 
 ## 3. Before You Begin
 
@@ -49,13 +50,15 @@ The `scanType` field determines which scanners run and where the data is publish
 | `ble` | Starts BLE scanning only. BLE advertisement events stream on the reader's BLE data channel. |
 | `["ble", "rfid"]` | Starts both scanners in a single session. RFID and BLE events stream independently on their respective data channels. |
 
+> Firmware requirement: BLE scanning — and with it the `scanType` field — is available from reader build **4.0.11** onward. On builds older than 4.0.11, `scanType` is not supported: omit it, and `PUT /cloud/start` starts RFID inventory only. Check the installed build with `GET /cloud/version` (`readerApplication`).
+
 ### Persistence Across Reboots
 
-The `doNotPersistState` field controls whether the reader resumes scanning automatically after a reboot or reconnect.
+The `doNotPersistState` field controls whether the reader resumes RFID inventory automatically after a reboot or reconnect. It applies to RFID only and has no effect on BLE scanning — a BLE scan never auto-resumes.
 
 | `doNotPersistState` | Behavior on Reboot or Reconnect |
 |---|---|
-| `false` (default) | The reader **remembers the running state** and automatically resumes scanning. |
+| `false` (default) | The reader **remembers the running RFID inventory state** and automatically resumes it. |
 | `true` | The running state is **not saved**. The reader stays Idle until `PUT /cloud/start` is called again. |
 
 > Tip: Use `doNotPersistState: true` for one-time or debugging sessions where automatic resume after reboot is not desired.

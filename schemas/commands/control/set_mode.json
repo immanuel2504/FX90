@@ -227,7 +227,8 @@
               "TID",
               "USER",
               "MAC",
-              "HOSTNAME"
+              "HOSTNAME",
+              "READER_LOCATION"
             ],
             "example": "RSSI"
           },
