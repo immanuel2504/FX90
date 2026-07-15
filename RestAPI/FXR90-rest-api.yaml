@@ -4576,6 +4576,8 @@ paths:
 
         | Supported Certificate Types | `client`, `server`, `app` |
 
+        | Supported Transfer Protocols | `HTTPS`, `FTPS`, `SFTP` |
+
         | Supported Authentication Types | `NONE`, `BASIC` |
 
 
@@ -4593,7 +4595,7 @@ paths:
 
         | Certificate type | `client` for mutual TLS authentication, `server` for CA/server trust, or `app` for application-specific certificates. |
 
-        | Source URL | An HTTPS URL where the reader can download the PFX certificate file. The reader must have network connectivity to reach this URL. |
+        | Source URL | An `HTTPS`, `FTPS`, or `SFTP` URL where the reader can download the PFX certificate file. The reader must have network connectivity to reach this URL. |
 
         | Authentication type | `NONE` if the download server requires no credentials, or `BASIC` if username and password authentication is required. |
 
@@ -5032,7 +5034,9 @@ paths:
 
         | Supported Wi-Fi Security Types | `WPA2Personal`, `WPA2Enterprise`, `WPA3Personal`, `WPA3Enterprise` |
 
-        | Supported 802.1X Authentication | `TLS`, `TTLS`, `PEAP` |
+        | Supported 802.1X Outer Methods | `TLS`, `TTLS`, `PEAP` |
+
+        | Supported 802.1X Inner Methods | `TLS` (certificate-based), `MSCHAPv2` (credential-based) |
 
 
         ## 3. Before You Begin
@@ -5053,13 +5057,34 @@ paths:
 
         | Wi-Fi access point | For `mlan0`, include the `accesspoint` object with `essid`, `connect`, `autoConn`, and the `security` sub-object. |
 
-        | Wi-Fi security | For WPA2 Personal, provide the `password`. For WPA2 Enterprise, provide `authentication` type and either a certificate name (TLS) or credentials (TTLS/PEAP). |
+        | Wi-Fi security | For WPA2 Personal, provide the `password`. For Enterprise (WPA2/WPA3), provide the `authentication` type and either a client certificate (certificate-based) or a username and password (credential-based). See the 802.1X authentication combinations below. |
 
         | Cellular settings | For `wan0`, set `activeSim` (`psim` or `esim`) and supply the `apn` and `preferredNetworkType` for the chosen SIM. |
 
         | Hotspot settings | For `uap0`, provide `ssid`, `ssidPassword`, `countryCode`, `securityType` (`WPA2Personal` or `WPA3Personal` only), and `isHidden`. |
 
         | Interface enablement | Always include `enable: true` or `enable: false` on the interface object to control whether the interface is active after configuration. |
+
+
+        ### 802.1X Enterprise Authentication Combinations
+
+
+        `WPA2Enterprise` and `WPA3Enterprise` pair an outer EAP method with an inner method. The reader supports the following combinations:
+
+
+        | Authentication type | Combination | Credentials required |
+
+        |---|---|---|
+
+        | Certificate-based | `TLS` | Client certificate |
+
+        | Certificate-based | `TTLS-TLS` | Client certificate |
+
+        | Certificate-based | `PEAP-TLS` | Client certificate |
+
+        | Credential-based | `TTLS-MSCHAPv2` | Username and password |
+
+        | Credential-based | `PEAP-MSCHAPv2` | Username and password |
 
 
         > Important: `uap0` and `mlan0` are mutually exclusive. The reader has one Wi-Fi radio, which operates either as a client joining an access point (`mlan0`) or as an access point of its own (`uap0`) — never both. Sending `uap0` with `enable: true` while `mlan0` is connected drops the Wi-Fi client connection, and vice versa. Configure them in separate requests and enable only the one you intend to run. If the reader''s only route to your network is `mlan0`, enabling the hotspot will disconnect it.
@@ -6017,6 +6042,8 @@ paths:
 
         | Required Request Fields | `url`, `authenticationType` |
 
+        | Supported Transfer Protocols | `HTTPS`, `SFTP`, `SCP`, `FTPS` |
+
         | Supported Authentication Types | `NONE`, `BASIC` |
 
 
@@ -6030,7 +6057,7 @@ paths:
 
         |---|---|
 
-        | Firmware URL | The HTTP(S) URL of the firmware directory. The reader fetches a file list from this URL, then downloads the appropriate build. |
+        | Firmware URL | The URL of the firmware directory on a server the reader can reach over `HTTPS`, `SFTP`, `SCP`, or `FTPS`. The reader fetches a file list from this URL, then downloads the appropriate build. |
 
         | Authentication type | `NONE` if no download credentials are required, or `BASIC` for username/password HTTP authentication. |
 
@@ -6038,11 +6065,14 @@ paths:
 
         | JWT bearer token | Optional - supply a JWT in `headers.Authorization` for token-based authentication, regardless of `authenticationType`. |
 
-        | Network reachability | The reader must be able to reach the firmware URL on the network. Confirm firewall rules allow HTTP(S) outbound on the port used by the firmware server. |
+        | Network reachability | The reader must be able to reach the firmware URL on the network. Confirm firewall rules allow the chosen protocol (`HTTPS`, `SFTP`, `SCP`, or `FTPS`) outbound on the port used by the firmware server. |
 
         | Current firmware version | Use `GET /cloud/version` to confirm the reader''s current build before initiating an update. |
 
         | Rollback plan | If the update fails, use `PUT /cloud/revertbackOS` to return to the previous OS version. |
+
+
+        > Note: This endpoint performs a **server-based** update — the reader downloads the build from `url` over `HTTPS`, `SFTP`, `SCP`, or `FTPS`. The reader also supports two update methods that do not use this endpoint: a **file-based update** (the firmware file is uploaded directly to the reader) and a **USB update** (the firmware is applied from a USB drive).
 
         '
       operationId: setOs

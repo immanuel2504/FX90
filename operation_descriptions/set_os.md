@@ -25,6 +25,7 @@ Use this command to:
 | REST Endpoint | `PUT /cloud/os` |
 | Related Commands | [get_version](get_version.md), [revertback](revertback.md), [get_status](get_status.md) |
 | Required Payload Fields | `url`, `authenticationType` |
+| Supported Transfer Protocols | `HTTPS`, `SFTP`, `SCP`, `FTPS` |
 | Supported Authentication Types | `NONE`, `BASIC` |
 | Supported API Versions | V1.0 |
 
@@ -34,11 +35,13 @@ Gather all firmware download details before sending this command. A failed OS up
 
 | What You Need | Details |
 |---|---|
-| Firmware URL | The HTTP(S) URL of the firmware directory. The reader fetches a file list from this URL, then downloads the appropriate build. |
+| Firmware URL | The URL of the firmware directory on a server the reader can reach over `HTTPS`, `SFTP`, `SCP`, or `FTPS`. The reader fetches a file list from this URL, then downloads the appropriate build. |
 | Authentication type | `NONE` if no download credentials are required, or `BASIC` for username/password HTTP authentication. |
 | Download credentials | Required when `authenticationType` is `BASIC`. Provide `options.username` and `options.password`. |
 | JWT bearer token | Optional - supply a JWT in `headers.Authorization` for token-based authentication, regardless of `authenticationType`. |
-| Network reachability | The reader must be able to reach the firmware URL on the network. Confirm firewall rules allow HTTP(S) outbound on the port used by the firmware server. |
+| Network reachability | The reader must be able to reach the firmware URL on the network. Confirm firewall rules allow the chosen protocol (`HTTPS`, `SFTP`, `SCP`, or `FTPS`) outbound on the port used by the firmware server. |
 | Current firmware version | Use `get_version` to confirm the reader's current build before initiating an update. |
 | Rollback plan | If the update fails, use `revertback` to return to the previous OS version. |
+
+> Note: This command performs a **server-based** update — the reader downloads the build from `url` over `HTTPS`, `SFTP`, `SCP`, or `FTPS`. The reader also supports two update methods that do not use this command: a **file-based update** (the firmware file is uploaded directly to the reader) and a **USB update** (the firmware is applied from a USB drive).
 
