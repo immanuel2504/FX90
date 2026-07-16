@@ -27,5 +27,41 @@
     "command",
     "command_id",
     "payload"
-  ]
+  ],
+  "examples": [
+    {
+      "command": "autostart_user_app",
+      "command_id": "abcd123",
+      "payload": {
+        "appname": "mylogger",
+        "autostart": true
+      }
+    },
+    {
+      "command": "autostart_user_app",
+      "command_id": "abcd123",
+      "payload": {
+        "appname": "mylogger",
+        "autostart": false
+      }
+    }
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "autostart_user_app",
+      "command_id": "abcd123",
+      "payload": {
+        "appname": "mylogger",
+        "autostart": true
+      }
+    },
+    "example-2": {
+      "command": "autostart_user_app",
+      "command_id": "abcd123",
+      "payload": {
+        "appname": "mylogger",
+        "autostart": false
+      }
+    }
+  }
 }

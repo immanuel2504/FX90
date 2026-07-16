@@ -5,7 +5,7 @@
   "examples": [
     {
       "command": "get_network",
-      "command_id": "a12cb345654",
+      "command_id": "abcd345",
       "response": "success",
       "payload": {
         "hostName": "FXR90C5F1AB",
@@ -24,12 +24,23 @@
               "dnsAddress": "fd6c:10:233:1::201",
               "domainName": "zlab.com",
               "gatewayAddress": "fe80::f6ee:31ff:fe0c:5a1f",
-              "ipAddress": "fd6c:10:233:45:eab:f51f:957e:f729"
+              "ipAddress": "fd6c:10:233:45:eab:f51f:957e:f729",
+              "prefix": 64
             },
             "Status": "connected",
             "isEnabled": true,
             "macAddress": "C8:1C:FE:C5:F1:AB"
-          },
+          }
+        }
+      }
+    },
+    {
+      "command": "get_network",
+      "command_id": "abcd345",
+      "response": "success",
+      "payload": {
+        "hostName": "FXR90C5F1AB",
+        "networkInterface": {
           "mlan0": {
             "IPV4": {
               "dhcp": true,
@@ -44,7 +55,8 @@
               "dnsAddress": "fd6c:10:233:1::201",
               "domainName": "FXR90C5F1AB",
               "gatewayAddress": "fe80::c206:c3ff:febe:ee3c",
-              "ipAddress": "fe80::3626:9125:eda5:36d7"
+              "ipAddress": "fe80::3626:9125:eda5:36d7",
+              "prefix": 64
             },
             "Status": "connected",
             "accesspoint": {
@@ -57,7 +69,17 @@
             },
             "isEnabled": true,
             "macAddress": "48:A4:93:BF:A9:50"
-          },
+          }
+        }
+      }
+    },
+    {
+      "command": "get_network",
+      "command_id": "abcd345",
+      "response": "success",
+      "payload": {
+        "hostName": "FXR90C5F1AB",
+        "networkInterface": {
           "bnep0": {
             "Status": "active",
             "deviceDiscoverableName": "FXR90C5F1AB",
@@ -71,7 +93,17 @@
             "passKey": "1234",
             "subnetMask": "255.255.0.0",
             "usePassKey": true
-          },
+          }
+        }
+      }
+    },
+    {
+      "command": "get_network",
+      "command_id": "abcd345",
+      "response": "success",
+      "payload": {
+        "hostName": "FXR90C5F1AB",
+        "networkInterface": {
           "wan0": {
             "Status": "online",
             "activeSim": "psim",
@@ -94,7 +126,17 @@
               "simState": "Initialized",
               "snr": "0.0dB"
             }
-          },
+          }
+        }
+      }
+    },
+    {
+      "command": "get_network",
+      "command_id": "abcd345",
+      "response": "success",
+      "payload": {
+        "hostName": "FXR90C5F1AB",
+        "networkInterface": {
           "uap0": {
             "ssid": "FXR90Hotspot",
             "ssidPassword": "MyP@ssword",
@@ -173,7 +215,7 @@
   "x-examples": {
     "example-1": {
       "command": "get_network",
-      "command_id": "a12cb345654",
+      "command_id": "abcd345",
       "response": "success",
       "payload": {
         "hostName": "FXR90C5F1AB",
@@ -192,12 +234,23 @@
               "dnsAddress": "fd6c:10:233:1::201",
               "domainName": "zlab.com",
               "gatewayAddress": "fe80::f6ee:31ff:fe0c:5a1f",
-              "ipAddress": "fd6c:10:233:45:eab:f51f:957e:f729"
+              "ipAddress": "fd6c:10:233:45:eab:f51f:957e:f729",
+              "prefix": 64
             },
             "Status": "connected",
             "isEnabled": true,
             "macAddress": "C8:1C:FE:C5:F1:AB"
-          },
+          }
+        }
+      }
+    },
+    "example-2": {
+      "command": "get_network",
+      "command_id": "abcd345",
+      "response": "success",
+      "payload": {
+        "hostName": "FXR90C5F1AB",
+        "networkInterface": {
           "mlan0": {
             "IPV4": {
               "dhcp": true,
@@ -212,7 +265,8 @@
               "dnsAddress": "fd6c:10:233:1::201",
               "domainName": "FXR90C5F1AB",
               "gatewayAddress": "fe80::c206:c3ff:febe:ee3c",
-              "ipAddress": "fe80::3626:9125:eda5:36d7"
+              "ipAddress": "fe80::3626:9125:eda5:36d7",
+              "prefix": 64
             },
             "Status": "connected",
             "accesspoint": {
@@ -225,7 +279,17 @@
             },
             "isEnabled": true,
             "macAddress": "48:A4:93:BF:A9:50"
-          },
+          }
+        }
+      }
+    },
+    "example-3": {
+      "command": "get_network",
+      "command_id": "abcd345",
+      "response": "success",
+      "payload": {
+        "hostName": "FXR90C5F1AB",
+        "networkInterface": {
           "bnep0": {
             "Status": "active",
             "deviceDiscoverableName": "FXR90C5F1AB",
@@ -239,7 +303,17 @@
             "passKey": "1234",
             "subnetMask": "255.255.0.0",
             "usePassKey": true
-          },
+          }
+        }
+      }
+    },
+    "example-4": {
+      "command": "get_network",
+      "command_id": "abcd345",
+      "response": "success",
+      "payload": {
+        "hostName": "FXR90C5F1AB",
+        "networkInterface": {
           "wan0": {
             "Status": "online",
             "activeSim": "psim",
@@ -262,7 +336,17 @@
               "simState": "Initialized",
               "snr": "0.0dB"
             }
-          },
+          }
+        }
+      }
+    },
+    "example-5": {
+      "command": "get_network",
+      "command_id": "abcd345",
+      "response": "success",
+      "payload": {
+        "hostName": "FXR90C5F1AB",
+        "networkInterface": {
           "uap0": {
             "ssid": "FXR90Hotspot",
             "ssidPassword": "MyP@ssword",

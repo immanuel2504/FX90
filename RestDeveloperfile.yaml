@@ -1364,9 +1364,9 @@ paths:
                                         type:
                                           type: string
                                           description: >-
-                                            Connection type. Supported values: mqtt, mqtt-GCP,
+                                            Connection type. Supported values: mqtt,
                                             mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET,
-                                            tcpip-server, keyboard-emulation.
+                                            tcpip-server.
                                         options:
                                           type: object
                                           description: Connection-specific options.
@@ -1438,7 +1438,7 @@ paths:
                                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                                 keyAlgorithm:
                                                   type: string
-                                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                                 keyFormat:
                                                   type: string
                                                   description: Key file format (e.g. PEM).
@@ -1540,9 +1540,9 @@ paths:
                                         type:
                                           type: string
                                           description: >-
-                                            Connection type. Supported values: mqtt, mqtt-GCP,
+                                            Connection type. Supported values: mqtt,
                                             mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET,
-                                            tcpip-server, keyboard-emulation.
+                                            tcpip-server.
                                         options:
                                           type: object
                                           description: Connection-specific options.
@@ -1614,7 +1614,7 @@ paths:
                                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                                 keyAlgorithm:
                                                   type: string
-                                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                                 keyFormat:
                                                   type: string
                                                   description: Key file format (e.g. PEM).
@@ -1676,9 +1676,9 @@ paths:
                                         type:
                                           type: string
                                           description: >-
-                                            Connection type. Supported values: mqtt, mqtt-GCP,
+                                            Connection type. Supported values: mqtt,
                                             mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET,
-                                            tcpip-server, keyboard-emulation.
+                                            tcpip-server.
                                         options:
                                           type: object
                                           description: Connection-specific options.
@@ -1750,7 +1750,7 @@ paths:
                                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                                 keyAlgorithm:
                                                   type: string
-                                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                                 keyFormat:
                                                   type: string
                                                   description: Key file format (e.g. PEM).
@@ -1826,9 +1826,9 @@ paths:
                                         type:
                                           type: string
                                           description: >-
-                                            Connection type. Supported values: mqtt, mqtt-GCP,
+                                            Connection type. Supported values: mqtt,
                                             mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET,
-                                            tcpip-server, keyboard-emulation.
+                                            tcpip-server.
                                         options:
                                           type: object
                                           description: Connection-specific options.
@@ -1900,7 +1900,7 @@ paths:
                                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                                 keyAlgorithm:
                                                   type: string
-                                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                                 keyFormat:
                                                   type: string
                                                   description: Key file format (e.g. PEM).
@@ -2554,7 +2554,7 @@ paths:
                                                 example: server
                                               keyAlgorithm:
                                                 type: string
-                                                description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                                description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                                 example: RS256
                                               keyFormat:
                                                 type: string
@@ -2596,9 +2596,9 @@ paths:
                                       type:
                                         type: string
                                         description: >-
-                                          Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS,
-                                          mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.
-                                          Only one WEBSOCKET, tcpip-server, or keyboard-emulation connection
+                                          Connection type. Supported values: mqtt, mqtt-AWS,
+                                          mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.
+                                          Only one WEBSOCKET or tcpip-server connection
                                           is allowed at a time.
                                         example: mqtt
                                   example:
@@ -3217,7 +3217,7 @@ paths:
                                             example: server
                                           keyAlgorithm:
                                             type: string
-                                            description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                            description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                             example: RS256
                                           keyFormat:
                                             type: string
@@ -3250,8 +3250,8 @@ paths:
                                   type:
                                     type: string
                                     description: >-
-                                      Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS,
-                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.
+                                      Connection type. Supported values: mqtt, mqtt-AWS,
+                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.
                                     example: mqtt
                               example:
                                 - description: MQTT_TEST
@@ -3479,7 +3479,7 @@ paths:
                                             example: server
                                           keyAlgorithm:
                                             type: string
-                                            description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                            description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                             example: RS256
                                           keyFormat:
                                             type: string
@@ -3509,8 +3509,8 @@ paths:
                                   type:
                                     type: string
                                     description: >-
-                                      Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS,
-                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.
+                                      Connection type. Supported values: mqtt, mqtt-AWS,
+                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.
                                     example: mqtt
                               example:
                                 - additionalOptions:
@@ -3661,7 +3661,7 @@ paths:
                                             example: server
                                           keyAlgorithm:
                                             type: string
-                                            description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                            description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                             example: RS256
                                           keyFormat:
                                             type: string
@@ -3694,8 +3694,8 @@ paths:
                                   type:
                                     type: string
                                     description: >-
-                                      Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS,
-                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.
+                                      Connection type. Supported values: mqtt, mqtt-AWS,
+                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.
                                     example: mqtt
                               example:
                                 - description: MQTT_TEST
@@ -3842,7 +3842,7 @@ paths:
                                             example: server
                                           keyAlgorithm:
                                             type: string
-                                            description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                            description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                             example: RS256
                                           keyFormat:
                                             type: string
@@ -3872,8 +3872,8 @@ paths:
                                   type:
                                     type: string
                                     description: >-
-                                      Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS,
-                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.
+                                      Connection type. Supported values: mqtt, mqtt-AWS,
+                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.
                                     example: mqtt
                               example:
                                 - description: MQTT_TEST
@@ -10708,9 +10708,6 @@ components:
       title: Reader Configuration
       type: object
       properties:
-        xml:
-          type: string
-          description: Current reader XML configuration
         GPIO-LED:
           $ref: '#/components/schemas/GPIOLEDConfig.v1'
         READER-GATEWAY:

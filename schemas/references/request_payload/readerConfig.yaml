@@ -2438,10 +2438,6 @@ properties:
                           type: object
                           properties:
                             batching:
-                              type:
-                              - object
-                              - 'null'
-                              example: null
                               description: Per-connection batching configuration. Set to null to use global batching settings. When provided as an object, overrides global batching for this connection only.
                               oneOf:
                               - type: 'null'
@@ -2568,7 +2564,7 @@ properties:
                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                 keyAlgorithm:
                                   type: string
-                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                 keyFormat:
                                   type: string
                                   description: Key file format (e.g. PEM).
@@ -2598,7 +2594,7 @@ properties:
                           description: Connection-specific options. Content varies by connection type.
                         type:
                           type: string
-                          description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation. Only one WEBSOCKET, tcpip-server, or keyboard-emulation connection is allowed at a time.'
+                          description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server. Only one WEBSOCKET or tcpip-server connection is allowed at a time.'
                 description: Data event endpoint. Defines the cloud connections that receive tag read events.
             description: Data plane endpoint configuration (tag read event publishing channel).
       batching:

@@ -1863,13 +1863,11 @@ paths:
       description: '## 1. Description
 
 
-        The `GET /cloud/config` REST endpoint retrieves the reader''s full configuration, including RF and XML settings, GPIO and LED defaults, and reader-gateway endpoint settings.
+        The `GET /cloud/config` REST endpoint retrieves the reader''s full configuration, including RF settings, GPIO and LED defaults, and reader-gateway endpoint settings.
 
 
         This endpoint returns:
 
-
-        - The current reader XML configuration
 
         - GPIO and LED trigger configuration (`GPIO-LED`), including GPO and LED defaults; returned as `NOT_CONFIGURED` when unset
 
@@ -1920,8 +1918,6 @@ paths:
         | Field | What to Check | Why It Matters |
 
         |---|---|---|
-
-        | `xml` | Is the XML configuration as expected? | Defines the RF and reader behavior used during inventory operations. |
 
         | `READER-GATEWAY` | Are endpoint URLs and credentials correct? | Determines where tag data is delivered and how the reader authenticates. |
 
@@ -2098,7 +2094,7 @@ paths:
       description: '## 1. Description
 
 
-        The `PUT /cloud/config` REST endpoint updates the reader''s full configuration, including RF/XML settings, GPIO and LED defaults, and reader-gateway endpoint configuration.
+        The `PUT /cloud/config` REST endpoint updates the reader''s full configuration, including RF settings, GPIO and LED defaults, and reader-gateway endpoint configuration.
 
 
         ## 2. Endpoint Details
@@ -2126,14 +2122,14 @@ paths:
         ## 3. Before You Begin
 
 
-        Gather these details before sending the request. An invalid XML string or misconfigured endpoint can disrupt tag reporting and management events.
+        Gather these details before sending the request. A misconfigured endpoint can disrupt tag reporting and management events.
 
 
         | What You Need | Details |
 
         |---|---|
 
-        | Configuration scope | Full `xml` string and/or partial `GPIO-LED` / `READER-GATEWAY` objects. |
+        | Configuration scope | Partial or full `GPIO-LED` and/or `READER-GATEWAY` objects. |
 
         | GPIO/LED defaults | Desired GPO pin defaults (`HIGH`/`LOW`) and LED colors per pin. |
 
@@ -2584,7 +2580,7 @@ paths:
 
         | Required Request Fields | `endpointConfig` |
 
-        | Supported Connection Types | `mqtt`, `mqtt-GCP`, `mqtt-AWS`, `mqtt-Azure`, `httpPost`, `WEBSOCKET`, `tcpip-server`, `keyboard-emulation` |
+        | Supported Connection Types | `mqtt`, `mqtt-AWS`, `mqtt-Azure`, `httpPost`, `WEBSOCKET`, `tcpip-server` |
 
 
         ## 3. Before You Begin
@@ -2599,7 +2595,7 @@ paths:
 
         | Endpoint channels | Decide which channels to configure: `data.event`, `control.commandResponse`, `management.event`, and/or `management.commandResponse`. Only include channels you are provisioning. |
 
-        | Connection type | Per connection, choose the transport type: `mqtt`, `mqtt-GCP`, `mqtt-AWS`, `mqtt-Azure`, `httpPost`, `WEBSOCKET`, `tcpip-server`, or `keyboard-emulation`. |
+        | Connection type | Per connection, choose the transport type: `mqtt`, `mqtt-AWS`, `mqtt-Azure`, `httpPost`, `WEBSOCKET`, or `tcpip-server`. |
 
         | Host, port, and topics | For MQTT connections: `hostName`, `port`, `protocol`, publish topics (`publishTopic`), and subscribe topics (`subscribeTopic` for command-response channels). |
 
@@ -2621,8 +2617,6 @@ paths:
 
         | `mqtt` | Standard MQTT broker connection. |
 
-        | `mqtt-GCP` | Google Cloud MQTT connection. |
-
         | `mqtt-AWS` | AWS IoT Core MQTT connection. |
 
         | `mqtt-Azure` | Azure IoT Hub MQTT connection. |
@@ -2632,8 +2626,6 @@ paths:
         | `WEBSOCKET` | WebSocket endpoint connection. |
 
         | `tcpip-server` | TCP/IP server socket endpoint. |
-
-        | `keyboard-emulation` | Keyboard emulation output. |
 
         '
       operationId: setImportcloudconfig
@@ -9950,7 +9942,7 @@ components:
                                 description: Unique name identifier for this connection.
                               type:
                                 type: string
-                                description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                                description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
                               options:
                                 type: object
                                 description: Connection-specific options.
@@ -10016,7 +10008,7 @@ components:
                                         description: Type of the pre-installed certificate (e.g. "server", "client").
                                       keyAlgorithm:
                                         type: string
-                                        description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                        description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                       keyFormat:
                                         type: string
                                         description: Key file format (e.g. PEM).
@@ -10109,7 +10101,7 @@ components:
                                 description: Unique name identifier for this connection. Must be unique across all data connections.
                               type:
                                 type: string
-                                description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                                description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
                               options:
                                 type: object
                                 description: Connection-specific options.
@@ -10175,7 +10167,7 @@ components:
                                         description: Type of the pre-installed certificate (e.g. "server", "client").
                                       keyAlgorithm:
                                         type: string
-                                        description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                        description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                       keyFormat:
                                         type: string
                                         description: Key file format (e.g. PEM).
@@ -10234,7 +10226,7 @@ components:
                                 description: Unique name identifier for this connection.
                               type:
                                 type: string
-                                description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                                description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
                               options:
                                 type: object
                                 description: Connection-specific options.
@@ -10300,7 +10292,7 @@ components:
                                         description: Type of the pre-installed certificate (e.g. "server", "client").
                                       keyAlgorithm:
                                         type: string
-                                        description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                        description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                       keyFormat:
                                         type: string
                                         description: Key file format (e.g. PEM).
@@ -10369,7 +10361,7 @@ components:
                                 description: Unique name identifier for this management event connection.
                               type:
                                 type: string
-                                description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                                description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
                               options:
                                 type: object
                                 description: Connection-specific options.
@@ -10435,7 +10427,7 @@ components:
                                         description: Type of the pre-installed certificate (e.g. "server", "client").
                                       keyAlgorithm:
                                         type: string
-                                        description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                        description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                       keyFormat:
                                         type: string
                                         description: Key file format (e.g. PEM).
@@ -10823,7 +10815,7 @@ components:
                                         description: Type of the pre-installed certificate (e.g. "server", "client").
                                       keyAlgorithm:
                                         type: string
-                                        description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                        description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                       keyFormat:
                                         type: string
                                         description: Key file format (e.g. PEM).
@@ -10851,7 +10843,7 @@ components:
                                     items: {}
                               type:
                                 type: string
-                                description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation. Only one WEBSOCKET, tcpip-server, or keyboard-emulation connection is allowed at a time.'
+                                description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server. Only one WEBSOCKET or tcpip-server connection is allowed at a time.'
             batching:
               description: Global batching configuration applied across all data endpoints. Can be a single object (applied to all endpoints) or an array of objects (one per endpoint, array length must match number of data endpoint connections).
               oneOf:
@@ -11035,7 +11027,7 @@ components:
                                     description: Type of the pre-installed certificate (e.g. "server", "client").
                                   keyAlgorithm:
                                     type: string
-                                    description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                    description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                   keyFormat:
                                     type: string
                                     description: Key file format (e.g. PEM).
@@ -11058,7 +11050,7 @@ components:
                                   type: string
                           type:
                             type: string
-                            description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                            description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
                     enableLocalRest:
                       type: boolean
                       description: When true, local REST API is enabled for sending control commands. Setting this via set_importCloudConfig persists the value to the cloud configuration file.
@@ -11201,7 +11193,7 @@ components:
                                     description: Type of the pre-installed certificate (e.g. "server", "client").
                                   keyAlgorithm:
                                     type: string
-                                    description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                    description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                   keyFormat:
                                     type: string
                                     description: Key file format (e.g. PEM).
@@ -11223,7 +11215,7 @@ components:
                                 items: {}
                           type:
                             type: string
-                            description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                            description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
             management:
               type: object
               description: 'Management plane endpoint configuration. Replaces the existing management.commandResponse and/or management.event configuration when provided. Only keys present in the payload are updated. Valid keys: commandResponse, event.'
@@ -11309,7 +11301,7 @@ components:
                                     description: Type of the pre-installed certificate (e.g. "server", "client").
                                   keyAlgorithm:
                                     type: string
-                                    description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                    description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                   keyFormat:
                                     type: string
                                     description: Key file format (e.g. PEM).
@@ -11332,7 +11324,7 @@ components:
                                   type: string
                           type:
                             type: string
-                            description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                            description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
                     enableLocalRest:
                       type: boolean
                       description: When true, local REST API is enabled for management plane commands. Setting this via set_importCloudConfig persists the value to the cloud configuration file.
@@ -11417,7 +11409,7 @@ components:
                                     description: Type of the pre-installed certificate (e.g. "server", "client").
                                   keyAlgorithm:
                                     type: string
-                                    description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                    description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                   keyFormat:
                                     type: string
                                     description: Key file format (e.g. PEM).
@@ -11439,7 +11431,7 @@ components:
                                 items: {}
                           type:
                             type: string
-                            description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                            description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
     SetImportcloudconfigResponse:
       type: string
       description: Returns an empty string on success.

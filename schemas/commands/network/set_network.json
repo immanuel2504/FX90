@@ -37,6 +37,9 @@
           "IPV4": {
             "dhcp": true
           },
+          "IPV6": {
+            "dhcp": true
+          },
           "enable": true
         }
       }
@@ -54,7 +57,46 @@
             "ipAddress": "10.233.46.47",
             "subnetMask": "255.255.255.0"
           },
+          "IPV6": {
+            "dhcp": false,
+            "dnsAddress": "2001:4860:4860::9999",
+            "domainName": "example.ee.com",
+            "gatewayAddress": "fe80::1643:8376:b32:4a16",
+            "ipAddress": "2001:db8:1:0:8731:2eb1:cd28:f0cd",
+            "prefix": 64
+          },
           "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "eth0": {
+          "IPV4": {
+            "dhcp": false,
+            "dnsAddress": "10.233.1.200",
+            "domainName": "zlab.com",
+            "gatewayAddress": "10.233.46.2",
+            "ipAddress": "10.233.46.47",
+            "subnetMask": "255.255.255.0"
+          },
+          "IPV6": {
+            "dhcp": false,
+            "dnsAddress": "2001:4860:4860::9999",
+            "domainName": "example.ee.com",
+            "gatewayAddress": "fe80::1643:8376:b32:4a16",
+            "ipAddress": "2001:db8:1:0:8731:2eb1:cd28:f0cd",
+            "prefix": 64
+          },
+          "enable": true,
+          "security": {
+            "802_1xEAP": {
+              "authentication": "TLS",
+              "certificate": "my-client-cert"
+            }
+          }
         }
       }
     },
@@ -94,10 +136,16 @@
       "command": "set_network",
       "command_id": "abcd345",
       "payload": {
-        "mlan0": {
-          "IPV4": {
-            "dhcp": true
-          }
+        "eth0": {
+          "security": {
+            "802_1xEAP": {
+              "authentication": "PEAP",
+              "innerAuthentication": "MSCHAPv2",
+              "username": "john.doe",
+              "password": "secret"
+            }
+          },
+          "enable": true
         }
       }
     },
@@ -113,7 +161,45 @@
             "gatewayAddress": "10.233.46.2",
             "ipAddress": "10.233.46.47",
             "subnetMask": "255.255.255.0"
+          },
+          "IPV6": {
+            "dhcp": false,
+            "dnsAddress": "2001:4860:4860::9999",
+            "domainName": "example.ee.com",
+            "gatewayAddress": "fe80::1643:8376:b32:4a16",
+            "ipAddress": "2001:db8:1:0:8731:2eb1:cd28:f0cd",
+            "prefix": 64
+          },
+          "enable": true,
+          "accesspoint": {
+            "autoConn": true,
+            "connect": true,
+            "essid": "Redmi Note 12 5G",
+            "security": {
+              "WPA2Personal": {
+                "password": "12345678"
+              }
+            }
           }
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "autoConn": true,
+            "connect": true,
+            "essid": "Redmi Note 12 5G",
+            "security": {
+              "WPA3Personal": {
+                "password": "12345678"
+              }
+            }
+          },
+          "enable": true
         }
       }
     },
@@ -130,23 +216,9 @@
               "WPA2Personal": {
                 "password": "12345678"
               }
-            },
-            "enable": true
-          }
-        }
-      }
-    },
-    {
-      "command": "set_network",
-      "command_id": "abcd345",
-      "payload": {
-        "mlan0": {
-          "accesspoint": {
-            "essid": "OpenNetwork",
-            "connect": true,
-            "autoConn": true,
-            "enable": true
-          }
+            }
+          },
+          "enable": true
         }
       }
     },
@@ -164,9 +236,52 @@
                 "authentication": "TLS",
                 "certificate": "my-client-cert"
               }
-            },
-            "enable": true
-          }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "WPA3Enterprise": {
+                "authentication": "TTLS",
+                "innerAuthentication": "MSCHAPv2",
+                "username": "john.doe",
+                "password": "secret"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "WPA2Enterprise": {
+                "authentication": "PEAP",
+                "innerAuthentication": "TLS",
+                "certificate": "my-client-cert"
+              }
+            }
+          },
+          "enable": true
         }
       }
     },
@@ -182,13 +297,34 @@
             "security": {
               "WPA2Enterprise": {
                 "authentication": "TTLS",
+                "innerAuthentication": "TLS",
+                "certificate": "my-client-cert"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "WPA3Enterprise": {
+                "authentication": "PEAP",
                 "innerAuthentication": "MSCHAPv2",
                 "username": "john.doe",
                 "password": "secret"
               }
-            },
-            "enable": true
-          }
+            }
+          },
+          "enable": true
         }
       }
     },
@@ -246,6 +382,9 @@
           "IPV4": {
             "dhcp": true
           },
+          "IPV6": {
+            "dhcp": true
+          },
           "enable": true
         }
       }
@@ -263,11 +402,50 @@
             "ipAddress": "10.233.46.47",
             "subnetMask": "255.255.255.0"
           },
+          "IPV6": {
+            "dhcp": false,
+            "dnsAddress": "2001:4860:4860::9999",
+            "domainName": "example.ee.com",
+            "gatewayAddress": "fe80::1643:8376:b32:4a16",
+            "ipAddress": "2001:db8:1:0:8731:2eb1:cd28:f0cd",
+            "prefix": 64
+          },
           "enable": true
         }
       }
     },
     "example-3": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "eth0": {
+          "IPV4": {
+            "dhcp": false,
+            "dnsAddress": "10.233.1.200",
+            "domainName": "zlab.com",
+            "gatewayAddress": "10.233.46.2",
+            "ipAddress": "10.233.46.47",
+            "subnetMask": "255.255.255.0"
+          },
+          "IPV6": {
+            "dhcp": false,
+            "dnsAddress": "2001:4860:4860::9999",
+            "domainName": "example.ee.com",
+            "gatewayAddress": "fe80::1643:8376:b32:4a16",
+            "ipAddress": "2001:db8:1:0:8731:2eb1:cd28:f0cd",
+            "prefix": 64
+          },
+          "enable": true,
+          "security": {
+            "802_1xEAP": {
+              "authentication": "TLS",
+              "certificate": "my-client-cert"
+            }
+          }
+        }
+      }
+    },
+    "example-4": {
       "command": "set_network",
       "command_id": "abcd345",
       "payload": {
@@ -282,7 +460,7 @@
         }
       }
     },
-    "example-4": {
+    "example-5": {
       "command": "set_network",
       "command_id": "abcd345",
       "payload": {
@@ -299,18 +477,24 @@
         }
       }
     },
-    "example-5": {
+    "example-6": {
       "command": "set_network",
       "command_id": "abcd345",
       "payload": {
-        "mlan0": {
-          "IPV4": {
-            "dhcp": true
-          }
+        "eth0": {
+          "security": {
+            "802_1xEAP": {
+              "authentication": "PEAP",
+              "innerAuthentication": "MSCHAPv2",
+              "username": "john.doe",
+              "password": "secret"
+            }
+          },
+          "enable": true
         }
       }
     },
-    "example-6": {
+    "example-7": {
       "command": "set_network",
       "command_id": "abcd345",
       "payload": {
@@ -322,11 +506,49 @@
             "gatewayAddress": "10.233.46.2",
             "ipAddress": "10.233.46.47",
             "subnetMask": "255.255.255.0"
+          },
+          "IPV6": {
+            "dhcp": false,
+            "dnsAddress": "2001:4860:4860::9999",
+            "domainName": "example.ee.com",
+            "gatewayAddress": "fe80::1643:8376:b32:4a16",
+            "ipAddress": "2001:db8:1:0:8731:2eb1:cd28:f0cd",
+            "prefix": 64
+          },
+          "enable": true,
+          "accesspoint": {
+            "autoConn": true,
+            "connect": true,
+            "essid": "Redmi Note 12 5G",
+            "security": {
+              "WPA2Personal": {
+                "password": "12345678"
+              }
+            }
           }
         }
       }
     },
-    "example-7": {
+    "example-8": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "autoConn": true,
+            "connect": true,
+            "essid": "Redmi Note 12 5G",
+            "security": {
+              "WPA3Personal": {
+                "password": "12345678"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-9": {
       "command": "set_network",
       "command_id": "abcd345",
       "payload": {
@@ -339,43 +561,9 @@
               "WPA2Personal": {
                 "password": "12345678"
               }
-            },
-            "enable": true
-          }
-        }
-      }
-    },
-    "example-8": {
-      "command": "set_network",
-      "command_id": "abcd345",
-      "payload": {
-        "mlan0": {
-          "accesspoint": {
-            "essid": "OpenNetwork",
-            "connect": true,
-            "autoConn": true,
-            "enable": true
-          }
-        }
-      }
-    },
-    "example-9": {
-      "command": "set_network",
-      "command_id": "abcd345",
-      "payload": {
-        "mlan0": {
-          "accesspoint": {
-            "essid": "CorpNetwork",
-            "connect": true,
-            "autoConn": true,
-            "security": {
-              "WPA2Enterprise": {
-                "authentication": "TLS",
-                "certificate": "my-client-cert"
-              }
-            },
-            "enable": true
-          }
+            }
+          },
+          "enable": true
         }
       }
     },
@@ -390,18 +578,102 @@
             "autoConn": true,
             "security": {
               "WPA2Enterprise": {
+                "authentication": "TLS",
+                "certificate": "my-client-cert"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-11": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "WPA3Enterprise": {
                 "authentication": "TTLS",
                 "innerAuthentication": "MSCHAPv2",
                 "username": "john.doe",
                 "password": "secret"
               }
-            },
-            "enable": true
-          }
+            }
+          },
+          "enable": true
         }
       }
     },
-    "example-11": {
+    "example-12": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "WPA2Enterprise": {
+                "authentication": "PEAP",
+                "innerAuthentication": "TLS",
+                "certificate": "my-client-cert"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-13": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "WPA2Enterprise": {
+                "authentication": "TTLS",
+                "innerAuthentication": "TLS",
+                "certificate": "my-client-cert"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-14": {
+      "command": "set_network",
+      "command_id": "abcd345",
+      "payload": {
+        "mlan0": {
+          "accesspoint": {
+            "essid": "CorpNetwork",
+            "connect": true,
+            "autoConn": true,
+            "security": {
+              "WPA3Enterprise": {
+                "authentication": "PEAP",
+                "innerAuthentication": "MSCHAPv2",
+                "username": "john.doe",
+                "password": "secret"
+              }
+            }
+          },
+          "enable": true
+        }
+      }
+    },
+    "example-15": {
       "command": "set_network",
       "command_id": "abcd345",
       "payload": {
@@ -416,7 +688,7 @@
         }
       }
     },
-    "example-12": {
+    "example-16": {
       "command": "set_network",
       "command_id": "abcd345",
       "payload": {
@@ -431,7 +703,7 @@
         }
       }
     },
-    "example-13": {
+    "example-17": {
       "command": "set_network",
       "command_id": "abcd345",
       "payload": {

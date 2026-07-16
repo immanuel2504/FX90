@@ -10,7 +10,14 @@
       "command": "set_ntpServer",
       "command_id": "abcd1324",
       "payload": {
-        "server": "time.google.com",
+        "server": "time1.google.com",
+        "server2": "time2.google.com"
+      }
+    },
+    {
+      "command": "set_ntpServer",
+      "command_id": "abcd1324",
+      "payload": {
         "server1": "time1.google.com",
         "server2": "time2.google.com"
       }
@@ -37,5 +44,23 @@
     "command",
     "command_id",
     "payload"
-  ]
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "set_ntpServer",
+      "command_id": "abcd1324",
+      "payload": {
+        "server": "time1.google.com",
+        "server2": "time2.google.com"
+      }
+    },
+    "example-2": {
+      "command": "set_ntpServer",
+      "command_id": "abcd1324",
+      "payload": {
+        "server1": "time1.google.com",
+        "server2": "time2.google.com"
+      }
+    }
+  }
 }

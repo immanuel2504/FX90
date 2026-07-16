@@ -28,7 +28,7 @@ properties:
     uniqueItems: true
   doNotPersistState:
     type: boolean
-    description: Controls whether the started inventory state is persisted across reboot. If `true`, the state is not persisted and auto-start is not enabled after reboot. If `false`, the state is persisted across reboot, enabling auto-start.
+    description: Applies to RFID inventory only — it has no effect on BLE scanning. Controls whether the started RFID inventory state is persisted across reboot. If `true`, the state is not persisted and auto-start is not enabled after reboot. If `false`, the state is persisted across reboot, enabling auto-start.
   applyImpinjGen2X:
     type: boolean
     description: 'When true, applies the previously configured Impinj Gen2X features (FastID, TagProtect, TagFocus, TagQuieting) on start. Cannot be used with `scanType: ["ble"]`.'

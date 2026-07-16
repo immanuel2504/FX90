@@ -87,7 +87,7 @@ properties:
                               description: Type of the pre-installed certificate (e.g. "server", "client").
                             keyAlgorithm:
                               type: string
-                              description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                              description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                             keyFormat:
                               type: string
                               description: Key file format (e.g. PEM).
@@ -113,7 +113,7 @@ properties:
                       description: Connection-specific options.
                     type:
                       type: string
-                      description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                      description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
               enableLocalRest:
                 type: boolean
                 description: When true, local REST API is enabled for sending control commands. Setting this via set_importCloudConfig persists the value to the cloud configuration file.
@@ -259,7 +259,7 @@ properties:
                               description: Type of the pre-installed certificate (e.g. "server", "client").
                             keyAlgorithm:
                               type: string
-                              description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                              description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                             keyFormat:
                               type: string
                               description: Key file format (e.g. PEM).
@@ -283,7 +283,7 @@ properties:
                       description: Connection-specific options.
                     type:
                       type: string
-                      description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                      description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
             description: Data event endpoint. Defines the cloud connections that receive tag read events.
         description: Data plane endpoint configuration. Replaces the existing data.event configuration when provided.
       management:
@@ -368,7 +368,7 @@ properties:
                               description: Type of the pre-installed certificate (e.g. "server", "client").
                             keyAlgorithm:
                               type: string
-                              description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                              description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                             keyFormat:
                               type: string
                               description: Key file format (e.g. PEM).
@@ -394,7 +394,7 @@ properties:
                       description: Connection-specific options.
                     type:
                       type: string
-                      description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                      description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
               enableLocalRest:
                 type: boolean
                 description: When true, local REST API is enabled for management plane commands. Setting this via set_importCloudConfig persists the value to the cloud configuration file.
@@ -478,7 +478,7 @@ properties:
                               description: Type of the pre-installed certificate (e.g. "server", "client").
                             keyAlgorithm:
                               type: string
-                              description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                              description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                             keyFormat:
                               type: string
                               description: Key file format (e.g. PEM).
@@ -502,7 +502,7 @@ properties:
                       description: Connection-specific options.
                     type:
                       type: string
-                      description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                      description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
             description: Management async event endpoint (publishes heartbeat, errors, and warnings).
         description: 'Management plane endpoint configuration. Replaces the existing management.commandResponse and/or management.event configuration when provided. Only keys present in the payload are updated. Valid keys: commandResponse, event.'
     description: Cloud endpoint configuration to import. Selectively merges the provided sub-sections (control.commandResponse, management.commandResponse, management.event, data.event) into the reader's existing configuration. Only the sections provided are updated; omitted sections are left unchanged.

@@ -14,7 +14,6 @@ properties:
           - httpPost
           - tcpip-server
           - WEBSOCKET
-          - keyboard-emulation
           - mqtt-AZURE
           - mqtt-AWS
           description: Type of Channel
@@ -25,7 +24,6 @@ properties:
           - $ref: httpPost.v1.yaml
           - $ref: tcpip.v1.yaml
           - $ref: websocket.v1.yaml
-          - $ref: keyboardEmulation.v1.yaml
           - $ref: azure.v1.yaml
           - $ref: aws.v1.yaml
           description: Options for the chosen type

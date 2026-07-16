@@ -7,9 +7,8 @@ properties:
     description: Certificate name. For REST, the certificate is identified by the certname path parameter; for MQTT, the certificate is identified by the name payload field.
   type:
     type: string
-    description: 'Certificate type. Valid values: server, client, app.'
+    description: 'Certificate type. Valid values: client, app. The server certificate cannot be deleted.'
     enum:
-    - server
     - client
     - app
 required:

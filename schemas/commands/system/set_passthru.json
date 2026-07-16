@@ -48,6 +48,32 @@
         "component": "RC",
         "payload": "mode"
       }
+    },
+    {
+      "command": "set_passthru",
+      "command_id": "passthru-set-001",
+      "payload": {
+        "component": "RC",
+        "payload": "status"
+      }
     }
-  ]
+  ],
+  "x-examples": {
+    "example-1": {
+      "command": "set_passthru",
+      "command_id": "passthru-set-001",
+      "payload": {
+        "component": "RC",
+        "payload": "mode"
+      }
+    },
+    "example-2": {
+      "command": "set_passthru",
+      "command_id": "passthru-set-001",
+      "payload": {
+        "component": "RC",
+        "payload": "status"
+      }
+    }
+  }
 }

@@ -54,7 +54,7 @@ properties:
                           description: Unique name identifier for this connection.
                         type:
                           type: string
-                          description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                          description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
                         options:
                           type: object
                           properties:
@@ -118,7 +118,7 @@ properties:
                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                 keyAlgorithm:
                                   type: string
-                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                 keyFormat:
                                   type: string
                                   description: Key file format (e.g. PEM).
@@ -213,7 +213,7 @@ properties:
                           description: Unique name identifier for this connection. Must be unique across all data connections.
                         type:
                           type: string
-                          description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                          description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
                         options:
                           type: object
                           properties:
@@ -277,7 +277,7 @@ properties:
                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                 keyAlgorithm:
                                   type: string
-                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                 keyFormat:
                                   type: string
                                   description: Key file format (e.g. PEM).
@@ -338,7 +338,7 @@ properties:
                           description: Unique name identifier for this connection.
                         type:
                           type: string
-                          description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                          description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
                         options:
                           type: object
                           properties:
@@ -402,7 +402,7 @@ properties:
                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                 keyAlgorithm:
                                   type: string
-                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                 keyFormat:
                                   type: string
                                   description: Key file format (e.g. PEM).
@@ -473,7 +473,7 @@ properties:
                           description: Unique name identifier for this management event connection.
                         type:
                           type: string
-                          description: 'Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.'
+                          description: 'Connection type. Supported values: mqtt, mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.'
                         options:
                           type: object
                           properties:
@@ -537,7 +537,7 @@ properties:
                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                 keyAlgorithm:
                                   type: string
-                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
+                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
                                 keyFormat:
                                   type: string
                                   description: Key file format (e.g. PEM).

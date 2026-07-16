@@ -21,12 +21,8 @@
     },
     "payload": {
       "type": "object",
-      "description": "At least one of xml, GPIO-LED, or READER-GATEWAY must be provided.",
+      "description": "At least one of GPIO-LED or READER-GATEWAY must be provided.",
       "properties": {
-        "xml": {
-          "type": "string",
-          "description": "Raw XML reader configuration string."
-        },
         "GPIO-LED": {
           "title": "GPIO-LED configuration",
           "type": "object",
