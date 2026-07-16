@@ -621,25 +621,6 @@ paths:
       summary: Retrieves the operating mode
       description: MQTT API :-  get_mode <br> Retrieves the current operating mode
       operationId: getMode
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                verbose:
-                  type: boolean
-                  description: "Controls how much of the operating-mode configuration is returned. When `true`, the reader returns the entire mode configuration, including every default value. When `false` or omitted, the reader returns only the settings that have been explicitly configured for the current mode; default values are omitted."
-                  example: true
-            examples:
-              default_configured_only:
-                summary: Configured values only (default)
-                value: {}
-              verbose_full:
-                summary: Entire configuration including defaults
-                value:
-                  verbose: true
       responses:
         '200':
           description: 'OK'
@@ -869,7 +850,7 @@ paths:
                   example: ["ble", "rfid"]
                 doNotPersistState:
                   type: boolean
-                  description: "Applies to RFID inventory only — it has no effect on BLE scanning. Controls whether the started RFID inventory state is persisted across reboot. If `true`, the state is not persisted and auto-start is not enabled after reboot. If `false`, the state is persisted across reboot, enabling auto-start."
+                  description: "Controls whether the started inventory state is persisted across reboot. If `true`, the state is not persisted and auto-start is not enabled after reboot. If `false`, the state is persisted across reboot, enabling auto-start."
                   example: false
                 applyImpinjGen2X:
                   type: boolean
@@ -959,6 +940,9 @@ paths:
               schema:
                 type: object
                 properties:
+                  availableOsUpgrades:
+                    type: object
+                    description: Placeholder object for available OS upgrades on the reader.
                   cloudAgentApplication:
                     type: string
                     description: Version of the cloud agent application.
@@ -967,6 +951,10 @@ paths:
                     description: Reader model identifier returned by the device.
                     enum:
                       - FXR90
+                      - FX7500
+                      - FX9600
+                      - ATR7000
+                      - FXR60
                   radioControlApplication:
                     type: string
                     description: Version of the radio control application.
@@ -976,15 +964,20 @@ paths:
                   readerApplication:
                     type: string
                     description: Version of the main reader application.
+                  revertBackFirmware:
+                    type: object
+                    description: Versions available for reverting the reader firmware.
                   serialNumber:
                     type: string
                     description: Reader serial number.
               example:
+                availableOsUpgrades: {}
                 cloudAgentApplication: 0.6.2.25
                 model: FXR90
                 radioControlApplication: 0.2.58.6
                 radioFirmware: 2.1.57.0
                 readerApplication: 2.0.7-5
+                revertBackFirmware: {}
                 serialNumber: 233575230D0028
 
       security:
@@ -1131,11 +1124,7 @@ paths:
                     description: Power negotiation mode reported by the reader.
                   powerSource:
                     type: string
-                    description: "Current power source for the reader. On the FXR90, `DC` indicates the reader is powered by the external DC power brick (Power Brick)."
-                    enum:
-                      - DC
-                      - POE
-                      - POE+
+                    description: Current power source for the reader.
                   radioActivity:
                     type: string
                     description: Current radio activity state.
@@ -1254,7 +1243,7 @@ paths:
                   offset: 0
                   reach: 0
                 powerNegotiation: POE+
-                powerSource: DC
+                powerSource: PWR_BRICK
                 radioActivity: inactive
                 radioConnection: connected
                 ram:
@@ -1303,6 +1292,11 @@ paths:
                       - type: string
                         description: Returned as "NOT_CONFIGURED" when GPIO-LED config has not been set.
                         example: NOT_CONFIGURED
+                  xml:
+                    type: string
+                    description: >-
+                      RFID reader operational XML profile (the "Cloud Connect" RFID profile).
+                      Only returned on supported reader models (e.g. STARFISH/FX series).
                   READER-GATEWAY:
                     type: object
                     description: >-
@@ -1364,9 +1358,9 @@ paths:
                                         type:
                                           type: string
                                           description: >-
-                                            Connection type. Supported values: mqtt,
+                                            Connection type. Supported values: mqtt, mqtt-GCP,
                                             mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET,
-                                            tcpip-server.
+                                            tcpip-server, keyboard-emulation.
                                         options:
                                           type: object
                                           description: Connection-specific options.
@@ -1438,7 +1432,7 @@ paths:
                                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                                 keyAlgorithm:
                                                   type: string
-                                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
+                                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                                 keyFormat:
                                                   type: string
                                                   description: Key file format (e.g. PEM).
@@ -1540,9 +1534,9 @@ paths:
                                         type:
                                           type: string
                                           description: >-
-                                            Connection type. Supported values: mqtt,
+                                            Connection type. Supported values: mqtt, mqtt-GCP,
                                             mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET,
-                                            tcpip-server.
+                                            tcpip-server, keyboard-emulation.
                                         options:
                                           type: object
                                           description: Connection-specific options.
@@ -1614,7 +1608,7 @@ paths:
                                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                                 keyAlgorithm:
                                                   type: string
-                                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
+                                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                                 keyFormat:
                                                   type: string
                                                   description: Key file format (e.g. PEM).
@@ -1676,9 +1670,9 @@ paths:
                                         type:
                                           type: string
                                           description: >-
-                                            Connection type. Supported values: mqtt,
+                                            Connection type. Supported values: mqtt, mqtt-GCP,
                                             mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET,
-                                            tcpip-server.
+                                            tcpip-server, keyboard-emulation.
                                         options:
                                           type: object
                                           description: Connection-specific options.
@@ -1750,7 +1744,7 @@ paths:
                                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                                 keyAlgorithm:
                                                   type: string
-                                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
+                                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                                 keyFormat:
                                                   type: string
                                                   description: Key file format (e.g. PEM).
@@ -1826,9 +1820,9 @@ paths:
                                         type:
                                           type: string
                                           description: >-
-                                            Connection type. Supported values: mqtt,
+                                            Connection type. Supported values: mqtt, mqtt-GCP,
                                             mqtt-AWS, mqtt-Azure, httpPost, WEBSOCKET,
-                                            tcpip-server.
+                                            tcpip-server, keyboard-emulation.
                                         options:
                                           type: object
                                           description: Connection-specific options.
@@ -1900,7 +1894,7 @@ paths:
                                                   description: Type of the pre-installed certificate (e.g. "server", "client").
                                                 keyAlgorithm:
                                                   type: string
-                                                  description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
+                                                  description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                                 keyFormat:
                                                   type: string
                                                   description: Key file format (e.g. PEM).
@@ -2321,6 +2315,7 @@ paths:
       summary: Updates reader configuration
       description: >-
         MQTT API :- set_config <br> Updates reader configuration. Accepts one or more of the following top-level keys:
+        **xml** (string) - raw XML reader config;
         **GPIO-LED** (object) - GPIO and LED event-action configuration;
         **READER-GATEWAY** (object) - cloud gateway configuration accepting at least one of:
         endpointConfig (data endpoint configuration only - control/management endpoints are not configurable here; use /cloud/cloudConfig for that),
@@ -2333,8 +2328,11 @@ paths:
           application/json:
             schema:
               type: object
-              description: At least one of GPIO-LED or READER-GATEWAY must be provided.
+              description: At least one of xml, GPIO-LED, or READER-GATEWAY must be provided.
               properties:
+                xml:
+                  type: string
+                  description: Raw XML reader configuration string.
                 GPIO-LED:
                   $ref: '#/components/schemas/GPIOLEDConfig.v1'
                 READER-GATEWAY:
@@ -2554,7 +2552,7 @@ paths:
                                                 example: server
                                               keyAlgorithm:
                                                 type: string
-                                                description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
+                                                description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                                 example: RS256
                                               keyFormat:
                                                 type: string
@@ -2596,9 +2594,9 @@ paths:
                                       type:
                                         type: string
                                         description: >-
-                                          Connection type. Supported values: mqtt, mqtt-AWS,
-                                          mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.
-                                          Only one WEBSOCKET or tcpip-server connection
+                                          Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS,
+                                          mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.
+                                          Only one WEBSOCKET, tcpip-server, or keyboard-emulation connection
                                           is allowed at a time.
                                         example: mqtt
                                   example:
@@ -3217,7 +3215,7 @@ paths:
                                             example: server
                                           keyAlgorithm:
                                             type: string
-                                            description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
+                                            description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                             example: RS256
                                           keyFormat:
                                             type: string
@@ -3250,8 +3248,8 @@ paths:
                                   type:
                                     type: string
                                     description: >-
-                                      Connection type. Supported values: mqtt, mqtt-AWS,
-                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.
+                                      Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS,
+                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.
                                     example: mqtt
                               example:
                                 - description: MQTT_TEST
@@ -3479,7 +3477,7 @@ paths:
                                             example: server
                                           keyAlgorithm:
                                             type: string
-                                            description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
+                                            description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                             example: RS256
                                           keyFormat:
                                             type: string
@@ -3509,8 +3507,8 @@ paths:
                                   type:
                                     type: string
                                     description: >-
-                                      Connection type. Supported values: mqtt, mqtt-AWS,
-                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.
+                                      Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS,
+                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.
                                     example: mqtt
                               example:
                                 - additionalOptions:
@@ -3661,7 +3659,7 @@ paths:
                                             example: server
                                           keyAlgorithm:
                                             type: string
-                                            description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
+                                            description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                             example: RS256
                                           keyFormat:
                                             type: string
@@ -3694,8 +3692,8 @@ paths:
                                   type:
                                     type: string
                                     description: >-
-                                      Connection type. Supported values: mqtt, mqtt-AWS,
-                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.
+                                      Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS,
+                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.
                                     example: mqtt
                               example:
                                 - description: MQTT_TEST
@@ -3842,7 +3840,7 @@ paths:
                                             example: server
                                           keyAlgorithm:
                                             type: string
-                                            description: Signing algorithm for JWT-based authentication (e.g. RS256, ES256).
+                                            description: JWT signing algorithm for GCP connections (e.g. RS256, ES256).
                                             example: RS256
                                           keyFormat:
                                             type: string
@@ -3872,8 +3870,8 @@ paths:
                                   type:
                                     type: string
                                     description: >-
-                                      Connection type. Supported values: mqtt, mqtt-AWS,
-                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server.
+                                      Connection type. Supported values: mqtt, mqtt-GCP, mqtt-AWS,
+                                      mqtt-Azure, httpPost, WEBSOCKET, tcpip-server, keyboard-emulation.
                                     example: mqtt
                               example:
                                 - description: MQTT_TEST
@@ -9708,7 +9706,6 @@ components:
           - USER
           - MAC
           - HOSTNAME
-          - READER_LOCATION
         properties:
           userDefined:
             type: string
@@ -9732,8 +9729,6 @@ components:
                 type: number
                 nullable: true
                 description: Longitude in decimal degrees.
-          readerLocation:
-            $ref: '#/components/schemas/readerLocationMode.v1'
     radioStartConditions.v1:
       title: radioStartConditions
       type: object
@@ -10155,11 +10150,26 @@ components:
     os_update.v1:
       title: os_update
       type: object
+      description: Server-based OS update request. Supported transfer protocols are SCP, HTTPS, SFTP, and FTPS. File-based and USB-based update methods are not available in this API at this time.
       properties:
         url:
           type: string
-          description: URL where the OS image is served
-          example: http://169.254.149.144:8000/firmware
+          format: uri
+          description: URL where the OS image is served. Supported URL schemes are scp://, https://, sftp://, and ftps://.
+          oneOf:
+            - pattern: '^scp://.+'
+            - pattern: '^https://.+'
+            - pattern: '^sftp://.+'
+            - pattern: '^ftps://.+'
+          example: https://169.254.149.144:8000/firmware
+        transfer_protocol:
+          type: string
+          description: Optional explicit transfer protocol for firmware download. If omitted, protocol is inferred from the `url` scheme.
+          enum:
+            - SCP
+            - HTTPS
+            - SFTP
+            - FTPS
         authenticationType:
           type: string
           description: Type of authentication required to get OS image
@@ -10178,6 +10188,33 @@ components:
       required:
         - url
         - authenticationType
+    installCACertificate.v1:
+      title: installCACertificate
+      type: object
+      description: Request payload to install a CA certificate.
+      properties:
+        name:
+          type: string
+          description: Required for MQTT API (`set_InstallCACertificate`). Ignored for local REST where the path parameter `{caname}` is used.
+          example: AmazonRootCA1
+        content:
+          type: string
+          description: PEM-encoded CA certificate content.
+          example: |
+            -----BEGIN CERTIFICATE-----
+            MIIB...
+            -----END CERTIFICATE-----
+      required:
+        - content
+    caCertificateList.v1:
+      title: caCertificateList
+      type: array
+      description: List of installed CA certificate names.
+      items:
+        type: string
+      example:
+        - AmazonRootCA1
+        - broker.emqx.io-ca
     actionBlink.v1:
       title: Action Blink Configuration
       type: object
@@ -10842,6 +10879,9 @@ components:
       title: Reader Configuration
       type: object
       properties:
+        xml:
+          type: string
+          description: Current reader XML configuration
         GPIO-LED:
           $ref: '#/components/schemas/GPIOLEDConfig.v1'
         READER-GATEWAY:
@@ -10855,33 +10895,6 @@ components:
             managementEventConfig:
               $ref: '#/components/schemas/eventsConfig.v1'
       description: Configuration body for the set_config request
-    installCACertificate.v1:
-      title: installCACertificate
-      type: object
-      description: Request payload to install a CA certificate.
-      properties:
-        name:
-          type: string
-          description: Required for MQTT API (`set_InstallCACertificate`). Ignored for local REST where the path parameter `{caname}` is used.
-          example: AmazonRootCA1
-        content:
-          type: string
-          description: PEM-encoded CA certificate content.
-          example: |
-            -----BEGIN CERTIFICATE-----
-            MIIB...
-            -----END CERTIFICATE-----
-      required:
-        - content
-    caCertificateList.v1:
-      title: caCertificateList
-      type: array
-      description: List of installed CA certificate names.
-      items:
-        type: string
-      example:
-        - AmazonRootCA1
-        - broker.emqx.io-ca
     logLevel.v1:
       title: logLevel
       type: object

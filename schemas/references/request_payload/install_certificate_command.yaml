@@ -35,6 +35,13 @@ properties:
   url:
     type: string
     description: URL to download the certificate file from.
+  transfer_protocol:
+    type: string
+    description: Optional explicit transfer protocol for certificate download. If omitted, protocol is inferred from the `url` scheme.
+    enum:
+    - HTTPS
+    - FTPS
+    - SFTP
   verifyPeer:
     type: boolean
     description: Verify the server TLS peer certificate.

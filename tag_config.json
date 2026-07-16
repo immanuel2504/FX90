@@ -69,8 +69,8 @@
     "refresh-cert": "certificate",
     "get_network": "network",
     "set_network": "network",
-    "get_hostname": "network",
-    "set_hostname": "network",
+    "get_hostname": "system",
+    "set_hostname": "system",
     "get_availableWifiNetworks": "network",
     "get_networkInterfaces": "network",
     "get_readPoints": "network",
@@ -104,7 +104,10 @@
     "directionality_tag_data_events": "tag-data-events",
     "zoneHistory": "tag-data-events",
     "locationHistory": "tag-data-events",
-    "get_supportedStandardList": "region"
+    "get_supportedStandardList": "region",
+    "get_CACertificates": "certificate",
+    "set_installCACertificate": "certificate",
+    "del_CACertificate": "certificate"
   },
   "operation_order": {
     "control": [
@@ -130,7 +133,9 @@
       "get_cableLossCompensation",
       "set_cableLossCompensation",
       "reboot",
-      "set_password"
+      "set_password",
+      "get_hostname",
+      "set_hostname"
     ],
     "app-led": [
       "get_appled",
@@ -168,7 +173,10 @@
       "get_certs",
       "del_certs",
       "set_update_cert",
-      "refresh-cert"
+      "refresh-cert",
+      "get_CACertificates",
+      "set_installCACertificate",
+      "del_CACertificate"
     ],
     "firmware": [
       "set_os",
@@ -192,9 +200,7 @@
       "get_readPoints",
       "get_gpsCoordinates",
       "get_eSimConfig",
-      "set_eSimConfig",
-      "get_hostname",
-      "set_hostname"
+      "set_eSimConfig"
     ],
     "ble": [
       "get_bleConfig",
@@ -244,9 +250,7 @@
     ]
   },
   "excluded_operations": [
-    "localrest_login",
-    "set_installCACertificate",
-    "del_CACertificate"
+    "localrest_login"
   ],
   "display_name_aliases": {
     "get_supportedStandardList": "get_SupportedStandardlist"

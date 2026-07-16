@@ -113,7 +113,9 @@
             "get_cableLossCompensation",
             "set_cableLossCompensation",
             "reboot",
-            "set_password"
+            "set_password",
+            "get_hostname",
+            "set_hostname"
         ],
         "app-led": [
             "get_appled",
@@ -151,7 +153,10 @@
             "get_certs",
             "del_certs",
             "set_update_cert",
-            "refresh-cert"
+            "refresh-cert",
+            "get_CACertificates",
+            "set_installCACertificate",
+            "del_CACertificate"
         ],
         "firmware": [
             "set_os",
@@ -175,9 +180,7 @@
             "get_readPoints",
             "get_gpsCoordinates",
             "get_eSimConfig",
-            "set_eSimConfig",
-            "get_hostname",
-            "set_hostname"
+            "set_eSimConfig"
         ],
         "ble": [
             "get_bleConfig",
@@ -13924,6 +13927,312 @@
                 }
             }
         },
+        "/get_hostname": {
+            "post": {
+                "tags": [
+                    "system"
+                ],
+                "summary": "Get Hostname",
+                "description": "## 1. Description\n\nThe `get_hostname` command retrieves the reader's currently configured network hostname.\n\nThis command returns:\n\n- The hostname string currently assigned to the reader\n\nNo additional payload fields are required to retrieve the hostname.\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Hostname Query |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| REST Endpoint | `GET /cloud/hostName` |\n| Related Commands | [set_hostname](set_hostname.md), [get_network](get_network.md) |\n| Supported Operations | Retrieve the configured reader hostname |\n\n## 3. When to Use This Command\n\nUse `get_hostname` to:\n\n- Verify the hostname assigned to a reader during provisioning\n- Confirm the hostname matches the expected naming convention for the deployment\n- Retrieve the current hostname before changing it with `set_hostname`\n- Verify the result of a prior `set_hostname` call\n\nKey fields to check in the response:\n\n| Field | What to Check | Why It Matters |\n|---|---|---|\n| `hostName` | Does it match the expected naming convention? | The hostname identifies the reader on the local network and in management systems; a mismatch may indicate the wrong reader was configured. |",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_hostname"
+                                        ],
+                                        "example": "get_hostname",
+                                        "description": "The value for command must be get_hostname"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "a12cb345654",
+                                        "description": "A Unique Id echoed by the reader in the response to Get Hostname"
+                                    },
+                                    "payload": {
+                                        "title": "get_hostname",
+                                        "type": "object",
+                                        "description": "Reader hostname information"
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ],
+                                "x-examples": {
+                                    "Example 1": {
+                                        "command": "get_hostname",
+                                        "command_id": "a12cb345654",
+                                        "payload": {}
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_hostname",
+                                        "command_id": "a12cb345654",
+                                        "payload": {}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "get_hostname response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "description": "The value for the key command must be get_hostname",
+                                            "enum": [
+                                                "get_hostname"
+                                            ]
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                            "example": "a12cb345654"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ]
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "title": "get_hostName",
+                                                    "type": "object",
+                                                    "description": "Reader hostname information",
+                                                    "properties": {
+                                                        "hostName": {
+                                                            "type": "string",
+                                                            "description": "Current hostname configured on the reader."
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "hostName"
+                                                    ],
+                                                    "x-stoplight": {
+                                                        "id": "66v28ebog3asj"
+                                                    }
+                                                },
+                                                {
+                                                    "title": "failure",
+                                                    "type": "object",
+                                                    "description": "description of the error",
+                                                    "properties": {
+                                                        "code": {
+                                                            "type": "integer",
+                                                            "description": "The error code",
+                                                            "example": 1,
+                                                            "enum": [
+                                                                1,
+                                                                2,
+                                                                3,
+                                                                6,
+                                                                7
+                                                            ]
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "A brief description of the error"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "code",
+                                                        "message"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "get_hostname",
+                                            "command_id": "a12cb345654",
+                                            "response": "success",
+                                            "payload": {
+                                                "hostName": "FXR90C60C001"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/set_hostname": {
+            "post": {
+                "tags": [
+                    "system"
+                ],
+                "summary": "Set Hostname",
+                "description": "## 1. Description\n\nThe `set_hostname` command sets the network hostname of the reader.\n\nThis command allows you to configure:\n\n- The reader's network hostname through `hostname`\n\nUse this command to:\n\n- Assign a recognizable hostname for network identification during provisioning\n- Standardize hostname naming conventions across a fleet\n- Update the hostname after a reader is relocated or re-provisioned\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Hostname Configuration |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| REST Endpoint | `PUT /cloud/hostName` |\n| Related Commands | [get_hostname](get_hostname.md), [set_network](set_network.md), [get_network](get_network.md) |\n| Required Payload Fields | `hostname` |\n\n## 3. Before You Begin\n\nHave the desired hostname ready before sending this command. Duplicate hostnames on the same network can cause resolution conflicts.\n\n| What You Need | Details |\n|---|---|\n| Hostname string | The desired hostname (payload key: `hostname`). Must be a valid RFC 1123 hostname - lowercase alphanumeric characters and hyphens only; no underscores or spaces. |\n| Network uniqueness | Verify the chosen hostname is not already in use on the network segment to avoid DNS or mDNS conflicts. |",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "set_hostname"
+                                        ],
+                                        "example": "set_hostname",
+                                        "description": "The value for the key command must be set_hostname"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "abcd345",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "title": "set_hostname",
+                                        "type": "object",
+                                        "description": "Set the hostname of the reader",
+                                        "properties": {
+                                            "hostname": {
+                                                "type": "string",
+                                                "description": "New hostname for the reader. Use lowercase alphanumeric characters and hyphens only (RFC 1123). Must match the GET /cloud/hostName response field name casing on the device."
+                                            }
+                                        },
+                                        "x-stoplight": {
+                                            "id": "set_hostname_cmd"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ]
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "set_hostname",
+                                        "command_id": "abcd345",
+                                        "payload": {
+                                            "hostname": "FX75006A0B8C"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "set_hostname response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "set_hostname"
+                                            ],
+                                            "description": "The value for the key command must be set_hostname"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                            "example": "abcd345"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ]
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "title": "success",
+                                                    "type": "object",
+                                                    "description": "Updates the reader hostname"
+                                                },
+                                                {
+                                                    "title": "failure",
+                                                    "type": "object",
+                                                    "description": "description of the error",
+                                                    "properties": {
+                                                        "code": {
+                                                            "type": "integer",
+                                                            "description": "The error code",
+                                                            "example": 1,
+                                                            "enum": [
+                                                                1,
+                                                                2,
+                                                                3,
+                                                                6,
+                                                                7
+                                                            ]
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "A brief description of the error"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "code",
+                                                        "message"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id",
+                                        "response"
+                                    ]
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_hostname",
+                                            "command_id": "abcd345",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/get_appled": {
             "post": {
                 "tags": [
@@ -18509,6 +18818,15 @@
                                                 "type": "string",
                                                 "description": "URL to download the certificate file from."
                                             },
+                                            "transfer_protocol": {
+                                                "type": "string",
+                                                "description": "Optional explicit transfer protocol for certificate download. If omitted, protocol is inferred from the `url` scheme.",
+                                                "enum": [
+                                                    "HTTPS",
+                                                    "FTPS",
+                                                    "SFTP"
+                                                ]
+                                            },
                                             "verifyPeer": {
                                                 "type": "boolean",
                                                 "description": "Verify the server TLS peer certificate."
@@ -18864,6 +19182,547 @@
                                         "value": {
                                             "command": "set_refreshCertificate",
                                             "command_id": "abcd1324",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/get_CACertificates": {
+            "post": {
+                "tags": [
+                    "certificate"
+                ],
+                "summary": "Get Cacertificates",
+                "description": "## 1. Description\n\nThe `get_CACertificates` command retrieves the list of CA (Certificate Authority) certificates currently installed on the reader.\n\nThe response payload is an array of the installed CA certificate names.\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | CA Certificate Query |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| REST Endpoint | `GET /cloud/caCertificates` |\n| Related Commands | [set_installCACertificate](set_installCACertificate.md), [del_CACertificate](del_CACertificate.md), [get_certs](get_certs.md) |\n| Supported Operations | List installed CA certificate names |\n\n## 3. When to Use This Command\n\nUse `get_CACertificates` to:\n\n- Confirm which CA certificates are installed before configuring a TLS endpoint that must trust them\n- Audit the reader's CA trust store across a fleet\n- Verify a CA certificate was installed successfully after `set_installCACertificate`, or removed after `del_CACertificate`",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "enum": [
+                                            "get_CACertificates"
+                                        ],
+                                        "example": "get_CACertificates",
+                                        "description": "The value for the key command must be get_CACertificates"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "example": "abcd1234",
+                                        "description": "A unique ID that will be echoed back in the command response by the reader."
+                                    },
+                                    "payload": {
+                                        "type": "object",
+                                        "title": "get_CACertificates",
+                                        "description": "Command to list the installed CA certificates on the reader. No payload fields are required.",
+                                        "properties": {}
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id"
+                                ]
+                            },
+                            "examples": {
+                                "default": {
+                                    "value": {
+                                        "command": "get_CACertificates",
+                                        "command_id": "abcd1234",
+                                        "payload": {}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "get_CACertificates response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "enum": [
+                                                "get_CACertificates"
+                                            ],
+                                            "example": "get_CACertificates",
+                                            "description": "The value for the key command must be get_CACertificates"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "example": "abcd1234",
+                                            "description": "A unique ID that will be echoed back in the command response by the reader."
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ],
+                                            "example": "success"
+                                        },
+                                        "payload": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "array",
+                                                    "title": "caCertificateList",
+                                                    "description": "List of installed CA certificate names.",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                {
+                                                    "title": "failure",
+                                                    "type": "object",
+                                                    "description": "description of the error",
+                                                    "properties": {
+                                                        "code": {
+                                                            "type": "integer",
+                                                            "description": "The error code",
+                                                            "example": 1,
+                                                            "enum": [
+                                                                1,
+                                                                2,
+                                                                3,
+                                                                6,
+                                                                7
+                                                            ]
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "A brief description of the error"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "code",
+                                                        "message"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id"
+                                    ]
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": {
+                                            "command": "get_CACertificates",
+                                            "command_id": "abcd1234",
+                                            "response": "success",
+                                            "payload": []
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/set_installCACertificate": {
+            "post": {
+                "tags": [
+                    "certificate"
+                ],
+                "summary": "Set Installcacertificate",
+                "description": "## 1. Description\n\nThe `set_installCACertificate` command installs a CA (Certificate Authority) root certificate on the reader by providing the PEM-encoded certificate content inline in the payload.\n\nThis command allows you to configure:\n\n- The CA certificate name on the reader through `name`\n- The PEM-encoded certificate content through `content`\n\nUse this command to:\n\n- Trust a private CA so the reader can validate TLS connections to your MQTT or HTTPS endpoints\n- Add a CA root certificate required for chain validation before mutual TLS is configured\n- Support your organization's PKI for both client and server TLS certificate validation\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | CA Certificate Installation |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| Related Commands | [del_CACertificate](del_CACertificate.md), [set_update_cert](set_update_cert.md) |\n| Required Payload Fields | `name`, `content` |\n\n## 3. Before You Begin\n\nHave the CA certificate's PEM content ready before sending this command. Invalid PEM content will be rejected and the CA will not be installed.\n\n| What You Need | Details |\n|---|---|\n| CA certificate name | A unique name to assign this CA certificate on the reader. If a CA with this name already exists, it will be replaced. |\n| PEM content | The full PEM-encoded CA certificate string, including the `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----` headers and footers. |\n| Certificate validity | Confirm the CA certificate is not expired before installing it. An expired CA root will still install but will fail to validate any certificates it issued. |\n| Intended use | Know which MQTT broker or HTTP endpoint TLS certificate is issued by this CA, so you can verify the chain after installation. |",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                            "id": "0c7zf7xokhhsw"
+                                        },
+                                        "enum": [
+                                            "set_InstallCACertificate"
+                                        ],
+                                        "example": "set_InstallCACertificate",
+                                        "description": "The value for the key command must be set_InstallCACertificate"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                            "id": "bxe3nh799mqcg"
+                                        },
+                                        "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                        "example": "abcd1234"
+                                    },
+                                    "payload": {
+                                        "title": "set_InstallCACertificate",
+                                        "x-stoplight": {
+                                            "id": "j3d4tgmsx7r73"
+                                        },
+                                        "type": "object",
+                                        "description": "Install CA Certificate on the reader",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "x-stoplight": {
+                                                    "id": "qv0057avfyq3a"
+                                                },
+                                                "description": "Required for MQTT API (`set_InstallCACertificate`). Ignored for local REST where the path parameter `{caname}` is used."
+                                            },
+                                            "content": {
+                                                "type": "string",
+                                                "x-stoplight": {
+                                                    "id": "tfwfxoyswm6eq"
+                                                },
+                                                "description": "PEM-encoded CA certificate content."
+                                            }
+                                        },
+                                        "required": [
+                                            "name",
+                                            "content"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ],
+                                "x-examples": {
+                                    "Example 1": {
+                                        "command": "set_InstallCACertificate",
+                                        "command_id": "abcd1234",
+                                        "payload": {
+                                            "name": "cacert",
+                                            "content": "-----BEGIN CERTIFICATE-----\r\nMIIEVTCCAz2gAwIBAgIUOhTtie7JVOnggZyYYJKoZIhvcNAQEL\r\nBQAwgbgxCzAJBgNVBAYTAklOMRIwEAYDVQQIDAlLYXJuYXRha2ExEjAQBgNVBAcM\r\nCUJlbmdhbHVydTEbMBkGA1UECgwSWmVicmFfVGVjaG5vbG9naWVzMRowGAYDVQQL\r\nDBFEQ1NfUkZJRF9TdGFyZmlzaDEnMCUGA1UEAwweZWwxMTRkMXUyMC01OTUuemxh\r\nYi5jb21fUm9vdENBMR8wHQYJKoZIhvcNAQkBFhBxdms2MzhAemVicmEuY29tMCAX\r\nDTIzMDcyNjA2MzQzNVoYDzIxMjMwNzAyMDYzNDM1WjCBuDELMAkGA1UEBhMCSU4x\r\nEjAQBgNVBAgMCUthcm5hdGFrYTESMBAGA1UEBwwJQmVuZ2FsdXJ1MRswGQYDVQQK\r\nDBJaZWJyYV9UZWNobm9sb2dpZXMxGjAYBgNVBAsMEURDU19SRklEX1N0YXJmaXNo\r\nMScwJQYDVQQDDB5lbDExNGQxdTIwLTU5NS56bGFiLmNvbV9Sb290Q0ExHzAdBgkq\r\nhkiG9w0BCQEWEHF2azYzOEB6ZWJyYS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IB\r\nDwAwggEKAoIBAQDNPbuF2CLXLkBGMf5WkJGp9Qyi+E7cQA9/TD4fJh7Exd0x2pCi\r\nuqcuGqI585NNhn8tsCiDpNh2YhKpr+Q+qauessOsKUEnW0kciq7KfhWupHJ1XEBh\r\nAzswIMEjs1uvWKIGsuYvzwpNo+1h7uJZRHnWf2aEFa4nEETm+21eudiQftgvoe5l\r\nd37haoJmKewLvmD7E9pUzlLSLZxBWcWEPSfHJO3u4+2jCuf404Dru0O/jgQGbekh\r\nXxLldfaYuq+GJG+/hvsw2UaFBXdrxhHP3sKfChyVfss9JKsJLzlgleE7u7PAkpLZ\r\nKJZPUrj2Ru6WefSWiQY65BWqOuNk7Lh6mIDDAgMBAAGjUzBRMB0GA1UdDgQWBBSi\r\noz6avhwJ8CN0L8SeVQlNmDNLFjAfBgNVHSMEGDAWgBSioz6avhwJ8CN0L8SeVQlN\r\nmDNLFjAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCRgfrIWw6g\r\nnTmIFaatvI0qhpT3N+Eaq5UtKqtpKNOIuI00Cn+z6dzsLuz1KvdJEnWjzCFIYT+a\r\nSkL2SddbhACEWP5+nghrwd0iyBZmi+l8Ooh62Gkn1w7Sqd4uTgTdmSICSOc1mQFE\r\nwh6gx1b8eAKY4MnXDLLLyraef7GGgPSoVcNgG2zoHDzfMEhfxjXb0lT47VGEjjR2\r\nmYsEtC8olXZ+or1cUs8hcftDZGLMK7TH16o19gzEos+E9sUh/CZS6fBwcnBlxens\r\nZupBzwV4qH/JV4csizAL8BLPyALl2ErisQRb7/PVvB55JX9Egd2nqcYFGIHrusyh\r\nzTwoS0OMXfLK\r\n-----END CERTIFICATE-----\r\n"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "set_InstallCACertificate",
+                                        "command_id": "abcd1234",
+                                        "payload": {
+                                            "name": "cacert",
+                                            "content": "-----BEGIN CERTIFICATE-----\r\nMIIEVTCCAz2gAwIBAgIUOhTtie7JVOnggZyYRdQmhg50ik4wDQYJKoZIhvcNAQEL\r\nBQAwgbgxCzAJBgNVBAYTAklOMRIwEAYDVQQIDAlLYXJuYXRha2ExEjAQBgNVBAcM\r\nCUJlbmdhbHVydTEbMBkGA1UECgwSWmVicmFfVGVjaG5vbG9naWVzMRowGAYDVQQL\r\nDBFEQ1NfUkZJRF9TdGFyZmlzaDEnMCUGA1UEAwweZWwxMTRkMXUyMC01OTUuemxh\r\nYi5jb21fUm9vdENBMR8wHQYJKoZIhvcNAQkBFhBxdms2MzhAemVicmEuY29tMCAX\r\nDTIzMDcyNjA2MzQzNVoYDzIxMjMwNzAyMDYzNDM1WjCBuDELMAkGA1UEBhMCSU4x\r\nEjAQBgNVBAgMCUthcm5hdGFrYTESMBAGA1UEBwwJQmVuZ2FsdXJ1MRswGQYDVQQK\r\nDBJaZWJyYV9UZWNobm9sb2dpZXMxGjAYBgNVBAsMEURDU19SRklEX1N0YXJmaXNo\r\nMScwJQYDVQQDDB5lbDExNGQxdTIwLTU5NS56bGFiLmNvbV9Sb290Q0ExHzAdBgkq\r\nhkiG9w0BCQEWEHF2azYzOEB6ZWJyYS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IB\r\nDwAwggEKAoIBAQDNPbuF2CLXLkBGMf5WkJGp9Qyi+E7cQA9/TD4fJh7Exd0x2pCi\r\nuqcuGqI585NNhn8tsCiDpNh2YhKpr+Q+qauessOsKUEnW0kciq7KfhWupHJ1XEBh\r\nAzswIMEjs1uvWKIGsuYvzwpNo+1h7uJZRHnWf2aEFa4nEETm+21eudiQftgvoe5l\r\nd37haoJmKewLvmD7E9pUzlLSLZxBWcWEPSfHJO3u4+2jCuf404Dru0O/jgQGbekh\r\nXxLldfaYuq+GJG+/hvsw2UaFBXdrxhHP3sKfChyVfss9JKsJLzlgleE7u7PAkpLZ\r\nKJZPUrj2Ru6WefSWiQY65BWqOuNk7Lh6mIDDAgMBAAGjUzBRMB0GA1UdDgQWBBSi\r\noz6avhwJ8CN0L8SeVQlNmDNLFjAfBgNVHSMEGDAWgBSioz6avhwJ8CN0L8SeVQlN\r\nmDNLFjAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCRgfrIWw6g\r\nnTmIFaatvI0qhpT3N+Eaq5UtKqtpKNOIuI00Cn+z6dzsLuz1KvdJEnWjzCFIYT+a\r\nSkL2SddbhACEWP5+nghrwd0iyBZmi+l8Ooh62Gkn1w7Sqd4uTgTdmSICSOc1mQFE\r\nwh6gx1b8eAKY4MnXDLLLyraef7GGgPSoVcNgG2zoHDzfMEhfxjXb0lT47VGEjjR2\r\nmYsEtC8olXZ+or1cUs8hcftDZGLMK7TH16o19gzEos+E9sUh/CZS6fBwcnBlxens\r\nZupBzwV4qH/JV4csizAL8BLPyALl2ErisQRb7/PVvB55JX9Egd2nqcYFGIHrusyh\r\nzTwoS0OMXfLK\r\n-----END CERTIFICATE-----\r\n"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "set_installCACertificate response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "p0am4ixaunpl1"
+                                            },
+                                            "enum": [
+                                                "set_InstallCACertificate"
+                                            ],
+                                            "example": "set_InstallCACertificate",
+                                            "description": "The value for the key command must be set_InstallCACertificate"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "z9ieyq8kzpdr7"
+                                            },
+                                            "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                            "example": "abcd1234"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "3cuxc59a0dwhw"
+                                            },
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ]
+                                        },
+                                        "payload": {
+                                            "x-stoplight": {
+                                                "id": "l6rrme68fau0t"
+                                            },
+                                            "oneOf": [
+                                                {
+                                                    "title": "success",
+                                                    "x-stoplight": {
+                                                        "id": "1rakt6s7t9g6f"
+                                                    },
+                                                    "type": "object",
+                                                    "description": "Install CA Certificate on the reader"
+                                                },
+                                                {
+                                                    "title": "failure",
+                                                    "type": "object",
+                                                    "description": "description of the error",
+                                                    "properties": {
+                                                        "code": {
+                                                            "type": "integer",
+                                                            "description": "The error code",
+                                                            "example": 1,
+                                                            "enum": [
+                                                                1,
+                                                                2,
+                                                                3,
+                                                                6,
+                                                                7
+                                                            ]
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "A brief description of the error"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "code",
+                                                        "message"
+                                                    ],
+                                                    "x-stoplight": {
+                                                        "id": "46y46dbyt3j2z"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id"
+                                    ],
+                                    "x-examples": {
+                                        "Example 1": {
+                                            "command": "set_InstallCACertificate",
+                                            "command_id": "abcd1234",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "set_InstallCACertificate",
+                                            "command_id": "abcd1234",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/del_CACertificate": {
+            "post": {
+                "tags": [
+                    "certificate"
+                ],
+                "summary": "Del Cacertificate",
+                "description": "## 1. Description\n\nThe `del_CACertificate` command removes an installed CA (Certificate Authority) root certificate from the reader. When you run this command, the CA certificate identified by name is permanently deleted from the reader's CA certificate store.\n\nUse this command to:\n\n- Remove a CA certificate that is no longer trusted or has been compromised\n- Clean up the CA store before installing a replacement with `set_installCACertificate`\n- Rotate PKI trust anchors on the reader as part of a certificate lifecycle policy\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | CA Certificate Deletion |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| Related Commands | [set_installCACertificate](set_installCACertificate.md), [del_certs](del_certs.md) |\n| Required Payload Fields | `name` |\n\n## 3. Before You Begin\n\nConfirm the CA certificate is safe to remove before sending this command. Deleting a CA that is actively used for TLS verification will cause all TLS connections that depend on it to fail.\n\n| What You Need | Details |\n|---|---|\n| CA certificate name | The exact `name` of the CA certificate to delete, as returned by `get_certs`. The name is case-sensitive. |\n| Active use check | Identify all MQTT or HTTPS endpoints whose server or client certificates are issued by this CA. Remove those dependencies or install a replacement CA before deleting. |",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "command": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                            "id": "4yan4r9nrytt1"
+                                        },
+                                        "enum": [
+                                            "del_CACertificate"
+                                        ],
+                                        "example": "del_CACertificate",
+                                        "description": "The value for the key command must be del_CACertificate"
+                                    },
+                                    "command_id": {
+                                        "type": "string",
+                                        "x-stoplight": {
+                                            "id": "6cbikvs1h8fh8"
+                                        },
+                                        "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                        "example": "abcd1234"
+                                    },
+                                    "payload": {
+                                        "title": "del_CACertificate",
+                                        "x-stoplight": {
+                                            "id": "lwg7q0q7h07km"
+                                        },
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "x-stoplight": {
+                                                    "id": "7m444vi2dsnj7"
+                                                },
+                                                "description": "Name of the CA certificate that needs to be deleted"
+                                            }
+                                        },
+                                        "required": [
+                                            "name"
+                                        ],
+                                        "description": "Deletes the CA Certificate from the reader"
+                                    }
+                                },
+                                "required": [
+                                    "command",
+                                    "command_id",
+                                    "payload"
+                                ],
+                                "x-examples": {
+                                    "Example 1": {
+                                        "command": "del_CACertificate",
+                                        "command_id": "abcd1234",
+                                        "payload": {
+                                            "name": "cacert"
+                                        }
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "example1": {
+                                    "value": {
+                                        "command": "del_CACertificate",
+                                        "command_id": "abcd1234",
+                                        "payload": {
+                                            "name": "cacert"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "del_CACertificate response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "command": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "xtibx4k35ahzo"
+                                            },
+                                            "enum": [
+                                                "del_CACertificate"
+                                            ],
+                                            "example": "del_CACertificate",
+                                            "description": "The value for the key command must be del_CACertificate"
+                                        },
+                                        "command_id": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "dw42rwl7u36hp"
+                                            },
+                                            "description": "A unique ID that will be echoed back in the command response by the reader.",
+                                            "example": "abcd1234"
+                                        },
+                                        "response": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "f8llzegq6wga7"
+                                            },
+                                            "enum": [
+                                                "success",
+                                                "failure"
+                                            ]
+                                        },
+                                        "payload": {
+                                            "x-stoplight": {
+                                                "id": "8ez6pir960tly"
+                                            },
+                                            "oneOf": [
+                                                {
+                                                    "title": "success",
+                                                    "x-stoplight": {
+                                                        "id": "lw0r7lns7izky"
+                                                    },
+                                                    "type": "object",
+                                                    "description": "Deletes the CA Certificate from the reader"
+                                                },
+                                                {
+                                                    "title": "failure",
+                                                    "type": "object",
+                                                    "description": "description of the error",
+                                                    "properties": {
+                                                        "code": {
+                                                            "type": "integer",
+                                                            "description": "The error code",
+                                                            "example": 1,
+                                                            "enum": [
+                                                                1,
+                                                                2,
+                                                                3,
+                                                                6,
+                                                                7
+                                                            ]
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "A brief description of the error"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "code",
+                                                        "message"
+                                                    ],
+                                                    "x-stoplight": {
+                                                        "id": "bjyjicbzbh06t"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "command",
+                                        "command_id"
+                                    ],
+                                    "x-examples": {
+                                        "Example 1": {
+                                            "command": "del_CACertificate",
+                                            "command_id": "abcd1234",
+                                            "response": "success",
+                                            "payload": {}
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "command": "del_CACertificate",
+                                            "command_id": "abcd1234",
                                             "response": "success",
                                             "payload": {}
                                         }
@@ -22081,7 +22940,7 @@
                     "network"
                 ],
                 "summary": "Set Esimconfig",
-                "description": "## 1. Description\n\nThe `set_eSimConfig` command updates the eSIM profile state on the reader.\n\nThis command allows you to configure:\n\n- The eSIM operation to perform through `operation`\n- The target profile nickname through `profileNickName`\n\nUse this command to:\n\n- Enable a specific eSIM carrier profile on the reader\n- Switch between installed eSIM profiles for different cellular network providers\n- Apply eSIM provisioning changes from your carrier management system\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | eSIM Configuration |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| REST Endpoint | `PUT /cloud/eSimConfig` |\n| Related Commands | [get_eSimConfig](get_eSimConfig.md), [get_network](get_network.md), [set_network](set_network.md) |\n| Supported Operations | `enable`, `disable` |\n\n## 3. Before You Begin\n\nUse `get_eSimConfig` first to retrieve the exact profile nickname available on the reader before sending this command.\n\n| What You Need | Details |\n|---|---|\n| Operation | The eSIM operation to perform: `enable` to activate the selected profile, or `disable` to deactivate it. |\n| Profile nickname | The exact nickname of the eSIM profile to enable, as returned by `get_eSimConfig`. The nickname must match exactly - case-sensitive. |\n| Active SIM setting | After enabling an eSIM profile, confirm the `wan0.activeSim` is set to `esim` in the network configuration (see `set_network`) for the profile to be used for data. |",
+                "description": "## 1. Description\n\nThe `set_eSimConfig` command updates the eSIM profile state on the reader.\n\nThis command allows you to configure:\n\n- The eSIM operation to perform through `operation`\n- The target profile nickname through `profileNickName`\n- The activation code for provisioning a new profile through `activationID`\n\nUse this command to:\n\n- Add (install) a new eSIM profile using its activation code\n- Enable a specific eSIM carrier profile on the reader\n- Switch between installed eSIM profiles for different cellular network providers\n- Delete an eSIM profile from the reader\n- Apply eSIM provisioning changes from your carrier management system\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | eSIM Configuration |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| REST Endpoint | `PUT /cloud/eSimConfig` |\n| Related Commands | [get_eSimConfig](get_eSimConfig.md), [get_network](get_network.md), [set_network](set_network.md) |\n| Supported Operations | `add`, `delete`, `enable`, `disable` |\n\n## 3. Before You Begin\n\nUse `get_eSimConfig` first to retrieve the exact profile nickname available on the reader before sending this command.\n\n| What You Need | Details |\n|---|---|\n| Operation | The eSIM operation to perform: `add` to provision a new profile, `delete` to remove one, `enable` to activate the selected profile, or `disable` to deactivate it. |\n| Profile nickname | The exact nickname of the eSIM profile to apply the operation to, as returned by `get_eSimConfig`. The nickname must match exactly - case-sensitive. |\n| Activation code | Required only when `operation` is `add`: the activation code/ID (`activationID`) used to provision the new eSIM profile. Omit for `enable`, `disable`, and `delete`. |\n| Active SIM setting | After enabling an eSIM profile, confirm the `wan0.activeSim` is set to `esim` in the network configuration (see `set_network`) for the profile to be used for data. |",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -22109,6 +22968,8 @@
                                                 "type": "string",
                                                 "description": "eSIM profile operation to perform.",
                                                 "enum": [
+                                                    "add",
+                                                    "delete",
                                                     "enable",
                                                     "disable"
                                                 ],
@@ -22118,8 +22979,17 @@
                                                 "type": "string",
                                                 "description": "Nickname of the eSIM profile to apply the operation to.",
                                                 "example": "gnd1"
+                                            },
+                                            "activationID": {
+                                                "type": "string",
+                                                "description": "Activation code/ID for provisioning a new eSIM profile. Required only when `operation` is `add`. Must be omitted for `enable`, `disable`, and `delete`.",
+                                                "example": "LPA:1$RSP.GSMA.COM$ABCDEF1234567890"
                                             }
-                                        }
+                                        },
+                                        "required": [
+                                            "operation",
+                                            "profileNickName"
+                                        ]
                                     }
                                 },
                                 "required": [
@@ -22129,12 +22999,36 @@
                                 ]
                             },
                             "examples": {
-                                "example1": {
+                                "Enable eSIM profile": {
+                                    "description": "Enables the specified eSIM profile on the reader.",
                                     "value": {
                                         "command": "set_eSimConfig",
                                         "command_id": "esim-set-001",
                                         "payload": {
                                             "operation": "enable",
+                                            "profileNickName": "gnd1"
+                                        }
+                                    }
+                                },
+                                "Add (install) eSIM profile": {
+                                    "description": "Provisions and installs a new eSIM profile using its activation code.",
+                                    "value": {
+                                        "command": "set_eSimConfig",
+                                        "command_id": "esim-set-001",
+                                        "payload": {
+                                            "operation": "add",
+                                            "profileNickName": "gnd1",
+                                            "activationID": "LPA:1$RSP.GSMA.COM$ABCDEF1234567890"
+                                        }
+                                    }
+                                },
+                                "Delete eSIM profile": {
+                                    "description": "Removes the specified eSIM profile from the reader.",
+                                    "value": {
+                                        "command": "set_eSimConfig",
+                                        "command_id": "esim-set-001",
+                                        "payload": {
+                                            "operation": "delete",
                                             "profileNickName": "gnd1"
                                         }
                                     }
@@ -22229,312 +23123,6 @@
                 }
             }
         },
-        "/get_hostname": {
-            "post": {
-                "tags": [
-                    "network"
-                ],
-                "summary": "Get Hostname",
-                "description": "## 1. Description\n\nThe `get_hostname` command retrieves the reader's currently configured network hostname.\n\nThis command returns:\n\n- The hostname string currently assigned to the reader\n\nNo additional payload fields are required to retrieve the hostname.\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Hostname Query |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| REST Endpoint | `GET /cloud/hostName` |\n| Related Commands | [set_hostname](set_hostname.md), [get_network](get_network.md) |\n| Supported Operations | Retrieve the configured reader hostname |\n\n## 3. When to Use This Command\n\nUse `get_hostname` to:\n\n- Verify the hostname assigned to a reader during provisioning\n- Confirm the hostname matches the expected naming convention for the deployment\n- Retrieve the current hostname before changing it with `set_hostname`\n- Verify the result of a prior `set_hostname` call\n\nKey fields to check in the response:\n\n| Field | What to Check | Why It Matters |\n|---|---|---|\n| `hostName` | Does it match the expected naming convention? | The hostname identifies the reader on the local network and in management systems; a mismatch may indicate the wrong reader was configured. |",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "command": {
-                                        "type": "string",
-                                        "enum": [
-                                            "get_hostname"
-                                        ],
-                                        "example": "get_hostname",
-                                        "description": "The value for command must be get_hostname"
-                                    },
-                                    "command_id": {
-                                        "type": "string",
-                                        "example": "a12cb345654",
-                                        "description": "A Unique Id echoed by the reader in the response to Get Hostname"
-                                    },
-                                    "payload": {
-                                        "title": "get_hostname",
-                                        "type": "object",
-                                        "description": "Reader hostname information"
-                                    }
-                                },
-                                "required": [
-                                    "command",
-                                    "command_id",
-                                    "payload"
-                                ],
-                                "x-examples": {
-                                    "Example 1": {
-                                        "command": "get_hostname",
-                                        "command_id": "a12cb345654",
-                                        "payload": {}
-                                    }
-                                }
-                            },
-                            "examples": {
-                                "default": {
-                                    "value": {
-                                        "command": "get_hostname",
-                                        "command_id": "a12cb345654",
-                                        "payload": {}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "default": {
-                        "description": "get_hostname response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "command": {
-                                            "type": "string",
-                                            "description": "The value for the key command must be get_hostname",
-                                            "enum": [
-                                                "get_hostname"
-                                            ]
-                                        },
-                                        "command_id": {
-                                            "type": "string",
-                                            "description": "A unique ID that will be echoed back in the command response by the reader.",
-                                            "example": "a12cb345654"
-                                        },
-                                        "response": {
-                                            "type": "string",
-                                            "enum": [
-                                                "success",
-                                                "failure"
-                                            ]
-                                        },
-                                        "payload": {
-                                            "oneOf": [
-                                                {
-                                                    "title": "get_hostName",
-                                                    "type": "object",
-                                                    "description": "Reader hostname information",
-                                                    "properties": {
-                                                        "hostName": {
-                                                            "type": "string",
-                                                            "description": "Current hostname configured on the reader."
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "hostName"
-                                                    ],
-                                                    "x-stoplight": {
-                                                        "id": "66v28ebog3asj"
-                                                    }
-                                                },
-                                                {
-                                                    "title": "failure",
-                                                    "type": "object",
-                                                    "description": "description of the error",
-                                                    "properties": {
-                                                        "code": {
-                                                            "type": "integer",
-                                                            "description": "The error code",
-                                                            "example": 1,
-                                                            "enum": [
-                                                                1,
-                                                                2,
-                                                                3,
-                                                                6,
-                                                                7
-                                                            ]
-                                                        },
-                                                        "message": {
-                                                            "type": "string",
-                                                            "description": "A brief description of the error"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "code",
-                                                        "message"
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "command",
-                                        "command_id",
-                                        "response"
-                                    ]
-                                },
-                                "examples": {
-                                    "example1": {
-                                        "value": {
-                                            "command": "get_hostname",
-                                            "command_id": "a12cb345654",
-                                            "response": "success",
-                                            "payload": {
-                                                "hostName": "FXR90C60C001"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/set_hostname": {
-            "post": {
-                "tags": [
-                    "network"
-                ],
-                "summary": "Set Hostname",
-                "description": "## 1. Description\n\nThe `set_hostname` command sets the network hostname of the reader.\n\nThis command allows you to configure:\n\n- The reader's network hostname through `hostname`\n\nUse this command to:\n\n- Assign a recognizable hostname for network identification during provisioning\n- Standardize hostname naming conventions across a fleet\n- Update the hostname after a reader is relocated or re-provisioned\n\n## 2. Command Details\n\n| Property | Value |\n|---|---|\n| Pattern Name | Hostname Configuration |\n| Communication Type | Bidirectional (Cloud to Device, Device to Cloud) |\n| Applies To | FXR90 |\n| REST Endpoint | `PUT /cloud/hostName` |\n| Related Commands | [get_hostname](get_hostname.md), [set_network](set_network.md), [get_network](get_network.md) |\n| Required Payload Fields | `hostname` |\n\n## 3. Before You Begin\n\nHave the desired hostname ready before sending this command. Duplicate hostnames on the same network can cause resolution conflicts.\n\n| What You Need | Details |\n|---|---|\n| Hostname string | The desired hostname (payload key: `hostname`). Must be a valid RFC 1123 hostname - lowercase alphanumeric characters and hyphens only; no underscores or spaces. |\n| Network uniqueness | Verify the chosen hostname is not already in use on the network segment to avoid DNS or mDNS conflicts. |",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "command": {
-                                        "type": "string",
-                                        "enum": [
-                                            "set_hostname"
-                                        ],
-                                        "example": "set_hostname",
-                                        "description": "The value for the key command must be set_hostname"
-                                    },
-                                    "command_id": {
-                                        "type": "string",
-                                        "example": "abcd345",
-                                        "description": "A unique ID that will be echoed back in the command response by the reader."
-                                    },
-                                    "payload": {
-                                        "title": "set_hostname",
-                                        "type": "object",
-                                        "description": "Set the hostname of the reader",
-                                        "properties": {
-                                            "hostname": {
-                                                "type": "string",
-                                                "description": "New hostname for the reader. Use lowercase alphanumeric characters and hyphens only (RFC 1123). Must match the GET /cloud/hostName response field name casing on the device."
-                                            }
-                                        },
-                                        "x-stoplight": {
-                                            "id": "set_hostname_cmd"
-                                        }
-                                    }
-                                },
-                                "required": [
-                                    "command",
-                                    "command_id",
-                                    "payload"
-                                ]
-                            },
-                            "examples": {
-                                "example1": {
-                                    "value": {
-                                        "command": "set_hostname",
-                                        "command_id": "abcd345",
-                                        "payload": {
-                                            "hostname": "FX75006A0B8C"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "default": {
-                        "description": "set_hostname response",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "command": {
-                                            "type": "string",
-                                            "enum": [
-                                                "set_hostname"
-                                            ],
-                                            "description": "The value for the key command must be set_hostname"
-                                        },
-                                        "command_id": {
-                                            "type": "string",
-                                            "description": "A unique ID that will be echoed back in the command response by the reader.",
-                                            "example": "abcd345"
-                                        },
-                                        "response": {
-                                            "type": "string",
-                                            "enum": [
-                                                "success",
-                                                "failure"
-                                            ]
-                                        },
-                                        "payload": {
-                                            "oneOf": [
-                                                {
-                                                    "title": "success",
-                                                    "type": "object",
-                                                    "description": "Updates the reader hostname"
-                                                },
-                                                {
-                                                    "title": "failure",
-                                                    "type": "object",
-                                                    "description": "description of the error",
-                                                    "properties": {
-                                                        "code": {
-                                                            "type": "integer",
-                                                            "description": "The error code",
-                                                            "example": 1,
-                                                            "enum": [
-                                                                1,
-                                                                2,
-                                                                3,
-                                                                6,
-                                                                7
-                                                            ]
-                                                        },
-                                                        "message": {
-                                                            "type": "string",
-                                                            "description": "A brief description of the error"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "code",
-                                                        "message"
-                                                    ]
-                                                }
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "command",
-                                        "command_id",
-                                        "response"
-                                    ]
-                                },
-                                "examples": {
-                                    "example1": {
-                                        "value": {
-                                            "command": "set_hostname",
-                                            "command_id": "abcd345",
-                                            "response": "success",
-                                            "payload": {}
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/set_os": {
             "post": {
                 "tags": [
@@ -22596,6 +23184,16 @@
                                             "url": {
                                                 "type": "string",
                                                 "description": "URL to the OS image or update bundle."
+                                            },
+                                            "transfer_protocol": {
+                                                "type": "string",
+                                                "description": "Optional explicit transfer protocol for firmware download. If omitted, protocol is inferred from the `url` scheme.",
+                                                "enum": [
+                                                    "SCP",
+                                                    "HTTPS",
+                                                    "SFTP",
+                                                    "FTPS"
+                                                ]
                                             },
                                             "verifyPeer": {
                                                 "type": "boolean",

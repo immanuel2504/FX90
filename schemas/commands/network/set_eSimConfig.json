@@ -23,6 +23,8 @@
           "type": "string",
           "description": "eSIM profile operation to perform.",
           "enum": [
+            "add",
+            "delete",
             "enable",
             "disable"
           ],
@@ -32,8 +34,17 @@
           "type": "string",
           "description": "Nickname of the eSIM profile to apply the operation to.",
           "example": "gnd1"
+        },
+        "activationID": {
+          "type": "string",
+          "description": "Activation code/ID for provisioning a new eSIM profile. Required only when `operation` is `add`. Must be omitted for `enable`, `disable`, and `delete`.",
+          "example": "LPA:1$RSP.GSMA.COM$ABCDEF1234567890"
         }
-      }
+      },
+      "required": [
+        "operation",
+        "profileNickName"
+      ]
     }
   },
   "required": [
@@ -47,6 +58,23 @@
       "command_id": "esim-set-001",
       "payload": {
         "operation": "enable",
+        "profileNickName": "gnd1"
+      }
+    },
+    {
+      "command": "set_eSimConfig",
+      "command_id": "esim-set-001",
+      "payload": {
+        "operation": "add",
+        "profileNickName": "gnd1",
+        "activationID": "LPA:1$RSP.GSMA.COM$ABCDEF1234567890"
+      }
+    },
+    {
+      "command": "set_eSimConfig",
+      "command_id": "esim-set-001",
+      "payload": {
+        "operation": "delete",
         "profileNickName": "gnd1"
       }
     }

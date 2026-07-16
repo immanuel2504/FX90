@@ -1,0 +1,8 @@
+type: array
+title: caCertificateList
+description: List of installed CA certificate names.
+items:
+  type: string
+examples:
+- - AmazonRootCA1
+  - broker.emqx.io-ca

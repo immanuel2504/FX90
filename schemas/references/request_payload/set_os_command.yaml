@@ -30,6 +30,14 @@ properties:
   url:
     type: string
     description: URL to the OS image or update bundle.
+  transfer_protocol:
+    type: string
+    description: Optional explicit transfer protocol for firmware download. If omitted, protocol is inferred from the `url` scheme.
+    enum:
+    - SCP
+    - HTTPS
+    - SFTP
+    - FTPS
   verifyPeer:
     type: boolean
     description: Verify the server TLS peer certificate. Defaults to true when omitted.
