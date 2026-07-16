@@ -1,0 +1,4 @@
+type: object
+title: get_CACertificates
+description: Command to list the installed CA certificates on the reader. No payload fields are required.
+properties: {}

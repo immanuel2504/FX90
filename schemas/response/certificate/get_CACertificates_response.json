@@ -1,0 +1,42 @@
+{
+  "title": "List CA Certificates",
+  "type": "object",
+  "description": "Lists the installed CA certificates on the reader",
+  "properties": {
+    "command": {
+      "type": "string",
+      "enum": [
+        "get_CACertificates"
+      ],
+      "example": "get_CACertificates",
+      "description": "The value for the key command must be get_CACertificates"
+    },
+    "command_id": {
+      "type": "string",
+      "example": "abcd1234",
+      "description": "A unique ID that will be echoed back in the command response by the reader."
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failure"
+      ],
+      "example": "success"
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "$ref": "../../references/response_payload/get_CACertificates_response.yaml"
+        },
+        {
+          "$ref": "../../references/response_payload/errors.yaml"
+        }
+      ]
+    }
+  },
+  "required": [
+    "command",
+    "command_id"
+  ]
+}

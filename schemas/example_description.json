@@ -147,5 +147,10 @@
   "Auto Start User App": {
     "Enable auto-start": "Enables automatic startup of the specified user application on reader boot.",
     "Disable auto-start": "Disables automatic startup of the specified user application."
+  },
+  "Set eSIM Configuration": {
+    "Enable eSIM profile": "Enables the specified eSIM profile on the reader.",
+    "Add (install) eSIM profile": "Provisions and installs a new eSIM profile using its activation code.",
+    "Delete eSIM profile": "Removes the specified eSIM profile from the reader."
   }
 }

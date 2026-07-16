@@ -4772,6 +4772,111 @@ paths:
           enum:
           - client
           - app
+  /cloud/caCertificates:
+    get:
+      tags:
+      - Certificate
+      summary: List installed CA certificates
+      description: MQTT API :- get_CACertificates <br> Returns the list of installed CA certificate names.
+      operationId: getCACertificates
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/caCertificateList.v1'
+              examples:
+                get_CACertificates:
+                  value:
+                  - AmazonRootCA1
+                  - broker.emqx.io-ca
+      security:
+      - bearerAuth: []
+  /cloud/caCertificates/{caname}:
+    parameters:
+    - name: caname
+      in: path
+      required: true
+      description: CA certificate name. For local REST this path parameter is used as the certificate name. For MQTT, `name` is provided in the payload.
+      schema:
+        type: string
+    put:
+      tags:
+      - Certificate
+      summary: Install CA certificate
+      description: MQTT API :- set_InstallCACertificate <br> Installs a CA certificate on the device.
+      operationId: setInstallCACertificate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/installCACertificate.v1'
+            examples:
+              set_InstallCACertificate:
+                value:
+                  content: '-----BEGIN CERTIFICATE-----
+
+                    MIIDdzCCAl+gAwIBAgIEbJQz0jANBgkqhkiG9w0BAQsFADBvMQswCQYDVQQGEwJV
+
+                    UzELMAkGA1UECBMCQ0ExEDAOBgNVBAcTB0lydmluZTEPMA0GA1UEChMGWmVicmEx
+
+                    EzARBgNVBAsTCkVuZ2luZWVyaW5nMRcwFQYDVQQDEw5BbWF6b25Sb290Q0ExMB4X
+
+                    DTE1MDUyNjAwMDAwMFoXDTM1MDUyNjAwMDAwMFowbzELMAkGA1UEBhMCVVMxCzAJ
+
+                    BgNVBAgTAkNBMRAwDgYDVQQHEwdJcnZpbmUxDzANBgNVBAoTBlplYnJhMRMwEQYD
+
+                    VQQLEwpFbmdpbmVlcmluZzEXMBUGA1UEAxMOQW1hem9uUm9vdENBMTCCASIwDQYJ
+
+                    KoZIhvcNAQEBBQADggEPADCCAQoCggEBAN9x7k8m4rjQv2N2j9pYx0Qwdk6U4b5o
+
+                    5xY+o2zj7n3q6WvWq6E4Yt8k1bH6Y3w2N7v0Y8o1Y4yYHqk8iCw8Wj8JmZ2dK8q3
+
+                    1YJYQv1M2VxQy6G8z3yq8r4jG9Q2n7gY3D9v2v2V5Hh1oS8q5D7rX2f3W7n9j3aP
+
+                    2r5sLrGv7R9yq8vM1Cq7y8l3b6Q2h9K1z0t6b4M2V8yN4o6W2n8p1v5z3f9dQ8m7
+
+                    B6oK7wQ8m3v1w4b9n8z6m1o3k2p5q7r9s1v2x4y6z8a0b2c4d6e8f0g1h2i3j4k5
+
+                    l6m7n8o9p0q1r2s3t4u5v6w7x8y9z0CAwEAAaNQME4wHQYDVR0OBBYEFJ4i9Q6d
+
+                    iQ0aQ1m3nY2j8f4K9l8WMB8GA1UdIwQYMBaAFJ4i9Q6diQ0aQ1m3nY2j8f4K9l8W
+
+                    MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAB9N8eYk1Wl7d8q9m5fG
+
+                    2b3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D0E1F2G3H
+
+                    4I5J6K7L8M9N0O1P2Q3R4S5T6U7V8W9X0Y1Z2a3b4c5d6e7f8g9h0i1j2k3l4m5n
+
+                    -----END CERTIFICATE-----
+
+                    '
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetInstallCACertificateResponse'
+      security:
+      - bearerAuth: []
+    delete:
+      tags:
+      - Certificate
+      summary: Delete CA certificate
+      description: MQTT API :- del_CACertificate <br> Deletes the specified CA certificate from the device.
+      operationId: delCACertificate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DelCACertificateResponse'
+      security:
+      - bearerAuth: []
   /cloud/network:
     get:
       tags:
@@ -5904,6 +6009,7 @@ paths:
         | `profiles` | Which profiles are installed and which is active? | Only one profile can be active at a time; use this to confirm the correct carrier profile is enabled. |
 
         '
+      operationId: getEsimConfig
       responses:
         '200':
           description: OK
@@ -5930,6 +6036,8 @@ paths:
 
         - The target profile nickname through `profileNickName`
 
+        - The activation code for provisioning a new profile through `activationID`
+
 
         ## 2. Endpoint Details
 
@@ -5950,7 +6058,7 @@ paths:
 
         | Content-Type | `application/json` |
 
-        | Supported Operations | `enable`, `disable` |
+        | Supported Operations | `add`, `delete`, `enable`, `disable` |
 
 
         ## 3. Before You Begin
@@ -5963,9 +6071,11 @@ paths:
 
         |---|---|
 
-        | Operation | The eSIM operation to perform: `enable` to activate the selected profile, or `disable` to deactivate it. |
+        | Operation | The eSIM operation to perform: `add` to provision a new profile, `delete` to remove one, `enable` to activate the selected profile, or `disable` to deactivate it. |
 
-        | Profile nickname | The exact nickname of the eSIM profile to enable, as returned by `GET /cloud/eSimConfig`. The nickname must match exactly - case-sensitive. |
+        | Profile nickname | The exact nickname of the eSIM profile to apply the operation to, as returned by `GET /cloud/eSimConfig`. The nickname must match exactly - case-sensitive. |
+
+        | Activation code | Required only when `operation` is `add`: the activation code/ID (`activationID`) used to provision the new eSIM profile. Omit for `enable`, `disable`, and `delete`. |
 
         | Active SIM setting | After enabling an eSIM profile, confirm the `wan0.activeSim` is set to `esim` in the network configuration (see `PUT /cloud/network`) for the profile to be used for data. |
 
@@ -5977,9 +6087,18 @@ paths:
             schema:
               $ref: '#/components/schemas/SetEsimConfigRequest'
             examples:
-              set_eSimConfig:
+              set_eSimConfig_enable:
                 value:
                   operation: enable
+                  profileNickName: gnd1
+              set_eSimConfig_add:
+                value:
+                  operation: add
+                  profileNickName: gnd1
+                  activationID: LPA:1$RSP.GSMA.COM$ABCDEF1234567890
+              set_eSimConfig_delete:
+                value:
+                  operation: delete
                   profileNickName: gnd1
       responses:
         '200':
@@ -6784,7 +6903,7 @@ paths:
   /cloud/hostName:
     get:
       tags:
-      - Network
+      - System
       summary: Retrieves reader hostname
       description: '## 1. Description
 
@@ -6858,7 +6977,7 @@ paths:
       - bearerAuth: []
     put:
       tags:
-      - Network
+      - System
       summary: Sets reader hostname
       description: '## 1. Description
 
@@ -8919,6 +9038,25 @@ components:
           type: boolean
           default: true
           description: Asynchronous events from user applications
+    installCACertificate.v1:
+      title: installCACertificate
+      type: object
+      description: Request payload to install a CA certificate.
+      properties:
+        name:
+          type: string
+          description: Required for MQTT API (`set_InstallCACertificate`). Ignored for local REST where the path parameter `{caname}` is used.
+        content:
+          type: string
+          description: PEM-encoded CA certificate content.
+      required:
+      - content
+    caCertificateList.v1:
+      title: caCertificateList
+      type: array
+      description: List of installed CA certificate names.
+      items:
+        type: string
     logLevel.v1:
       title: logLevel
       type: object
@@ -11917,7 +12055,19 @@ components:
           - app
         url:
           type: string
-          description: URL to download the certificate file from.
+          format: uri
+          description: URL to download the certificate file from. Supported URL schemes are https://, ftps://, and sftp://.
+          oneOf:
+          - pattern: ^https://.+
+          - pattern: ^ftps://.+
+          - pattern: ^sftp://.+
+        transfer_protocol:
+          type: string
+          description: Optional explicit transfer protocol for certificate download. If omitted, protocol is inferred from the `url` scheme.
+          enum:
+          - HTTPS
+          - FTPS
+          - SFTP
         verifyPeer:
           type: boolean
           description: Verify the server TLS peer certificate.
@@ -11969,6 +12119,12 @@ components:
       type: string
       description: Returns an empty string on success.
     DelCertificateResponse:
+      type: string
+      description: Returns an empty string on success.
+    SetInstallCACertificateResponse:
+      type: string
+      description: Returns an empty string on success.
+    DelCACertificateResponse:
       type: string
       description: Returns an empty string on success.
     GetNetworkResponse:
@@ -12810,16 +12966,24 @@ components:
                 description: Name of the mobile network provider.
     SetEsimConfigRequest:
       type: object
+      required:
+      - operation
+      - profileNickName
       properties:
         operation:
           type: string
           description: eSIM profile operation to perform.
           enum:
+          - add
+          - delete
           - enable
           - disable
         profileNickName:
           type: string
           description: Nickname of the eSIM profile to apply the operation to.
+        activationID:
+          type: string
+          description: Activation code/ID for provisioning a new eSIM profile. Required only when `operation` is `add`. Must be omitted for `enable`, `disable`, and `delete`.
     SetEsimConfigResponse:
       type: string
       description: Returns an empty string on success.
@@ -12850,7 +13014,21 @@ components:
               description: Password for BASIC authentication.
         url:
           type: string
-          description: URL to the OS image or update bundle.
+          format: uri
+          description: URL to the OS image or update bundle. Supported URL schemes are scp://, https://, sftp://, and ftps://.
+          oneOf:
+          - pattern: ^scp://.+
+          - pattern: ^https://.+
+          - pattern: ^sftp://.+
+          - pattern: ^ftps://.+
+        transfer_protocol:
+          type: string
+          description: Optional explicit transfer protocol for firmware download. If omitted, protocol is inferred from the `url` scheme.
+          enum:
+          - SCP
+          - HTTPS
+          - SFTP
+          - FTPS
         verifyPeer:
           type: boolean
           description: Verify the server TLS peer certificate. Defaults to true when omitted.
