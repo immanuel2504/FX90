@@ -1041,7 +1041,7 @@
                   "readerLocation": {
                     "title": "readerLocation",
                     "type": "object",
-                    "description": "Reader location metadata reported with mode configuration.",
+                    "description": "The reader's configured location (latitude, longitude, altitude, and an optional user-defined label) reported with each tag event. Included in the tag metadata only when `READER_LOCATION` is listed in `tagMetaData`.",
                     "properties": {
                       "latitude": {
                         "type": "number",

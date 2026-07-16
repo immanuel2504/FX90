@@ -2163,58 +2163,38 @@ paths:
                                   type: number
                                   description: Rate limit in events/sec for replaying retained events after reconnect (0 - 1000).
               example:
-                GPIO-LED: NOT_CONFIGURED
+                GPIO-LED: {}
                 READER-GATEWAY:
                   batching:
-                    - maxPayloadSizePerReport: 0
-                      reportingInterval: 0
+                  - maxPayloadSizePerReport: 256000
+                    reportingInterval: 10000
                   endpointConfig:
                     control:
-                      commandResponse:
-                        enableLocalRest: true
+                      commandResponse: {}
                     data:
-                      batching:
-                        maxPayloadSizePerReport: 0
-                        reportingInterval: 0
                       event:
                         connections:
-                          - additionalOptions:
-                              batching:
-                                maxPayloadSizePerReport: 0
-                                reportingInterval: 0
-                              retention:
-                                maxEventRetentionTimeInMin: 0
-                                maxNumEvents: 0
-                                throttle: 1
-                            description: WEBSOCKET_TEST
-                            name: WEBSOCKET_TEST
-                            options:
-                              security:
-                                verifyPeer: false
-                            type: WEBSOCKET
-                      retention:
-                        maxEventRetentionTimeInMin: 0
-                        maxNumEvents: 0
-                        throttle: 1
+                        - additionalOptions:
+                            batching:
+                              maxPayloadSizePerReport: 256000
+                              reportingInterval: 10000
+                            retention:
+                              maxEventRetentionTimeInMin: 500
+                              maxNumEvents: 150000
+                              throttle: 100
+                          description: QWERTYU
+                          name: ASDFGHJ
+                          options:
+                            security:
+                              verifyPeer: false
+                          type: WEBSOCKET
                     management:
-                      commandResponse:
-                        enableLocalRest: true
+                      commandResponse: {}
                       event:
-                        connections:
-                          - additionalOptions:
-                              retention:
-                                maxEventRetentionTimeInMin: 500
-                                maxNumEvents: 150000
-                                throttle: 100
-                            description: WEBSOCKET_TEST
-                            name: WEBSOCKET_TEST
-                            options:
-                              security:
-                                verifyPeer: false
-                            type: WEBSOCKET
+                        connections: []
                   managementEventConfig:
                     errors:
-                      antenna: false
+                      antenna: true
                       cpu:
                         reportIntervalInSec: 1800
                         threshold: 90
@@ -2224,7 +2204,7 @@ paths:
                         threshold: 90
                       ntp: true
                       radio: true
-                      radio_control: false
+                      radio_control: true
                       ram:
                         reportIntervalInSec: 1800
                         threshold: 90
@@ -2237,56 +2217,56 @@ paths:
                     heartbeat:
                       fields:
                         radio_control:
-                          - ANTENNAS
-                          - RADIO_ACTIVITY
-                          - RADIO_CONNECTION
-                          - CPU
-                          - RAM
-                          - UPTIME
-                          - NUM_ERRORS
-                          - NUM_WARNINGS
-                          - NUM_TAG_READS
-                          - NUM_TAG_READS_PER_ANTENNA
-                          - NUM_DATA_MESSAGES_TXED
-                          - NUM_RADIO_PACKETS_RXED
+                        - ANTENNAS
+                        - RADIO_ACTIVITY
+                        - RADIO_CONNECTION
+                        - CPU
+                        - RAM
+                        - UPTIME
+                        - NUM_ERRORS
+                        - NUM_WARNINGS
+                        - NUM_TAG_READS
+                        - NUM_TAG_READS_PER_ANTENNA
+                        - NUM_DATA_MESSAGES_TXED
+                        - NUM_RADIO_PACKETS_RXED
                         reader_gateway:
-                          - NUM_DATA_MESSAGES_RXED
-                          - NUM_MANAGEMENT_EVENTS_TXED
-                          - NUM_DATA_MESSAGES_TXED
-                          - NUM_DATA_MESSAGES_RETAINED
-                          - NUM_DATA_MESSAGES_DROPPED
-                          - CPU
-                          - RAM
-                          - UPTIME
-                          - NUM_ERRORS
-                          - NUM_WARNINGS
-                          - INTERFACE_CONNECTION_STATUS
-                          - NOLOCKQ_DEPTH
+                        - NUM_DATA_MESSAGES_RXED
+                        - NUM_MANAGEMENT_EVENTS_TXED
+                        - NUM_DATA_MESSAGES_TXED
+                        - NUM_DATA_MESSAGES_RETAINED
+                        - NUM_DATA_MESSAGES_DROPPED
+                        - CPU
+                        - RAM
+                        - UPTIME
+                        - NUM_ERRORS
+                        - NUM_WARNINGS
+                        - INTERFACE_CONNECTION_STATUS
+                        - NOLOCKQ_DEPTH
                         system:
-                          - CPU
-                          - FLASH
-                          - NTP
-                          - RAM
-                          - SYSTEMTIME
-                          - TEMPERATURE
-                          - UPTIME
-                          - GPO
-                          - GPI
-                          - POWER_NEGOTIATION
-                          - POWER_SOURCE
-                          - MAC_ADDRESS
-                          - HOSTNAME
-                        userDefined: null
+                        - CPU
+                        - FLASH
+                        - NTP
+                        - RAM
+                        - SYSTEMTIME
+                        - TEMPERATURE
+                        - UPTIME
+                        - GPO
+                        - GPI
+                        - POWER_NEGOTIATION
+                        - POWER_SOURCE
+                        - MAC_ADDRESS
+                        - HOSTNAME
+                        userDefined: {}
                         userapps:
-                          - STATUS
-                          - CPU
-                          - RAM
-                          - UPTIME
-                          - NUM_DATA_MESSAGES_RXED
-                          - NUM_DATA_MESSAGES_TXED
-                          - INCOMING_DATA_BUFFER_PERCENTAGE_REMAINING
-                          - OUTGOING_DATA_BUFFER_PERCENTAGE_REMAINING
-                      interval: 10
+                        - STATUS
+                        - CPU
+                        - RAM
+                        - UPTIME
+                        - NUM_DATA_MESSAGES_RXED
+                        - NUM_DATA_MESSAGES_TXED
+                        - INCOMING_DATA_BUFFER_PERCENTAGE_REMAINING
+                        - OUTGOING_DATA_BUFFER_PERCENTAGE_REMAINING
+                      interval: 60
                     userappEvents: true
                     warnings:
                       cpu:
@@ -2310,9 +2290,9 @@ paths:
                         reportIntervalInSec: 1800
                         threshold: 60
                   retention:
-                    - maxEventRetentionTimeInMin: -1
-                      maxNumEvents: 0
-                      throttle: 500
+                  - maxEventRetentionTimeInMin: 500
+                    maxNumEvents: 150000
+                    throttle: 100
       security:
         - bearerAuth: []
     put:
@@ -2805,40 +2785,38 @@ paths:
                       data:
                         event:
                           connections:
-                            - additionalOptions:
-                                batching: null
-                                retention:
-                                  maxEventRetentionTimeInMin: 500
-                                  maxNumEvents: 150000
-                                  throttle: 500
-                              description: MQTT_TEST
-                              name: MQTT_TEST
-                              options:
-                                additional:
-                                  cleanSession: true
-                                  clientId: EV1
-                                  debug: false
-                                  keepAlive: 60
-                                  qos: 0
-                                  reconnectDelay: 1
-                                  reconnectDelayMax: 5
-                                enableSecurity: false
-                                endpoint:
-                                  hostName: 10.117.229.9
-                                  port: 1883
-                                  protocol: tcp
-                                publishTopic:
-                                  - tagevents_r2c_longrun
-                                security:
-                                  CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
-                                  installedCertificateName: Server
-                                  installedCertificateType: server
-                                  keyAlgorithm: RS256
-                                  keyFormat: PEM
-                                  verifyHostName: false
-                                  verifyPeer: false
-                                subscribeTopic: []
-                              type: mqtt
+                          - description: azure_8883yj
+                            name: AZURE_8883
+                            options:
+                              additional:
+                                cleanSession: false
+                                clientId: FXR90A3A2F7
+                                debug: true
+                                keepAlive: 120
+                                qos: 1
+                                reconnectDelay: 600
+                                reconnectDelayMax: 86400
+                              basicAuthentication:
+                                password: none
+                                username: VULCANIOTHUB.azure-devices.net/FXR90A3A2F7/?api-version=2018-06-30
+                              enableSecurity: true
+                              endpoint:
+                                hostName: VULCANIOTHUB.azure-devices.net
+                                port: 8883
+                                protocol: ssl
+                              publishTopic:
+                              - devices/FXR90A3A2F7/messages/events/
+                              security:
+                                CACertificateFileLocation: /data/apps/cacertazure.pem
+                                keyAlgorithm: RS256
+                                keyFormat: PEM
+                                privateKeyFileLocation: /data/apps/key.pem
+                                publicKeyFileLocation: /data/apps/csr.pem
+                                verifyHostName: false
+                                verifyPeer: false
+                              subscribeTopic:
+                              - devices/FXR90A3A2F7/messages/devicebound/#
+                            type: mqtt-AZURE
               set_config_data_clear:
                 value:
                   READER-GATEWAY:
@@ -9870,7 +9848,7 @@ components:
     readerLocationMode.v1:
       title: readerLocation
       type: object
-      description: Reader location metadata reported with mode configuration.
+      description: The reader's configured location (latitude, longitude, altitude, and an optional user-defined label) reported with each tag event. Included in the tag metadata only when `READER_LOCATION` is listed in `tagMetaData`.
       properties:
         latitude:
           type: number
@@ -10321,6 +10299,7 @@ components:
             - GREEN
             - RED
             - AMBER
+            - 'OFF'
         blink:
           $ref: '#/components/schemas/actionBlink.v1'
         conditions:
@@ -10351,11 +10330,15 @@ components:
         2. GPI_1_H: event raised when GPI 1 changed from LOW to HIGH
         3. GPI_2_L: event raised when GPI 2 changed from HIGH to LOW
         4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH
-        5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud
-        6. CLOUD_CONNECT: event raised when reader is connected to cloud
-        7. TAG_READ: event raised when a tag is read
-        8. RADIO_START: event raised when inventory operation started using START API
-        9. RADIO_STOP: event raised when inventory operation stopped using STOP API
+        5. GPI_3_L: event raised when GPI 3 changed from HIGH to LOW
+        6. GPI_3_H: event raised when GPI 3 changed from LOW to HIGH
+        7. GPI_4_L: event raised when GPI 4 changed from HIGH to LOW
+        8. GPI_4_H: event raised when GPI 4 changed from LOW to HIGH
+        9. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud
+        10. CLOUD_CONNECT: event raised when reader is connected to cloud
+        11. TAG_READ: event raised when a tag is read
+        12. RADIO_START: event raised when inventory operation started using START API
+        13. RADIO_STOP: event raised when inventory operation stopped using STOP API
       properties:
         GPODefaults:
           type: object
@@ -10417,6 +10400,14 @@ components:
         GPI_2_H:
           $ref: '#/components/schemas/gpoledAction.v1'
         GPI_2_L:
+          $ref: '#/components/schemas/gpoledAction.v1'
+        GPI_3_H:
+          $ref: '#/components/schemas/gpoledAction.v1'
+        GPI_3_L:
+          $ref: '#/components/schemas/gpoledAction.v1'
+        GPI_4_H:
+          $ref: '#/components/schemas/gpoledAction.v1'
+        GPI_4_L:
           $ref: '#/components/schemas/gpoledAction.v1'
         CLOUD_DISCONNECT:
           $ref: '#/components/schemas/gpoledAction.v1'
