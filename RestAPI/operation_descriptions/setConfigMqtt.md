@@ -1,10 +1,9 @@
 ## 1. Description
 
-The `PUT /cloud/config` REST endpoint updates the reader's full configuration, including RF/XML settings, GPIO and LED defaults, and reader-gateway endpoint configuration.
+The `PUT /cloud/config` REST endpoint updates the reader's full configuration, including RF settings, GPIO and LED defaults, and reader-gateway endpoint configuration.
 
 Use this endpoint to:
 
-- Push a complete or partial reader XML configuration
 - Configure GPIO/LED default states and event-triggered actions
 - Set tag-data retention, batching, and data/management endpoint connections
 
@@ -22,11 +21,11 @@ Use this endpoint to:
 
 ## 3. Before You Begin
 
-Gather these details before sending the request. An invalid XML string or misconfigured endpoint can disrupt tag reporting and management events.
+Gather these details before sending the request. A misconfigured endpoint can disrupt tag reporting and management events.
 
 | What You Need | Details |
 |---|---|
-| Configuration scope | Full `xml` string and/or partial `GPIO-LED` / `READER-GATEWAY` objects. |
+| Configuration scope | Partial or full `GPIO-LED` and/or `READER-GATEWAY` objects. |
 | GPIO/LED defaults | Desired GPO pin defaults (`HIGH`/`LOW`) and LED colors per pin. |
 | Endpoint connections | Data and management channel types (`mqtt`, `httpPost`, `tcpip-server`, etc.) with host, port, and security. |
 | Certificates | Pre-installed or inline PEM content for TLS endpoints (see `GET /cloud/certificates`). |

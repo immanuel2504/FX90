@@ -28,52 +28,281 @@
       "example": "success"
     },
     "payload": {
-      "oneOf": [
-        {
+      "title": "operatingMode",
+      "type": "object",
+      "description": "Represents the reader operating mode.\n\nCross-field constraints:\n- accesses is not allowed in INVENTORY mode.\n- query and filter with prefix cannot be configured at the same time.\n- radioStartConditions and radioStopConditions are not allowed in PORTAL mode.\n- reportFilter and accesses cannot both be set.\n- accesses cannot be set with tagMetaData containing RESERVED, EPC, TID, or USER.\n- reportFilter cannot be set with tagMetaData containing RESERVED, EPC, TID, or USER unless reportFilter.addl_keys is configured.\n- transmitPower array length, antennaStopCondition array length, and query array length must match the size of antennas.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SIMPLE",
+            "INVENTORY",
+            "PORTAL",
+            "CONVEYOR",
+            "CUSTOM"
+          ],
+          "description": "The type of mode of operation ",
+          "default": "SIMPLE"
+        },
+        "modeSpecificSettings": {
+          "description": "One of inventorySettings or portalSettings, depending on the selected mode type.",
+          "oneOf": [
+            {
+              "title": "inventorySettings",
+              "type": "object",
+              "description": "Reader settings for inventory mode. If absent, the reader will report each tag on each antenna once per minute.",
+              "properties": {
+                "interval": {
+                  "type": "object",
+                  "description": "The time interval (how often) to report each tag",
+                  "properties": {
+                    "unit": {
+                      "type": "string",
+                      "enum": [
+                        "seconds",
+                        "minutes",
+                        "hours",
+                        "days"
+                      ]
+                    },
+                    "value": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "title": "portalSettings",
+              "type": "object",
+              "description": "Reader settings for portal mode.",
+              "properties": {
+                "startTrigger": {
+                  "type": "object",
+                  "description": "The GPI trigger to start reads on the portal",
+                  "properties": {
+                    "port": {
+                      "type": "integer",
+                      "description": "The GPI port to signal. If absent, port 1 is used."
+                    },
+                    "signal": {
+                      "type": "string",
+                      "enum": [
+                        "HIGH",
+                        "LOW"
+                      ],
+                      "description": "The signal value for the trigger. If absent, signal LOW is used"
+                    }
+                  }
+                },
+                "stopInterval": {
+                  "type": "integer",
+                  "description": "The interval at which to stop reads after the last unique tag is read (seconds). If absent, the reader will stop after not reading a unique tag in 3 seconds"
+                }
+              }
+            }
+          ]
+        },
+        "environment": {
+          "type": "string",
+          "enum": [
+            "LOW_INTERFERENCE",
+            "HIGH_INTERFERENCE",
+            "VERY_HIGH_INTERFERENCE",
+            "AUTO_DETECT",
+            "DEMO"
+          ],
+          "description": "\n\n\n\n\n  The type of environment in which the reader operates. Along with the regulatory configuration of the reader, the environment parameter will set the default link profile parameters (i.e., Miller mode, BLF, Tari, etc.) and the receiver dynamic range (interference immunity).\n\n  LOW_INTERFERENCE:  The reader is operating in an environment when the likelihood of interference is very low or only occurs for very brief periods of time (defined as a single interrogator environment in the Gen2 and ISO standards).\n\n  HIGH_INTERFERENCE: The reader is operating in the presence of other readers (defined as a multi-interrogator or dense interrogator environment in the Gen2 and ISO standards).\n\n  VERY_HIGH_INTERFERENCE: The reader is operating in an environment where the number of readers is greater than the number of available channels, or when interfering readers are in very close proximity to each other.\n\n  AUTO_DETECT: This will cause the reader to try and assess the environment and adjust accordingly. \n\n  DEMO: Should be used when demonstrating the maximum performance (fastest read rate) of a reader. This assumes no other readers in the environment.\n\n  If absent, the environment is set to HIGH_INTERFERENCE",
+          "default": "HIGH_INTERFERENCE"
+        },
+        "antennas": {
+          "type": "array",
+          "description": "\n\n\n\n\n An array of integers representing the antenna ports to use to read tags.\n\n If absent, all antenna ports are used.",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "filter": {
+          "title": "tagIdFilter",
           "type": "object",
-          "description": "Current reader operating mode configuration.",
+          "description": "Represents filter on the tag id.\n\nIf absent, no filter is used.\n\nCross-field constraint: When match is set to prefix, query cannot be configured at the same time.",
           "properties": {
-            "type": {
+            "value": {
               "type": "string",
-              "description": "Operating mode type.",
+              "description": "The value to match.\n\n\nFor prefix and suffix filters. Only hex digits are allowed and there must be an even number of hex digits.\n\nWhen prefix filter is used, selects cannot be used. \n\nFor regex filter, C++ STL regex values should be used."
+            },
+            "match": {
+              "type": "string",
+              "description": "The segment or method of the id to match.",
               "enum": [
-                "SIMPLE",
-                "INVENTORY",
-                "PORTAL",
-                "CONVEYOR",
-                "CUSTOM"
+                "prefix",
+                "suffix",
+                "regex"
               ]
             },
-            "environment": {
+            "operation": {
               "type": "string",
-              "description": "Reader RF environment profile.",
+              "default": "include",
               "enum": [
-                "LOW_INTERFERENCE",
-                "HIGH_INTERFERENCE",
-                "VERY_HIGH_INTERFERENCE",
-                "AUTO_DETECT",
-                "DEMO"
+                "include",
+                "exclude"
+              ],
+              "description": "The filter operation (include/exclude)."
+            }
+          },
+          "required": [
+            "value",
+            "match",
+            "operation"
+          ]
+        },
+        "inventoryProtocol": {
+          "title": "inventoryProtocol",
+          "type": "object",
+          "description": "Inventory protocol settings for tag interrogation.",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "description": "Inventory protocol mode.",
+              "enum": [
+                "GEN2X",
+                "GEN2",
+                "HYBRID"
               ]
+            }
+          },
+          "required": [
+            "mode"
+          ]
+        },
+        "transmitPower": {
+          "oneOf": [
+            {
+              "type": "number",
+              "description": "Single value applies to all antennas"
             },
-            "antennaStopCondition": {
+            {
               "type": "array",
-              "description": "Per-antenna or shared antenna stop conditions.",
+              "description": "Each value applies to each antenna in the antennas array\nArray length must match antennas array length",
               "items": {
+                "type": "number"
+              }
+            }
+          ],
+          "description": "\n\n\n\n\n Desired Transmit Power (in dbm).\n\n If absent, the value is set to 27 dbm.\n\n Cross-field constraint: when provided as an array, the array length must match the size of antennas."
+        },
+        "antennaStopCondition": {
+          "oneOf": [
+            {
+              "title": "antennaStopCondition",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "DURATION",
+                    "INVENTORY_COUNT",
+                    "GPI",
+                    "SINGLE_INVENTORY_LIMITED_DURATION"
+                  ],
+                  "description": "Type of Stop Condition"
+                },
+                "value": {
+                  "oneOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "title": "gpi",
+                      "type": "object",
+                      "properties": {
+                        "port": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 2,
+                          "description": "GPI Port Number"
+                        },
+                        "signal": {
+                          "type": "string",
+                          "enum": [
+                            "HIGH",
+                            "LOW"
+                          ],
+                          "description": "Transition to this GPI will trigger event"
+                        },
+                        "debounceTime": {
+                          "type": "integer",
+                          "description": "Time (in milliseconds) until GPI must remain at signal level to trigger event",
+                          "default": 0
+                        }
+                      },
+                      "required": [
+                        "port",
+                        "signal"
+                      ]
+                    }
+                  ],
+                  "description": "Value dependent on type"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ]
+            },
+            {
+              "type": "array",
+              "description": "Each value applies to each antenna in the antennas array\nArray length must match antennas array length",
+              "items": {
+                "title": "antennaStopCondition",
                 "type": "object",
                 "properties": {
                   "type": {
                     "type": "string",
-                    "description": "Type of stop condition.",
                     "enum": [
                       "DURATION",
                       "INVENTORY_COUNT",
                       "GPI",
                       "SINGLE_INVENTORY_LIMITED_DURATION"
-                    ]
+                    ],
+                    "description": "Type of Stop Condition"
                   },
                   "value": {
-                    "type": "number",
-                    "description": "Value for the selected stop condition type."
+                    "oneOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "title": "gpi",
+                        "type": "object",
+                        "properties": {
+                          "port": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 2,
+                            "description": "GPI Port Number"
+                          },
+                          "signal": {
+                            "type": "string",
+                            "enum": [
+                              "HIGH",
+                              "LOW"
+                            ],
+                            "description": "Transition to this GPI will trigger event"
+                          },
+                          "debounceTime": {
+                            "type": "integer",
+                            "description": "Time (in milliseconds) until GPI must remain at signal level to trigger event",
+                            "default": 0
+                          }
+                        },
+                        "required": [
+                          "port",
+                          "signal"
+                        ]
+                      }
+                    ],
+                    "description": "Value dependent on type"
                   }
                 },
                 "required": [
@@ -81,53 +310,75 @@
                   "value"
                 ]
               }
-            },
-            "antennas": {
-              "type": "array",
-              "description": "Antenna ports to be used for inventory.",
-              "items": {
-                "type": "number"
-              }
-            },
-            "delayBetweenAntennaCycles": {
+            }
+          ],
+          "description": "\n\n\n\n\n Stop Condition for antennas. \n\n If absent, the antenna stop condition is set to run a single inventory round for no longer than 1/N seconds. Where N is the number of enabled antennas."
+        },
+        "query": {
+          "oneOf": [
+            {
+              "title": "query",
               "type": "object",
               "properties": {
-                "duration": {
-                  "type": "number",
-                  "description": "Delay in milliseconds."
+                "tagPopulation": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Expected number of tags "
                 },
-                "type": {
+                "sel": {
                   "type": "string",
-                  "description": "Condition under which delay is applied.",
                   "enum": [
-                    "DISABLED",
-                    "NO_TAGS",
-                    "NO_UNIQUE_TAGS"
+                    "ALL",
+                    "SL",
+                    "NOT_SL"
+                  ],
+                  "description": "Sel field (see EPC Gen2 Spec)"
+                },
+                "session": {
+                  "type": "string",
+                  "description": "Session Field (see EPC Gen2 Spec)",
+                  "enum": [
+                    "S0",
+                    "S1",
+                    "S2",
+                    "S3"
+                  ]
+                },
+                "target": {
+                  "type": "string",
+                  "description": "Target Field (see EPC Gen2 Spec)",
+                  "enum": [
+                    "A",
+                    "B",
+                    "AB"
                   ]
                 }
               }
             },
-            "query": {
+            {
               "type": "array",
+              "description": "Each value applies to each antenna in the antennas array\nArray length must match antennas array length",
               "items": {
+                "title": "query",
                 "type": "object",
                 "properties": {
                   "tagPopulation": {
-                    "type": "number",
-                    "description": "Expected number of tags."
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "Expected number of tags "
                   },
                   "sel": {
                     "type": "string",
-                    "description": "Sel field (EPC Gen2).",
                     "enum": [
                       "ALL",
                       "SL",
                       "NOT_SL"
-                    ]
+                    ],
+                    "description": "Sel field (see EPC Gen2 Spec)"
                   },
                   "session": {
                     "type": "string",
-                    "description": "Session field (EPC Gen2).",
+                    "description": "Session Field (see EPC Gen2 Spec)",
                     "enum": [
                       "S0",
                       "S1",
@@ -137,7 +388,7 @@
                   },
                   "target": {
                     "type": "string",
-                    "description": "Target field (EPC Gen2).",
+                    "description": "Target Field (see EPC Gen2 Spec)",
                     "enum": [
                       "A",
                       "B",
@@ -146,42 +397,609 @@
                   }
                 }
               }
-            },
-            "inventoryProtocol": {
-              "type": "object",
-              "properties": {
-                "mode": {
-                  "type": "string",
-                  "description": "Inventory protocol mode.",
-                  "enum": [
-                    "GEN2X",
-                    "GEN2",
-                    "HYBRID"
-                  ]
-                }
-              }
-            },
-            "reportFilter": {
-              "type": "object",
-              "properties": {
-                "duration": {
-                  "type": "number",
-                  "description": "Report filter duration in seconds."
-                },
-                "type": {
-                  "type": "string",
-                  "description": "Report filter scope.",
-                  "enum": [
-                    "RADIO_WIDE",
-                    "PER_ANTENNA"
-                  ]
-                }
-              }
-            },
-            "tagMetaData": {
+            }
+          ],
+          "description": "\n\n\n\n\n Gen2 query parameters. See Gen2 spec for details.\n\n If absent, \"sel\" is set to ALL, session is set to 1, target is set to A, and tag population set to 1.\n\n Cross-field constraints: cannot be configured at the same time as filter with prefix; when provided as an array, the array length must match the size of antennas."
+        },
+        "selects": {
+          "description": "\n\n\n\n\n Gen2 select parameters. See Gen2 spec for details.\n\n If absent, no select will be issued. Cannot be set when filter with prefix type is also set. \n\n If there is an array of select objects, all of the selects in the array will be applied to all antennas.\n \n If there is an array of array of select objects, each array of select objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.",
+          "oneOf": [
+            {
               "type": "array",
-              "description": "Tag metadata fields included in reports.",
               "items": {
+                "title": "select",
+                "type": "object",
+                "properties": {
+                  "target": {
+                    "type": "string",
+                    "enum": [
+                      "SL",
+                      "S0",
+                      "S1",
+                      "S2",
+                      "S3"
+                    ],
+                    "description": "Target Field (see EPC Gen2 Spec)"
+                  },
+                  "action": {
+                    "type": "string",
+                    "enum": [
+                      "ASSERTSL_DEASSERTSL",
+                      "ASSERTSL_NOTHING",
+                      "NOTHING_DEASSERTSL",
+                      "NEGATESL_NOTHING",
+                      "DEASSERTSL_ASSERTSL",
+                      "DEASSERTSL_NOTHING",
+                      "NOTHING_ASSERTSL",
+                      "NOTHING_NEGATESL",
+                      "INVA_INVB",
+                      "INVA_NOTHING",
+                      "NOTHING_INVB",
+                      "FLIPAB_NOTHING",
+                      "INVB_INVA",
+                      "INVB_NOTHING",
+                      "NOTHING_INVA",
+                      "NOTHING_FLIPAB"
+                    ],
+                    "description": "Action Field (see EPC Gen2 Spec)"
+                  },
+                  "membank": {
+                    "type": "string",
+                    "enum": [
+                      "EPC",
+                      "TID",
+                      "USER",
+                      "RES"
+                    ],
+                    "description": "Membank Field (see EPC Gen2 Spec)"
+                  },
+                  "pointer": {
+                    "type": "integer",
+                    "description": "Pointer Field (see EPC Gen2 Spec)"
+                  },
+                  "length": {
+                    "type": "integer",
+                    "description": "Length Field (see EPC Gen2 Spec)"
+                  },
+                  "mask": {
+                    "type": "string",
+                    "description": "Mask Field (see EPC Gen2 Spec). The value must be a hex string (only values 0-9 and a-f) and must have an even number of characters. "
+                  },
+                  "truncate": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Truncate Field (see EPC Gen2 Spec) If absent, truncation is disabled. If non-zero, the value indicates the number of bits to expect in the tag response."
+                  }
+                },
+                "required": [
+                  "target",
+                  "action",
+                  "membank",
+                  "pointer",
+                  "length",
+                  "mask"
+                ]
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "title": "select",
+                  "type": "object",
+                  "properties": {
+                    "target": {
+                      "type": "string",
+                      "enum": [
+                        "SL",
+                        "S0",
+                        "S1",
+                        "S2",
+                        "S3"
+                      ],
+                      "description": "Target Field (see EPC Gen2 Spec)"
+                    },
+                    "action": {
+                      "type": "string",
+                      "enum": [
+                        "ASSERTSL_DEASSERTSL",
+                        "ASSERTSL_NOTHING",
+                        "NOTHING_DEASSERTSL",
+                        "NEGATESL_NOTHING",
+                        "DEASSERTSL_ASSERTSL",
+                        "DEASSERTSL_NOTHING",
+                        "NOTHING_ASSERTSL",
+                        "NOTHING_NEGATESL",
+                        "INVA_INVB",
+                        "INVA_NOTHING",
+                        "NOTHING_INVB",
+                        "FLIPAB_NOTHING",
+                        "INVB_INVA",
+                        "INVB_NOTHING",
+                        "NOTHING_INVA",
+                        "NOTHING_FLIPAB"
+                      ],
+                      "description": "Action Field (see EPC Gen2 Spec)"
+                    },
+                    "membank": {
+                      "type": "string",
+                      "enum": [
+                        "EPC",
+                        "TID",
+                        "USER",
+                        "RES"
+                      ],
+                      "description": "Membank Field (see EPC Gen2 Spec)"
+                    },
+                    "pointer": {
+                      "type": "integer",
+                      "description": "Pointer Field (see EPC Gen2 Spec)"
+                    },
+                    "length": {
+                      "type": "integer",
+                      "description": "Length Field (see EPC Gen2 Spec)"
+                    },
+                    "mask": {
+                      "type": "string",
+                      "description": "Mask Field (see EPC Gen2 Spec). The value must be a hex string (only values 0-9 and a-f) and must have an even number of characters. "
+                    },
+                    "truncate": {
+                      "type": "integer",
+                      "default": 0,
+                      "description": "Truncate Field (see EPC Gen2 Spec) If absent, truncation is disabled. If non-zero, the value indicates the number of bits to expect in the tag response."
+                    }
+                  },
+                  "required": [
+                    "target",
+                    "action",
+                    "membank",
+                    "pointer",
+                    "length",
+                    "mask"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "delayAfterSelects": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65,
+          "description": "Duration in milliseconds to wait after issuing the final select before issuing a query. If absent, the minimum time will be used. "
+        },
+        "accesses": {
+          "description": "\n\n\n\n\n Gen2 access parameters. See Gen2 spec for details.\n\n If absent, no access will be issued. \n\n Cross-field constraints:\n - Cannot be set in INVENTORY mode.\n - Cannot be set at the same time as reportFilter.\n - Cannot be set at the same time as tagMetaData containing RESERVED/EPC/TID/USER.\n\n If there is an array of access objects, all of the accesss in the array will be applied to all antennas.\n \n If there is an array of array of access objects, each array of access objects will apply to each antenna. The array of arrays must have the same number of entries as the antennas array.",
+          "oneOf": [
+            {
+              "title": "access_cmds",
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "title": "read",
+                    "type": "object",
+                    "properties": {
+                      "config": {
+                        "type": "object",
+                        "properties": {
+                          "membank": {
+                            "type": "string",
+                            "enum": [
+                              "EPC",
+                              "TID",
+                              "USER",
+                              "RESERVED"
+                            ],
+                            "description": "Membank Field (see EPC Gen2 Spec)"
+                          },
+                          "wordPointer": {
+                            "type": "integer",
+                            "description": "WordPtr Field (see EPC Gen2 Spec)"
+                          },
+                          "wordCounter": {
+                            "type": "integer",
+                            "description": "WordPtr Field (see EPC Gen2 Spec)"
+                          }
+                        },
+                        "required": [
+                          "membank",
+                          "wordPointer",
+                          "wordCounter"
+                        ]
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "READ"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type"
+                    ]
+                  },
+                  {
+                    "title": "write",
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "WRITE"
+                        ]
+                      },
+                      "config": {
+                        "type": "object",
+                        "required": [
+                          "membank",
+                          "wordPointer",
+                          "data"
+                        ],
+                        "properties": {
+                          "membank": {
+                            "type": "string",
+                            "enum": [
+                              "EPC",
+                              "TID",
+                              "USER",
+                              "RESERVED"
+                            ],
+                            "description": "Membank Field (see EPC Gen2 Spec)"
+                          },
+                          "wordPointer": {
+                            "type": "integer",
+                            "description": "WordPtr Field (see EPC Gen2 Spec)"
+                          },
+                          "data": {
+                            "type": "string",
+                            "description": "Data Field (see EPC Gen2 Spec) Hex string indicating the word(s) to be written. Unlike the Gen2 Spec, the length of the data field can be more than a single 16 bit word. However, the length of the string must be a multiple of 16 bit words"
+                          },
+                          "blockSize": {
+                            "type": "integer",
+                            "description": "Block size - if set to non-zero value, the reader will use the BlockWrite command set write the data (and not the simple Write command). The value indicates the number of 16-bit words to use for each block"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "config"
+                    ]
+                  },
+                  {
+                    "title": "access",
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "ACCESS"
+                        ]
+                      },
+                      "config": {
+                        "type": "object",
+                        "properties": {
+                          "password": {
+                            "type": "string",
+                            "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
+                          }
+                        },
+                        "required": [
+                          "password"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "title": "lock",
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "LOCK"
+                        ]
+                      },
+                      "config": {
+                        "type": "object",
+                        "required": [
+                          "actions"
+                        ],
+                        "properties": {
+                          "actions": {
+                            "type": "array",
+                            "description": "Payload Field (see EPC Gen2 Spec)",
+                            "items": {
+                              "type": "string",
+                              "enum": [
+                                "PERMALOCK_USER_BANK",
+                                "WRITE_LOCK_USER_BANK",
+                                "WRITE_UNLOCK_USER_BANK",
+                                "WRITE_LOCK_TID_BANK",
+                                "WRITE_UNLOCK_TID_BANK",
+                                "PERMALOCK_EPC_BANK",
+                                "WRITE_LOCK_EPC_BANK",
+                                "PERMALOCK_ACCESS_PASSWORD",
+                                "READ_WRITE_LOCK_ACCESS_PASSWORD",
+                                "READ_WRITE_UNLOCK_ACCESS_PASSWORD",
+                                "PERMALOCK_KILL_PASSWORD",
+                                "READ_WRITE_LOCK_KILL_PASSWORD",
+                                "READ_WRITE_UNLOCK_KILL_PASSWORD"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "config"
+                    ]
+                  },
+                  {
+                    "title": "kill",
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "KILL"
+                        ]
+                      },
+                      "config": {
+                        "type": "object",
+                        "required": [
+                          "password"
+                        ],
+                        "properties": {
+                          "password": {
+                            "type": "string",
+                            "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "config"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "title": "access_cmds",
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "title": "read",
+                      "type": "object",
+                      "properties": {
+                        "config": {
+                          "type": "object",
+                          "properties": {
+                            "membank": {
+                              "type": "string",
+                              "enum": [
+                                "EPC",
+                                "TID",
+                                "USER",
+                                "RESERVED"
+                              ],
+                              "description": "Membank Field (see EPC Gen2 Spec)"
+                            },
+                            "wordPointer": {
+                              "type": "integer",
+                              "description": "WordPtr Field (see EPC Gen2 Spec)"
+                            },
+                            "wordCounter": {
+                              "type": "integer",
+                              "description": "WordPtr Field (see EPC Gen2 Spec)"
+                            }
+                          },
+                          "required": [
+                            "membank",
+                            "wordPointer",
+                            "wordCounter"
+                          ]
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "READ"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type"
+                      ]
+                    },
+                    {
+                      "title": "write",
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "WRITE"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "required": [
+                            "membank",
+                            "wordPointer",
+                            "data"
+                          ],
+                          "properties": {
+                            "membank": {
+                              "type": "string",
+                              "enum": [
+                                "EPC",
+                                "TID",
+                                "USER",
+                                "RESERVED"
+                              ],
+                              "description": "Membank Field (see EPC Gen2 Spec)"
+                            },
+                            "wordPointer": {
+                              "type": "integer",
+                              "description": "WordPtr Field (see EPC Gen2 Spec)"
+                            },
+                            "data": {
+                              "type": "string",
+                              "description": "Data Field (see EPC Gen2 Spec) Hex string indicating the word(s) to be written. Unlike the Gen2 Spec, the length of the data field can be more than a single 16 bit word. However, the length of the string must be a multiple of 16 bit words"
+                            },
+                            "blockSize": {
+                              "type": "integer",
+                              "description": "Block size - if set to non-zero value, the reader will use the BlockWrite command set write the data (and not the simple Write command). The value indicates the number of 16-bit words to use for each block"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "config"
+                      ]
+                    },
+                    {
+                      "title": "access",
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "ACCESS"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "properties": {
+                            "password": {
+                              "type": "string",
+                              "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
+                            }
+                          },
+                          "required": [
+                            "password"
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "title": "lock",
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "LOCK"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "required": [
+                            "actions"
+                          ],
+                          "properties": {
+                            "actions": {
+                              "type": "array",
+                              "description": "Payload Field (see EPC Gen2 Spec)",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "PERMALOCK_USER_BANK",
+                                  "WRITE_LOCK_USER_BANK",
+                                  "WRITE_UNLOCK_USER_BANK",
+                                  "WRITE_LOCK_TID_BANK",
+                                  "WRITE_UNLOCK_TID_BANK",
+                                  "PERMALOCK_EPC_BANK",
+                                  "WRITE_LOCK_EPC_BANK",
+                                  "PERMALOCK_ACCESS_PASSWORD",
+                                  "READ_WRITE_LOCK_ACCESS_PASSWORD",
+                                  "READ_WRITE_UNLOCK_ACCESS_PASSWORD",
+                                  "PERMALOCK_KILL_PASSWORD",
+                                  "READ_WRITE_LOCK_KILL_PASSWORD",
+                                  "READ_WRITE_UNLOCK_KILL_PASSWORD"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "config"
+                      ]
+                    },
+                    {
+                      "title": "kill",
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "KILL"
+                          ]
+                        },
+                        "config": {
+                          "type": "object",
+                          "required": [
+                            "password"
+                          ],
+                          "properties": {
+                            "password": {
+                              "type": "string",
+                              "description": "Password Field (see EPC Gen2 Spec)\nMust be a hex string with 8 hex characters. "
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "config"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "delayBetweenAntennaCycles": {
+          "title": "delayBetweenAntennaCycles",
+          "type": "object",
+          "description": "This introduces a delay between antenna cycles if no tags are read or if no unique tags are read. This allows the reader to share the spectrum if there are no tags to be read. \n\nIf absent, \non the ATR7000 and the FX9600, delayBetweenAntennas cycles is set to wait for 75 mS if no unique tags are read during a antenna cycle.  \non the FX7500, delayBetweenAntennas cycles is set to wait for 75 mS if no tags are read during a antenna cycle. ",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "DISABLED",
+                "NO_TAGS",
+                "NO_UNIQUE_TAGS"
+              ],
+              "description": "Condition under which to delay between antenna cycles"
+            },
+            "duration": {
+              "type": "integer",
+              "description": "Delay between antenna cycles in milliseconds. Will only wait if the type condition (no tags or no unique tags) is met. If the type is DISABLED, duration must be set to 0. If the type is not DISABLED, the value must be set to a non-zero value."
+            }
+          },
+          "required": [
+            "type",
+            "duration"
+          ]
+        },
+        "tagMetaData": {
+          "title": "tagMetaData",
+          "type": "array",
+          "description": "Controls the metadata that is sent when a tag is reported\n\n  “ANTENNA” will report the antenna port upon which the tag was inventoried.\n\n  “RSSI” will report the rssi (in dbm) of the inventoried tag. If the tag is only reported occasionally (see reportFilter), this tag will be the peak rssi since the last reported read.\n\n   “PHASE” will report the phase (in degrees) of the inventoried tag. This value will only be reported if each individual tag read is reported (in other words, if reportFilter duration is set to 0). Otherwise, it will not be reported.\n\n  “CHANNEL” will report the channel (in MHz) the reader was using when the tag was inventoried. This value will only be reported if each individual tag read is reported (in other words, if reportFilter duration is set to 0). Otherwise, it will not be reported.\n\n  “SEEN_COUNT” will report the number of times the tag has been inventoried since the previous report. This value will always be 1 if each individual tag read is reported (in other words, if reportFilter duration is set to 0). \n\n  “PC” will report the PC bits of the inventoried tag as a hex string. \n\n  “XPC” will report the XPC bits of the inventoried tag, if present, as a hex string. \n\n  “CRC” will report the CRC bits of the inventoried tag as a hex string.\n\n  “EPC” will report the entire contents of the EPC bank as a hex string. If only a portion of the memory bank is desired, this can be requested by appending a [] to the string and placing the words requested. For instance, if only the first word is desired, the value can be set as “EPC[1]”. If the first word and the 3-5 word are desired, the value can be set to “EPC[1,3-5]”.\n\n  “TID” will report the entire contents of the TID bank as a hex string. If only a portion of the memory bank is desired, this can be requested by appending a [] to the string and placing the words requested. For instance, if only the first word is desired, the value can be set as “TID[1]”. If the first word and the 3-5 word are desired, the value can be set to “TID[1,3-5]”.\n\n  “USER” will report the entire contents of the USER bank as a hex string. If only a portion of the memory bank is desired, this can be requested by appending a [] to the string and placing the words requested. For instance, if only the first word is desired, the value can be set as “TID[1]”. If the first word and the 3-5 word are desired, the value can be set to “TID[1,3-5]”.\n\n  “MAC” will report the MAC Address of the reader reporting the tag.\n\n  “HOSTNAME” will report the hostname of the reader reporting the tag.\n\nThe array may also contain an object or objects. The object must contain a single name value pair with the name being set to “userDefined”, “antennaNames”, or “gpsCoordinates”.\n\n\nIf absent,\n“SIMPLE” mode does not report any additional meta data, “PORTAL” and “CONVEYOR” modes reports “ANTENNA”, and “INVENTORY” mode reports “ANTENNA”, “RSSI”, and “SEEN_COUNT”.\n",
+          "items": {
+            "oneOf": [
+              {
                 "type": "string",
                 "enum": [
                   "RSSI",
@@ -199,24 +1017,223 @@
                   "HOSTNAME",
                   "READER_LOCATION"
                 ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "userDefined": {
+                    "type": "string",
+                    "description": "A user defined field to report each time a tag is reported"
+                  },
+                  "antennaNames": {
+                    "type": "array",
+                    "description": "Used to give antenna ports descriptive names\nLength of array must match the number of antenna ports on the device",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "gpsCoordinates": {
+                    "type": "object",
+                    "description": "GPS coordinates metadata reported with each tag event when location metadata is enabled.",
+                    "properties": {
+                      "latitude": {
+                        "type": "number",
+                        "nullable": true,
+                        "description": "Latitude in decimal degrees."
+                      },
+                      "longitude": {
+                        "type": "number",
+                        "nullable": true,
+                        "description": "Longitude in decimal degrees."
+                      }
+                    }
+                  },
+                  "readerLocation": {
+                    "title": "readerLocation",
+                    "type": "object",
+                    "description": "Reader location metadata reported with mode configuration.",
+                    "properties": {
+                      "latitude": {
+                        "type": "number",
+                        "description": "Latitude in decimal degrees."
+                      },
+                      "longitude": {
+                        "type": "number",
+                        "description": "Longitude in decimal degrees."
+                      },
+                      "altitude": {
+                        "type": "number",
+                        "description": "Altitude in meters."
+                      },
+                      "userDefined": {
+                        "type": "string",
+                        "description": "User-defined location label."
+                      }
+                    }
+                  }
+                }
               }
+            ]
+          }
+        },
+        "radioStartConditions": {
+          "title": "radioStartConditions",
+          "type": "object",
+          "description": "Controls when, after a start command is issued, the radio starts trying to inventory tags.\nThis is distinct from antennaStopCondition.\nCross-field constraint: cannot be set in PORTAL mode.\n",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "GPI",
+                "GPI_WITH_RESTART"
+              ]
             },
-            "transmitPower": {
+            "gpis": {
               "type": "array",
-              "description": "Desired transmit power values in dBm.",
+              "description": "List of GPI pins used to trigger radio start",
               "items": {
-                "type": "number"
+                "title": "gpi",
+                "type": "object",
+                "properties": {
+                  "port": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2,
+                    "description": "GPI Port Number"
+                  },
+                  "signal": {
+                    "type": "string",
+                    "enum": [
+                      "HIGH",
+                      "LOW"
+                    ],
+                    "description": "Transition to this GPI will trigger event"
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Time (in milliseconds) until GPI must remain at signal level to trigger event",
+                    "default": 0
+                  }
+                },
+                "required": [
+                  "port",
+                  "signal"
+                ]
+              }
+            }
+          }
+        },
+        "radioStopConditions": {
+          "title": "radioStopConditions",
+          "type": "object",
+          "description": "Controls when an ongoing radio operation completes.\nThis is distinct from antennaStopCondition.\nCross-field constraint: cannot be set in PORTAL mode.\n",
+          "properties": {
+            "duration": {
+              "type": "integer",
+              "description": "Time to run until radio stops (in seconds)",
+              "format": "int32"
+            },
+            "antennaCycles": {
+              "type": "integer",
+              "description": "The number of cycles through all enabled antennas before stopping the radio",
+              "format": "int32"
+            },
+            "tagCount": {
+              "type": "integer",
+              "description": "The number of tags to inventory until the radio stops. Cannot be set at the same time as durationAfterNoMoreUniqueTags",
+              "format": "int32"
+            },
+            "durationAfterNoMoreUniqueTags": {
+              "type": "integer",
+              "description": "Duration (in seconds) after not inventorying any more unique tags to stop the radio. Cannot be set at the same time as tagCount",
+              "format": "int32"
+            },
+            "gpis": {
+              "type": "array",
+              "items": {
+                "title": "gpi",
+                "type": "object",
+                "properties": {
+                  "port": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2,
+                    "description": "GPI Port Number"
+                  },
+                  "signal": {
+                    "type": "string",
+                    "enum": [
+                      "HIGH",
+                      "LOW"
+                    ],
+                    "description": "Transition to this GPI will trigger event"
+                  },
+                  "debounceTime": {
+                    "type": "integer",
+                    "description": "Time (in milliseconds) until GPI must remain at signal level to trigger event",
+                    "default": 0
+                  }
+                },
+                "required": [
+                  "port",
+                  "signal"
+                ]
+              }
+            }
+          }
+        },
+        "reportFilter": {
+          "title": "reportFilter",
+          "type": "object",
+          "description": "Controls when and how often a tag is reported.\n\nCross-field constraints:\n- Cannot be set while in INVENTORY mode.\n- Cannot be set at the same time as accesses.\n- Cannot be set at the same time as tagMetaData containing RESERVED/EPC/TID/USER unless addl_keys is configured.",
+          "properties": {
+            "duration": {
+              "type": "integer",
+              "description": "Duration (in seconds) to wait to report a tag again once it has already been reported\nIt should be noted that the way the filter works is that as long as the tag is being read by the reader, it will not report unless the time since the previous report of this tag on this antenna meets the type and duration. \nDuration is a uint32 value and the max value is bound by the data type. ",
+              "format": "int32",
+              "minimum": 0
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "RADIO_WIDE",
+                "PER_ANTENNA"
+              ],
+              "description": "Configures the timeout (in seconds) by antenna or for entire radio \n"
+            },
+            "addl_keys": {
+              "type": "array",
+              "description": "Filters tag reports based on additional configured keys.\n\nSupported value: TID.\n\nCross-field constraints:\n- addl_keys can only contain TID when tagMetaData also contains TID, PC and CRC.\n- When type is PER_ANTENNA and addl_keys contains TID, tagMetaData must also include ANTENNA.",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "TID"
+                ]
               }
             }
           },
           "required": [
+            "duration",
             "type"
-          ],
-          "title": "success"
+          ]
         },
-        {
-          "$ref": "../../references/response_payload/errors.yaml"
+        "rssiFilter": {
+          "title": "rssiFilter",
+          "type": "object",
+          "description": "Tag with RSSI below threshold will not be inventoried by the radio\n\nIf absent, rssi filter is not used.\n\nNote: Currently ONLY supported by the FX9600.",
+          "properties": {
+            "threshold": {
+              "type": "integer",
+              "description": "Threshold (in dbm) below which the radio will ignore a tag response",
+              "format": "int32",
+              "minimum": -128,
+              "maximum": -20
+            }
+          }
         }
+      },
+      "required": [
+        "type"
       ]
     }
   },

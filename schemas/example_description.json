@@ -87,11 +87,6 @@
     "Advanced quiet tags": "Applies advanced quieting using preSelect and tagQuietMasks conditions.",
     "Advanced unquiet tags": "Removes advanced quieting and restores tag communication based on defined conditions."
   },
-  "Get Impinj Gen2X Response": {
-    "Empty configuration": "Returns an empty object when no Impinj Gen2X configuration has been set on the reader.",
-    "FastID configured": "Returns the FastID configuration when the FastID feature is enabled.",
-    "TagFocus configured": "Returns the TagFocus configuration when the feature is enabled."
-  },
   "Get App LED Response": {
     "Retrieve LED status": "Returns the current status of the application LED on the reader."
   },
@@ -101,16 +96,56 @@
   "Set Network Configuration": {
     "Ethernet DHCP (eth0)": "Configures the eth0 wired interface to obtain its IPv4 address automatically via DHCP.",
     "Ethernet static IP (eth0)": "Configures the eth0 wired interface with a static IPv4 address, subnet mask, gateway, and DNS.",
-    "Ethernet 802.1X EAP-TLS (eth0)": "Secures the eth0 wired interface with 802.1X port authentication using EAP-TLS and a client certificate.",
-    "Ethernet 802.1X EAP-TTLS (eth0)": "Secures the eth0 wired interface with 802.1X port authentication using EAP-TTLS with MSCHAPv2 username and password.",
-    "Wi-Fi DHCP (mlan0)": "Configures the mlan0 Wi-Fi interface to obtain its IPv4 address automatically via DHCP.",
+    "Ethernet 802.1X EAP-TLS, static IP (eth0)": "Secures the eth0 wired interface with 802.1X EAP-TLS and a client certificate, using a static IPv4 address.",
+    "Ethernet 802.1X EAP-TLS, DHCP (eth0)": "Secures the eth0 wired interface with 802.1X EAP-TLS and a client certificate, obtaining its address via DHCP.",
+    "Ethernet 802.1X EAP-TTLS/MSCHAPv2 (eth0)": "Secures the eth0 wired interface with 802.1X port authentication using EAP-TTLS with MSCHAPv2 username and password.",
+    "Ethernet 802.1X PEAP/MSCHAPv2 (eth0)": "Secures the eth0 wired interface with 802.1X port authentication using PEAP with MSCHAPv2 username and password.",
     "Wi-Fi static IP (mlan0)": "Configures the mlan0 Wi-Fi interface with a static IPv4 address, subnet mask, gateway, and DNS.",
+    "Wi-Fi DHCP (mlan0)": "Configures the mlan0 Wi-Fi interface to obtain its IPv4 address automatically via DHCP.",
     "Wi-Fi WPA2-Personal (mlan0)": "Connects the mlan0 Wi-Fi interface to a WPA2-Personal access point using a pre-shared key.",
-    "Wi-Fi open network (mlan0)": "Connects the mlan0 Wi-Fi interface to an open (unsecured) access point.",
     "Wi-Fi WPA2-Enterprise EAP-TLS (mlan0)": "Connects the mlan0 Wi-Fi interface to a WPA2-Enterprise access point using EAP-TLS with a client certificate.",
-    "Wi-Fi WPA2-Enterprise EAP-TTLS (mlan0)": "Connects the mlan0 Wi-Fi interface to a WPA2-Enterprise access point using EAP-TTLS with MSCHAPv2 username and password.",
+    "Wi-Fi WPA3-Enterprise EAP-TTLS/MSCHAPv2 (mlan0)": "Connects the mlan0 Wi-Fi interface to a WPA3-Enterprise access point using EAP-TTLS with MSCHAPv2 username and password.",
+    "Wi-Fi WPA2-Enterprise PEAP-TLS (mlan0)": "Connects the mlan0 Wi-Fi interface to a WPA2-Enterprise access point using PEAP with an inner EAP-TLS client certificate.",
+    "Wi-Fi WPA2-Enterprise EAP-TTLS/TLS (mlan0)": "Connects the mlan0 Wi-Fi interface to a WPA2-Enterprise access point using EAP-TTLS with an inner TLS client certificate.",
+    "Wi-Fi WPA3-Enterprise PEAP/MSCHAPv2 (mlan0)": "Connects the mlan0 Wi-Fi interface to a WPA3-Enterprise access point using PEAP with MSCHAPv2 username and password.",
     "Bluetooth PAN (bnep0)": "Configures the bnep0 Bluetooth PAN interface, including the DHCP address range, discoverability, and pairing options.",
     "Cellular WAN physical SIM (wan0)": "Configures the wan0 cellular interface using the physical SIM with an APN and automatic preferred network type.",
     "Wi-Fi hotspot WPA3 (uap0)": "Configures the uap0 software access point (hotspot) with a WPA3-Personal SSID and password."
+  },
+  "readerNetworkAll": {
+    "Ethernet (eth0)": "Shows the eth0 wired interface configuration and status, including IPv4/IPv6 addressing and MAC address.",
+    "Wi-Fi (mlan0)": "Shows the mlan0 Wi-Fi interface configuration and status, including the connected access point and IP addressing.",
+    "Bluetooth (bnep0)": "Shows the bnep0 Bluetooth PAN interface configuration and status.",
+    "Cellular WAN (wan0)": "Shows the wan0 cellular interface configuration and status, including SIM, APN, and IP addressing.",
+    "Wi-Fi hotspot (uap0)": "Shows the uap0 software access point (hotspot) configuration and status."
+  },
+  "Set Operating Mode": {
+    "Simple mode": "Configures a SIMPLE operating mode with antenna, Gen2 query, and inventory-protocol settings.",
+    "Default FXR90 mode": "Applies the default FXR90 CUSTOM operating-mode configuration.",
+    "TagFocus mode": "Configures a CUSTOM operating mode with TagFocus and mode-specific settings."
+  },
+  "Get Impinj Gen2X Configuration Response": {
+    "Empty configuration": "Returns an empty object when no Impinj Gen2X configuration has been set on the reader.",
+    "FastID configured": "Returns the FastID configuration when the FastID feature is enabled.",
+    "TagFocus configured": "Returns the TagFocus configuration when the feature is enabled.",
+    "Tag protect configured": "Returns the tag-protect configuration when tag protection is enabled.",
+    "Tag quieting (basic) configured": "Returns the basic tag-quieting configuration.",
+    "Tag quieting (advanced) configured": "Returns the advanced tag-quieting configuration."
+  },
+  "Set Password": {
+    "Change admin password": "Changes the admin account password using the current and new password values.",
+    "Change rfidadm password": "Changes the rfidadm account password using the current and new password values."
+  },
+  "Set-NTPServer": {
+    "Set NTP servers": "Configures the reader's NTP time servers.",
+    "Set NTP servers (legacy fields)": "Configures NTP servers using the legacy server field names."
+  },
+  "Set Passthru": {
+    "Send mode command to component": "Sends a pass-through command to the specified component to control or query its operating mode.",
+    "Send status command to component": "Sends a pass-through command to the specified component to request its current status."
+  },
+  "Auto Start User App": {
+    "Enable auto-start": "Enables automatic startup of the specified user application on reader boot.",
+    "Disable auto-start": "Disables automatic startup of the specified user application."
   }
 }

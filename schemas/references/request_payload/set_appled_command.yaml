@@ -4,12 +4,11 @@ description: Sets the reader App LED to the specified color and behavior.
 properties:
   color:
     type: string
-    description: The color of the LED (red, amber, green, blue, off).
+    description: The color of the LED (red, amber, green, off).
     enum:
     - red
     - amber
     - green
-    - blue
     - 'off'
   flash:
     type: boolean
