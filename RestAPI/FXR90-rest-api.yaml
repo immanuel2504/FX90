@@ -1935,58 +1935,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetConfigResponse'
               example:
-                GPIO-LED: NOT_CONFIGURED
+                GPIO-LED: {}
                 READER-GATEWAY:
                   batching:
-                  - maxPayloadSizePerReport: 0
-                    reportingInterval: 0
+                  - maxPayloadSizePerReport: 256000
+                    reportingInterval: 10000
                   endpointConfig:
                     control:
-                      commandResponse:
-                        enableLocalRest: true
+                      commandResponse: {}
                     data:
-                      batching:
-                        maxPayloadSizePerReport: 0
-                        reportingInterval: 0
                       event:
                         connections:
                         - additionalOptions:
                             batching:
-                              maxPayloadSizePerReport: 0
-                              reportingInterval: 0
-                            retention:
-                              maxEventRetentionTimeInMin: 0
-                              maxNumEvents: 0
-                              throttle: 1
-                          description: WEBSOCKET_TEST
-                          name: WEBSOCKET_TEST
-                          options:
-                            security:
-                              verifyPeer: false
-                          type: WEBSOCKET
-                      retention:
-                        maxEventRetentionTimeInMin: 0
-                        maxNumEvents: 0
-                        throttle: 1
-                    management:
-                      commandResponse:
-                        enableLocalRest: true
-                      event:
-                        connections:
-                        - additionalOptions:
+                              maxPayloadSizePerReport: 256000
+                              reportingInterval: 10000
                             retention:
                               maxEventRetentionTimeInMin: 500
                               maxNumEvents: 150000
                               throttle: 100
-                          description: WEBSOCKET_TEST
-                          name: WEBSOCKET_TEST
+                          description: QWERTYU
+                          name: ASDFGHJ
                           options:
                             security:
                               verifyPeer: false
                           type: WEBSOCKET
+                    management:
+                      commandResponse: {}
+                      event:
+                        connections: []
                   managementEventConfig:
                     errors:
-                      antenna: false
+                      antenna: true
                       cpu:
                         reportIntervalInSec: 1800
                         threshold: 90
@@ -1996,7 +1976,7 @@ paths:
                         threshold: 90
                       ntp: true
                       radio: true
-                      radio_control: false
+                      radio_control: true
                       ram:
                         reportIntervalInSec: 1800
                         threshold: 90
@@ -2048,7 +2028,7 @@ paths:
                         - POWER_SOURCE
                         - MAC_ADDRESS
                         - HOSTNAME
-                        userDefined: null
+                        userDefined: {}
                         userapps:
                         - STATUS
                         - CPU
@@ -2058,7 +2038,7 @@ paths:
                         - NUM_DATA_MESSAGES_TXED
                         - INCOMING_DATA_BUFFER_PERCENTAGE_REMAINING
                         - OUTGOING_DATA_BUFFER_PERCENTAGE_REMAINING
-                      interval: 10
+                      interval: 60
                     userappEvents: true
                     warnings:
                       cpu:
@@ -2082,9 +2062,9 @@ paths:
                         reportIntervalInSec: 1800
                         threshold: 60
                   retention:
-                  - maxEventRetentionTimeInMin: -1
-                    maxNumEvents: 0
-                    throttle: 500
+                  - maxEventRetentionTimeInMin: 500
+                    maxNumEvents: 150000
+                    throttle: 100
       security:
       - bearerAuth: []
     put:
@@ -2228,40 +2208,38 @@ paths:
                       data:
                         event:
                           connections:
-                          - additionalOptions:
-                              batching: null
-                              retention:
-                                maxEventRetentionTimeInMin: 500
-                                maxNumEvents: 150000
-                                throttle: 500
-                            description: MQTT_TEST
-                            name: MQTT_TEST
+                          - description: azure_8883yj
+                            name: AZURE_8883
                             options:
                               additional:
-                                cleanSession: true
-                                clientId: EV1
-                                debug: false
-                                keepAlive: 60
-                                qos: 0
-                                reconnectDelay: 1
-                                reconnectDelayMax: 5
-                              enableSecurity: false
+                                cleanSession: false
+                                clientId: FXR90A3A2F7
+                                debug: true
+                                keepAlive: 120
+                                qos: 1
+                                reconnectDelay: 600
+                                reconnectDelayMax: 86400
+                              basicAuthentication:
+                                password: none
+                                username: VULCANIOTHUB.azure-devices.net/FXR90A3A2F7/?api-version=2018-06-30
+                              enableSecurity: true
                               endpoint:
-                                hostName: 10.117.229.9
-                                port: 1883
-                                protocol: tcp
+                                hostName: VULCANIOTHUB.azure-devices.net
+                                port: 8883
+                                protocol: ssl
                               publishTopic:
-                              - tagevents_r2c_longrun
+                              - devices/FXR90A3A2F7/messages/events/
                               security:
-                                CACertificateFileLocation: /home/root/broker.emqx.io-ca.crt
-                                installedCertificateName: Server
-                                installedCertificateType: server
+                                CACertificateFileLocation: /data/apps/cacertazure.pem
                                 keyAlgorithm: RS256
                                 keyFormat: PEM
+                                privateKeyFileLocation: /data/apps/key.pem
+                                publicKeyFileLocation: /data/apps/csr.pem
                                 verifyHostName: false
                                 verifyPeer: false
-                              subscribeTopic: []
-                            type: mqtt
+                              subscribeTopic:
+                              - devices/FXR90A3A2F7/messages/devicebound/#
+                            type: mqtt-AZURE
               set_config_data_clear:
                 value:
                   READER-GATEWAY:
@@ -4777,7 +4755,66 @@ paths:
       tags:
       - Certificate
       summary: List installed CA certificates
-      description: MQTT API :- get_CACertificates <br> Returns the list of installed CA certificate names.
+      description: '## 1. Description
+
+
+        The `GET /cloud/caCertificates` REST endpoint retrieves the list of CA (Certificate Authority) certificates installed on the reader.
+
+
+        This endpoint returns:
+
+
+        - An array of installed CA certificate names
+
+
+        No request body is required.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | Pattern Name | CA Certificate Inventory Query |
+
+        | REST Endpoint | `GET /cloud/caCertificates` |
+
+        | Communication Type | Client to Device (HTTP request/response) |
+
+        | Applies To | FXR90 |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Supported Operations | Retrieve the list of installed CA certificate names |
+
+
+        ## 3. When to Use This Endpoint
+
+
+        Use `GET /cloud/caCertificates` to:
+
+
+        - Confirm which CA certificates are installed before configuring a TLS endpoint that must trust them
+
+        - Audit the reader''s CA trust store across a fleet of readers
+
+        - Verify a CA certificate was installed after `PUT /cloud/caCertificates/{caname}`, or removed after `DELETE /cloud/caCertificates/{caname}`
+
+        - Reconcile the reader''s trust anchors against your organization''s PKI
+
+
+        Key fields to check in the response:
+
+
+        | Field | What to Check | Why It Matters |
+
+        |---|---|---|
+
+        | CA certificate name | Is the expected CA certificate name present in the returned array? | Confirms the reader trusts the CA that issued your broker or endpoint TLS certificates. |
+
+        '
       operationId: getCACertificates
       responses:
         '200':
@@ -4805,7 +4842,63 @@ paths:
       tags:
       - Certificate
       summary: Install CA certificate
-      description: MQTT API :- set_InstallCACertificate <br> Installs a CA certificate on the device.
+      description: '## 1. Description
+
+
+        The `PUT /cloud/caCertificates/{caname}` REST endpoint installs a CA (Certificate Authority) root certificate on the reader by providing the PEM-encoded certificate content in the request body.
+
+
+        This endpoint allows you to configure:
+
+
+        - The CA certificate name through the `{caname}` path parameter
+
+        - The PEM-encoded certificate content through `content`
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | Pattern Name | CA Certificate Installation |
+
+        | REST Endpoint | `PUT /cloud/caCertificates/{caname}` |
+
+        | Communication Type | Client to Device (HTTP request/response) |
+
+        | Applies To | FXR90 |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Content-Type | `application/json` |
+
+        | Path Parameter | `caname` (the CA certificate name to install) |
+
+        | Required Request Fields | `content` |
+
+
+        ## 3. Before You Begin
+
+
+        Have the CA certificate''s PEM content ready before sending this request. Invalid PEM content will be rejected and the CA will not be installed.
+
+
+        | What You Need | Details |
+
+        |---|---|
+
+        | CA certificate name | A unique name to assign this CA certificate on the reader, supplied as the `{caname}` path parameter. If a CA with this name already exists, it will be replaced. |
+
+        | PEM content | The full PEM-encoded CA certificate string (`content`), including the `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----` headers and footers. |
+
+        | Certificate validity | Confirm the CA certificate is not expired before installing it. An expired CA root will still install but will fail to validate any certificates it issued. |
+
+        | Intended use | Know which MQTT broker or HTTP endpoint TLS certificate is issued by this CA, so you can verify the chain after installation with `GET /cloud/caCertificates`. |
+
+        '
       operationId: setInstallCACertificate
       requestBody:
         required: true
@@ -4866,7 +4959,51 @@ paths:
       tags:
       - Certificate
       summary: Delete CA certificate
-      description: MQTT API :- del_CACertificate <br> Deletes the specified CA certificate from the device.
+      description: '## 1. Description
+
+
+        The `DELETE /cloud/caCertificates/{caname}` REST endpoint removes an installed CA (Certificate Authority) root certificate from the reader. When you call this endpoint, the CA certificate identified by the `{caname}` path parameter is permanently deleted from the reader''s CA certificate store.
+
+
+        ## 2. Endpoint Details
+
+
+        | Property | Value |
+
+        |---|---|
+
+        | Pattern Name | CA Certificate Deletion |
+
+        | REST Endpoint | `DELETE /cloud/caCertificates/{caname}` |
+
+        | Communication Type | Client to Device (HTTP request/response) |
+
+        | Applies To | FXR90 |
+
+        | Authentication | Bearer token (`Authorization: Bearer <token>`) |
+
+        | Path Parameter | `caname` (the CA certificate name to delete) |
+
+        | Supported Operations | Delete an installed CA certificate |
+
+
+        ## 3. Before You Begin
+
+
+        Confirm the CA certificate is safe to remove before sending this request. Deleting a CA that is actively used for TLS verification will cause all TLS connections that depend on it to fail.
+
+
+        | What You Need | Details |
+
+        |---|---|
+
+        | CA certificate name | The exact name of the CA certificate to delete, supplied as the `{caname}` path parameter, as returned by `GET /cloud/caCertificates`. The name is case-sensitive. |
+
+        | Active use check | Identify all MQTT or HTTPS endpoints whose server or client certificates are issued by this CA. Remove those dependencies or install a replacement CA before deleting. |
+
+        | Irreversible action | Deletion is permanent. If the CA is still needed, reinstall it with `PUT /cloud/caCertificates/{caname}` and its original PEM content. |
+
+        '
       operationId: delCACertificate
       responses:
         '200':
@@ -8347,7 +8484,7 @@ components:
     readerLocationMode.v1:
       title: readerLocation
       type: object
-      description: Reader location metadata reported with mode configuration.
+      description: The reader's configured location (latitude, longitude, altitude, and an optional user-defined label) reported with each tag event. Included in the tag metadata only when `READER_LOCATION` is listed in `tagMetaData`.
       properties:
         latitude:
           type: number
@@ -8653,6 +8790,7 @@ components:
           - GREEN
           - RED
           - AMBER
+          - 'OFF'
         blink:
           $ref: '#/components/schemas/actionBlink.v1'
         conditions:
@@ -8688,15 +8826,23 @@ components:
 
         4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH
 
-        5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud
+        5. GPI_3_L: event raised when GPI 3 changed from HIGH to LOW
 
-        6. CLOUD_CONNECT: event raised when reader is connected to cloud
+        6. GPI_3_H: event raised when GPI 3 changed from LOW to HIGH
 
-        7. TAG_READ: event raised when a tag is read
+        7. GPI_4_L: event raised when GPI 4 changed from HIGH to LOW
 
-        8. RADIO_START: event raised when inventory operation started using START API
+        8. GPI_4_H: event raised when GPI 4 changed from LOW to HIGH
 
-        9. RADIO_STOP: event raised when inventory operation stopped using STOP API'
+        9. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud
+
+        10. CLOUD_CONNECT: event raised when reader is connected to cloud
+
+        11. TAG_READ: event raised when a tag is read
+
+        12. RADIO_START: event raised when inventory operation started using START API
+
+        13. RADIO_STOP: event raised when inventory operation stopped using STOP API'
       properties:
         GPODefaults:
           type: object
@@ -8758,6 +8904,14 @@ components:
         GPI_2_H:
           $ref: '#/components/schemas/gpoledAction.v1'
         GPI_2_L:
+          $ref: '#/components/schemas/gpoledAction.v1'
+        GPI_3_H:
+          $ref: '#/components/schemas/gpoledAction.v1'
+        GPI_3_L:
+          $ref: '#/components/schemas/gpoledAction.v1'
+        GPI_4_H:
+          $ref: '#/components/schemas/gpoledAction.v1'
+        GPI_4_L:
           $ref: '#/components/schemas/gpoledAction.v1'
         CLOUD_DISCONNECT:
           $ref: '#/components/schemas/gpoledAction.v1'

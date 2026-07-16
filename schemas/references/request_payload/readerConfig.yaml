@@ -20,15 +20,23 @@ properties:
 
       4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH
 
-      5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud
+      5. GPI_3_L: event raised when GPI 3 changed from HIGH to LOW
 
-      6. CLOUD_CONNECT: event raised when reader is connected to cloud
+      6. GPI_3_H: event raised when GPI 3 changed from LOW to HIGH
 
-      7. TAG_READ: event raised when a tag is read
+      7. GPI_4_L: event raised when GPI 4 changed from HIGH to LOW
 
-      8. RADIO_START: event raised when inventory operation started using START API
+      8. GPI_4_H: event raised when GPI 4 changed from LOW to HIGH
 
-      9. RADIO_STOP: event raised when inventory operation stopped using STOP API'
+      9. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud
+
+      10. CLOUD_CONNECT: event raised when reader is connected to cloud
+
+      11. TAG_READ: event raised when a tag is read
+
+      12. RADIO_START: event raised when inventory operation started using START API
+
+      13. RADIO_STOP: event raised when inventory operation stopped using STOP API'
     properties:
       GPODefaults:
         type: object
@@ -248,6 +256,7 @@ properties:
                 - GREEN
                 - RED
                 - AMBER
+                - 'OFF'
               blink:
                 title: Action Blink Configuration
                 type: object
@@ -507,6 +516,7 @@ properties:
                 - GREEN
                 - RED
                 - AMBER
+                - 'OFF'
               blink:
                 title: Action Blink Configuration
                 type: object
@@ -766,6 +776,7 @@ properties:
                 - GREEN
                 - RED
                 - AMBER
+                - 'OFF'
               blink:
                 title: Action Blink Configuration
                 type: object
@@ -1025,6 +1036,1047 @@ properties:
                 - GREEN
                 - RED
                 - AMBER
+                - 'OFF'
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                - type: object
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: Operator to be used for conditions validation
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+            required:
+            - type
+            - led
+            - color
+      GPI_3_H:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        items:
+          anyOf:
+          - title: GPO Action
+            type: object
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+              pin:
+                type: number
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                - type: object
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: Operator to be used for conditions validation
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            type: object
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 1
+                - 2
+                - 3
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                - 'OFF'
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                - type: object
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: Operator to be used for conditions validation
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+            required:
+            - type
+            - led
+            - color
+      GPI_3_L:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        items:
+          anyOf:
+          - title: GPO Action
+            type: object
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+              pin:
+                type: number
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                - type: object
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: Operator to be used for conditions validation
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            type: object
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 1
+                - 2
+                - 3
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                - 'OFF'
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                - type: object
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: Operator to be used for conditions validation
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+            required:
+            - type
+            - led
+            - color
+      GPI_4_H:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        items:
+          anyOf:
+          - title: GPO Action
+            type: object
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+              pin:
+                type: number
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                - type: object
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: Operator to be used for conditions validation
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            type: object
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 1
+                - 2
+                - 3
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                - 'OFF'
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                - type: object
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: Operator to be used for conditions validation
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+            required:
+            - type
+            - led
+            - color
+      GPI_4_L:
+        title: GPO-LED Action
+        type: array
+        description: Array of GPO or LED actions. Actions will be performed sequentially.
+        items:
+          anyOf:
+          - title: GPO Action
+            type: object
+            description: 'Configuration to define operations on single GPO.
+
+
+              GPO Action will be skipped if conditions provided is not satisfied.'
+            properties:
+              type:
+                type: string
+                enum:
+                - GPO
+                description: Action type
+              pin:
+                type: number
+                description: GPO pin number
+                enum:
+                - 1
+                - 2
+                - 3
+                - 4
+              state:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state
+              postActionState:
+                type: string
+                enum:
+                - HIGH
+                - LOW
+                description: Desired GPO pin state after action execution completed
+              blink:
+                title: Action Blink Configuration
+                type: object
+                description: action blink configuration for GPO or LED
+                properties:
+                  'ON':
+                    type: number
+                    minimum: 0
+                    description: SET GPO or LED to desired state for ON (milliseconds) duration
+                  'OFF':
+                    type: number
+                    minimum: 0
+                    description: Toggle GPO or LED for OFF(milliseconds) duration
+                  DURATION:
+                    type: number
+                    minimum: 0
+                    description: Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever
+                required:
+                - 'ON'
+                - 'OFF'
+                - DURATION
+              conditions:
+                oneOf:
+                - type: array
+                  title: Conditions Array
+                  description: 'Predefined conditions
+
+
+                    IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                    ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                    IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                    ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                  uniqueItems: true
+                  minItems: 0
+                  items:
+                    type: string
+                    enum:
+                    - IS_CLOUD_CONNECTED
+                    - ~IS_CLOUD_CONNECTED
+                    - IS_RADIO_ONGOING
+                    - ~IS_RADIO_ONGOING
+                - type: object
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - and
+                      - or
+                      description: Operator to be used for conditions validation
+                    operands:
+                      type: array
+                      title: Conditions Array
+                      description: 'Predefined conditions
+
+
+                        IS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.
+
+
+                        ~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.
+
+
+                        IS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.
+
+
+                        ~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.'
+                      uniqueItems: true
+                      minItems: 0
+                      items:
+                        type: string
+                        enum:
+                        - IS_CLOUD_CONNECTED
+                        - ~IS_CLOUD_CONNECTED
+                        - IS_RADIO_ONGOING
+                        - ~IS_RADIO_ONGOING
+                title: Action Conditions
+                description: 'Predefined conditions to trigger GPO or LED actions
+
+
+                  Default "and" operator is used when array of conditions is provided.
+
+
+                  operator "and": Action is performed only when all the conditions provided is true.
+
+                  operator "or": Action is performed only when one of the conditions provided is true.'
+            required:
+            - type
+            - pin
+            - state
+          - title: LED Action
+            type: object
+            description: 'Configuration to define operations on single LED.
+
+
+              LED Action will be skipped if conditions provided is not satisfied.'
+            properties:
+              type:
+                type: string
+                description: Action type
+                enum:
+                - LED
+              led:
+                type: number
+                description: LED number
+                enum:
+                - 1
+                - 2
+                - 3
+              color:
+                type: string
+                description: Desired LED color
+                enum:
+                - RED
+                - AMBER
+                - GREEN
+              postActionColor:
+                type: string
+                description: Desired LED color after action expired
+                enum:
+                - GREEN
+                - RED
+                - AMBER
+                - 'OFF'
               blink:
                 title: Action Blink Configuration
                 type: object
@@ -1284,6 +2336,7 @@ properties:
                 - GREEN
                 - RED
                 - AMBER
+                - 'OFF'
               blink:
                 title: Action Blink Configuration
                 type: object
@@ -1543,6 +2596,7 @@ properties:
                 - GREEN
                 - RED
                 - AMBER
+                - 'OFF'
               blink:
                 title: Action Blink Configuration
                 type: object
@@ -1802,6 +2856,7 @@ properties:
                 - GREEN
                 - RED
                 - AMBER
+                - 'OFF'
               blink:
                 title: Action Blink Configuration
                 type: object
@@ -2061,6 +3116,7 @@ properties:
                 - GREEN
                 - RED
                 - AMBER
+                - 'OFF'
               blink:
                 title: Action Blink Configuration
                 type: object
@@ -2320,6 +3376,7 @@ properties:
                 - GREEN
                 - RED
                 - AMBER
+                - 'OFF'
               blink:
                 title: Action Blink Configuration
                 type: object

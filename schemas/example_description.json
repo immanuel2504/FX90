@@ -63,9 +63,8 @@
   "Set-ImportCloudConfig-Response": {
     "Cloud config import success": "Returns an empty payload when the cloud endpoint configuration import succeeds."
   },
-  "Set Cable Loss Compensation": {
-    "Set ports 1 and 2 cable loss": "Sets cable length and cable loss per hundred feet for antenna ports 1 and 2.",
-    "Set ports 3 and 4 cable loss": "Sets cable length and cable loss per hundred feet for antenna ports 3 and 4."
+  "Set-CableLossCompensation": {
+    "Set cable loss for ports 1-4": "Sets cable length and cable loss per hundred feet for antenna ports 1 to 4."
   },
   "Get Reader Capabilities Response": {
     "Retrieve reader capabilities": "Returns the list of supported capabilities on the current reader, including antennas, supported endpoints, network interfaces, and feature flags."

@@ -1340,7 +1340,7 @@
                                                                     "readerLocation": {
                                                                         "title": "readerLocation",
                                                                         "type": "object",
-                                                                        "description": "Reader location metadata reported with mode configuration.",
+                                                                        "description": "The reader's configured location (latitude, longitude, altitude, and an optional user-defined label) reported with each tag event. Included in the tag metadata only when `READER_LOCATION` is listed in `tagMetaData`.",
                                                                         "properties": {
                                                                             "latitude": {
                                                                                 "type": "number",
@@ -2670,7 +2670,7 @@
                                                                 "readerLocation": {
                                                                     "title": "readerLocation",
                                                                     "type": "object",
-                                                                    "description": "Reader location metadata reported with mode configuration.",
+                                                                    "description": "The reader's configured location (latitude, longitude, altitude, and an optional user-defined label) reported with each tag event. Included in the tag metadata only when `READER_LOCATION` is listed in `tagMetaData`.",
                                                                     "properties": {
                                                                         "latitude": {
                                                                             "type": "number",
@@ -7089,12 +7089,12 @@
                                             "command_id": "1a234",
                                             "response": "success",
                                             "payload": {
-                                                "GPIO-LED": "NOT_CONFIGURED",
+                                                "GPIO-LED": {},
                                                 "READER-GATEWAY": {
                                                     "batching": [
                                                         {
-                                                            "maxPayloadSizePerReport": 0,
-                                                            "reportingInterval": 0
+                                                            "maxPayloadSizePerReport": 256000,
+                                                            "reportingInterval": 10000
                                                         }
                                                     ],
                                                     "endpointConfig": {
@@ -7102,57 +7102,22 @@
                                                             "commandResponse": {}
                                                         },
                                                         "data": {
-                                                            "batching": {
-                                                                "maxPayloadSizePerReport": 0,
-                                                                "reportingInterval": 0
-                                                            },
                                                             "event": {
                                                                 "connections": [
                                                                     {
                                                                         "additionalOptions": {
                                                                             "batching": {
-                                                                                "maxPayloadSizePerReport": 0,
-                                                                                "reportingInterval": 0
+                                                                                "maxPayloadSizePerReport": 256000,
+                                                                                "reportingInterval": 10000
                                                                             },
-                                                                            "retention": {
-                                                                                "maxEventRetentionTimeInMin": 0,
-                                                                                "maxNumEvents": 0,
-                                                                                "throttle": 1
-                                                                            }
-                                                                        },
-                                                                        "description": "WEBSOCKET_TEST",
-                                                                        "name": "WEBSOCKET_TEST",
-                                                                        "options": {
-                                                                            "security": {
-                                                                                "verifyPeer": false
-                                                                            }
-                                                                        },
-                                                                        "type": "WEBSOCKET"
-                                                                    }
-                                                                ]
-                                                            },
-                                                            "retention": {
-                                                                "maxEventRetentionTimeInMin": 0,
-                                                                "maxNumEvents": 0,
-                                                                "throttle": 1
-                                                            }
-                                                        },
-                                                        "management": {
-                                                            "commandResponse": {
-                                                                "enableLocalRest": true
-                                                            },
-                                                            "event": {
-                                                                "connections": [
-                                                                    {
-                                                                        "additionalOptions": {
                                                                             "retention": {
                                                                                 "maxEventRetentionTimeInMin": 500,
                                                                                 "maxNumEvents": 150000,
                                                                                 "throttle": 100
                                                                             }
                                                                         },
-                                                                        "description": "WEBSOCKET_TEST",
-                                                                        "name": "WEBSOCKET_TEST",
+                                                                        "description": "QWERTYU",
+                                                                        "name": "ASDFGHJ",
                                                                         "options": {
                                                                             "security": {
                                                                                 "verifyPeer": false
@@ -7162,11 +7127,17 @@
                                                                     }
                                                                 ]
                                                             }
+                                                        },
+                                                        "management": {
+                                                            "commandResponse": {},
+                                                            "event": {
+                                                                "connections": []
+                                                            }
                                                         }
                                                     },
                                                     "managementEventConfig": {
                                                         "errors": {
-                                                            "antenna": false,
+                                                            "antenna": true,
                                                             "cpu": {
                                                                 "reportIntervalInSec": 1800,
                                                                 "threshold": 90
@@ -7178,7 +7149,7 @@
                                                             },
                                                             "ntp": true,
                                                             "radio": true,
-                                                            "radio_control": false,
+                                                            "radio_control": true,
                                                             "ram": {
                                                                 "reportIntervalInSec": 1800,
                                                                 "threshold": 90
@@ -7236,7 +7207,7 @@
                                                                     "MAC_ADDRESS",
                                                                     "HOSTNAME"
                                                                 ],
-                                                                "userDefined": null,
+                                                                "userDefined": {},
                                                                 "userapps": [
                                                                     "STATUS",
                                                                     "CPU",
@@ -7248,7 +7219,7 @@
                                                                     "OUTGOING_DATA_BUFFER_PERCENTAGE_REMAINING"
                                                                 ]
                                                             },
-                                                            "interval": 10
+                                                            "interval": 60
                                                         },
                                                         "userappEvents": true,
                                                         "warnings": {
@@ -7281,9 +7252,9 @@
                                                     },
                                                     "retention": [
                                                         {
-                                                            "maxEventRetentionTimeInMin": -1,
-                                                            "maxNumEvents": 0,
-                                                            "throttle": 500
+                                                            "maxEventRetentionTimeInMin": 500,
+                                                            "maxNumEvents": 150000,
+                                                            "throttle": 100
                                                         }
                                                     ]
                                                 }
@@ -7331,7 +7302,7 @@
                                             "GPIO-LED": {
                                                 "title": "GPIO-LED configuration",
                                                 "type": "object",
-                                                "description": "GPIO-LED module configuration\n\nConfigure GPO and LED behaviour based on Events generated\n\nSupported Events:\n1. GPI_1_L: event raised when GPI 1 changed from HIGH to LOW\n2. GPI_1_H: event raised when GPI 1 changed from LOW to HIGH\n3. GPI_2_L: event raised when GPI 2 changed from HIGH to LOW\n4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH\n5. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud\n6. CLOUD_CONNECT: event raised when reader is connected to cloud\n7. TAG_READ: event raised when a tag is read\n8. RADIO_START: event raised when inventory operation started using START API\n9. RADIO_STOP: event raised when inventory operation stopped using STOP API",
+                                                "description": "GPIO-LED module configuration\n\nConfigure GPO and LED behaviour based on Events generated\n\nSupported Events:\n1. GPI_1_L: event raised when GPI 1 changed from HIGH to LOW\n2. GPI_1_H: event raised when GPI 1 changed from LOW to HIGH\n3. GPI_2_L: event raised when GPI 2 changed from HIGH to LOW\n4. GPI_2_H: event raised when GPI 2 changed from LOW to HIGH\n5. GPI_3_L: event raised when GPI 3 changed from HIGH to LOW\n6. GPI_3_H: event raised when GPI 3 changed from LOW to HIGH\n7. GPI_4_L: event raised when GPI 4 changed from HIGH to LOW\n8. GPI_4_H: event raised when GPI 4 changed from LOW to HIGH\n9. CLOUD_DISCONNECT: event raised when reader is disconnected from cloud\n10. CLOUD_CONNECT: event raised when reader is connected to cloud\n11. TAG_READ: event raised when a tag is read\n12. RADIO_START: event raised when inventory operation started using START API\n13. RADIO_STOP: event raised when inventory operation stopped using STOP API",
                                                 "properties": {
                                                     "GPODefaults": {
                                                         "type": "object",
@@ -7569,7 +7540,8 @@
                                                                             "enum": [
                                                                                 "GREEN",
                                                                                 "RED",
-                                                                                "AMBER"
+                                                                                "AMBER",
+                                                                                "OFF"
                                                                             ]
                                                                         },
                                                                         "blink": {
@@ -7825,7 +7797,8 @@
                                                                             "enum": [
                                                                                 "GREEN",
                                                                                 "RED",
-                                                                                "AMBER"
+                                                                                "AMBER",
+                                                                                "OFF"
                                                                             ]
                                                                         },
                                                                         "blink": {
@@ -8081,7 +8054,8 @@
                                                                             "enum": [
                                                                                 "GREEN",
                                                                                 "RED",
-                                                                                "AMBER"
+                                                                                "AMBER",
+                                                                                "OFF"
                                                                             ]
                                                                         },
                                                                         "blink": {
@@ -8337,7 +8311,1036 @@
                                                                             "enum": [
                                                                                 "GREEN",
                                                                                 "RED",
-                                                                                "AMBER"
+                                                                                "AMBER",
+                                                                                "OFF"
+                                                                            ]
+                                                                        },
+                                                                        "blink": {
+                                                                            "title": "Action Blink Configuration",
+                                                                            "type": "object",
+                                                                            "description": "action blink configuration for GPO or LED",
+                                                                            "properties": {
+                                                                                "ON": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "SET GPO or LED to desired state for ON (milliseconds) duration"
+                                                                                },
+                                                                                "OFF": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Toggle GPO or LED for OFF(milliseconds) duration"
+                                                                                },
+                                                                                "DURATION": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "ON",
+                                                                                "OFF",
+                                                                                "DURATION"
+                                                                            ]
+                                                                        },
+                                                                        "conditions": {
+                                                                            "oneOf": [
+                                                                                {
+                                                                                    "type": "array",
+                                                                                    "title": "Conditions Array",
+                                                                                    "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                    "uniqueItems": true,
+                                                                                    "minItems": 0,
+                                                                                    "items": {
+                                                                                        "type": "string",
+                                                                                        "enum": [
+                                                                                            "IS_CLOUD_CONNECTED",
+                                                                                            "~IS_CLOUD_CONNECTED",
+                                                                                            "IS_RADIO_ONGOING",
+                                                                                            "~IS_RADIO_ONGOING"
+                                                                                        ]
+                                                                                    }
+                                                                                },
+                                                                                {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "operator": {
+                                                                                            "type": "string",
+                                                                                            "enum": [
+                                                                                                "and",
+                                                                                                "or"
+                                                                                            ],
+                                                                                            "description": "Operator to be used for conditions validation"
+                                                                                        },
+                                                                                        "operands": {
+                                                                                            "type": "array",
+                                                                                            "title": "Conditions Array",
+                                                                                            "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                            "uniqueItems": true,
+                                                                                            "minItems": 0,
+                                                                                            "items": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    "IS_CLOUD_CONNECTED",
+                                                                                                    "~IS_CLOUD_CONNECTED",
+                                                                                                    "IS_RADIO_ONGOING",
+                                                                                                    "~IS_RADIO_ONGOING"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ],
+                                                                            "title": "Action Conditions",
+                                                                            "description": "Predefined conditions to trigger GPO or LED actions\n\nDefault \"and\" operator is used when array of conditions is provided.\n\noperator \"and\": Action is performed only when all the conditions provided is true.\noperator \"or\": Action is performed only when one of the conditions provided is true."
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "type",
+                                                                        "led",
+                                                                        "color"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "GPI_3_H": {
+                                                        "title": "GPO-LED Action",
+                                                        "type": "array",
+                                                        "description": "Array of GPO or LED actions. Actions will be performed sequentially.",
+                                                        "items": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "title": "GPO Action",
+                                                                    "type": "object",
+                                                                    "description": "Configuration to define operations on single GPO.\n\nGPO Action will be skipped if conditions provided is not satisfied.",
+                                                                    "properties": {
+                                                                        "type": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "GPO"
+                                                                            ],
+                                                                            "description": "Action type"
+                                                                        },
+                                                                        "pin": {
+                                                                            "type": "number",
+                                                                            "description": "GPO pin number",
+                                                                            "enum": [
+                                                                                1,
+                                                                                2,
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
+                                                                        "state": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "HIGH",
+                                                                                "LOW"
+                                                                            ],
+                                                                            "description": "Desired GPO pin state"
+                                                                        },
+                                                                        "postActionState": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "HIGH",
+                                                                                "LOW"
+                                                                            ],
+                                                                            "description": "Desired GPO pin state after action execution completed"
+                                                                        },
+                                                                        "blink": {
+                                                                            "title": "Action Blink Configuration",
+                                                                            "type": "object",
+                                                                            "description": "action blink configuration for GPO or LED",
+                                                                            "properties": {
+                                                                                "ON": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "SET GPO or LED to desired state for ON (milliseconds) duration"
+                                                                                },
+                                                                                "OFF": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Toggle GPO or LED for OFF(milliseconds) duration"
+                                                                                },
+                                                                                "DURATION": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "ON",
+                                                                                "OFF",
+                                                                                "DURATION"
+                                                                            ]
+                                                                        },
+                                                                        "conditions": {
+                                                                            "oneOf": [
+                                                                                {
+                                                                                    "type": "array",
+                                                                                    "title": "Conditions Array",
+                                                                                    "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                    "uniqueItems": true,
+                                                                                    "minItems": 0,
+                                                                                    "items": {
+                                                                                        "type": "string",
+                                                                                        "enum": [
+                                                                                            "IS_CLOUD_CONNECTED",
+                                                                                            "~IS_CLOUD_CONNECTED",
+                                                                                            "IS_RADIO_ONGOING",
+                                                                                            "~IS_RADIO_ONGOING"
+                                                                                        ]
+                                                                                    }
+                                                                                },
+                                                                                {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "operator": {
+                                                                                            "type": "string",
+                                                                                            "enum": [
+                                                                                                "and",
+                                                                                                "or"
+                                                                                            ],
+                                                                                            "description": "Operator to be used for conditions validation"
+                                                                                        },
+                                                                                        "operands": {
+                                                                                            "type": "array",
+                                                                                            "title": "Conditions Array",
+                                                                                            "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                            "uniqueItems": true,
+                                                                                            "minItems": 0,
+                                                                                            "items": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    "IS_CLOUD_CONNECTED",
+                                                                                                    "~IS_CLOUD_CONNECTED",
+                                                                                                    "IS_RADIO_ONGOING",
+                                                                                                    "~IS_RADIO_ONGOING"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ],
+                                                                            "title": "Action Conditions",
+                                                                            "description": "Predefined conditions to trigger GPO or LED actions\n\nDefault \"and\" operator is used when array of conditions is provided.\n\noperator \"and\": Action is performed only when all the conditions provided is true.\noperator \"or\": Action is performed only when one of the conditions provided is true."
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "type",
+                                                                        "pin",
+                                                                        "state"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "title": "LED Action",
+                                                                    "type": "object",
+                                                                    "description": "Configuration to define operations on single LED.\n\nLED Action will be skipped if conditions provided is not satisfied.",
+                                                                    "properties": {
+                                                                        "type": {
+                                                                            "type": "string",
+                                                                            "description": "Action type",
+                                                                            "enum": [
+                                                                                "LED"
+                                                                            ]
+                                                                        },
+                                                                        "led": {
+                                                                            "type": "number",
+                                                                            "description": "LED number",
+                                                                            "enum": [
+                                                                                1,
+                                                                                2,
+                                                                                3
+                                                                            ]
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "description": "Desired LED color",
+                                                                            "enum": [
+                                                                                "RED",
+                                                                                "AMBER",
+                                                                                "GREEN"
+                                                                            ]
+                                                                        },
+                                                                        "postActionColor": {
+                                                                            "type": "string",
+                                                                            "description": "Desired LED color after action expired",
+                                                                            "enum": [
+                                                                                "GREEN",
+                                                                                "RED",
+                                                                                "AMBER",
+                                                                                "OFF"
+                                                                            ]
+                                                                        },
+                                                                        "blink": {
+                                                                            "title": "Action Blink Configuration",
+                                                                            "type": "object",
+                                                                            "description": "action blink configuration for GPO or LED",
+                                                                            "properties": {
+                                                                                "ON": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "SET GPO or LED to desired state for ON (milliseconds) duration"
+                                                                                },
+                                                                                "OFF": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Toggle GPO or LED for OFF(milliseconds) duration"
+                                                                                },
+                                                                                "DURATION": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "ON",
+                                                                                "OFF",
+                                                                                "DURATION"
+                                                                            ]
+                                                                        },
+                                                                        "conditions": {
+                                                                            "oneOf": [
+                                                                                {
+                                                                                    "type": "array",
+                                                                                    "title": "Conditions Array",
+                                                                                    "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                    "uniqueItems": true,
+                                                                                    "minItems": 0,
+                                                                                    "items": {
+                                                                                        "type": "string",
+                                                                                        "enum": [
+                                                                                            "IS_CLOUD_CONNECTED",
+                                                                                            "~IS_CLOUD_CONNECTED",
+                                                                                            "IS_RADIO_ONGOING",
+                                                                                            "~IS_RADIO_ONGOING"
+                                                                                        ]
+                                                                                    }
+                                                                                },
+                                                                                {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "operator": {
+                                                                                            "type": "string",
+                                                                                            "enum": [
+                                                                                                "and",
+                                                                                                "or"
+                                                                                            ],
+                                                                                            "description": "Operator to be used for conditions validation"
+                                                                                        },
+                                                                                        "operands": {
+                                                                                            "type": "array",
+                                                                                            "title": "Conditions Array",
+                                                                                            "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                            "uniqueItems": true,
+                                                                                            "minItems": 0,
+                                                                                            "items": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    "IS_CLOUD_CONNECTED",
+                                                                                                    "~IS_CLOUD_CONNECTED",
+                                                                                                    "IS_RADIO_ONGOING",
+                                                                                                    "~IS_RADIO_ONGOING"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ],
+                                                                            "title": "Action Conditions",
+                                                                            "description": "Predefined conditions to trigger GPO or LED actions\n\nDefault \"and\" operator is used when array of conditions is provided.\n\noperator \"and\": Action is performed only when all the conditions provided is true.\noperator \"or\": Action is performed only when one of the conditions provided is true."
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "type",
+                                                                        "led",
+                                                                        "color"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "GPI_3_L": {
+                                                        "title": "GPO-LED Action",
+                                                        "type": "array",
+                                                        "description": "Array of GPO or LED actions. Actions will be performed sequentially.",
+                                                        "items": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "title": "GPO Action",
+                                                                    "type": "object",
+                                                                    "description": "Configuration to define operations on single GPO.\n\nGPO Action will be skipped if conditions provided is not satisfied.",
+                                                                    "properties": {
+                                                                        "type": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "GPO"
+                                                                            ],
+                                                                            "description": "Action type"
+                                                                        },
+                                                                        "pin": {
+                                                                            "type": "number",
+                                                                            "description": "GPO pin number",
+                                                                            "enum": [
+                                                                                1,
+                                                                                2,
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
+                                                                        "state": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "HIGH",
+                                                                                "LOW"
+                                                                            ],
+                                                                            "description": "Desired GPO pin state"
+                                                                        },
+                                                                        "postActionState": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "HIGH",
+                                                                                "LOW"
+                                                                            ],
+                                                                            "description": "Desired GPO pin state after action execution completed"
+                                                                        },
+                                                                        "blink": {
+                                                                            "title": "Action Blink Configuration",
+                                                                            "type": "object",
+                                                                            "description": "action blink configuration for GPO or LED",
+                                                                            "properties": {
+                                                                                "ON": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "SET GPO or LED to desired state for ON (milliseconds) duration"
+                                                                                },
+                                                                                "OFF": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Toggle GPO or LED for OFF(milliseconds) duration"
+                                                                                },
+                                                                                "DURATION": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "ON",
+                                                                                "OFF",
+                                                                                "DURATION"
+                                                                            ]
+                                                                        },
+                                                                        "conditions": {
+                                                                            "oneOf": [
+                                                                                {
+                                                                                    "type": "array",
+                                                                                    "title": "Conditions Array",
+                                                                                    "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                    "uniqueItems": true,
+                                                                                    "minItems": 0,
+                                                                                    "items": {
+                                                                                        "type": "string",
+                                                                                        "enum": [
+                                                                                            "IS_CLOUD_CONNECTED",
+                                                                                            "~IS_CLOUD_CONNECTED",
+                                                                                            "IS_RADIO_ONGOING",
+                                                                                            "~IS_RADIO_ONGOING"
+                                                                                        ]
+                                                                                    }
+                                                                                },
+                                                                                {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "operator": {
+                                                                                            "type": "string",
+                                                                                            "enum": [
+                                                                                                "and",
+                                                                                                "or"
+                                                                                            ],
+                                                                                            "description": "Operator to be used for conditions validation"
+                                                                                        },
+                                                                                        "operands": {
+                                                                                            "type": "array",
+                                                                                            "title": "Conditions Array",
+                                                                                            "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                            "uniqueItems": true,
+                                                                                            "minItems": 0,
+                                                                                            "items": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    "IS_CLOUD_CONNECTED",
+                                                                                                    "~IS_CLOUD_CONNECTED",
+                                                                                                    "IS_RADIO_ONGOING",
+                                                                                                    "~IS_RADIO_ONGOING"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ],
+                                                                            "title": "Action Conditions",
+                                                                            "description": "Predefined conditions to trigger GPO or LED actions\n\nDefault \"and\" operator is used when array of conditions is provided.\n\noperator \"and\": Action is performed only when all the conditions provided is true.\noperator \"or\": Action is performed only when one of the conditions provided is true."
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "type",
+                                                                        "pin",
+                                                                        "state"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "title": "LED Action",
+                                                                    "type": "object",
+                                                                    "description": "Configuration to define operations on single LED.\n\nLED Action will be skipped if conditions provided is not satisfied.",
+                                                                    "properties": {
+                                                                        "type": {
+                                                                            "type": "string",
+                                                                            "description": "Action type",
+                                                                            "enum": [
+                                                                                "LED"
+                                                                            ]
+                                                                        },
+                                                                        "led": {
+                                                                            "type": "number",
+                                                                            "description": "LED number",
+                                                                            "enum": [
+                                                                                1,
+                                                                                2,
+                                                                                3
+                                                                            ]
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "description": "Desired LED color",
+                                                                            "enum": [
+                                                                                "RED",
+                                                                                "AMBER",
+                                                                                "GREEN"
+                                                                            ]
+                                                                        },
+                                                                        "postActionColor": {
+                                                                            "type": "string",
+                                                                            "description": "Desired LED color after action expired",
+                                                                            "enum": [
+                                                                                "GREEN",
+                                                                                "RED",
+                                                                                "AMBER",
+                                                                                "OFF"
+                                                                            ]
+                                                                        },
+                                                                        "blink": {
+                                                                            "title": "Action Blink Configuration",
+                                                                            "type": "object",
+                                                                            "description": "action blink configuration for GPO or LED",
+                                                                            "properties": {
+                                                                                "ON": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "SET GPO or LED to desired state for ON (milliseconds) duration"
+                                                                                },
+                                                                                "OFF": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Toggle GPO or LED for OFF(milliseconds) duration"
+                                                                                },
+                                                                                "DURATION": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "ON",
+                                                                                "OFF",
+                                                                                "DURATION"
+                                                                            ]
+                                                                        },
+                                                                        "conditions": {
+                                                                            "oneOf": [
+                                                                                {
+                                                                                    "type": "array",
+                                                                                    "title": "Conditions Array",
+                                                                                    "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                    "uniqueItems": true,
+                                                                                    "minItems": 0,
+                                                                                    "items": {
+                                                                                        "type": "string",
+                                                                                        "enum": [
+                                                                                            "IS_CLOUD_CONNECTED",
+                                                                                            "~IS_CLOUD_CONNECTED",
+                                                                                            "IS_RADIO_ONGOING",
+                                                                                            "~IS_RADIO_ONGOING"
+                                                                                        ]
+                                                                                    }
+                                                                                },
+                                                                                {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "operator": {
+                                                                                            "type": "string",
+                                                                                            "enum": [
+                                                                                                "and",
+                                                                                                "or"
+                                                                                            ],
+                                                                                            "description": "Operator to be used for conditions validation"
+                                                                                        },
+                                                                                        "operands": {
+                                                                                            "type": "array",
+                                                                                            "title": "Conditions Array",
+                                                                                            "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                            "uniqueItems": true,
+                                                                                            "minItems": 0,
+                                                                                            "items": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    "IS_CLOUD_CONNECTED",
+                                                                                                    "~IS_CLOUD_CONNECTED",
+                                                                                                    "IS_RADIO_ONGOING",
+                                                                                                    "~IS_RADIO_ONGOING"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ],
+                                                                            "title": "Action Conditions",
+                                                                            "description": "Predefined conditions to trigger GPO or LED actions\n\nDefault \"and\" operator is used when array of conditions is provided.\n\noperator \"and\": Action is performed only when all the conditions provided is true.\noperator \"or\": Action is performed only when one of the conditions provided is true."
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "type",
+                                                                        "led",
+                                                                        "color"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "GPI_4_H": {
+                                                        "title": "GPO-LED Action",
+                                                        "type": "array",
+                                                        "description": "Array of GPO or LED actions. Actions will be performed sequentially.",
+                                                        "items": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "title": "GPO Action",
+                                                                    "type": "object",
+                                                                    "description": "Configuration to define operations on single GPO.\n\nGPO Action will be skipped if conditions provided is not satisfied.",
+                                                                    "properties": {
+                                                                        "type": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "GPO"
+                                                                            ],
+                                                                            "description": "Action type"
+                                                                        },
+                                                                        "pin": {
+                                                                            "type": "number",
+                                                                            "description": "GPO pin number",
+                                                                            "enum": [
+                                                                                1,
+                                                                                2,
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
+                                                                        "state": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "HIGH",
+                                                                                "LOW"
+                                                                            ],
+                                                                            "description": "Desired GPO pin state"
+                                                                        },
+                                                                        "postActionState": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "HIGH",
+                                                                                "LOW"
+                                                                            ],
+                                                                            "description": "Desired GPO pin state after action execution completed"
+                                                                        },
+                                                                        "blink": {
+                                                                            "title": "Action Blink Configuration",
+                                                                            "type": "object",
+                                                                            "description": "action blink configuration for GPO or LED",
+                                                                            "properties": {
+                                                                                "ON": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "SET GPO or LED to desired state for ON (milliseconds) duration"
+                                                                                },
+                                                                                "OFF": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Toggle GPO or LED for OFF(milliseconds) duration"
+                                                                                },
+                                                                                "DURATION": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "ON",
+                                                                                "OFF",
+                                                                                "DURATION"
+                                                                            ]
+                                                                        },
+                                                                        "conditions": {
+                                                                            "oneOf": [
+                                                                                {
+                                                                                    "type": "array",
+                                                                                    "title": "Conditions Array",
+                                                                                    "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                    "uniqueItems": true,
+                                                                                    "minItems": 0,
+                                                                                    "items": {
+                                                                                        "type": "string",
+                                                                                        "enum": [
+                                                                                            "IS_CLOUD_CONNECTED",
+                                                                                            "~IS_CLOUD_CONNECTED",
+                                                                                            "IS_RADIO_ONGOING",
+                                                                                            "~IS_RADIO_ONGOING"
+                                                                                        ]
+                                                                                    }
+                                                                                },
+                                                                                {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "operator": {
+                                                                                            "type": "string",
+                                                                                            "enum": [
+                                                                                                "and",
+                                                                                                "or"
+                                                                                            ],
+                                                                                            "description": "Operator to be used for conditions validation"
+                                                                                        },
+                                                                                        "operands": {
+                                                                                            "type": "array",
+                                                                                            "title": "Conditions Array",
+                                                                                            "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                            "uniqueItems": true,
+                                                                                            "minItems": 0,
+                                                                                            "items": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    "IS_CLOUD_CONNECTED",
+                                                                                                    "~IS_CLOUD_CONNECTED",
+                                                                                                    "IS_RADIO_ONGOING",
+                                                                                                    "~IS_RADIO_ONGOING"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ],
+                                                                            "title": "Action Conditions",
+                                                                            "description": "Predefined conditions to trigger GPO or LED actions\n\nDefault \"and\" operator is used when array of conditions is provided.\n\noperator \"and\": Action is performed only when all the conditions provided is true.\noperator \"or\": Action is performed only when one of the conditions provided is true."
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "type",
+                                                                        "pin",
+                                                                        "state"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "title": "LED Action",
+                                                                    "type": "object",
+                                                                    "description": "Configuration to define operations on single LED.\n\nLED Action will be skipped if conditions provided is not satisfied.",
+                                                                    "properties": {
+                                                                        "type": {
+                                                                            "type": "string",
+                                                                            "description": "Action type",
+                                                                            "enum": [
+                                                                                "LED"
+                                                                            ]
+                                                                        },
+                                                                        "led": {
+                                                                            "type": "number",
+                                                                            "description": "LED number",
+                                                                            "enum": [
+                                                                                1,
+                                                                                2,
+                                                                                3
+                                                                            ]
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "description": "Desired LED color",
+                                                                            "enum": [
+                                                                                "RED",
+                                                                                "AMBER",
+                                                                                "GREEN"
+                                                                            ]
+                                                                        },
+                                                                        "postActionColor": {
+                                                                            "type": "string",
+                                                                            "description": "Desired LED color after action expired",
+                                                                            "enum": [
+                                                                                "GREEN",
+                                                                                "RED",
+                                                                                "AMBER",
+                                                                                "OFF"
+                                                                            ]
+                                                                        },
+                                                                        "blink": {
+                                                                            "title": "Action Blink Configuration",
+                                                                            "type": "object",
+                                                                            "description": "action blink configuration for GPO or LED",
+                                                                            "properties": {
+                                                                                "ON": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "SET GPO or LED to desired state for ON (milliseconds) duration"
+                                                                                },
+                                                                                "OFF": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Toggle GPO or LED for OFF(milliseconds) duration"
+                                                                                },
+                                                                                "DURATION": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "ON",
+                                                                                "OFF",
+                                                                                "DURATION"
+                                                                            ]
+                                                                        },
+                                                                        "conditions": {
+                                                                            "oneOf": [
+                                                                                {
+                                                                                    "type": "array",
+                                                                                    "title": "Conditions Array",
+                                                                                    "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                    "uniqueItems": true,
+                                                                                    "minItems": 0,
+                                                                                    "items": {
+                                                                                        "type": "string",
+                                                                                        "enum": [
+                                                                                            "IS_CLOUD_CONNECTED",
+                                                                                            "~IS_CLOUD_CONNECTED",
+                                                                                            "IS_RADIO_ONGOING",
+                                                                                            "~IS_RADIO_ONGOING"
+                                                                                        ]
+                                                                                    }
+                                                                                },
+                                                                                {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "operator": {
+                                                                                            "type": "string",
+                                                                                            "enum": [
+                                                                                                "and",
+                                                                                                "or"
+                                                                                            ],
+                                                                                            "description": "Operator to be used for conditions validation"
+                                                                                        },
+                                                                                        "operands": {
+                                                                                            "type": "array",
+                                                                                            "title": "Conditions Array",
+                                                                                            "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                            "uniqueItems": true,
+                                                                                            "minItems": 0,
+                                                                                            "items": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    "IS_CLOUD_CONNECTED",
+                                                                                                    "~IS_CLOUD_CONNECTED",
+                                                                                                    "IS_RADIO_ONGOING",
+                                                                                                    "~IS_RADIO_ONGOING"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ],
+                                                                            "title": "Action Conditions",
+                                                                            "description": "Predefined conditions to trigger GPO or LED actions\n\nDefault \"and\" operator is used when array of conditions is provided.\n\noperator \"and\": Action is performed only when all the conditions provided is true.\noperator \"or\": Action is performed only when one of the conditions provided is true."
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "type",
+                                                                        "led",
+                                                                        "color"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    "GPI_4_L": {
+                                                        "title": "GPO-LED Action",
+                                                        "type": "array",
+                                                        "description": "Array of GPO or LED actions. Actions will be performed sequentially.",
+                                                        "items": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "title": "GPO Action",
+                                                                    "type": "object",
+                                                                    "description": "Configuration to define operations on single GPO.\n\nGPO Action will be skipped if conditions provided is not satisfied.",
+                                                                    "properties": {
+                                                                        "type": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "GPO"
+                                                                            ],
+                                                                            "description": "Action type"
+                                                                        },
+                                                                        "pin": {
+                                                                            "type": "number",
+                                                                            "description": "GPO pin number",
+                                                                            "enum": [
+                                                                                1,
+                                                                                2,
+                                                                                3,
+                                                                                4
+                                                                            ]
+                                                                        },
+                                                                        "state": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "HIGH",
+                                                                                "LOW"
+                                                                            ],
+                                                                            "description": "Desired GPO pin state"
+                                                                        },
+                                                                        "postActionState": {
+                                                                            "type": "string",
+                                                                            "enum": [
+                                                                                "HIGH",
+                                                                                "LOW"
+                                                                            ],
+                                                                            "description": "Desired GPO pin state after action execution completed"
+                                                                        },
+                                                                        "blink": {
+                                                                            "title": "Action Blink Configuration",
+                                                                            "type": "object",
+                                                                            "description": "action blink configuration for GPO or LED",
+                                                                            "properties": {
+                                                                                "ON": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "SET GPO or LED to desired state for ON (milliseconds) duration"
+                                                                                },
+                                                                                "OFF": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Toggle GPO or LED for OFF(milliseconds) duration"
+                                                                                },
+                                                                                "DURATION": {
+                                                                                    "type": "number",
+                                                                                    "minimum": 0,
+                                                                                    "description": "Total duration in milliseconds to perform blink. 0 will blink GPO or LED forever"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "ON",
+                                                                                "OFF",
+                                                                                "DURATION"
+                                                                            ]
+                                                                        },
+                                                                        "conditions": {
+                                                                            "oneOf": [
+                                                                                {
+                                                                                    "type": "array",
+                                                                                    "title": "Conditions Array",
+                                                                                    "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                    "uniqueItems": true,
+                                                                                    "minItems": 0,
+                                                                                    "items": {
+                                                                                        "type": "string",
+                                                                                        "enum": [
+                                                                                            "IS_CLOUD_CONNECTED",
+                                                                                            "~IS_CLOUD_CONNECTED",
+                                                                                            "IS_RADIO_ONGOING",
+                                                                                            "~IS_RADIO_ONGOING"
+                                                                                        ]
+                                                                                    }
+                                                                                },
+                                                                                {
+                                                                                    "type": "object",
+                                                                                    "properties": {
+                                                                                        "operator": {
+                                                                                            "type": "string",
+                                                                                            "enum": [
+                                                                                                "and",
+                                                                                                "or"
+                                                                                            ],
+                                                                                            "description": "Operator to be used for conditions validation"
+                                                                                        },
+                                                                                        "operands": {
+                                                                                            "type": "array",
+                                                                                            "title": "Conditions Array",
+                                                                                            "description": "Predefined conditions\n\nIS_CLOUD_CONNECTED  : Condition will be true when reader is successfully connected to Cloud.\n\n~IS_CLOUD_CONNECTED : Condition will be true when reader lost Cloud connectivity.\n\nIS_RADIO_ONGOING    : Condition will be true when the reader is currently performing or has started an inventory operation.\n\n~IS_RADIO_ONGOING   : Condition will be true when the reader is not performing inventory or has stopped an inventory operation.",
+                                                                                            "uniqueItems": true,
+                                                                                            "minItems": 0,
+                                                                                            "items": {
+                                                                                                "type": "string",
+                                                                                                "enum": [
+                                                                                                    "IS_CLOUD_CONNECTED",
+                                                                                                    "~IS_CLOUD_CONNECTED",
+                                                                                                    "IS_RADIO_ONGOING",
+                                                                                                    "~IS_RADIO_ONGOING"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ],
+                                                                            "title": "Action Conditions",
+                                                                            "description": "Predefined conditions to trigger GPO or LED actions\n\nDefault \"and\" operator is used when array of conditions is provided.\n\noperator \"and\": Action is performed only when all the conditions provided is true.\noperator \"or\": Action is performed only when one of the conditions provided is true."
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "type",
+                                                                        "pin",
+                                                                        "state"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "title": "LED Action",
+                                                                    "type": "object",
+                                                                    "description": "Configuration to define operations on single LED.\n\nLED Action will be skipped if conditions provided is not satisfied.",
+                                                                    "properties": {
+                                                                        "type": {
+                                                                            "type": "string",
+                                                                            "description": "Action type",
+                                                                            "enum": [
+                                                                                "LED"
+                                                                            ]
+                                                                        },
+                                                                        "led": {
+                                                                            "type": "number",
+                                                                            "description": "LED number",
+                                                                            "enum": [
+                                                                                1,
+                                                                                2,
+                                                                                3
+                                                                            ]
+                                                                        },
+                                                                        "color": {
+                                                                            "type": "string",
+                                                                            "description": "Desired LED color",
+                                                                            "enum": [
+                                                                                "RED",
+                                                                                "AMBER",
+                                                                                "GREEN"
+                                                                            ]
+                                                                        },
+                                                                        "postActionColor": {
+                                                                            "type": "string",
+                                                                            "description": "Desired LED color after action expired",
+                                                                            "enum": [
+                                                                                "GREEN",
+                                                                                "RED",
+                                                                                "AMBER",
+                                                                                "OFF"
                                                                             ]
                                                                         },
                                                                         "blink": {
@@ -8593,7 +9596,8 @@
                                                                             "enum": [
                                                                                 "GREEN",
                                                                                 "RED",
-                                                                                "AMBER"
+                                                                                "AMBER",
+                                                                                "OFF"
                                                                             ]
                                                                         },
                                                                         "blink": {
@@ -8849,7 +9853,8 @@
                                                                             "enum": [
                                                                                 "GREEN",
                                                                                 "RED",
-                                                                                "AMBER"
+                                                                                "AMBER",
+                                                                                "OFF"
                                                                             ]
                                                                         },
                                                                         "blink": {
@@ -9105,7 +10110,8 @@
                                                                             "enum": [
                                                                                 "GREEN",
                                                                                 "RED",
-                                                                                "AMBER"
+                                                                                "AMBER",
+                                                                                "OFF"
                                                                             ]
                                                                         },
                                                                         "blink": {
@@ -9361,7 +10367,8 @@
                                                                             "enum": [
                                                                                 "GREEN",
                                                                                 "RED",
-                                                                                "AMBER"
+                                                                                "AMBER",
+                                                                                "OFF"
                                                                             ]
                                                                         },
                                                                         "blink": {
@@ -9617,7 +10624,8 @@
                                                                             "enum": [
                                                                                 "GREEN",
                                                                                 "RED",
-                                                                                "AMBER"
+                                                                                "AMBER",
+                                                                                "OFF"
                                                                             ]
                                                                         },
                                                                         "blink": {
@@ -10547,47 +11555,45 @@
                                                         "event": {
                                                             "connections": [
                                                                 {
-                                                                    "additionalOptions": {
-                                                                        "batching": null,
-                                                                        "retention": {
-                                                                            "maxEventRetentionTimeInMin": 500,
-                                                                            "maxNumEvents": 150000,
-                                                                            "throttle": 500
-                                                                        }
-                                                                    },
-                                                                    "description": "MQTT_TEST",
-                                                                    "name": "MQTT_TEST",
+                                                                    "description": "azure_8883yj",
+                                                                    "name": "AZURE_8883",
                                                                     "options": {
                                                                         "additional": {
-                                                                            "cleanSession": true,
-                                                                            "clientId": "EV1",
-                                                                            "debug": false,
-                                                                            "keepAlive": 60,
-                                                                            "qos": 0,
-                                                                            "reconnectDelay": 1,
-                                                                            "reconnectDelayMax": 5
+                                                                            "cleanSession": false,
+                                                                            "clientId": "FXR90A3A2F7",
+                                                                            "debug": true,
+                                                                            "keepAlive": 120,
+                                                                            "qos": 1,
+                                                                            "reconnectDelay": 600,
+                                                                            "reconnectDelayMax": 86400
                                                                         },
-                                                                        "enableSecurity": false,
+                                                                        "basicAuthentication": {
+                                                                            "password": "none",
+                                                                            "username": "VULCANIOTHUB.azure-devices.net/FXR90A3A2F7/?api-version=2018-06-30"
+                                                                        },
+                                                                        "enableSecurity": true,
                                                                         "endpoint": {
-                                                                            "hostName": "10.117.229.9",
-                                                                            "port": 1883,
-                                                                            "protocol": "tcp"
+                                                                            "hostName": "VULCANIOTHUB.azure-devices.net",
+                                                                            "port": 8883,
+                                                                            "protocol": "ssl"
                                                                         },
                                                                         "publishTopic": [
-                                                                            "tagevents_r2c_longrun"
+                                                                            "devices/FXR90A3A2F7/messages/events/"
                                                                         ],
                                                                         "security": {
-                                                                            "CACertificateFileLocation": "/home/root/broker.emqx.io-ca.crt",
-                                                                            "installedCertificateName": "Server",
-                                                                            "installedCertificateType": "server",
+                                                                            "CACertificateFileLocation": "/data/apps/cacertazure.pem",
                                                                             "keyAlgorithm": "RS256",
                                                                             "keyFormat": "PEM",
+                                                                            "privateKeyFileLocation": "/data/apps/key.pem",
+                                                                            "publicKeyFileLocation": "/data/apps/csr.pem",
                                                                             "verifyHostName": false,
                                                                             "verifyPeer": false
                                                                         },
-                                                                        "subscribeTopic": []
+                                                                        "subscribeTopic": [
+                                                                            "devices/FXR90A3A2F7/messages/devicebound/#"
+                                                                        ]
                                                                     },
-                                                                    "type": "mqtt"
+                                                                    "type": "mqtt-AZURE"
                                                                 }
                                                             ]
                                                         }
@@ -13465,7 +14471,8 @@
                                 }
                             },
                             "examples": {
-                                "example1": {
+                                "Set cable loss for ports 1-4": {
+                                    "description": "Sets cable length and cable loss per hundred feet for antenna ports 1 to 4.",
                                     "value": {
                                         "command": "set_cableLossCompensation",
                                         "command_id": "abcd1324",

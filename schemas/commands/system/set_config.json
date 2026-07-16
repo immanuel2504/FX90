@@ -149,47 +149,45 @@
               "event": {
                 "connections": [
                   {
-                    "additionalOptions": {
-                      "batching": null,
-                      "retention": {
-                        "maxEventRetentionTimeInMin": 500,
-                        "maxNumEvents": 150000,
-                        "throttle": 500
-                      }
-                    },
-                    "description": "MQTT_TEST",
-                    "name": "MQTT_TEST",
+                    "description": "azure_8883yj",
+                    "name": "AZURE_8883",
                     "options": {
                       "additional": {
-                        "cleanSession": true,
-                        "clientId": "EV1",
-                        "debug": false,
-                        "keepAlive": 60,
-                        "qos": 0,
-                        "reconnectDelay": 1,
-                        "reconnectDelayMax": 5
+                        "cleanSession": false,
+                        "clientId": "FXR90A3A2F7",
+                        "debug": true,
+                        "keepAlive": 120,
+                        "qos": 1,
+                        "reconnectDelay": 600,
+                        "reconnectDelayMax": 86400
                       },
-                      "enableSecurity": false,
+                      "basicAuthentication": {
+                        "password": "none",
+                        "username": "VULCANIOTHUB.azure-devices.net/FXR90A3A2F7/?api-version=2018-06-30"
+                      },
+                      "enableSecurity": true,
                       "endpoint": {
-                        "hostName": "10.117.229.9",
-                        "port": 1883,
-                        "protocol": "tcp"
+                        "hostName": "VULCANIOTHUB.azure-devices.net",
+                        "port": 8883,
+                        "protocol": "ssl"
                       },
                       "publishTopic": [
-                        "tagevents_r2c_longrun"
+                        "devices/FXR90A3A2F7/messages/events/"
                       ],
                       "security": {
-                        "CACertificateFileLocation": "/home/root/broker.emqx.io-ca.crt",
-                        "installedCertificateName": "Server",
-                        "installedCertificateType": "server",
+                        "CACertificateFileLocation": "/data/apps/cacertazure.pem",
                         "keyAlgorithm": "RS256",
                         "keyFormat": "PEM",
+                        "privateKeyFileLocation": "/data/apps/key.pem",
+                        "publicKeyFileLocation": "/data/apps/csr.pem",
                         "verifyHostName": false,
                         "verifyPeer": false
                       },
-                      "subscribeTopic": []
+                      "subscribeTopic": [
+                        "devices/FXR90A3A2F7/messages/devicebound/#"
+                      ]
                     },
-                    "type": "mqtt"
+                    "type": "mqtt-AZURE"
                   }
                 ]
               }
